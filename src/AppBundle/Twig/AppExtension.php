@@ -42,8 +42,7 @@ class AppExtension extends \Twig_Extension
         ImageService $imageService,
         CacheItemPoolInterface $cache,
         string $recaptchaKey
-    )
-    {
+    ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
         $this->userService = $userService;
@@ -85,6 +84,7 @@ class AppExtension extends \Twig_Extension
             $categoryTree->expiresAfter(3600);
             $this->cache->save($categoryTree);
         }
+
         return $categoryTree->get();
     }
 
@@ -95,6 +95,7 @@ class AppExtension extends \Twig_Extension
         }
         try {
             $apiKey = $this->session->get(\AppBundle\Controller\AuthController::API_KEY);
+
             return $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
         } catch (NotFound $e) {
             return null;
@@ -108,6 +109,7 @@ class AppExtension extends \Twig_Extension
             return null;
         }
         $basket = $this->basketService->getBasket($basketId);
+
         return $basket;
     }
 

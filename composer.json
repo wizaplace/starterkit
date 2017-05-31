@@ -21,7 +21,11 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "wizaplace/php-coding-standard": "^1.0",
+        "m6web/coke": "^2.2",
+        "phpstan/phpstan": "^0.7.0",
+        "phpunit/phpunit": "^6.1"
     },
     "scripts": {
         "symfony-scripts": [

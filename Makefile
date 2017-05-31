@@ -1,45 +1,53 @@
 
+all: install
 
+install: composer-install npm-install assets
 
-#--------
-# Helpers
-#--------
+install-ci: composer-install-ci npm-install assets
 
-is-vagrant-user:
-	@user=`whoami` ; \
-	if test $$user != "vagrant" ; \
-	then \
-		echo "You must run this command in Vagrant environment"; \
-		exit 1; \
-	fi
+composer-install:
+	composer install
 
-is-not-vagrant-user:
-	@user=`whoami` ; \
-	if test $$user = "vagrant" ; \
-	then \
-		echo "You must not run this command in Vagrant environment"; \
-		exit 1; \
-	fi
+composer-install-ci:
+	composer install --no-interaction --no-progress --ignore-platform-reqs
 
-#----------------------------------------------------------------
-# Tache unique pour installer l'environnement de dev avec Vagrant
-#----------------------------------------------------------------
+lint: lint-php lint-twig lint-yaml lint-xliff
 
-dev-from-scratch: is-not-vagrant-user
-	# Lancement de Vagrant
-	@vagrant up
-	@vagrant ssh --command "cd /vagrant && make install"
+lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff
 
+lint-php:
+	./vendor/bin/coke
 
-#-------------------------------------------------------------
-# Tache d'intallation/initialisation de l'environnement de dev
-#-------------------------------------------------------------
+lint-php-ci:
+	./vendor/bin/coke --report-junit=coke-result.xml
 
-install: is-vagrant-user
-	composer install --no-scripts
-	cp app/config/parameters.yml.dist app/config/parameters.yml
+lint-twig:
+	bin/console lint:twig app src
+
+lint-yaml:
+	bin/console lint:yaml app
+	bin/console lint:yaml src
+
+lint-xliff:
+	bin/console lint:xliff app
+	bin/console lint:xliff src
+
+stan:
+	./vendor/bin/phpstan analyse -l 4 src tests
+
+stan-ci:
+	./vendor/bin/phpstan --no-interaction analyse -l 4 src tests
+
+test:
+	./vendor/bin/phpunit --configuration ./phpunit.xml
+
+test-ci:
+	php -dxdebug.coverage_enable=1 ./vendor/bin/phpunit --configuration ./phpunit.xml --log-junit ./phpunit-result.xml --coverage-clover ./clover.xml
+
+npm-install:
 	npm install
-	make assets
 
-assets: is-vagrant-user
+assets:
 	gulp deploy
+
+.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-ci

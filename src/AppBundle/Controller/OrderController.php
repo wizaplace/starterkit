@@ -19,6 +19,7 @@ class OrderController extends Controller
     {
         $orderService = $this->get(OrderService::class);
         $orders = $orderService->getOrders($this->getApiKey());
+
         return $this->render('legacy/profile/orders.html.twig', ['orders' => $orders]);
     }
 
@@ -28,6 +29,7 @@ class OrderController extends Controller
         $orderService = $this->get(OrderService::class);
 
         $order = $orderService->getOrder($orderId, $this->getApiKey());
+
         return $this->render('legacy/profile/order.html.twig', ['order' => $order]);
     }
 
