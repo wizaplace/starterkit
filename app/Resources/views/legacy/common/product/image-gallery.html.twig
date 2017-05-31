@@ -1,0 +1,10 @@
+<div class="slider-for">
+    {% for image in images %}
+        <div><img src="{{ image.id|imageUrl(351, 351)}}" /></div>
+    {% endfor %}
+</div>
+<div class="slider-nav">
+    {% for image in images %}
+        <div><img src="{{ image.id|imageUrl(351, 351)}}" /></div>
+    {% endfor %}
+</div>

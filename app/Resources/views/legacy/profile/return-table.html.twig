@@ -1,0 +1,29 @@
+<table class="commande-table">
+    <thead>
+    <tr>
+        <th>N° de retour </th>
+        <th>N° de commande </th>
+        <th>Date</th>
+        <th>Produits</th>
+        <th>Quantité</th>
+        <th>Statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for return in orderReturns %}
+        <tr>
+            <td rowspan="{{ return.items|length }}">{{ return.id }}</td>
+            <td rowspan="{{ return.items|length }}">{{ return.orderId }}</td>
+            <td rowspan="{{ return.items|length }}">{{ return.timestamp.format('d-m-y') }}</td>
+            {%  for item in return.items %}
+                <td>{{ item.product }}</td>
+
+                <td>{{ item.amount }}</td>
+            {% endfor %}
+            <td>{{ return.status }}</td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>

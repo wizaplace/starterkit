@@ -1,0 +1,66 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+    recaptcha.key: '6LcVkB0UAAAAAOiX8LA0mDX30VHvg8MCvqxoCIoc'
+    recaptcha.secret: '6LcVkB0UAAAAAGbw1fOkuhXsCNsST18be2_ZEfgl'
+
+framework:
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.project_dir%/app/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        # Temp fix for: 'Warning: SessionHandler::read(): Session data file is not created by your uid' issue
+        save_path:   "%kernel.project_dir%/var/sessions/%kernel.environment%"
+        #save_path: /var/lib/php/sessions
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+services:
+    http.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                base_uri: '%api.base_url%'
+    Wizaplace\Catalog\CatalogService:
+        arguments: ['@http.client']
+    Wizaplace\Basket\BasketService:
+        arguments: ['@http.client']
+    Wizaplace\User\UserService:
+        arguments: ['@http.client']
+    Wizaplace\Order\OrderService:
+        arguments: ['@http.client']
+    Wizaplace\Image\ImageService:
+        arguments: ['@http.client']
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        autowire: true
+        arguments:
+            5: '@cache.app'
+            6: '%recaptcha.key%'
+        public: false
+        tags:
+            - { name: twig.extension }

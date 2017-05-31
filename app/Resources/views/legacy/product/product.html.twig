@@ -1,0 +1,172 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {% set declination = product.declinations.0 %}
+    {% set inStock = declination.amount > 0 %}
+
+    {% include 'legacy/common/breadcrumb.html.twig' with {'categoryPath': product.categoryPath } %}
+
+    <div id="product-page" class="product-page container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row bloc">
+                    <div class="col-md-12 ">
+                        {% if product.creationDate.timestamp > date('-7days', 'Europe/Paris').timestamp %}
+                            <div class="badge-new">Nouveau</div><br />
+                        {% endif %}
+                        <div class="big-title">{{ product.name }}</div>
+                        <br />
+                        <div class="text-blue-grey">
+                            {{ product.shortDescription|striptags|raw }}<br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div id="mini-gallery">
+                            {% if declination.images %}
+                               {% include 'legacy/common/product/image-gallery.html.twig' with {'images': declination.images } %}
+                            {% else %}
+                                <img src="{{ asset('images/legacy/no-image.jpg') }}" class="img-responsive" />
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <hr />
+                        <div class="row bloc">
+                            <div class="col-md-8">
+                                <label>RÉF. FOURNISSEUR</label><br />
+                                <span>{{ product.supplierReference }}</span><br />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Code EAN :</label><br />
+                                <span>{{ product.code }}</span>
+                                <br />
+                            </div>
+                        </div>
+
+                        <div class="row bloc-and-shipping">
+                            <div class="col-md-12">
+                                <hr />
+                                <div class="badge-stock">
+                                    {% if inStock %}
+                                        En stock
+                                    {% else %}
+                                        Rupture de stock
+                                    {% endif %}
+                                </div><br />
+                            </div>
+                        </div>
+
+                        {# price and quantity on mobile and tablet #}
+                        <div class="row bloc">
+                            <div class="col-xs-12 hidden-md hidden-lg">
+                                {% include 'legacy/product/price-quantity.html.twig' %}
+                            </div>
+                        </div>
+
+                        <div class="row bloc">
+                            <div class="col-md-12">
+                                <hr />
+                                <h1 class=""> Description du produit </h1>
+                                {{ product.description|striptags('<br><p>')|raw }}
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row bloc">
+                            <div class="col-md-12">
+                                <h1>Caractéristiques techniques</h1>
+                                <table>
+                                    {% for attribute in product.attributes %}
+                                        <tr>
+                                            <td>{{ attribute.name }}</td>
+                                            <td>
+                                                {% for value in attribute.value %}
+                                                    {{ value }}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# price and quantity on desktop #}
+            <div class="col-md-4 hidden-xs hidden-sm pull-right">
+                {% include 'legacy/product/price-quantity.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'legacy/common/product/showcase.html.twig' with {'headerTitle': 'Autres "Bornes Wifi', "products" : latestProducts } %}
+    {% include 'legacy/common/product/showcase.html.twig' with {'headerTitle': 'Accéssoires "Réseaux', "products" : latestProducts } %}
+
+    {# 'added to basket' modal #}
+    {% include 'legacy/common/basket-popup.html.twig' %}
+
+    <script>
+        $(function() {
+
+            var vm = new Vue({
+                delimiters: ['${','}'],
+                el: '#product-page',
+                data: {
+                    productId: {{ product.id }},
+                    quantity: 1
+                },
+
+                methods: {
+                    increaseQuantity: function() {
+                        if(this.quantity < {{ product.declinations.0.amount|e('js') }}) {
+                            this.quantity ++;
+                        }
+                    },
+
+                    decreaseQuantity: function() {
+                        if(this.quantity > 1) {
+                            this.quantity --;
+                        }
+                    },
+
+                    submitBasket: function() {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ path('basket_add_item') }}",
+                            data: { declinationId: this.productId, quantity: this.quantity },
+                            success: function(response) {
+                                hydrateModal(response.addedProduct, response.message);
+                            }
+                        });
+                    }
+                }
+            });
+
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.slider-nav'
+            });
+
+            $('.slider-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                asNavFor: '.slider-for',
+                infinite: true,
+                dots: true,
+                centerMode: true,
+                focusOnSelect: true,
+                arrows: false
+            });
+        });
+    </script>
+
+{% endblock %}

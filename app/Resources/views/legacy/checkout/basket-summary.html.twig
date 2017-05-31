@@ -1,0 +1,44 @@
+<div class="basket-summary">
+    <h1 class="main-title">Récapitulatif</h1>
+
+    {# products #}
+    <ul>
+        {% for company in basket.companyGroups %}
+            {% for item in company.shippingGroups.0.items %}
+                <li>
+                    <span class="title">{{item.productName}}</span><br />
+                    <span class="title text-grey">{{item.quantity}}x</span>
+                    <span class="title">{{item.individualPrice|price}}&nbsp;TTC</span> {# TODO convert to HT #}
+                </li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    <div class="spacer"></div>
+    <hr />
+
+    {# sub total #}
+    <div class="title">Sous total</div>
+    <p>{{ basket.subtotal|price }}&nbsp;TTC</p>{# TODO convert to HT #}
+    <br />
+
+    {# promo code #}
+    {% if basket.totalDiscount %}
+        <div class="title">Promotion</div>
+        <p>- {{ basket.totalDiscount|price }}&nbsp;TTC</p>
+        <br />
+    {% endif %}
+
+    {# shipping amount #}
+    <div class="title">Livraison</div>
+    <p>{{ basket.totalShipping|price }}&nbsp;TTC</p>{# TODO convert to HT #}
+    <br />
+
+    {# total amount #}
+    <div class="title text-blue">Total TTC</div>
+    <div class="big-title text-blue"> {{ basket.total|price }}&nbsp;TTC</div>{# TODO convert to HT #}
+    <br />
+
+    <div class="title">Dont TVA et autres taxes</div>
+    <span>{{ basket.totalTax|price }}</span>
+    <br />
+</div>

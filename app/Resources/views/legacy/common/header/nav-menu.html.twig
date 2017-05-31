@@ -1,0 +1,56 @@
+<nav>
+    <div class="container-fluid no-gutter hidden-xs">
+        <div class="row">
+
+            <ul id="categories-menu" class="categories-menu nav nav-justified">
+                {% set cptr = 0 %}
+                {%for category in categoryTree() %}
+                    {% set hasChild = category.children|length %}
+                    {% if(cptr < 11) %}
+                        <li class="dropdown">
+                            <a href="#" class="light-title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ category.category.name }}</a>
+                            <div class="dropdown-menu" aria-labelledby="dLabel">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h1 class="text-blue">
+                                                {% if not hasChild %}<a href="{{ path('view_category_seo', {'categoryId': category.category.id, 'slug': category.category.slug}) }}">{% endif %}
+                                                    {{ category.category.name }}
+                                                {% if not hasChild %}</a>{% endif %}
+                                            </h1>
+                                        </div>
+                                        {% for child in category.children %}
+                                            {% set hasChild = child.children|length %}
+
+                                            <div class="col-md-3">
+                                                <h3>
+                                                    {% if not hasChild %}<a href="{{ path('view_category_seo', {'categoryId': child.category.id, 'slug': child.category.slug}) }}">{% endif %}
+                                                        {{ child.category.name }}
+                                                    {% if not hasChild %}</a>{% endif %}
+                                                </h3>
+                                                {% if child.children|length > 0 %}
+                                                    <ul>
+                                                        {% for subchild in child.children %}
+                                                            <li>
+                                                                <a href="{{ path('view_category_seo', {'categoryId': subchild.category.id, 'slug': subchild.category.slug}) }}" class="technical-link">
+                                                                    {{ subchild.category.name }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% set cptr = cptr +1 %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+

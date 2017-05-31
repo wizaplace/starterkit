@@ -1,0 +1,35 @@
+@import 'var';
+
+//.nav-justified { position:relative;}
+.nav > li { position: static; }
+.nav-justified .dropdown-menu { width: 100%; background:transparent;}
+.nav-justified .dropdown-menu .container-fluid { background:white;}
+.nav-justified > li > a {
+    background-color: #364660;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: center;
+}
+.nav-justified > .active > a,
+.nav-justified > .active > a:hover,
+.nav-justified > .active > a:focus,
+.nav > li > a:focus, .nav > li > a:hover { background-color: #ddd;color:@grey-blue;}
+#categories-menu li.open .dropdown-menu {
+    margin:0;
+    padding:0;
+    left: 0;
+}
+#categories-menu li.open .dropdown-menu .container-fluid { padding-top:20px;}
+
+@media (min-width: 768px) {
+    .nav-justified > li > a { min-height: 75px;}
+    .nav-justified > li:first-child > a { border-left: 0; }
+    .nav-justified > li:last-child > a { border-right: 0;}
+}
+//menu mobile
+#categories-menu-mobile .panel-collapse {
+    padding:20px;
+}

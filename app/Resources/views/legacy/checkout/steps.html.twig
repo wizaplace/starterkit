@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="spacer"></div>
+            <h1 class="big-title">Panier</h1>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="checkout-steps-buttons btn-group btn-group-lg" role="group">
+                <button class="btn btn-default {% if step == 1 %} active {% else %} previous {% endif %}">
+                    <span class="icon icon-cart visible-xs"></span>
+                    <span class="hidden-xs">Récapitulatif</span>
+                </button>
+
+                <button class="btn btn-default {% if step == 2 %} active {% elseif step > 2 %} previous {% endif %}">
+                    <span class="icon icon-avatar visible-xs"></span>
+                    <span class="hidden-xs">Identification</span>
+                </button>
+
+                <button class="btn btn-default {% if step == 3 %} active {% elseif step > 3 %} previous {% endif %}">
+                    <span class="icon icon-box visible-xs"></span>
+                    <span class="hidden-xs">Livraison & Facturation</span>
+                </button>
+
+                <button class="btn btn-default {% if step == 4 %} active {% endif %}">
+                    <span class="icon icon-cb visible-xs"></span>
+                    <span class="hidden-xs">Paiement</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

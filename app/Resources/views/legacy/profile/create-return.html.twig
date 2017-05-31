@@ -1,0 +1,21 @@
+{% extends 'layout-profile.html.twig' %}
+
+{% block profile_content %}
+    Réaliser un retour : <br/>
+    <form method="post" action="{{ path('create_return', {'orderId' : order.id}) }}">
+        <input type="hidden" name="orderId" value="{{ order.id }}">
+        <input type="text" name="comments" placeholder="commentaires">
+        {% for item in order.orderItem %}
+            {{ item.productName }}&nbsp;:
+            <input type="number" name="items[{{ item.declinationId }}][amount]" min="0" max="{{ item.amount }}" value="{{ item.amount }}">
+            Raison&nbsp;:
+            <select name="items[{{ item.declinationId }}][reason]">
+                {% for returnType in returnTypes %}
+                    <option value="{{ returnType.id }}">{{ returnType.name }}</option>
+                {% endfor %}
+            </select>
+
+        {% endfor %}
+        <input type="submit">
+    </form>
+{% endblock %}

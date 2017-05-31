@@ -1,0 +1,13 @@
+{% extends 'layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <div class="spacer"></div>
+    <label>Commandes terminées, retour produit possible</label>
+    <div class="spacer"></div>
+    {{ include('profile/order-table.html.twig') }}
+
+    <div class="spacer"></div>
+    <label>Retour produits</label>
+    <div class="spacer"></div>
+    {{ include('profile/return-table.html.twig') }}
+{% endblock %}

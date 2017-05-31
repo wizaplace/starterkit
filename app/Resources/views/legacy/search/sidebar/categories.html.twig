@@ -1,0 +1,56 @@
+{% set categories = categoryTree() %}
+
+<ul id="categories" class="collapse sidebar-item-content {% if currentCategory|default %} in {% endif %}">
+    {% for category in categories %}
+
+        {# category - level 1 (root) #}
+        <li class="category"
+            :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+
+            {% if category.children|length == 0 %}
+                <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id})}}">
+                    {{ category.category.name }}
+                </a>
+            {% else %}
+                <a class="category-name" data-toggle="collapse" href="{{ '#cat'~category.category.id }}" aria-expanded="false" aria-controls="">
+                    <span>{{ category.category.name }}</span>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            {% endif %}
+
+            <ul id="cat{{category.category.id }}" class="collapse">
+                {% for category in category.children %}
+
+                    {# category - level 2 #}
+                    <li class="category sub-category radio"
+                        :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+
+                        {% if category.children|length == 0 %}
+                            <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id})}}">
+                                <span class="check-radio"></span>
+                                {{ category.category.name }}
+                            </a>
+                        {% else %}
+                            <a class="category-name" data-toggle="collapse" data-target="{{ '#cat'~category.category.id }}" aria-expanded="false" aria-controls="">
+                                <span class="check-radio"></span>
+                                {{ category.category.name }}
+                            </a>
+                        {% endif %}
+
+                        <ul id="cat{{category.category.id }}" class="collapse">
+                            {% for category in category.children %}
+
+                                {# category - level 3 #}
+                                <li class="category sub-category"
+                                    :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+
+                                    <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id }) }}">{{ category.category.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Projet Démo{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('style/app.css') }}">
+
+    <script src="{{ asset('scripts/jquery.min.js') }}"></script>
+</head>
+<body>
+
+{{ include('legacy/common/header.html.twig') }}
+{{ include('legacy/common/header/nav-menu.html.twig') }}
+{{ include('legacy/common/header/nav-menu-mobile.html.twig') }}
+{{ include('legacy/common/header/notifications.html.twig') }}
+
+{% block body %}{% endblock %}
+
+{% block footer %}{% include('legacy/common/footer.html.twig') %}{% endblock %}
+
+<script src="{{ asset('scripts/app.js') }}"></script>
+
+
+{# TODO: clean up (remove when not needed anymore) #}
+<script src="{{ asset('scripts/legacy/legacy.js') }}"></script>
+
+</body>
+</html>

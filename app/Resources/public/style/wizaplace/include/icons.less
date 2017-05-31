@@ -1,0 +1,16 @@
+// dynamic icons
+i {
+    font-style: normal;
+
+    &::before, &::after {
+        font-family: @font-family-icon-lib, sans-serif;
+    }
+}
+
+.closed-menu-icon  {
+    &::before { content: @closed-menu-icon; }
+}
+
+.open-menu-icon {
+    &::before { content: @open-menu-icon; }
+}

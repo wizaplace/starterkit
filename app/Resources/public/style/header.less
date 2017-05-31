@@ -1,0 +1,72 @@
+.main-header {
+
+    // logo and quick access links
+    // ===========================
+
+    .top-nav {
+        background-color: @primary-color;
+
+        .nav-wrapper {
+            color: #fff;
+            padding: 1em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .logo {
+                width: @logo-width;
+            }
+
+            .quick-access-link {
+                color: #fff;
+
+                &:hover {
+                    color: @secondary-color;
+                }
+            }
+
+            // TODO
+            .quick-access-content {
+                position: absolute;
+                color: @text-color;
+                background-color: #fff;
+            }
+        }
+    }
+
+    // category menu and main static links
+    // ===================================
+
+    .main-menu {
+        background: @secondary-color;
+
+        .main-menu-wrapper {
+            padding: 1em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .category-menu {
+                .category {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    // search-bar
+    // ==========
+
+    .search-bar {
+        background-color: @primary-color;
+
+        .search-bar-wrapper {
+            padding: 1em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+}

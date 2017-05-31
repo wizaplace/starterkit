@@ -1,0 +1,88 @@
+{% extends 'layout-profile.html.twig' %}
+
+{% block profile_content %}
+
+    <label>Informations sur la commande #{{ order.id }}</label>
+    <div class="spacer"></div>
+
+    {# order details #}
+    <div class="table-responsive">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th class="hidden-xs">N° Cde</th>
+                    <th class="hidden-xs">Date</th>
+                    <th>Total HT</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="hidden-xs">{{ order.id }}</td>
+                    <td class="hidden-xs">{{ order.timestamp|date("d/m/Y") }}</td>
+                    <td class="price">{{ order.total|price }}</td>
+                    <td>
+                        {% if  order.status == "STANDBY_BILLING" %}Attente de paiement
+                        {% elseif order.status =="STANDBY_VENDOR" %}Validation vendeur
+                        {% elseif order.status =="PROCESSING_SHIPPING" %}Envoi en cours
+                        {% elseif order.status =="PROCESSED" %}Traitée
+                        {% elseif order.status =="COMPLETED" %}Terminée
+                        {% elseif order.status =="BILLING_FAILED" %}Paiement échoué
+                        {% elseif order.status =="VENDOR_DECLINED" %}Refusée par le vendeur
+                        {% elseif order.status =="STANDBY_SUPPLYING" %}Attente d'approvisionnement
+                        {% elseif order.status =="UNPAID" %}Impayée
+                        {% elseif order.status =="REFUNDED" %}Remboursée
+                        {% elseif order.status =="CANCELED" %}Annulée
+                        {% elseif order.status =="INCOMPLETED" %}Incomplète
+                        {% elseif order.status =="PARENT_ORDER" %}Parente
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {# product details #}
+    <div class="product-list">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom du produit</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire HT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in order.orderItem %}
+
+                        <tr>
+                            <td>{{ product.productName }}</td>
+                            <td>{{ product.amount }}</td>
+                            <td>{{ product.price|price }}&nbsp;TTC</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {# addresses #}
+    <div class="addresses">
+
+        {# shipping address #}
+        {% set address = order.shippingAddress %}
+        <div>
+            <h3 class="title">Adresse de livraison</h3>
+            <ul class="list-unstyled">
+                <li>{{ address.firstname }} {{ address.lastname }}</li>
+                <li>{{ address.address }}</li>
+                <li>{{ address.address2 }}</li>
+                <li>{{ address.zipcode }} {{ address.city }}</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+

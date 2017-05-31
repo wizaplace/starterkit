@@ -1,0 +1,8 @@
+<ul>
+  <li><a href="{{ path("profile") }}">Profil</a></li>
+  <li><a href="{{ path("profile_addresses") }}">Adresses</a></li>
+  <li><a href="{{ path("profile_orders") }}">Achats</a></li>
+  <li><a href="{{ path("profile_returns") }}">Retours</a></li>
+  <li><hr/></li>
+  <li><a href="{{ path('logout') }}?csrf_token={{ csrf_token('logout_token') }}" class="text-grey">Se déconnecter</a></li>
+</ul>
