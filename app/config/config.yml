@@ -25,9 +25,6 @@ framework:
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
-        # Temp fix for: 'Warning: SessionHandler::read(): Session data file is not created by your uid' issue
-        save_path:   "%kernel.project_dir%/var/sessions/%kernel.environment%"
-        #save_path: /var/lib/php/sessions
     fragments:       ~
     http_method_override: true
     assets: ~
