@@ -6,6 +6,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    slug.regexp: !php/const:Wizaplace\Seo\SeoService::SLUG_REGEXP
     recaptcha.key: '6LcVkB0UAAAAAOiX8LA0mDX30VHvg8MCvqxoCIoc'
     recaptcha.secret: '6LcVkB0UAAAAAGbw1fOkuhXsCNsST18be2_ZEfgl'
 
@@ -40,27 +41,40 @@ twig:
     strict_variables: "%kernel.debug%"
 
 services:
-    http.client:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    AppBundle\:
+        resource: '../../src/AppBundle'
+        exclude: '../../src/AppBundle/{Twig,Entity,Repository}'
+
+    wizaplace.http.client:
         class: GuzzleHttp\Client
         arguments:
             -
                 base_uri: '%api.base_url%'
     Wizaplace\Catalog\CatalogService:
-        arguments: ['@http.client']
+        arguments: ['@wizaplace.http.client']
+        public: true
     Wizaplace\Basket\BasketService:
-        arguments: ['@http.client']
+        arguments: ['@wizaplace.http.client']
+        public: true
     Wizaplace\User\UserService:
-        arguments: ['@http.client']
+        arguments: ['@wizaplace.http.client']
+        public: true
     Wizaplace\Order\OrderService:
-        arguments: ['@http.client']
+        arguments: ['@wizaplace.http.client']
+        public: true
     Wizaplace\Image\ImageService:
-        arguments: ['@http.client']
+        arguments: ['@wizaplace.http.client']
+        public: true
+    Wizaplace\Seo\SeoService:
+        arguments: ['@wizaplace.http.client']
+        public: true
     app.twig_extension:
         class: AppBundle\Twig\AppExtension
-        autowire: true
         arguments:
-            5: '@cache.app'
-            6: '%recaptcha.key%'
-        public: false
-        tags:
-            - { name: twig.extension }
+            $cache: '@cache.app'
+            $recaptchaKey: '%recaptcha.key%'
