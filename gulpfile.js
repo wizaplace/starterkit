@@ -4,7 +4,6 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const postcss = require('gulp-postcss');
-const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
@@ -39,7 +38,7 @@ gulp.task('babelify', function () {
             console.error(err);
             this.emit('end');
         })
-        .pipe(source('es6.js')) //fichier de destination
+        .pipe(source('app.js')) //fichier de destination
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write('./'))
@@ -51,14 +50,9 @@ gulp.task('scripts_prod', ['babelify'], function() {
     // concat custom code with libs
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
-        `${nodeModulePath}/vue/dist/vue.min.js`,
         `${javascriptLibsPath}/jquery-ui-slider.min.js`,
-        './web/scripts/es6.js',
     ])
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(concat('app.js'))
-        .pipe(sourcemaps.write('./'))
+        .pipe(concat('libraries.js'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
@@ -67,12 +61,10 @@ gulp.task('scripts_dev', ['babelify'], function() {
     // concat custom code with libs
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.js`,
-        `${nodeModulePath}/vue/dist/vue.js`,
         `${javascriptLibsPath}/jquery-ui-slider.js`,
-        './web/scripts/es6.js',
     ])
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
+        .pipe(concat('libraries.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });

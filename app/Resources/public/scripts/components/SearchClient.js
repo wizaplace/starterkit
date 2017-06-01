@@ -2,7 +2,12 @@
  * Search API.
  */
 
-function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
+export class SearchClient {
+    
+    constructor(productSearchEndpoint, productAutocompleteEndpoint) {
+        this.productSearchEndpoint = productSearchEndpoint;
+        this.productAutocompleteEndpoint = productAutocompleteEndpoint;
+    }
 
     /**
      * @param {string} query
@@ -14,93 +19,106 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
      * @param {Object} extra Key-value map of extra parameters specific to the search engine implementation
      * @param {function} success Signature: function(results)
      */
-    this.searchProducts = function (query, page, resultsPerPage, filters, sorting, geoFilter, extra, success) {
-        var parameters = {
+    searchProducts(query, page, resultsPerPage, filters, sorting, geoFilter, extra, success) {
+        let parameters = {
             query: query,
             page: page,
             resultsPerPage: resultsPerPage,
             extra: extra
         };
-        for (var filterName in filters) {
+
+        for (let filterName in filters) {
             if (filters.hasOwnProperty(filterName)) {
-                var key = 'filters[' + filterName + ']';
+                let key = 'filters[' + filterName + ']';
                 parameters[key] = filters[filterName];
             }
         }
+
         if (sorting !== null) {
             parameters.sorting = sorting;
         }
+
         if (geoFilter !== null) {
             parameters.geo = geoFilter;
         }
 
-        var request = jQuery.get(productSearchEndpoint, parameters);
+        let request = jQuery.get(this.productSearchEndpoint, parameters);
         request.done(function (data) {
             success(data);
         });
+
         request.fail(function (jqXHR, textStatus) {
             console.error('Error while searching products: ' + textStatus);
         });
-    };
+    }
 
     /**
      * @param {string} query
      * @param {function} success Signature: function(results)
-     */
-    this.autocomplete = function (query, success) {
-        var request = jQuery.get(productAutocompleteEndpoint, {
+     */    
+    autocomplete(query, success) {
+        let request = jQuery.get(this.productAutocompleteEndpoint, {
             query: query
         });
+        
         request.done(function (data) {
             success(data);
         });
+        
         request.fail(function (jqXHR, textStatus) {
             console.error('Error while autocompleting products: ' + textStatus);
         });
-    };
+    }
 
     /**
      * Save search parameters in the URL (as query parameters).
      *
      * Requires the URI.js library.
      */
-    this.saveSearchInUrl = function (query, page, resultsPerPage, filters, sorting, geoFilter) {
-        var uri = new URI();
+    saveSearchInUrl(query, page, resultsPerPage, filters, sorting, geoFilter) {
+        let uri = new URI();
 
         // remove filters from current query (so we can set only the ones we were passed in params)
-        currentQuery = uri.search(true)
-        for (var name in currentQuery) {
+        let currentQuery = uri.search(true);
+        
+        for (let name in currentQuery) {
             if (!currentQuery.hasOwnProperty(name)) {
                 continue;
             }
 
-            if(isSpecialFilter(name) || isInt(name) || name.indexOf("sort") === 0) {
+            if(this.isSpecialFilter(name) || this.isInt(name) || name.indexOf("sort") === 0) {
                 uri.removeQuery(name);
             }
         }
 
-        for (var name in filters) {
+        for (let name in filters) {
             if (!filters.hasOwnProperty(name)) {
                 continue;
             }
-            value = filters[name];
+            
+            let value = filters[name];
+            
             // Numeric filter
             if (value.hasOwnProperty('min') || value.hasOwnProperty('max')) {
                 if (value.hasOwnProperty('min')) {
                     uri.setQuery(name + '[min]', filters[name]['min']);
                 }
+                
                 if (value.hasOwnProperty('max')) {
                     uri.setQuery(name + '[max]', filters[name]['max']);
                 }
+                
             } else {
                 uri.setQuery(name, filters[name]);
             }
         }
+        
         if (query) {
             uri.setQuery('q', query);
         } else {
             uri.removeQuery('q');
         }
+        
         if (page != 1) {
             uri.setQuery('page', page);
             uri.setQuery('perPage', resultsPerPage);
@@ -108,11 +126,13 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             uri.removeQuery('page');
             uri.removeQuery('perPage');
         }
-        for (var sortName in sorting) {
+        
+        for (let sortName in sorting) {
             if (sorting.hasOwnProperty(sortName)) {
                 uri.setQuery('sort[' + sortName +']', sorting[sortName]);
             }
         }
+        
         if (geoFilter) {
             uri.setQuery('geo[lat]', geoFilter.lat);
             uri.setQuery('geo[lng]', geoFilter.lng);
@@ -124,8 +144,9 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             uri.removeQuery('geo[radius]');
             uri.removeQuery('geo[label]');
         }
+        
         history.replaceState({}, document.title, uri.toString());
-    };
+    }
 
     /**
      * Restore search parameters from the URL (query parameters).
@@ -134,12 +155,12 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
      *
      * @return {{ query: String, page: Number, resultsPerPage: Number, sorting: Object, filters: Object }}
      */
-    this.restoreSearchFromUrl = function () {
+    restoreSearchFromUrl() {
         // Decode URI parameters, including arrays (which URI.js doesn't do)
         function getUriParameters() {
-            var uriParameters = (new URI()).query(true);
-            var parameters = {};
-            for (var name in uriParameters) {
+            let uriParameters = (new URI()).query(true);
+            let parameters = {};
+            for (let name in uriParameters) {
                 if (!uriParameters.hasOwnProperty(name)) {
                     continue;
                 }
@@ -148,7 +169,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
                     continue;
                 }
                 // Decode arrays (does not support nested arrays or indexed arrays yet)
-                var matches = name.match(/(.+)\[(.+)\]/);
+                let matches = name.match(/(.+)\[(.+)\]/);
                 if (matches) {
                     if (!parameters.hasOwnProperty(matches[1])) {
                         parameters[matches[1]] = {};
@@ -161,7 +182,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             return parameters;
         }
 
-        var result = {
+        let result = {
             query: null,
             page: null,
             resultsPerPage: null,
@@ -171,12 +192,12 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
         };
 
         // Read parameters from the URL
-        var parameters = getUriParameters();
-        for (var name in parameters) {
+        let parameters = getUriParameters();
+        for (let name in parameters) {
             if (!parameters.hasOwnProperty(name)) {
                 continue;
             }
-            var value = parameters[name];
+            let value = parameters[name];
             if (name === 'q') {
                 result.query = value;
             } else if (name === 'page') {
@@ -187,7 +208,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
                 result.sorting = value;
             } else if (name === 'geo') {
                 result.geoFilter = value;
-            } else if (isSpecialFilter(name) || isInt(name)) {
+            } else if (this.isSpecialFilter(name) || this.isInt(name)) {
                 // Filters
                 if (result.filters === null) {
                     result.filters = {};
@@ -195,17 +216,14 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
                 result.filters[name] = value;
             }
         }
-
         return result;
-    };
+    }
 
-    return this;
-}
+    isSpecialFilter(name) {
+        return ["categories", "companies", "companyType", "price"].indexOf(name) !== -1
+    }
 
-function isSpecialFilter(name) {
-    return ["categories", "companies", "companyType", "price"].indexOf(name) !== -1
-}
-
-function isInt(val) {
-    return (typeof val === 'number' || typeof val === 'string') && val % 1 === 0
+    isInt(val) {
+        return (typeof val === 'number' || typeof val === 'string') && val % 1 === 0
+    }
 }

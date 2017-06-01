@@ -20,11 +20,15 @@
 
 {% block footer %}{% include('legacy/common/footer.html.twig') %}{% endblock %}
 
-<script src="{{ asset('scripts/app.js') }}"></script>
-
-
 {# TODO: clean up (remove when not needed anymore) #}
+<script src="{{ asset('scripts/libraries.js') }}"></script>
 <script src="{{ asset('scripts/legacy/legacy.js') }}"></script>
+<script src="https://unpkg.com/vue@2.3.3"></script>
+
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+<script src="{{ asset('scripts/app.js') }}"></script>
 
 </body>
 </html>

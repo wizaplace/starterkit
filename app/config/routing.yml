@@ -1,3 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 home:
     path: /
     defaults: { _controller: AppBundle:Home:home }
