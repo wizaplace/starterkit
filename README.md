@@ -17,8 +17,8 @@ Store your SSH key in the SSH agent:
 Clone the project and install it:
 
 ```
-$ git clone git@github.com:wizaplace/demo.git
-$ cd demo/
+$ git clone git@github.com:wizaplace/starterkit.git
+$ cd starterkit/
 $ make dev-from-scratch
 ```
 
