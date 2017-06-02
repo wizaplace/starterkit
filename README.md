@@ -19,12 +19,12 @@ Clone the project and install it:
 ```
 $ git clone git@github.com:wizaplace/starterkit.git
 $ cd starterkit/
-$ vagrant up
+$ make dev-from-scratch
 ```
 
 The website is now reachable at [http://demo.loc/](http://demo.loc/).
 
-At any time you can rebuild everything by running `vagrant provision`.
+At any time you can rebuild everything by running `make dev-from-scratch` again.
 
 ## Customization
 
