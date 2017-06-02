@@ -50,4 +50,7 @@ npm-install:
 assets:
 	gulp deploy
 
-.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-ci
+dev-from-scratch:
+	vagrant destroy -f && vagrant up
+
+.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-ci dev-from-scratch
