@@ -86,7 +86,7 @@ export class SearchClient {
                 continue;
             }
 
-            if(this.isSpecialFilter(name) || this.isInt(name) || name.indexOf("sort") === 0) {
+            if(isSpecialFilter(name) || isInt(name) || name.indexOf("sort") === 0) {
                 uri.removeQuery(name);
             }
         }
@@ -208,7 +208,7 @@ export class SearchClient {
                 result.sorting = value;
             } else if (name === 'geo') {
                 result.geoFilter = value;
-            } else if (this.isSpecialFilter(name) || this.isInt(name)) {
+            } else if (isSpecialFilter(name) || isInt(name)) {
                 // Filters
                 if (result.filters === null) {
                     result.filters = {};
@@ -218,12 +218,13 @@ export class SearchClient {
         }
         return result;
     }
+}
 
-    isSpecialFilter(name) {
-        return ["categories", "companies", "companyType", "price"].indexOf(name) !== -1
-    }
+// 'private' functions (callable only inside this module)
+function isSpecialFilter(name) {
+    return ["categories", "companies", "companyType", "price"].indexOf(name) !== -1
+}
 
-    isInt(val) {
-        return (typeof val === 'number' || typeof val === 'string') && val % 1 === 0
-    }
+function isInt(val) {
+    return (typeof val === 'number' || typeof val === 'string') && val % 1 === 0
 }

@@ -3,26 +3,26 @@
         <li class="sidebar-item">
 
             {# category filter label #}
-            {#<div class="sidebar-item-label">#}
-                {#<a data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="">#}
-                    {#<span class="label">Par</span><br>#}
+            <div class="sidebar-item-label">
+                <a data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="">
+                    <span class="label">Par</span><br>
 
-                    {#<div class="filter-name">#}
-                        {#<span class="light-title">Catégorie</span>#}
-                        {#<span class="glyphicon#}
-                            {#{% if currentCategory|default %}#}
-                                {#glyphicon-menu-down#}
-                            {#{% else %}#}
-                                {#glyphicon-menu-up#}
-                            {#{% endif %}#}
-                             {#">#}
-                        {#</span>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
+                    <div class="filter-name">
+                        <span class="light-title">Catégorie</span>
+                        <span class="glyphicon
+                            {% if currentCategory|default %}
+                                glyphicon-menu-down
+                            {% else %}
+                                glyphicon-menu-up
+                            {% endif %}
+                             ">
+                        </span>
+                    </div>
+                </a>
+            </div>
 
             {# category filters #}
-            {#{% include('legacy/search/sidebar/categories.html.twig') %}#}
+            {% include('legacy/search/sidebar/categories.html.twig') %}
         </li>
 
         <li v-for="facet in facets" class="sidebar-item" v-if="facet.name != 'categories'">
@@ -64,14 +64,13 @@
                     </a>
                 </div>
 
-                {# TODO: Fix error #}
-                {#<div class="collapse sidebar-item-content">#}
-                    {#<br />#}
-                    {#<div class="subcategory-item"  v-for="(value, index) in facet.values">#}
-                        {#<input type="radio" @click="toggleFilter(facet.name, index)" :checked="isChecked(facet.name, index)" />#}
-                        {#<span>${value.label}</span>#}
-                    {#</div>#}
-                {#</div>#}
+                <div class="collapse sidebar-item-content">
+                    <br />
+                    <div class="subcategory-item"  v-for="(value, index) in facet.values">
+                        <input type="radio" @click="toggleFilter(facet.name, index)">
+                        <span>${value.label}</span>
+                    </div>
+                </div>
             </div>
         </li>
     </ul>

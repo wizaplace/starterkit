@@ -1,44 +1,77 @@
 import { SearchClient } from '../components/SearchClient';
+import { PriceSlider } from '../components/PriceSlider';
+
+// helpers
+const searchContainerId = "search";
+const searchPageIsLoaded = $(`#${searchContainerId}`).length;
+let instance = null; // will hold a reference to this class as a singleton
 
 export class SearchPage {
 
-    static init() {
-        this.search = new SearchClient(Routing.generate('api_search_products'), '');
-        this.urlParameters = this.search.restoreSearchFromUrl();
+    constructor() {
 
-        this.bindVue();
+        if(! instance) {
+
+            instance = this; // set singleton
+
+            this.search = new SearchClient(Routing.generate('api_search_products'), '');
+            this.urlParameters = this.search.restoreSearchFromUrl();
+
+            this.priceSliderInit();
+            this.searchInit();
+        }
+
+        return instance;
     }
 
-    static bindVue() {
+    static init() {
+
+        // code is executed only on search page
+        if(searchPageIsLoaded) {
+            return new this; // return singleton instance of this class
+        }
+    }
+
+    // price slider filter
+    priceSliderInit() {
+
+    }
+
+    // search related functions (filters, facets, pagination, etc.)
+    searchInit() {
+
         Vue.filter('round', function(value) {
             return Math.round(value);
         });
 
+        // as 'this' here represents the Vue object, 'instance' is used to reference the SearchPage class
+        // and to avoid confusion about the 'this' keyword, 'vm' is used to reference the current Vue object
         let vm = new Vue({
-            el: '#search-content',
-            delimiters: ['${','}'],
+            el: `#${searchContainerId}`,
+            delimiters: ['${','}'], // avoid conflict with twig '{{ }}' syntax
             data: {
                 loading: true,
                 products: [],
-                query: this.urlParameters.query || '',
+                query: vm.urlParameters.query || '',
                 pagination: {
-                    page: this.urlParameters.page || 1,
-                    resultsPerPage: this.urlParameters.resultsPerPage || 12
+                    page: vm.urlParameters.page || 1,
+                    resultsPerPage: vm.urlParameters.resultsPerPage || 12
                 },
 
                 // TODO: get filters from ajax in mounted method
-                filters: this.urlParameters.filters,  // || {{ filters|default({})|json_encode|raw }},
-                sorting: this.urlParameters.sorting || {},
+                filters: vm.urlParameters.filters,  // || {{ filters|default({})|json_encode|raw }},
+                sorting: vm.urlParameters.sorting || {},
                 facets: [],
                 currentUrl: window.location.href,
-                geoFilter: this.urlParameters.geoFilter,
-                calculatedPages: this.calculatePages,
+                geoFilter: vm.urlParameters.geoFilter,
+                calculatedPages: vm.calculatePages,
         },
             
         methods: {
             refresh: function () {
 
-                SearchPage.search.searchProducts(this.query, this.pagination.page, this.pagination.resultsPerPage, this.filters, this.sorting, this.geoFilter, {}, function (response) {
+                instance.search.searchProducts(vm.query, vm.pagination.page, vm.pagination.resultsPerPage, vm.filters, vm.sorting, vm.geoFilter, {}, function (response) {
+
                     vm.loading = false;
                     vm.products = response.results;
                     vm.pagination = response.pagination;
@@ -63,7 +96,7 @@ export class SearchPage {
 
                     vm.facets = response.facets;
 
-                    SearchPage.search.saveSearchInUrl(vm.query, vm.pagination.page, vm.pagination.resultsPerPage, vm.filters, vm.sorting, vm.geoFilter);
+                    instance.search.saveSearchInUrl(vm.query, vm.pagination.page, vm.pagination.resultsPerPage, vm.filters, vm.sorting, vm.geoFilter);
 
                     Vue.nextTick(function () {
                         // open category tree
@@ -72,70 +105,66 @@ export class SearchPage {
                 });
             },
 
-            isChecked: function(facetName, variantName) {
-                return this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName;
-            },
-
             setSort: function(criteria, direction) {
                 if(criteria ===  null) {
-                    this.sorting = null;
+                    vm.sorting = null;
                 } else {
-                    this.sorting = {};
-                    this.sorting[criteria] = direction;
+                    vm.sorting = {};
+                    vm.sorting[criteria] = direction;
                 }
-                this.refresh();
+                vm.refresh();
             },
 
             goToPage: function (page) {
-                this.pagination.page = page;
+                vm.pagination.page = page;
 
                 // got to page top
                 let $container = $('html, body');
                 let $ref = $("#search-content");
                 $container.animate({ scrollTop: $ref.offset().top - $container.offset().top }, 'fast');
 
-                this.refresh();
+                vm.refresh();
             },
 
             toggleFilter: function (facetName, variantName) {
-                if (this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName) {
+                if (vm.filters.hasOwnProperty(facetName) && vm.filters[facetName] == variantName) {
                     // Clear filter
-                    Vue.delete(this.filters, facetName);
+                    Vue.delete(vm.filters, facetName);
                 } else {
                     // Set filter
-                    Vue.set(this.filters, facetName, variantName);
+                    Vue.set(vm.filters, facetName, variantName);
                 }
-                this.refresh();
+                vm.refresh();
             },
 
             changeResultsNumber: function (_resultsPerPage) {
-                this.pagination.resultsPerPage = _resultsPerPage;
-                this.refresh();
+                vm.pagination.resultsPerPage = _resultsPerPage;
+                vm.refresh();
             },
 
             updateNumericFilter: function (facetName, min, max) {
-                if (!this.filters[facetName]) {
-                    this.filters[facetName] = {};
+                if ( ! vm.filters[facetName]) {
+                    vm.filters[facetName] = {};
                 }
-                this.filters[facetName]['min'] = min;
-                this.filters[facetName]['max'] = max;
-                this.refresh();
+                vm.filters[facetName]['min'] = min;
+                vm.filters[facetName]['max'] = max;
+                vm.refresh();
             },
 
             clearFilters: function () {
                 // Clear everything except the selected category
                 for (let property in this.filters) {
-                    if (property !== 'categories' && this.filters.hasOwnProperty(property)) {
-                        Vue.delete(this.filters, property);
+                    if (property !== 'categories' && vm.filters.hasOwnProperty(property)) {
+                        Vue.delete(vm.filters, property);
                     }
                 }
 
-                this.refresh();
+                vm.refresh();
             },
 
             imageStyle: function(product) {
                 return {
-                    backgroundImage: 'url(' + this.imageUrl(product) + ')',
+                    backgroundImage: 'url(' + vm.imageUrl(product) + ')',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
@@ -213,7 +242,7 @@ export class SearchPage {
 
         mounted: function () {
             // Trigger the first refresh
-            this.refresh();
+            vm.refresh();
         },
 
         filters: {
