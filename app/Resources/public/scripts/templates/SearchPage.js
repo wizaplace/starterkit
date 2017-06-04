@@ -1,5 +1,5 @@
 import { SearchClient } from '../components/SearchClient';
-import { PriceSlider } from '../components/PriceSlider';
+import { Helper } from '../Helper';
 
 const templateContainerId = "search";
 const containerIsLoaded = $(`#${templateContainerId}`).length;
@@ -33,9 +33,37 @@ export class SearchPage {
         }
     }
 
-    // price slider filter
+    // price slider
     priceSliderInit() {
 
+        Vue.component('slider', {
+            template: '#slider-template',
+            props: ['min', 'max'],
+            data: function () {
+                return {
+                    currentMin: this.min,
+                    currentMax: this.max
+                }
+            },
+            activated: function () {
+                var view = this;
+
+                $('#price-slider').slider({
+                    range: true,
+                    min: Math.floor(view.min),
+                    max: Math.ceil(view.max),
+                    values: [view.currentMin, view.currentMax],
+                    slide: function (event, ui) {
+                        view.currentMin = ui.values[0];
+                        view.currentMax = ui.values[1];
+                    },
+                    stop: function () {
+                        // Dispatch an event to the main view to update the search
+                        view.$emit('update', view.currentMin, view.currentMax);
+                    }
+                });
+            }
+        });
     }
 
     // search related functions (filters, facets, pagination, etc.) and search product data
@@ -45,15 +73,19 @@ export class SearchPage {
             return Math.round(value);
         });
 
+        Vue.filter('formatPrice', function(value) {
+            return Helper.formatPrice(value);
+        });
+
         // as 'this' here represents the Vue object, 'instance' is used to reference the SearchPage class
-        new Vue({
+        let view = new Vue({
             el: `#${templateContainerId}`,
 
-            delimiters: ['${','}'], // avoid conflict with twig '{{ }}' syntax
+            delimiters: ['${', '}'],
 
             data: {
-                products: [], // currently filtered list of products to display
-                facets: [], // TODO comment
+                products: [], // currently list of filtered products to display
+                facets: [],
 
                 // extracted from URL
                 query: instance.urlParameters.query || '', // term used in search-bar
@@ -126,10 +158,6 @@ export class SearchPage {
                     }
                     this.refresh();
                 },
-                
-                setCurrentCategory() {
-                    
-                },
 
                 // pagination
                 goToPage(page) {
@@ -163,8 +191,10 @@ export class SearchPage {
                     if( ! this.filters[facetName]) {
                         this.filters[facetName] = {};
                     }
+
                     this.filters[facetName]['min'] = min;
                     this.filters[facetName]['max'] = max;
+
                     this.refresh();
                 },
 
@@ -231,7 +261,7 @@ export class SearchPage {
                 },
 
                 isCurrentCategory(categoryId) {
-                    // return this.filters['categories'] == categoryId;
+                    return this.filters['categories'] === categoryId;
                 },
 
                 submitBasket(declinationId) {
@@ -257,21 +287,8 @@ export class SearchPage {
             },
 
             mounted() {
-
-                // get current category (if set) from url to update filters parameter
-                // let currentCategory = this.getCurrentCategory();
-                //
-                // if(currentCategory) {
-                //     this.filters['categories'] = currentCategory;
-                // }
-
-                
                 // trigger the first refresh
                 this.refresh();
-            },
-
-            filters: {
-                price: W.formatPrice
             }
         });
     }

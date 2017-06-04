@@ -11,20 +11,24 @@ add_to_basket:
     methods: [POST]
 
 # search
-quick_search:
-    path: /recherche
-    defaults: { _controller: AppBundle:Search:quickSearch }
-    methods: [GET]
-
 api_search:
     path: /api/search
     defaults: { _controller: AppBundle:Search:apiSearch }
     methods: [GET]
 
-# ajax
-current_category:
-    path: /category/current
-    defaults: { _controller: AppBundle:Category:currentCategory }
+quick_search:
+    path: /recherche
+    defaults: { _controller: AppBundle:Search:quickSearch }
+    methods: [GET]
+
+view_category:
+    path: /category/{categoryId}
+    defaults: { _controller: AppBundle:Category:search }
+    methods: [GET]
+
+view_category_seo:
+    path: /c-{categoryId}-{slug}
+    defaults: { _controller: AppBundle:Category:search }
     methods: [GET]
 
 # javascript routing
@@ -40,10 +44,6 @@ product:
 product_seo:
     path: /p-{productId}-{slug}
     defaults: { _controller: AppBundle:Product:view }
-search:
-    path: /recherche
-    defaults: { _controller: AppBundle:Search:search }
-    methods: [GET]
 
 
 # basket and checkout
@@ -153,14 +153,7 @@ reset_password:
     defaults: { _controller: AppBundle:Auth:resetPassword }
     methods: [POST]
 
-view_category:
-    path: /category/{categoryId}
-    defaults: { _controller: AppBundle:Category:View }
-    methods: [GET]
-view_category_seo:
-    path: /c-{categoryId}-{slug}
-    defaults: { _controller: AppBundle:Category:View }
-    methods: [GET]
+
 cmsQuiSommesNous:
     path: /qui-sommes-nous
     defaults:

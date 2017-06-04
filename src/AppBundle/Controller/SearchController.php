@@ -11,15 +11,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wizaplace\Catalog\CatalogService;
 
 class SearchController extends Controller
 {
-    public function quickSearchAction(): Response
+    public function quickSearchAction(Request $request): Response
     {
-        $apiBaseUrl = $this->getParameter("api.base_url");
+        $catalogService = $this->get(CatalogService::class);
+        $categoryId = $request->get('categories');
 
-        return $this->render('legacy/search/search.html.twig', [
-            'apiBaseUrl' => $apiBaseUrl
+        if (!empty($categoryId)) {
+
+            // add searched category into a filters array
+            $filters['categories'] = $categoryId;
+
+            // get searched category
+            $currentCategory = $catalogService->getCategory((int) $categoryId);
+        }
+
+        return $this->render('search/quick-search.html.twig', [
+            'currentCategory' => $currentCategory ?? null,
+            'filters' => $filters ?? [],
+            'searchQuery' => $request->query->get('query'),
         ]);
     }
 

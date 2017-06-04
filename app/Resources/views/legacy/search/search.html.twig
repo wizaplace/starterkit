@@ -49,19 +49,19 @@
                             {# promo badge #}
                             <div class="top-badge badge-promo" v-if="product.crossedOutPrice !== null">PROMO</div>
 
-                            <a class="product-detail" :href="'/p-'+product.productId+'-'+product.name">
+                            <a class="product-detail" :href="product.url">
                                 <div class="product-image" :style="imageStyle(product)"></div>
                                 <div class="product-caption">
-                                    <div class="title ellipsis">${product.name}</div>
-                                    <div class="ellipsis">${ product.subtitle }</div>
+                                    <div class="title ellipsis" v-text="product.name"></div>
+                                    <div class="ellipsis" v-text="product.subtitle"></div>
                                 </div>
                             </a>
 
                             <div class="product-price">
                                 <div class="pull-left">
-                                    <span v-if="product.crossedOutPrice !== null" class="title">${product.minimumPrice|price}&nbsp;TTC</span><br />
-                                    <span v-if="product.crossedOutPrice !== null" class="title text-blue text-line-through">${product.crossedOutPrice|price}&nbsp;TTC</span>
-                                    <span v-else class="title">${product.minimumPrice|price}&nbsp;TTC</span><br />
+                                    <span v-if="product.crossedOutPrice !== null" class="title">${ product.minimumPrice | formatPrice }&nbsp;TTC</span><br />
+                                    <span v-if="product.crossedOutPrice !== null" class="title text-blue text-line-through">${ product.crossedOutPrice | formatPrice }&nbsp;TTC</span>
+                                    <span v-else class="title">${ product.minimumPrice | formatPrice }&nbsp;TTC</span><br />
                                 </div>
                                 <button class="add-to-basket btn btn-link pull-right" @click="submitBasket(product.productId)" title="Ajouter au panier">
                                     <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span>
@@ -120,7 +120,7 @@
     {# price slider template #}
     <template id="slider-template">
         <div class="clearfix">
-            <div id="facet-slider"></div>
+            <div id="price-slider"></div>
             <span class="facet-range-min" v-text="currentMin + ' €'"></span>
             <span class="facet-range-max" v-text="currentMax + ' €'"></span>
         </div>

@@ -12,23 +12,17 @@ use Wizaplace\Catalog\CatalogService;
 
 class CategoryController extends Controller
 {
-    public function viewAction($categoryId)
+    public function searchAction($categoryId)
     {
         $catalogService = $this->get(CatalogService::class);
-        $currentCategory = $catalogService->getCategory((int)$categoryId);
-        $apiBaseUrl = $this->getParameter("api.base_url");
-        
-        $categories = $catalogService->getCategoryTree();
-
-        $filters = [];
+        $currentCategory = $catalogService->getCategory((int) $categoryId);
         $filters['categories'] = $categoryId;
+
         return $this->render(
-            'legacy/search/search.html.twig',
+            'search/category-search.html.twig',
                 [
-                    'categories' => $categories,
                     'currentCategory' => $currentCategory,
                     'filters' => $filters,
-                    'apiBaseUrl' => $apiBaseUrl
                 ]);
     }
 }
