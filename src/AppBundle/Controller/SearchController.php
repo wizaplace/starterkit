@@ -10,10 +10,11 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
-    public function searchAction()
+    public function searchAction(): Response
     {
         $apiBaseUrl = $this->getParameter("api.base_url");
 
@@ -22,12 +23,12 @@ class SearchController extends Controller
         ]);
     }
 
-    public function apiSearchAction(Request $request) : JsonResponse
+    public function apiSearchAction(Request $request): JsonResponse
     {
         $apiBaseUrl = $this->getParameter('api.base_url');
         $httpClient = $this->get('http.client');
-        $response = $httpClient->get($apiBaseUrl . '/catalog/search/products', [
-            // We forward the whole query string to the API ('query')
+
+        $response = $httpClient->get($apiBaseUrl . 'catalog/search/products', [
             'query' => $request->getQueryString(),
         ]);
 
