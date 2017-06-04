@@ -25,6 +25,7 @@ class ProfileController extends Controller
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+
             return $this->render('legacy/profile/profile.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
@@ -36,6 +37,7 @@ class ProfileController extends Controller
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+
             return $this->render('legacy/profile/addresses.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
@@ -56,6 +58,7 @@ class ProfileController extends Controller
                     return $vendorId == $order->getCompanyId();
                 }
             );
+
             return $this->render('legacy/profile/orders.html.twig', ['profile' => $profile, 'orders' => $orders]);
         }
         throw new NotFoundHttpException();
@@ -67,6 +70,7 @@ class ProfileController extends Controller
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+
             return $this->render('legacy/profile/returns.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
@@ -78,6 +82,7 @@ class ProfileController extends Controller
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+
             return $this->render('legacy/profile/sav.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
@@ -107,6 +112,7 @@ class ProfileController extends Controller
         $userService->updateUserAdresses($user, $this->getApiKey());
 
         $referer =  $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 

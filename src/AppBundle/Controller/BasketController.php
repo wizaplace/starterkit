@@ -46,7 +46,7 @@ class BasketController extends Controller
 
         // get product main image
         $productImages = $product->getDeclinations()["0"]->getImages();
-        if(count($productImages)) {
+        if (count($productImages)) {
             $imageId = reset($productImages)->getId();
             $imageService = $this->get(ImageService::class);
             $addedProduct["imageLink"] = $imageService->getImageLink($imageId, 100, 100);
@@ -79,10 +79,11 @@ class BasketController extends Controller
     public function cleanBasketAction(Request $request): Response
     {
         $token = $request->request->get("token");
-        if($this->isCsrfTokenValid("clean",$token)) {
+        if ($this->isCsrfTokenValid("clean", $token)) {
             $this->get("session")->remove(self::SESSION_BASKET_ATTRIBUTE);
         }
         $referer = $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 
@@ -96,6 +97,7 @@ class BasketController extends Controller
 
         $basketId = $this->getBasketId();
         $basket = $basketService->getBasket($basketId);
+
         return $this->render('legacy/checkout/basket.html.twig', [
             'basket' => $basket,
         ]);

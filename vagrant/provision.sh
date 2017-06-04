@@ -10,3 +10,4 @@ cp /vagrant/vagrant/apache.conf /etc/apache2/sites-available/apache.conf
 a2ensite apache.conf
 service apache2 restart
 
+cd /vagrant && make install

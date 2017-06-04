@@ -1,11 +1,11 @@
 # Require the plugin EditorConfig in Phpstorm
+
 [*]
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
-# Tab indentation (no size specified)
 [Makefile]
 indent_style = tab
 

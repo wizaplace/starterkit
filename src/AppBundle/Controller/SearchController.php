@@ -19,7 +19,7 @@ class SearchController extends Controller
         $apiBaseUrl = $this->getParameter("api.base_url");
 
         return $this->render('legacy/search/search.html.twig', [
-            'apiBaseUrl' => $apiBaseUrl
+            'apiBaseUrl' => $apiBaseUrl,
         ]);
     }
 
@@ -27,8 +27,7 @@ class SearchController extends Controller
     {
         $apiBaseUrl = $this->getParameter('api.base_url');
         $httpClient = $this->get('http.client');
-
-        $response = $httpClient->get($apiBaseUrl . 'catalog/search/products', [
+        $response = $httpClient->get($apiBaseUrl.'catalog/search/products', [
             'query' => $request->getQueryString(),
         ]);
 
