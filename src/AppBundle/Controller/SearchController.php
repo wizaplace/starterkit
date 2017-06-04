@@ -28,13 +28,8 @@ class SearchController extends Controller
         $apiBaseUrl = $this->getParameter('api.base_url');
         $httpClient = $this->get('http.client');
 
-        $query = $request->query;
-        $filters = $query->get('filters', []);
-        $filters['companies'] = $this->get('kernel')->getVendorId();
-        $query->add(['filters' => $filters]);
-
-        $response = $httpClient->get($apiBaseUrl . '/catalog/search/products', [
-            'query' => $query->all(),
+        $response = $httpClient->get($apiBaseUrl . 'catalog/search/products', [
+            'query' => $request->getQueryString(),
         ]);
 
         return new JsonResponse(json_decode($response->getBody()->getContents(), true));
