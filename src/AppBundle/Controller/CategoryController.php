@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $catalogService = $this->get(CatalogService::class);
         $currentCategory = $catalogService->getCategory((int) $categoryId);
         $apiBaseUrl = $this->getParameter("api.base_url");
-        
+
         $categories = $catalogService->getCategoryTree();
 
         $filters = [];
