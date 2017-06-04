@@ -137,7 +137,7 @@ export class SearchPage {
 
                     // got to page top
                     let $container = $('html, body');
-                    let $ref = $("#search-content");
+                    let $ref = $(`#${templateContainerId}`);
                     $container.animate({ scrollTop: $ref.offset().top - $container.offset().top }, 'fast');
 
                     this.refresh();
