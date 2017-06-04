@@ -84,7 +84,7 @@
                                     </a>
                                 </li>
 
-                                {# 3 templates previous to current page #}
+                                {# 3 pages previous to current page #}
                                 <li v-for="i in range(pagination.page -3, pagination.page)" v-if="i > 0">
                                     <a href="#" @click.prevent="goToPage(i)" class="page-number">${i}</a>
                                 </li>
@@ -96,7 +96,7 @@
                                     </a>
                                 </li>
 
-                                {# 3 templates next to current page #}
+                                {# 3 pages next to current page #}
                                 <li v-for="i in range(pagination.page + 1, pagination.page + 4)" v-if="i < pagination.nbPages + 1">
                                     <a href="#" @click.prevent="goToPage(i)" class="page-number">${i}</a>
                                 </li>
