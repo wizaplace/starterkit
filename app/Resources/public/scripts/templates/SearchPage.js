@@ -264,6 +264,10 @@ export class SearchPage {
                     return this.filters['categories'] === categoryId;
                 },
 
+                isChecked: function(facetName, variantName) {
+                    return this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName;
+                },
+
                 submitBasket(declinationId) {
                     $.ajax({
                         type: "POST",
