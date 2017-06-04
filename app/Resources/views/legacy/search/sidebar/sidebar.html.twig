@@ -67,7 +67,7 @@
                 <div :id="'facet-'+facet.name" class="collapse sidebar-item-content" :class="{in: (filters[facet.name] !== null) }">
                     <br />
                     <div class="subcategory-item"  v-for="(value, index) in facet.values">
-                        <input type="radio" @click="toggleFilter(facet.name, index)">
+                        <input type="radio" @click="toggleFilter(facet.name, index)" :checked="isChecked(facet.name, index)" />
                         <span>${value.label}</span>
                     </div>
                 </div>
