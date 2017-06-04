@@ -4,6 +4,8 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const postcss = require('gulp-postcss');
+const clean = require('gulp-clean')
+const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
@@ -27,6 +29,18 @@ const nodeModulePath = "./node_modules";
 const resourcesPath = "./app/Resources/public";
 const javascriptLibsPath = `${resourcesPath}/scripts/libs`;
 
+// clean generated assets folders
+gulp.task('clean', function() {
+    return gulp.src([
+        './web/fonts',
+        './web/images',
+        './web/scripts',
+        './web/style',
+    ],
+        { read: false })
+        .pipe(clean());
+});
+
 // Scripts (ES6)
 gulp.task('babelify', function () {
 
@@ -38,7 +52,7 @@ gulp.task('babelify', function () {
             console.error(err);
             this.emit('end');
         })
-        .pipe(source('app.js')) //fichier de destination
+        .pipe(source('es6.js')) //fichier de destination
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write('./'))
@@ -51,10 +65,13 @@ gulp.task('scripts_prod', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
-        `${nodeModulePath}/moment/min/moment.min.js`,
         `${javascriptLibsPath}/jquery-ui-slider.min.js`,
+        './web/scripts/es6.js',
     ])
-        .pipe(concat('libraries.js'))
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(concat('app.js'))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
@@ -64,11 +81,11 @@ gulp.task('scripts_dev', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.js`,
         `${nodeModulePath}/vue/dist/vue.js`,
-        `${nodeModulePath}/moment/min/moment.min.js`,
         `${javascriptLibsPath}/jquery-ui-slider.js`,
+        './web/scripts/es6.js',
     ])
         .pipe(sourcemaps.init())
-        .pipe(concat('libraries.js'))
+        .pipe(concat('app.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });
