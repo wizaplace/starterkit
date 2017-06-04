@@ -20,11 +20,11 @@
 
 {% block footer %}{% include('legacy/common/footer.html.twig') %}{% endblock %}
 
-<script src="{{ asset('scripts/app.js') }}"></script>
-
-
 {# TODO: clean up (remove when not needed anymore) #}
 <script src="{{ asset('scripts/legacy/legacy.js') }}"></script>
+
+<script src="{{ asset('scripts/libraries.js') }}"></script>
+<script src="{{ asset('scripts/app.js') }}"></script>
 
 </body>
 </html>
