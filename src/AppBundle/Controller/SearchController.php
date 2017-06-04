@@ -15,10 +15,10 @@ class SearchController extends Controller
 {
     public function searchAction()
     {
-        $apiUrl = $this->getParameter("api.base_url");
+        $apiBaseUrl = $this->getParameter("api.base_url");
 
         return $this->render('legacy/search/search.html.twig', [
-            'apiUrl' => $apiUrl
+            'apiBaseUrl' => $apiBaseUrl
         ]);
     }
 
