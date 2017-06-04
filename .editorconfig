@@ -10,10 +10,6 @@ charset = utf-8
 indent_style = tab
 
 # http://www.php-fig.org/psr/psr-2/#indenting
-[*.{php,less,js}]
+[*.{php,less,js,yml}]
 indent_style = space
 indent_size = 4
-
-[*.yml]
-indent_style = space
-indent_size = 2
