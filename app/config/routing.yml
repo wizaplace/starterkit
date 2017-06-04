@@ -1,7 +1,7 @@
 # pages
 home:
     path: /
-    defaults: { _controller: AppBundle:Home:view }
+    defaults: { _controller: AppBundle:Home:home }
     methods: [GET]
 
 # basket
