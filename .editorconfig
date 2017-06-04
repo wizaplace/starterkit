@@ -1,3 +1,5 @@
+# Require the plugin EditorConfig in Phpstorm
+
 [*]
 end_of_line = lf
 insert_final_newline = true
@@ -7,6 +9,11 @@ charset = utf-8
 [Makefile]
 indent_style = tab
 
-[*.{php,less,yml,js}]
+# http://www.php-fig.org/psr/psr-2/#indenting
+[*.{php,less,js}]
 indent_style = space
 indent_size = 4
+
+[*.yml]
+indent_style = space
+indent_size = 2
