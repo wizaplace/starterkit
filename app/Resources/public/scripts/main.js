@@ -1,4 +1,5 @@
-import { SearchPage } from './pages/SearchPage';
+import { SearchBar } from './templates/SearchBar';
+import { SearchPage } from './templates/SearchPage';
 
 // custom scripts
 function onReady() {
@@ -7,13 +8,10 @@ function onReady() {
 
 // wait until page is fully loaded
 $(function() {
-    // components
-    PriceSlider.init();
 
-    // pages
+    // templates
+    SearchBar.init();
     SearchPage.init();
-
-
 
     // trigger custom scripts
     onReady();

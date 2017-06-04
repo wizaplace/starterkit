@@ -43,7 +43,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ path('basket_add_item') }}",
+                url: "{{ path('add_to_basket') }}",
                 data: { declinationId: declinationId, quantity: quantity },
                 success: function(response) {
                     hydrateModal(response.addedProduct, response.message);

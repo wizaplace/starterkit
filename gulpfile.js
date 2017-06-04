@@ -50,6 +50,8 @@ gulp.task('scripts_prod', ['babelify'], function() {
     // concat custom code with libs
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
+        `${nodeModulePath}/vue/dist/vue.min.js`,
+        `${nodeModulePath}/moment/min/moment.min.js`,
         `${javascriptLibsPath}/jquery-ui-slider.min.js`,
     ])
         .pipe(concat('libraries.js'))
@@ -61,6 +63,8 @@ gulp.task('scripts_dev', ['babelify'], function() {
     // concat custom code with libs
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.js`,
+        `${nodeModulePath}/vue/dist/vue.js`,
+        `${nodeModulePath}/moment/min/moment.min.js`,
         `${javascriptLibsPath}/jquery-ui-slider.js`,
     ])
         .pipe(sourcemaps.init())

@@ -1,10 +1,35 @@
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
+# pages
 home:
     path: /
-    defaults: { _controller: AppBundle:Home:home }
+    defaults: { _controller: AppBundle:Home:view }
     methods: [GET]
+
+# basket
+add_to_basket:
+    path: /basket/add
+    defaults: { _controller: AppBundle:Basket:add }
+    methods: [POST]
+
+# search
+quick_search:
+    path: /recherche
+    defaults: { _controller: AppBundle:Search:quickSearch }
+    methods: [GET]
+
+api_search:
+    path: /api/search
+    defaults: { _controller: AppBundle:Search:apiSearch }
+    methods: [GET]
+
+# ajax
+current_category:
+    path: /category/current
+    defaults: { _controller: AppBundle:Category:currentCategory }
+    methods: [GET]
+
+# javascript routing
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 
 # legacy
@@ -19,10 +44,7 @@ search:
     path: /recherche
     defaults: { _controller: AppBundle:Search:search }
     methods: [GET]
-api_search_products:
-    path: /api/search
-    defaults: { _controller: AppBundle:Search:apiSearch }
-    methods: [GET]
+
 
 # basket and checkout
 basket:
@@ -47,10 +69,7 @@ checkout_complete:
     methods: [POST]
 
 # panier (Create, Update, Delete)
-basket_add_item:
-    path: /basket/add
-    defaults: { _controller: AppBundle:Basket:addProduct }
-    methods: [POST]
+
 clean_basket:
     path: /basket/clean
     defaults: { _controller: AppBundle:Basket:cleanBasket }

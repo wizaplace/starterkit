@@ -1,0 +1,30 @@
+{% set categories = categoryTree() %}
+
+<div id="search-bar" class="search-bar">
+    <form action="{{ path('quick_search') }}" method="get" autocomplete="off">
+        <input type="hidden" name="categories" v-model="currentCategoryId">
+
+        <div class="search-input input-group">
+            <input class="search form-control" type="text" name="q" placeholder="Rechercher..."
+                   v-model="query" debounce="500" @keyup.esc="query = ''" @click="showCategories">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </form>
+
+    {# category filter #}
+    <ul class="category-filter hidden">
+        {% for category in categories %}
+            <li class="radio">
+                <label>
+                    <input type="radio" name="selected-category" @click="selectCategory('{{ category.category.id }}', '{{ category.category.name }}')"><span></span>
+                    {{ category.category.name }}
+                </label>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>

@@ -7,7 +7,6 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +20,7 @@ class HomeController extends Controller
 {
     const SESSION_BASKET_ATTRIBUTE = '_basketId';
 
-    public function homeAction() : Response
+    public function viewAction(): Response
     {
         $catalogService = $this->get(CatalogService::class);
 
