@@ -18,11 +18,9 @@ class CategoryController extends Controller
         $currentCategory = $catalogService->getCategory((int) $categoryId);
         $filters['categories'] = $categoryId;
 
-        return $this->render(
-            'search/category-search.html.twig',
-                [
-                    'currentCategory' => $currentCategory,
-                    'filters' => $filters,
-                ]);
+        return $this->render('search/category-search.html.twig', [
+            'currentCategory' => $currentCategory,
+            'filters' => $filters,
+        ]);
     }
 }

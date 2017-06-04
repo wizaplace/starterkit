@@ -21,7 +21,6 @@ class SearchController extends Controller
         $categoryId = $request->get('categories');
 
         if (!empty($categoryId)) {
-
             // add searched category into a filters array
             $filters['categories'] = $categoryId;
 
