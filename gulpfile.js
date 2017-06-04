@@ -4,6 +4,7 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const postcss = require('gulp-postcss');
+const clean = require('gulp-clean')
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
@@ -27,6 +28,18 @@ gulp.task('legacy', function() {
 const nodeModulePath = "./node_modules";
 const resourcesPath = "./app/Resources/public";
 const javascriptLibsPath = `${resourcesPath}/scripts/libs`;
+
+// clean generated assets folders
+gulp.task('clean', function() {
+    return gulp.src([
+        './web/fonts',
+        './web/images',
+        './web/scripts',
+        './web/style',
+    ],
+        { read: false })
+        .pipe(clean());
+});
 
 // Scripts (ES6)
 gulp.task('babelify', function () {
