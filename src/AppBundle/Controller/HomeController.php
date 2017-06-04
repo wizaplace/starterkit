@@ -19,7 +19,7 @@ class HomeController extends Controller
         $catalogService = $this->get(CatalogService::class);
 
         // latest products
-        $latestProducts = $catalogService->search('',[],['timestamp'=> 'desc'], 6)->getProducts();
+        $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
         return $this->render('legacy/home/home.html.twig', [
             'latestProducts' => $latestProducts,

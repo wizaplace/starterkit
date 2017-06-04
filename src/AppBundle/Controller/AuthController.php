@@ -36,6 +36,7 @@ class AuthController extends Controller
         }
 
         $referer =  $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 
@@ -75,6 +76,7 @@ class AuthController extends Controller
         }
 
         $referer = $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 
@@ -90,6 +92,7 @@ class AuthController extends Controller
 
 
         $referer = $request->headers->get('referer');
+
         return $this->redirect($referer);
     }
 }

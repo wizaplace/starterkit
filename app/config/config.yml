@@ -57,8 +57,8 @@ services:
         class: AppBundle\Twig\AppExtension
         autowire: true
         arguments:
-            5: '@cache.app'
-            6: '%recaptcha.key%'
+            '5': '@cache.app'
+            '6': '%recaptcha.key%'
         public: false
         tags:
             - { name: twig.extension }
