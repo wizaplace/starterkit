@@ -5,9 +5,9 @@ Wizaplace front-office demo.
 Requirements:
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads),
-- [Vagrant 1.8](https://releases.hashicorp.com/vagrant/1.8.7/),
+- [Vagrant 1.9.5](https://releases.hashicorp.com/vagrant/1.9.5/),
 - [Landrush plugin](https://github.com/vagrant-landrush/landrush): `vagrant plugin install landrush`,
-- [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier): `vagrant plugin install vagrant-cachier`
+- [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier): `vagrant plugin install vagrant-cachier`,
 - NFS on Linux: `sudo apt-get install nfs-common nfs-kernel-server`.
 
 Store your SSH key in the SSH agent:
