@@ -36,7 +36,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder '.', '/vagrant', type: 'nfs', mount_options: ['nolock', 'actimeo=1', 'fsc']
 
     # Provisioning
-    config.vm.provision "shell", path: "vagrant/provision.sh"
+    if File.exists?(ENV['HOME'] + "/.gitconfig")
+        config.vm.provision "file", source: "~/.gitconfig", destination: "/home/vagrant/.gitconfig"
+    end
+    config.vm.provision "shell", path: "vagrant/provision.sh", keep_color: true, privileged: false
 end
 
 local_vagrantfile = File.expand_path('../Vagrantfile.local', __FILE__)

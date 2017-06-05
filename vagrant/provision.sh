@@ -4,10 +4,10 @@
 [ -f /etc/php/7.0/mods-available/geoip.ini ] && sudo rm /etc/php/7.0/mods-available/geoip.ini || true
 
 # Configuration spécifique d'Apache
-a2enmod ssl
-a2dissite 000-default.conf
-cp /vagrant/vagrant/apache.conf /etc/apache2/sites-available/apache.conf
-a2ensite apache.conf
-service apache2 restart
+sudo a2enmod ssl
+sudo a2dissite 000-default.conf
+sudo cp /vagrant/vagrant/apache.conf /etc/apache2/sites-available/apache.conf
+sudo a2ensite apache.conf
+sudo service apache2 restart
 
 cd /vagrant && make install
