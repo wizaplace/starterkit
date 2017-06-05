@@ -31,9 +31,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.forward_agent = true
 
     # Folders
-    # A commenter sous windows (le partage par defaut est déjà au bon endroit donc pas besoin de le preciser
-    # et les mount_options définies ci-dessous sont incompatibles)
     config.vm.synced_folder '.', '/vagrant', type: 'nfs', mount_options: ['nolock', 'actimeo=1', 'fsc']
+
+    if Vagrant.has_plugin?("vagrant-cachier")
+        config.cache.scope = :box
+        config.cache.enable :composer
+        config.cache.enable :npm
+        config.cache.synced_folder_opts = {
+          type: :nfs,
+          mount_options: ['nolock', 'actimeo=1', 'fsc']
+        }
+    end
 
     # Provisioning
     if File.exists?(ENV['HOME'] + "/.gitconfig")
