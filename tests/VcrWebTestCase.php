@@ -18,7 +18,8 @@ abstract class VcrWebTestCase extends WebTestCase
         parent::setUp();
 
         VCR::turnOn();
-        VCR::insertCassette((new \ReflectionClass($this))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'.yml');
+        $cassette = (new \ReflectionClass($this))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'.yml';
+        VCR::insertCassette($cassette);
     }
 
     protected function tearDown(): void

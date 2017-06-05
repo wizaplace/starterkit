@@ -38,7 +38,7 @@ class CategoryController extends Controller
                     'categories' => $categories,
                     'currentCategory' => $currentCategory,
                     'filters' => $filters,
-                    'apiUrl' => $apiBaseUrl,
+                    'apiBaseUrl' => $apiBaseUrl,
             ]
         );
     }
