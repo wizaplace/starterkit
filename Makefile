@@ -42,7 +42,7 @@ test:
 	./vendor/bin/phpunit --configuration ./phpunit.xml
 
 test-ci:
-	rm -rf var/logs/*.log
+	chmod -R 777 ./var/logs
 	php -dxdebug.coverage_enable=1 ./vendor/bin/phpunit --configuration ./phpunit.xml --log-junit ./phpunit-result.xml --coverage-clover ./clover.xml
 
 npm-install:
