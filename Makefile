@@ -19,7 +19,7 @@ lint-php:
 	./vendor/bin/coke
 
 lint-php-ci:
-	./vendor/bin/coke --report-junit=coke-result.xml
+	./vendor/bin/coke --report-junit=coke-result.xml --report-full
 
 lint-twig:
 	bin/console lint:twig app src
