@@ -10,7 +10,7 @@ pipeline {
                 }
             }
             steps {
-                withCredentials([string(credentialsId: '8ffb1dc7-4858-4c4a-ac9e-0a1d655a3b59', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
                     sh 'echo -e "machine github.com\n  login $GITHUB_TOKEN" >> ~/.netrc'
                     sh 'composer config -g github-oauth.github.com $GITHUB_TOKEN'
                     sh 'composer install --no-interaction --no-progress --ignore-platform-reqs'
@@ -50,7 +50,29 @@ pipeline {
             }
             post {
                 always {
-                    junit 'coke-result.xml'
+                    withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
+                        step([
+                            $class: 'ViolationsToGitHubRecorder',
+                            config: [
+                                gitHubUrl: 'https://api.github.com/',
+                                repositoryOwner: 'wizaplace',
+                                repositoryName: 'starterkit',
+                                pullRequestId: "${env.CHANGE_ID}",
+                                useOAuth2Token: true,
+                                oAuth2Token: "$GITHUB_TOKEN",
+                                useUsernamePassword: false,
+                                useUsernamePasswordCredentials: false,
+                                usernamePasswordCredentialsId: '',
+                                createCommentWithAllSingleFileComments: true,
+                                createSingleFileComments: true,
+                                commentOnlyChangedContent: true,
+                                minSeverity: 'INFO',
+                                violationConfigs: [
+                                    [ pattern: '.*/coke-checkstyle\\.xml$', reporter: 'CHECKSTYLE' ],
+                                ]
+                            ]
+                        ])
+                    }
                     junit 'phpunit-result.xml'
                     step([
                         $class: 'CloverPublisher',
