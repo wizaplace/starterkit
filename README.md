@@ -5,7 +5,7 @@ Wizaplace front-office demo.
 Requirements:
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads),
-- [Vagrant 1.8](https://releases.hashicorp.com/vagrant/1.8.7/),
+- [Vagrant 1.9.5](https://releases.hashicorp.com/vagrant/1.9.5/),
 - Landrush plugin: `vagrant plugin install landrush`,
 - NFS on Linux: `sudo apt-get install nfs-common nfs-kernel-server`.
 
