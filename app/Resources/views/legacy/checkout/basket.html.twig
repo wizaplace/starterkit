@@ -76,99 +76,101 @@
         <div class="big-spacer"></div>
     </div>
 
-    <div class="container-fluid basket" style="background-color:#efefef">
-        <div class="col-md-6  col-md-offset-6">
-            <div class="spacer"></div>
-            <h1>Modes de livraison</h1>
-            <span class="text-red">Livraison offerte à partir de 1€ (france métropolitaine).</span>
+    {% if basket.totalQuantity > 0 %}
+        <div class="container-fluid basket" style="background-color:#efefef">
+            <div class="col-md-6  col-md-offset-6">
+                <div class="spacer"></div>
+                <h1>Modes de livraison</h1>
+                <span class="text-red">Livraison offerte à partir de 1€ (france métropolitaine).</span>
 
-            <ul>
-                {% for shipping in basket.companyGroups.0.shippingGroups.0.shippings %}
-                    <li class="radio">
-                        <label>
-                            <input type="radio" name="shippingId" value="{{ shipping.id }}"
-                                   {% if loop.first %}checked{% endif %}>
-                            <span></span> {# radio button image #}
-                            <span>{{ shipping.name }} ({{ shipping.price|price }})</span>
-                        </label>
-                    </li>
-                {% endfor %}
-            </ul>
-            <div class="spacer"></div>
+                <ul>
+                    {% for shipping in basket.companyGroups.0.shippingGroups.0.shippings %}
+                        <li class="radio">
+                            <label>
+                                <input type="radio" name="shippingId" value="{{ shipping.id }}"
+                                       {% if loop.first %}checked{% endif %}>
+                                <span></span> {# radio button image #}
+                                <span>{{ shipping.name }} ({{ shipping.price|price }})</span>
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="spacer"></div>
 
-            <label>Code promo</label><br />
-            <input type="text" placeholder=" Votre code" />
-            <button class="btn btn-default active">Appliquer</button>
-            <div class="big-spacer"></div>
+                <label>Code promo</label><br />
+                <input type="text" placeholder=" Votre code" />
+                <button class="btn btn-default active">Appliquer</button>
+                <div class="big-spacer"></div>
 
-            {# basket amount details #}
-            <table class="price-table" style="margin-left:-240px;">
+                {# basket amount details #}
+                <table class="price-table" style="margin-left:-240px;">
 
-                {# total excluding taxes without shipping #}
-                <tr>
-                    <td class="text-right"><div class="title">Sous total HT</div></td>
-                    <td class="text-left"> {{ basket.subtotal|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
-                </tr>
-
-                {% if basket.totalDiscount > 0 %}
+                    {# total excluding taxes without shipping #}
                     <tr>
-                        <td class="text-right"><div class="title">Promotion HT</div></td>
-                        <td class="text-left">- {{ basket.totalDiscount|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                        <td class="text-right"><div class="title">Sous total HT</div></td>
+                        <td class="text-left"> {{ basket.subtotal|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
                     </tr>
-                {% endif %}
 
-                {# shipping price #}
-                <tr>
-                    <td class="text-right"><div class="title">Livraison HT</div></td>
-                    <td class="text-left"> {{ basket.totalShipping|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
-                </tr>
+                    {% if basket.totalDiscount > 0 %}
+                        <tr>
+                            <td class="text-right"><div class="title">Promotion HT</div></td>
+                            <td class="text-left">- {{ basket.totalDiscount|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                        </tr>
+                    {% endif %}
 
-                {# total excluding taxes #}
-                <tr>
-                    <td class="text-right"><div class="title">Total HT</div></td>
-                    <td class="text-left"> {{ basket.total|price }}&nbsp;TTC</td>{# TODO modify with amount excl. taxes #}
-                </tr>
+                    {# shipping price #}
+                    <tr>
+                        <td class="text-right"><div class="title">Livraison HT</div></td>
+                        <td class="text-left"> {{ basket.totalShipping|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                    </tr>
 
-                {# total including taxes #}
-                <tr>
-                    <td class="text-right">
-                        <div class="big-spacer"></div>
-                        <div class="title text-blue">Total TTC</div>
-                    </td>
-                    <td class="text-left"><div class="big-title text-blue">{{ basket.total|price }}&nbsp;TTC</div></td>
-                </tr>
+                    {# total excluding taxes #}
+                    <tr>
+                        <td class="text-right"><div class="title">Total HT</div></td>
+                        <td class="text-left"> {{ basket.total|price }}&nbsp;TTC</td>{# TODO modify with amount excl. taxes #}
+                    </tr>
 
-                {# taxes detail #}
-                <tr>
-                    <td class="text-right"><div class="title">Dont TVA et autres taxes</div></td>
-                    <td class="text-left">{{ basket.totalTax|price }}</td>
-                </tr>
-            </table>
-            <div class="spacer"></div>
+                    {# total including taxes #}
+                    <tr>
+                        <td class="text-right">
+                            <div class="big-spacer"></div>
+                            <div class="title text-blue">Total TTC</div>
+                        </td>
+                        <td class="text-left"><div class="big-title text-blue">{{ basket.total|price }}&nbsp;TTC</div></td>
+                    </tr>
 
-            {% set nextStepLink = user|default ? path("checkout_addresses") : path("checkout_login") %}
-            <a href="{{ nextStepLink }}" class="btn btn-lg btn-primary">Valider mon panier</a>
-            <div class="spacer"></div>
+                    {# taxes detail #}
+                    <tr>
+                        <td class="text-right"><div class="title">Dont TVA et autres taxes</div></td>
+                        <td class="text-left">{{ basket.totalTax|price }}</td>
+                    </tr>
+                </table>
+                <div class="spacer"></div>
 
-            <div class="reinsurance">
-                <div class="reinsurance-item">
-                    <i class="icon icon-box"></i>
-                    <div class="light-title">Livraison express 24/48h</div>
+                {% set nextStepLink = user|default ? path("checkout_addresses") : path("checkout_login") %}
+                <a href="{{ nextStepLink }}" class="btn btn-lg btn-primary">Valider mon panier</a>
+                <div class="spacer"></div>
+
+                <div class="reinsurance">
+                    <div class="reinsurance-item">
+                        <i class="icon icon-box"></i>
+                        <div class="light-title">Livraison express 24/48h</div>
+                    </div>
+
+                    <div class="reinsurance-item">
+                        <i class="icon icon-shield"></i>
+                        <div class="light-title">Paiement 100% sécurisé</div>
+                    </div>
+
+                    <div class="reinsurance-item">
+                        <i class="icon icon-phone-o"></i>
+                        <div class="light-title">Assistance & Conseils<br>0800 97 55 55 (gratuit)</div>
+                    </div>
                 </div>
-
-                <div class="reinsurance-item">
-                    <i class="icon icon-shield"></i>
-                    <div class="light-title">Paiement 100% sécurisé</div>
-                </div>
-
-                <div class="reinsurance-item">
-                    <i class="icon icon-phone-o"></i>
-                    <div class="light-title">Assistance & Conseils<br>0800 97 55 55 (gratuit)</div>
-                </div>
+                <div class="spacer"></div>
             </div>
-            <div class="spacer"></div>
         </div>
-    </div>
+    {% endif %}
 
     <script>
 
