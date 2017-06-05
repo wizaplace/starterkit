@@ -91,9 +91,8 @@ class AuthController extends Controller
         $this->get(UserService::class)->recoverPassword($email);
 
 
-        $referer= $request->headers->get('referer');
+        $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
     }
-
 }
