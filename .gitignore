@@ -28,3 +28,7 @@ Vagrantfile.local
 /web/css
 /web/js
 /web/fonts
+
+# CI artifacts
+coke-*.xml
+phpunit-result.xml

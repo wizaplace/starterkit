@@ -267,7 +267,7 @@
 
                     imageUrl: function (product) {
                         if(product.mainImage != null) {
-                            return "{{ apiUrl }}/image/" + product.mainImage.id + "?w=500&h=500";
+                            return "{{ apiBaseUrl }}/image/" + product.mainImage.id + "?w=500&h=500";
                         } else {
                             return "{{ asset('images/legacy/no-image.jpg') }}"
                         }

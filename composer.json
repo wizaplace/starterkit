@@ -17,13 +17,16 @@
         "guzzlehttp/guzzle": "^6.2",
         "roave/security-advisories": "@dev",
         "google/recaptcha": "^1.1",
-        "wizaplace/sdk": "dev-master"
+        "wizaplace/sdk": "~0.1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
         "phpunit/phpunit": "^6.1",
-        "php-vcr/php-vcr": "^1.3"
+        "php-vcr/php-vcr": "^1.3",
+        "wizaplace/php-coding-standard": "^1.0",
+        "m6web/coke": "^2.2",
+        "phpstan/phpstan": "^0.7.0"
     },
     "scripts": {
         "symfony-scripts": [

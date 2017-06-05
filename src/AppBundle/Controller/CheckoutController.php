@@ -45,7 +45,7 @@ class CheckoutController extends Controller
 
         return $this->render('legacy/checkout/payment.html.twig', [
             'basket' => $basket,
-            'payments' => $payments
+            'payments' => $payments,
         ]);
     }
 
@@ -63,10 +63,10 @@ class CheckoutController extends Controller
         if ($paymentInfo->getRedirectUrl()) {
             return $this->redirect($paymentInfo->getRedirectUrl());
         }
+
         return $this->render('legacy/checkout/confirmation.html.twig', [
-                'paymentInfo'=> $paymentInfo,
-            ]
-        );
+                'paymentInfo' => $paymentInfo,
+        ]);
     }
 
     protected function getBasketId(): string

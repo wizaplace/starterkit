@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Projet Démo{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Starter Kit{% endblock %}</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('style/app.css') }}">
@@ -20,11 +23,11 @@
 
 {% block footer %}{% include('legacy/common/footer.html.twig') %}{% endblock %}
 
-<script src="{{ asset('scripts/app.js') }}"></script>
-
-
 {# TODO: clean up (remove when not needed anymore) #}
 <script src="{{ asset('scripts/legacy/legacy.js') }}"></script>
+
+<script src="{{ asset('scripts/libraries.js') }}"></script>
+<script src="{{ asset('scripts/app.js') }}"></script>
 
 </body>
 </html>
