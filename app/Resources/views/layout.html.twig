@@ -14,10 +14,12 @@
 </head>
 <body>
 
-{{ include('common/header.html.twig') }}
-{{ include('common/header/nav-menu.html.twig') }}
-{{ include('common/header/nav-menu-mobile.html.twig') }}
-{{ include('common/header/notifications.html.twig') }}
+<header class="main-header">
+    {% block header %}
+        {% include('common/header/_top.html.twig') %}
+        {% include('common/header/_main.html.twig') %}
+    {% endblock %}
+</header>
 
 {% block body %}{% endblock %}
 

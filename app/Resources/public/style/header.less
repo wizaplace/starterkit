@@ -39,7 +39,7 @@
                         margin-left: .5em;
                     }
 
-                    .icon {
+                    i {
                         margin-right: .2em;
                     }
 
@@ -196,17 +196,36 @@
                 justify-content: space-between;
                 align-items: center;
 
+                @media screen and (max-width: @screen-sm-max) {
+                    flex-direction: column;
+                }
+
+                i {
+                    min-width: 1em;
+                }
+
                 .query-input-group {
                     width: 65%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
 
+                    @media screen and (max-width: @screen-sm-max) {
+                        width: 100%;
+                        margin-bottom: 1em;
+                    }
+
                     [name="query"] {
                         flex: 1 1 50%;
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-right();
+
+
+                        @media screen and (max-width: @screen-sm-max) {
+                            flex: 1 1 auto;
+                            border-right: 0;
+                        }
                     }
 
                     .category-picker {
@@ -216,10 +235,14 @@
                         .remove-border-radius();
                         border-left: 0;
                         border-right: 0;
+
+                        @media screen and (max-width: @screen-xs-max) {
+                            display: none;
+                        }
                     }
 
                     .btn {
-                        flex: 1 1 auto;
+                        flex: 0 1 auto;
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-left();
@@ -235,6 +258,10 @@
                     justify-content: center;
                     align-items: center;
 
+                    @media screen and (max-width: @screen-sm-max) {
+                        width: 100%;
+                    }
+
                     [name="geo[label]"] {
                         flex: 1 1 auto;
 
@@ -244,7 +271,7 @@
                     }
 
                     .btn {
-                        flex: 1 1 auto;
+                        flex: 1 0 auto;
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-left();

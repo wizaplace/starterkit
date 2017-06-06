@@ -3,6 +3,11 @@ home:
     defaults: { _controller: AppBundle:Home:home }
     methods: [GET]
 
+search:
+    path: /recherche
+    defaults: { _controller: AppBundle:Search:search }
+    methods: [GET]
+
 
 # legacy
 # product
@@ -12,14 +17,6 @@ product:
     requirements:
         categoryPath: ".+"
         slug: "%slug.regexp%"
-search:
-    path: /recherche
-    defaults: { _controller: AppBundle:Search:search }
-    methods: [GET]
-api_search_products:
-    path: /api/search
-    defaults: { _controller: AppBundle:Search:apiSearch }
-    methods: [GET]
 
 # basket and checkout
 basket:

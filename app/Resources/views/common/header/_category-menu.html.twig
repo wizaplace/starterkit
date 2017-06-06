@@ -1,0 +1,54 @@
+{% set categories = categoryTree() %}
+
+<ul class="category-menu list-inline">
+    {% for category in categories | slice(0,8)%}
+
+        <li class="category">
+
+            {% if category.children %}
+
+                <span class="category-name">{{ category.category.name }}</span>
+
+                <div class="popin-wrapper">
+                    <ul class="category-sub-menu">
+
+                        {% for category in category.children %}
+
+                            <li class="category">
+
+                                {% if category.children %}
+
+                                    <span class="category-name">{{ category.category.name }}</span>
+                                    <ul class="category-sub-menu">
+
+                                        {% for category in category.children %}
+
+                                        <li class="category">
+                                            {# last level is a leaf #}
+                                            <a href="{{ path('view_category_seo', {'categoryId': category.category.id, 'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                        </li>
+
+                                        {% endfor %}
+                                    </ul>
+
+                                {% else %}
+
+                                    <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+
+                                {% endif %}
+
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            {# if this element is a tree leaf (hasn't got any children), display a link to the search page, filtered by this category #}
+            {% else %}
+
+                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
