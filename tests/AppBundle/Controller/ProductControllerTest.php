@@ -16,7 +16,7 @@ class ProductControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/informatique/ecrans/voluptas-nostrum-ea-consequatur');
+        $client->request('GET', '/p/informatique/ecrans/voluptas-nostrum-ea-consequatur');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -24,7 +24,7 @@ class ProductControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/informatique/informatique'); // slug belongs to a category, so the product is not found
+        $client->request('GET', '/p/informatique/informatique'); // slug belongs to a category, so the product is not found
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -32,7 +32,7 @@ class ProductControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/informatique/ecrans/404');
+        $client->request('GET', '/p/informatique/ecrans/404');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -40,7 +40,7 @@ class ProductControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/informatique/ecrans/invalid+*slug');
+        $client->request('GET', '/p/informatique/ecrans/invalid+*slug');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -49,7 +49,7 @@ class ProductControllerTest extends VcrWebTestCase
         $client = $this->createClient();
 
         $client->followRedirects(false);
-        $client->request('GET', '/product/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
+        $client->request('GET', '/p/product/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
         $response = $client->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals('/product/informatique/ecrans/voluptas-nostrum-ea-consequatur', $response->headers->get('Location'));
