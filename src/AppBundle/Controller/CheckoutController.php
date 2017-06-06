@@ -21,7 +21,7 @@ class CheckoutController extends Controller
         $basketId = $this->getBasketId();
         $basket = $this->get(BasketService::class)->getBasket($basketId);
 
-        return $this->render('legacy/checkout/login.html.twig', [
+        return $this->render('checkout/login.html.twig', [
             'basket' => $basket,
         ]);
     }
@@ -31,7 +31,7 @@ class CheckoutController extends Controller
         $basketId = $this->getBasketId();
         $basket = $this->get(BasketService::class)->getBasket($basketId);
 
-        return $this->render('legacy/checkout/addresses.html.twig', [
+        return $this->render('checkout/addresses.html.twig', [
             'basket' => $basket,
         ]);
     }
@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $basket = $basketService->getBasket($basketId);
         $payments = $basketService->getPayments($basketId);
 
-        return $this->render('legacy/checkout/payment.html.twig', [
+        return $this->render('checkout/payment.html.twig', [
             'basket' => $basket,
             'payments' => $payments,
         ]);
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
             return $this->redirect($paymentInfo->getRedirectUrl());
         }
 
-        return $this->render('legacy/checkout/confirmation.html.twig', [
+        return $this->render('checkout/confirmation.html.twig', [
                 'paymentInfo' => $paymentInfo,
         ]);
     }

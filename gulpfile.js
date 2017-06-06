@@ -5,29 +5,14 @@ const gulp = require('gulp');
 const less = require('gulp-less');
 const postcss = require('gulp-postcss');
 const clean = require('gulp-clean');
-const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
-const babelify = require('babelify');
-const browserify = require('browserify');
-const buffer = require('vinyl-buffer');
-const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
-
-// legacy scripts TODO: remove when not needed anymore
-gulp.task('legacy', function() {
-    return gulp.src('./app/Resources/public/scripts/legacy/**/*.*')
-        .pipe(sourcemaps.init())
-        .pipe(concat('legacy.js'))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./web/scripts/legacy'));
-});
+const imagemin = require('gulp-imagemin');
 
 // helpers
 const nodeModulePath = "./node_modules";
-const resourcesPath = "./app/Resources/public";
-const javascriptLibsPath = `${resourcesPath}/scripts/libs`;
 
 // clean generated assets folders
 gulp.task('clean', function() {
@@ -41,53 +26,33 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-// Scripts (ES6)
-gulp.task('babelify', function () {
-
-    // transpile es6 files
-    let bundler = browserify('./app/Resources/public/scripts/main.js', {debug: true}).transform(babelify);
-
-    bundler.bundle()
-        .on('error', function (err) {
-            console.error(err);
-            this.emit('end');
-        })
-        .pipe(source('app.js')) //fichier de destination
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./web/scripts'));
-});
-
-// Scripts (prod)
-gulp.task('scripts_prod', ['babelify'], function() {
-    // concat custom code with libs
+// scripts (prod)
+gulp.task('scripts_prod', function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
-        `${javascriptLibsPath}/jquery-ui-slider.min.js`,
+        './app/Resources/public/scripts/**/*.*',
     ])
-        .pipe(concat('libraries.js'))
+        .pipe(concat('app.js'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
-// Scripts (dev)
-gulp.task('scripts_dev', ['babelify'], function() {
-    // concat custom code with libs
+// scripts (dev)
+gulp.task('scripts_dev', function() {
     return gulp.src([
-        `${nodeModulePath}/bootstrap/dist/js/bootstrap.js`,
+        `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
-        `${javascriptLibsPath}/jquery-ui-slider.js`,
+        './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())
-        .pipe(concat('libraries.js'))
+        .pipe(concat('app.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
-// Style (less)
+// style (less)
 gulp.task('style', function () {
     return gulp.src('./app/Resources/public/style/main.less')
         .pipe(sourcemaps.init())
@@ -105,13 +70,14 @@ gulp.task('jquery', function() {
         .pipe(gulp.dest('./web/scripts'));
 });
 
-// Images (move)
+// images (move)
 gulp.task('images', function () {
     return gulp.src('./app/Resources/public/images/**/*.*')
+        .pipe(imagemin())
         .pipe(gulp.dest('./web/images'));
 });
 
-// Fonts (move)
+// fonts (move)
 gulp.task('fonts', function () {
     return gulp.src([
         './app/Resources/public/fonts/**/*.*',
@@ -120,7 +86,7 @@ gulp.task('fonts', function () {
     ]).pipe(gulp.dest('./web/fonts'));
 });
 
-// Watchers
+// watchers
 gulp.task('watch', function () {
     gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev']);
     gulp.watch('./app/Resources/public/style/**/*.*', ['style']);
@@ -132,7 +98,7 @@ gulp.task('watch', function () {
 gulp.task('default', ['dev', 'watch']);
 
 // common tasks, run both by dev and prod tasks
-gulp.task('common', ['style', 'jquery', 'images', 'fonts', 'legacy']);
+gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
 // dev tasks (with watcher and Vue.js dev version)
 gulp.task('dev', ['scripts_dev', 'common']);

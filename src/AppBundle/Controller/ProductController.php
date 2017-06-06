@@ -29,7 +29,7 @@ class ProductController extends Controller
         $catalogService = $this->get(CatalogService::class);
         $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
-        return $this->render('legacy/product/product.html.twig', [
+        return $this->render('product/product.html.twig', [
             'product' => $product,
             'latestProducts' => $latestProducts,
         ]);
