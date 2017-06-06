@@ -1,0 +1,29 @@
+{% if currentUser() %}
+
+    <div class="content">
+
+    </div>
+
+{% else %}
+
+    <div class="content" id="popin-login">
+        <p>Me connecter</p>
+        <form method="post" action="{{ path('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('login_token') }}">
+            <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
+
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email...">
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Mot de passe...">
+                <a href="#" rel="nofollow" class="forgotten-password-link">Mot de passe oublié</a>
+            </div>
+
+            <p><button type="submit" class="btn btn-primary">Valider</button></p>
+            <p><a href="#" data-target="#popin-register" class="btn btn-link">Créer mon compte</a></p>
+        </form>
+    </div>
+
+{% endif %}

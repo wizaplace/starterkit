@@ -32,3 +32,43 @@
         margin-left: .5em;
     }
 }
+
+.anchor-light {
+    color: @anchor-color-light;
+
+    &:hover {
+        color: @anchor-color-hover-light;
+    }
+
+    &:visited {
+        color: @anchor-color-light;
+
+        &:hover {
+            color: @anchor-color-hover-light;
+        }
+    }
+
+    &:focus, &:active {
+        color: @anchor-color-active-light;
+    }
+}
+
+.anchor-dark {
+    color: @anchor-color-dark;
+
+    &:hover {
+        color: @anchor-color-hover-dark;
+    }
+
+    &:visited {
+        color: @anchor-color-visited-dark;
+
+        &:hover {
+            color: @anchor-color-hover-dark;
+        }
+    }
+
+    &:focus, &:active {
+        color: @anchor-color-active-dark;
+    }
+}

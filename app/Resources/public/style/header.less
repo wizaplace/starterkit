@@ -41,6 +41,24 @@
 
                     i {
                         margin-right: .2em;
+
+                        @media screen and (max-width: @screen-xs-max) {
+                            font-size: 3em;
+
+                            &:first-of-type {
+                                margin-right: .5em;
+                            }
+                        }
+                    }
+
+                    .form-control {
+                        margin-bottom: .5em;
+                    }
+
+                    .forgotten-password-link {
+                        .anchor-dark();
+                        font-size: .8em;
+                        text-decoration: underline;
                     }
 
                     .popin-wrapper {
@@ -48,6 +66,14 @@
                     }
 
                     &:hover {
+                        .quick-access-link {
+                            color: @anchor-color-hover-light;
+
+                            &:active {
+                                color: @anchor-color-active-light;
+                            }
+                        }
+
                         .popin-wrapper {
                             display: block; // shows popin on hover
 
@@ -57,7 +83,7 @@
                             padding-top: .8em; // distance from link label
                             width: 100%;
 
-                            .quick-access-content {
+                            .content {
                                 .popin();
                             }
                         }
@@ -196,12 +222,12 @@
                 justify-content: space-between;
                 align-items: center;
 
-                @media screen and (max-width: @screen-sm-max) {
-                    flex-direction: column;
-                }
-
                 i {
                     min-width: 1em;
+                }
+
+                @media screen and (max-width: @screen-sm-max) {
+                    flex-direction: column;
                 }
 
                 .query-input-group {
@@ -215,7 +241,7 @@
                         margin-bottom: 1em;
                     }
 
-                    [name="query"] {
+                    [name="q"] {
                         flex: 1 1 50%;
 
                         // form-group: remove unneeded border radius
@@ -236,13 +262,18 @@
                         border-left: 0;
                         border-right: 0;
 
+                        @media screen and (max-width: @screen-sm-max) {
+                            flex: 1 1 auto;
+                        }
+
                         @media screen and (max-width: @screen-xs-max) {
                             display: none;
                         }
                     }
 
                     .btn {
-                        flex: 0 1 auto;
+                        flex: 1 1 auto;
+                        min-width: 20%;
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-left();
@@ -272,6 +303,7 @@
 
                     .btn {
                         flex: 1 0 auto;
+                        min-width: 20%;
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-left();

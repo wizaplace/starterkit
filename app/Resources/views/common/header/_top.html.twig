@@ -13,22 +13,22 @@
             {# quick access links #}
             <ul class="quick-access-links list-inline">
                 <li class="quick-access">
-                    <a href="{{ accountLink }}">
+                    <a href="{{ accountLink }}" class="quick-access-link">
                         <i class="icon fa fa-user"></i>
-                        <span>Mon compte</span>
+                        <span class="hidden-xs">Mon compte</span>
                     </a>
                     <div class="popin-wrapper">
-                        {% include('common/header/popin-account.html.twig') %}
+                        {% include('common/header/_popin-account.html.twig') %}
                     </div>
                 </li>
 
                 <li class="quick-access">
-                    <a href="{{ path('basket') }}">
+                    <a href="{{ path('basket') }}" class="quick-access-link">
                         <i class="icon fa fa-shopping-cart"></i>
-                        <span>Mon panier</span>
+                        <span class="hidden-xs">Mon panier</span>
                     </a>
                     <div class="popin-wrapper">
-                        {% include('common/header/popin-basket.html.twig') %}
+                        {% include('common/header/_popin-basket.html.twig') %}
                     </div>
                 </li>
             </ul>

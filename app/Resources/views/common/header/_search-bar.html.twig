@@ -11,7 +11,7 @@
                 <div class="query-input-group">
 
                     {# query text input #}
-                    <input class="form-control" type="text" name="query" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
+                    <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
 
                     {# categoriy selector (display only root categories) #}
                     <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
