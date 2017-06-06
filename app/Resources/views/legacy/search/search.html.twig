@@ -131,7 +131,7 @@
         $(function() {
             var urlParameters;
 
-            var search = new SearchClient('{{ path('api_search_products') }}', '');
+            var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products');
             urlParameters = search.restoreSearchFromUrl();
 
             Vue.filter('round', function(value) {
