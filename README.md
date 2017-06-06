@@ -6,7 +6,7 @@ Requirements:
 
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads),
 - [Vagrant 1.9.5](https://releases.hashicorp.com/vagrant/1.9.5/),
-- Landrush plugin: `vagrant plugin install landrush`,
+- [Landrush](https://github.com/vagrant-landrush/landrush) and [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier) plugins: `vagrant plugin install landrush vagrant-cachier`,
 - NFS on Linux: `sudo apt-get install nfs-common nfs-kernel-server`.
 
 Store your SSH key in the SSH agent:
