@@ -26,7 +26,7 @@ class ProductController extends Controller
         $product = $this->get(CatalogService::class)->getProductById($productId);
 
         $realCategoryPath = implode('/', $product->getCategorySlugs());
-        if($categoryPath !== $realCategoryPath) {
+        if ($categoryPath !== $realCategoryPath) {
             return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
         }
 
