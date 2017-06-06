@@ -7,10 +7,10 @@ home:
 # legacy
 # product
 product:
-    path: /product/{categoryPath}/{slug}
+    path: /{categoryPath}/{slug}
     defaults: { _controller: AppBundle:Product:view }
     requirements:
-        categoryPath: ".+"
+        categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
 search:
     path: /recherche
@@ -132,7 +132,7 @@ reset_password:
     methods: [POST]
 
 category:
-    path: /category/{slug}
+    path: /c-{slug}
     defaults: { _controller: AppBundle:Category:view }
     methods: [GET]
     requirements:

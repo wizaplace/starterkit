@@ -16,7 +16,7 @@ class CategoryControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/category/informatique');
+        $client->request('GET', '/c-informatique');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -24,7 +24,7 @@ class CategoryControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/category/voluptas-nostrum-ea-consequatur'); // slug belongs to a product, so the category is not found
+        $client->request('GET', '/c-voluptas-nostrum-ea-consequatur'); // slug belongs to a product, so the category is not found
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -32,7 +32,7 @@ class CategoryControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/category/404');
+        $client->request('GET', '/c-404');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -40,7 +40,7 @@ class CategoryControllerTest extends VcrWebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/category/invalid+*slug');
+        $client->request('GET', '/c-invalid+*slug');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 }
