@@ -1,6 +1,6 @@
 {% set categories = categoryTree() %}
 
-<ul id="categories" class="collapse sidebar-item-content {% if currentCategory|default %} in {% endif %}">
+<ul id="categories" class="collapse sidebar-item-content {% if currentCategory | default %} in {% endif %}">
     {% for category in categories %}
 
         {# category - level 1 (root) #}
@@ -25,7 +25,7 @@
                     <li class="category sub-category radio"
                         :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
 
-                        {% if category.children|length == 0 %}
+                        {% if category.children | length == 0 %}
                             <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id})}}">
                                 <span class="check-radio"></span>
                                 {{ category.category.name }}

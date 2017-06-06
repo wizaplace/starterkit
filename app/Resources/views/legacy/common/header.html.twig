@@ -5,32 +5,19 @@
     <nav id="header-menu">
         <div class="container-fluid">
             <div class="row">
-                <div id="logo" class="col-md-2 col-sm-6">
+                <div id="logo" class="col-sm-4 col-md-2">
                     <a href="{{ path('home') }}">
                         <img alt="Company name" src="{{ asset('images/legacy/votre-logo-ici.png') }}">
                     </a>
                 </div>
 
                 {# searchbar #}
-                <div id="search" class="col-md-4 col-sm-6">
-                    {{ include('legacy/common/header/search-bar.html.twig') }}
-                </div>
-
-                <div class="col-md-2 col-sm-4">
-                    <div class="generic-info">
-                        <div class="generic-info-picto pull-left">
-                            <span class="icon icon-phone"> </span>
-                        </div>
-                        <div class="generic-info-text">
-                            <span class="info-text title">
-                                Assistance et conseil</span><br />
-                            <span class="info-text title text-blue">0800 97 55 55 (gratuit)</span>
-                        </div>
-                    </div>
+                <div class="col-sm-4 col-md-4">
+                    {{ include('common/header/_search-bar.html.twig') }}
                 </div>
 
                 {# account #}
-                <div class="col-md-2 col-sm-4">
+                <div class="col-sm-4 col-md-2">
                     <div class="generic-info">
                         <div class="generic-info-picto pull-left">
                             <span class="icon icon-avatar"> </span>

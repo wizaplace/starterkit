@@ -62,3 +62,5 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+fos_js_routing:
+    routes_to_expose: [ (.*) ]

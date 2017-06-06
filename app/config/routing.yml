@@ -1,7 +1,39 @@
+# pages
 home:
     path: /
     defaults: { _controller: AppBundle:Home:home }
     methods: [GET]
+
+# basket
+add_to_basket:
+    path: /basket/add
+    defaults: { _controller: AppBundle:Basket:add }
+    methods: [POST]
+
+# search
+api_search:
+    path: /api/search
+    defaults: { _controller: AppBundle:Search:apiSearch }
+    methods: [GET]
+
+quick_search:
+    path: /recherche
+    defaults: { _controller: AppBundle:Search:quickSearch }
+    methods: [GET]
+
+view_category:
+    path: /category/{categoryId}
+    defaults: { _controller: AppBundle:Category:search }
+    methods: [GET]
+
+view_category_seo:
+    path: /c-{categoryId}-{slug}
+    defaults: { _controller: AppBundle:Category:search }
+    methods: [GET]
+
+# javascript routing
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 
 # legacy
@@ -12,14 +44,7 @@ product:
 product_seo:
     path: /p-{productId}-{slug}
     defaults: { _controller: AppBundle:Product:view }
-search:
-    path: /recherche
-    defaults: { _controller: AppBundle:Search:search }
-    methods: [GET]
-api_search_products:
-    path: /api/search
-    defaults: { _controller: AppBundle:Search:apiSearch }
-    methods: [GET]
+
 
 # basket and checkout
 basket:
@@ -44,10 +69,7 @@ checkout_complete:
     methods: [POST]
 
 # panier (Create, Update, Delete)
-basket_add_item:
-    path: /basket/add
-    defaults: { _controller: AppBundle:Basket:addProduct }
-    methods: [POST]
+
 clean_basket:
     path: /basket/clean
     defaults: { _controller: AppBundle:Basket:cleanBasket }
@@ -131,14 +153,7 @@ reset_password:
     defaults: { _controller: AppBundle:Auth:resetPassword }
     methods: [POST]
 
-view_category:
-    path: /category/{categoryId}
-    defaults: { _controller: AppBundle:Category:View }
-    methods: [GET]
-view_category_seo:
-    path: /c-{categoryId}-{slug}
-    defaults: { _controller: AppBundle:Category:View }
-    methods: [GET]
+
 cmsQuiSommesNous:
     path: /qui-sommes-nous
     defaults:

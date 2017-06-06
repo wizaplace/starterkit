@@ -17,7 +17,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "roave/security-advisories": "@dev",
         "google/recaptcha": "^1.1",
-        "wizaplace/sdk": "~0.1.0"
+        "wizaplace/sdk": "~0.1.0",
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
