@@ -43,4 +43,15 @@ class ProductControllerTest extends VcrWebTestCase
         $client->request('GET', '/informatique/ecrans/invalid+*slug');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testNonCanonicalCategoryPathIsRedirected()
+    {
+        $client = $this->createClient();
+
+        $client->followRedirects(false);
+        $client->request('GET', '/product/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
+        $response = $client->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals('/product/informatique/ecrans/voluptas-nostrum-ea-consequatur', $response->headers->get('Location'));
+    }
 }

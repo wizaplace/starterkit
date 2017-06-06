@@ -15,7 +15,7 @@ use Wizaplace\Seo\SlugTargetType;
 
 class ProductController extends Controller
 {
-    public function viewAction(SeoService $seoService, string $slug) : Response
+    public function viewAction(SeoService $seoService, string $categoryPath, string $slug) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::PRODUCT()) {
@@ -24,6 +24,11 @@ class ProductController extends Controller
         $productId = $slugTarget->getObjectId();
 
         $product = $this->get(CatalogService::class)->getProductById($productId);
+
+        $realCategoryPath = implode('/', $product->getCategorySlugs());
+        if ($categoryPath !== $realCategoryPath) {
+            return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
+        }
 
         // latestProducts
         $catalogService = $this->get(CatalogService::class);
