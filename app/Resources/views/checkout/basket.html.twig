@@ -1,0 +1,212 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    {# steps breadcrumb #}
+    {% include 'checkout/steps.html.twig' with {step: 1} %}
+
+    <div class="container-fluid">
+
+        {% if basket.companyGroups %}
+            {% set defaultShippingName = basket.companyGroups.0.shippingGroups.0.shippings.0.name %}
+            {% set defaultShippingDeliveryTime = basket.companyGroups.0.shippingGroups.0.shippings.0.deliveryTime %}
+
+            {% for item in basket.companyGroups.0.shippingGroups.0.items %}
+                <div class="row">
+                    <hr />
+
+                    {# product images #}
+                    <div class="col-md-1">
+                        {% if item.mainImage %}
+                            <img src="{{item.mainImage.id|imageUrl}}" class="img-responsive" />
+                        {% else %}
+                            <img src="{{ asset('images/no-image.jpg') }}" class="img-responsive" />
+                        {% endif %}
+                    </div>
+
+                    {# product descriptions #}
+                    <div class="col-md-5">
+                        <div class="title"> {{ item.productName }}</div>
+                        <div>{{ defaultShippingName }} ({{ defaultShippingDeliveryTime }} jours ouvrés)</div>
+                    </div>
+
+                    {# product prices #}
+                    <div class="col-md-2">
+                        <label>Prix unitaire</label>
+
+                        {% if item.crossedOutPrice != null %}
+                            <div class="badge-promo">Promo</div>
+                        {% endif %}<br />
+
+                        <div class="title">{{ item.individualPrice|price }}&nbsp;TTC</div>
+                        {% if item.crossedOutPrice != null %} Au lieu de {{ item.crossedOutPrice|price }}&nbsp;TTC{% endif %}
+                    </div>
+
+                    {# quantity update #}
+                    <div class="col-md-2">
+                        <label>Quantité</label><br />
+                        <div class="quantity-widget">
+                            <input class="product-quantity form-control test-basket-item-quantity" type="number" data-product-id="{{ item.declinationId }}" value="{{ item.quantity }}" />
+                            <button class="decrease-quantity btn btn-default" >-</button>
+                            <button class="increase-quantity btn btn-default" >+</button>
+                        </div>
+                    </div>
+
+                    {# remove product from basket #}
+                    <div class="col-md-2">
+                        <form method="post" action="{{ path('basket_remove_item') }}">
+                            <input type="hidden" name="declinationId" value="{{ item.declinationId }}" />
+                            <button type="submit" class="btn btn-default">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <div class="row">
+                <hr />
+                <div class="col-md-12 text-center">
+                    Votre panier est vide ....
+                    <a class="btn btn-default" href="{{ path('home') }}">Continuer mes achats</a>
+                </div>
+            </div>
+        {% endif %}
+
+        <hr />
+        <div class="big-spacer"></div>
+    </div>
+
+    <div class="container-fluid basket" style="background-color:#efefef">
+        <div class="col-md-6  col-md-offset-6">
+            <div class="spacer"></div>
+            <h1>Modes de livraison</h1>
+            <span class="text-red">Livraison offerte à partir de 1€ (france métropolitaine).</span>
+
+            <ul>
+                {% for shipping in basket.companyGroups.0.shippingGroups.0.shippings %}
+                    <li class="radio">
+                        <label>
+                            <input type="radio" name="shippingId" value="{{ shipping.id }}"
+                                   {% if loop.first %}checked{% endif %}>
+                            <span></span> {# radio button image #}
+                            <span>{{ shipping.name }} ({{ shipping.price|price }})</span>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="spacer"></div>
+
+            <label>Code promo</label><br />
+            <input type="text" placeholder=" Votre code" />
+            <button class="btn btn-default active">Appliquer</button>
+            <div class="big-spacer"></div>
+
+            {# basket amount details #}
+            <table class="price-table" style="margin-left:-240px;">
+
+                {# total excluding taxes without shipping #}
+                <tr>
+                    <td class="text-right"><div class="title">Sous total HT</div></td>
+                    <td class="text-left"> {{ basket.subtotal|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                </tr>
+
+                {% if basket.totalDiscount > 0 %}
+                    <tr>
+                        <td class="text-right"><div class="title">Promotion HT</div></td>
+                        <td class="text-left">- {{ basket.totalDiscount|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                    </tr>
+                {% endif %}
+
+                {# shipping price #}
+                <tr>
+                    <td class="text-right"><div class="title">Livraison HT</div></td>
+                    <td class="text-left"> {{ basket.totalShipping|price }}&nbsp;TTC</td> {# TODO modify with amount excl. taxes #}
+                </tr>
+
+                {# total excluding taxes #}
+                <tr>
+                    <td class="text-right"><div class="title">Total HT</div></td>
+                    <td class="text-left"> {{ basket.total|price }}&nbsp;TTC</td>{# TODO modify with amount excl. taxes #}
+                </tr>
+
+                {# total including taxes #}
+                <tr>
+                    <td class="text-right">
+                        <div class="big-spacer"></div>
+                        <div class="title text-blue">Total TTC</div>
+                    </td>
+                    <td class="text-left"><div class="big-title text-blue">{{ basket.total|price }}&nbsp;TTC</div></td>
+                </tr>
+
+                {# taxes detail #}
+                <tr>
+                    <td class="text-right"><div class="title">Dont TVA et autres taxes</div></td>
+                    <td class="text-left">{{ basket.totalTax|price }}</td>
+                </tr>
+            </table>
+            <div class="spacer"></div>
+
+            {% set nextStepLink = user|default ? path("checkout_addresses") : path("checkout_login") %}
+            <a href="{{ nextStepLink }}" class="btn btn-lg btn-primary">Valider mon panier</a>
+            <div class="spacer"></div>
+
+            <div class="reinsurance">
+                <div class="reinsurance-item">
+                    <i class="icon icon-box"></i>
+                    <div class="light-title">Livraison express 24/48h</div>
+                </div>
+
+                <div class="reinsurance-item">
+                    <i class="icon icon-shield"></i>
+                    <div class="light-title">Paiement 100% sécurisé</div>
+                </div>
+
+                <div class="reinsurance-item">
+                    <i class="icon icon-phone-o"></i>
+                    <div class="light-title">Assistance & Conseils<br>0800 97 55 55 (gratuit)</div>
+                </div>
+            </div>
+            <div class="spacer"></div>
+        </div>
+    </div>
+
+    <script>
+
+        {# quantity updates / page reload #}
+
+        {# update quantity with custom buttons #}
+        $('.decrease-quantity').on('click', function(){
+            var $inputField = $(this).parents('.quantity-widget').find('input');
+
+            if($inputField.val() > 1) {
+                $inputField.val(parseInt($inputField.val()) - 1);
+                modifyBasketQuantity($inputField);
+            }
+        });
+
+        $('.increase-quantity').on('click', function(){
+            var $inputField = $(this).parents('.quantity-widget').find('input');
+            $inputField.val(parseInt($inputField.val()) + 1);
+            modifyBasketQuantity($inputField);
+        });
+
+        {# update quantity with manual input #}
+        $('.product-quantity').on('change', function(){
+            modifyBasketQuantity($(this));
+        });
+
+        function modifyBasketQuantity($inputField){
+            W.toggleLoadingBox();
+            $.ajax({
+                method: "POST",
+                url: "{{ url('basket_update_item_quantity') }}",
+                data: {
+                    declinationId: $inputField.attr('data-product-id'),
+                    quantity: $inputField.val()
+                }
+            }).done(function () {
+                window.location.reload();
+            });
+        }
+    </script>
+{% endblock %}

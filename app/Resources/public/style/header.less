@@ -1,72 +1,46 @@
-.main-header {
+@import 'var';
 
-    // logo and quick access links
-    // ===========================
+#header-menu {
+    border: 0 none;
+    box-shadow: none;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+#header-menu #logo img {
+    height: auto;
+    width: 178px;
+}
+#logo { padding-left: 48px; }
+#search { padding-top:34px;}
+.generic-info { padding-top: 12px; }
+.generic-info-text { padding-left:50px;}
+.generic-info .icon {
+    font-size:30px;
+    margin-right: 10px;
+    color: #000;
+}
+.generic-info-detail {
+    display: none;
+    background: none repeat scroll 0 0 white;
+    height: auto;
+    position: absolute;
+    width: 380px;
+    z-index: 20;
+    padding:20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    right: 0;
+    left:auto;
+}
 
-    .top-nav {
-        background-color: @primary-color;
+.search-bar {
+    .category-filter {
+        position: absolute;
+        z-index: 10;
 
-        .nav-wrapper {
-            color: #fff;
-            padding: 1em 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .logo {
-                width: @logo-width;
-            }
-
-            .quick-access-link {
-                color: #fff;
-
-                &:hover {
-                    color: @secondary-color;
-                }
-            }
-
-            // TODO
-            .quick-access-content {
-                position: absolute;
-                color: @text-color;
-                background-color: #fff;
-            }
-        }
+        width: 90%;
+        background-color: #fff;
+        padding: 1em;
+        border: 1px solid @grey-light;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
-
-    // category menu and main static links
-    // ===================================
-
-    .main-menu {
-        background: @secondary-color;
-
-        .main-menu-wrapper {
-            padding: 1em 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .category-menu {
-                .category {
-                    font-size: 1.2em;
-                    font-weight: bold;
-                }
-            }
-        }
-    }
-
-    // search-bar
-    // ==========
-
-    .search-bar {
-        background-color: @primary-color;
-
-        .search-bar-wrapper {
-            padding: 1em 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    }
-
 }
