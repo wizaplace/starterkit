@@ -26,7 +26,7 @@ class ProfileController extends Controller
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
 
-            return $this->render('legacy/profile/profile.html.twig', ['profile' => $profile]);
+            return $this->render('profile/profile.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
@@ -38,7 +38,7 @@ class ProfileController extends Controller
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
 
-            return $this->render('legacy/profile/addresses.html.twig', ['profile' => $profile]);
+            return $this->render('profile/addresses.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
@@ -59,7 +59,7 @@ class ProfileController extends Controller
                 }
             );
 
-            return $this->render('legacy/profile/orders.html.twig', ['profile' => $profile, 'orders' => $orders]);
+            return $this->render('profile/orders.html.twig', ['profile' => $profile, 'orders' => $orders]);
         }
         throw new NotFoundHttpException();
     }
@@ -71,7 +71,7 @@ class ProfileController extends Controller
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
 
-            return $this->render('legacy/profile/returns.html.twig', ['profile' => $profile]);
+            return $this->render('profile/returns.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
@@ -83,7 +83,7 @@ class ProfileController extends Controller
             $apiKey = $session->get(AuthController::API_KEY);
             $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
 
-            return $this->render('legacy/profile/sav.html.twig', ['profile' => $profile]);
+            return $this->render('profile/sav.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }

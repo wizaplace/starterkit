@@ -27,7 +27,7 @@ class BasketController extends Controller
         $basketId = $this->getBasketId();
         $basket = $this->get(BasketService::class)->getBasket($basketId);
 
-        return $this->render('legacy/checkout/basket.html.twig', [
+        return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
         ]);
     }
@@ -71,7 +71,7 @@ class BasketController extends Controller
         $basketService->removeProductFromBasket($basketId, $declinationId);
         $basket = $basketService->getBasket($basketId);
 
-        return $this->render('legacy/checkout/basket.html.twig', [
+        return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
         ]);
     }
@@ -98,7 +98,7 @@ class BasketController extends Controller
         $basketId = $this->getBasketId();
         $basket = $basketService->getBasket($basketId);
 
-        return $this->render('legacy/checkout/basket.html.twig', [
+        return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
         ]);
     }

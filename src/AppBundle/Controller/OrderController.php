@@ -20,7 +20,7 @@ class OrderController extends Controller
         $orderService = $this->get(OrderService::class);
         $orders = $orderService->getOrders($this->getApiKey());
 
-        return $this->render('legacy/profile/orders.html.twig', ['orders' => $orders]);
+        return $this->render('profile/orders.html.twig', ['orders' => $orders]);
     }
 
     public function getOrderAction($orderId): Response
@@ -30,7 +30,7 @@ class OrderController extends Controller
 
         $order = $orderService->getOrder($orderId, $this->getApiKey());
 
-        return $this->render('legacy/profile/order.html.twig', ['order' => $order]);
+        return $this->render('profile/order.html.twig', ['order' => $order]);
     }
 
     private function getApiKey(): ApiKey

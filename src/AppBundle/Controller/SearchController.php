@@ -16,7 +16,7 @@ class SearchController extends Controller
     {
         $apiBaseUrl = $this->getParameter("api.base_url");
 
-        return $this->render('legacy/search/search.html.twig', [
+        return $this->render('search/search.html.twig', [
             'apiBaseUrl' => $apiBaseUrl,
         ]);
     }
