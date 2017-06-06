@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        apiBaseUrl: "%api.base_url%"
 
 services:
     _defaults:
