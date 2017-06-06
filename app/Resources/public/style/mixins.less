@@ -1,0 +1,34 @@
+.popin {
+    padding: 1em;
+
+    background-color: @background-color-light;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .05);
+}
+
+.remove-border-radius {
+    .remove-border-radius-left();
+    .remove-border-radius-right();
+}
+
+.remove-border-radius-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.remove-border-radius-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.icon-left {
+    .icon {
+        margin-right: .5em;
+    }
+}
+
+.icon-right {
+    .icon {
+        margin-left: .5em;
+    }
+}

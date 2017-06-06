@@ -1,46 +1,259 @@
-@import 'var';
+.main-header {
 
-#header-menu {
-    border: 0 none;
-    box-shadow: none;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-#header-menu #logo img {
-    height: auto;
-    width: 178px;
-}
-#logo { padding-left: 48px; }
-#search { padding-top:34px;}
-.generic-info { padding-top: 12px; }
-.generic-info-text { padding-left:50px;}
-.generic-info .icon {
-    font-size:30px;
-    margin-right: 10px;
-    color: #000;
-}
-.generic-info-detail {
-    display: none;
-    background: none repeat scroll 0 0 white;
-    height: auto;
-    position: absolute;
-    width: 380px;
-    z-index: 20;
-    padding:20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    right: 0;
-    left:auto;
-}
+    // branding and quick access links
+    // ===========================
 
-.search-bar {
-    .category-filter {
-        position: absolute;
-        z-index: 10;
+    .top-nav {
+        background-color: @primary-color;
 
-        width: 90%;
-        background-color: #fff;
-        padding: 1em;
-        border: 1px solid @grey-light;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        .nav-wrapper {
+            padding: 1em 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .branding {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .logo {
+                    width: @logo-width;
+                    margin-right: 2em;
+                }
+
+                .marketplace-name {
+                    color: @text-color-light;
+                    font-weight: bold;
+                    font-size: 2em;
+                }
+            }
+
+            .quick-access-links {
+                font-size: 1.2em;
+                position: relative;
+
+                .quick-access {
+                    &:last-of-type {
+                        margin-left: .5em;
+                    }
+
+                    .icon {
+                        margin-right: .2em;
+                    }
+
+                    .popin-wrapper {
+                        display: none; // starts off hidden
+                    }
+
+                    &:hover {
+                        .popin-wrapper {
+                            display: block; // shows popin on hover
+
+                            position: absolute;
+                            left: 0;
+                            z-index: 2;
+                            padding-top: .8em; // distance from link label
+                            width: 100%;
+
+                            .quick-access-content {
+                                .popin();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // category menu and main static links
+    // ===================================
+
+    .main-menu {
+        background: @primary-color;
+        font-size: 1.2em;
+
+        .main-menu-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 1em 0;
+
+            /* root level: categories */
+            .category-menu {
+                position: relative;
+                width: 100%;
+
+                // allow some space for static links
+                flex: 0 1 auto;
+
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .category {
+                    font-weight: bold;
+                    margin-left: .75em;
+
+                    .category-name {
+                        color: @text-color-light;
+                        cursor: pointer;
+                        text-align: center;
+                    }
+
+                    .popin-wrapper {
+                        display: none; // starts off hidden
+                    }
+
+                    &:hover {
+                        .category-name {
+                            color: @anchor-color-hover-light;
+
+                            &:active {
+                                color: @anchor-color-active-light;
+                            }
+                        }
+
+                        .popin-wrapper {
+                            display: block; // shows popin on hover
+
+                            position: absolute;
+                            left: 0;
+                            z-index: 2;
+                            padding-top: .8em; // distance from category label
+                            width: 100%;
+
+                            /* second level: sub-categories */
+                            > .category-sub-menu {
+                                .popin();
+
+                                .category {
+                                    .category-name {
+                                        color: @text-color-dark;
+                                        text-align: left;
+
+                                        &:hover {
+                                            color: @anchor-color-hover-dark;
+                                        }
+
+                                        &:active {
+                                            color: @anchor-color-active-dark;
+                                        }
+                                    }
+
+                                    /* third level: sub-sub-categories */
+                                    .category-sub-menu {
+                                        margin-left: 1em;
+
+                                        .category {
+                                            font-weight: normal;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .static-links {
+
+                // can expand and stay on one line
+                flex: 1 0 auto;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                font-size: .9em;
+                margin-left: 3em;
+
+                .icon {
+                    margin-left: .3em;
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+
+    // search-bar
+    // ==========
+
+    .search-bar {
+        background-color: @secondary-color;
+
+        .wrapper {
+            padding: 2em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .search-bar-form {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .query-input-group {
+                    width: 65%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    [name="query"] {
+                        flex: 1 1 50%;
+
+                        // form-group: remove unneeded border radius
+                        .remove-border-radius-right();
+                    }
+
+                    .category-picker {
+                        flex: 1 1 30%;
+
+                        // form-group: remove unneeded border radius and borders
+                        .remove-border-radius();
+                        border-left: 0;
+                        border-right: 0;
+                    }
+
+                    .btn {
+                        flex: 1 1 auto;
+
+                        // form-group: remove unneeded border radius
+                        .remove-border-radius-left();
+
+                        // add some space between text and icon
+                        .icon-left();
+                    }
+                }
+
+                .geo-input-group {
+                    width: 30%; // leave 5% of space between query and geoloc
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    [name="geo[label]"] {
+                        flex: 1 1 auto;
+
+                        // form-group: remove unneeded border radius and border
+                        .remove-border-radius-right();
+                        border-right: 0;
+                    }
+
+                    .btn {
+                        flex: 1 1 auto;
+
+                        // form-group: remove unneeded border radius
+                        .remove-border-radius-left();
+
+                        // add some space between text and icon
+                        .icon-left();
+                    }
+                }
+            }
+        }
     }
 }
