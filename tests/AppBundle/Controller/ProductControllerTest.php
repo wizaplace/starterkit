@@ -49,9 +49,9 @@ class ProductControllerTest extends VcrWebTestCase
         $client = $this->createClient();
 
         $client->followRedirects(false);
-        $client->request('GET', '/p/product/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
+        $client->request('GET', '/p/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
         $response = $client->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals('/p/product/informatique/ecrans/voluptas-nostrum-ea-consequatur', $response->headers->get('Location'));
+        $this->assertEquals('/p/informatique/ecrans/voluptas-nostrum-ea-consequatur', $response->headers->get('Location'));
     }
 }
