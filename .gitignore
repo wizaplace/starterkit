@@ -17,8 +17,6 @@
 /.vagrant
 Vagrantfile.local
 /.idea/
-/app/cache
-/app/logs/
 
 #Junk
 .DS_Store

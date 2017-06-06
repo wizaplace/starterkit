@@ -8,14 +8,23 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Seo\SeoService;
+use Wizaplace\Seo\SlugTargetType;
 
 class CategoryController extends Controller
 {
-    public function viewAction($categoryId)
+    public function viewAction(SeoService $seoService, string $slug) : Response
     {
+        $slugTarget = $seoService->resolveSlug($slug);
+        if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::CATEGORY()) {
+            throw $this->createNotFoundException("Category '${slug}' Not Found");
+        }
+        $categoryId = (int) $slugTarget->getObjectId();
+
         $catalogService = $this->get(CatalogService::class);
-        $currentCategory = $catalogService->getCategory((int) $categoryId);
+        $currentCategory = $catalogService->getCategory($categoryId);
         $apiBaseUrl = $this->getParameter("api.base_url");
 
         $categories = $catalogService->getCategoryTree();

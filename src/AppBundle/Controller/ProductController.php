@@ -8,16 +8,21 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Basket\Basket;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Seo\SeoService;
+use Wizaplace\Seo\SlugTargetType;
 
 class ProductController extends Controller
 {
-    public function viewAction($productId) : Response
+    public function viewAction(SeoService $seoService, string $slug) : Response
     {
+        $slugTarget = $seoService->resolveSlug($slug);
+        if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::PRODUCT()) {
+            throw $this->createNotFoundException("Product '${slug}' Not Found");
+        }
+        $productId = $slugTarget->getObjectId();
+
         $product = $this->get(CatalogService::class)->getProductById($productId);
 
         // latestProducts
