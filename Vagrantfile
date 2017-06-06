@@ -5,7 +5,7 @@ Vagrant.require_version ">= 1.8.0"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Box
     config.vm.box = "kuikui/modern-lamp"
-    config.vm.box_version = ">= 3.0.2"
+    config.vm.box_version = ">= 3.0.3"
 
     config.vm.provider "virtualbox" do |v|
       v.memory = 1536
