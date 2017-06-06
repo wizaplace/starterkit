@@ -1,0 +1,70 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=voluptas-nostrum-ea-consequatur'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 31 May 2017 11:50:04 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: '622037'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/622037'
+            Content-Length: '63'
+            Content-Type: application/json
+        body: '{"voluptas-nostrum-ea-consequatur":{"type":"product","id":"1"}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/products/1'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 31 May 2017 11:50:04 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 3fc31b
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/3fc31b'
+            Content-Length: '820'
+            Content-Type: application/json
+        body: '{"id":1,"code":"1733647523593","supplierReference":"","name":"voluptas nostrum ea consequatur","url":"http:\/\/wizaplace.loc\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","shortDescription":"","description":"","slug":"voluptas-nostrum-ea-consequatur","minPrice":275,"greenTax":0,"isTransactional":true,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":1,"name":"Marchand de test"}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":5,"name":"\u00c9crans","slug":"ecrans"}],"declinations":[{"code":"1733647523593","supplierReference":"","price":275,"originalPrice":275,"crossedOutPrice":326,"prices":{"priceWithTaxes":275,"priceWithoutVat":269.34,"vat":5.66},"greenTax":0,"amount":33,"affiliateLink":null,"images":[]}],"attributes":[]}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/search/products?sorting%5Btimestamp%5D=desc&resultsPerPage=6&page=1&query='
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 31 May 2017 11:50:04 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: ff3925
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ff3925'
+            Content-Length: '3541'
+            Content-Type: application/json
+        body: '{"results":[{"productId":1,"name":"voluptas nostrum ea consequatur","slug":"voluptas-nostrum-ea-consequatur","minimumPrice":275,"crossedOutPrice":326,"isAvailable":true,"createdAt":1,"updatedAt":1496156279,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":5,"name":"\u00c9crans","slug":"ecrans"}]},{"productId":14,"name":"et quo quia iste","slug":"et-quo-quia-iste","minimumPrice":237,"crossedOutPrice":428,"isAvailable":true,"createdAt":1,"updatedAt":1496156281,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/et-quo-quia-iste.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":16,"name":"molestiae ut et delectus","slug":"molestiae-ut-et-delectus","minimumPrice":187,"crossedOutPrice":367,"isAvailable":true,"createdAt":1,"updatedAt":1496156281,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/ecrans\/molestiae-ut-et-delectus.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":5,"name":"\u00c9crans","slug":"ecrans"}]},{"productId":12,"name":"totam non eos laudantium","slug":"totam-non-eos-laudantium","minimumPrice":98,"crossedOutPrice":203,"isAvailable":true,"createdAt":1,"updatedAt":1496156281,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/totam-non-eos-laudantium.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":11,"name":"quaerat et ab necessitatibus","slug":"quaerat-et-ab-necessitatibus","minimumPrice":94,"crossedOutPrice":111,"isAvailable":true,"createdAt":1,"updatedAt":1496156281,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/quaerat-et-ab-necessitatibus.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":10,"name":"quam est pariatur eos","slug":"quam-est-pariatur-eos","minimumPrice":91,"crossedOutPrice":451,"isAvailable":true,"createdAt":1,"updatedAt":1496156281,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/quam-est-pariatur-eos.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]}],"pagination":{"page":1,"nbResults":17,"nbPages":3,"resultsPerPage":6},"facets":[{"name":"categories","label":"Cat\u00e9gorie","values":{"3":{"label":"Informatique","count":"4"},"5":{"label":"\u00c9crans","count":"2"}},"isNumeric":false},{"name":"price","label":"Prix","values":{"min":91,"max":275},"isNumeric":true},{"name":"company_type","label":"Type de vendeur","values":{"":{"label":"w_type_product_","count":"6"}},"isNumeric":false},{"name":1,"label":"Couleur","values":{"2":{"label":"Blanc","count":0},"4":{"label":"Bleu","count":0},"1":{"label":"Noir","count":0},"3":{"label":"Rouge","count":0}},"isNumeric":false},{"name":3,"label":"Hauteur","values":[],"isNumeric":false}]}'

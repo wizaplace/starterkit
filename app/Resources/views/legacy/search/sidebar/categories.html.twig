@@ -8,7 +8,7 @@
             :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
 
             {% if category.children|length == 0 %}
-                <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id})}}">
+                <a class="category-name" href="{{ path('category', {'slug': category.category.slug})}}">
                     {{ category.category.name }}
                 </a>
             {% else %}
@@ -26,7 +26,7 @@
                         :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
 
                         {% if category.children|length == 0 %}
-                            <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id})}}">
+                            <a class="category-name" href="{{ path('category', {'slug': category.category.slug})}}">
                                 <span class="check-radio"></span>
                                 {{ category.category.name }}
                             </a>
@@ -44,7 +44,7 @@
                                 <li class="category sub-category"
                                     :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
 
-                                    <a class="category-name" href="{{ path('view_category', {'categoryId': category.category.id }) }}">{{ category.category.name }}</a>
+                                    <a class="category-name" href="{{ path('category', {'slug': category.category.slug}) }}">{{ category.category.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
