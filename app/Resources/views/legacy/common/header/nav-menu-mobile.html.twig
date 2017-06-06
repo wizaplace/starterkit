@@ -8,7 +8,7 @@
                     {% if(cptr < 11) %}
                     <li>
                         {% if not hasChild %}
-                            <a href="{{ path('view_category_seo', {'categoryId': category.category.id, 'slug': category.category.slug}) }}">
+                            <a href="{{ path('category', {'slug': category.category.slug}) }}">
                                 {{ category.category.name }}
                             </a>
                         {%  else %}
@@ -23,7 +23,7 @@
                                 <h1 class="text-blue">{{ category.category.name }}</h1>
                                 <h3>
                                     {% if not hasChild %}
-                                        <a href="{{ path('view_category_seo', {'categoryId': child.category.id, 'slug': child.category.slug}) }}">{% endif %}
+                                        <a href="{{ path('category', {'slug': child.category.slug}) }}">{% endif %}
                                         {{ child.category.name }}
                                         {% if not hasChild %}</a>{% endif %}
                                 </h3>
@@ -31,7 +31,7 @@
                                     <ul>
                                         {% for subchild in child.children %}
                                             <li>
-                                                <a href="{{ path('view_category_seo', {'categoryId': subchild.category.id, 'slug': subchild.category.slug}) }}" class="technical-link">
+                                                <a href="{{ path('category', {'slug': subchild.category.slug}) }}" class="technical-link">
                                                     {{ subchild.category.name }}
                                                 </a>
                                             </li>

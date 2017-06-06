@@ -7,11 +7,11 @@ home:
 # legacy
 # product
 product:
-    path: /product/{productId}
+    path: /product/{categoryPath}/{slug}
     defaults: { _controller: AppBundle:Product:view }
-product_seo:
-    path: /p-{productId}-{slug}
-    defaults: { _controller: AppBundle:Product:view }
+    requirements:
+        categoryPath: ".+"
+        slug: "%slug.regexp%"
 search:
     path: /recherche
     defaults: { _controller: AppBundle:Search:search }
@@ -131,14 +131,13 @@ reset_password:
     defaults: { _controller: AppBundle:Auth:resetPassword }
     methods: [POST]
 
-view_category:
-    path: /category/{categoryId}
-    defaults: { _controller: AppBundle:Category:View }
+category:
+    path: /category/{slug}
+    defaults: { _controller: AppBundle:Category:view }
     methods: [GET]
-view_category_seo:
-    path: /c-{categoryId}-{slug}
-    defaults: { _controller: AppBundle:Category:View }
-    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"
+
 cmsQuiSommesNous:
     path: /qui-sommes-nous
     defaults:
