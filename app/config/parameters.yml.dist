@@ -4,4 +4,4 @@
 parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
-    api.base_url: 'https://sandboz.wizaplace.com/api/v1/'
+    api.base_url: 'https://sandbox.wizaplace.com/api/v1/'
