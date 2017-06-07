@@ -20,12 +20,38 @@ use Wizaplace\Image\ImageService;
 
 class BasketController extends Controller
 {
+    /**
+     * @var BasketService
+     */
+    private $basketService;
+
+    /**
+     * @var CatalogService
+     */
+    private $catalogService;
+
+    /**
+     * @var ImageService
+     */
+    private $imageService;
+
+    public function __construct(
+        BasketService $basketService,
+        CatalogService $catalogService,
+        ImageService $imageService
+    )
+    {
+        $this->basketService = $basketService;
+        $this->catalogService = $catalogService;
+        $this->imageService = $imageService;
+    }
+
     const SESSION_BASKET_ATTRIBUTE = '_basketId';
 
     public function basketAction(): Response
     {
         $basketId = $this->getBasketId();
-        $basket = $this->get(BasketService::class)->getBasket($basketId);
+        $basket = $this->basketService->getBasket($basketId);
 
         return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
@@ -37,19 +63,18 @@ class BasketController extends Controller
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
         $requestedQuantity = $request->request->get('quantity');
-        $product = $this->get(CatalogService::class)->getProductById($declinationId);
+        $product = $this->catalogService->getProductById($declinationId);
 
         //  get product data
         $addedProduct["name"] = $product->getName();
         $addedProduct["price"] = $product->getDeclinations()["0"]->getPrice();
-        $addedProduct["quantity"] = $this->get(BasketService::class)->addProductToBasket($basketId, $declinationId, (int) $requestedQuantity);
+        $addedProduct["quantity"] = $this->basketService->addProductToBasket($basketId, $declinationId, (int) $requestedQuantity);
 
         // get product main image
         $productImages = $product->getDeclinations()["0"]->getImages();
         if (count($productImages)) {
             $imageId = reset($productImages)->getId();
-            $imageService = $this->get(ImageService::class);
-            $addedProduct["imageLink"] = $imageService->getImageLink($imageId, 100, 100);
+            $addedProduct["imageLink"] = $this->imageService->getImageLink($imageId, 100, 100);
         }
 
         // warning message regarding stock
@@ -64,12 +89,11 @@ class BasketController extends Controller
 
     public function removeProductAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
 
-        $basketService->removeProductFromBasket($basketId, $declinationId);
-        $basket = $basketService->getBasket($basketId);
+        $this->basketService->removeProductFromBasket($basketId, $declinationId);
+        $basket = $this->basketService->getBasket($basketId);
 
         return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
@@ -89,14 +113,13 @@ class BasketController extends Controller
 
     public function updateProductQuantityAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
         $quantity = $request->request->get('quantity');
-        $realQuantity = $basketService->updateProductQuantity($basketId, $declinationId, (int) $quantity);
+        $realQuantity = $this->basketService->updateProductQuantity($basketId, $declinationId, (int) $quantity);
 
         $basketId = $this->getBasketId();
-        $basket = $basketService->getBasket($basketId);
+        $basket = $this->basketService->getBasket($basketId);
 
         return $this->render('checkout/basket.html.twig', [
             'basket' => $basket,
@@ -105,12 +128,11 @@ class BasketController extends Controller
 
     public function addCouponAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
         $coupon = $request->request->get('coupon');
 
         try {
-            $basketService->addCoupon($basketId, $coupon);
+            $this->basketService->addCoupon($basketId, $coupon);
         } catch (CouponAlreadyPresent $e) {
             //Si le coupon est déjà dans le panier, on fait comme si tout s'etait bien passé
         }
@@ -121,12 +143,11 @@ class BasketController extends Controller
 
     public function removeCouponAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
         $coupon = $request->request->get('coupon');
 
         try {
-            $basketService->addCoupon($basketId, $coupon);
+            $this->basketService->addCoupon($basketId, $coupon);
         } catch (CouponNotInTheBasket $e) {
             //Si le coupon n'est pas dans le panier, on est dans l'état final attendu
         }
@@ -140,7 +161,7 @@ class BasketController extends Controller
         $basketId = $this->get('session')->get(self::SESSION_BASKET_ATTRIBUTE);
 
         if (null === $basketId) {
-            $basketId = $this->get(BasketService::class)->create();
+            $basketId = $this->basketService->create();
             $this->get('session')->set(self::SESSION_BASKET_ATTRIBUTE, $basketId);
         }
 

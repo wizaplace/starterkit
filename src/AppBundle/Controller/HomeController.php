@@ -13,13 +13,17 @@ use Wizaplace\Catalog\CatalogService;
 
 class HomeController extends Controller
 {
+    private $catalogService;
+
+    public function __construct(CatalogService $catalogService)
+    {
+        $this->catalogService = $catalogService;
+    }
+
     public function homeAction(): Response
     {
-        // get catalog service from sdk
-        $catalogService = $this->get(CatalogService::class);
-
         // latest products
-        $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
+        $latestProducts = $this->catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
         return $this->render('home/home.html.twig', [
             'latestProducts' => $latestProducts,
