@@ -7,27 +7,27 @@
             {# branding #}
             <div class="branding">
                 <a href="{{ path('home') }}"><img src="{{ asset('images/logo.png') }}" alt="Marketplace logo" class="logo"></a>
-                <span class="marketplace-name hidden-xs">Starter Kit</span>
+                <span class="marketplace-name">Starter Kit</span>
             </div>
 
             {# quick access links #}
             <ul class="quick-access-links list-inline">
                 <li class="quick-access">
                     <a href="{{ accountLink }}" class="quick-access-link">
-                        <i class="icon fa fa-user"></i>
+                        <i class="fa fa-user"></i>
                         <span class="hidden-xs">Mon compte</span>
                     </a>
-                    <div class="popin-wrapper">
+                    <div class="wrapper">
                         {% include('common/header/_popin-account.html.twig') %}
                     </div>
                 </li>
 
                 <li class="quick-access">
                     <a href="{{ path('basket') }}" class="quick-access-link">
-                        <i class="icon fa fa-shopping-cart"></i>
+                        <i class="fa fa-shopping-cart"></i>
                         <span class="hidden-xs">Mon panier</span>
                     </a>
-                    <div class="popin-wrapper">
+                    <div class="wrapper">
                         {% include('common/header/_popin-basket.html.twig') %}
                     </div>
                 </li>

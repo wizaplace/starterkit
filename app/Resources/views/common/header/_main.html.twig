@@ -3,7 +3,17 @@
         <div class="main-menu-wrapper">
 
             {# Category menu #}
-            {% include ('common/header/_category-menu.html.twig') %}
+            {# ============= #}
+
+            {# vertical nav (tablet screens) #}
+            <div class="category-wrapper side-panel">
+                {% include ('common/header/_category-menu.html.twig') %}
+            </div>
+
+            {# horizontal nav (desktop screens) #}
+            <div class="category-wrapper inline">
+                {% include ('common/header/_category-menu.html.twig') %}
+            </div>
 
             {# Static links #}
             <ul class="static-links list-inline">
@@ -11,14 +21,14 @@
                 <li class="static-link">
                     <a href="#">
                         <span>Nouveautés</span>
-                        <i class="icon fa fa-tags"></i>
+                        <i class="fa fa-tags"></i>
                     </a>
                 </li>
 
                 <li class="static-link">
                     <a href="https://www.wizaplace.com">
                         <span>Site externe</span>
-                        <i class="icon fa fa-external-link"></i>
+                        <i class="fa fa-external-link"></i>
                     </a>
                 </li>
             </ul>

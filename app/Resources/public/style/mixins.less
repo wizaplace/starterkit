@@ -1,9 +1,23 @@
-.popin {
+.popin(@duration: .3s) {
     padding: 1em;
 
     background-color: @background-color-light;
     border-radius: 2px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .05);
+
+    // toggle animation
+    // ================
+    animation: displayed @duration ease-in-out;
+
+    @keyframes displayed {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
 }
 
 .remove-border-radius {
@@ -21,15 +35,15 @@
     border-bottom-right-radius: 0;
 }
 
-.icon-left {
-    .icon {
-        margin-right: .5em;
+.icon-left(@distance: .5em) {
+    i {
+        margin-right: @distance;
     }
 }
 
-.icon-right {
-    .icon {
-        margin-left: .5em;
+.icon-right(@distance: .5em) {
+    i {
+        margin-left: @distance;
     }
 }
 

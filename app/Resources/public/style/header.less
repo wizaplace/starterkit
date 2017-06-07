@@ -27,6 +27,10 @@
                     color: @text-color-light;
                     font-weight: bold;
                     font-size: 2em;
+
+                    @media screen and (max-width: @screen-md-max) {
+                        font-size: 2.2em;
+                    }
                 }
             }
 
@@ -34,34 +38,26 @@
                 font-size: 1.2em;
                 position: relative;
 
+                @media screen and (max-width: @screen-md-max) {
+                    font-size: 1.8em;
+                }
+
                 .quick-access {
                     &:last-of-type {
-                        margin-left: .5em;
+                        margin-left: 1em;
                     }
 
-                    i {
-                        margin-right: .2em;
+                    .quick-access-link {
+                        .icon-left(.2em);
 
                         @media screen and (max-width: @screen-xs-max) {
-                            font-size: 3em;
-
-                            &:first-of-type {
-                                margin-right: .5em;
+                            i {
+                                font-size: 3em;
                             }
                         }
                     }
 
-                    .form-control {
-                        margin-bottom: .5em;
-                    }
-
-                    .forgotten-password-link {
-                        .anchor-dark();
-                        font-size: .8em;
-                        text-decoration: underline;
-                    }
-
-                    .popin-wrapper {
+                    .wrapper {
                         display: none; // starts off hidden
                     }
 
@@ -74,7 +70,7 @@
                             }
                         }
 
-                        .popin-wrapper {
+                        .wrapper {
                             display: block; // shows popin on hover
 
                             position: absolute;
@@ -83,126 +79,48 @@
                             padding-top: .8em; // distance from link label
                             width: 100%;
 
-                            .content {
-                                .popin();
+                            // even on hover state, doesn't show on small screens
+                            @media screen and (max-width: @screen-xs-max) {
+                                display: none;
                             }
                         }
+                    }
+                }
+
+                .content {
+
+                    .popin();
+
+                    .btn {
+                        // add some space between text and icon
+                        .icon-right();
+
+                        font-size: .75em;
+                    }
+
+                    .btn:first-of-type {
+                        margin-bottom: .75em;
+                    }
+
+                    .switch-popin {
+                        width: 100%;
+                    }
+                }
+
+                .popin-login {
+                    .forgotten-password {
+                        display: block;
+                        padding-top: .5em;
+                        text-align: right;
+                        .anchor-dark();
+                        font-size: .75em;
+                        text-decoration: underline;
                     }
                 }
             }
         }
     }
 
-    // category menu and main static links
-    // ===================================
-
-    .main-menu {
-        background: @primary-color;
-        font-size: 1.2em;
-
-        .main-menu-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            padding: 1em 0;
-
-            /* root level: categories */
-            .category-menu {
-                position: relative;
-                width: 100%;
-
-                // allow some space for static links
-                flex: 0 1 auto;
-
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-                .category {
-                    font-weight: bold;
-                    margin-left: .75em;
-
-                    .category-name {
-                        color: @text-color-light;
-                        cursor: pointer;
-                        text-align: center;
-                    }
-
-                    .popin-wrapper {
-                        display: none; // starts off hidden
-                    }
-
-                    &:hover {
-                        .category-name {
-                            color: @anchor-color-hover-light;
-
-                            &:active {
-                                color: @anchor-color-active-light;
-                            }
-                        }
-
-                        .popin-wrapper {
-                            display: block; // shows popin on hover
-
-                            position: absolute;
-                            left: 0;
-                            z-index: 2;
-                            padding-top: .8em; // distance from category label
-                            width: 100%;
-
-                            /* second level: sub-categories */
-                            > .category-sub-menu {
-                                .popin();
-
-                                .category {
-                                    .category-name {
-                                        color: @text-color-dark;
-                                        text-align: left;
-
-                                        &:hover {
-                                            color: @anchor-color-hover-dark;
-                                        }
-
-                                        &:active {
-                                            color: @anchor-color-active-dark;
-                                        }
-                                    }
-
-                                    /* third level: sub-sub-categories */
-                                    .category-sub-menu {
-                                        margin-left: 1em;
-
-                                        .category {
-                                            font-weight: normal;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .static-links {
-
-                // can expand and stay on one line
-                flex: 1 0 auto;
-
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                font-size: .9em;
-                margin-left: 3em;
-
-                .icon {
-                    margin-left: .3em;
-                    font-size: .8em;
-                }
-            }
-        }
-    }
 
     // search-bar
     // ==========
@@ -246,7 +164,6 @@
 
                         // form-group: remove unneeded border radius
                         .remove-border-radius-right();
-
 
                         @media screen and (max-width: @screen-sm-max) {
                             flex: 1 1 auto;
@@ -311,6 +228,162 @@
                         // add some space between text and icon
                         .icon-left();
                     }
+                }
+            }
+        }
+    }
+
+
+    // category menu and main static links
+    // ===================================
+
+    .main-menu {
+        background: @primary-color;
+        font-size: 1.2em;
+
+        .main-menu-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 1em 0;
+
+            @media screen and (max-width: @screen-md-max) {
+                flex-direction: column-reverse;
+
+                .category-menu {
+                    font-size: 1.2em;
+                }
+
+                .static-links {
+                    align-self: flex-end;
+                    margin-bottom: 1em;
+
+                    & > .static-link {
+                        font-size: 1.4em;
+
+                        &:last-of-type {
+                            margin-left: 1.5em;
+                        }
+                    }
+                }
+            }
+
+            .category-wrapper {
+
+                &.side-panel {
+                    @media screen and (min-width: @screen-md-min) {
+                        display: none;
+                    }
+                }
+
+                &.inline {
+                    position: relative;
+                    width: 100%;
+
+                    @media screen and (max-width: @screen-sm-max) {
+                        display: none;
+                    }
+
+                    /* root level: categories */
+                    .category-menu {
+                        // allow some space for static links
+                        flex: 0 1 auto;
+
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .category {
+                            font-weight: bold;
+                            cursor: pointer;
+
+                            .category-name {
+                                color: @text-color-light;
+                            }
+
+                            .wrapper {
+                                display: none; // starts off hidden
+                            }
+
+                            &:hover {
+                                .category-name {
+                                    color: @anchor-color-hover-light;
+
+                                    &:active {
+                                        color: @anchor-color-active-light;
+                                    }
+                                }
+
+                                .wrapper {
+                                    display: block; // shows popin on hover
+
+                                    position: absolute;
+                                    left: 0;
+                                    z-index: 2;
+                                    padding-top: .8em; // distance from category label
+                                    width: 100%;
+
+                                    /* second level: sub-categories */
+                                    > .category-sub-menu {
+                                        .popin();
+
+                                        .category {
+                                            .category-name {
+                                                color: @text-color-dark;
+                                                text-align: left;
+
+                                                &:hover {
+                                                    color: @anchor-color-hover-dark;
+                                                }
+
+                                                &:active {
+                                                    color: @anchor-color-active-dark;
+                                                }
+                                            }
+
+                                            /* third level: sub-sub-categories */
+                                            .category-sub-menu {
+                                                margin-left: 1em;
+
+                                                .category {
+                                                    font-weight: normal;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .static-links {
+
+                // can expand and stay on one line
+                flex: 1 0 auto;
+
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                font-size: .9em;
+                margin-left: 3em;
+
+                @media screen and (max-width: @screen-sm-max) {
+                    margin: 0;
+                }
+
+                .static-link {
+                    &:last-child {
+                        margin-left: .7em;
+                    }
+                }
+
+                i {
+                    margin-left: .3em;
+                    font-size: .8em;
                 }
             }
         }

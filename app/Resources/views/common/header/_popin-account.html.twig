@@ -1,29 +1,70 @@
 {% if currentUser() %}
 
+    {# user account links #}
     <div class="content">
 
     </div>
 
 {% else %}
 
-    <div class="content" id="popin-login">
-        <p>Me connecter</p>
+    {# login form #}
+    <div class="content popin-login" id="popin-login">
+        <p class="title">Me connecter</p>
         <form method="post" action="{{ path('login') }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token('login_token') }}">
             <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
 
+            {# email #}
             <div class="form-group">
                 <input type="email" class="form-control" name="email" placeholder="Email...">
             </div>
 
+            {# password #}
             <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Mot de passe...">
-                <a href="#" rel="nofollow" class="forgotten-password-link">Mot de passe oublié</a>
+                <a href="#" rel="nofollow" class="forgotten-password">Mot de passe oublié</a>
             </div>
 
-            <p><button type="submit" class="btn btn-primary">Valider</button></p>
-            <p><a href="#" data-target="#popin-register" class="btn btn-link">Créer mon compte</a></p>
+            {# submit login form #}
+            <button type="submit" class="btn btn-primary">Valider<i class="fa fa-check"></i></button></button>
         </form>
+        
+        {# switch popins (show register form) #}
+        <button class="switch-popin btn btn-default">Créer mon compte<i class="fa fa-chevron-circle-right"></i></button>
+    </div>
+
+    {# register form #}
+    <div class="content popin-register hidden" id="popin-register">
+        <p class="title">Créer mon compte</p>
+        <form method="post" action="{{ path('register') }}">
+            <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
+
+            {# email #}
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email...">
+            </div>
+
+            {# password #}
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Mot de passe...">
+            </div>
+
+            {# submit register form #}
+            <button type="submit" class="btn btn-primary">Valider<i class="fa fa-check"></i></button>
+        </form>
+
+        {# switch popins (show login form) #}
+        <button class="switch-popin btn btn-default">Me connecter<i class="fa fa-chevron-circle-right"></i></button>
     </div>
 
 {% endif %}
+
+{% block scripts %}
+    <script>
+        // switch between login popin and register popin
+        $(".switch-popin").on("click", function() {
+            $(this).closest(".quick-access").find(".content").toggleClass("hidden");
+        });
+
+    </script>
+{% endblock %}
