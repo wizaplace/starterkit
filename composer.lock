@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ee0db02af7539a499f38ace10193a74",
+    "content-hash": "c58ed5d74750eca40ca794afc521493a",
     "packages": [
+        {
+            "name": "bmancone/guzzle-stopwatch-middleware",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hectorj/guzzle-stopwatch-middleware.git",
+                "reference": "a15c7a332845476f7b168774f93824cb5c4be072"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hectorj/guzzle-stopwatch-middleware/zipball/a15c7a332845476f7b168774f93824cb5c4be072",
+                "reference": "a15c7a332845476f7b168774f93824cb5c4be072",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5",
+                "symfony/stopwatch": "^2.3 || ^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Leadz\\GuzzleHttp\\Stopwatch\\": "src/",
+                    "Leadz\\GuzzleHttp\\Stopwatch\\Test\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brice Mancone",
+                    "email": "brice.mancone@gmail.com",
+                    "homepage": "https://github.com/bmancone"
+                }
+            ],
+            "description": "Stopwatch Middleware for Guzzle.",
+            "keywords": [
+                "guzzle",
+                "stopwatch",
+                "symfony",
+                "timeline"
+            ],
+            "support": {
+                "source": "https://github.com/hectorj/guzzle-stopwatch-middleware/tree/master"
+            },
+            "time": "2017-06-07 15:07:11"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.7",
@@ -1345,12 +1397,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607"
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ccffea64be8575eaa7ad09cd16dfeedfa4711607",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
                 "shasum": ""
             },
             "conflict": {
@@ -1392,6 +1444,7 @@
                 "magento/magento2ce": ">=2,<2.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "onelogin/php-saml": "<2.10.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
                 "phpmailer/phpmailer": ">=5,<5.2.22",
@@ -1472,7 +1525,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-05-13T14:02:28+00:00"
+            "time": "2017-06-07T12:12:03+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -4726,7 +4779,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "bmancone/guzzle-stopwatch-middleware": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
