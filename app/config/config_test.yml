@@ -1,6 +1,9 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    api.base_url: 'http://wizaplace.loc/api/v1/'
+
 framework:
     test: ~
     session:
