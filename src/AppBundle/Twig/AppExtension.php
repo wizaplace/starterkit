@@ -8,7 +8,7 @@
 namespace AppBundle\Twig;
 
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
@@ -19,11 +19,11 @@ use Wizaplace\User\UserService;
 
 class AppExtension extends \Twig_Extension
 {
-    /** @var  CatalogService */
+    /** @var CatalogService */
     private $catalogService;
-    /** @var  Session */
+    /** @var SessionInterface */
     private $session;
-    /** @var  UserService */
+    /** @var UserService */
     private $userService;
     /** @var BasketService */
     private $basketService;
@@ -36,7 +36,7 @@ class AppExtension extends \Twig_Extension
 
     public function __construct(
         CatalogService $catalogService,
-        Session $session,
+        SessionInterface $session,
         UserService $userService,
         BasketService $basketService,
         ImageService $imageService,
