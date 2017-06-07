@@ -12,6 +12,7 @@ use VCR\VCR;
 require_once(__DIR__.'/../vendor/autoload.php');
 
 // Configure VCR
+ini_set('opcache.enable', '0');
 VCR::configure()->setCassettePath(__DIR__.'/fixtures/VCR/');
 VCR::configure()->setMode(VCR::MODE_ONCE);
 VCR::configure()->enableLibraryHooks(['stream_wrapper', 'curl'])

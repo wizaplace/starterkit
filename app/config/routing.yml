@@ -12,10 +12,10 @@ search:
 # legacy
 # product
 product:
-    path: /product/{categoryPath}/{slug}
+    path: /p/{categoryPath}/{slug}
     defaults: { _controller: AppBundle:Product:view }
     requirements:
-        categoryPath: ".+"
+        categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
 
 # basket and checkout
@@ -129,7 +129,7 @@ reset_password:
     methods: [POST]
 
 category:
-    path: /category/{slug}
+    path: /c/{slug}
     defaults: { _controller: AppBundle:Category:view }
     methods: [GET]
     requirements:
