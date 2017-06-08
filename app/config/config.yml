@@ -50,7 +50,7 @@ services:
         resource: '../../src/AppBundle'
         exclude: '../../src/AppBundle/{Twig,Entity,Repository}'
 
-    guzzle.handler:
+    wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
         class: 'GuzzleHttp\HandlerStack'
     wizaplace.http.client:
@@ -58,7 +58,7 @@ services:
         arguments:
             -
                 base_uri: '%api.base_url%'
-                handler: '@guzzle.handler'
+                handler: '@wizaplace.guzzle.handler'
     Wizaplace\Catalog\CatalogService:
         arguments: ['@wizaplace.http.client']
         public: true
