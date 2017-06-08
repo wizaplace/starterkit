@@ -24,12 +24,16 @@
                 }
 
                 .marketplace-name {
-                    color: @text-color-light;
+                    color: @color-light;
                     font-weight: bold;
                     font-size: 2em;
 
                     @media screen and (max-width: @screen-md-max) {
                         font-size: 2.2em;
+                    }
+
+                    @media screen and (max-width: 500px) {
+                        display: none;
                     }
                 }
             }
@@ -248,33 +252,58 @@
 
             padding: 1em 0;
 
-            @media screen and (max-width: @screen-md-max) {
-                flex-direction: column-reverse;
+            .close-slide-panel {
+                .anchor-dark();
+            }
 
-                .category-menu {
-                    font-size: 1.2em;
+            .open-slide-panel {
+                @media screen and(min-width: @screen-md-min) {
+                    display: none;
                 }
 
-                .static-links {
-                    align-self: flex-end;
-                    margin-bottom: 1em;
+                padding: 0 .5em;
+                font-size: 1.3em;
+                .icon-left();
+                .anchor-light();
+                border: 1px solid @color-light;
+                border-radius: @radius;
 
-                    & > .static-link {
-                        font-size: 1.4em;
+                &:hover {
+                    border-color: @color-hover-light;
+                }
 
-                        &:last-of-type {
-                            margin-left: 1.5em;
-                        }
+                &:active {
+                    border-color: @color-active-light;
+                }
+
+                @media screen and(max-width: @screen-xs-max) {
+                    border: none;
+
+                    span {
+                        display: none;
+                    }
+
+                    i {
+                        font-size: 2em;
                     }
                 }
             }
 
+            @media screen and (max-width: @screen-md-max) {
+                flex-direction: column-reverse;
+            }
+
+            @media screen and (max-width: @screen-sm-max) {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
             .category-wrapper {
 
-                &.side-panel {
-                    @media screen and (min-width: @screen-md-min) {
-                        display: none;
-                    }
+                // global
+                .category {
+                    font-weight: bold;
+                    cursor: pointer;
                 }
 
                 &.inline {
@@ -294,12 +323,13 @@
                         justify-content: space-between;
                         align-items: center;
 
-                        .category {
-                            font-weight: bold;
-                            cursor: pointer;
+                        @media screen and (max-width: @screen-md-max) {
+                            font-size: 1.2em;
+                        }
 
+                        .category {
                             .category-name {
-                                color: @text-color-light;
+                                color: @color-light;
                             }
 
                             .wrapper {
@@ -330,7 +360,7 @@
 
                                         .category {
                                             .category-name {
-                                                color: @text-color-dark;
+                                                color: @color-dark;
                                                 text-align: left;
 
                                                 &:hover {
@@ -371,10 +401,6 @@
                 font-size: .9em;
                 margin-left: 3em;
 
-                @media screen and (max-width: @screen-sm-max) {
-                    margin: 0;
-                }
-
                 .static-link {
                     &:last-child {
                         margin-left: .7em;
@@ -384,6 +410,32 @@
                 i {
                     margin-left: .3em;
                     font-size: .8em;
+                }
+
+                @media screen and (max-width: @screen-md-max) {
+                    align-self: flex-end;
+                    margin-bottom: .8em;
+
+                    .static-link {
+                        font-size: 1.4em;
+
+                        &:last-of-type {
+                            margin-left: 1.5em;
+                        }
+                    }
+                }
+
+                @media screen and (max-width: @screen-sm-max) {
+                    align-self: center;
+                    margin: 0;
+
+                    .static-link {
+                        font-size: 1.8em;
+
+                        &:last-of-type {
+                            margin-left: 2em;
+                        }
+                    }
                 }
             }
         }

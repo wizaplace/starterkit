@@ -36,18 +36,19 @@
 }
 
 .icon-left(@distance: .5em) {
-    i {
+    & > i {
         margin-right: @distance;
     }
 }
 
 .icon-right(@distance: .5em) {
-    i {
+    & > i {
         margin-left: @distance;
     }
 }
 
 .anchor-light {
+    cursor: pointer;
     color: @anchor-color-light;
 
     &:hover {
@@ -68,6 +69,7 @@
 }
 
 .anchor-dark {
+    cursor: pointer;
     color: @anchor-color-dark;
 
     &:hover {

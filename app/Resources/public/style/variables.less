@@ -22,30 +22,30 @@
 
 @background-color-light: #fefefe;
 
-@text-color-dark: #333;
-@text-color-light: #efefef;
+@color-dark: #333;
+@color-light: #efefef;
 
-@color-hover-dark: darken(@tertiary-color, 20%);
-@color-active-dark: darken(saturate(@tertiary-color, 50%), 20%);
+@color-hover-dark: darken(saturate(@tertiary-color, 20%), 20%);
+@color-active-dark: darken(saturate(@tertiary-color, 50%), 10%);
 
-@color-hover-light: lighten(@tertiary-color, 20%);
-@color-active-light: lighten(saturate(@tertiary-color, 50%), 20%);
+@color-hover-light: lighten(saturate(@tertiary-color, 20%), 20%);
+@color-active-light: lighten(saturate(@tertiary-color, 50%), 10%);
 
 // anchors (same as general by default)
-@anchor-color-dark: @text-color-dark;
-@anchor-color-light: @text-color-light;
+@anchor-color-dark: @color-dark;
+@anchor-color-light: @color-light;
 
 @anchor-color-hover-dark: @color-hover-dark;
 @anchor-color-active-dark: @color-active-dark;
-@anchor-color-visited-dark: @text-color-dark;
+@anchor-color-visited-dark: @color-dark;
 
 @anchor-color-hover-light: @color-hover-light;
 @anchor-color-active-light: @color-active-light;
-@anchor-color-visited-light: @text-color-light;
+@anchor-color-visited-light: @color-light;
 
 // buttons (same as general by default)
-@button-color-dark: @text-color-dark;
-@button-color-light: @text-color-light;
+@button-color-dark: @color-dark;
+@button-color-light: @color-light;
 
 @button-color-hover-dark: @color-hover-dark;
 @button-color-active-dark: @color-active-dark;
@@ -55,9 +55,12 @@
 
 // borders
 @border-color: lighten(@primary-color, 30%);
+@radius: 3px;
 
-// Components
-// ==========
+// z-indexes
+// =========
+
+@overlay: 10;
 
 // logo
 @logo-width: 80px;
