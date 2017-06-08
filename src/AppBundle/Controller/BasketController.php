@@ -37,8 +37,7 @@ class BasketController extends Controller
         BasketService $basketService,
         CatalogService $catalogService,
         ImageService $imageService
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
         $requestedQuantity = $request->request->get('quantity');

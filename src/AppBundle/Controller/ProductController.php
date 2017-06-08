@@ -20,8 +20,7 @@ class ProductController extends Controller
         SeoService $seoService,
         string $categoryPath,
         string $slug
-    ) : Response
-    {
+    ) : Response {
         $slugTarget = $seoService->resolveSlug($slug);
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::PRODUCT()) {
             throw $this->createNotFoundException("Product '${slug}' Not Found");

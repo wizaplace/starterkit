@@ -19,8 +19,7 @@ class CategoryController extends Controller
         SeoService $seoService,
         CatalogService $catalogService,
         string $slug
-    ) : Response
-    {
+    ) : Response {
         $slugTarget = $seoService->resolveSlug($slug);
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::CATEGORY()) {
             throw $this->createNotFoundException("Category '${slug}' Not Found");
