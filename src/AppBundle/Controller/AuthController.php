@@ -20,16 +20,25 @@ class AuthController extends Controller
     const API_KEY = '_apiKey';
 
     /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    /**
      * TODO: CSRF token
      */
     public function loginAction(Request $request): Response
     {
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-        $userService = $this->get(UserService::class);
 
         try {
-            $apiKey = $userService->authenticate($email, $password);
+            $apiKey = $this->userService->authenticate($email, $password);
             $this->get('session')->set(self::API_KEY, $apiKey);
         } catch (BadCredentials $e) {
             $this->get('session')->getFlashBag()->add('danger', 'Les identifiants ne sont pas valides');
@@ -48,13 +57,12 @@ class AuthController extends Controller
         if (!$resp->isSuccess()) {
             $this->get('session')->getFlashBag()->add('danger', 'Souci de Recaptcha, veuillez soumettre le formulaire à nouveau');
         } else {
-            $userService = $this->get(UserService::class);
             $email = $request->request->get('email');
             $password = $request->request->get('password');
 
             try {
-                $userService->register($email, $password);
-                $apiKey = $userService->authenticate($email, $password);
+                $this->userService->register($email, $password);
+                $apiKey = $this->userService->authenticate($email, $password);
                 $this->get('session')->set(self::API_KEY, $apiKey);
             } catch (BadCredentials $e) {//Ca ne devrait jamais arrivé puisqu'on vient de créer l'utilisateur
                 $this->get('session')->getFlashBag()->add('danger', 'Souci de connection après création du compte');
@@ -88,8 +96,7 @@ class AuthController extends Controller
         }
 
         $email = $request->request->get('email');
-        $this->get(UserService::class)->recoverPassword($email);
-
+        $this->userService->recoverPassword($email);
 
         $referer = $request->headers->get('referer');
 

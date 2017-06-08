@@ -16,10 +16,17 @@ class CheckoutController extends Controller
 {
     const SESSION_BASKET_ATTRIBUTE = '_basketId';
 
+    private $basketService;
+
+    public function __construct(BasketService $basketService)
+    {
+        $this->basketService = $basketService;
+    }
+
     public function loginAction(): Response
     {
         $basketId = $this->getBasketId();
-        $basket = $this->get(BasketService::class)->getBasket($basketId);
+        $basket = $this->basketService->getBasket($basketId);
 
         return $this->render('checkout/login.html.twig', [
             'basket' => $basket,
@@ -29,7 +36,7 @@ class CheckoutController extends Controller
     public function addressesAction(): Response
     {
         $basketId = $this->getBasketId();
-        $basket = $this->get(BasketService::class)->getBasket($basketId);
+        $basket = $this->basketService->getBasket($basketId);
 
         return $this->render('checkout/addresses.html.twig', [
             'basket' => $basket,
@@ -38,10 +45,9 @@ class CheckoutController extends Controller
 
     public function paymentAction(): Response
     {
-        $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
-        $basket = $basketService->getBasket($basketId);
-        $payments = $basketService->getPayments($basketId);
+        $basket = $this->basketService->getBasket($basketId);
+        $payments = $this->basketService->getPayments($basketId);
 
         return $this->render('checkout/payment.html.twig', [
             'basket' => $basket,
@@ -51,9 +57,8 @@ class CheckoutController extends Controller
 
     public function completeAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
         $paymentId = $request->request->get('paymentId');
-        $paymentInfo = $basketService->checkout(
+        $paymentInfo = $this->basketService->checkout(
             $this->getBasketId(),
             $paymentId,
             true,
@@ -74,7 +79,7 @@ class CheckoutController extends Controller
         $basketId = $this->get('session')->get(self::SESSION_BASKET_ATTRIBUTE);
 
         if (null === $basketId) {
-            $basketId = $this->get(BasketService::class)->create();
+            $basketId = $this->basketService->create();
             $this->get('session')->set(self::SESSION_BASKET_ATTRIBUTE, $basketId);
         }
 

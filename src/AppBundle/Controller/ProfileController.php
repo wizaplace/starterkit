@@ -19,39 +19,39 @@ use Wizaplace\User\UserService;
 
 class ProfileController extends Controller
 {
-    public function viewAction(): Response
+    public function viewAction(UserService $userService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/profile.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function addressesAction(): Response
+    public function addressesAction(UserService $userService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/addresses.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function ordersAction(): Response
+    public function ordersAction(UserService $userService, OrderService $orderService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $vendorId = $this->get('kernel')->getVendorId();
             $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
-            $orders = $this->get(OrderService::class)->getOrders($this->getApiKey());
+            $orders = $orderService->getOrders($this->getApiKey());
             $orders = array_filter(
                 $orders,
                 function (Order $order) use ($vendorId) {
@@ -64,31 +64,31 @@ class ProfileController extends Controller
         throw new NotFoundHttpException();
     }
 
-    public function returnsAction(): Response
+    public function returnsAction(UserService $userService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/returns.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function savAction(): Response
+    public function savAction(UserService $userService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/sav.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function updateProfileAction(Request $request)
+    public function updateProfileAction(Request $request, UserService $userService)
     {
         $data = $request->request->get('user');
         $sameAddress = $request->request->get('sameAddress');
@@ -107,7 +107,6 @@ class ProfileController extends Controller
         }
         $user = new User($data);
 
-        $userService = $this->get(UserService::class);
         $userService->updateUser($user, $this->getApiKey());
         $userService->updateUserAdresses($user, $this->getApiKey());
 
@@ -116,9 +115,8 @@ class ProfileController extends Controller
         return $this->redirect($referer);
     }
 
-    public function updateBillingAddressAction(Request $request)
+    public function updateBillingAddressAction(Request $request, UserService $userService)
     {
-        $userService = $this->get(UserService::class);
 
         $userId = $request->request->get('user[id]');
         $user = $userService->getProfileFromId($userId, $this->getApiKey());

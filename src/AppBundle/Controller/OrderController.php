@@ -10,23 +10,22 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wizaplace\Order\Order;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\ApiKey;
 
 class OrderController extends Controller
 {
-    public function getOrdersAction(): Response
+    public function getOrdersAction(OrderService $orderService): Response
     {
-        $orderService = $this->get(OrderService::class);
         $orders = $orderService->getOrders($this->getApiKey());
 
         return $this->render('profile/orders.html.twig', ['orders' => $orders]);
     }
 
-    public function getOrderAction($orderId): Response
+    public function getOrderAction($orderId, OrderService $orderService): Response
     {
         $orderId = (int) $orderId;
-        $orderService = $this->get(OrderService::class);
 
         $order = $orderService->getOrder($orderId, $this->getApiKey());
 

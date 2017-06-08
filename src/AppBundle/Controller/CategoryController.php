@@ -15,7 +15,11 @@ use Wizaplace\Seo\SlugTargetType;
 
 class CategoryController extends Controller
 {
-    public function viewAction(SeoService $seoService, string $slug) : Response
+    public function viewAction(
+        SeoService $seoService,
+        CatalogService $catalogService,
+        string $slug
+    ) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::CATEGORY()) {
@@ -23,7 +27,6 @@ class CategoryController extends Controller
         }
         $categoryId = (int) $slugTarget->getObjectId();
 
-        $catalogService = $this->get(CatalogService::class);
         $currentCategory = $catalogService->getCategory($categoryId);
         $apiBaseUrl = $this->getParameter("api.base_url");
 
