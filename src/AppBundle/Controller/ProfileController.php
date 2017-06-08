@@ -23,7 +23,7 @@ class ProfileController extends Controller
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
+            $apiKey = $this->getApiKey();
             $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/profile.html.twig', ['profile' => $profile]);
@@ -35,7 +35,7 @@ class ProfileController extends Controller
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
+            $apiKey = $this->getApiKey();
             $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/addresses.html.twig', ['profile' => $profile]);
@@ -48,10 +48,10 @@ class ProfileController extends Controller
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $vendorId = $this->get('kernel')->getVendorId();
-            $apiKey = $session->get(AuthController::API_KEY);
+            $apiKey = $this->getApiKey();
             $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
-            $orders = $orderService->getOrders($this->getApiKey());
+            $orders = $orderService->getOrders($apiKey);
             $orders = array_filter(
                 $orders,
                 function (Order $order) use ($vendorId) {
@@ -68,7 +68,7 @@ class ProfileController extends Controller
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
+            $apiKey = $this->getApiKey();
             $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/returns.html.twig', ['profile' => $profile]);
@@ -80,7 +80,7 @@ class ProfileController extends Controller
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
+            $apiKey = $this->getApiKey();
             $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/sav.html.twig', ['profile' => $profile]);
