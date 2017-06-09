@@ -30,3 +30,18 @@
         $element.removeClass("in");
     }
 })();
+
+// toggle category menus
+(function toggle() {
+
+    $(document).on("click", ".category-menu > .category > .category-name", function() {
+
+        let $category = $(this).parent();
+
+        // toggle class to animate or change style
+        $category.toggleClass("in");
+
+        // show/hide filter content
+        $category.children(".wrapper").toggle("fast");
+    });
+})();

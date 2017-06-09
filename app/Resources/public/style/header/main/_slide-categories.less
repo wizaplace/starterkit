@@ -1,0 +1,56 @@
+&.slide-panel {
+    overflow-y: auto;
+
+    .close-slide-panel {
+        .anchor-dark();
+    }
+
+    .category-menu {
+        margin-top: 2em;
+
+        .category-name {
+            .anchor-dark();
+
+            // leaf (it's a link and not a menu opener)
+            &:last-child {
+                color: @primary-color;
+            }
+        }
+
+        > .category {
+            .category-name {
+                font-size: 1.5em;
+                display: block;
+
+                i {
+                    margin-left: 1em;
+                    font-size: .7em;
+                    color: @tertiary-color;
+                    transition: transform .1s ease-in;
+                }
+            }
+
+            // rotate icon
+            &.in .category-name i {
+                transform: rotate(90deg);
+            }
+
+            .wrapper {
+                display: none; // toggled programmatically (on click)
+
+                .category-sub-menu {
+                    padding-left: 2em;
+
+                    .category {
+                        font-size: .9em;
+                        font-weight: normal;
+
+                        .category-name {
+                            color: @color-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

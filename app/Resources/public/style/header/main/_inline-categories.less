@@ -1,0 +1,97 @@
+// .category-wrapper
+&.inline {
+    width: 100%;
+
+    @media screen and (max-width: @screen-sm-max) {
+        display: none;
+    }
+
+    /* root level: categories */
+    .category-menu {
+        // list-inline
+        padding-left: 0;
+        list-style: none;
+        margin-left: -5px;
+
+        // allow some space for static links
+        flex: 0 1 auto;
+
+        display: flex;
+        justify-content: space-between; // change to flex-start if there are lots of categories
+        align-items: center;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: @screen-md-max) {
+            font-size: 1.2em;
+        }
+
+        .category {
+            // list-inline
+            display: inline-block;
+            margin-left: 1em;
+
+            .category-name {
+                color: @color-light;
+            }
+
+            .wrapper {
+                display: none; // starts off hidden
+            }
+
+            &:hover {
+                .category-name {
+                    color: @anchor-color-hover-light;
+
+                    &:active {
+                        color: @anchor-color-active-light;
+                    }
+                }
+
+                .wrapper {
+                    display: block; // shows popin on hover
+
+                    position: absolute;
+                    left: 0;
+                    z-index: 2;
+                    padding-top: .8em; // distance from category label
+                    width: 100%;
+
+                    /* second level: sub-categories */
+                    > .category-sub-menu {
+                        .popin();
+
+                        display: flex;
+                        flex-direction: column;
+
+                        .category {
+                            .category-name {
+                                color: @color-dark;
+                                text-align: left;
+
+                                &:hover {
+                                    color: @anchor-color-hover-dark;
+                                }
+
+                                &:active {
+                                    color: @anchor-color-active-dark;
+                                }
+                            }
+
+                            /* third level: sub-sub-categories */
+                            .category-sub-menu {
+                                margin-left: 1em;
+
+                                display: flex;
+                                flex-direction: column;
+
+                                .category {
+                                    font-weight: normal;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

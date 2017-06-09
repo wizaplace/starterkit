@@ -1,13 +1,13 @@
 {% set categories = categoryTree() %}
 
-<ul class="category-menu list-inline">
-    {% for category in categories | slice(0,8)%}
+<ul class="category-menu">
+    {% for category in categories %}
 
         <li class="category">
 
             {% if category.children %}
 
-                <span class="category-name">{{ category.category.name }}</span>
+                <span class="category-name">{{ category.category.name }}<i class="fa fa-chevron-right hidden-md hidden-lg"></i></span>
 
                 <div class="wrapper">
                     <ul class="category-sub-menu">

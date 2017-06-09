@@ -1,0 +1,110 @@
+// search-bar
+// ==========
+
+.search-bar {
+    background-color: @secondary-color;
+
+    .wrapper {
+        padding: 2em 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .search-bar-form {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            i {
+                min-width: 1em;
+            }
+
+            @media screen and (max-width: @screen-sm-max) {
+                flex-direction: column;
+            }
+
+            .query-input-group {
+                width: 65%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media screen and (max-width: @screen-sm-max) {
+                    width: 100%;
+                    margin-bottom: 1em;
+                }
+
+                [name="q"] {
+                    flex: 1 1 50%;
+
+                    // form-group: remove unneeded border radius
+                    .remove-border-radius-right();
+
+                    @media screen and (max-width: @screen-sm-max) {
+                        flex: 1 1 auto;
+                        border-right: 0;
+                    }
+                }
+
+                .category-picker {
+                    flex: 1 1 30%;
+
+                    // form-group: remove unneeded border radius and borders
+                    .remove-border-radius();
+                    border-left: 0;
+                    border-right: 0;
+
+                    @media screen and (max-width: @screen-sm-max) {
+                        flex: 1 1 auto;
+                    }
+
+                    @media screen and (max-width: @screen-xs-max) {
+                        display: none;
+                    }
+                }
+
+                .btn {
+                    flex: 1 1 auto;
+                    min-width: 20%;
+
+                    // form-group: remove unneeded border radius
+                    .remove-border-radius-left();
+
+                    // add some space between text and icon
+                    .icon-left();
+                }
+            }
+
+            .geo-input-group {
+                width: 30%; // leave 5% of space between query and geoloc
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media screen and (max-width: @screen-sm-max) {
+                    width: 100%;
+                }
+
+                [name="geo[label]"] {
+                    flex: 1 1 auto;
+
+                    // form-group: remove unneeded border radius and border
+                    .remove-border-radius-right();
+                    border-right: 0;
+                }
+
+                .btn {
+                    flex: 1 0 auto;
+                    min-width: 20%;
+
+                    // form-group: remove unneeded border radius
+                    .remove-border-radius-left();
+
+                    // add some space between text and icon
+                    .icon-left();
+                }
+            }
+        }
+    }
+}
