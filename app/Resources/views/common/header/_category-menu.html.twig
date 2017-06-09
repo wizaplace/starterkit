@@ -7,7 +7,7 @@
 
             {% if category.children %}
 
-                <span class="category-name">{{ category.category.name }}<i class="fa fa-chevron-right hidden-md hidden-lg"></i></span>
+                <span class="category-name">{{ category.category.name }}<i class="fa fa-plus hidden-md hidden-lg"></i></span>
 
                 <div class="wrapper">
                     <ul class="category-sub-menu">
@@ -15,30 +15,19 @@
                         {% for category in category.children %}
 
                             <li class="category">
+                                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                <ul class="category-sub-menu">
 
-                                {% if category.children %}
+                                    {% for category in category.children %}
 
-                                    <span class="category-name">{{ category.category.name }}</span>
-                                    <ul class="category-sub-menu">
+                                    <li class="category">
+                                        {# last level is a leaf #}
+                                        <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                    </li>
 
-                                        {% for category in category.children %}
-
-                                        <li class="category">
-                                            {# last level is a leaf #}
-                                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
-                                        </li>
-
-                                        {% endfor %}
-                                    </ul>
-
-                                {% else %}
-
-                                    <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
-
-                                {% endif %}
-
+                                    {% endfor %}
+                                </ul>
                             </li>
-
                         {% endfor %}
                     </ul>
                 </div>

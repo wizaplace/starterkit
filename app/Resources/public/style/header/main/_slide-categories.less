@@ -1,38 +1,40 @@
 &.slide-panel {
     overflow-y: auto;
 
-    .close-slide-panel {
-        .anchor-dark();
-    }
-
     .category-menu {
         margin-top: 2em;
 
         .category-name {
             .anchor-dark();
-
-            // leaf (it's a link and not a menu opener)
-            &:last-child {
-                color: @primary-color;
-            }
         }
 
         > .category {
+            margin-top: 1.8em;
+
             .category-name {
-                font-size: 1.5em;
                 display: block;
+                font-size: 1.8em;
+                margin-bottom: 1.5em;
 
                 i {
                     margin-left: 1em;
                     font-size: .7em;
-                    color: @tertiary-color;
-                    transition: transform .1s ease-in;
+                    color: @color-hover-dark;
+                    transition: transform .1s ease-in; // rotate icon back
                 }
             }
 
-            // rotate icon
-            &.in .category-name i {
-                transform: rotate(90deg);
+            &.in .category-name {
+                // rotate icon
+                i {
+                    transform: rotate(180deg);
+                }
+
+                margin-bottom: 0;
+
+                .category-name {
+                    margin-bottom: 0;
+                }
             }
 
             .wrapper {
@@ -46,7 +48,7 @@
                         font-weight: normal;
 
                         .category-name {
-                            color: @color-dark;
+                            .anchor-dark();
                         }
                     }
                 }

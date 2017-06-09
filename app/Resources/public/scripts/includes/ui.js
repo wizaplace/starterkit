@@ -38,8 +38,18 @@
 
         let $category = $(this).parent();
 
-        // toggle class to animate or change style
+        // ignore toggling if no sub-menu
+        if( ! $category.find(".category").length ) {
+            return;
+        }
+
+        // toggle class
         $category.toggleClass("in");
+
+        // animate icon
+        setTimeout(function() {
+            $category.find("i").toggleClass("fa-plus fa-minus");
+        }, 100); // related to duration set in stylesheet (100 = .1s)
 
         // show/hide filter content
         $category.children(".wrapper").toggle("fast");
