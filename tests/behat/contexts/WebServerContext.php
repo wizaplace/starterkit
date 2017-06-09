@@ -54,14 +54,6 @@ class WebServerContext extends MinkContext
     }
 
     /**
-     * @Then I test all
-     */
-    public function testAll()
-    {
-        $this->saveScreenshot('screenshot.png', '/home/hectorj/www/starterkit/var/');
-    }
-
-    /**
      * @AfterSuite
      */
     public static function stopWebServer(): void
