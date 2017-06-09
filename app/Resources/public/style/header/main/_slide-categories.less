@@ -1,11 +1,13 @@
 &.slide-panel {
     overflow-y: auto;
+    background-color: @primary-color;
 
     .category-menu {
         margin-top: 2em;
 
+        // global
         .category-name {
-            .anchor-dark();
+            .anchor-light();
         }
 
         > .category {
@@ -19,7 +21,7 @@
                 i {
                     margin-left: 1em;
                     font-size: .7em;
-                    color: @color-hover-dark;
+                    color: @color-hover-light;
                     transition: transform .1s ease-in; // rotate icon back
                 }
             }
@@ -48,7 +50,7 @@
                         font-weight: normal;
 
                         .category-name {
-                            .anchor-dark();
+                            .anchor-light();
                         }
                     }
                 }

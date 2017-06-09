@@ -46,16 +46,18 @@
 
     // close icon
     & > i {
-        float: right;
+        position: absolute;
+        right: 1em;
         cursor: pointer;
         font-size: 1.5em;
+        color: @color-light;
 
         &:hover {
-            color: @anchor-color-hover-dark;
+            color: @anchor-color-hover-light;
         }
 
         &:active, &:focus {
-            color: @anchor-color-active-dark;
+            color: @anchor-color-active-light;
         }
     }
 }
