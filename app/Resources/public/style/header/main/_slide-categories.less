@@ -1,6 +1,16 @@
+// & = .category-wrapper
 &.slide-panel {
     overflow-y: auto;
     background-color: @primary-color;
+
+    .title {
+        font-size: 2.2em;
+        font-weight: bold;
+        color: @color-light;
+        text-align: center;
+        padding: .25em 0 1em;
+        border-bottom: 2px solid @tertiary-color;
+    }
 
     .category-menu {
         margin-top: 2em;
@@ -13,20 +23,21 @@
         > .category {
             margin-top: 1.8em;
 
-            .category-name {
-                display: block;
-                font-size: 1.8em;
-                margin-bottom: 1.5em;
-
-                i {
-                    margin-left: 1em;
-                    font-size: .7em;
-                    color: @color-hover-light;
-                    transition: transform .1s ease-in; // rotate icon back
-                }
+            .category-name-group {
+                position: relative;
             }
 
-            &.in .category-name {
+            i {
+                position: absolute;
+                font-size: 1.2em;
+                padding: .6em;
+                background-color: @tertiary-color;
+                border-radius: @radius;
+                color: @color-light;
+                transition: transform .1s ease-in; // rotate icon back
+            }
+
+            &.in .category-name-group {
                 // rotate icon
                 i {
                     transform: rotate(180deg);
@@ -37,6 +48,12 @@
                 .category-name {
                     margin-bottom: 0;
                 }
+            }
+
+            .category-name {
+                display: block;
+                font-size: 1.8em;
+                margin: 0 0 .5em 1.8em;
             }
 
             .wrapper {

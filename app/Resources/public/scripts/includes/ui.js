@@ -34,9 +34,11 @@
 // toggle category menus
 (function toggle() {
 
-    $(document).on("click", ".category-menu > .category > .category-name", function() {
+    $(document).on("click", ".menu-toggle", function(e) {
 
-        let $category = $(this).parent();
+        e.preventDefault();
+
+        let $category = $(this).closest(".category");
 
         // ignore toggling if no sub-menu
         if( ! $category.find(".category").length ) {
