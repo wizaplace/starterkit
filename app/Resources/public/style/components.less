@@ -48,9 +48,9 @@
     // close icon
     & > i {
         position: fixed;
-        right: 1em;
+        right: 1.5em;
         top: 1em;
-        visibility: hidden;
+        opacity: 0;
 
         cursor: pointer;
         font-size: 1.5em;
@@ -67,6 +67,7 @@
 
     // close icon transition
     &.in > i {
-        visibility: visible;
+        opacity: 1;
+        transition: opacity .4s ease .4s;
     }
 }
