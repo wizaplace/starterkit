@@ -16,25 +16,28 @@
             </div>
 
             <div class="wrapper">
-                <ul class="category-sub-menu">
 
-                    {% for category in category.children %}
+                {% if category.children %}
+                    <ul class="category-sub-menu">
 
-                        <li class="category">
-                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
-                            <ul class="category-sub-menu">
+                        {% for category in category.children %}
 
-                                {% for category in category.children %}
+                            <li class="category">
+                                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                <ul class="category-sub-menu">
 
-                                    <li class="category">
-                                        <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
-                                    </li>
+                                    {% for category in category.children %}
 
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
+                                        <li class="category">
+                                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </li>
     {% endfor %}

@@ -25,10 +25,17 @@
             font-size: 1.2em;
         }
 
-        .category {
-            // list-inline
-            display: inline-block;
+        &.category:first-of-type {
             margin-left: 1em;
+        }
+
+        .category {
+            display: inline-block; // list-inline
+            position: relative;
+
+            &:not(:first-of-type) {
+                margin-left: 1em;
+            }
 
             .category-name {
                 color: @color-light;
@@ -51,14 +58,14 @@
                     display: block; // shows popin on hover
 
                     position: absolute;
-                    left: 0;
+                    left: -100%;
+                    right: -100%;
                     z-index: 2;
                     padding-top: .8em; // distance from category label
-                    width: 100%;
 
                     /* second level: sub-categories */
                     > .category-sub-menu {
-                        .popin();
+                        .popin(.1s);
 
                         display: flex;
                         flex-direction: column;
@@ -90,6 +97,22 @@
                             }
                         }
                     }
+                }
+            }
+
+            // first category popin will be aligned on the left
+            &:first-of-type {
+                .wrapper {
+                    left: 0;
+                    right: -200%;
+                }
+            }
+
+            // last category popin will be aligned on the right
+            &:last-of-type {
+                .wrapper {
+                    left: -200%;
+                    right: 0;
                 }
             }
         }
