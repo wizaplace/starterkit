@@ -67,6 +67,15 @@
                     > .category-sub-menu {
                         .popin(.1s);
 
+                        &::before {
+                            font-family: FontAwesome;
+                            content: '\f0d8'; // .caret-up
+                            color: #fff;
+                            position: absolute;
+                            top: 0;
+                            left: 48%;
+                        }
+
                         display: flex;
                         flex-direction: column;
 
@@ -105,6 +114,17 @@
                 .wrapper {
                     left: 0;
                     right: -200%;
+
+                    > .category-sub-menu {
+                        &::before {
+                            font-family: FontAwesome;
+                            content: '\f0d8'; // .caret-up
+                            color: #fff;
+                            position: absolute;
+                            top: 0;
+                            left: 10%;
+                        }
+                    }
                 }
             }
 
@@ -113,6 +133,17 @@
                 .wrapper {
                     left: -200%;
                     right: 0;
+
+                    > .sub-category {
+                        &::before {
+                            font-family: FontAwesome;
+                            content: '\f0d8'; // .caret-up
+                            color: #fff;
+                            position: absolute;
+                            top: 0;
+                            right: 10%;
+                        }
+                    }
                 }
             }
         }
