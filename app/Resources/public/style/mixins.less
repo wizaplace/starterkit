@@ -1,4 +1,4 @@
-.pop-under(@duration: .3s, @position: "center", @arrow: false) {
+.popunder(@duration: .3s, @position: "center", @arrow: false) {
 
     position: absolute;
     z-index: 2;
@@ -23,7 +23,7 @@
         right: 0;
     }
 
-    & > :first-child {
+    & > .pop-content {
         padding: 1em;
 
         background-color: @background-color-light;
@@ -66,7 +66,7 @@
             }
 
             & when (@position = "center") {
-                left: 42%;
+                left: 47%;
             }
 
             & when (@position = "right") {

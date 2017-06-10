@@ -61,6 +61,7 @@
 
                 .wrapper {
                     display: none; // starts off hidden
+                    .popunder();
                 }
 
                 &:hover {
@@ -73,12 +74,8 @@
                     }
 
                     .wrapper {
-                        display: block; // shows pop-under on hover
-
-                        position: absolute;
+                        display: block; // shows popunder on hover
                         left: 0;
-                        z-index: 2;
-                        padding-top: .8em; // distance from link label
                         width: 100%;
 
                         // even on hover state, doesn't show on small screens
@@ -91,8 +88,6 @@
 
             .content {
 
-                .pop-under();
-
                 .btn {
                     // add some space between text and icon
                     .icon-right();
@@ -104,12 +99,12 @@
                     margin-bottom: .75em;
                 }
 
-                .switch-pop-under {
+                .switch-popunder {
                     width: 100%;
                 }
             }
 
-            .pop-under-login {
+            .popunder-login {
                 .forgotten-password {
                     display: block;
                     padding-top: .5em;
