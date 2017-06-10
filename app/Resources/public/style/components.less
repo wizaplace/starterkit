@@ -38,6 +38,7 @@
         display: none;
     }
 
+    // panel animation
     &.in {
         visibility: visible;
         left: 0;
@@ -46,8 +47,13 @@
 
     // close icon
     & > i {
-        position: absolute;
-        right: 1em;
+        // because of its fixed position, icon has to be animated separately
+        position: fixed; // so it doesn't react to scroll bar toggle
+        left: -100vw;
+        top: 1em;
+        visibility: hidden;
+        transition: left .3s ease-in-out, visibility 0s ease .3s;
+
         cursor: pointer;
         font-size: 1.5em;
         color: @color-light;
@@ -58,6 +64,17 @@
 
         &:active, &:focus {
             color: @anchor-color-active-light;
+        }
+    }
+
+    // close icon animation
+    &.in > i {
+        visibility: visible;
+        left: 38vh;
+        transition: left .3s ease-in-out;
+
+        @media screen and (max-width: @screen-xs-max) {
+            left: 68vh;
         }
     }
 }
