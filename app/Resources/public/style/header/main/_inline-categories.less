@@ -55,26 +55,12 @@
                 }
 
                 .wrapper {
-                    display: block; // shows popin on hover
+                    display: block; // shows pop-under on hover
 
-                    position: absolute;
-                    left: -100%;
-                    right: -100%;
-                    z-index: 2;
-                    padding-top: .8em; // distance from category label
+                    .pop-under(.1s, "center", true); // duration, horizontal position, with arrow,
 
                     /* second level: sub-categories */
                     > .category-sub-menu {
-                        .popin(.1s);
-
-                        &::before {
-                            font-family: FontAwesome;
-                            content: '\f0d8'; // .caret-up
-                            color: #fff;
-                            position: absolute;
-                            top: 0;
-                            left: 48%;
-                        }
 
                         display: flex;
                         flex-direction: column;
@@ -109,41 +95,17 @@
                 }
             }
 
-            // first category popin will be aligned on the left
+            // first category pop-under will be aligned on the left
             &:first-of-type {
                 .wrapper {
-                    left: 0;
-                    right: -200%;
-
-                    > .category-sub-menu {
-                        &::before {
-                            font-family: FontAwesome;
-                            content: '\f0d8'; // .caret-up
-                            color: #fff;
-                            position: absolute;
-                            top: 0;
-                            left: 10%;
-                        }
-                    }
+                    .pop-under(.1s, "left", true)
                 }
             }
 
-            // last category popin will be aligned on the right
+            // last category pop-under will be aligned on the right
             &:last-of-type {
                 .wrapper {
-                    left: -200%;
-                    right: 0;
-
-                    > .sub-category {
-                        &::before {
-                            font-family: FontAwesome;
-                            content: '\f0d8'; // .caret-up
-                            color: #fff;
-                            position: absolute;
-                            top: 0;
-                            right: 10%;
-                        }
-                    }
+                    .pop-under(.1s, "right", true)
                 }
             }
         }
