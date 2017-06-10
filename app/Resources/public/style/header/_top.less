@@ -45,8 +45,19 @@
             }
 
             .quick-access {
+
+                &:first-of-type {
+                    .wrapper {
+                        .popunder(.2s, "left", true);
+                    }
+                }
+
                 &:last-of-type {
                     margin-left: 1em;
+
+                    .wrapper {
+                        .popunder(.2s, "right", true);
+                    }
                 }
 
                 .quick-access-link {
@@ -61,7 +72,6 @@
 
                 .wrapper {
                     display: none; // starts off hidden
-                    .popunder();
                 }
 
                 &:hover {
