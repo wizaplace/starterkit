@@ -32,16 +32,10 @@
                 border-color: @color-active-light;
             }
 
-            @media screen and(max-width: @screen-xs-max) {
-                border: none;
-
-                span {
-                    display: none;
-                }
-
-                i {
-                    font-size: 2em;
-                }
+            @media screen and (max-width: @screen-xs-max) {
+                font-size: 1.8em;
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -51,6 +45,11 @@
 
         @media screen and (max-width: @screen-sm-max) {
             flex-direction: row;
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width: @screen-xs-max) {
+            flex-direction: column;
             justify-content: space-between;
         }
 
@@ -82,8 +81,23 @@
             margin-left: 3em;
 
             .static-link {
-                &:last-child {
-                    margin-left: .7em;
+
+                &:last-of-type { margin-left: .8em; }
+
+                @media screen and (max-width: @screen-md-max) {
+                    font-size: 1.4em;
+
+                    &:last-of-type { margin-left: 1.5em; }
+                }
+
+                @media screen and (max-width: @screen-sm-max) {
+                    font-size: 1.5em;
+
+                    &:last-of-type { margin-left: 2em; }
+                }
+
+                @media screen and (max-width: @screen-xs-max) {
+                    display: none;
                 }
             }
 
@@ -95,27 +109,14 @@
             @media screen and (max-width: @screen-md-max) {
                 align-self: flex-end;
                 margin-bottom: .8em;
-
-                .static-link {
-                    font-size: 1.4em;
-
-                    &:last-of-type {
-                        margin-left: 1.5em;
-                    }
-                }
             }
 
             @media screen and (max-width: @screen-sm-max) {
-                align-self: center;
                 margin: 0;
+            }
 
-                .static-link {
-                    font-size: 1.8em;
-
-                    &:last-of-type {
-                        margin-left: 2em;
-                    }
-                }
+            @media screen and (max-width: @screen-xs-max) {
+                display: none;
             }
         }
     }

@@ -47,12 +47,10 @@
 
     // close icon
     & > i {
-        // because of its fixed position, icon has to be animated separately
-        position: fixed; // so it doesn't react to scroll bar toggle
-        left: -100vw;
+        position: fixed;
+        right: 1em;
         top: 1em;
         visibility: hidden;
-        transition: left .3s ease-in-out, visibility 0s ease .3s;
 
         cursor: pointer;
         font-size: 1.5em;
@@ -67,14 +65,8 @@
         }
     }
 
-    // close icon animation
+    // close icon transition
     &.in > i {
         visibility: visible;
-        left: 38vh;
-        transition: left .3s ease-in-out;
-
-        @media screen and (max-width: @screen-xs-max) {
-            left: 68vh;
-        }
     }
 }
