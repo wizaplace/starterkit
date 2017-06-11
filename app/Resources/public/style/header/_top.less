@@ -11,6 +11,10 @@
         justify-content: space-between;
         align-items: center;
 
+        @media screen and (max-width: @screen-xs-max) {
+            flex-direction: column;
+        }
+
         .branding {
             display: flex;
             justify-content: flex-start;
@@ -29,10 +33,10 @@
                 @media screen and (max-width: @screen-md-max) {
                     font-size: 2.2em;
                 }
+            }
 
-                @media screen and (max-width: 500px) {
-                    display: none;
-                }
+            @media screen and (max-width: @screen-xs-max) {
+                margin-bottom: 1.5em;
             }
         }
 
@@ -42,6 +46,12 @@
 
             @media screen and (max-width: @screen-md-max) {
                 font-size: 1.8em;
+            }
+
+            @media screen and (max-width: @screen-xs-max) {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
             }
 
             .quick-access {
@@ -58,6 +68,10 @@
                     .wrapper {
                         .popunder(.2s, "right", true);
                     }
+
+                    @media screen and (max-width: @screen-xs-max) {
+                        margin: 0;
+                    }
                 }
 
                 .quick-access-link {
@@ -66,6 +80,7 @@
                     @media screen and (max-width: @screen-xs-max) {
                         i {
                             font-size: 3em;
+                            margin: 0;
                         }
                     }
                 }
