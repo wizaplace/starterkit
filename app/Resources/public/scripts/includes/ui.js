@@ -57,3 +57,14 @@
         $category.children(".wrapper").toggle("fast");
     });
 })();
+
+// header account popins don't disappear with auto suggestions
+$('.quick-access').find('input').on('click', function () {
+
+    let $quickAccess = $(this).closest('.quick-access');
+    $quickAccess.addClass("in");
+
+    $(this).on('blur', function() {
+        $quickAccess.removeClass("in");
+    });
+});
