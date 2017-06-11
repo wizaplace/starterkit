@@ -16,10 +16,6 @@
             justify-content: space-between;
             align-items: center;
 
-            i {
-                min-width: 1em;
-            }
-
             @media screen and (max-width: @screen-sm-max) {
                 flex-direction: column;
             }
@@ -103,6 +99,25 @@
 
                     // add some space between text and icon
                     .icon-left();
+                }
+            }
+
+            // global
+            [class*="-input-group"] {
+                @media screen and (max-width: @screen-xs-max) {
+
+                    [type="text"] {
+                        font-size: 1.8em;
+                        height: auto;
+                    }
+
+                    .btn {
+                        font-size: 1.8em;
+
+                        i {
+                            margin: 0;
+                        }
+                    }
                 }
             }
         }
