@@ -59,7 +59,7 @@
 })();
 
 // header account popins don't disappear with auto suggestions
-$('.quick-access').find('input').on('click', function () {
+$('.quick-access').find('input, .btn').on('click', function () {
 
     let $quickAccess = $(this).closest('.quick-access');
     $quickAccess.addClass("in");
