@@ -14,13 +14,6 @@ default:
                 symfony:
                     symfony2: ~
     suites:
-        default:
-            paths: [ '%paths.base%/tests/behat' ]
-            contexts:
-                - \Behat\MinkExtension\Context\MinkContext
-                - \Tests\behat\contexts\HomePageContext
-            filters:
-                tags: '~@javascript'
         javascript:
             paths: [ '%paths.base%/tests/behat' ]
             contexts:
@@ -28,3 +21,10 @@ default:
                 - \Tests\behat\contexts\HomePageContext
             filters:
                 tags: '@javascript'
+        symfony:
+            paths: [ '%paths.base%/tests/behat' ]
+            contexts:
+                - \Behat\MinkExtension\Context\MinkContext
+                - \Tests\behat\contexts\HomePageContext
+            filters:
+                tags: '~@javascript'

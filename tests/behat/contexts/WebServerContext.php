@@ -9,47 +9,49 @@ declare(strict_types = 1);
 namespace Tests\behat\contexts;
 
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use Symfony\Bundle\WebServerBundle\WebServer;
 use Symfony\Bundle\WebServerBundle\WebServerConfig;
 
 class WebServerContext extends MinkContext
 {
-    use KernelDictionary;
-
-    /** @var WebServer */
-    private static $webServer;
-
-    /** @var string */
-    private static $pidFile;
-
     /**
-     * @BeforeScenario
+     * @BeforeSuite
      */
-    public function startWebServer(): void
+    public static function startWebServer(): void
     {
-        self::$pidFile = $this->getContainer()->getParameter('kernel.project_dir').'/var/webserver.pid';
-        $webRoot = $this->getContainer()->getParameter('kernel.project_dir').'/web';
+        if (self::getWebServerlUrlFromEnv()) {
+            return;
+        }
+        $webRoot = __DIR__.'/../../../web';
         $webServerConfig = new WebServerConfig($webRoot, 'test');
-        self::$webServer = new WebServer($webServerConfig);
-        if (!self::$webServer->isRunning(self::$pidFile)) {
-            self::$webServer->start($webServerConfig, self::$pidFile);
+        $webServer = new WebServer();
+        if (!$webServer->isRunning()) {
+            $webServer->start($webServerConfig);
         }
 
         // Wait for the webserver to actually be started.
-        $address = false;
+        $runs = false;
         for ($i = 0; $i < 10; $i++) {
-            $address = self::$webServer->getAddress(self::$pidFile);
-            if ($address !== false) {
+            $runs = $webServer->isRunning();
+            if ($runs) {
                 break;
             }
-            usleep(100000);
+            sleep(1);
         }
-        if ($address === false) {
-            throw new \Exception('Webserver took too long to start');
+        if (!$runs) {
+            throw new \Exception('Webserver is not running (took too long to start, or already crashed)');
         }
+    }
 
-        $address = 'http://'.self::$webServer->getAddress(self::$pidFile);
+    /**
+     * @BeforeStep
+     */
+    public function setWebServerUrl()
+    {
+        $address = self::getWebServerlUrlFromEnv();
+        if (!$address) {
+            $address = 'http://'.(new WebServer())->getAddress();
+        }
         $this->setMinkParameter('base_url', $address);
     }
 
@@ -58,8 +60,14 @@ class WebServerContext extends MinkContext
      */
     public static function stopWebServer(): void
     {
-        if (isset(self::$webServer) && self::$webServer->isRunning(self::$pidFile)) {
-            self::$webServer->stop(self::$pidFile);
+        $webServer = (new WebServer());
+        if ($webServer->isRunning()) {
+            $webServer->stop();
         }
+    }
+
+    private static function getWebServerlUrlFromEnv()
+    {
+        return getenv('TEST_WEBSERVER_URL');
     }
 }
