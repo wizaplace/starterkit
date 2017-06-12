@@ -16,21 +16,27 @@
 
             {# email #}
             <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email...">
+                <input type="email" class="form-control" name="email" placeholder="Email..." required>
             </div>
 
             {# password #}
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Mot de passe...">
+                <input type="password" class="form-control" name="password" placeholder="Mot de passe..." required>
                 <a href="#" rel="nofollow" class="forgotten-password">Mot de passe oublié</a>
             </div>
 
             {# submit login form #}
-            <button type="submit" class="btn btn-primary">Valider<i class="fa fa-check"></i></button></button>
+            <button type="submit" class="btn btn-primary">
+                <span>Valider</span>
+                <i class="fa fa-check"></i></button>
+            </button>
         </form>
-        
+
         {# switch popunders (show register form) #}
-        <button class="switch-popunder btn btn-default">Créer mon compte<i class="fa fa-chevron-circle-right"></i></button>
+        <button class="switch-popunder btn btn-default">
+            <span>Créer mon compte</span>
+            <i class="fa fa-chevron-circle-right"></i>
+        </button>
     </div>
 
     {# register form #}
@@ -41,20 +47,33 @@
 
             {# email #}
             <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email...">
+                <input type="email" class="form-control" name="email" placeholder="Email..." required>
             </div>
 
             {# password #}
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Mot de passe...">
+                <input type="password" class="form-control" name="password" placeholder="Mot de passe..." required>
             </div>
 
-            {# submit register form #}
-            <button type="submit" class="btn btn-primary">Valider<i class="fa fa-check"></i></button>
+            {# terms #}
+            <div class="form-group">
+                <label class="terms">
+                    <input type="checkbox" name="terms_approved" value="1" required>
+                    <span>J'accepte les <a href="#">Conditions Générales d'Utilisation*</a></span>
+                </label>
+            </div>
+
+            {# invisible reCaptcha button #}
+            {% include 'common/recaptcha.html.twig' with { recaptchaId: "header" } %}
+
+            <button type="submit" class="hidden"></button>
         </form>
 
         {# switch popunders (show login form) #}
-        <button class="switch-popunder btn btn-default">Me connecter<i class="fa fa-chevron-circle-right"></i></button>
+        <button class="switch-popunder btn btn-default">
+            <span>Me connecter</span>
+            <i class="fa fa-chevron-circle-right"></i>
+        </button>
     </div>
 
 {% endif %}
@@ -62,9 +81,8 @@
 {% block scripts %}
     <script>
         // switch between login popunder and register popunder
-        $(".switch-popunder").on("click", function() {
+        $(".switch-popunder").on("click", function () {
             $(this).closest(".quick-access").find(".content").toggleClass("hidden");
         });
-
     </script>
 {% endblock %}

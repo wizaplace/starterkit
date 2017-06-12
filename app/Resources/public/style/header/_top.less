@@ -89,7 +89,8 @@
                     display: none; // starts off hidden
                 }
 
-                &:hover {
+                &:hover, &.in {
+
                     .quick-access-link {
                         color: @anchor-color-hover-light;
 
@@ -122,6 +123,24 @@
 
                 .btn:first-of-type {
                     margin-bottom: .75em;
+                }
+
+                .terms {
+                    font-size: .7em;
+                    cursor: pointer;
+
+                    a {
+                        .anchor-dark();
+                        color: @tertiary-color;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                        &:visited {
+                            color: @tertiary-color;
+                        }
+                    }
                 }
 
                 .switch-popunder {

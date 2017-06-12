@@ -113,7 +113,7 @@ class AppExtension extends \Twig_Extension
         return $basket;
     }
 
-    public function getRecaptchaKey():string
+    public function getRecaptchaKey(): string
     {
         return $this->recaptchaKey;
     }
