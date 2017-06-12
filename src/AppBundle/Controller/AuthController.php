@@ -50,6 +50,8 @@ class AuthController extends Controller
 
     public function registerAction(Request $request): Response
     {
+        $flashBag = $this->get('session')->getFlashBag();
+
         // redirection url
         $requestedUrl = $request->get('redirect_url');
         $referer = $request->headers->get('referer');
@@ -60,7 +62,7 @@ class AuthController extends Controller
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
         if (! $recaptchaValidation->isSuccess()) {
-            $this->get('session')->getFlashBag()->add('danger', 'Erreur de Recaptcha, merci de réessayer.');
+            $flashBag->add('danger', 'Erreur de Recaptcha, merci de réessayer.');
 
             return $this->redirect($referer);
         }
@@ -71,7 +73,7 @@ class AuthController extends Controller
         $terms = $request->get('terms');
 
         if ($email === null || $password === null || $terms === null) {
-            $this->get('session')->getFlashBag()->add('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+            $flashBag->add('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
 
             return $this->redirect($referer);
         }
@@ -84,9 +86,14 @@ class AuthController extends Controller
             $apiKey = $userService->authenticate($email, $password);
             $this->get('session')->set(self::API_KEY, $apiKey);
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-            $this->get('session')->getFlashBag()->add('danger', 'Erreur de connection après la création du compte.');
+            $flashBag->add('danger', 'Erreur de connection après la création du compte.');
         } catch (UserAlreadyExists $e) {
-            $this->get('session')->getFlashBag()->add('warning', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+            $flashBag->add('warning', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+        }
+
+        // add a success message
+        if ($this->get('session')->get(self::API_KEY)) {
+            $flashBag->add('success', 'Votre compte a bien été créé.');
         }
 
         return $this->redirect($requestedUrl);
