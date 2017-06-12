@@ -1,7 +1,9 @@
 default:
     extensions:
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
-        Behat\Symfony2Extension: ~
+        Behat\Symfony2Extension:
+            kernel:
+                debug: false
         Behat\MinkExtension:
             default_session: symfony
             javascript_session: chrome
@@ -24,7 +26,7 @@ default:
         symfony:
             paths: [ '%paths.base%/tests/behat' ]
             contexts:
-                - \Behat\MinkExtension\Context\MinkContext
+                - \Tests\behat\contexts\SymfonyContext
                 - \Tests\behat\contexts\HomePageContext
             filters:
                 tags: '~@javascript'

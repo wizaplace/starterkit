@@ -1,0 +1,24 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/search/products?sorting%5Btimestamp%5D=desc&resultsPerPage=6&page=1&query='
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Mon, 12 Jun 2017 15:10:01 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: '198591'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/198591'
+            Content-Length: '2070'
+            Content-Type: application/json
+        body: '{"results":[{"productId":1,"name":"optio corporis similique voluptatum","slug":"test-product-slug","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1497253518,"updatedAt":1497253518,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/test-product-slug.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":2,"name":"Voluptas nostrum \u00e9a Consequatur","slug":"voluptas-nostrum-ea-consequatur","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1497253519,"updatedAt":1497253519,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}]},{"productId":3,"name":"Test Product Slug","slug":"test-product-slug-2","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1497253519,"updatedAt":1497253519,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/test-category-slug\/test-product-slug-2.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":5,"name":"Test Category Slug","slug":"test-category-slug"}]}],"pagination":{"page":1,"nbResults":3,"nbPages":1,"resultsPerPage":6},"facets":[{"name":"categories","label":"Cat\u00e9gorie","values":{"3":{"label":"Informatique","count":"1"},"4":{"label":"\u00c9crans","count":"1"},"5":{"label":"Test Category Slug","count":"1"}},"isNumeric":false},{"name":"company_type","label":"Type de vendeur","values":{"V":{"label":"Vendeur professionnel","count":"3"}},"isNumeric":false},{"name":1,"label":"color","values":{"2":{"label":"blue","count":0},"1":{"label":"red","count":0},"3":{"label":"test attribute variant slug","count":0}},"isNumeric":false}]}'
