@@ -51,6 +51,10 @@ profile_returns:
     defaults: { _controller: AppBundle:Profile:returns }
     methods: [GET]
 
+profile_messages:
+    path: /profil/messagerie
+    defaults: { _controller: AppBundle:Profile:view }
+    methods: [GET]
 
 # legacy
 # product
@@ -134,7 +138,6 @@ updateUser:
     path: /update-user
     defaults: { _controller: AppBundle:Profile:updateProfile }
     methods: [POST]
-
 
 category:
     path: /c/{slug}

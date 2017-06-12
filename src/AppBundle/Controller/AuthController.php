@@ -21,6 +21,8 @@ class AuthController extends Controller
 
     public function loginAction(Request $request): Response
     {
+        $flashBag = $this->get('session')->getFlashBag();
+
         // redirection url
         $requestedUrl = $request->get('redirect_url');
 
@@ -28,7 +30,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
-            $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+            $flashBag->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
 
             return $this->redirect($requestedUrl);
         }
@@ -42,7 +44,12 @@ class AuthController extends Controller
             $apiKey = $userService->authenticate($email, $password);
             $this->get('session')->set(self::API_KEY, $apiKey);
         } catch (BadCredentials $e) {
-            $this->get('session')->getFlashBag()->add('danger', 'Identifiants invalides, merci de réessayer.');
+            $flashBag->add('danger', 'Identifiants invalides, merci de réessayer.');
+        }
+
+        // add a success message
+        if ($this->get('session')->get(self::API_KEY)) {
+            $flashBag->add('success', 'Vous vous êtes connecté avec succès.');
         }
 
         return $this->redirect($requestedUrl);
