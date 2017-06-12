@@ -18,6 +18,32 @@
     }
 }
 
+.notifications {
+    position: fixed;
+    top: 5em;
+    left: 2em;
+
+    .alert {
+        position: relative;
+        height: auto;
+        width: auto;
+        z-index: @overlay + 2;
+        animation: display .5s;
+
+        @keyframes display {
+            from {
+                transform: translate(-100%, 0);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(2em, 0);
+                opacity: 1;
+            }
+        }
+    }
+}
+
 .slide-panel {
     position: fixed;
     left: -100vw;

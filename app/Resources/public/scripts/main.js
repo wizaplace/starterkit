@@ -48,11 +48,6 @@ $(function() {
     // Replace exceeding text with ellipsis (three dots)
     $('.ellipsis').dotdotdot();
 
-    // hide notifications after 3 seconds
-    setTimeout(function(){
-        $(".notifications .alert").hide();
-    }, 3000);
-
     // slick
     // =====
 
