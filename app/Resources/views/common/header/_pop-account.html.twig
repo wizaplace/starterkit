@@ -2,13 +2,18 @@
 
     {# user account links #}
     <div class="content">
-
+        <ul class="list-unstyled">
+            <li><a href="{{ path('profile') }}">Mon profil</a></li>
+            <li><a href="{{ path('profile') }}">Mes achats</a></li>
+            <li><a href="{{ path('profile') }}">Ma messagerie</a></li>
+            <li><a href="{{ path('profile') }}">Me déconnecter</a></li>
+        </ul>
     </div>
 
 {% else %}
 
     {# login form #}
-    <div class="content pop-content popunder-login" id="popunder-login">
+    <div class="content popunder-login" id="popunder-login">
         <p class="title">Me connecter</p>
         <form method="post" action="{{ path('login') }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token('login_token') }}">
@@ -40,7 +45,7 @@
     </div>
 
     {# register form #}
-    <div class="content pop-content popunder-register hidden" id="popunder-register">
+    <div class="content popunder-register hidden" id="popunder-register">
         <p class="title">Créer mon compte</p>
         <form method="post" action="{{ path('register') }}">
             <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
