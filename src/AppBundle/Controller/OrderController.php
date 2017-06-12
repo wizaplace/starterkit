@@ -16,18 +16,24 @@ use Wizaplace\User\ApiKey;
 
 class OrderController extends Controller
 {
-    public function getOrdersAction(OrderService $orderService): Response
+    private $orderService;
+    public function __construct(OrderService $orderService)
     {
-        $orders = $orderService->getOrders($this->getApiKey());
+        $this->orderService = $orderService;
+    }
+
+    public function getOrdersAction(): Response
+    {
+        $orders = $this->orderService->getOrders($this->getApiKey());
 
         return $this->render('profile/orders.html.twig', ['orders' => $orders]);
     }
 
-    public function getOrderAction($orderId, OrderService $orderService): Response
+    public function getOrderAction($orderId): Response
     {
         $orderId = (int) $orderId;
 
-        $order = $orderService->getOrder($orderId, $this->getApiKey());
+        $order = $this->orderService->getOrder($orderId, $this->getApiKey());
 
         return $this->render('profile/order.html.twig', ['order' => $order]);
     }

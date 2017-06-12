@@ -19,37 +19,43 @@ use Wizaplace\User\UserService;
 
 class ProfileController extends Controller
 {
-    public function viewAction(UserService $userService): Response
+    private $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    public function viewAction(): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $this->getApiKey();
-            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/profile.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function addressesAction(UserService $userService): Response
+    public function addressesAction(): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $this->getApiKey();
-            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/addresses.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function ordersAction(UserService $userService, OrderService $orderService): Response
+    public function ordersAction(OrderService $orderService): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $vendorId = $this->get('kernel')->getVendorId();
             $apiKey = $this->getApiKey();
-            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             $orders = $orderService->getOrders($apiKey);
             $orders = array_filter(
@@ -64,31 +70,31 @@ class ProfileController extends Controller
         throw new NotFoundHttpException();
     }
 
-    public function returnsAction(UserService $userService): Response
+    public function returnsAction(): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $this->getApiKey();
-            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/returns.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function savAction(UserService $userService): Response
+    public function savAction(): Response
     {
         $session = $this->get('session');
         if ($session->has(AuthController::API_KEY)) {
             $apiKey = $this->getApiKey();
-            $profile = $userService->getProfileFromId($apiKey->getId(), $apiKey);
+            $profile = $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
 
             return $this->render('profile/sav.html.twig', ['profile' => $profile]);
         }
         throw new NotFoundHttpException();
     }
 
-    public function updateProfileAction(Request $request, UserService $userService)
+    public function updateProfileAction(Request $request)
     {
         $data = $request->request->get('user');
         $sameAddress = $request->request->get('sameAddress');
@@ -107,24 +113,24 @@ class ProfileController extends Controller
         }
         $user = new User($data);
 
-        $userService->updateUser($user, $this->getApiKey());
-        $userService->updateUserAdresses($user, $this->getApiKey());
+        $this->userService->updateUser($user, $this->getApiKey());
+        $this->userService->updateUserAdresses($user, $this->getApiKey());
 
         $referer =  $request->headers->get('referer');
 
         return $this->redirect($referer);
     }
 
-    public function updateBillingAddressAction(Request $request, UserService $userService)
+    public function updateBillingAddressAction(Request $request)
     {
 
         $userId = $request->request->get('user[id]');
-        $user = $userService->getProfileFromId($userId, $this->getApiKey());
+        $user = $this->userService->getProfileFromId($userId, $this->getApiKey());
         $userData = $request->request->get('user');
     }
 
     private function getApiKey(): ApiKey
     {
-        return $this->get('session')->get(\AppBundle\Controller\AuthController::API_KEY);
+        return $this->get('session')->get(AuthController::API_KEY);
     }
 }
