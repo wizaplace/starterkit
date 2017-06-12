@@ -29,6 +29,7 @@ class AuthController extends Controller
 
         if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
             return $this->redirect($requestedUrl);
         }
 
@@ -60,6 +61,7 @@ class AuthController extends Controller
 
         if (! $recaptchaValidation->isSuccess()) {
             $this->get('session')->getFlashBag()->add('danger', 'Erreur de Recaptcha, merci de réessayer.');
+
             return $this->redirect($referer);
         }
 
@@ -70,6 +72,7 @@ class AuthController extends Controller
 
         if ($email === null || $password === null || $terms === null) {
             $this->get('session')->getFlashBag()->add('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+
             return $this->redirect($referer);
         }
 
@@ -99,6 +102,7 @@ class AuthController extends Controller
 
         if (! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
             return $this->redirect($referer);
         }
 
@@ -118,6 +122,7 @@ class AuthController extends Controller
 
         if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
             return $this->redirect($referer);
         }
 
