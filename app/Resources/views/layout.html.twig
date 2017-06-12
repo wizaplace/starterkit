@@ -28,7 +28,7 @@
 {# overlay, modal, notification, etc. #}
 {% include('common/components.html.twig') %}
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="{{ asset('scripts/app.js') }}"></script>
 
 {% block scripts %}{% endblock %}

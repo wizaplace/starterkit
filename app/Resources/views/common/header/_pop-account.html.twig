@@ -58,13 +58,20 @@
             {# terms #}
             <div class="form-group">
                 <label class="terms">
-                    <input type="checkbox" name="terms_approved" value="1" required>
+                    <input type="checkbox" name="terms" value="1" required>
                     <span>J'accepte les <a href="#">Conditions Générales d'Utilisation*</a></span>
                 </label>
             </div>
 
             {# invisible reCaptcha button #}
-            {% include 'common/recaptcha.html.twig' with { recaptchaId: "header" } %}
+            <button type="button" class="btn btn-primary trigger-recaptcha"
+                    id="g-recaptcha-header"
+                    data-sitekey="{{ recaptchaKey() }}"
+            >
+
+                <span>Valider</span>
+                <i class="fa fa-check"></i></button>
+            </button>
 
             <button type="submit" class="hidden"></button>
         </form>

@@ -51,6 +51,7 @@ class AuthController extends Controller
     {
         // redirection url
         $requestedUrl = $request->get('redirect_url');
+        $referer = $request->headers->get('referer');
 
         // recaptcha validation
         $recaptchaResponse = $request->request->get('g-recaptcha-response');
@@ -59,15 +60,21 @@ class AuthController extends Controller
 
         if (! $recaptchaValidation->isSuccess()) {
             $this->get('session')->getFlashBag()->add('danger', 'Erreur de Recaptcha, merci de réessayer.');
-            return $this->redirect($requestedUrl);
+            return $this->redirect($referer);
         }
 
-        var_dump($recaptchaValidation->isSuccess());die;
+        // form validation
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $terms = $request->get('terms');
+
+        if ($email === null || $password === null || $terms === null) {
+            $this->get('session')->getFlashBag()->add('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+            return $this->redirect($referer);
+        }
 
         // user registration and authentication
         $userService = $this->get(UserService::class);
-        $email = $request->request->get('email');
-        $password = $request->request->get('password');
 
         try {
             $userService->register($email, $password);
