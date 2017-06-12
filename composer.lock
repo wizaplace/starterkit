@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ee0db02af7539a499f38ace10193a74",
+    "content-hash": "7245c7335e8f955d61c086310001cc47",
     "packages": [
+        {
+            "name": "bmancone/guzzle-stopwatch-middleware",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hectorj/guzzle-stopwatch-middleware.git",
+                "reference": "a15c7a332845476f7b168774f93824cb5c4be072"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hectorj/guzzle-stopwatch-middleware/zipball/a15c7a332845476f7b168774f93824cb5c4be072",
+                "reference": "a15c7a332845476f7b168774f93824cb5c4be072",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5",
+                "symfony/stopwatch": "^2.3 || ^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Leadz\\GuzzleHttp\\Stopwatch\\": "src/",
+                    "Leadz\\GuzzleHttp\\Stopwatch\\Test\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brice Mancone",
+                    "email": "brice.mancone@gmail.com",
+                    "homepage": "https://github.com/bmancone"
+                }
+            ],
+            "description": "Stopwatch Middleware for Guzzle.",
+            "keywords": [
+                "guzzle",
+                "stopwatch",
+                "symfony",
+                "timeline"
+            ],
+            "support": {
+                "source": "https://github.com/hectorj/guzzle-stopwatch-middleware/tree/master"
+            },
+            "time": "2017-06-07 15:07:11"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.7",
@@ -1345,12 +1397,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607"
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ccffea64be8575eaa7ad09cd16dfeedfa4711607",
-                "reference": "ccffea64be8575eaa7ad09cd16dfeedfa4711607",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
+                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
                 "shasum": ""
             },
             "conflict": {
@@ -1392,6 +1444,7 @@
                 "magento/magento2ce": ">=2,<2.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "onelogin/php-saml": "<2.10.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
                 "phpmailer/phpmailer": ">=5,<5.2.22",
@@ -1472,7 +1525,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-05-13T14:02:28+00:00"
+            "time": "2017-06-07T12:12:03+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2140,16 +2193,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "fe3e3f3359b23b36f65cb600cd516142c07a2e7d"
+                "reference": "eab7c3288ae6603d7d6f92b531626af2b162d1f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/fe3e3f3359b23b36f65cb600cd516142c07a2e7d",
-                "reference": "fe3e3f3359b23b36f65cb600cd516142c07a2e7d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/eab7c3288ae6603d7d6f92b531626af2b162d1f2",
+                "reference": "eab7c3288ae6603d7d6f92b531626af2b162d1f2",
                 "shasum": ""
             },
             "require": {
@@ -2202,20 +2255,20 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-06-06T03:58:14+00:00"
+            "time": "2017-06-07T18:47:58+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:wizaplace/wizaplace-php-sdk.git",
-                "reference": "b8cebcea812ac25109ba509d62ddc597321c0ce3"
+                "reference": "d64ad3cb869d4f6f7c5f4efeb8b315536ed62dac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/b8cebcea812ac25109ba509d62ddc597321c0ce3",
-                "reference": "b8cebcea812ac25109ba509d62ddc597321c0ce3",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/d64ad3cb869d4f6f7c5f4efeb8b315536ed62dac",
+                "reference": "d64ad3cb869d4f6f7c5f4efeb8b315536ed62dac",
                 "shasum": ""
             },
             "require": {
@@ -2247,10 +2300,10 @@
             },
             "description": "Wizaplace's PHP SDK",
             "support": {
-                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/master",
+                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/0.1.2",
                 "issues": "https://github.com/wizaplace/wizaplace-php-sdk/issues"
             },
-            "time": "2017-06-05T10:08:02+00:00"
+            "time": "2017-06-08T13:01:02+00:00"
         }
     ],
     "packages-dev": [
@@ -2365,22 +2418,22 @@
         },
         {
             "name": "escapestudios/symfony2-coding-standard",
-            "version": "2.10.1",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/djoos/Symfony2-coding-standard.git",
-                "reference": "fdf8de2c4de016abb5ea6b6015f80c47f1f6301b"
+                "url": "https://github.com/djoos/Symfony-coding-standard.git",
+                "reference": "4aea10ad53d1952b2cfd8f7c9afe5e481dd574bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djoos/Symfony2-coding-standard/zipball/fdf8de2c4de016abb5ea6b6015f80c47f1f6301b",
-                "reference": "fdf8de2c4de016abb5ea6b6015f80c47f1f6301b",
+                "url": "https://api.github.com/repos/djoos/Symfony-coding-standard/zipball/4aea10ad53d1952b2cfd8f7c9afe5e481dd574bc",
+                "reference": "4aea10ad53d1952b2cfd8f7c9afe5e481dd574bc",
                 "shasum": ""
             },
             "require": {
                 "squizlabs/php_codesniffer": "~2.0"
             },
-            "type": "coding-standard",
+            "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.x-dev"
@@ -2408,7 +2461,7 @@
                 "phpcs",
                 "symfony"
             ],
-            "time": "2017-05-05T08:51:47+00:00"
+            "time": "2017-06-08T10:48:30+00:00"
         },
         {
             "name": "m6web/coke",
@@ -4726,7 +4779,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "bmancone/guzzle-stopwatch-middleware": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -55,11 +55,16 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    wizaplace.guzzle.handler:
+        factory: 'GuzzleHttp\HandlerStack::create'
+        class: 'GuzzleHttp\HandlerStack'
+
     wizaplace.http.client:
         class: GuzzleHttp\Client
         arguments:
             -
                 base_uri: '%api.base_url%'
+                handler: '@wizaplace.guzzle.handler'
     Wizaplace\Catalog\CatalogService:
         arguments: ['@wizaplace.http.client']
         public: true
