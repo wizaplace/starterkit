@@ -27,7 +27,7 @@ class AuthController extends Controller
         // CSRF token validation
         $submittedToken = $request->get('csrf_token');
 
-        if(! $this->isCsrfTokenValid('login_token', $submittedToken)) {
+        if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
             return $this->redirect($requestedUrl);
         }
@@ -97,7 +97,7 @@ class AuthController extends Controller
         // CSRF token validation
         $submittedToken = $request->get('csrf_token');
 
-        if(! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
+        if (! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
             return $this->redirect($referer);
         }
@@ -116,7 +116,7 @@ class AuthController extends Controller
         // CSRF token validation
         $submittedToken = $request->get('csrf_token');
 
-        if(! $this->isCsrfTokenValid('password_token', $submittedToken)) {
+        if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
             $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
             return $this->redirect($referer);
         }
