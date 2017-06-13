@@ -16,6 +16,15 @@ class WebServerContext extends MinkContext
     /**
      * @BeforeScenario
      */
+    public function setWindowSize()
+    {
+        // To be changed if we want to introduce tests for tablet/mobile devices
+        $this->getSession()->getDriver()->maximizeWindow();
+    }
+
+    /**
+     * @BeforeScenario
+     */
     public function setWebServerUrl(BeforeScenarioScope $scope)
     {
         $address = getenv('TEST_WEBSERVER_URL');

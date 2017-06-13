@@ -24,7 +24,7 @@ abstract class PageContext extends RawMinkContext
                 return $searchScope->find('css', $cssSelector);
             }, $timeoutInSeconds, $searchScope);
         } catch (Timeout $e) {
-            throw new Timeout("Waited $timeoutInSeconds second(s), but still no element found with selector '$cssSelector'", 0, $e);
+            throw new \Exception("No element found with selector '$cssSelector'", 0, $e);
         }
     }
 
