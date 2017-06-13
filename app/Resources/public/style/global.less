@@ -63,6 +63,69 @@ select {
     margin-bottom: .75em;
 }
 
+// icons
+// =====
+
+.icon-checkbox:before {
+    content: "\e900";
+}
+.icon-checkbox-checked:before {
+    content: "\e901";
+}
+.icon-radio:before {
+    content: "\e902";
+}
+.icon-radio-checked:before {
+    content: "\e903";
+}
+
+// checkboxes and radio inputs
+// ===========================
+
+label {
+    .input-label {
+        cursor: pointer;
+
+        // unchecked version
+        &::before {
+            font-family: @font-family-icon;
+            padding-right: .5em;
+            vertical-align: -13%; // optically better than 'middle'
+            font-size: 1.5em;
+            color: fade(@primary-color, 12%);
+            content: @icon-checkbox;
+            transition: all .3s ease;
+        }
+    }
+
+    [type="checkbox"], [type="radio"] {
+
+        // hide original checkable input
+        position: absolute;
+        left: 0;
+        height: 1px;
+        width: 1px;
+        opacity: 0;
+
+        // checked version
+        &:checked {
+
+            // change label and input color
+            & ~ .input-label,
+            & ~ .input-label:before {
+                color: @tertiary-color;
+            }
+
+            // change input icon
+            & ~ .input-label:before {
+                content: @icon-checkbox-checked;
+            }
+        }
+    }
+
+
+}
+
 // override Bootstrap defaults
 // ===========================
 
