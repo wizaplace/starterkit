@@ -17,7 +17,7 @@ abstract class PageContext extends RawMinkContext
     /**
      * Finds a DOM node by its CSS selector.
      */
-    protected function waitForFind(string $cssSelector, int $timeoutInSeconds = 1, ?NodeElement $searchScope = null): NodeElement
+    protected function waitForFind(string $cssSelector, int $timeoutInSeconds = 2, ?NodeElement $searchScope = null): NodeElement
     {
         try {
             return $this->waitForX(function (ElementInterface $searchScope) use ($cssSelector) : ?NodeElement {
@@ -28,7 +28,7 @@ abstract class PageContext extends RawMinkContext
         }
     }
 
-    private function waitForX(callable $getter, int $timeoutInSeconds = 1, ?NodeElement $scope = null)
+    private function waitForX(callable $getter, int $timeoutInSeconds = 2, ?NodeElement $scope = null)
     {
         if (is_null($scope)) {
             $scope = $this->getSession()->getPage();
