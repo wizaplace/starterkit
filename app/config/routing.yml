@@ -3,6 +3,58 @@ home:
     defaults: { _controller: AppBundle:Home:home }
     methods: [GET]
 
+# Search
+search:
+    path: /recherche
+    defaults: { _controller: AppBundle:Search:search }
+    methods: [GET]
+
+# Auth
+login:
+    path: /login
+    defaults: { _controller: AppBundle:Auth:Login }
+    methods: [POST]
+
+register:
+    path: /register
+    defaults: { _controller: AppBundle:Auth:Register }
+    methods: [POST]
+
+logout:
+    path: /logout
+    defaults: { _controller: AppBundle:Auth:Logout }
+    methods: [GET]
+
+reset_password:
+    path: /password
+    defaults: { _controller: AppBundle:Auth:resetPassword }
+    methods: [POST]
+
+# Profile
+profile:
+    path: /profil
+    defaults: { _controller: AppBundle:Profile:view }
+    methods: [GET]
+
+profile_addresses:
+    path: /profil/adresses
+    defaults: { _controller: AppBundle:Profile:addresses }
+    methods: [GET]
+
+profile_orders:
+    path: /profil/commandes
+    defaults: { _controller: AppBundle:Profile:orders }
+    methods: [GET]
+
+profile_returns:
+    path: /profil/retours
+    defaults: { _controller: AppBundle:Profile:returns }
+    methods: [GET]
+
+profile_messages:
+    path: /profil/messagerie
+    defaults: { _controller: AppBundle:Profile:view }
+    methods: [GET]
 
 # legacy
 # product
@@ -12,14 +64,6 @@ product:
     requirements:
         categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
-search:
-    path: /recherche
-    defaults: { _controller: AppBundle:Search:search }
-    methods: [GET]
-api_search_products:
-    path: /api/search
-    defaults: { _controller: AppBundle:Search:apiSearch }
-    methods: [GET]
 
 # basket and checkout
 basket:
@@ -90,45 +134,9 @@ create_return_form:
     defaults: { _controller: AppBundle:Order:displayCreateReturn }
     methods: [GET]
 
-# profile
-profile:
-    path: /profile
-    defaults: { _controller: AppBundle:Profile:view }
-    methods: [GET]
-profile_addresses:
-    path: /profil/adresses
-    defaults: { _controller: AppBundle:Profile:addresses }
-    methods: [GET]
-profile_orders:
-    path: /profil/commandes
-    defaults: { _controller: AppBundle:Profile:orders }
-    methods: [GET]
-profile_returns:
-    path: /profil/retours
-    defaults: { _controller: AppBundle:Profile:returns }
-    methods: [GET]
-
-login:
-    path: /login
-    defaults: { _controller: AppBundle:Auth:Login }
-    methods: [POST]
-register:
-    path: /register
-    defaults: { _controller: AppBundle:Auth:Register }
-    methods: [POST]
 updateUser:
     path: /update-user
     defaults: { _controller: AppBundle:Profile:updateProfile }
-    methods: [POST]
-
-logout:
-    path: /logout
-    defaults: { _controller: AppBundle:Auth:Logout }
-    methods: [GET]
-
-reset_password:
-    path: /password
-    defaults: { _controller: AppBundle:Auth:resetPassword }
     methods: [POST]
 
 category:

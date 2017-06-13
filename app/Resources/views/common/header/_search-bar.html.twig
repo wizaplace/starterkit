@@ -1,0 +1,76 @@
+{% set categories = categoryTree() %}
+
+<div id="search-bar" class="search-bar">
+    <div class="container">
+        <div class="wrapper">
+
+            <form action="{{ path('search') }}" method="get" class="search-bar-form" autocomplete="off">
+                <input type="hidden" name="categories" v-model="currentCategoryId">
+
+                {# query #}
+                <div class="query-input-group">
+
+                    {# query text input #}
+                    <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
+
+                    {# categoriy selector (display only root categories) #}
+                    <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
+                        <option class="default-option" value="" selected disabled>Toutes les catégories</option>
+
+                        {% for category in categories %}
+                            <option value="{{ category.category.id }}">{{ category.category.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    {# submit button #}
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                        <span class="hidden-xs">Rechercher</span>
+                    </button>
+                </div>
+
+                {# geolocation #}
+                <div class="geo-input-group">
+
+                    {# forward the geoloc to search page #}
+                    {#<input type="hidden" name="geo[lat]" v-model="geoFilter.lat">#}
+                    {#<input type="hidden" name="geo[lng]" v-model="geoFilter.lng">#}
+
+                    {# city, department #}
+                    <input type="text" name="geo[label]" {#v-model="geoFilter.label"#} class="form-control" placeholder="Ville, département...">
+
+                    {# submit button #}
+                    <button class="btn btn-primary" >
+                        {#<button type="button" class="btn btn-default" aria-label="{{ 'Localize'|trans }}" v-on:click="geolocateMe">#}
+                        <i class="fa fa-map-marker"></i>
+                        <span class="hidden-xs">Me localiser</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        new Vue({
+            el: '#search-bar',
+
+            data: {
+                currentCategory: '',
+                currentCategoryId: '',
+                currentCategoryName: '',
+                query: '',
+            },
+
+            methods: {
+                selectCategory: function() {
+                    var $selectedCategory = $(".category-picker option:selected");
+
+                    this.currentCategoryId = $selectedCategory.val();
+                    this.currentCategoryName = $selectedCategory.text();
+                },
+            }
+        });
+    });
+</script>

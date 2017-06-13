@@ -1,0 +1,79 @@
+// Fonts
+// =====
+
+@font-family-sans-serif: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif: Georgia, "Times New Roman", Times, serif;
+
+@font-path: "../fonts/";
+@font-family-icon: 'icomoon';
+@font-family-icon-lib: "FontAwesome";
+
+// actual icon content code (e.g. "\f067" for font-awesome plus icon).
+@closed-menu-icon: @fa-var-plus;
+@open-menu-icon: @fa-var-minus;
+
+// Colors
+// ======
+
+// general
+@primary-color: #607d8b;
+@secondary-color: #c7d6e0;
+@tertiary-color: #bc609a;
+
+@background-color-light: #fefefe;
+
+@color-dark: #333;
+@color-light: #efefef;
+
+@color-hover-dark: darken(saturate(@tertiary-color, 20%), 20%);
+@color-active-dark: darken(saturate(@tertiary-color, 50%), 10%);
+
+@color-hover-light: lighten(saturate(@tertiary-color, 20%), 20%);
+@color-active-light: lighten(saturate(@tertiary-color, 50%), 10%);
+
+// anchors (same as general by default)
+@anchor-color-dark: @color-dark;
+@anchor-color-light: @color-light;
+
+@anchor-color-hover-dark: @color-hover-dark;
+@anchor-color-active-dark: @color-active-dark;
+@anchor-color-visited-dark: @color-dark;
+
+@anchor-color-hover-light: @color-hover-light;
+@anchor-color-active-light: @color-active-light;
+@anchor-color-visited-light: @color-light;
+
+// buttons (same as general by default)
+@button-color-dark: @color-dark;
+@button-color-light: @color-light;
+
+@button-color-hover-dark: @color-hover-dark;
+@button-color-active-dark: @color-active-dark;
+
+@button-color-hover-light: @color-hover-light;
+@button-color-active-light: @color-active-light;
+
+// borders
+@border-color: lighten(@primary-color, 30%);
+@radius: 3px;
+
+// z-indexes
+// =========
+
+@overlay: 10;
+
+// logo
+@logo-width: 80px;
+
+// price slider
+@handle-color: #fff;
+@handle-color-active: #b542a4;
+@handle-border-width: 1px;
+@handle-border-color: #b542a4;
+@handle-height: 20px;
+@handle-width: 20px;
+@handle-border-radius: 100%; // 100% correspond to round handles
+
+@slider-height: 2px;
+@slider-background-color: #bbb;
+@slider-range-background-color: #b542a4;

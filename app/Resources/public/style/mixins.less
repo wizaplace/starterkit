@@ -1,0 +1,146 @@
+.popunder(@duration: .3s, @position: "center", @arrow: false) {
+
+    position: absolute;
+    z-index: 2;
+    padding-top: .8em; // distance from parent
+
+    @media screen and (max-width: @screen-md-max) {
+        padding-top: .6em;
+    }
+
+    & when (@position = "left") {
+        left: 0;
+        right: -200%;
+    }
+
+    & when (@position = "center") {
+        left: -100%;
+        right: -100%;
+    }
+
+    & when (@position = "right") {
+        left: -200%;
+        right: 0;
+    }
+
+    & > .content {
+        padding: 1em;
+
+        background-color: @background-color-light;
+        border-radius: 2px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .2);
+
+        // toggle animation
+        // ================
+        animation: displayed @duration ease-in-out;
+
+        @keyframes displayed {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        // top arrow
+        &::before {
+            font-family: FontAwesome;
+            content: '\f0d8'; // fa-caret-up
+            color: @background-color-light;
+            position: absolute;
+            font-size: 1.4em;
+            top: -.3em;
+
+            @media screen and (max-width: @screen-md-max) {
+                top: -.44em;
+            }
+
+            & when (@arrow = false) {
+                content: '';
+            }
+
+            & when (@position = "left") {
+                left: 10%;
+            }
+
+            & when (@position = "center") {
+                left: 47%;
+            }
+
+            & when (@position = "right") {
+                left: 85%;
+            }
+        }
+    }
+}
+
+.remove-border-radius {
+    .remove-border-radius-left();
+    .remove-border-radius-right();
+}
+
+.remove-border-radius-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.remove-border-radius-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.icon-left(@distance: .5em) {
+    & > i {
+        margin-right: @distance;
+    }
+}
+
+.icon-right(@distance: .5em) {
+    & > i {
+        margin-left: @distance;
+    }
+}
+
+.anchor-light {
+    cursor: pointer;
+    color: @anchor-color-light;
+
+    &:hover {
+        color: @anchor-color-hover-light;
+    }
+
+    &:visited {
+        color: @anchor-color-light;
+
+        &:hover {
+            color: @anchor-color-hover-light;
+        }
+    }
+
+    &:focus, &:active {
+        color: @anchor-color-active-light;
+    }
+}
+
+.anchor-dark {
+    cursor: pointer;
+    color: @anchor-color-dark;
+
+    &:hover {
+        color: @anchor-color-hover-dark;
+    }
+
+    &:visited {
+        color: @anchor-color-visited-dark;
+
+        &:hover {
+            color: @anchor-color-hover-dark;
+        }
+    }
+
+    &:focus, &:active {
+        color: @anchor-color-active-dark;
+    }
+}

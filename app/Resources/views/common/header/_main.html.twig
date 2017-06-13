@@ -1,0 +1,39 @@
+<nav class="main-menu">
+    <div class="container">
+        <div class="main-menu-wrapper">
+
+            {# Category menu #}
+            {# ============= #}
+
+            {# vertical nav (slider: small screens) #}
+            <div class="open-slide-panel"><i class="fa fa-bars"></i><span class="btn-label">Voir les catégories</span></div>
+            <div class="category-wrapper slide-panel">
+                <i class="close-slide-panel fa fa-close" aria-label="fermer"></i>
+                {% include ('common/header/_category-menu.html.twig') %}
+            </div>
+
+            {# horizontal nav (inline: large screens) #}
+            <div class="category-wrapper inline">
+                {% include ('common/header/_category-menu.html.twig') %}
+            </div>
+
+            {# Static links #}
+            <ul class="static-links list-inline">
+
+                <li class="static-link">
+                    <a href="#">
+                        <span>Nouveautés</span>
+                        <i class="fa fa-tags"></i>
+                    </a>
+                </li>
+
+                <li class="static-link">
+                    <a href="https://www.wizaplace.com">
+                        <span>Site externe</span>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -48,11 +48,6 @@ $(function() {
     // Replace exceeding text with ellipsis (three dots)
     $('.ellipsis').dotdotdot();
 
-    // hide notifications after 3 seconds
-    setTimeout(function(){
-        $(".notifications .alert").hide();
-    }, 3000);
-
     // slick
     // =====
 
@@ -106,4 +101,35 @@ $(function() {
         var i = $prev.index( this );
         slick.eq(i).slick("slickPrev");
     });
+
+
+    // notifications
+    // =============
+
+    let $alerts = $(".notifications .alert");
+
+    $alerts.addClass("in"); // animate in
+
+    // hide notification behaviour
+    $alerts.each(function() {
+        let $self = $(this);
+
+        setTimeout(function(){
+            removeAlert($self); // remove with time
+        }, 6000);
+
+        $(this).find('.close').on('click', function() {
+            removeAlert($self); // remove on click
+        });
+    });
+
+    // hide and remove alert
+    function removeAlert($alert) {
+        $alert.removeClass('in'); // animate out
+
+        // wait 1 second for the hiding animation to be done
+        setTimeout(function(){
+            $alert.remove(); // remove from DOM
+        }, 1000);
+    }
 });
