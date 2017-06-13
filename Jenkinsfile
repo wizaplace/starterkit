@@ -82,5 +82,21 @@ pipeline {
                 }
             }
         }
+        stage('check2') {
+            agent {
+                dockerfile {
+                    dir 'tests/behat/docker'
+                    args '-u 0:0'
+                }
+            }
+            steps {
+                sh '/entrypoint.sh'
+            }
+            post {
+                always {
+                    junit 'behat-result/*.xml'
+                }
+            }
+        }
     }
 }
