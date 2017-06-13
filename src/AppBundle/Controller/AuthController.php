@@ -21,8 +21,6 @@ class AuthController extends Controller
 
     public function loginAction(Request $request): Response
     {
-        $flashBag = $this->get('session')->getFlashBag();
-
         // redirection url
         $requestedUrl = $request->get('redirect_url');
 
@@ -30,7 +28,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
-            $flashBag->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
 
             return $this->redirect($requestedUrl);
         }
@@ -44,12 +42,12 @@ class AuthController extends Controller
             $apiKey = $userService->authenticate($email, $password);
             $this->get('session')->set(self::API_KEY, $apiKey);
         } catch (BadCredentials $e) {
-            $flashBag->add('danger', 'Identifiants invalides, merci de réessayer.');
+            $this->addFlash('danger', 'Identifiants invalides, merci de réessayer.');
         }
 
         // add a success message
         if ($this->get('session')->get(self::API_KEY)) {
-            $flashBag->add('success', 'Vous vous êtes connecté avec succès.');
+            $this->addFlash('success', 'Vous vous êtes connecté avec succès.');
         }
 
         return $this->redirect($requestedUrl);
@@ -57,8 +55,6 @@ class AuthController extends Controller
 
     public function registerAction(Request $request): Response
     {
-        $flashBag = $this->get('session')->getFlashBag();
-
         // redirection url
         $requestedUrl = $request->get('redirect_url');
         $referer = $request->headers->get('referer');
@@ -69,7 +65,7 @@ class AuthController extends Controller
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
         if (! $recaptchaValidation->isSuccess()) {
-            $flashBag->add('danger', 'Erreur de Recaptcha, merci de réessayer.');
+            $this->addFlash('danger', 'Erreur de Recaptcha, merci de réessayer.');
 
             return $this->redirect($referer);
         }
@@ -80,7 +76,7 @@ class AuthController extends Controller
         $terms = $request->get('terms');
 
         if ($email === null || $password === null || $terms === null) {
-            $flashBag->add('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+            $this->addFlash('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
 
             return $this->redirect($referer);
         }
@@ -93,14 +89,14 @@ class AuthController extends Controller
             $apiKey = $userService->authenticate($email, $password);
             $this->get('session')->set(self::API_KEY, $apiKey);
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-            $flashBag->add('danger', 'Erreur de connection après la création du compte.');
+            $this->addFlash('danger', 'Erreur de connection après la création du compte.');
         } catch (UserAlreadyExists $e) {
-            $flashBag->add('warning', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+            $this->addFlash('warning', 'Cette adresse email est déjà utilisée, merci de réessayer.');
         }
 
         // add a success message
         if ($this->get('session')->get(self::API_KEY)) {
-            $flashBag->add('success', 'Votre compte a bien été créé.');
+            $this->addFlash('success', 'Votre compte a bien été créé.');
         }
 
         return $this->redirect($requestedUrl);
@@ -115,7 +111,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
-            $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
 
             return $this->redirect($referer);
         }
@@ -135,7 +131,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $this->get('session')->getFlashBag()->add('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
 
             return $this->redirect($referer);
         }
