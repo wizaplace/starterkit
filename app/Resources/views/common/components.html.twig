@@ -1,3 +1,40 @@
+{# password reset (modal window) #}
+<div class="modal fade" tabindex="-1" role="dialog" id="password-reset-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            {# header #}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="title">Récupérer mon mot de passe</p>
+            </div>
+
+            {# body #}
+            <div class="modal-body">
+                <form method="post" action="{{ path('reset_password') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token('password_token') }}">
+
+                    <p>Veuillez renseigner votre adresse email&nbsp;:</p>
+
+                    {# email #}
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                    </div>
+
+                    {# action buttons #}
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Valider</span>
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {# display page wide overlay by adding class 'in' #}
 <div id="overlay"></div>
 

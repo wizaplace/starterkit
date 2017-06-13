@@ -97,3 +97,41 @@
         transition: opacity .4s ease .4s;
     }
 }
+
+.modal {
+    font-size: 1.4em;
+
+    @media screen and (max-width: @screen-md-max) {
+        font-size: 1.9em;
+    }
+
+    .title {
+        font-size: 1em;
+        line-height: 1.2em;
+    }
+
+    .modal-body {
+        p {
+            font-size: .7em;
+            margin-bottom: .5em;
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .btn {
+            font-size: .75em;
+
+            &:last-of-type {
+                margin-left: .75em;
+
+                @media screen and (max-width: 480px) {
+                    margin-left: .25em;
+                }
+            }
+        }
+    }
+}
