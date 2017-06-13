@@ -8,6 +8,7 @@ declare(strict_types = 1);
 
 namespace Tests\behat\contexts;
 
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\MinkExtension\Context\MinkContext;
 
@@ -19,7 +20,7 @@ class WebServerContext extends MinkContext
     public function setWindowSize()
     {
         // To be changed if we want to introduce tests for tablet/mobile devices
-        $this->getSession()->getDriver()->maximizeWindow();
+        $this->getSession()->getDriver()->resizeWindow(1366, 768);
     }
 
     /**
@@ -34,5 +35,19 @@ class WebServerContext extends MinkContext
         $this->setMinkParameter('base_url', $address);
 
         $this->getSession('chrome')->setRequestHeader('vcr-k7', "{$scope->getFeature()->getTitle()}/{$scope->getScenario()->getTitle()}.yml");
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function recordClues(AfterScenarioScope $scope)
+    {
+        if (!$scope->getTestResult()->isPassed()) {
+            $dirPath = __DIR__."/../../../var/screenshots/{$scope->getFeature()->getTitle()}";
+            if (!file_exists($dirPath)) {
+                mkdir($dirPath, 0777, true);
+            }
+            $this->saveScreenshot("{$scope->getScenario()->getTitle()}.png", $dirPath);
+        }
     }
 }
