@@ -12,7 +12,7 @@
 
     &.in {
         z-index: @overlay;
-        opacity: .7;
+        opacity: .5;
         transition: opacity .2s ease-in-out,
         z-index 0s ease;
     }
@@ -71,28 +71,18 @@
     }
 
     // close icon
-    & > i {
+    & > .close-slide-panel {
         position: fixed;
         right: 1.5em;
         top: 1em;
-        text-shadow: rgba(0,0,0,.3) 3px 3px 3px;
         opacity: 0;
-
-        cursor: pointer;
         font-size: 1.5em;
-        color: @color-light;
-
-        &:hover {
-            color: @anchor-color-hover-light;
-        }
-
-        &:active, &:focus {
-            color: @anchor-color-active-light;
-        }
+        .anchor-light();
+        text-shadow: rgba(0,0,0,.3) 3px 3px 3px;
     }
 
     // close icon transition
-    &.in > i {
+    &.in > .close-slide-panel {
         opacity: 1;
         transition: opacity .4s ease .4s;
     }
@@ -103,6 +93,13 @@
 
     @media screen and (max-width: @screen-md-max) {
         font-size: 1.9em;
+    }
+
+    .close-modal {
+        float: right;
+        font-size: .9em;
+        .anchor-dark();
+        color: fade(@color-dark, 75%);
     }
 
     .title {
