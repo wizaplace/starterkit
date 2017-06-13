@@ -14,15 +14,21 @@
 </head>
 <body>
 
-{{ include('common/header.html.twig') }}
-{{ include('common/header/nav-menu.html.twig') }}
-{{ include('common/header/nav-menu-mobile.html.twig') }}
-{{ include('common/header/notifications.html.twig') }}
+<header class="main-header">
+    {% block header %}
+        {% include('common/header/_top.html.twig') %}
+        {% include('common/header/_main.html.twig') %}
+    {% endblock %}
+</header>
 
 {% block body %}{% endblock %}
 
 {% block footer %}{% include('common/footer.html.twig') %}{% endblock %}
 
+{# overlay, modal, notification, etc. #}
+{% include('common/components.html.twig') %}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="{{ asset('scripts/app.js') }}"></script>
 
 {% block scripts %}{% endblock %}

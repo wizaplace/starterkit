@@ -1,0 +1,187 @@
+// branding and quick access links
+// ===========================
+
+.top-nav {
+    background-color: @primary-color;
+
+    .nav-wrapper {
+        padding: 1em 0;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media screen and (max-width: @screen-xs-max) {
+            flex-direction: column;
+        }
+
+        .branding {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .logo {
+                width: @logo-width;
+                margin-right: 2em;
+            }
+
+            .marketplace-name {
+                color: @color-light;
+                font-weight: bold;
+                font-size: 2em;
+
+                @media screen and (max-width: @screen-md-max) {
+                    font-size: 2.2em;
+                }
+            }
+
+            @media screen and (max-width: @screen-xs-max) {
+                margin-bottom: 1.5em;
+            }
+        }
+
+        .quick-access-links {
+            font-size: 1.2em;
+            position: relative;
+
+            @media screen and (max-width: @screen-md-max) {
+                font-size: 1.8em;
+            }
+
+            @media screen and (max-width: @screen-xs-max) {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .quick-access {
+
+                &:first-of-type {
+                    .wrapper {
+                        .popunder(.2s, "left", true);
+                    }
+                }
+
+                &:last-of-type {
+                    margin-left: 1em;
+
+                    .wrapper {
+                        .popunder(.2s, "right", true);
+                    }
+
+                    @media screen and (max-width: @screen-xs-max) {
+                        margin: 0;
+                    }
+                }
+
+                .quick-access-link {
+                    .icon-left(.2em);
+
+                    @media screen and (max-width: @screen-xs-max) {
+                        i {
+                            font-size: 3em;
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .wrapper {
+                    display: none; // starts off hidden
+                }
+
+                &:hover, &.in {
+
+                    .quick-access-link {
+                        color: @anchor-color-hover-light;
+
+                        &:active {
+                            color: @anchor-color-active-light;
+                        }
+                    }
+
+                    .wrapper {
+                        display: block; // shows popunder on hover
+                        left: 0;
+                        width: 100%;
+
+                        // even on hover state, doesn't show on small screens
+                        @media screen and (max-width: @screen-xs-max) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .content {
+
+                .btn {
+                    // add some space between text and icon
+                    .icon-right();
+
+                    font-size: .75em;
+
+                    // allow some room to isolate the following (switch) button
+                    &.btn-primary {
+                        margin-bottom: 1.5em;
+                    }
+                }
+
+                .terms {
+                    font-size: .7em;
+                    cursor: pointer;
+
+                    a {
+                        .anchor-dark();
+                        color: @tertiary-color;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                        &:visited {
+                            color: @tertiary-color;
+                        }
+                    }
+                }
+
+                .switch-popunder {
+                    font-size: .7em;
+                    width: 100%;
+                    margin-bottom: .6em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    i {
+                        font-size: .7em;
+                        margin-left: 2em;
+                    }
+                }
+            }
+
+            .popunder-login {
+                .forgotten-password {
+                    display: block;
+                    padding-top: .5em;
+                    text-align: right;
+                    .anchor-dark();
+                    font-size: .7em;
+                    color: fade(@color-dark, 70%);
+                    text-decoration: underline;
+                    font-style: italic;
+                }
+            }
+
+            .profile-links {
+                * {
+                    .anchor-dark();
+                }
+
+                .logout {
+                    width: 100%;
+
+                }
+            }
+        }
+    }
+}
