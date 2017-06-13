@@ -15,12 +15,12 @@ class HomePageContext extends PageContext
      */
     public function clickOnCategoryMenu(string $rootCategoryName, string $categoryName)
     {
-        $topSelector = "#categories-menu > li > a:contains('$rootCategoryName')";
-        $categoryMenu = $this->find($topSelector);
-        $categoryMenu->click();
+        $topSelector = ".category-wrapper.inline a.category-name:contains('$rootCategoryName')";
+        $categoryMenu = $this->waitForFind($topSelector);
+        $categoryMenu->mouseOver();
 
-        $subSelector = $topSelector." + .dropdown-menu a:contains('$categoryName')";
-        $categoryItem = $this->find($subSelector);
+        $subSelector = ":not(.category-sub-menu) .category-sub-menu a.category-name:contains('$categoryName')";
+        $categoryItem = $this->waitForFind($subSelector);
         $categoryItem->click();
     }
 }

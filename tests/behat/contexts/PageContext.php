@@ -16,19 +16,32 @@ abstract class PageContext extends RawMinkContext
 {
     /**
      * Finds a DOM node by its CSS selector.
-     * @TODO: put it in some trait or abstract context
      */
-    protected function find(string $cssSelector, int $timeoutInSeconds = 1): NodeElement
+    protected function waitForFind(string $cssSelector, int $timeoutInSeconds = 1, ?NodeElement $searchScope = null): NodeElement
     {
-        $element = $this->getSession()->getPage()
-            ->waitFor($timeoutInSeconds, function (ElementInterface $page) use ($cssSelector) {
-                return $page->find('css', $cssSelector);
-            });
+        try {
+            return $this->waitForX(function (ElementInterface $searchScope) use ($cssSelector) : ?NodeElement {
+                return $searchScope->find('css', $cssSelector);
+            }, $timeoutInSeconds, $searchScope);
+        } catch (Timeout $e) {
+            throw new Timeout("Waited $timeoutInSeconds second(s), but still no element found with selector '$cssSelector'", 0, $e);
+        }
+    }
 
-        if (is_null($element)) {
-            throw new \Exception("Element '$cssSelector' not found in page, even after waiting $timeoutInSeconds second(s)'");
+    private function waitForX(callable $getter, int $timeoutInSeconds = 1, ?NodeElement $scope = null)
+    {
+        if (is_null($scope)) {
+            $scope = $this->getSession()->getPage();
         }
 
-        return $element;
+        $result = $scope->waitFor($timeoutInSeconds, function (ElementInterface $scope) use ($getter) {
+            return $getter($scope);
+        });
+
+        if (!$result) {
+            throw new Timeout("Waited $timeoutInSeconds second(s), but still no result");
+        }
+
+        return $result;
     }
 }
