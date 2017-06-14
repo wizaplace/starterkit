@@ -7,8 +7,8 @@ imports:
 parameters:
     locale: fr
     slug.regexp: !php/const:Wizaplace\Seo\SeoService::SLUG_REGEXP
-    recaptcha.key: '6LchwhsUAAAAAJayf-K5o9QIxSeoCUyj-YOAuXMg'
-    recaptcha.secret: '6LchwhsUAAAAAEdoqK8pURlMIunZAgxXN-6lOkqA'
+    recaptcha.key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+    recaptcha.secret: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 framework:
     translator:      { fallbacks: ["%locale%"] }
