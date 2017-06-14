@@ -177,13 +177,17 @@
             }
 
             .profile-links {
-                * {
-                    .anchor-dark();
+                > *:not(:last-child) {
+                    margin-bottom: .5em;
+
+                    > * {
+                        .anchor-dark();
+                    }
                 }
 
                 .logout {
                     width: 100%;
-
+                    color: @color-dark;
                 }
             }
         }
