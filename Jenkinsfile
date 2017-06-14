@@ -85,7 +85,7 @@ pipeline {
                 }
             }
         }
-        stage('check2') {
+        stage('behat') {
             agent {
                 dockerfile {
                     dir 'tests/behat/docker'
