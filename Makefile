@@ -38,12 +38,20 @@ stan:
 stan-ci:
 	./vendor/bin/phpstan --no-interaction analyse -l 4 src tests
 
-test:
+test: test-phpunit test-behat
+
+test-phpunit:
 	./vendor/bin/phpunit --configuration ./phpunit.xml
 
-test-ci:
+test-phpunit-ci:
 	chmod -R 777 ./var/logs
 	php -dxdebug.coverage_enable=1 ./vendor/bin/phpunit --configuration ./phpunit.xml --log-junit ./phpunit-result.xml --coverage-clover ./clover.xml
+
+test-behat:
+	php -d opcache.enable=0 vendor/bin/behat --config behat.yml
+
+test-behat-ci:
+	php -d opcache.enable=0 vendor/bin/behat --config behat.yml --format=pretty --out=std --format=junit --out=behat-result
 
 npm-install:
 	npm install
@@ -54,4 +62,4 @@ assets:
 dev-from-scratch:
 	vagrant destroy -f && vagrant up
 
-.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-ci dev-from-scratch
+.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-phpunit test-phpunit-ci test-behat test-behat-ci dev-from-scratch

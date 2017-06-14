@@ -32,3 +32,5 @@ Vagrantfile.local
 # CI artifacts
 coke-*.xml
 phpunit-result.xml
+behat-result
+*pid

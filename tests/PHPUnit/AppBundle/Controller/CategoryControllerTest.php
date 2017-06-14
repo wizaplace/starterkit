@@ -6,9 +6,9 @@
  */
 declare(strict_types = 1);
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\PHPUnit\AppBundle\Controller;
 
-use Tests\VcrWebTestCase;
+use Tests\PHPUnit\VcrWebTestCase;
 
 class CategoryControllerTest extends VcrWebTestCase
 {
