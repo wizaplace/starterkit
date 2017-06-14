@@ -16,12 +16,9 @@ ul {
 a {
     text-decoration: none;
     .anchor-dark();
-}
 
-.main-header {
-    a {
+    &:hover {
         text-decoration: none;
-        .anchor-light();
     }
 }
 
@@ -97,6 +94,23 @@ select {
 // add this class to a radio enclosing label
 .radio {
     .checkable(@icon-radio, @icon-radio-checked);
+}
+
+// use mixins defaults in templates
+// ================================
+
+.has-left-icon {
+    .has-left-icon();
+}
+.has-right-icon {
+    .has-right-icon();
+}
+
+.anchor-dark {
+    .anchor-dark();
+}
+.anchor-light {
+    .anchor-light();
 }
 
 

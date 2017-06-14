@@ -1,3 +1,53 @@
+{% set userBasket = basket() %}
+
+{# show user basket if not empty #}
+{% if userBasket %}
     <div class="content">
-        Panier Vide
+
+        {# basket items groupped by vendor companies #}
+        {% for company in userBasket.companyGroups %}
+
+            {# basket items groupped by shipping #}
+            {% for shipping in company.shippingGroups %}
+
+                {% for item in shipping.items %}
+
+                    <article class="product" data-id="{{ item.declinationId }}">
+                        {# flags #}
+                        <div class="flags">
+                            <div class="promo">Promotion</div>
+                            <div class="new">Nouveauté</div>
+                        </div>
+
+                        {# main image #}
+                        <div class="image">
+                            {% if item.mainImage %}
+
+                                <img src="{{ item.mainImage|imageUrl(100) }}" alt="{{ item.productName }}">
+
+                            {% else %}
+
+                                <div class="no-image">Pas d'image</div>
+
+                            {% endif %}
+                        </div>
+
+                        {# product details #}
+                        <div class="name">{{ item.productName }}</div>
+                        <div class="price">{{ item.individualPrice }}</div>
+
+                        <a class="remove-from-basket has-right-icon anchor-dark"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                    </article>
+
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
     </div>
+
+{# empty basket #}
+{% else %}
+
+    <div class="content">
+        Votre panier est vide
+    </div>
+{% endif %}
