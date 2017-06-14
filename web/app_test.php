@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use VCR\VCR;
 
@@ -10,6 +11,8 @@ use VCR\VCR;
 
 /** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../vendor/autoload.php';
+
+Debug::enable();
 
 $kernel = new AppKernel('test', true);
 $request = Request::createFromGlobals();
@@ -33,6 +36,11 @@ if ($request->headers->has('vcr-k7')) {
 
     VCR::turnOn();
     VCR::insertCassette($request->headers->get('vcr-k7'));
+
+    // Clear the local cache
+    // @TODO: parametrize, so we can test some cases with cache
+    $kernel->boot();
+    $kernel->getContainer()->get('cache.app')->clear();
 }
 
 $response = $kernel->handle($request);

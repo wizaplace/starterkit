@@ -1,9 +1,7 @@
 default:
     extensions:
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
-        Behat\Symfony2Extension:
-            kernel:
-                debug: false
+        Behat\Symfony2Extension: ~
         Behat\MinkExtension:
             default_session: symfony
             javascript_session: chrome
