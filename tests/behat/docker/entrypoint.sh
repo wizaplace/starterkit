@@ -8,4 +8,4 @@ bin/console --env=test server:start 127.0.0.1:8080
 
 export TEST_WEBSERVER_URL="http://127.0.0.1:8080/app_test.php/"
 
-php -d opcache.enable=0 vendor/bin/behat --config behat.yml --format=pretty --out=std --format=junit --out=behat-result
+make test-behat-ci

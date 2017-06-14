@@ -47,7 +47,7 @@ pipeline {
                         sh 'make stan-ci'
                     },
                     'test': {
-                        sh 'make test-ci'
+                        sh 'make test-phpunit-ci'
                     }
                 )
             }
