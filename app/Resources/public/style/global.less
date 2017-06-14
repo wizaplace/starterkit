@@ -63,6 +63,44 @@ select {
     margin-bottom: .75em;
 }
 
+// icons
+// =====
+
+.icon-checkbox:before {
+    content: @icon-checkbox;
+}
+.icon-checkbox-checked:before {
+    content: @icon-checkbox-checked;
+}
+.icon-radio:before {
+    content: @icon-radio-checked;
+}
+.icon-radio-checked:before {
+    content: @icon-radio-checked;
+}
+
+// checkboxes and radio inputs
+// ===========================
+
+/**
+ * Usage example:
+ * <label class="checkbox">
+ *     <input type="checkbox">
+ *     <span class="input-label">I agree to check that box</span>
+ * </label>
+ */
+
+// add this class to a checkbox enclosing label
+.checkbox {
+    .checkable(@icon-checkbox, @icon-checkbox-checked);
+}
+
+// add this class to a radio enclosing label
+.radio {
+    .checkable(@icon-radio, @icon-radio-checked);
+}
+
+
 // override Bootstrap defaults
 // ===========================
 
