@@ -180,8 +180,13 @@
                 > *:not(:last-child) {
                     margin-bottom: .5em;
 
+                    &:nth-last-child(2) {
+                        margin-bottom: .75em;
+                    }
+
                     > * {
                         .anchor-dark();
+                        .icon-left();
                     }
                 }
 

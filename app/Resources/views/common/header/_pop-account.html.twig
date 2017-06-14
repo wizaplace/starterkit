@@ -3,9 +3,9 @@
     {# user account links #}
     <div class="content">
         <ul class="list-unstyled profile-links">
-            <li><a href="{{ path('profile') }}">Mon profil</a></li>
-            <li><a href="{{ path('profile_orders') }}">Mes achats</a></li>
-            <li><a href="{{ path('profile_messages') }}">Ma messagerie</a></li>
+            <li><a href="{{ path('profile') }}"><i class="fa fa-user-circle-o"></i>Mon profil</a></li>
+            <li><a href="{{ path('profile_orders') }}"><i class="fa fa-shopping-basket"></i>Mes achats</a></li>
+            <li><a href="{{ path('profile_messages') }}"><i class="fa fa-envelope-open-o"></i>Ma messagerie</a></li>
             <li><a href="{{ path('logout', { 'csrf_token': csrf_token('logout_token') }) }}" class="btn btn-default logout">Me déconnecter<i class="fa fa-times"></i></a></li>
         </ul>
     </div>
