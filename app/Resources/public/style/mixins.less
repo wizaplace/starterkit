@@ -103,20 +103,65 @@
     }
 }
 
+.underlined() {
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:visited {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &:focus, &:active {
+        text-decoration: underline;
+    }
+}
+
+.not-underlined() {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:visited {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &:focus, &:active {
+        text-decoration: none;
+    }
+}
+
 .anchor(@color-variant: "dark", @state-option: true) {
     cursor: pointer;
 
-    @color: "anchor-color-@{color-variant}";
-    @color-hover: "anchor-color-hover-@{color-variant}";
-    @color-active: "anchor-color-active-@{color-variant}";
-    @color-visited: "anchor-color-visited-@{color-variant}";
-
-    & when(@state-option) {
+    .state-option() when (@state-option = false) {
         @color: "color-@{color-variant}";
         @color-hover: "color-@{color-variant}";
         @color-active: "color-@{color-variant}";
         @color-visited: "color-@{color-variant}";
     }
+
+    .state-option() when (@state-option = true) {
+        @color: "anchor-color-@{color-variant}";
+        @color-hover: "anchor-color-hover-@{color-variant}";
+        @color-active: "anchor-color-active-@{color-variant}";
+        @color-visited: "anchor-color-visited-@{color-variant}";
+    }
+
+    // assign variable names
+    .state-option();
 
     color: @@color;
 
@@ -125,10 +170,17 @@
     }
 
     &:visited {
+        text-decoration: none;
         color: @@color-visited;
+
+        &:hover {
+            text-decoration: none;
+            color: @@color-hover;
+        }
     }
 
     &:focus, &:active {
+        text-decoration: none;
         color: @@color-active;
     }
 }

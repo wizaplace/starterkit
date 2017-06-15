@@ -44,8 +44,19 @@
         {% endfor %}
 
         <ul class="actions list-unstyled">
-            <li class="show-basket"><a href="#" class="btn btn-default">Voir mon panier</a></li>
-            <li class="order"><a href="#" class="btn btn-primary">Passer la commande</a></li>
+            <li class="show-basket">
+                <a href="{{ path('basket') }}" class="btn btn-default">
+                    <span>Voir mon panier</span>
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+            </li>
+
+            <li class="order">
+                <a href="{{ path('checkout_login') }}" class="btn btn-primary">
+                    <span>Passer la commande</span>
+                    <i class="fa fa-check"></i>
+                </a>
+            </li>
         </ul>
     </div>
 

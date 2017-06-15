@@ -56,6 +56,22 @@ profile_messages:
     defaults: { _controller: AppBundle:Profile:view }
     methods: [GET]
 
+# basket and checkout
+basket:
+    path: /panier
+    defaults: { _controller: AppBundle:Basket:basket }
+    methods: [GET]
+
+checkout_login:
+    path: /commande/connexion
+    defaults: { _controller: AppBundle:Checkout:login }
+    methods: [GET]
+
+checkout_addresses:
+    path: /commande/adresses
+    defaults: { _controller: AppBundle:Checkout:addresses }
+    methods: [GET]
+
 # legacy
 # product
 product:
@@ -65,19 +81,6 @@ product:
         categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
 
-# basket and checkout
-basket:
-    path: /basket
-    defaults: { _controller: AppBundle:Basket:basket }
-    methods: [GET]
-checkout_login:
-    path: /checkout/login
-    defaults: { _controller: AppBundle:Checkout:login }
-    methods: [GET]
-checkout_addresses:
-    path: /checkout/addresses
-    defaults: { _controller: AppBundle:Checkout:addresses }
-    methods: [GET]
 checkout_payment:
     path: /checkout/paiement
     defaults: { _controller: AppBundle:Checkout:payment }

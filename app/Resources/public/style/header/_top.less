@@ -160,8 +160,7 @@
                     align-items: center;
 
                     i {
-                        font-size: .7em;
-                        margin-left: 2em;
+                        font-size: .8em;
                     }
                 }
             }
@@ -172,9 +171,9 @@
                     padding-top: .5em;
                     text-align: right;
                     .anchor("dark");
+                    .underlined();
                     font-size: .7em;
                     color: @color-faded-dark;
-                    text-decoration: underline;
                     font-style: italic;
                 }
 
@@ -202,6 +201,7 @@
             .popunder-basket {
                 .product {
                     font-size: .8em;
+                    margin-bottom: 1em;
                 }
 
                 .remove-from-basket {
@@ -210,7 +210,13 @@
                 }
 
                 .actions {
+                    > :first-child {
+                        margin-bottom: 1em;
+                    }
 
+                    .btn {
+                        width: 100%;
+                    }
                 }
             }
         }

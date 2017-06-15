@@ -22,16 +22,14 @@ select {
     font-weight: bold;
 }
 
+
 // buttons and anchors
 // ===================
 
 a {
     text-decoration: none;
-    .anchor("dark");
-
-    &:hover {
-        text-decoration: none;
-    }
+    .anchor("dark", true);
+    .not-underlined();
 
     &.btn-default {
         .anchor("dark", false);
@@ -125,10 +123,10 @@ a {
 }
 
 .anchor-dark {
-    .anchor("dark");
+    .anchor("dark", true);
 }
 .anchor-light {
-    .anchor("light");
+    .anchor("light", true);
 }
 .anchor-neutral-dark {
     .anchor("dark", false);
