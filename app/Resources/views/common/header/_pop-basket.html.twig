@@ -2,7 +2,7 @@
 
 {# show user basket if not empty #}
 {% if userBasket %}
-    <div class="content">
+    <div class="content popunder-basket">
 
         {# basket items groupped by vendor companies #}
         {% for company in userBasket.companyGroups %}
@@ -36,12 +36,17 @@
                         <div class="name">{{ item.productName }}</div>
                         <div class="price">{{ item.individualPrice }}</div>
 
-                        <a class="remove-from-basket has-right-icon anchor-dark"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                        <a class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
                     </article>
 
                 {% endfor %}
             {% endfor %}
         {% endfor %}
+
+        <ul class="actions list-unstyled">
+            <li class="show-basket"><a href="#" class="btn btn-default">Voir mon panier</a></li>
+            <li class="order"><a href="#" class="btn btn-primary">Passer la commande</a></li>
+        </ul>
     </div>
 
 {# empty basket #}

@@ -13,12 +13,32 @@ ul {
     }
 }
 
+select {
+    cursor: pointer;
+}
+
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+// buttons and anchors
+// ===================
+
 a {
     text-decoration: none;
-    .anchor-dark();
+    .anchor("dark");
 
     &:hover {
         text-decoration: none;
+    }
+
+    &.btn-default {
+        .anchor("dark", false);
+    }
+
+    &.btn-primary {
+        .anchor("light", false);
     }
 }
 
@@ -37,6 +57,10 @@ a {
     }
 }
 
+
+// placeholders
+// ============
+
 ::-webkit-input-placeholder {
     font-style: italic;
 }
@@ -50,14 +74,6 @@ a {
     font-style: italic;
 }
 
-select {
-    cursor: pointer;
-}
-
-.title {
-    font-size: 1.2em;
-    font-weight: bold;
-}
 
 // icons
 // =====
@@ -74,6 +90,7 @@ select {
 .icon-radio-checked:before {
     content: @icon-radio-checked;
 }
+
 
 // checkboxes and radio inputs
 // ===========================
@@ -96,6 +113,7 @@ select {
     .checkable(@icon-radio, @icon-radio-checked);
 }
 
+
 // use mixins defaults in templates
 // ================================
 
@@ -107,10 +125,24 @@ select {
 }
 
 .anchor-dark {
-    .anchor-dark();
+    .anchor("dark");
 }
 .anchor-light {
-    .anchor-light();
+    .anchor("light");
+}
+.anchor-neutral-dark {
+    .anchor("dark", false);
+}
+.anchor-neutral-light {
+    .anchor("light", false);
+}
+
+.faded-dark {
+    color: @color-faded-dark;
+}
+
+.faded-light {
+    color: @color-faded-light;
 }
 
 

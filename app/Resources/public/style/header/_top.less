@@ -124,8 +124,7 @@
 
                     font-size: .75em;
 
-                    // allow some room to isolate the following (switch) button
-                    &.btn-primary {
+                    &.validate {
                         margin-bottom: 1.5em;
                     }
                 }
@@ -135,7 +134,7 @@
                     cursor: pointer;
 
                     a {
-                        .anchor-dark();
+                        .anchor("dark");
                         color: @tertiary-color;
 
                         &:hover {
@@ -144,6 +143,10 @@
 
                         &:visited {
                             color: @tertiary-color;
+
+                            &:hover {
+                                color: @tertiary-color;
+                            }
                         }
                     }
                 }
@@ -168,31 +171,46 @@
                     display: block;
                     padding-top: .5em;
                     text-align: right;
-                    .anchor-dark();
+                    .anchor("dark");
                     font-size: .7em;
-                    color: fade(@color-dark, 70%);
+                    color: @color-faded-dark;
                     text-decoration: underline;
                     font-style: italic;
                 }
-            }
 
-            .profile-links {
-                > *:not(:last-child) {
-                    margin-bottom: .5em;
+                .profile-links {
+                    > *:not(:last-child) {
+                        margin-bottom: .5em;
 
-                    &:nth-last-child(2) {
-                        margin-bottom: .75em;
+                        &:nth-last-child(2) {
+                            margin-bottom: .75em;
+                        }
+
+                        > * {
+                            .anchor("dark");
+                            .has-left-icon();
+                        }
                     }
 
-                    > * {
-                        .anchor-dark();
-                        .has-left-icon();
+                    .logout {
+                        width: 100%;
+                        color: @color-dark;
                     }
                 }
+            }
 
-                .logout {
-                    width: 100%;
-                    color: @color-dark;
+            .popunder-basket {
+                .product {
+                    font-size: .8em;
+                }
+
+                .remove-from-basket {
+                    .anchor("dark");
+                    color: @color-faded-dark;
+                }
+
+                .actions {
+
                 }
             }
         }
