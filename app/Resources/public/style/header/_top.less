@@ -201,17 +201,46 @@
             .popunder-basket {
                 .product {
                     font-size: .8em;
+                    display: flex;
+                    padding-bottom: .75em;
+                    border-bottom: 1px solid @color-medium;
                     margin-bottom: 1em;
-                }
 
-                .remove-from-basket {
-                    .anchor("dark");
-                    color: @color-faded-dark;
+                    &:last-of-type {
+                        border-bottom: 0;
+                    }
+
+                    .image-block {
+                        flex: 0 0 100px;
+                        height: auto;
+                        margin-right: .5em;
+
+                        .flags {
+                            position: absolute;
+                            z-index: 2;
+                        }
+
+                        .image {
+                            background-color: grey;
+                            max-width: 100px;
+                        }
+                    }
+
+                    .text-block {
+                        display: flex;
+                        flex-direction: column;
+
+                        .remove-from-basket {
+                            .anchor("dark");
+                            color: @color-faded-dark;
+                            align-self: flex-end;
+                        }
+                    }
                 }
 
                 .actions {
                     > :first-child {
-                        margin-bottom: 1em;
+                        margin-bottom: .75em;
                     }
 
                     .btn {

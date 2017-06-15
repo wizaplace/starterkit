@@ -13,30 +13,35 @@
                 {% for item in shipping.items %}
 
                     <article class="product" data-id="{{ item.declinationId }}">
-                        {# flags #}
-                        <div class="flags">
-                            <div class="promo">Promotion</div>
-                            <div class="new">Nouveauté</div>
-                        </div>
+                        <div class="image-block">
+                            {# flags #}
+                            <div class="flags">
+                                <div class="promo">Promotion</div>
+                                <div class="new">Nouveauté</div>
+                            </div>
 
-                        {# main image #}
-                        <div class="image">
-                            {% if item.mainImage %}
+                            {# main image #}
+                            <div class="image">
+                                {% if item.mainImage %}
 
-                                <img src="{{ item.mainImage|imageUrl(100) }}" alt="{{ item.productName }}">
+                                    <img src="{{ item.mainImage.id|imageUrl(100) }}" alt="{{ item.productName }}">
 
-                            {% else %}
+                                {% else %}
 
-                                <div class="no-image">Pas d'image</div>
+                                    <div class="no-image">Pas d'image</div>
 
-                            {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
 
                         {# product details #}
-                        <div class="name">{{ item.productName }}</div>
-                        <div class="price">{{ item.individualPrice }}</div>
+                        <div class="text-block">
+                            <div class="name">{{ item.productName }}</div>
+                            <div class="price">{{ item.individualPrice }}</div>
 
-                        <a class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                            {# remove product from basket #}
+                            <a class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                        </div>
                     </article>
 
                 {% endfor %}
