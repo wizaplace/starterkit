@@ -3,7 +3,7 @@
 <div class="title hidden-md hidden-lg">Catégories</div>
 
 <ul class="category-menu">
-    {% for category in categories %}
+    {% for category in categories|slice(0,8) %} {# remove slice filter if you want to display all categories #}
 
         <li class="category">
 
