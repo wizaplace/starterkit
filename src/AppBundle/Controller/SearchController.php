@@ -8,16 +8,17 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
-    public function searchAction(): Response
+    public function searchAction(Request $request): Response
     {
-        $apiBaseUrl = $this->getParameter("api.base_url");
+        $selectedCategoryId = $request->get("selected_category_id");
 
         return $this->render('search/search.html.twig', [
-            'apiBaseUrl' => $apiBaseUrl,
+            'selectedCategoryId' => $selectedCategoryId,
         ]);
     }
 }
