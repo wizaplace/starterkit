@@ -46,7 +46,11 @@ $(function() {
     W.renderRatings();
 
     // Replace exceeding text with ellipsis (three dots)
-    $('.ellipsis').dotdotdot();
+    function ellipsis() {
+        $('.ellipsis').dotdotdot();
+    }
+    ellipsis(); // execute on page load
+
 
     // slick
     // =====
