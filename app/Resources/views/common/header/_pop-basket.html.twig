@@ -12,19 +12,16 @@
 
                 {% for item in shipping.items %}
 
-                    <article class="product" data-id="{{ item.declinationId }}">
+                    {{ dump(item) }}
+
+                    <article class="product" data-id="{{ item.declinationId }} data-quantity="{{ item.quantity }}">
                         <div class="image-block">
-                            {# flags #}
-                            <div class="flags">
-                                <div class="promo">Promotion</div>
-                                <div class="new">Nouveauté</div>
-                            </div>
 
                             {# main image #}
                             <div class="image">
                                 {% if item.mainImage %}
 
-                                    <img src="{{ item.mainImage.id|imageUrl(100) }}" alt="{{ item.productName }}">
+                                    <img src="{{ item.mainImage.id|imageUrl(60) }}" alt="{{ item.productName }}" style="width: 60px;">
 
                                 {% else %}
 
@@ -34,19 +31,31 @@
                             </div>
                         </div>
 
-                        {# product details #}
                         <div class="text-block">
-                            <div class="name">{{ item.productName }}</div>
-                            <div class="price">{{ item.individualPrice }}</div>
+                            {# product details #}
+                            <div class="name ellipsis">{{ item.productName }}</div>
+
+                            {# price #}
+                            <div class="price-block">
+                                {% if item.crossedOutPrice|default %}
+                                    <div class="old-price">{{ item.crossedOutPrice|price }}&nbsp;TTC</div>
+                                {% endif %}
+                                <div class="price">{{ item.individualPrice|price }}&nbsp;TTC</div>
+                            </div>
 
                             {# remove product from basket #}
-                            <a class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                            <a href="#" class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
                         </div>
                     </article>
 
                 {% endfor %}
             {% endfor %}
         {% endfor %}
+
+        <div class="total">
+            <span class="total-label">TOTAL</span>
+            <span class="total-amount">{{ userBasket.total|price }}<span class="tax-detail">&nbsp;TTC</span> </span>
+        </div>
 
         <ul class="actions list-unstyled">
             <li class="show-basket">
@@ -67,7 +76,6 @@
 
 {# empty basket #}
 {% else %}
-
     <div class="content">
         Votre panier est vide
     </div>

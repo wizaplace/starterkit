@@ -206,23 +206,14 @@
                     border-bottom: 1px solid @color-medium;
                     margin-bottom: 1em;
 
-                    &:last-of-type {
-                        border-bottom: 0;
-                    }
-
                     .image-block {
-                        flex: 0 0 100px;
+                        flex: 0 0 60px;
                         height: auto;
                         margin-right: .5em;
 
-                        .flags {
-                            position: absolute;
-                            z-index: 2;
-                        }
-
                         .image {
-                            background-color: grey;
-                            max-width: 100px;
+                            background-color: @color-medium;
+                            max-width: 60px;
                         }
                     }
 
@@ -230,10 +221,33 @@
                         display: flex;
                         flex-direction: column;
 
+                        .name {
+                            max-height: 3em;
+                        }
+
                         .remove-from-basket {
                             .anchor("dark");
                             color: @color-faded-dark;
                             align-self: flex-end;
+                        }
+                    }
+                }
+
+                .total {
+                    font-size: .8em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    padding: 0 .25em .75em;
+                    border-bottom: 1px solid @color-medium;
+                    margin-bottom: 1em;
+
+                    .total-amount {
+                        font-weight: bold;
+                        color: @tertiary-color;
+
+                        .tax-detail {
+                            font-weight: normal;
                         }
                     }
                 }
