@@ -12,6 +12,7 @@
 @closed-menu-icon: @fa-var-plus;
 @open-menu-icon: @fa-var-minus;
 
+
 // Colors
 // ======
 
@@ -20,16 +21,20 @@
 @secondary-color: #c7d6e0;
 @tertiary-color: #bc609a;
 
-@background-color-light: #fefefe;
-
 @color-dark: #333;
-@color-light: #efefef;
+@color-medium: #d9d9d9;
+@color-light: #fefefe;
+
+@color-faded-dark: fade(@color-dark, 50%);
+@color-faded-light: fade(@color-light, 50%);
 
 @color-hover-dark: darken(saturate(@tertiary-color, 20%), 20%);
 @color-active-dark: darken(saturate(@tertiary-color, 50%), 10%);
 
 @color-hover-light: lighten(saturate(@tertiary-color, 20%), 20%);
 @color-active-light: lighten(saturate(@tertiary-color, 50%), 10%);
+
+@background-color-light: @color-light;
 
 // anchors (same as general by default)
 @anchor-color-dark: @color-dark;
@@ -53,17 +58,21 @@
 @button-color-hover-light: @color-hover-light;
 @button-color-active-light: @color-active-light;
 
+
 // borders
 @border-color: lighten(@primary-color, 30%);
 @radius: 3px;
+
 
 // z-indexes
 // =========
 
 @overlay: 10;
 
+
 // logo
 @logo-width: 80px;
+
 
 // price slider
 @handle-color: #fff;
@@ -77,6 +86,7 @@
 @slider-height: 2px;
 @slider-background-color: #bbb;
 @slider-range-background-color: #b542a4;
+
 
 // custom icons content
 // ====================

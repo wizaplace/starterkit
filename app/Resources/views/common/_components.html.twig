@@ -1,3 +1,6 @@
+{# password reset (modal window) #}
+{% include('common/_password-reset.html.twig') %}
+
 {# display page wide overlay by adding class 'in' #}
 <div id="overlay"></div>
 
@@ -6,8 +9,8 @@
     {% for type, messages in app.session.flashbag.all %}
         {% for message in messages %}
             <div class="alert alert-{{ type }}">
-                <button type="button" class="close"><span>&times;</span></button>
                 <span>{{ message }}</span>
+                <i class="close-notification fa fa-close" data-dismiss="alert"></i>
             </div>
         {% endfor %}
     {% endfor %}

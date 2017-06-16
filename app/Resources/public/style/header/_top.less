@@ -75,7 +75,7 @@
                 }
 
                 .quick-access-link {
-                    .icon-left(.2em);
+                    .has-left-icon(.2em);
 
                     @media screen and (max-width: @screen-xs-max) {
                         i {
@@ -114,14 +114,17 @@
 
             .content {
 
+                .title {
+                    margin-bottom: .75em;
+                }
+
                 .btn {
                     // add some space between text and icon
-                    .icon-right();
+                    .has-right-icon();
 
                     font-size: .75em;
 
-                    // allow some room to isolate the following (switch) button
-                    &.btn-primary {
+                    &.validate {
                         margin-bottom: 1.5em;
                     }
                 }
@@ -131,7 +134,7 @@
                     cursor: pointer;
 
                     a {
-                        .anchor-dark();
+                        .anchor("dark");
                         color: @tertiary-color;
 
                         &:hover {
@@ -140,6 +143,10 @@
 
                         &:visited {
                             color: @tertiary-color;
+
+                            &:hover {
+                                color: @tertiary-color;
+                            }
                         }
                     }
                 }
@@ -153,8 +160,7 @@
                     align-items: center;
 
                     i {
-                        font-size: .7em;
-                        margin-left: 2em;
+                        font-size: .8em;
                     }
                 }
             }
@@ -164,22 +170,102 @@
                     display: block;
                     padding-top: .5em;
                     text-align: right;
-                    .anchor-dark();
+                    .anchor("dark");
+                    .underlined();
                     font-size: .7em;
-                    color: fade(@color-dark, 70%);
-                    text-decoration: underline;
+                    color: @color-faded-dark;
                     font-style: italic;
+                }
+
+                .profile-links {
+                    > *:not(:last-child) {
+                        margin-bottom: .5em;
+
+                        &:nth-last-child(2) {
+                            margin-bottom: .75em;
+                        }
+
+                        > * {
+                            .anchor("dark");
+                            .has-left-icon();
+                        }
+                    }
+
+                    .logout {
+                        width: 100%;
+                        color: @color-dark;
+                    }
                 }
             }
 
-            .profile-links {
-                * {
-                    .anchor-dark();
+            .popunder-basket {
+                .product {
+                    font-size: .8em;
+                    display: flex;
+                    padding-bottom: .75em;
+                    border-bottom: 1px solid @color-medium;
+                    margin-bottom: 1em;
+
+                    .image-block {
+                        flex: 0 0 60px;
+                        height: auto;
+                        margin-right: .5em;
+
+                        .image {
+                            background-color: @color-medium;
+                            max-width: 60px;
+                        }
+
+                        .no-image {
+                            width: 60px;
+                            height: 60px;
+                            font-size: .65em;
+                        }
+                    }
+
+                    .text-block {
+                        display: flex;
+                        flex-direction: column;
+
+                        .name {
+                            max-height: 3em;
+                        }
+
+                        .remove-from-basket {
+                            .anchor("dark");
+                            color: @color-faded-dark;
+                            align-self: flex-end;
+                        }
+                    }
                 }
 
-                .logout {
-                    width: 100%;
+                .total {
+                    font-size: .8em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    padding: 0 .25em .75em;
+                    border-bottom: 1px solid @color-medium;
+                    margin-bottom: 1em;
 
+                    .total-amount {
+                        font-weight: bold;
+                        color: @tertiary-color;
+
+                        .tax-detail {
+                            font-weight: normal;
+                        }
+                    }
+                }
+
+                .actions {
+                    > :first-child {
+                        margin-bottom: .75em;
+                    }
+
+                    .btn {
+                        width: 100%;
+                    }
                 }
             }
         }

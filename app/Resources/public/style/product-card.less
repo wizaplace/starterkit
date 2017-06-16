@@ -1,0 +1,29 @@
+.product {
+    .flags {
+        position: absolute;
+        z-index: 2;
+        margin:  auto;
+        color: @color-light;
+        background-color: saturate(@tertiary-color, 30%);
+        font-size: .75em;
+        padding: .25em;
+        opacity: .95;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        font-size: .9em;
+    }
+
+    .price {
+        color: @tertiary-color;
+    }
+
+    .image {
+        .no-image {
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

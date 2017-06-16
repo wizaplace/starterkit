@@ -3,9 +3,9 @@
     {# user account links #}
     <div class="content">
         <ul class="list-unstyled profile-links">
-            <li><a href="{{ path('profile') }}">Mon profil</a></li>
-            <li><a href="{{ path('profile_orders') }}">Mes achats</a></li>
-            <li><a href="{{ path('profile_messages') }}">Ma messagerie</a></li>
+            <li><a href="{{ path('profile') }}"><i class="fa fa-user-circle-o"></i>Mon profil</a></li>
+            <li><a href="{{ path('profile_orders') }}"><i class="fa fa-shopping-basket"></i>Mes achats</a></li>
+            <li><a href="{{ path('profile_messages') }}"><i class="fa fa-envelope-open-o"></i>Ma messagerie</a></li>
             <li><a href="{{ path('logout', { 'csrf_token': csrf_token('logout_token') }) }}" class="btn btn-default logout">Me déconnecter<i class="fa fa-times"></i></a></li>
         </ul>
     </div>
@@ -27,11 +27,11 @@
             {# password #}
             <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Mot de passe..." required>
-                <a href="#" rel="nofollow" class="forgotten-password">Mot de passe oublié</a>
+                <a href="#password-reset-modal" data-toggle="modal" rel="nofollow" class="forgotten-password">Mot de passe oublié</a>
             </div>
 
             {# submit login form #}
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary validate">
                 <span>Valider</span>
                 <i class="fa fa-check"></i></button>
             </button>
@@ -69,7 +69,7 @@
             </div>
 
             {# invisible reCaptcha button #}
-            <button type="button" class="btn btn-primary trigger-recaptcha"
+            <button type="button" class="btn btn-primary trigger-recaptcha validate"
                     id="g-recaptcha-header"
                     data-sitekey="{{ recaptchaKey() }}"
             >

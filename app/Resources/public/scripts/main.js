@@ -106,22 +106,26 @@ $(function() {
     // notifications
     // =============
 
-    let $alerts = $(".notifications .alert");
-
-    $alerts.addClass("in"); // animate in
-
     // hide notification behaviour
-    $alerts.each(function() {
-        let $self = $(this);
+    function showAlerts() {
 
-        setTimeout(function(){
-            removeAlert($self); // remove with time
-        }, 6000);
+        let $alerts = $(".notifications .alert");
 
-        $(this).find('.close').on('click', function() {
-            removeAlert($self); // remove on click
+        $alerts.addClass("in"); // animate in
+
+        $alerts.each(function() {
+            let $self = $(this);
+
+            setTimeout(function(){
+                removeAlert($self); // remove with time
+            }, 6000);
+
+            $(this).find('.close').on('click', function() {
+                removeAlert($self); // remove on click
+            });
         });
-    });
+    }
+    showAlerts(); // display alerts on page load
 
     // hide and remove alert
     function removeAlert($alert) {
@@ -132,4 +136,52 @@ $(function() {
             $alert.remove(); // remove from DOM
         }, 1000);
     }
+
+    /**
+     * helper to create notifications
+     * uses Bootstrap classes: "success", "warning", "danger", eg.:
+     * createAlert("Hello world!", "success");
+     */
+    function createAlert(message, type) {
+        let $notifications = $(".notifications");
+        let $alert = "<div class='alert alert-" + type + "'><span>" + message + "</span><i class='close-notification fa fa-close' data-dismiss='alert'></i></div>";
+
+        $notifications.append($alert);
+
+        // let some time for animation
+        setTimeout(function() {
+            showAlerts();
+        }, 100);
+    }
+
+
+    // modify basket
+    // =============
+
+    // change quantity
+    // TODO: add a mechanism to make the page reload optional (use case: product removal from basket popin)
+    // TODO: add CSRF token
+    function modifyQuantity(productId, quantity) {
+        $.post(
+            "/basket/update", {
+                product_id: productId,
+                quantity: quantity
+            }
+
+        ).done(function () {
+            window.location.reload();
+
+        }).fail(function() {
+            createAlert("Une erreur est survenue.", "danger");
+        });
+    }
+
+    // remove a product from basket
+    $('.remove-from-basket').on('click', function() {
+        let $product = $(this).closest('.product');
+        let productId = $product.data('id');
+        let quantity = $product.data('quantity');
+
+        modifyQuantity(productId, quantity);
+    });
 });

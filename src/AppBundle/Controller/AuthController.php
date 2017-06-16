@@ -91,7 +91,7 @@ class AuthController extends Controller
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
             $this->addFlash('danger', 'Erreur de connection après la création du compte.');
         } catch (UserAlreadyExists $e) {
-            $this->addFlash('warning', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+            $this->addFlash('danger', 'Cette adresse email est déjà utilisée, merci de réessayer.');
         }
 
         // add a success message
@@ -136,9 +136,22 @@ class AuthController extends Controller
             return $this->redirect($referer);
         }
 
+        // form validation
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $terms = $request->get('terms');
+
+        if ($email === null) {
+            $this->addFlash('danger', 'Vous devez renseigner votre adresse email, merci de réessayer.');
+
+            return $this->redirect($referer);
+        }
+
         // send password recovery email
         $email = $request->request->get('email');
         $this->get(UserService::class)->recoverPassword($email);
+
+        $this->addFlash('success', 'Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe.');
 
         return $this->redirect($referer);
     }

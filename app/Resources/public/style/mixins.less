@@ -76,7 +76,6 @@
     }
 }
 
-
 .remove-border-radius {
     .remove-border-radius-left();
     .remove-border-radius-right();
@@ -92,62 +91,99 @@
     border-bottom-right-radius: 0;
 }
 
-
-.icon-left(@distance: .5em) {
+.has-left-icon(@distance: .5em) {
     & > i {
         margin-right: @distance;
     }
 }
 
-.icon-right(@distance: .5em) {
+.has-right-icon(@distance: .5em) {
     & > i {
         margin-left: @distance;
     }
 }
 
-
-.anchor-light {
-    cursor: pointer;
-    color: @anchor-color-light;
+.underlined() {
+    text-decoration: underline;
 
     &:hover {
-        color: @anchor-color-hover-light;
+        text-decoration: underline;
     }
 
     &:visited {
-        color: @anchor-color-light;
+        text-decoration: underline;
 
         &:hover {
-            color: @anchor-color-hover-light;
+            text-decoration: underline;
         }
     }
 
     &:focus, &:active {
-        color: @anchor-color-active-light;
+        text-decoration: underline;
     }
 }
 
-.anchor-dark {
-    cursor: pointer;
-    color: @anchor-color-dark;
+.not-underlined() {
+    text-decoration: none;
 
     &:hover {
-        color: @anchor-color-hover-dark;
+        text-decoration: none;
     }
 
     &:visited {
-        color: @anchor-color-visited-dark;
+        text-decoration: none;
 
         &:hover {
-            color: @anchor-color-hover-dark;
+            text-decoration: none;
         }
     }
 
     &:focus, &:active {
-        color: @anchor-color-active-dark;
+        text-decoration: none;
     }
 }
 
+.anchor(@color-variant: "dark", @state-option: true) {
+    cursor: pointer;
+
+    .state-option() when (@state-option = false) {
+        @color: "color-@{color-variant}";
+        @color-hover: "color-@{color-variant}";
+        @color-active: "color-@{color-variant}";
+        @color-visited: "color-@{color-variant}";
+    }
+
+    .state-option() when (@state-option = true) {
+        @color: "anchor-color-@{color-variant}";
+        @color-hover: "anchor-color-hover-@{color-variant}";
+        @color-active: "anchor-color-active-@{color-variant}";
+        @color-visited: "anchor-color-visited-@{color-variant}";
+    }
+
+    // assign variable names
+    .state-option();
+
+    color: @@color;
+
+    &:hover {
+        color: @@color-hover;
+    }
+
+    &:visited {
+        text-decoration: none;
+        color: @@color-visited;
+
+        &:hover {
+            text-decoration: none;
+            color: @@color-hover;
+        }
+    }
+
+    &:focus, &:active {
+        text-decoration: none;
+        color: @@color-active;
+    }
+}
 
 .checkable(@icon, @checked-icon) {
     .input-label {
@@ -156,10 +192,10 @@
         // unchecked version
         &::before {
             font-family: @font-family-icon;
-            padding-right: .5em;
+            margin-right: .5em;
             vertical-align: -13%; // optically better than 'middle'
             font-size: 1.5em;
-            color: fade(@primary-color, 12%);
+            color: @color-medium;
             content: @icon;
             transition: all .3s ease;
         }

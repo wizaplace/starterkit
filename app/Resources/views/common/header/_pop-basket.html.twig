@@ -1,3 +1,81 @@
-    <div class="content">
-        Panier Vide
+{% set userBasket = basket() %}
+
+{# show user basket if not empty #}
+{% if userBasket and userBasket.totalQuantity > 0 %}
+
+    <div class="content popunder-basket">
+
+        {# basket items groupped by vendor companies #}
+        {% for company in userBasket.companyGroups %}
+
+            {# basket items groupped by shipping #}
+            {% for shipping in company.shippingGroups %}
+
+                {% for item in shipping.items %}
+
+                    <article class="product" data-id="{{ item.declinationId }} data-quantity="{{ item.quantity }}">
+                        <div class="image-block">
+
+                            {# main image #}
+                            <div class="image">
+                                {% if item.mainImage %}
+
+                                    <img src="{{ item.mainImage.id|imageUrl(60) }}" alt="{{ item.productName }}" style="width: 60px;">
+
+                                {% else %}
+
+                                    <div class="no-image">Pas d'image</div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="text-block">
+                            {# product details #}
+                            <div class="name ellipsis">{{ item.productName }}</div>
+
+                            {# price #}
+                            <div class="price-block">
+                                {% if item.crossedOutPrice|default %}
+                                    <div class="old-price">{{ item.crossedOutPrice|price }}&nbsp;TTC</div>
+                                {% endif %}
+                                <div class="price">{{ item.individualPrice|price }}&nbsp;TTC</div>
+                            </div>
+
+                            {# remove product from basket #}
+                            <a href="#" class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </article>
+
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+
+        <div class="total">
+            <span class="total-label">TOTAL</span>
+            <span class="total-amount">{{ userBasket.total|price }}<span class="tax-detail">&nbsp;TTC</span> </span>
+        </div>
+
+        <ul class="actions list-unstyled">
+            <li class="show-basket">
+                <a href="{{ path('basket') }}" class="btn btn-default">
+                    <span>Voir mon panier</span>
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+            </li>
+
+            <li class="order">
+                <a href="{{ path('checkout_login') }}" class="btn btn-primary">
+                    <span>Passer la commande</span>
+                    <i class="fa fa-check"></i>
+                </a>
+            </li>
+        </ul>
     </div>
+
+{# empty basket #}
+{% else %}
+    <div class="content">
+        Votre panier est vide
+    </div>
+{% endif %}
