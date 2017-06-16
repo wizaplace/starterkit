@@ -18,7 +18,7 @@
         "roave/security-advisories": "@dev",
         "google/recaptcha": "^1.1",
         "wizaplace/sdk": "~0.1.2",
-        "bmancone/guzzle-stopwatch-middleware": "dev-master"
+        "bmancone/guzzle-stopwatch-middleware": "0.0.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -66,10 +66,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/wizaplace/wizaplace-php-sdk.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/hectorj/guzzle-stopwatch-middleware.git"
         }
     ]
 }
