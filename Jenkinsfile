@@ -1,5 +1,8 @@
 pipeline {
-    agent none
+    agent docker {
+        image 'php:7.1'
+        args '-u 0:0'
+    }
 
     stages {
         stage('composer install') {
@@ -32,12 +35,6 @@ pipeline {
             }
         }
         stage('check') {
-            agent {
-                docker {
-                    image 'php:7.1'
-                    args '-u 0:0'
-                }
-            }
             steps {
                 parallel(
                     'lint': {
