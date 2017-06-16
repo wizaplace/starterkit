@@ -11,6 +11,9 @@ pipeline {
             }
             steps {
                 withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
+                    sh 'rm -rf var/logs/*'
+                    sh 'rm -rf var/cache/*'
+                    sh 'rm -rf var/screenshots/*'
                     sh 'echo -e "machine github.com\n  login $GITHUB_TOKEN" >> ~/.netrc'
                     sh 'composer config -g github-oauth.github.com $GITHUB_TOKEN'
                     sh 'composer install --no-interaction --no-progress --ignore-platform-reqs'
@@ -44,7 +47,7 @@ pipeline {
                         sh 'make stan-ci'
                     },
                     'test': {
-                        sh 'make test-ci'
+                        sh 'make test-phpunit-ci'
                     }
                 )
             }
@@ -79,6 +82,24 @@ pipeline {
                         cloverReportDir: './',
                         cloverReportFileName: 'clover.xml'
                     ])
+                }
+            }
+        }
+        stage('behat') {
+            agent {
+                dockerfile {
+                    dir 'tests/behat/docker'
+                    args '-u 0:0'
+                }
+            }
+            steps {
+                sh '/entrypoint.sh'
+            }
+            post {
+                always {
+                    junit 'behat-result/*.xml'
+                    archiveArtifacts 'var/logs/test.log'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
                 }
             }
         }

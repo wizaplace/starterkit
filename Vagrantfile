@@ -37,6 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.cache.scope = :box
         config.cache.enable :composer
         config.cache.enable :npm
+        config.cache.enable :apt
         config.cache.synced_folder_opts = {
           type: :nfs,
           mount_options: ['nolock', 'actimeo=1', 'fsc']

@@ -6,7 +6,7 @@
  */
 declare(strict_types = 1);
 
-namespace Tests;
+namespace Tests\PHPUnit;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use VCR\VCR;
