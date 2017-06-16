@@ -1,4 +1,9 @@
-.popunder(@duration: .3s, @position: "center", @arrow: false) {
+.popunder(@duration: .3s, @width: 300px, @position: "center", @arrow: false) {
+
+    @arrow-width: 18px;
+    @popunder-width: @width;
+    @arrow-half: @arrow-width / 2;
+    @popunder-half: @popunder-width / 2;
 
     position: absolute;
     z-index: 2;
@@ -10,16 +15,16 @@
 
     & when (@position = "left") {
         left: 0;
-        right: -200%;
+        right: ~"calc(-@{popunder-width} + 100%)";
     }
 
     & when (@position = "center") {
-        left: -100%;
-        right: -100%;
+        left: ~"calc(-@{popunder-half} + 50%)";
+        right: ~"calc(-@{popunder-half} + 50%)";
     }
 
     & when (@position = "right") {
-        left: -200%;
+        left: ~"calc(-@{popunder-width} + 100%)";
         right: 0;
     }
 
@@ -62,15 +67,15 @@
             }
 
             & when (@position = "left") {
-                left: 10%;
+                left: 1em;
             }
 
             & when (@position = "center") {
-                left: 47%;
+                left: ~"calc(@{popunder-half} - @{arrow-half})";
             }
 
             & when (@position = "right") {
-                left: 85%;
+                left: ~"calc(@{popunder-width} - @{arrow-width} - 1em)";
             }
         }
     }

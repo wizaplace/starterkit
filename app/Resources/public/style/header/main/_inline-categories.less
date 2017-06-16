@@ -17,9 +17,11 @@
         flex: 0 1 auto;
 
         display: flex;
-        justify-content: space-between; // change to flex-start if there are lots of categories
         align-items: center;
-        flex-wrap: wrap;
+
+        // change to 'flex-start' and 'wrap' if there are lots of categories
+        justify-content: space-between;
+        flex-wrap: nowrap;
 
         @media screen and (max-width: @screen-md-max) {
             font-size: 1.2em;
@@ -32,6 +34,7 @@
         .category {
             display: inline-block; // list-inline
             position: relative;
+            text-align: center;
 
             &:not(:first-of-type) {
                 margin-left: 1em;
@@ -57,7 +60,7 @@
                 .wrapper {
                     display: block; // shows popunder on hover
 
-                    .popunder(.1s, "center", true); // duration, horizontal position, with arrow,
+                    .popunder(.1s, 300px, "center", true); // duration, horizontal position, with arrow,
 
                     /* second level: sub-categories */
                     > .category-sub-menu {
@@ -66,6 +69,8 @@
                         flex-direction: column;
 
                         .category {
+                            text-align: left;
+
                             .category-name {
                                 color: @color-dark;
                                 text-align: left;
@@ -95,17 +100,17 @@
                 }
             }
 
-            // first category popunder will be aligned on the left
-            &:first-of-type {
+            // first two categories popunder will be aligned on the left
+            &:first-of-type, &:nth-of-type(2) {
                 .wrapper {
-                    .popunder(.1s, "left", true)
+                    .popunder(.1s, 300px, "left", true)
                 }
             }
 
             // last category popunder will be aligned on the right
-            &:last-of-type {
+            &:last-of-type, &:nth-last-of-type(2) {
                 .wrapper {
-                    .popunder(.1s, "right", true)
+                    .popunder(.1s, 300px, "right", true)
                 }
             }
         }
