@@ -1,7 +1,8 @@
 {% set userBasket = basket() %}
 
 {# show user basket if not empty #}
-{% if userBasket %}
+{% if userBasket and userBasket.totalQuantity > 0 %}
+
     <div class="content popunder-basket">
 
         {# basket items groupped by vendor companies #}
@@ -11,8 +12,6 @@
             {% for shipping in company.shippingGroups %}
 
                 {% for item in shipping.items %}
-
-                    {{ dump(item) }}
 
                     <article class="product" data-id="{{ item.declinationId }} data-quantity="{{ item.quantity }}">
                         <div class="image-block">
