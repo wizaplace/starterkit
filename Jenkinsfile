@@ -98,10 +98,16 @@ pipeline {
             post {
                 always {
                     junit 'behat-result/*.xml'
-                    archiveArtifacts 'var/logs/test.log'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'behat-result/*.xml'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
         }
     }
 }
