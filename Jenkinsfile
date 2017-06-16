@@ -24,7 +24,7 @@ pipeline {
             agent {
                 docker {
                     image 'myprod/gulp'
-                    args '-u 0:0'
+                    args '-v npm-cache:/root/.npm -u 0:0'
                 }
             }
             steps {
