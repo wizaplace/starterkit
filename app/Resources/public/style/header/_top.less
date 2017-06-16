@@ -58,7 +58,11 @@
 
                 &:first-of-type {
                     .wrapper {
-                        .popunder(.2s, "left", true);
+                        .popunder(.2s, 250px, "left", true);
+
+                        @media screen and (max-width: @screen-md-max) {
+                            .popunder(.2s, 300px, "left", true);
+                        }
                     }
                 }
 
@@ -66,7 +70,11 @@
                     margin-left: 1em;
 
                     .wrapper {
-                        .popunder(.2s, "right", true);
+                        .popunder(.2s, 350px, "right", true);
+
+                        @media screen and (max-width: @screen-md-max) {
+                            .popunder(.2s, 400px, "right", true);
+                        }
                     }
 
                     @media screen and (max-width: @screen-xs-max) {
@@ -101,8 +109,6 @@
 
                     .wrapper {
                         display: block; // shows popunder on hover
-                        left: 0;
-                        width: 100%;
 
                         // even on hover state, doesn't show on small screens
                         @media screen and (max-width: @screen-xs-max) {
@@ -224,6 +230,7 @@
                     }
 
                     .text-block {
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
 
