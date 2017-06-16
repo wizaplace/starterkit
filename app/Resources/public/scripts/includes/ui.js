@@ -68,3 +68,59 @@ $('.quick-access').find('input, .btn').on('click', function () {
         $quickAccess.removeClass("in");
     });
 });
+
+
+// notifications
+// =============
+
+// hide notification behaviour
+function showAlerts() {
+
+    let $alerts = $(".notifications .alert");
+
+    $alerts.addClass("in"); // animate in
+
+    $alerts.each(function() {
+        let $self = $(this);
+
+        setTimeout(function(){
+            removeAlert($self); // remove with time
+        }, 6000);
+
+        $(this).find('.close').on('click', function() {
+            removeAlert($self); // remove on click
+        });
+    });
+}
+
+// display alerts on page load, with a small delay for animation
+setTimeout(function() {
+    showAlerts();
+}, 100);
+
+// hide and remove alert
+function removeAlert($alert) {
+    $alert.removeClass('in'); // animate out
+
+    // wait 1 second for the animation to be done
+    setTimeout(function(){
+        $alert.remove(); // remove from DOM
+    }, 1000);
+}
+
+/**
+ * helper to create notifications
+ * uses Bootstrap classes: "success", "warning", "danger", eg.:
+ * createAlert("Hello world!", "success");
+ */
+function createAlert(message, type) {
+    let $notifications = $(".notifications");
+    let $alert = "<div class='alert alert-" + type + "'><span>" + message + "</span><i class='close-notification fa fa-close' data-dismiss='alert'></i></div>";
+
+    $notifications.append($alert);
+
+    // small delay is for animation to kick off
+    setTimeout(function() {
+        showAlerts();
+    }, 100);
+}

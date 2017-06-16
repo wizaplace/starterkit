@@ -13,7 +13,7 @@
 
                 {% for item in shipping.items %}
 
-                    <article class="product" data-id="{{ item.declinationId }} data-quantity="{{ item.quantity }}">
+                    <article class="product">
                         <div class="image-block">
 
                             {# main image #}
@@ -43,7 +43,7 @@
                             </div>
 
                             {# remove product from basket #}
-                            <a href="#" class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                            <a href="{{ path('basket_remove_product', { 'declinationId': item.declinationId }) }}" class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
                         </div>
                     </article>
 
