@@ -14,7 +14,7 @@
                     <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
 
                     {# categoriy selector (display only root categories) #}
-                    <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()" v-model="selectedCategoryId">
+                    <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
                         <option class="default-option" value="" selected disabled>Toutes les catégories</option>
 
                         {% for category in categories %}
@@ -76,14 +76,13 @@
                 geoLocateMe: function() {
 
                     if (navigator.geolocation) {
-
                         navigator.geolocation.getCurrentPosition(function(position) {
                             vm.geoFilter.lat = position.coords.latitude;
                             vm.geoFilter.lng = position.coords.longitude;
                         });
 
                     } else {
-                        //TODO: display an error alert
+                        notification.createAlert("Géolocalisation impossible.", "danger");
                     }
                 },
             },

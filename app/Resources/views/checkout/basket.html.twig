@@ -198,7 +198,7 @@
         });
 
         function modifyBasketQuantity($inputField){
-            W.toggleLoadingBox();
+            helper.toggleLoadingBox();
             $.ajax({
                 method: "POST",
                 url: "{{ url('basket_update_item_quantity') }}",
