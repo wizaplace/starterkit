@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
 
     stages {
         stage('composer install') {
@@ -24,7 +24,7 @@ pipeline {
             agent {
                 docker {
                     image 'myprod/gulp'
-                    args '-u 0:0'
+                    args '-v npm-cache:/root/.npm -u 0:0'
                 }
             }
             steps {
@@ -98,10 +98,15 @@ pipeline {
             post {
                 always {
                     junit 'behat-result/*.xml'
-                    archiveArtifacts 'var/logs/test.log'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
         }
     }
 }
