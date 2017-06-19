@@ -1,19 +1,41 @@
-// check if all required fields are filled
-function isFormValid($form) {
+const helper = {
 
-    let $requiredFields = $form.find('[required]');
+    // check if all required fields of a specific form are filled (including checkboxes)
+    isFormValid: function($form) {
 
-    // create an array with empty required fields
-    let $emptyRequiredFields = $requiredFields.filter(function() {
+        let $requiredFields = $form.find('[required]');
 
-        if($(this).is(':checkbox')) {
-            return ! $(this).is(':checked');
+        // create an array with empty required fields
+        let $emptyRequiredFields = $requiredFields.filter(function() {
 
-        } else {
-            return ! $(this).val();
+            if($(this).is(':checkbox')) {
+                return ! $(this).is(':checked');
+
+            } else {
+                return ! $(this).val();
+            }
+        });
+
+        // if some required fields are not filled then the form is not valid
+        return ! $emptyRequiredFields.length;
+    },
+
+    generateSlug: function (string) {
+
+        // Replace anything that isn't a word character by an underscore
+        return string.replace(/\W/g,'_');
+    },
+
+    formatPrice: function formatPrice (price) {
+        if (! $.isNumeric(price)) {
+            return '';
         }
-    });
+        price = price.toFixed(2) + '';
+        return price.replace('.', ',') + '€';
+    },
 
-    // if some required fields are not filled then the form is not valid
-    return ! $emptyRequiredFields.length;
-}
+    // used in search results
+    toggleLoadingBox: function toggleLoadingBox (action) {
+        $('.ajax-loading-box').toggle(action);
+    },
+};
