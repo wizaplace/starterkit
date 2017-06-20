@@ -138,7 +138,7 @@
 
                         $.ajax({
                             type: "POST",
-                            url: "{{ path('basket_add_item') }}",
+                            url: "{{ path('basket_add_product') }}",
                             data: { declinationId: this.productId, quantity: this.quantity },
                             success: function(response) {
                                 hydrateModal(response.addedProduct, response.message);

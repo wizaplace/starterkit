@@ -1,4 +1,5 @@
 const ui = {
+
     // slide panel
     initSlidePanel: function() {
 
@@ -34,7 +35,6 @@ const ui = {
 
     // toggle category menus behaviour
     initCategoryToggle: function() {
-
         $(document).on("click", ".menu-toggle", function(e) {
 
             e.preventDefault();
