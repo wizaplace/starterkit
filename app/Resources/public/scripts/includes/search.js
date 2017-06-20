@@ -15,15 +15,15 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
      * @param {function} success Signature: function(results)
      */
     this.searchProducts = function (query, page, resultsPerPage, filters, sorting, geoFilter, extra, success) {
-        var parameters = {
+        let parameters = {
             query: query,
             page: page,
             resultsPerPage: resultsPerPage,
             extra: extra
         };
-        for (var filterName in filters) {
+        for (let filterName in filters) {
             if (filters.hasOwnProperty(filterName)) {
-                var key = 'filters[' + filterName + ']';
+                let key = 'filters[' + filterName + ']';
                 parameters[key] = filters[filterName];
             }
         }
@@ -34,7 +34,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             parameters.geo = geoFilter;
         }
 
-        var request = jQuery.get(productSearchEndpoint, parameters);
+        let request = jQuery.get(productSearchEndpoint, parameters);
         request.done(function (data) {
             success(data);
         });
@@ -48,7 +48,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
      * @param {function} success Signature: function(results)
      */
     this.autocomplete = function (query, success) {
-        var request = jQuery.get(productAutocompleteEndpoint, {
+        let request = jQuery.get(productAutocompleteEndpoint, {
             query: query
         });
         request.done(function (data) {
@@ -65,11 +65,11 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
      * Requires the URI.js library.
      */
     this.saveSearchInUrl = function (query, page, resultsPerPage, filters, sorting, geoFilter) {
-        var uri = new URI();
+        let uri = new URI();
 
         // remove filters from current query (so we can set only the ones we were passed in params)
         currentQuery = uri.search(true)
-        for (var name in currentQuery) {
+        for (let name in currentQuery) {
             if (!currentQuery.hasOwnProperty(name)) {
                 continue;
             }
@@ -79,7 +79,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             }
         }
 
-        for (var name in filters) {
+        for (let name in filters) {
             if (!filters.hasOwnProperty(name)) {
                 continue;
             }
@@ -108,7 +108,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             uri.removeQuery('page');
             uri.removeQuery('perPage');
         }
-        for (var sortName in sorting) {
+        for (let sortName in sorting) {
             if (sorting.hasOwnProperty(sortName)) {
                 uri.setQuery('sort[' + sortName + ']', sorting[sortName]);
             }
@@ -137,9 +137,9 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
     this.restoreSearchFromUrl = function () {
         // Decode URI parameters, including arrays (which URI.js doesn't do)
         function getUriParameters() {
-            var uriParameters = (new URI()).query(true);
-            var parameters = {};
-            for (var name in uriParameters) {
+            let uriParameters = (new URI()).query(true);
+            let parameters = {};
+            for (let name in uriParameters) {
                 if (!uriParameters.hasOwnProperty(name)) {
                     continue;
                 }
@@ -148,7 +148,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
                     continue;
                 }
                 // Decode arrays (does not support nested arrays or indexed arrays yet)
-                var matches = name.match(/(.+)\[(.+)\]/);
+                let matches = name.match(/(.+)\[(.+)\]/);
                 if (matches) {
                     if (!parameters.hasOwnProperty(matches[1])) {
                         parameters[matches[1]] = {};
@@ -161,7 +161,7 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
             return parameters;
         }
 
-        var result = {
+        let result = {
             query: null,
             page: null,
             resultsPerPage: null,
@@ -171,12 +171,12 @@ function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
         };
 
         // Read parameters from the URL
-        var parameters = getUriParameters();
-        for (var name in parameters) {
+        let parameters = getUriParameters();
+        for (let name in parameters) {
             if (!parameters.hasOwnProperty(name)) {
                 continue;
             }
-            var value = parameters[name];
+            let value = parameters[name];
             if (name === 'q') {
                 result.query = value;
             } else if (name === 'page') {

@@ -1,126 +1,141 @@
-// slide panel
-(function slidePanel() {
+const ui = {
 
-    let $slidePanel = $(".slide-panel");
-    let $openButton = $(".open-slide-panel");
-    let $closeButton = $(".close-slide-panel");
-    let $overlay = $("#overlay");
+    // slide panel
+    initSlidePanel: function() {
 
-    $openButton.on("click", open);
+        let $slidePanel = $(".slide-panel");
+        let $openButton = $(".open-slide-panel");
+        let $closeButton = $(".close-slide-panel");
+        let $overlay = $("#overlay");
 
-    // slide panel can be closed with a click on close button or overlay
-    $closeButton.on("click", close);
-    $overlay.on("click", close);
+        $openButton.on("click", open);
 
-    function open() {
-        show($overlay);
-        show($slidePanel);
-    }
+        // slide panel can be closed with a click on close button or overlay
+        $closeButton.on("click", close);
+        $overlay.on("click", close);
 
-    function close() {
-        hide($slidePanel);
-        hide($overlay);
-    }
-
-    function show($element) {
-        $element.addClass("in");
-    }
-
-    function hide($element) {
-        $element.removeClass("in");
-    }
-})();
-
-// toggle category menus
-(function toggle() {
-
-    $(document).on("click", ".menu-toggle", function(e) {
-
-        e.preventDefault();
-
-        let $category = $(this).closest(".category");
-
-        // ignore toggling if no sub-menu
-        if( ! $category.find(".category").length ) {
-            return;
+        function open() {
+            show($overlay);
+            show($slidePanel);
         }
 
-        // toggle class
-        $category.toggleClass("in");
+        function close() {
+            hide($slidePanel);
+            hide($overlay);
+        }
 
-        // animate icon
-        setTimeout(function() {
-            $category.find("i").toggleClass("fa-plus fa-minus");
-        }, 100); // related to duration set in stylesheet (100 = .1s)
+        function show($element) {
+            $element.addClass("in");
+        }
 
-        // show/hide filter content
-        $category.children(".wrapper").toggle("fast");
-    });
-})();
+        function hide($element) {
+            $element.removeClass("in");
+        }
+    },
 
-// header account popins don't disappear with auto suggestions
-$('.quick-access').find('input, .btn').on('click', function () {
+    // toggle category menus behaviour
+    initCategoryToggle: function() {
+        $(document).on("click", ".menu-toggle", function(e) {
 
-    let $quickAccess = $(this).closest('.quick-access');
-    $quickAccess.addClass("in");
+            e.preventDefault();
 
-    $(this).on('blur', function() {
-        $quickAccess.removeClass("in");
-    });
-});
+            let $category = $(this).closest(".category");
 
+            // ignore toggling if no sub-menu
+            if( ! $category.find(".category").length ) {
+                return;
+            }
 
-// notifications
-// =============
+            // toggle class
+            $category.toggleClass("in");
 
-// hide notification behaviour
-function showAlerts() {
+            // animate icon
+            setTimeout(function() {
+                $category.find("i").toggleClass("fa-plus fa-minus");
+            }, 100); // related to duration set in stylesheet (100 = .1s)
 
-    let $alerts = $(".notifications .alert");
-
-    $alerts.addClass("in"); // animate in
-
-    $alerts.each(function() {
-        let $self = $(this);
-
-        setTimeout(function(){
-            removeAlert($self); // remove with time
-        }, 6000);
-
-        $(this).find('.close').on('click', function() {
-            removeAlert($self); // remove on click
+            // show/hide filter content
+            $category.children(".wrapper").toggle("fast");
         });
-    });
-}
+    },
 
-// display alerts on page load, with a small delay for animation
-setTimeout(function() {
-    showAlerts();
-}, 100);
+    // header account popins don't disappear with auto suggestions
+    initPopins: function() {
 
-// hide and remove alert
-function removeAlert($alert) {
-    $alert.removeClass('in'); // animate out
+        $('.quick-access').find('input, .btn').on('click', function () {
 
-    // wait 1 second for the animation to be done
-    setTimeout(function(){
-        $alert.remove(); // remove from DOM
-    }, 1000);
-}
+            let $quickAccess = $(this).closest('.quick-access');
+            $quickAccess.addClass("in");
 
-/**
- * helper to create notifications
- * uses Bootstrap classes: "success", "warning", "danger", eg.:
- * createAlert("Hello world!", "success");
- */
-function createAlert(message, type) {
-    let $notifications = $(".notifications");
-    let $alert = "<div class='alert alert-" + type + "'><span>" + message + "</span><i class='close-notification fa fa-close' data-dismiss='alert'></i></div>";
+            $(this).on('blur', function() {
+                $quickAccess.removeClass("in");
+            });
+        });
+    },
 
-    $notifications.append($alert);
+    // convert ratings into stars
+    renderRatings: function() {
+        $('.js-rating').rating({
+            min: 0,
+            max: 5,
+            step: 1,
+            size: 'sm',
+            showClear: false,
+            showCaption: false
+        });
+    },
 
-    // small delay is for animation to kick off
-    setTimeout(function() {
-        showAlerts();
-    }, 100);
-}
+    // slick
+    initSlick: function() {
+        let $arrows = $('.arrows');
+        let $next = $arrows.children('.products-next');
+        let $prev = $arrows.children('.products-prev');
+
+        let slick = $('.product-container').slick(
+            {
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                arrows: false,
+                appendArrows: $arrows,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            }
+        );
+
+        $('.products-next').on('click', function () {
+            let i = $next.index( this );
+            slick.eq(i).slick('slickNext');
+        });
+
+        $('.products-prev').on('click', function () {
+            let i = $prev.index( this );
+            slick.eq(i).slick("slickPrev");
+        });
+    }
+};

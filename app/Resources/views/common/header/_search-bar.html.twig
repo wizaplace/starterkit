@@ -5,7 +5,7 @@
         <div class="wrapper">
 
             <form action="{{ path('search') }}" method="get" class="search-bar-form" autocomplete="off">
-                <input type="hidden" name="categories" v-model="currentCategoryId">
+                <input type="hidden" name="selected_category_id" v-model="selectedCategoryId">
 
                 {# query #}
                 <div class="query-input-group">
@@ -33,15 +33,14 @@
                 <div class="geo-input-group">
 
                     {# forward the geoloc to search page #}
-                    {#<input type="hidden" name="geo[lat]" v-model="geoFilter.lat">#}
-                    {#<input type="hidden" name="geo[lng]" v-model="geoFilter.lng">#}
+                    <input type="hidden" name="geo[lat]" v-model="geoFilter.lat">
+                    <input type="hidden" name="geo[lng]" v-model="geoFilter.lng">
 
                     {# city, department #}
-                    <input type="text" name="geo[label]" {#v-model="geoFilter.label"#} class="form-control" placeholder="Ville, département...">
+                    <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control" placeholder="Ville, département...">
 
                     {# submit button #}
-                    <button class="btn btn-primary" >
-                        {#<button type="button" class="btn btn-default" aria-label="{{ 'Localize'|trans }}" v-on:click="geolocateMe">#}
+                    <button type="button" class="btn btn-primary" @click="geoLocateMe">
                         <i class="fa fa-map-marker"></i>
                         <span class="hidden-xs">Me localiser</span>
                     </button>
@@ -53,24 +52,38 @@
 
 <script>
     $(function() {
-        new Vue({
+        let vm = new Vue({
             el: '#search-bar',
 
             data: {
-                currentCategory: '',
-                currentCategoryId: '',
-                currentCategoryName: '',
+                selectedCategoryId: '',
                 query: '',
+                geoFilter: {
+                    label: '',
+                    lat: '',
+                    lng: ''
+                }
             },
 
             methods: {
                 selectCategory: function() {
-                    var $selectedCategory = $(".category-picker option:selected");
-
-                    this.currentCategoryId = $selectedCategory.val();
-                    this.currentCategoryName = $selectedCategory.text();
+                    let $selectedCategory = $(".category-picker option:selected");
+                    this.selectedCategoryId = $selectedCategory.val();
                 },
-            }
+
+                geoLocateMe: function() {
+
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            vm.geoFilter.lat = position.coords.latitude;
+                            vm.geoFilter.lng = position.coords.longitude;
+                        });
+
+                    } else {
+                        notification.createAlert("Géolocalisation impossible.", "danger");
+                    }
+                },
+            },
         });
     });
 </script>
