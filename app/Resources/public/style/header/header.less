@@ -3,3 +3,24 @@
     @import './main/main';
     @import './_search-bar';
 }
+
+// Google place library auto-complete
+.pac-container {
+    margin-top: .8em;
+    padding: .5em;
+    border-radius: @radius;
+    box-shadow: @box-shadow;
+
+    > :first-child {
+        border-top: none;
+    }
+
+    .pac-item, .pac-item-query {
+        font-size: 1em;
+        cursor: pointer;
+
+        @media screen and (max-width: @screen-md-max) {
+            font-size: 1.2em;
+        }
+    }
+}

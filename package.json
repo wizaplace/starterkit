@@ -13,6 +13,7 @@
     "gulp": "^3.9.1",
     "gulp-imagemin": "^3.3.0",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "vue": "^2.3.3"
   },
   "devDependencies": {
