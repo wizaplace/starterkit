@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\Basket\Exception\CouponNotInTheBasket;
@@ -64,16 +63,19 @@ class BasketController extends Controller
 
     public function removeProductAction(Request $request): Response
     {
+        // redirection url
+        $referer = $request->headers->get('referer');
+
         $basketService = $this->get(BasketService::class);
         $basketId = $this->getBasketId();
-        $declinationId = $request->request->get('declinationId');
+        $declinationId = $request->get('declinationId');
 
         $basketService->removeProductFromBasket($basketId, $declinationId);
-        $basket = $basketService->getBasket($basketId);
 
-        return $this->render('checkout/basket.html.twig', [
-            'basket' => $basket,
-        ]);
+        // add a success message
+        $this->addFlash('success', 'Le produit a bien été supprimé de votre panier.');
+
+        return $this->redirect($referer);
     }
 
     public function cleanBasketAction(Request $request): Response

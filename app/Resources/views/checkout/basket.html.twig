@@ -54,7 +54,7 @@
 
                     {# remove product from basket #}
                     <div class="col-md-2">
-                        <form method="post" action="{{ path('basket_remove_item') }}">
+                        <form method="post" action="{{ path('basket_remove_product') }}">
                             <input type="hidden" name="declinationId" value="{{ item.declinationId }}" />
                             <button type="submit" class="btn btn-default">Supprimer</button>
                         </form>
@@ -201,7 +201,7 @@
             helper.toggleLoadingBox();
             $.ajax({
                 method: "POST",
-                url: "{{ url('basket_update_item_quantity') }}",
+                url: "{{ url('basket_update_product_quantity') }}",
                 data: {
                     declinationId: $inputField.attr('data-product-id'),
                     quantity: $inputField.val()

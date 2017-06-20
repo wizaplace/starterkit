@@ -62,15 +62,20 @@ basket:
     defaults: { _controller: AppBundle:Basket:basket }
     methods: [GET]
 
-basket_add_item:
+basket_add_product:
     path: /basket/add
     defaults: { _controller: AppBundle:Basket:addProduct }
     methods: [POST]
 
-basket_update_item_quantity:
+basket_update_product_quantity:
     path: /basket/update
     defaults: { _controller: AppBundle:Basket:updateProductQuantity }
     methods: [POST]
+    
+basket_remove_product:
+    path: /basket/remove
+    defaults: { _controller: AppBundle:Basket:removeProduct }
+    methods: [GET]
 
 
 #checkout
@@ -108,10 +113,7 @@ clean_basket:
     path: /basket/clean
     defaults: { _controller: AppBundle:Basket:cleanBasket }
     methods: [POST]
-basket_remove_item:
-    path: /basket/remove
-    defaults: { _controller: AppBundle:Basket:removeProduct }
-    methods: [POST]
+
 
 basket_add_coupon:
     path: /basket/add_coupon
