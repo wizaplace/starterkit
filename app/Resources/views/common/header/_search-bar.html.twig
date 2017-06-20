@@ -37,7 +37,7 @@
                     <input type="hidden" name="geo[lng]" v-model="geoFilter.lng">
 
                     {# city, department #}
-                    <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control" placeholder="Ville, département...">
+                    <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control" id="geofilter-label" placeholder="Ville, département...">
 
                     {# submit button #}
                     <button type="button" class="btn btn-primary" @click="geoLocateMe">
@@ -73,17 +73,60 @@
 
                 geoLocateMe: function() {
 
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                            vm.geoFilter.lat = position.coords.latitude;
-                            vm.geoFilter.lng = position.coords.longitude;
-                        });
-
-                    } else {
+                    if (! 'geolocation' in navigator) {
                         notification.createAlert("Géolocalisation impossible.", "danger");
+                        return;
                     }
+
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        vm.geoFilter = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            label: "Autour de moi"
+                        };
+
+                        // success message
+                        notification.createAlert('Rechercher "Autour de moi".', "success");
+
+                    }, function (error) {
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                notification.createAlert("Géolocalisation refusée.", "danger");
+                                break;
+                            default:
+                                notification.createAlert("Erreur de géolocalisation.", "danger");
+                                break;
+                        }
+                    });
+                },
+
+                // called when the user autocompletes a place with Google Maps
+                geolocAutocompleted: function () {
+
+                    let place = this.googleMapsAutocomplete.getPlace();
+
+                    if (! place.geometry) {
+
+                        // user entered a place that was not suggested and pressed Enter, or the request failed
+                        this.geoFilter = {};
+                        return;
+                    }
+
+                    this.geoFilter = {
+                        lat: place.geometry.location.lat(),
+                        lng: place.geometry.location.lng(),
+                        label: place.name
+                    };
                 },
             },
+
+            mounted: function () {
+
+                // initialize the Google Maps autocomplete in search bar
+                let labelInput = document.getElementById('geofilter-label');
+                this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+            }
         });
     });
 </script>

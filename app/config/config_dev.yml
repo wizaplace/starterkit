@@ -1,6 +1,9 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    googlemaps.api_key: 'AIzaSyBZTTRwiE94s-iJ7OVJAdl-linxm4LMAJE' # usable only from '*.demo.loc/*'
+
 framework:
     router:
         resource: "%kernel.project_dir%/app/config/routing_dev.yml"

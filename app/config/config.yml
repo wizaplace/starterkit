@@ -39,6 +39,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         apiBaseUrl: "%api.base_url%"
+        googleMapsApiKey: '%googlemaps.api_key%'
+
 
 services:
     _defaults:

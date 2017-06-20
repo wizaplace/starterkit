@@ -25,7 +25,6 @@ const reCaptcha = {
     },
 
     submitForm: function($reCaptcha) {
-
         let $form = $reCaptcha.closest('form');
         let $submitButton = $form.find('[type="submit"]');
 
