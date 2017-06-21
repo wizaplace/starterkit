@@ -52,6 +52,10 @@ services:
         resource: '../../src/AppBundle'
         exclude: '../../src/AppBundle/{Twig,Entity,Repository}'
 
+    AppBundle\Controller\:
+        resource: '../../src/AppBundle/Controller'
+        public: true
+
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
         class: 'GuzzleHttp\HandlerStack'
@@ -77,6 +81,9 @@ services:
         arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Seo\SeoService:
+        arguments: ['@wizaplace.http.client']
+        public: true
+    Wizaplace\Cms\CmsService:
         arguments: ['@wizaplace.http.client']
         public: true
     app.twig_extension:
