@@ -15,8 +15,8 @@ class GenericPageContext extends AbstractPageContext
      */
     public function assertPageMetaTitleEquals(string $expectedTitle)
     {
-        $actualTitle = $this->getSession()->getPage()->find("css", "html > head > title")->getHtml();
-        assert($expectedTitle == $actualTitle);
+        $actualTitle = $this->getSession()->getPage()->find("css", "html > head > title")->getText();
+        assertEquals($expectedTitle, $actualTitle, "'$actualTitle'");
     }
 
     /**
@@ -24,7 +24,7 @@ class GenericPageContext extends AbstractPageContext
      */
     public function assertPageH1TitleEquals(string $expectedTitle)
     {
-        $actualTitle = $this->getSession()->getPage()->find("css", "h1")->getHtml();
+        $actualTitle = $this->getSession()->getPage()->find("css", "h1")->getText();
         assert($expectedTitle == $actualTitle);
     }
 
@@ -33,7 +33,8 @@ class GenericPageContext extends AbstractPageContext
      */
     public function assertPageMetaDescriptionContains(string $expectedDescription)
     {
-        $actualDescription = $this->getSession()->getPage()->find("css", "html > head > meta[name=description]")->getHtml();
-        assert(strpos($actualDescription, $expectedDescription) !== false);
+        $actualDescription = $this->getSession()->getPage()->find("css", "html > head > meta[name=description]")
+            ->getAttribute('content');
+        assertContains($expectedDescription, $actualDescription);
     }
 }
