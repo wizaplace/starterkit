@@ -12,8 +12,6 @@ use Behat\Mink\Element\ElementInterface;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 
-require_once(__DIR__.'/../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php');
-
 abstract class AbstractPageContext extends RawMinkContext
 {
     /**

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ada2dde3f875e55557b72259e77cdda5",
+    "content-hash": "176350995d864a4fb6a2ac4aa961bf17",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",

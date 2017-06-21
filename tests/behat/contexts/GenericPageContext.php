@@ -8,6 +8,8 @@ declare(strict_types = 1);
 
 namespace Tests\behat\contexts;
 
+use Assert\Assertion;
+
 class GenericPageContext extends AbstractPageContext
 {
     /**
@@ -16,7 +18,7 @@ class GenericPageContext extends AbstractPageContext
     public function assertPageMetaTitleEquals(string $expectedTitle)
     {
         $actualTitle = $this->getSession()->getPage()->find("css", "html > head > title")->getText();
-        assertEquals($expectedTitle, $actualTitle, "'$actualTitle'");
+        Assertion::eq($expectedTitle, $actualTitle);
     }
 
     /**
@@ -25,7 +27,7 @@ class GenericPageContext extends AbstractPageContext
     public function assertPageH1TitleEquals(string $expectedTitle)
     {
         $actualTitle = $this->getSession()->getPage()->find("css", "h1")->getText();
-        assert($expectedTitle == $actualTitle);
+        Assertion::eq($expectedTitle, $actualTitle);
     }
 
     /**
@@ -35,6 +37,6 @@ class GenericPageContext extends AbstractPageContext
     {
         $actualDescription = $this->getSession()->getPage()->find("css", "html > head > meta[name=description]")
             ->getAttribute('content');
-        assertContains($expectedDescription, $actualDescription);
+        Assertion::contains($actualDescription, $expectedDescription);
     }
 }
