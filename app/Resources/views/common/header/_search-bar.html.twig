@@ -15,9 +15,17 @@
                         <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
 
                         {# auto-complete suggestions #}
-                        <div class="product-suggestions">
+                        <div class="product-suggestions" :class="{'hidden': hideSuggestions}">
                             <ul class="content" v-if="productSuggestions.length">
-                                <li v-for="suggestion in productSuggestions" v-text="suggestion.name"></li>
+                                <li class="suggestion-item">
+                                    <a href="#"
+                                       class="suggestion"
+                                       v-for="suggestion in productSuggestions"
+                                       @click.prevent="selectSuggestion(suggestion)"
+                                       v-text="suggestion.name"
+                                       tabindex="0"
+                                    ></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -75,6 +83,13 @@
                 geoFilter: urlParameters.geoFilter || {},
             },
 
+            computed: {
+                hideSuggestions: function() {
+                    let $inputField = $('[name="q"]');
+                    return false;
+                }
+            },
+
             methods: {
                 selectCategory: function() {
 
@@ -92,8 +107,35 @@
                     });
                 },
                     // how long to wait for user to stop typing (in ms)
-                    500
+                    200
                 ),
+
+                // watch user query input to display corresponding product suggestions (auto-completion)
+                initProductAutocomplete: function() {
+                    let self = this;
+                    let $queryInput = $('[name="q"]');
+
+                    // show suggestions when:
+                    // - user has typed at least 3 characters
+                    // - there are three characters and user clicks in the input field
+                    $queryInput.on('keyup click', function() {
+                        if (self.query.length >= 3) {
+                            self.productAutocomplete();
+                        } else {
+                            // don't fill/show suggestions if user input isn't specific enough
+                            self.productSuggestions = [];
+                        }
+                    });
+                },
+
+                selectSuggestion: function(suggestion) {
+
+                    // update 'query' v-model and add suggestion into query input box
+                    this.query = suggestion.name;
+
+                    // hide suggestions
+                    this.productSuggestions = [];
+                },
 
                 geoLocateMe: function() {
 
@@ -146,25 +188,15 @@
                 },
             },
 
-            watch: {
-
-                // watch user query input to display corresponding product suggestions (auto-completion)
-                query: function() {
-
-                    if (this.query.length >= 2) {
-                        this.productAutocomplete();
-                    } else {
-                        this.productSuggestions = [];
-                    }
-                }
-            },
-
             mounted: function () {
 
                 // initialize the Google Maps autocomplete in search bar
                 let labelInput = document.getElementById('geofilter-label');
                 this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
                 this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+
+                // input field behaviour
+                this.initProductAutocomplete();
             }
         });
     });
