@@ -32,6 +32,11 @@
                             {# product details #}
                             <div class="name ellipsis">{{ item.productName }}</div>
 
+                            {# product quantity (displayed only if > 1) #}
+                            {% if item.quantity > 1 %}
+                                <div class="quantity">(x {{ item.quantity }})</div>
+                            {% endif %}
+
                             {# price #}
                             <div class="price-block">
                                 {% if item.crossedOutPrice|default %}
