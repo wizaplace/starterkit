@@ -41,21 +41,24 @@
                         .popunder(.3s, 100%);
                         cursor: pointer;
 
-                        .suggestion {
-                            display: block;
-                            font-size: 1em;
-                            padding: .5em .25em;
+                        .suggestion-item {
 
                             &:not(:first-of-type) {
                                 border-top: 1px solid @border-color;
                             }
 
-                            @media screen and (max-width: @screen-sm-max) {
-                                font-size: 1.2em;
-                            }
+                            .suggestion {
+                                display: block;
+                                font-size: 1em;
+                                padding: .5em .25em;
 
-                            &:hover, &:focus {
-                                background-color: fade(@tertiary-color, 10%);
+                                @media screen and (max-width: @screen-sm-max) {
+                                    font-size: 1.2em;
+                                }
+
+                                &:hover, &:focus {
+                                    background-color: fade(@tertiary-color, 10%);
+                                }
                             }
                         }
                     }

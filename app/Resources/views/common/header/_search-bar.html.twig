@@ -15,12 +15,11 @@
                         <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
 
                         {# auto-complete suggestions #}
-                        <div class="product-suggestions" :class="{'hidden': hideSuggestions}">
+                        <div class="product-suggestions">
                             <ul class="content" v-if="productSuggestions.length">
-                                <li class="suggestion-item">
+                                <li class="suggestion-item" v-for="suggestion in productSuggestions">
                                     <a href="#"
                                        class="suggestion"
-                                       v-for="suggestion in productSuggestions"
                                        @click.prevent="selectSuggestion(suggestion)"
                                        v-text="suggestion.name"
                                        tabindex="0"
@@ -83,16 +82,8 @@
                 geoFilter: urlParameters.geoFilter || {},
             },
 
-            computed: {
-                hideSuggestions: function() {
-                    let $inputField = $('[name="q"]');
-                    return false;
-                }
-            },
-
             methods: {
                 selectCategory: function() {
-
                     let $selectedCategory = $(".category-picker option:selected");
                     this.selectedCategoryId = $selectedCategory.val();
                 },
@@ -114,17 +105,31 @@
                 initProductAutocomplete: function() {
                     let self = this;
                     let $queryInput = $('[name="q"]');
+                    let $queryInputGroup = $('.product-suggestions');
 
                     // show suggestions when:
                     // - user has typed at least 3 characters
                     // - there are three characters and user clicks in the input field
                     $queryInput.on('keyup click', function() {
                         if (self.query.length >= 3) {
+                            $queryInputGroup.removeClass('hidden');
                             self.productAutocomplete();
                         } else {
                             // don't fill/show suggestions if user input isn't specific enough
                             self.productSuggestions = [];
                         }
+                    });
+
+                    // hide suggestions when user has clicked somewhere else
+                    $(document).on('click', function(e) {
+
+                        // doesn't hide if user has clicked on a suggestion or in the input field
+                        let $target = $(e.target);
+                        if ($target.hasClass('suggestion') || $target.attr('name') === 'q') {
+                            return;
+                        }
+
+                        $queryInputGroup.addClass('hidden');
                     });
                 },
 
