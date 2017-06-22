@@ -71,7 +71,7 @@ basket_update_product_quantity:
     path: /basket/update
     defaults: { _controller: AppBundle:Basket:updateProductQuantity }
     methods: [POST]
-    
+
 basket_remove_product:
     path: /basket/remove
     defaults: { _controller: AppBundle:Basket:removeProduct }
@@ -161,24 +161,31 @@ cmsQuiSommesNous:
     path: /qui-sommes-nous
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    legacy/cms/qui-sommes-nous.html.twig
+        template:    cms/qui-sommes-nous.html.twig
 cmsAide:
     path: /aide-et-faq
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    legacy/cms/aide-et-faq.html.twig
+        template:    cms/aide-et-faq.html.twig
 cmsContact:
     path: /contact
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    legacy/cms/contact.html.twig
+        template:    cms/contact.html.twig
 cmsMentionsLegales:
     path: /mentions-legales
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    legacy/cms/mentions-legales.html.twig
+        template:    cms/mentions-legales.html.twig
 cmsCgv:
     path: /cgv
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    legacy/cms/cgv.html.twig
+        template:    cms/cgv.html.twig
+
+cmsPage:
+    path: /{slug}
+    defaults: { _controller: AppBundle:Cms:Page }
+    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"

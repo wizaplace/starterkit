@@ -19,6 +19,7 @@ default:
             contexts:
                 - \Tests\behat\contexts\WebServerContext
                 - \Tests\behat\contexts\HomePageContext
+                - \Tests\behat\contexts\GenericPageContext
             filters:
                 tags: '@javascript'
         symfony:
@@ -26,5 +27,6 @@ default:
             contexts:
                 - \Tests\behat\contexts\SymfonyContext
                 - \Tests\behat\contexts\HomePageContext
+                - \Tests\behat\contexts\GenericPageContext
             filters:
                 tags: '~@javascript'

@@ -12,7 +12,7 @@ use Behat\Mink\Element\ElementInterface;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 
-abstract class PageContext extends RawMinkContext
+abstract class AbstractPageContext extends RawMinkContext
 {
     /**
      * Finds a DOM node by its CSS selector.

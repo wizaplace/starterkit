@@ -8,7 +8,7 @@ declare(strict_types = 1);
 
 namespace Tests\behat\contexts;
 
-class HomePageContext extends PageContext
+class HomePageContext extends AbstractPageContext
 {
     /**
      * @When /^(?:|I )click on the category "(?P<categoryName>[^"]+)" under "(?P<rootCategoryName>[^"]+)" in the top menu$/
