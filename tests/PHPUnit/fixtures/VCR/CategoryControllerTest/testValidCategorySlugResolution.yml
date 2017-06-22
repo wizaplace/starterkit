@@ -6,7 +6,7 @@
         headers:
             Host: wizaplace.loc
             Accept-Encoding: null
-            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
             Accept: null
     response:
         status:
@@ -14,11 +14,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Wed, 31 May 2017 11:50:02 GMT'
+            Date: 'Thu, 22 Jun 2017 12:45:30 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: bfb1b6
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/bfb1b6'
+            X-Debug-Token: a280ab
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/a280ab'
             Content-Length: '45'
             Content-Type: application/json
         body: '{"informatique":{"type":"category","id":"3"}}'
@@ -29,7 +29,7 @@
         headers:
             Host: wizaplace.loc
             Accept-Encoding: null
-            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
             Accept: null
     response:
         status:
@@ -37,14 +37,14 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Wed, 31 May 2017 11:50:03 GMT'
+            Date: 'Thu, 22 Jun 2017 12:45:30 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: f84168
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/f84168'
-            Content-Length: '282'
+            X-Debug-Token: ec5f64
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ec5f64'
+            Content-Length: '128'
             Content-Type: application/json
-        body: '{"id":3,"parentId":null,"name":"Informatique","description":"Quae repellendus exercitationem natus molestiae a dolor laudantium. Quas est quam illo qui adipisci molestias quam. Officia quibusdam impedit quis error.","slug":"informatique","image":null,"position":0,"productCount":12}'
+        body: '{"id":3,"parentId":null,"name":"Informatique","description":"","slug":"informatique","image":null,"position":0,"productCount":3}'
 -
     request:
         method: GET
@@ -52,7 +52,7 @@
         headers:
             Host: wizaplace.loc
             Accept-Encoding: null
-            User-Agent: 'GuzzleHttp/6.2.1 curl/7.47.0 PHP/7.1.5-1+deb.sury.org~xenial+2'
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
             Accept: null
     response:
         status:
@@ -60,11 +60,34 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Wed, 31 May 2017 11:50:03 GMT'
+            Date: 'Thu, 22 Jun 2017 12:45:31 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 015d63
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/015d63'
-            Content-Length: '1388'
+            X-Debug-Token: 09887d
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/09887d'
+            Content-Length: '648'
             Content-Type: application/json
-        body: '[{"category":{"id":2,"parentId":null,"name":"Cat\u00e9gorie principale","description":"","slug":"categorie-principale","image":null,"position":10,"productCount":0},"children":[]},{"category":{"id":3,"parentId":null,"name":"Informatique","description":"Quae repellendus exercitationem natus molestiae a dolor laudantium. Quas est quam illo qui adipisci molestias quam. Officia quibusdam impedit quis error.","slug":"informatique","image":null,"position":0,"productCount":12},"children":[{"category":{"id":4,"parentId":3,"name":"Ordinateurs portables","description":"Pariatur facere dolor ut doloremque ut animi. Non commodi corporis consequatur rerum eos sed cupiditate. Consectetur molestias doloremque ut aliquam ut.","slug":"ordinateurs-portables","image":null,"position":0,"productCount":4},"children":[]},{"category":{"id":5,"parentId":3,"name":"\u00c9crans","description":"Repellendus qui ratione repudiandae mollitia deserunt eveniet deleniti. Velit sed voluptas facilis dolorem quas. Corporis et quod ipsam animi.","slug":"ecrans","image":null,"position":0,"productCount":4},"children":[]}]},{"category":{"id":6,"parentId":null,"name":"T\u00e9l\u00e9phone","description":"Velit quia sapiente incidunt sed sunt. Distinctio et velit explicabo fugit ratione ipsam laborum. Sed est unde laborum fugit.","slug":"telephone","image":{"id":3},"position":0,"productCount":2},"children":[]}]'
+        body: '[{"category":{"id":2,"parentId":null,"name":"Cat\u00e9gorie principale","description":"","slug":"categorie-principale","image":null,"position":10,"productCount":0},"children":[]},{"category":{"id":3,"parentId":null,"name":"Informatique","description":"","slug":"informatique","image":null,"position":0,"productCount":3},"children":[{"category":{"id":4,"parentId":3,"name":"\u00c9crans","description":"","slug":"ecrans","image":null,"position":0,"productCount":1},"children":[]}]},{"category":{"id":5,"parentId":null,"name":"Test Category Slug","description":"","slug":"test-category-slug","image":null,"position":0,"productCount":1},"children":[]}]'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/menus'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:45:31 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 71cf37
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/71cf37'
+            Content-Length: '2415'
+            Content-Type: application/json
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'
