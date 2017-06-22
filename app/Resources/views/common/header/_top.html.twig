@@ -1,4 +1,5 @@
 {% set accountLink = currentUser() ? path('profile') : path('login') %}
+{% set userBasket = basket() %}
 
 <nav class="top-nav">
     <div class="container">
@@ -30,6 +31,11 @@
                     <div class="wrapper">
                         {% include('common/header/_pop-basket.html.twig') %}
                     </div>
+
+                    {# number of items in basket #}
+                    {% if userBasket|default and userBasket.totalQuantity > 0 %}
+                        <span class="basket-badge">{{ userBasket.totalQuantity }}</span>
+                    {% endif %}
                 </li>
             </ul>
         </div>

@@ -79,6 +79,11 @@
 
                     @media screen and (max-width: @screen-xs-max) {
                         margin: 0;
+
+                        // position with basket-badge
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
                     }
                 }
 
@@ -114,6 +119,23 @@
                         @media screen and (max-width: @screen-xs-max) {
                             display: none;
                         }
+                    }
+                }
+
+                .basket-badge {
+                    font-weight: bold;
+                    vertical-align: super;
+                    color: @color-light;
+                    font-size: .6em;
+                    border-radius: 100%;
+                    padding: .35em .7em;
+                    margin-left: .35em;
+                    background-color: @tertiary-color;
+                    user-select: none;
+                    cursor: pointer;
+
+                    @media screen and (max-width: @screen-xs-max) {
+                        font-size: .75em;
                     }
                 }
             }

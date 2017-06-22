@@ -1,7 +1,5 @@
-{% set userBasket = basket() %}
-
 {# show user basket if not empty #}
-{% if userBasket and userBasket.totalQuantity > 0 %}
+{% if userBasket|default and userBasket.totalQuantity > 0 %}
 
     <div class="content popunder-basket">
 
