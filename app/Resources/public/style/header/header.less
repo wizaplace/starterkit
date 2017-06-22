@@ -23,4 +23,15 @@
             font-size: 1.2em;
         }
     }
+
+    .pac-item {
+        &:hover, &:focus {
+            background-color: fade(@tertiary-color, 10%);
+            color: @color-hover-dark;
+
+            & .pac-item-query {
+                color: @color-hover-dark;
+            }
+        }
+    }
 }
