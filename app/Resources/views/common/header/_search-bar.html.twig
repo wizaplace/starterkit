@@ -1,6 +1,6 @@
 {% set categories = categoryTree() %}
 
-<div id="search-bar" class="search-bar">
+<div id="search-bar" class="search-bar" v-cloak>
     <div class="container">
         <div class="wrapper">
 
@@ -11,7 +11,23 @@
                 <div class="query-input-group">
 
                     {# query text input #}
-                    <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
+                    <div class="product-search-input-group">
+                        <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
+
+                        {# auto-complete suggestions #}
+                        <div class="product-suggestions">
+                            <ul class="content" v-if="productSuggestions.length">
+                                <li class="suggestion-item" v-for="suggestion in productSuggestions">
+                                    <a href="#"
+                                       class="suggestion"
+                                       @click.prevent="selectSuggestion(suggestion)"
+                                       v-text="suggestion.name"
+                                       tabindex="0"
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
                     {# categoriy selector (display only root categories) #}
                     <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
@@ -52,23 +68,78 @@
 
 <script>
     $(function() {
+
+        let search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
+        let urlParameters = search.restoreSearchFromUrl(); // used in search page
+
         let vm = new Vue({
             el: '#search-bar',
 
             data: {
                 selectedCategoryId: '',
-                query: '',
-                geoFilter: {
-                    label: '',
-                    lat: '',
-                    lng: ''
-                }
+                productSuggestions: [],
+                query: urlParameters.query || '',
+                geoFilter: urlParameters.geoFilter || {},
             },
 
             methods: {
                 selectCategory: function() {
                     let $selectedCategory = $(".category-picker option:selected");
                     this.selectedCategoryId = $selectedCategory.val();
+                },
+
+                // _.debounce is a function provided by lodash to limit how often a particularly expensive operation can be run.
+                productAutocomplete: _.debounce(function() {
+
+                    let self = this;
+
+                    search.autocomplete(this.query, function (results) {
+                        self.productSuggestions = results;
+                    });
+                },
+                    // how long to wait for user to stop typing (in ms)
+                    200
+                ),
+
+                // watch user query input to display corresponding product suggestions (auto-completion)
+                initProductAutocomplete: function() {
+                    let self = this;
+                    let $queryInput = $('[name="q"]');
+                    let $queryInputGroup = $('.product-suggestions');
+
+                    // show suggestions when:
+                    // - user has typed at least 3 characters
+                    // - there are three characters and user clicks in the input field
+                    $queryInput.on('keyup click', function() {
+                        if (self.query.length >= 3) {
+                            $queryInputGroup.removeClass('hidden');
+                            self.productAutocomplete();
+                        } else {
+                            // don't fill/show suggestions if user input isn't specific enough
+                            self.productSuggestions = [];
+                        }
+                    });
+
+                    // hide suggestions when user has clicked somewhere else
+                    $(document).on('click', function(e) {
+
+                        // doesn't hide if user has clicked on a suggestion or in the input field
+                        let $target = $(e.target);
+                        if ($target.hasClass('suggestion') || $target.attr('name') === 'q') {
+                            return;
+                        }
+
+                        $queryInputGroup.addClass('hidden');
+                    });
+                },
+
+                selectSuggestion: function(suggestion) {
+
+                    // update 'query' v-model and add suggestion into query input box
+                    this.query = suggestion.name;
+
+                    // hide suggestions
+                    this.productSuggestions = [];
                 },
 
                 geoLocateMe: function() {
@@ -79,6 +150,7 @@
                     }
 
                     navigator.geolocation.getCurrentPosition(function(position) {
+
                         vm.geoFilter = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
@@ -89,6 +161,7 @@
                         notification.createAlert('Rechercher "Autour de moi".', "success");
 
                     }, function (error) {
+
                         switch(error.code) {
                             case error.PERMISSION_DENIED:
                                 notification.createAlert("Géolocalisation refusée.", "danger");
@@ -126,6 +199,9 @@
                 let labelInput = document.getElementById('geofilter-label');
                 this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
                 this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+
+                // input field behaviour
+                this.initProductAutocomplete();
             }
         });
     });
