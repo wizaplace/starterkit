@@ -13,7 +13,6 @@ use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Cms\CmsService;
-use Wizaplace\Cms\Menu;
 use Wizaplace\Exception\NotFound;
 use Wizaplace\Image\ImageService;
 use Wizaplace\User\User;
@@ -66,7 +65,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFunction('currentUser', [$this, 'getCurrentUser']),
             new \Twig_SimpleFunction('basket', [$this, 'getBasket']),
             new \Twig_SimpleFunction('recaptchaKey', [$this, 'getRecaptchaKey']),
-            new \Twig_SimpleFunction('menu', [$this, 'getMenu']),
+            new \Twig_SimpleFunction('menus', [$this->cmsService, 'getAllMenus']),
         ];
     }
 
@@ -118,18 +117,6 @@ class AppExtension extends \Twig_Extension
         $basket = $this->basketService->getBasket($basketId);
 
         return $basket;
-    }
-
-    public function getMenu(string $name): ?Menu
-    {
-        $menus = $this->cmsService->getAllMenus();
-        foreach ($menus as $menu) {
-            if ($name === $menu->getName()) {
-                return $menu;
-            }
-        }
-
-        return null;
     }
 
     public function getRecaptchaKey(): string

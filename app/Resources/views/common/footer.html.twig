@@ -1,13 +1,18 @@
-{%  set footerMenu = menu('footer') %}
+{%  set menus = menus() %}
 <footer>
     <div class="container text-center">
-        <ul class="footer-items">
-            {% if footerMenu is not null %}
-                {% for menuItem in footerMenu.items %}
-                    <li><a href="{{ menuItem.url }}" class="light-title">{{ menuItem.name }}</a></li>
-                {% endfor %}
+        {% for menu in menus %}
+            {% if menu.items is not empty %}
+            <nav>
+                <h4>{{ menu.name }}</h4>
+                <ul class="footer-items">
+                    {% for menuItem in menu.items %}
+                        <li><a href="{{ menuItem.url }}" class="light-title">{{ menuItem.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
             {% endif %}
-        </ul>
+        {% endfor %}
         <p class="light-title text-grey">Copyright ® 1998 — 2017</p>
     </div>
 </footer>
