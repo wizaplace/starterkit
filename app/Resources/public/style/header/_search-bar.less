@@ -41,24 +41,23 @@
                         .popunder(.3s, 100%);
                         cursor: pointer;
 
-                        .suggestion-item {
-
+                        .suggestion {
                             &:not(:first-of-type) {
                                 border-top: 1px solid @border-color;
                             }
 
-                            .suggestion {
-                                display: block;
-                                font-size: 1em;
-                                padding: .5em .25em;
+                            display: block;
+                            font-size: 1em;
+                            padding: .5em .25em;
 
-                                @media screen and (max-width: @screen-sm-max) {
-                                    font-size: 1.2em;
-                                }
+                            @media screen and (max-width: @screen-sm-max) {
+                                font-size: 1.2em;
+                            }
 
-                                &:hover, &:focus {
-                                    background-color: fade(@tertiary-color, 10%);
-                                }
+                            &:hover, &:focus {
+                                background-color: fade(@tertiary-color, 10%);
+                                color: @color-hover-dark;
+                                outline: 0;
                             }
                         }
                     }

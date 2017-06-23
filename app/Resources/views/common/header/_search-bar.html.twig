@@ -17,13 +17,11 @@
                         {# auto-complete suggestions #}
                         <div class="product-suggestions">
                             <ul class="content" v-if="productSuggestions.length">
-                                <li class="suggestion-item" v-for="suggestion in productSuggestions">
-                                    <a href="#"
-                                       class="suggestion"
-                                       @click.prevent="selectSuggestion(suggestion)"
-                                       v-text="suggestion.name"
-                                       tabindex="0"
-                                    ></a>
+                                <li class="suggestion"
+                                    v-for="suggestion in productSuggestions"
+                                    @click.prevent="selectSuggestion(suggestion)"
+                                    v-text="suggestion.name"
+                                    tabindex="0">
                                 </li>
                             </ul>
                         </div>
@@ -88,12 +86,21 @@
                     this.selectedCategoryId = $selectedCategory.val();
                 },
 
-                // _.debounce is a function provided by lodash to limit how often a particularly expensive operation can be run.
+                // _.debounce is a function provided by lodash
+                // to limit how often a particularly expensive operation can be run.
                 productAutocomplete: _.debounce(function() {
 
                     let self = this;
 
                     search.autocomplete(this.query, function (results) {
+
+                        // don't display suggestions if there is only one and that already matches user input
+                        if(results.length === 1 && results[0].name === self.query) {
+                            self.productSuggestions = [];
+                            return;
+                        }
+
+                        // fill suggestions
                         self.productSuggestions = results;
                     });
                 },
@@ -111,9 +118,11 @@
                     // - user has typed at least 3 characters
                     // - there are three characters and user clicks in the input field
                     $queryInput.on('keyup click', function() {
+
                         if (self.query.length >= 3) {
                             $queryInputGroup.removeClass('hidden');
                             self.productAutocomplete();
+
                         } else {
                             // don't fill/show suggestions if user input isn't specific enough
                             self.productSuggestions = [];
@@ -125,11 +134,73 @@
 
                         // doesn't hide if user has clicked on a suggestion or in the input field
                         let $target = $(e.target);
-                        if ($target.hasClass('suggestion') || $target.attr('name') === 'q') {
+
+                        if ($target.hasClass('suggestion') || $target[0] === $queryInput[0]) {
                             return;
                         }
 
                         $queryInputGroup.addClass('hidden');
+                    });
+
+                    // accessibility (keyboard usage)
+                    // ==============================
+
+                    // highlight first suggestion
+                    $queryInput.on('focus', function() {
+
+                        // If conditions are met, some suggestions are displayed
+                        // so now user can use down arrow key to highlight the first one
+                        $(this).on('keydown', function(e) {
+                            if(e.which === 40) { // 'down arrow' key
+                                $('.suggestion').first().focus();
+
+                                // add event listeners on suggestions for keyboard navigation
+                                // called only here to avoid performance issues
+                                self.suggestionsNav();
+                            }
+                        })
+                    });
+                },
+
+                // navigate through suggestions with keyboard
+                suggestionsNav: function() {
+                    let self = this;
+                    let $queryInput = $('[name="q"]');
+                    let $queryInputGroup = $('.product-suggestions');
+
+                    // behaviour when focus is on a suggestion
+                    $('.suggestion').on('keydown', function(e) {
+
+                        // if user pressed enter or space, select the suggestion
+                        if(e.which === 13 || e.which === 32) {
+                            self.query = $(this).text();
+                            $queryInput.focus();
+                            return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
+                        }
+
+                        // if user pressed down arrow key, focus next suggestion (loop if there is none)
+                        if(e.which === 40) {
+                            $(this).next().focus();
+                            return false; // prevent page to scroll down
+                        }
+
+                        // if user pressed up arrow key, focus previous suggestion (loop if there is none)
+                        if(e.which === 38) {
+                            $(this).prev().focus();
+                            return false; // prevent page to scroll up
+                        }
+
+                        // if user press tab key while on last suggestion, hide suggestions
+                        let $lastSuggestion = $(this).is(':last-of-type');
+
+                        if(e.which === 9 && $lastSuggestion) {
+                            $queryInputGroup.addClass('hidden');
+                        }
+
+                        // if user pressed esc key, focus (and reset) input field
+                        if(e.which === 27) {
+                            $queryInput.focus();
+                        }
                     });
                 },
 
@@ -140,6 +211,9 @@
 
                     // hide suggestions
                     this.productSuggestions = [];
+
+                    // focus back on input field
+                    $('[name="q"]').focus();
                 },
 
                 geoLocateMe: function() {
