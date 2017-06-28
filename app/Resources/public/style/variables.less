@@ -17,9 +17,9 @@
 // ======
 
 // general
-@primary-color: #607d8b;
-@secondary-color: #c7d6e0;
-@tertiary-color: #bc609a;
+@color-primary: #607d8b;
+@color-secondary: #c7d6e0;
+@color-tertiary: #bc609a;
 
 @color-dark: #333;
 @color-medium: #d9d9d9;
@@ -28,11 +28,11 @@
 @color-faded-dark: fade(@color-dark, 50%);
 @color-faded-light: fade(@color-light, 50%);
 
-@color-hover-dark: darken(saturate(@tertiary-color, 20%), 20%);
-@color-active-dark: darken(saturate(@tertiary-color, 50%), 10%);
+@color-hover-dark: darken(saturate(@color-tertiary, 20%), 20%);
+@color-active-dark: darken(saturate(@color-tertiary, 50%), 10%);
 
-@color-hover-light: lighten(saturate(@tertiary-color, 20%), 20%);
-@color-active-light: lighten(saturate(@tertiary-color, 50%), 10%);
+@color-hover-light: lighten(saturate(@color-tertiary, 20%), 20%);
+@color-active-light: lighten(saturate(@color-tertiary, 50%), 10%);
 
 @background-color-light: @color-light;
 
@@ -60,7 +60,7 @@
 
 
 // borders
-@border-color: lighten(@primary-color, 30%);
+@border-color: lighten(@color-primary, 30%);
 @radius: 3px;
 
 
