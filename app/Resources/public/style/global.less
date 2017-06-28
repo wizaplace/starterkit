@@ -126,6 +126,27 @@ a {
     }
 }
 
+.visible-xxs, .visible-xxs-block, .visible-xxs-inline {
+    // hidden on larger screen sizes
+    @media screen and (min-width: @screen-xs-min) {
+        display: none;
+    }
+}
+
+.visible-xxs, .visible-xxs-block {
+    // visible on very small screens
+    @media screen and (max-width: @screen-xxs-max) {
+        display: block;
+    }
+}
+
+.visible-xxs-inline {
+    // visible on very small screens
+    @media screen and (max-width: @screen-xxs-max) {
+        display: inline;
+    }
+}
+
 
 // use mixins defaults in templates
 // ================================

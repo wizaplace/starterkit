@@ -6,7 +6,15 @@
             {# ============= #}
 
             {# vertical nav (slider: small screens) #}
-            <div class="open-slide-panel"><i class="fa fa-bars"></i><span class="btn-label">Voir les catégories</span></div>
+            <div class="open-slide-panel">
+                <i class="fa fa-bars"></i>
+
+                {# visible on small and medium screens #}
+                <span class="btn-label hidden-xxs">Voir les catégories</span>
+
+                {# visible on very small screens #}
+                <span class="btn-label visible-xxs-inline">CATÉGORIES</span>
+            </div>
             <div class="category-wrapper slide-panel">
                 <i class="close-slide-panel fa fa-close" aria-label="fermer"></i>
                 {% include ('common/header/_category-menu.html.twig') %}
