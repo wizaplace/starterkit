@@ -25,6 +25,9 @@ security:
                 login_path: home
                 username_parameter: 'email'
                 password_parameter: 'password'
+            logout:
+                path: logout
+                target: home
             # activate different ways to authenticate
 
             # http_basic: ~

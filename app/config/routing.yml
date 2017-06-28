@@ -10,20 +10,19 @@ search:
     methods: [GET]
 
 # Auth
-login:
+login: # see security.yml
     path: /login
-    defaults: { _controller: AppBundle:Auth:Login }
     methods: [POST]
+
+logout: # see security.yml
+    path: /logout
+    methods: [GET]
 
 register:
     path: /register
     defaults: { _controller: AppBundle:Auth:Register }
     methods: [POST]
 
-logout:
-    path: /logout
-    defaults: { _controller: AppBundle:Auth:Logout }
-    methods: [GET]
 
 reset_password:
     path: /password
