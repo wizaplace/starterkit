@@ -117,6 +117,16 @@ a {
 }
 
 
+// grids
+// =====
+
+.hidden-xxs {
+    @media screen and (max-width: @screen-xxs-max) {
+        display: none;
+    }
+}
+
+
 // use mixins defaults in templates
 // ================================
 
@@ -158,6 +168,7 @@ p {
 
 .form-control {
     border-color: @border-color;
+    border-radius: @radius;
 }
 
 label {

@@ -7,147 +7,118 @@
         justify-content: space-between;
         align-items: center;
 
-        .search-bar-form {
+        form {
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: stretch;
 
             @media screen and (max-width: @screen-sm-max) {
                 flex-direction: column;
             }
 
-            .query-input-group {
-                width: 65%;
+            .group {
+                background: lighten(@secondary-color, 12%);
+                border-radius: @radius;
+                padding: .75em;
+                margin-right: .75em;
                 display: flex;
-                justify-content: center;
                 align-items: center;
 
                 @media screen and (max-width: @screen-sm-max) {
                     width: 100%;
-                    margin-bottom: 1em;
-                }
 
-                .product-search-input-group {
-                    position: relative;
-                    flex: 1 0 30%;
-
-                    @media screen and (max-width: @screen-sm-max) {
-                        flex: 1 1 60%;
+                    .form-control {
+                        height: 45px;
                     }
-
-                    // auto-complete
-                    .product-suggestions {
-                        .popunder(.3s, 100%);
-                        cursor: pointer;
-
-                        .suggestion {
-                            &:not(:first-of-type) {
-                                border-top: 1px solid @border-color;
-                            }
-
-                            display: block;
-                            font-size: 1em;
-                            padding: .5em .25em;
-
-                            @media screen and (max-width: @screen-sm-max) {
-                                font-size: 1.2em;
-                            }
-
-                            &:hover, &:focus {
-                                background-color: fade(@tertiary-color, 10%);
-                                color: @color-hover-dark;
-                                outline: 0;
-                            }
-                        }
-                    }
-
-                    // query input
-                    [name="q"] {
-                        // form-group: remove unneeded border radius
-                        .remove-border-radius-right();
-
-                        @media screen and (max-width: @screen-sm-max) {
-                            border-right: 0;
-                        }
-                    }
-                }
-
-                .category-picker {
-                    flex: 1 1 30%;
-
-                    // form-group: remove unneeded border radius and borders
-                    .remove-border-radius();
-                    border-left: 0;
-                    border-right: 0;
-
-                    @media screen and (max-width: @screen-sm-max) {
-                        flex: 1 1 auto;
-                    }
-
-                    @media screen and (max-width: @screen-xs-max) {
-                        display: none;
-                    }
-                }
-
-                .btn {
-                    flex: 1 1 auto;
-                    min-width: 20%;
-
-                    // form-group: remove unneeded border radius
-                    .remove-border-radius-left();
-
-                    // add some space between text and icon
-                    .has-left-icon();
                 }
             }
 
-            .geo-input-group {
-                width: 30%; // leave 5% of space between query and geoloc
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            // auto-complete
+            .product-suggestions {
+                .popunder(.3s, 100%);
+                cursor: pointer;
 
-                @media screen and (max-width: @screen-sm-max) {
-                    width: 100%;
+                .suggestion {
+                    &:not(:first-of-type) {
+                        border-top: 1px solid @border-color;
+                    }
+
+                    display: block;
+                    font-size: 1em;
+                    padding: .5em .25em;
+
+                    @media screen and (max-width: @screen-sm-max) {
+                        font-size: 1.2em;
+                    }
+
+                    &:hover, &:focus {
+                        background-color: fade(@tertiary-color, 10%);
+                        color: @color-hover-dark;
+                        outline: 0;
+                    }
+                }
+            }
+
+            // keyword and category query group
+            .group:first-of-type {
+                position: relative; // suggestions will fit inside this element width
+
+                & > * {
+                    width: 50%;
                 }
 
-                [name="geo[label]"] {
-                    flex: 1 1 auto;
-
-                    // form-group: remove unneeded border radius and border
+                [name="q"] {
                     .remove-border-radius-right();
                     border-right: 0;
                 }
 
-                .btn {
-                    flex: 1 0 auto;
-                    min-width: 20%;
-
-                    // form-group: remove unneeded border radius
+                .category-picker {
                     .remove-border-radius-left();
+                }
 
-                    // add some space between text and icon
-                    .has-left-icon();
+                // remove radius on smaller screens
+                @media screen and (max-width: @screen-md-max) {
+                    .remove-border-radius-bottom();
                 }
             }
 
-            // global
-            [class*="-input-group"] {
+            // geolocalization group
+            .group:last-of-type {
+                flex: 1 0 auto;
+
+                em {
+                    margin: 0 1em;
+                }
+
+                .btn {
+                    @media screen and (max-width: @screen-sm-max) {
+                        padding: .25em .75em;
+                    }
+                }
+
+                // remove radius on smaller screens and push away submit button
+                @media screen and (max-width: @screen-sm-max) {
+                    .remove-border-radius-top();
+                    margin-bottom: 1em;
+                }
+            }
+
+            .btn {
+                @media screen and (max-width: @screen-md-max) {
+                    font-size: 1.1em;
+                }
+
+                @media screen and (max-width: @screen-sm-max) {
+                    font-size: 1.3em;
+                }
+
                 @media screen and (max-width: @screen-xs-max) {
+                    font-size: 1.4em;
+                }
 
-                    [type="text"] {
-                        font-size: 1.8em;
-                        height: auto;
-                    }
-
-                    .btn {
-                        font-size: 1.8em;
-
-                        i {
-                            margin: 0;
-                        }
-                    }
+                @media screen and (max-width: @screen-xxs-max) {
+                    font-size: 1.7em;
                 }
             }
         }

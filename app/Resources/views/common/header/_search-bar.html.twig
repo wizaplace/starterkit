@@ -4,14 +4,14 @@
     <div class="container">
         <div class="wrapper">
 
-            <form action="{{ path('search') }}" method="get" class="search-bar-form" autocomplete="off">
+            <form action="{{ path('search') }}" method="get" autocomplete="off">
                 <input type="hidden" name="selected_category_id" v-model="selectedCategoryId">
 
-                {# query #}
-                <div class="query-input-group">
+                {# keyword and category query #}
+                <div class="group">
 
-                    {# query text input #}
-                    <div class="product-search-input-group">
+                    {# keyword input #}
+                    <div class="keyword-input">
                         <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
 
                         {# auto-complete suggestions #}
@@ -27,24 +27,18 @@
                         </div>
                     </div>
 
-                    {# categoriy selector (display only root categories) #}
+                    {# categoriy picker (display only root categories) #}
                     <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
-                        <option class="default-option" value="" selected disabled>Toutes les catégories</option>
+                        <option value="" selected>Toutes les catégories</option>
 
                         {% for category in categories %}
                             <option value="{{ category.category.id }}">{{ category.category.name }}</option>
                         {% endfor %}
                     </select>
-
-                    {# submit button #}
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fa fa-search"></i>
-                        <span class="hidden-xs">Rechercher</span>
-                    </button>
                 </div>
 
                 {# geolocation #}
-                <div class="geo-input-group">
+                <div class="group">
 
                     {# forward the geoloc to search page #}
                     <input type="hidden" name="geo[lat]" v-model="geoFilter.lat">
@@ -53,12 +47,20 @@
                     {# city, department #}
                     <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control" id="geofilter-label" placeholder="Ville, département...">
 
-                    {# submit button #}
+                    <em>ou</em>
+
+                    {# geolocalization button #}
                     <button type="button" class="btn btn-primary" @click="geoLocateMe">
                         <i class="fa fa-map-marker"></i>
-                        <span class="hidden-xs">Me localiser</span>
+                        <span class="hidden-xxs">Me localiser</span>
                     </button>
                 </div>
+
+                {# submit button #}
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i>
+                    <span class="hidden-xxs">Rechercher</span>
+                </button>
             </form>
         </div>
     </div>
