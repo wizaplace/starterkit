@@ -9,10 +9,10 @@ namespace AppBundle\Twig;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Exception\NotFound;
 use Wizaplace\Image\ImageService;
 use Wizaplace\User\User;
 use Wizaplace\User\UserService;
@@ -23,6 +23,8 @@ class AppExtension extends \Twig_Extension
     private $catalogService;
     /** @var SessionInterface */
     private $session;
+    /** @var TokenStorageInterface */
+    private $tokenStorage;
     /** @var UserService */
     private $userService;
     /** @var BasketService */
@@ -37,6 +39,7 @@ class AppExtension extends \Twig_Extension
     public function __construct(
         CatalogService $catalogService,
         SessionInterface $session,
+        TokenStorageInterface $tokenStorage,
         UserService $userService,
         BasketService $basketService,
         ImageService $imageService,
@@ -45,6 +48,7 @@ class AppExtension extends \Twig_Extension
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
+        $this->tokenStorage = $tokenStorage;
         $this->userService = $userService;
         $this->basketService = $basketService;
         $this->imageService = $imageService;
@@ -90,16 +94,15 @@ class AppExtension extends \Twig_Extension
 
     public function getCurrentUser(): ?User
     {
-        if (!$this->session->has(\AppBundle\Controller\AuthController::API_KEY)) {
-            return null;
-        }
-        try {
-            $apiKey = $this->session->get(\AppBundle\Controller\AuthController::API_KEY);
+        $token = $this->tokenStorage->getToken();
+        if (!is_null($token)) {
+            /** @var \AppBundle\Security\User $user */
+            $user = $token->getUser();
 
-            return $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
-        } catch (NotFound $e) {
-            return null;
+            return $user->getWizaplaceUser();
         }
+
+        return null;
     }
 
     public function getBasket(): ?Basket

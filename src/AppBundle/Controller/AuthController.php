@@ -21,36 +21,40 @@ class AuthController extends Controller
 
     public function loginAction(Request $request): Response
     {
-        // redirection url
-        $requestedUrl = $request->get('redirect_url');
+        dump($request);
+        dump($this->getUser());
 
-        // CSRF token validation
-        $submittedToken = $request->get('csrf_token');
-
-        if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
-            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
-
-            return $this->redirect($requestedUrl);
-        }
-
-        // user authentication
-        $email = $request->request->get('email');
-        $password = $request->request->get('password');
-        $userService = $this->get(UserService::class);
-
-        try {
-            $apiKey = $userService->authenticate($email, $password);
-            $this->get('session')->set(self::API_KEY, $apiKey);
-        } catch (BadCredentials $e) {
-            $this->addFlash('danger', 'Identifiants invalides, merci de réessayer.');
-        }
-
-        // add a success message
-        if ($this->get('session')->get(self::API_KEY)) {
-            $this->addFlash('success', 'Vous vous êtes connecté avec succès.');
-        }
-
-        return $this->redirect($requestedUrl);
+        return Response::create();
+//        // redirection url
+//        $requestedUrl = $request->get('redirect_url');
+//
+//        // CSRF token validation
+//        $submittedToken = $request->get('csrf_token');
+//
+//        if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
+//            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+//
+//            return $this->redirect($requestedUrl);
+//        }
+//
+//        // user authentication
+//        $email = $request->request->get('email');
+//        $password = $request->request->get('password');
+//        $userService = $this->get(UserService::class);
+//
+//        try {
+//            $apiKey = $userService->authenticate($email, $password);
+//            $this->get('session')->set(self::API_KEY, $apiKey);
+//        } catch (BadCredentials $e) {
+//            $this->addFlash('danger', 'Identifiants invalides, merci de réessayer.');
+//        }
+//
+//        // add a success message
+//        if ($this->get('session')->get(self::API_KEY)) {
+//            $this->addFlash('success', 'Vous vous êtes connecté avec succès.');
+//        }
+//
+//        return $this->redirect($requestedUrl);
     }
 
     public function registerAction(Request $request): Response

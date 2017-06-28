@@ -7,85 +7,61 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wizaplace\Order\Order;
 use Wizaplace\Order\OrderService;
-use Wizaplace\User\ApiKey;
-use Wizaplace\User\User;
+use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
 
 class ProfileController extends Controller
 {
     public function viewAction(): Response
     {
-        $session = $this->get('session');
-        if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
-
-            return $this->render('profile/profile.html.twig', ['profile' => $profile]);
-        }
-        throw new NotFoundHttpException();
+        return $this->render('profile/profile.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
     }
 
     public function addressesAction(): Response
     {
-        $session = $this->get('session');
-        if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
-
-            return $this->render('profile/addresses.html.twig', ['profile' => $profile]);
-        }
-        throw new NotFoundHttpException();
+        return $this->render('profile/addresses.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
     }
 
     public function ordersAction(): Response
     {
-        $session = $this->get('session');
-        if ($session->has(AuthController::API_KEY)) {
-            $vendorId = $this->get('kernel')->getVendorId();
-            $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
+        $vendorId = $this->get('kernel')->getVendorId();
 
-            $orders = $this->get(OrderService::class)->getOrders($this->getApiKey());
-            $orders = array_filter(
-                $orders,
-                function (Order $order) use ($vendorId) {
-                    return $vendorId == $order->getCompanyId();
-                }
-            );
+        $orders = $this->get(OrderService::class)->getOrders();
+        $orders = array_filter(
+            $orders,
+            function (Order $order) use ($vendorId) {
+                return $vendorId == $order->getCompanyId();
+            }
+        );
 
-            return $this->render('profile/orders.html.twig', ['profile' => $profile, 'orders' => $orders]);
-        }
-        throw new NotFoundHttpException();
+        return $this->render('profile/orders.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+            'orders' => $orders,
+        ]);
     }
 
     public function returnsAction(): Response
     {
-        $session = $this->get('session');
-        if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
-
-            return $this->render('profile/returns.html.twig', ['profile' => $profile]);
-        }
-        throw new NotFoundHttpException();
+        return $this->render('profile/returns.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
     }
 
     public function savAction(): Response
     {
-        $session = $this->get('session');
-        if ($session->has(AuthController::API_KEY)) {
-            $apiKey = $session->get(AuthController::API_KEY);
-            $profile = $this->get(UserService::class)->getProfileFromId($apiKey->getId(), $apiKey);
-
-            return $this->render('profile/sav.html.twig', ['profile' => $profile]);
-        }
-        throw new NotFoundHttpException();
+        return $this->render('profile/sav.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
     }
 
     public function updateProfileAction(Request $request)
@@ -105,11 +81,11 @@ class ProfileController extends Controller
             $data['addresses']['shipping'][40] = $data['addresses']['shipping'][39];
             unset($data['addresses']['shipping'][39]);
         }
-        $user = new User($data);
+        $user = new WizaplaceUser($data);
 
         $userService = $this->get(UserService::class);
-        $userService->updateUser($user, $this->getApiKey());
-        $userService->updateUserAdresses($user, $this->getApiKey());
+        $userService->updateUser($user);
+        $userService->updateUserAdresses($user);
 
         $referer =  $request->headers->get('referer');
 
@@ -121,12 +97,13 @@ class ProfileController extends Controller
         $userService = $this->get(UserService::class);
 
         $userId = $request->request->get('user[id]');
-        $user = $userService->getProfileFromId($userId, $this->getApiKey());
+        $user = $this->getUser();
         $userData = $request->request->get('user');
     }
 
-    private function getApiKey(): ApiKey
+    protected function getUser(): User
     {
-        return $this->get('session')->get(\AppBundle\Controller\AuthController::API_KEY);
+        // This method is just here for the return type hint.
+        return parent::getUser();
     }
 }
