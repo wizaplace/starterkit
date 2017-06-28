@@ -7,6 +7,7 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -95,11 +96,8 @@ class AppExtension extends \Twig_Extension
     public function getCurrentUser(): ?User
     {
         $token = $this->tokenStorage->getToken();
-        if (!is_null($token)) {
-            /** @var \AppBundle\Security\User $user */
-            $user = $token->getUser();
-
-            return $user->getWizaplaceUser();
+        if ($token instanceof ApiKeyToken) {
+            return $token->getUser()->getWizaplaceUser();
         }
 
         return null;
