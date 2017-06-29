@@ -9,7 +9,6 @@ declare(strict_types = 1);
 namespace AppBundle\Security;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -22,16 +21,12 @@ class FormAuthenticator implements SimpleFormAuthenticatorInterface
     /** @var ApiClient */
     private $apiClient;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
     /** @var UserService */
     private $userService;
 
-    public function __construct(ApiClient $apiClient, UserService $userService, TokenStorageInterface $tokenStorage)
+    public function __construct(ApiClient $apiClient, UserService $userService)
     {
         $this->apiClient = $apiClient;
-        $this->tokenStorage = $tokenStorage;
         $this->userService = $userService;
     }
 
