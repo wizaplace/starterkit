@@ -11,7 +11,6 @@ use AppBundle\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Order\Order;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
@@ -34,15 +33,7 @@ class ProfileController extends Controller
 
     public function ordersAction(): Response
     {
-        $vendorId = $this->get('kernel')->getVendorId();
-
         $orders = $this->get(OrderService::class)->getOrders();
-        $orders = array_filter(
-            $orders,
-            function (Order $order) use ($vendorId) {
-                return $vendorId == $order->getCompanyId();
-            }
-        );
 
         return $this->render('profile/orders.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
