@@ -9,6 +9,7 @@ declare(strict_types = 1);
 namespace AppBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Wizaplace\Authentication\ApiKey;
 use Wizaplace\User\User as WizaplaceUser;
 
 class User implements UserInterface
@@ -16,8 +17,12 @@ class User implements UserInterface
     /** @var WizaplaceUser */
     private $user;
 
-    public function __construct(WizaplaceUser $user = null)
+    /** @var ApiKey */
+    private $apiKey;
+
+    public function __construct(ApiKey $apiKey, WizaplaceUser $user)
     {
+        $this->apiKey = $apiKey;
         $this->user = $user;
     }
 
@@ -46,8 +51,13 @@ class User implements UserInterface
     {
     }
 
-    public function getWizaplaceUser(): \Wizaplace\User\User
+    public function getWizaplaceUser(): WizaplaceUser
     {
         return $this->user;
+    }
+
+    public function getApiKey(): ApiKey
+    {
+        return $this->apiKey;
     }
 }

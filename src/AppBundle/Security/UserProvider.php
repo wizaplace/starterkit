@@ -11,6 +11,7 @@ namespace AppBundle\Security;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Wizaplace\ApiClient;
 use Wizaplace\User\UserService;
 
 class UserProvider implements UserProviderInterface
@@ -18,11 +19,14 @@ class UserProvider implements UserProviderInterface
     /** @var UserService */
     private $userService;
 
-    public function __construct(UserService $userService)
+    /** @var ApiClient */
+    private $apiClient;
+
+    public function __construct(UserService $userService, ApiClient $apiClient)
     {
         $this->userService = $userService;
+        $this->apiClient = $apiClient;
     }
-
 
     public function loadUserByUsername($username): UserInterface
     {

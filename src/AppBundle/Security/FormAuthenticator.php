@@ -39,14 +39,10 @@ class FormAuthenticator implements SimpleFormAuthenticatorInterface
     {
         $apiKey = $this->apiClient->authenticate($token->getUsername(), $token->getCredentials());
 
-        $user = new User($this->userService->getProfileFromId($apiKey->getId()));
+        $user = new User($apiKey, $this->userService->getProfileFromId($apiKey->getId()));
+        $token = new UsernamePasswordToken($user, $token->getCredentials(), $providerKey, $user->getRoles());
 
-        $apiKeyToken = new ApiKeyToken($apiKey, $user, $token->getRoles());
-        $apiKeyToken->setAuthenticated(true);
-
-        $this->tokenStorage->setToken($apiKeyToken);
-
-        return $apiKeyToken;
+        return $token;
     }
 
     public function supportsToken(TokenInterface $token, $providerKey): bool
