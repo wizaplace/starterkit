@@ -39,12 +39,11 @@ class UserProvider implements UserProviderInterface
             throw new UnsupportedUserException();
         }
 
-        // @FIXME: this does not work, as we haven't set the ApiKey at this point...
-//        $freshUser = $this->userService->getProfileFromId($user->getWizaplaceUser()->getId());
-//
-//        return new User($freshUser);
+        $this->apiClient->setApiKey($user->getApiKey());
 
-        return $user;
+        $freshUser = $this->userService->getProfileFromId($user->getWizaplaceUser()->getId());
+
+        return new User($user->getApiKey(), $freshUser);
     }
 
     public function supportsClass($class): bool
