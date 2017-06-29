@@ -1,18 +1,22 @@
 {%  set menus = menus() %}
 <footer>
-    <div class="container text-center">
-        {% for menu in menus %}
-            {% if menu.items is not empty %}
-            <nav>
-                <h4>{{ menu.name }}</h4>
-                <ul class="footer-items">
-                    {% for menuItem in menu.items %}
-                        <li><a href="{{ menuItem.url }}" class="light-title">{{ menuItem.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
-            {% endif %}
+    <div class="container">
+        {% for menuBatch in menus|batch(4) %}
+            <div class="row">
+                {% for menu in menuBatch %}
+                    <nav class="col-lg-3 col-sm-3">
+                        <h4>{{ menu.name }}</h4>
+                        <ul class="footer-items">
+                            {% for menuItem in menu.items %}
+                                <li><a href="{{ menuItem.url }}" class="light-title">{{ menuItem.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endfor %}
+            </div>
         {% endfor %}
-        <p class="light-title text-grey">Copyright ® 1998 — 2017</p>
+        <p class="light-title text-grey text-center">
+            Copyright ® 1998 — 2017
+        </p>
     </div>
 </footer>
