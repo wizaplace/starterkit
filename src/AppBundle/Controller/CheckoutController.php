@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wizaplace\Basket\BasketService;
 
 class CheckoutController extends Controller
@@ -18,6 +19,11 @@ class CheckoutController extends Controller
 
     public function loginAction(): Response
     {
+        if (!is_null($this->getUser())) {
+            // User is already authenticated, go to next step
+            return $this->redirect($this->generateUrl('checkout_addresses'));
+        }
+
         $basketId = $this->getBasketId();
         $basket = $this->get(BasketService::class)->getBasket($basketId);
 
@@ -49,7 +55,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function completeAction(Request $request): Response
+    public function submitPaymentAction(Request $request): Response
     {
         $basketService = $this->get(BasketService::class);
         $paymentId = $request->request->get('paymentId');
@@ -57,16 +63,30 @@ class CheckoutController extends Controller
             $this->getBasketId(),
             $paymentId,
             true,
-            $this->get('session')->get(\AppBundle\Controller\AuthController::API_KEY)
+            $this->generateUrl('checkout_complete', [], UrlGeneratorInterface::ABSOLUTE_URL)
         );
 
-        if ($paymentInfo->getRedirectUrl()) {
-            return $this->redirect($paymentInfo->getRedirectUrl());
+        $paymentRedirectUrl = $paymentInfo->getRedirectUrl();
+        if ($paymentRedirectUrl) {
+            return $this->redirect($paymentRedirectUrl);
         }
 
-        return $this->render('checkout/confirmation.html.twig', [
-                'paymentInfo' => $paymentInfo,
-        ]);
+        // @FIXME : display $paymentInfo->getHtml()
+        return $this->redirect($this->generateUrl('checkout_complete'));
+    }
+
+    public function completeAction(Request $request): Response
+    {
+        $success = (bool) $request->query->get("status", true);
+        if (!$success) {
+            $this->addFlash('error', 'payment failed');
+
+            return $this->redirect($this->generateUrl('checkout_payment'));
+        }
+
+        // @TODO : get order IDs from request, and display orders
+
+        return $this->render('checkout/confirmation.html.twig', []);
     }
 
     protected function getBasketId(): string

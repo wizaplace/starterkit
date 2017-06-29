@@ -35,7 +35,7 @@ security:
                 path: logout
                 target: home
                 csrf_parameter: csrf_token
-                csrf_token_id: logout
+                csrf_token_id: logout_token
                 csrf_token_generator: security.csrf.token_manager
             # activate different ways to authenticate
 
@@ -46,3 +46,5 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
     access_control:
         - { path: ^/profil, roles: [ ROLE_USER ] }
+        - { path: ^/commande/connexion, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/commande, roles: [ ROLE_USER ] }
