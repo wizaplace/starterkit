@@ -41,9 +41,9 @@ class UserProvider implements UserProviderInterface
 
         $this->apiClient->setApiKey($user->getApiKey());
 
-        $freshUser = $this->userService->getProfileFromId($user->getWizaplaceUser()->getId());
+        $user->setUserService($this->userService);
 
-        return new User($user->getApiKey(), $freshUser);
+        return $user;
     }
 
     public function supportsClass($class): bool

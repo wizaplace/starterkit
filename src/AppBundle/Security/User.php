@@ -11,21 +11,34 @@ namespace AppBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wizaplace\Authentication\ApiKey;
 use Wizaplace\User\User as WizaplaceUser;
+use Wizaplace\User\UserService;
 
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /** @var WizaplaceUser */
-    private $user;
+    private $wizaplaceUser;
 
     /** @var ApiKey */
     private $apiKey;
 
-    public function __construct(ApiKey $apiKey, WizaplaceUser $user)
+    /** @var null|UserService */
+    private $userService;
+
+    /** @var bool */
+    private $userIsFresh;
+
+    public function __construct(ApiKey $apiKey, WizaplaceUser $user, ?UserService $userService = null)
     {
+        $this->wizaplaceUser = $user;
+        $this->userIsFresh = true;
         $this->apiKey = $apiKey;
-        $this->user = $user;
+        $this->userService = $userService;
     }
 
+    public function setUserService(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
 
     public function getRoles(): array
     {
@@ -44,7 +57,7 @@ class User implements UserInterface
 
     public function getUsername(): string
     {
-        return $this->user->getEmail();
+        return $this->wizaplaceUser->getEmail();
     }
 
     public function eraseCredentials(): void
@@ -53,11 +66,40 @@ class User implements UserInterface
 
     public function getWizaplaceUser(): WizaplaceUser
     {
-        return $this->user;
+        if (!$this->userIsFresh) {
+            $this->refreshWizaplaceUser();
+        }
+
+        return $this->wizaplaceUser;
     }
 
     public function getApiKey(): ApiKey
     {
         return $this->apiKey;
+    }
+
+    public function serialize()
+    {
+        return \serialize([
+            'apiKey' => $this->apiKey,
+            'wUser' => $this->wizaplaceUser,
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        $data = \unserialize($serialized);
+        $this->apiKey = $data['apiKey'];
+        $this->wizaplaceUser = $data['wUser'];
+        $this->userIsFresh = false;
+    }
+
+    private function refreshWizaplaceUser(): void
+    {
+        if (is_null($this->userService)) {
+            return;
+        }
+        $this->wizaplaceUser = $this->userService->getProfileFromId($this->wizaplaceUser->getId());
+        $this->userIsFresh = true;
     }
 }

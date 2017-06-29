@@ -11,6 +11,7 @@ use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
@@ -96,8 +97,11 @@ class AppExtension extends \Twig_Extension
     public function getCurrentUser(): ?User
     {
         $token = $this->tokenStorage->getToken();
-        if ($token instanceof ApiKeyToken) {
-            return $token->getUser()->getWizaplaceUser();
+        if ($token instanceof TokenInterface) {
+            $user = $token->getUser();
+            if ($user instanceof \AppBundle\Security\User) {
+                return $user->getWizaplaceUser();
+            }
         }
 
         return null;
