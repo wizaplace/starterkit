@@ -47,7 +47,7 @@ class User implements UserInterface, \Serializable
 
     public function getPassword(): string
     {
-        return '';// TODO: Implement getPassword() method.
+        return '';
     }
 
     public function getSalt(): ?string
