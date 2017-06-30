@@ -18,7 +18,7 @@ class GenericPageContext extends AbstractPageContext
     public function assertPageMetaTitleEquals(string $expectedTitle)
     {
         $actualTitle = $this->getSession()->getPage()->find("css", "html > head > title")->getText();
-        Assertion::eq($expectedTitle, $actualTitle);
+        Assertion::eq($actualTitle, $expectedTitle);
     }
 
     /**
@@ -27,7 +27,7 @@ class GenericPageContext extends AbstractPageContext
     public function assertPageH1TitleEquals(string $expectedTitle)
     {
         $actualTitle = $this->getSession()->getPage()->find("css", "h1")->getText();
-        Assertion::eq($expectedTitle, $actualTitle);
+        Assertion::eq($actualTitle, $expectedTitle);
     }
 
     /**

@@ -157,32 +157,6 @@ category:
     requirements:
         slug: "%slug.regexp%"
 
-cmsQuiSommesNous:
-    path: /qui-sommes-nous
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    cms/qui-sommes-nous.html.twig
-cmsAide:
-    path: /aide-et-faq
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    cms/aide-et-faq.html.twig
-cmsContact:
-    path: /contact
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    cms/contact.html.twig
-cmsMentionsLegales:
-    path: /mentions-legales
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    cms/mentions-legales.html.twig
-cmsCgv:
-    path: /cgv
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    cms/cgv.html.twig
-
 cmsPage:
     path: /{slug}
     defaults: { _controller: AppBundle:Cms:Page }
