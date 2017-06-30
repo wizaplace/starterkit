@@ -13,7 +13,7 @@
             justify-content: space-between;
             align-items: stretch;
 
-            @media screen and (max-width: @screen-sm-max) {
+            @media screen and (max-width: @screen-md-max) {
                 flex-direction: column;
             }
 
@@ -25,7 +25,7 @@
                 display: flex;
                 align-items: center;
 
-                @media screen and (max-width: @screen-sm-max) {
+                @media screen and (max-width: @screen-md-max) {
                     width: 100%;
 
                     .form-control {
@@ -48,7 +48,7 @@
                     font-size: 1em;
                     padding: .5em .25em;
 
-                    @media screen and (max-width: @screen-sm-max) {
+                    @media screen and (max-width: @screen-md-max) {
                         font-size: 1.2em;
                     }
 
@@ -62,19 +62,68 @@
 
             // keyword and category query group
             .group:first-of-type {
-                position: relative; // suggestions will fit inside this element width
-
-                & > * {
-                    width: 50%;
-                }
-
-                [name="q"] {
-                    .remove-border-radius-right();
-                    border-right: 0;
-                }
+                position: relative;
+                flex-basis: 50%; // of the container width
 
                 .category-picker {
-                    .remove-border-radius-left();
+                    color: @color-primary;
+                    cursor: pointer;
+                    .remove-border-radius-right();
+                    background: @color-secondary;
+                    flex: 0 1 auto;
+
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .picker-icon {
+                        font-size: 2em;
+                        color: @color-light;
+                        text-shadow: 1px 1px 1px rgba(0,0,0,.1); // subtle pop
+
+                        @media screen and (min-width: @screen-md-min) {
+                            display: none;
+                        }
+                    }
+
+                    .picker-label, .picker-arrow {
+                        @media screen and (max-width: @screen-sm-max) {
+                            display: none;
+                        }
+                    }
+
+                    &:hover {
+                        background: darken(saturate(@color-secondary, 5%), 8%);
+                    }
+
+                    .categories {
+                        display: none; // starts off hidden
+
+                        position: absolute;
+                        z-index: 2;
+
+                        &.is-open {
+                            display: block;
+                        }
+                    }
+
+                    @media screen and (max-width: @screen-sm-max) {
+                        flex-basis: 0;
+                    }
+                }
+
+                .keyword-input {
+                    position: relative; // suggestions will fit inside this element width
+                    flex: 1 0 70%;
+
+                    [name="q"] {
+                        .remove-border-radius-left();
+                        border-left: 0;
+                    }
+
+                    @media screen and (max-width: @screen-md-max) {
+                        flex-basis: 80%;
+                    }
                 }
 
                 // remove radius on smaller screens
@@ -92,24 +141,22 @@
                 }
 
                 .btn {
-                    @media screen and (max-width: @screen-sm-max) {
+                    @media screen and (max-width: @screen-md-max) {
                         padding: .25em .75em;
                     }
                 }
 
                 // remove radius on smaller screens and push away submit button
-                @media screen and (max-width: @screen-sm-max) {
+                @media screen and (max-width: @screen-md-max) {
                     .remove-border-radius-top();
                     margin-bottom: 1em;
                 }
             }
 
             .btn {
-                @media screen and (max-width: @screen-md-max) {
-                    font-size: 1.1em;
-                }
+                flex: 1 1 auto;
 
-                @media screen and (max-width: @screen-sm-max) {
+                @media screen and (max-width: @screen-md-max) {
                     font-size: 1.3em;
                 }
 

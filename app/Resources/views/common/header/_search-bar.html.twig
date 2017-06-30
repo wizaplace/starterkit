@@ -10,6 +10,28 @@
                 {# keyword and category query #}
                 <div class="group">
 
+                    {# category picker (display only root categories) #}
+                    <div class="category-picker form-control" title="Sélectionnez une catégorie">
+                        <i class="picker-icon fa fa-list-alt"></i>
+                        <span class="picker-label">Toutes les catégories</span>
+                        <i class="picker-arrow fa fa-caret-down"></i>
+
+                        {# categories #}
+                        <ul class="categories">
+                            <li class="category" v-for="i in 12">Nom de la catégorie</li>
+                        </ul>
+                    </div>
+
+
+
+                    {#<select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">#}
+                        {#<option value="" selected>Toutes les catégories</option>#}
+
+                        {#{% for category in categories %}#}
+                            {#<option value="{{ category.category.id }}">{{ category.category.name }}</option>#}
+                        {#{% endfor %}#}
+                    {#</select>#}
+
                     {# keyword input #}
                     <div class="keyword-input">
                         <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
@@ -26,15 +48,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    {# categoriy picker (display only root categories) #}
-                    <select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">
-                        <option value="" selected>Toutes les catégories</option>
-
-                        {% for category in categories %}
-                            <option value="{{ category.category.id }}">{{ category.category.name }}</option>
-                        {% endfor %}
-                    </select>
                 </div>
 
                 {# geolocation #}
@@ -279,6 +292,15 @@
                 // input field behaviour
                 this.initProductAutocomplete();
             }
+        });
+
+
+        // DOM behaviour
+        // =============
+
+        // toggle category picker
+        $('.category-picker').on('click', function() {
+            $(this).find('.categories').toggleClass('is-open');
         });
     });
 </script>
