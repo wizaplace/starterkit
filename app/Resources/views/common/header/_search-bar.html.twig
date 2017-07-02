@@ -108,7 +108,7 @@
                             return;
                         }
 
-                        $('.categories.is-open').removeClass('is-open');
+                        $('.category-picker.is-active').removeClass('is-active');
                     });
                 },
 
@@ -321,7 +321,7 @@
 
         // toggle category picker
         $('.category-picker').on('click', function() {
-            $(this).find('.categories').toggleClass('is-open');
+            $(this).toggleClass('is-active');
         });
     });
 </script>

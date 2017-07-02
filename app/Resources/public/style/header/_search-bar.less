@@ -94,7 +94,22 @@
                         .popunder();
                         cursor: pointer;
 
-                        &.is-open {
+                        .category {
+                            .popin-list-item();
+                            color: @color-dark;
+                            padding: .25em;
+                        }
+                    }
+
+                    &.is-active {
+                        background: darken(saturate(@color-secondary, 5%), 12%);
+
+                        .picker-icon {
+                            color: darken(@color-primary, 10%);
+                            text-shadow: none;
+                        }
+
+                        .categories {
                             display: block;
                             top: 3em;
                             left: .75em;
@@ -102,12 +117,6 @@
                             @media screen and (max-width: @screen-md-max) {
                                 top: 4em;
                             }
-                        }
-
-                        .category {
-                            .popin-list-item();
-                            color: @color-dark;
-                            padding: .25em;
                         }
                     }
 
