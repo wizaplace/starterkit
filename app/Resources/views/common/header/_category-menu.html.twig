@@ -12,7 +12,7 @@
                     <i class="menu-toggle fa fa-plus hidden-md hidden-lg"></i>
                 {% endif %}
 
-                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
             </div>
 
             <div class="wrapper">
@@ -23,13 +23,13 @@
                         {% for category in category.children %}
 
                             <li class="category">
-                                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
                                 <ul class="category-sub-menu">
 
                                     {% for category in category.children %}
 
                                         <li class="category">
-                                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name }}</a>
+                                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
                                         </li>
 
                                     {% endfor %}

@@ -13,10 +13,6 @@
         padding: 1em 0;
 
         .open-slide-panel {
-            @media screen and(min-width: @screen-md-min) {
-                display: none;
-            }
-
             padding: .25em .75em;
             font-size: 1.3em;
             .has-left-icon();
@@ -25,12 +21,20 @@
             border: 1px solid @color-light;
             border-radius: @radius;
 
-            &:hover {
-                border-color: @color-hover-light;
+            // hide button from medium screens
+            @media screen and(min-width: @screen-md-min) {
+                display: none;
             }
 
-            &:active {
-                border-color: @color-active-light;
+            // style change basis on smaller screens
+            @media screen and (max-width: @screen-sm-max) {
+                background: darken(saturate(@color-secondary, 5%), 12%);
+                text-shadow: 1px 1px 1px rgba(0,0,0,.3); // subtle pop
+
+                &:hover, &:focus, &:active {
+                    color: darken(@color-primary, 10%);
+                    text-shadow: none;
+                }
             }
 
             @media screen and (max-width: @screen-xs-max) {
