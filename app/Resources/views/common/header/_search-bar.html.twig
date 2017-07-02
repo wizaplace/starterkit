@@ -88,7 +88,7 @@
 
             data: {
                 selectedCategory: {
-                    id: "",
+                    id: '{{ selectedCategory.id|default('')|e('js') }}' || "",
                     name: '{{ selectedCategory.name|default('')|lower|capitalize|e('js') }}' || "Toutes les catégories"
                 },
                 productSuggestions: [],
