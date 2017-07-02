@@ -5,7 +5,7 @@
         <div class="wrapper">
 
             <form action="{{ path('search') }}" method="get" autocomplete="off">
-                <input type="hidden" name="selected_category_id" v-model="selectedCategoryId">
+                <input type="hidden" name="selected_category_id" v-model="selectedCategory.id">
 
                 {# keyword and category query #}
                 <div class="group">
@@ -13,24 +13,22 @@
                     {# category picker (display only root categories) #}
                     <div class="category-picker form-control" title="Sélectionnez une catégorie">
                         <i class="picker-icon fa fa-list-alt"></i>
-                        <span class="picker-label">Toutes les catégories</span>
+                        <span class="picker-label" v-text="selectedCategory.name"></span>
                         <i class="picker-arrow fa fa-caret-down"></i>
 
                         {# categories #}
-                        <ul class="categories">
-                            <li class="category" v-for="i in 12">Nom de la catégorie</li>
-                        </ul>
+                        <div class="categories">
+                            <ul class="content">
+                                {% for category in categories %}
+                                    <li class="category"
+                                        :class="{ 'is-selected': selectedCategory.id == '{{ category.category.id }}' }"
+                                        @click='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'>
+                                        {{ category.category.name|lower|capitalize }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-
-
-
-                    {#<select class="category-picker form-control" title="Sélectionnez une catégorie" @change="selectCategory()">#}
-                        {#<option value="" selected>Toutes les catégories</option>#}
-
-                        {#{% for category in categories %}#}
-                            {#<option value="{{ category.category.id }}">{{ category.category.name }}</option>#}
-                        {#{% endfor %}#}
-                    {#</select>#}
 
                     {# keyword input #}
                     <div class="keyword-input">
@@ -89,16 +87,36 @@
             el: '#search-bar',
 
             data: {
-                selectedCategoryId: '',
+                selectedCategory: {
+                    id: "",
+                    name: '{{ selectedCategory.name|default('')|lower|capitalize|e('js') }}' || "Toutes les catégories"
+                },
                 productSuggestions: [],
                 query: urlParameters.query || '',
                 geoFilter: urlParameters.geoFilter || {},
             },
 
             methods: {
-                selectCategory: function() {
-                    let $selectedCategory = $(".category-picker option:selected");
-                    this.selectedCategoryId = $selectedCategory.val();
+                initCategorySelection: function() {
+                    // hide list when user has clicked somewhere else
+                    $(document).on('click', function(e) {
+
+                        // doesn't hide if user has clicked on a listed category
+                        let $target = $(e.target);
+
+                        if($target.closest('.category-picker').length) {
+                            return;
+                        }
+
+                        $('.categories.is-open').removeClass('is-open');
+                    });
+                },
+
+                selectCategory: function(categoryId, categoryName) {
+                    this.selectedCategory = {
+                        id: categoryId,
+                        name: categoryName
+                    }
                 },
 
                 // _.debounce is a function provided by lodash
@@ -171,14 +189,14 @@
 
                                 // add event listeners on suggestions for keyboard navigation
                                 // called only here to avoid performance issues
-                                self.suggestionsNav();
+                                self.keyboardNav();
                             }
                         })
                     });
                 },
 
-                // navigate through suggestions with keyboard
-                suggestionsNav: function() {
+                // navigate through a list with keyboard
+                keyboardNav: function() {
                     let self = this;
                     let $queryInput = $('[name="q"]');
                     let $queryInputGroup = $('.product-suggestions');
@@ -291,6 +309,9 @@
 
                 // input field behaviour
                 this.initProductAutocomplete();
+
+                // category list selection behaviour
+                this.initCategorySelection();
             }
         });
 
