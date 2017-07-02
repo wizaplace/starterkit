@@ -11,7 +11,7 @@
                 <div class="group">
 
                     {# category picker (display only root categories) #}
-                    <div class="category-picker form-control" title="Sélectionnez une catégorie">
+                    <div class="category-picker form-control" title="Sélectionnez une catégorie" tabindex="0">
                         <i class="picker-icon fa fa-list-alt"></i>
                         <span class="picker-label" v-text="selectedCategory.name"></span>
                         <i class="picker-arrow fa fa-caret-down"></i>
@@ -22,8 +22,9 @@
                                 {% for category in categories %}
                                     <li class="category"
                                         :class="{ 'is-selected': selectedCategory.id == '{{ category.category.id }}' }"
-                                        @click='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'>
-                                        {{ category.category.name|lower|capitalize }}
+                                        @click='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
+                                        tabindex="0">
+                                    {{ category.category.name|lower|capitalize }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -32,7 +33,8 @@
 
                     {# keyword input #}
                     <div class="keyword-input">
-                        <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query" @keyup.esc="query = ''">
+                        <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query"
+                               @keyup.esc="query = ''">
 
                         {# auto-complete suggestions #}
                         <div class="product-suggestions">
@@ -56,7 +58,8 @@
                     <input type="hidden" name="geo[lng]" v-model="geoFilter.lng">
 
                     {# city, department #}
-                    <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control" id="geofilter-label" placeholder="Ville, département...">
+                    <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control"
+                           id="geofilter-label" placeholder="Ville, département...">
 
                     <em>ou</em>
 
@@ -78,7 +81,7 @@
 </div>
 
 <script>
-    $(function() {
+    $(function () {
 
         let search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
         let urlParameters = search.restoreSearchFromUrl(); // used in search page
@@ -97,14 +100,44 @@
             },
 
             methods: {
-                initCategorySelection: function() {
-                    // hide list when user has clicked somewhere else
-                    $(document).on('click', function(e) {
+                initCategorySelection: function () {
+
+                    // toggle selectable categories list
+                    // =================================
+
+                    let $categoryPicker = $('.category-picker');
+                    let $selectableCategories = $categoryPicker.find('.category');
+
+                    // toggle categories list on click
+                    $categoryPicker.on('click', function() {
+                        $(this).toggleClass('is-active');
+                    });
+
+                    // toggle categories list if picker is focused and user press space or enter key
+                    $categoryPicker.on('focus', function () {
+
+                        $(this).on('keydown', function(e) {
+                            if (e.which === 13 || e.which === 32) {
+                                $(this).toggleClass('is-active');
+                                return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
+                            }
+                        });
+                    });
+
+                    // hide categories list on last selectable category blur event
+                    let $lastSelectableCategory = $categoryPicker.find('.category:last-of-type');
+
+                    $lastSelectableCategory.on('blur', function () {
+                        $categoryPicker.removeClass('is-active');
+                    });
+
+                    // hide categories list when user has clicked somewhere else
+                    $(document).on('click', function (e) {
 
                         // doesn't hide if user has clicked on a listed category
                         let $target = $(e.target);
 
-                        if($target.closest('.category-picker').length) {
+                        if ($target.closest('.category-picker').length) {
                             return;
                         }
 
@@ -112,7 +145,7 @@
                     });
                 },
 
-                selectCategory: function(categoryId, categoryName) {
+                selectCategory: function (categoryId, categoryName) {
                     this.selectedCategory = {
                         id: categoryId,
                         name: categoryName
@@ -121,39 +154,39 @@
 
                 // _.debounce is a function provided by lodash
                 // to limit how often a particularly expensive operation can be run.
-                productAutocomplete: _.debounce(function() {
+                productAutocomplete: _.debounce(function () {
 
-                    let self = this;
+                        let self = this;
 
-                    search.autocomplete(this.query, function (results) {
+                        search.autocomplete(this.query, function (results) {
 
-                        // don't display suggestions if there is only one and that already matches user input
-                        if(results.length === 1 && results[0].name === self.query) {
-                            self.productSuggestions = [];
-                            return;
-                        }
+                            // don't display suggestions if there is only one and that already matches user input
+                            if (results.length === 1 && results[0].name === self.query) {
+                                self.productSuggestions = [];
+                                return;
+                            }
 
-                        // fill suggestions
-                        self.productSuggestions = results;
-                    });
-                },
+                            // fill suggestions
+                            self.productSuggestions = results;
+                        });
+                    },
                     // how long to wait for user to stop typing (in ms)
                     200
                 ),
 
                 // watch user query input to display corresponding product suggestions (auto-completion)
-                initProductAutocomplete: function() {
+                initProductAutocomplete: function () {
                     let self = this;
                     let $queryInput = $('[name="q"]');
-                    let $queryInputGroup = $('.product-suggestions');
+                    let $productSuggestions = $('.product-suggestions');
 
                     // show suggestions when:
                     // - user has typed at least 3 characters
                     // - there are three characters and user clicks in the input field
-                    $queryInput.on('keyup click', function() {
+                    $queryInput.on('keyup click', function () {
 
                         if (self.query.length >= 3) {
-                            $queryInputGroup.removeClass('hidden');
+                            $productSuggestions.removeClass('hidden');
                             self.productAutocomplete();
 
                         } else {
@@ -163,7 +196,7 @@
                     });
 
                     // hide suggestions when user has clicked somewhere else
-                    $(document).on('click', function(e) {
+                    $(document).on('click', function (e) {
 
                         // doesn't hide if user has clicked on a suggestion or in the input field
                         let $target = $(e.target);
@@ -172,72 +205,76 @@
                             return;
                         }
 
-                        $queryInputGroup.addClass('hidden');
+                        $productSuggestions.addClass('hidden');
                     });
 
                     // accessibility (keyboard usage)
                     // ==============================
 
                     // highlight first suggestion
-                    $queryInput.on('focus', function() {
+                    $queryInput.on('focus', function () {
 
                         // If conditions are met, some suggestions are displayed
                         // so now user can use down arrow key to highlight the first one
-                        $(this).on('keydown', function(e) {
-                            if(e.which === 40) { // 'down arrow' key
+                        $(this).on('keydown', function (e) {
+
+                            if (e.which === 40) { // 'down arrow'
                                 $('.suggestion').first().focus();
 
                                 // add event listeners on suggestions for keyboard navigation
                                 // called only here to avoid performance issues
                                 self.keyboardNav();
+
+                            // if user pressed tab key instead
+                            } else if (e.which === 9) {
+                                self.keyboardNav();
                             }
-                        })
+                        });
                     });
                 },
 
-                // navigate through a list with keyboard
-                keyboardNav: function() {
+                // navigate through a list of selectable items with keyboard
+                keyboardNav: function () {
                     let self = this;
                     let $queryInput = $('[name="q"]');
-                    let $queryInputGroup = $('.product-suggestions');
+                    let $productSuggestions = $('.product-suggestions');
 
-                    // behaviour when focus is on a suggestion
-                    $('.suggestion').on('keydown', function(e) {
+                    $('.suggestion').on('keydown', function (e) {
 
                         // if user pressed enter or space, select the suggestion
-                        if(e.which === 13 || e.which === 32) {
+                        if (e.which === 13 || e.which === 32) {
                             self.query = $(this).text();
                             $queryInput.focus();
                             return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
                         }
 
-                        // if user pressed down arrow key, focus next suggestion (loop if there is none)
-                        if(e.which === 40) {
+                        // if user pressed down arrow or tab key, focus next suggestion
+                        if (e.which === 40) {
                             $(this).next().focus();
                             return false; // prevent page to scroll down
                         }
 
-                        // if user pressed up arrow key, focus previous suggestion (loop if there is none)
-                        if(e.which === 38) {
+                        // if user pressed up arrow key, focus previous suggestion
+                        if (e.which === 38) {
                             $(this).prev().focus();
                             return false; // prevent page to scroll up
                         }
 
-                        // if user press tab key while on last suggestion, hide suggestions
-                        let $lastSuggestion = $(this).is(':last-of-type');
-
-                        if(e.which === 9 && $lastSuggestion) {
-                            $queryInputGroup.addClass('hidden');
+                        // if user pressed esc key, focus (and reset) input field
+                        if (e.which === 27) {
+                            $queryInput.focus();
                         }
 
-                        // if user pressed esc key, focus (and reset) input field
-                        if(e.which === 27) {
-                            $queryInput.focus();
+                        // if user pressed tab key and there are no other suggestion to focus on
+                        if (e.which === 9) {
+                            if (! $(this).next().length) {
+                                $productSuggestions.addClass('hidden');
+                            }
                         }
                     });
                 },
 
-                selectSuggestion: function(suggestion) {
+                selectSuggestion: function (suggestion) {
 
                     // update 'query' v-model and add suggestion into query input box
                     this.query = suggestion.name;
@@ -249,14 +286,14 @@
                     $('[name="q"]').focus();
                 },
 
-                geoLocateMe: function() {
+                geoLocateMe: function () {
 
-                    if (! 'geolocation' in navigator) {
+                    if (!'geolocation' in navigator) {
                         notification.createAlert("Géolocalisation impossible.", "danger");
                         return;
                     }
 
-                    navigator.geolocation.getCurrentPosition(function(position) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
 
                         vm.geoFilter = {
                             lat: position.coords.latitude,
@@ -269,7 +306,7 @@
 
                     }, function (error) {
 
-                        switch(error.code) {
+                        switch (error.code) {
                             case error.PERMISSION_DENIED:
                                 notification.createAlert("Géolocalisation refusée.", "danger");
                                 break;
@@ -285,7 +322,7 @@
 
                     let place = this.googleMapsAutocomplete.getPlace();
 
-                    if (! place.geometry) {
+                    if (!place.geometry) {
 
                         // user entered a place that was not suggested and pressed Enter, or the request failed
                         this.geoFilter = {};
@@ -313,15 +350,6 @@
                 // category list selection behaviour
                 this.initCategorySelection();
             }
-        });
-
-
-        // DOM behaviour
-        // =============
-
-        // toggle category picker
-        $('.category-picker').on('click', function() {
-            $(this).toggleClass('is-active');
         });
     });
 </script>
