@@ -29,6 +29,8 @@ security:
                 default_target_path: home
                 target_path_parameter: redirect_url
                 use_referer: false
+                failure_handler: AppBundle\Security\AuthenticationFailureHandler
+                success_handler: AppBundle\Security\AuthenticationSuccessHandler
             logout:
                 path: logout
                 target: home

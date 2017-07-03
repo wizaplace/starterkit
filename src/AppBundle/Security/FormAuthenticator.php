@@ -11,9 +11,11 @@ namespace AppBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimpleFormAuthenticatorInterface;
 use Wizaplace\ApiClient;
+use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserService;
 
 class FormAuthenticator implements SimpleFormAuthenticatorInterface
@@ -32,7 +34,11 @@ class FormAuthenticator implements SimpleFormAuthenticatorInterface
 
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey): TokenInterface
     {
-        $apiKey = $this->apiClient->authenticate($token->getUsername(), $token->getCredentials());
+        try {
+            $apiKey = $this->apiClient->authenticate($token->getUsername(), $token->getCredentials());
+        } catch (BadCredentials $e) {
+            throw new BadCredentialsException($e->getMessage(), $e->getCode(), $e);
+        }
 
         $user = new User($apiKey, $this->userService->getProfileFromId($apiKey->getId()));
         $token = new UsernamePasswordToken($user, $token->getCredentials(), $providerKey, $user->getRoles());
