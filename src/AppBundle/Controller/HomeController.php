@@ -13,11 +13,8 @@ use Wizaplace\Catalog\CatalogService;
 
 class HomeController extends Controller
 {
-    public function homeAction(): Response
+    public function homeAction(CatalogService $catalogService): Response
     {
-        // get catalog service from sdk
-        $catalogService = $this->get(CatalogService::class);
-
         // latest products
         $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
