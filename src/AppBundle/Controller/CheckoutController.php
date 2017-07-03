@@ -86,16 +86,18 @@ class CheckoutController extends Controller
 
     public function completeAction(Request $request): Response
     {
-        $success = (bool) $request->query->get("status", true);
+        $success = (bool) $request->query->get("success", true);
         if (!$success) {
             $this->addFlash('error', $this->translator->trans('payment_failed'));
 
             return $this->redirect($this->generateUrl('checkout_payment'));
         }
 
-        // @TODO : get order IDs from request, and display orders
+        $orderIds = $request->query->get("orderIds", []);
 
-        return $this->render('checkout/confirmation.html.twig', []);
+        return $this->render('checkout/confirmation.html.twig', [
+            'orderIds' => $orderIds,
+        ]);
     }
 
     protected function getBasketId(): string
