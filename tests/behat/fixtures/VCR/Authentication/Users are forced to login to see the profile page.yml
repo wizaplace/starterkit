@@ -1,0 +1,24 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/menus'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Mon, 03 Jul 2017 15:20:00 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: '886723'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/886723'
+            Content-Length: '924'
+            Content-Type: application/json
+        body: '{"1":{"id":1,"name":"Informations","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"}]},"2":{"id":2,"name":"Espace client","items":[{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"}]},"3":{"id":3,"name":"Espace pro","items":[{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Conditions G\u00e9n\u00e9rales de Vente","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"}]}}'
