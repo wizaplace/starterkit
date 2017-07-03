@@ -15,6 +15,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Cms\CmsService;
+use Wizaplace\Exception\NotFound;
 use Wizaplace\Image\ImageService;
 use Wizaplace\User\User;
 use Wizaplace\User\UserService;
@@ -33,6 +35,8 @@ class AppExtension extends \Twig_Extension
     private $basketService;
     /** @var ImageService */
     private $imageService;
+    /** @var CmsService */
+    private $cmsService;
     /** @var CacheItemPoolInterface */
     private $cache;
     /** @var string */
@@ -45,6 +49,7 @@ class AppExtension extends \Twig_Extension
         UserService $userService,
         BasketService $basketService,
         ImageService $imageService,
+        CmsService $cmsService,
         CacheItemPoolInterface $cache,
         string $recaptchaKey
     ) {
@@ -54,6 +59,7 @@ class AppExtension extends \Twig_Extension
         $this->userService = $userService;
         $this->basketService = $basketService;
         $this->imageService = $imageService;
+        $this->cmsService = $cmsService;
         $this->cache = $cache;
         $this->recaptchaKey = $recaptchaKey;
     }
@@ -66,6 +72,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFunction('currentUser', [$this, 'getCurrentUser']),
             new \Twig_SimpleFunction('basket', [$this, 'getBasket']),
             new \Twig_SimpleFunction('recaptchaKey', [$this, 'getRecaptchaKey']),
+            new \Twig_SimpleFunction('menus', [$this->cmsService, 'getAllMenus']),
         ];
     }
 

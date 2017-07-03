@@ -81,6 +81,37 @@
     }
 }
 
+.popin-list-item {
+    &:not(:first-of-type) {
+        border-top: 1px solid @border-color;
+    }
+
+    display: block;
+    font-size: 1em;
+    padding: .25em;
+
+    @media screen and (max-width: @screen-md-max) {
+        font-size: 1.2em;
+    }
+
+    &:hover, &:focus, &.is-selected {
+        background-color: fade(@color-tertiary, 10%);
+        color: @color-hover-dark;
+        outline: 0;
+    }
+
+    &.is-selected {
+        &:hover {
+            background-color: @color-light;
+        }
+
+        &:before {
+            font-family: @font-family-icon-lib;
+            content: @icon-selected;
+        }
+    }
+}
+
 .remove-border-radius {
     .remove-border-radius-left();
     .remove-border-radius-right();
