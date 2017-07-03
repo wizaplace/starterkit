@@ -156,7 +156,7 @@ create_return_form:
     defaults: { _controller: AppBundle:Order:displayCreateReturn }
     methods: [GET]
 
-updateUser:
+update_user:
     path: /update-user
     defaults: { _controller: AppBundle:Profile:updateProfile }
     methods: [POST]
@@ -168,7 +168,7 @@ category:
     requirements:
         slug: "%slug.regexp%"
 
-cmsPage:
+cms_page:
     path: /{slug}
     defaults: { _controller: AppBundle:Cms:Page }
     methods: [GET]

@@ -1,5 +1,5 @@
 {% set user = app.user.wizaplaceUser %}
-<form action="{{ path("updateUser") }}" method="post">
+<form action="{{ path("update_user") }}" method="post">
     <input type="hidden" name="user[id]" value="{{ user.id }}" >
     <input type="hidden" name="user[email]" value="{{ user.email }}" >
     <input type="hidden" name="user[lastName]" value="{{ user.lastname }}" >
