@@ -51,9 +51,18 @@ services:
     AppBundle\:
         resource: '../../src/AppBundle'
         exclude: '../../src/AppBundle/{Twig,Entity,Repository}'
-
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
+        public: true
+    AppBundle\Security\AuthenticationFailureHandler:
+        parent: 'security.authentication.failure_handler'
+        autowire: true
+        autoconfigure: false
+        public: true
+    AppBundle\Security\AuthenticationSuccessHandler:
+        parent: 'security.authentication.success_handler'
+        autowire: true
+        autoconfigure: false
         public: true
 
     wizaplace.guzzle.handler:
@@ -65,26 +74,22 @@ services:
             -
                 base_uri: '%api.base_url%'
                 handler: '@wizaplace.guzzle.handler'
-    Wizaplace\Catalog\CatalogService:
+    Wizaplace\ApiClient:
         arguments: ['@wizaplace.http.client']
+        public: true
+    Wizaplace\Catalog\CatalogService:
         public: true
     Wizaplace\Basket\BasketService:
-        arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\User\UserService:
-        arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Order\OrderService:
-        arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Image\ImageService:
-        arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Seo\SeoService:
-        arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Cms\CmsService:
-        arguments: ['@wizaplace.http.client']
         public: true
     app.twig_extension:
         class: AppBundle\Twig\AppExtension

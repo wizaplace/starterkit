@@ -12,7 +12,7 @@
                 <h1 class="main-title">Connexion</h1>
                 <form method="post" action="{{ path('login') }}" class="account-form">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token("login_token") }}">
-                    <input type="hidden" name="redirect_url" value="{{ path('checkout_addresses') }}">
+                    <input type="hidden" name="redirect_url" value="{{ url('checkout_addresses') }}">
 
                     <div class="form-group">
                         <label for="login-email">E-mail </label>

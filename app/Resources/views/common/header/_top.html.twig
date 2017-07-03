@@ -1,5 +1,5 @@
-{% set accountLink = currentUser() ? path('profile') : path('login') %}
-{% set userBasket = basket() %}
+{% set accountLink = app.user ? path('profile') : path('login') %}
+{% set userBasket = basket ?? basket() %}
 
 <nav class="top-nav">
     <div class="container">

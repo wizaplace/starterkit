@@ -42,5 +42,6 @@
     "your_basket_is_empty": "Votre panier est vide",
     "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
     "get_my_password_back": "Récupérer mon mot de passe",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "payment_failed": "Une erreur s'est produite lors du paiement"
 }

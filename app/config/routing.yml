@@ -10,20 +10,24 @@ search:
     methods: [GET]
 
 # Auth
-login:
+login: # see security.yml
     path: /login
-    defaults: { _controller: AppBundle:Auth:Login }
     methods: [POST]
+
+login_form:
+    path: /login
+    defaults: { _controller: AppBundle:Auth:login }
+    methods: [GET]
+
+logout: # see security.yml
+    path: /logout
+    methods: [GET]
 
 register:
     path: /register
     defaults: { _controller: AppBundle:Auth:Register }
     methods: [POST]
 
-logout:
-    path: /logout
-    defaults: { _controller: AppBundle:Auth:Logout }
-    methods: [GET]
 
 reset_password:
     path: /password
@@ -89,6 +93,21 @@ checkout_addresses:
     defaults: { _controller: AppBundle:Checkout:addresses }
     methods: [GET]
 
+checkout_payment:
+    path: /commande/paiement
+    defaults: { _controller: AppBundle:Checkout:payment }
+    methods: [GET]
+
+checkout_submit_payment:
+    path: /commande/paiement
+    defaults: { _controller: AppBundle:Checkout:submitPayment }
+    methods: [POST]
+
+checkout_complete:
+    path: /commande/confirmation
+    defaults: { _controller: AppBundle:Checkout:complete }
+    methods: [GET]
+
 # legacy
 # product
 product:
@@ -98,14 +117,6 @@ product:
         categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
 
-checkout_payment:
-    path: /checkout/paiement
-    defaults: { _controller: AppBundle:Checkout:payment }
-    methods: [GET]
-checkout_complete:
-    path: /checkout/confirmation
-    defaults: { _controller: AppBundle:Checkout:complete }
-    methods: [POST]
 
 # panier (Create, Update, Delete)
 

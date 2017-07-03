@@ -4,8 +4,8 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        wizaplace:
+            id: AppBundle\Security\UserProvider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +15,28 @@ security:
 
         main:
             anonymous: ~
+            simple_form:
+                authenticator: AppBundle\Security\FormAuthenticator
+                check_path: login
+                login_path: login_form
+                username_parameter: 'email'
+                password_parameter: 'password'
+                post_only: true
+                csrf_parameter: csrf_token
+                csrf_token_id: login_token
+                csrf_token_generator: security.csrf.token_manager
+                # post-login redirection config
+                default_target_path: home
+                target_path_parameter: redirect_url
+                use_referer: false
+                failure_handler: AppBundle\Security\AuthenticationFailureHandler
+                success_handler: AppBundle\Security\AuthenticationSuccessHandler
+            logout:
+                path: logout
+                target: home
+                csrf_parameter: csrf_token
+                csrf_token_id: logout_token
+                csrf_token_generator: security.csrf.token_manager
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -22,3 +44,7 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/profil, roles: [ ROLE_USER ] }
+        - { path: ^/commande/connexion, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/commande, roles: [ ROLE_USER ] }

@@ -7,15 +7,14 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Cms\CmsService;
-use Wizaplace\Exception\NotFound;
 use Wizaplace\Image\ImageService;
-use Wizaplace\User\User;
 use Wizaplace\User\UserService;
 
 class AppExtension extends \Twig_Extension
@@ -92,20 +91,6 @@ class AppExtension extends \Twig_Extension
         }
 
         return $categoryTree->get();
-    }
-
-    public function getCurrentUser(): ?User
-    {
-        if (!$this->session->has(\AppBundle\Controller\AuthController::API_KEY)) {
-            return null;
-        }
-        try {
-            $apiKey = $this->session->get(\AppBundle\Controller\AuthController::API_KEY);
-
-            return $this->userService->getProfileFromId($apiKey->getId(), $apiKey);
-        } catch (NotFound $e) {
-            return null;
-        }
     }
 
     public function getBasket(): ?Basket

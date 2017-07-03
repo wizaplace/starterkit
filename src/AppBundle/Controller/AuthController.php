@@ -11,46 +11,15 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\User\BadCredentials;
+use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
 
 class AuthController extends Controller
 {
-    const API_KEY = '_apiKey';
-
-    public function loginAction(Request $request): Response
+    public function loginAction(): Response
     {
-        // redirection url
-        $requestedUrl = $request->get('redirect_url');
-
-        // CSRF token validation
-        $submittedToken = $request->get('csrf_token');
-
-        if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
-            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
-
-            return $this->redirect($requestedUrl);
-        }
-
-        // user authentication
-        $email = $request->request->get('email');
-        $password = $request->request->get('password');
-        $userService = $this->get(UserService::class);
-
-        try {
-            $apiKey = $userService->authenticate($email, $password);
-            $this->get('session')->set(self::API_KEY, $apiKey);
-        } catch (BadCredentials $e) {
-            $this->addFlash('danger', 'Identifiants invalides, merci de réessayer.');
-        }
-
-        // add a success message
-        if ($this->get('session')->get(self::API_KEY)) {
-            $this->addFlash('success', 'Vous vous êtes connecté avec succès.');
-        }
-
-        return $this->redirect($requestedUrl);
+        return $this->render('login/login.html.twig');
     }
 
     public function registerAction(Request $request): Response
@@ -86,40 +55,16 @@ class AuthController extends Controller
 
         try {
             $userService->register($email, $password);
-            $apiKey = $userService->authenticate($email, $password);
-            $this->get('session')->set(self::API_KEY, $apiKey);
+            $userService->authenticate($email, $password);
+
+            $this->addFlash('success', 'Votre compte a bien été créé.');
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
             $this->addFlash('danger', 'Erreur de connection après la création du compte.');
         } catch (UserAlreadyExists $e) {
             $this->addFlash('danger', 'Cette adresse email est déjà utilisée, merci de réessayer.');
         }
 
-        // add a success message
-        if ($this->get('session')->get(self::API_KEY)) {
-            $this->addFlash('success', 'Votre compte a bien été créé.');
-        }
-
         return $this->redirect($requestedUrl);
-    }
-
-    public function logoutAction(Request $request):Response
-    {
-        // redirection url
-        $referer = $request->headers->get('referer');
-
-        // CSRF token validation
-        $submittedToken = $request->get('csrf_token');
-
-        if (! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
-            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
-
-            return $this->redirect($referer);
-        }
-
-        // logout user
-        $this->get('session')->remove(self::API_KEY);
-
-        return $this->redirectToRoute('home');
     }
 
     public function resetPasswordAction(Request $request): Response
