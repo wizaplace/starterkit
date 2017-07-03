@@ -11,7 +11,7 @@
                 <div class="group">
 
                     {# category picker (display only root categories) #}
-                    <div class="category-picker form-control" title="Sélectionnez une catégorie" tabindex="0">
+                    <div class="category-picker form-control" title="{{ 'select_a_category'|trans }}" tabindex="0">
                         <i class="picker-icon fa fa-list-alt"></i>
                         <span class="picker-label" v-text="selectedCategory.name"></span>
                         <i class="picker-arrow fa fa-caret-down"></i>
@@ -19,16 +19,18 @@
                         {# categories #}
                         <div class="categories">
                             <ul class="content">
-                                {# Default to 'All categories' #}
+
+                                {# default selects all categories #}
                                 <li class="category"
                                     tabindex="0"
                                     :class="{ 'is-selected': selectedCategory.id == '' }"
 
                                     {# select category on click, space and enter #}
-                                    @click.prevent='selectCategory("", "Toutes les catégories")'
-                                    @keydown.space.prevent='selectCategory("", "Toutes les catégories")'
-                                    @keydown.enter.prevent='selectCategory("", "Toutes les catégories")'>
-                                    Toutes les catégories
+                                    @click.prevent='selectCategory("", "{{'all_categories'|trans}}")'
+                                    @keydown.space.prevent='selectCategory("", "{{'all_categories'|trans}}")'
+                                    @keydown.enter.prevent='selectCategory("", "{{'all_categories'|trans}}")'>
+
+                                    <span>{{'all_categories'|trans}}</span>
                                 </li>
 
                                 {% for category in categories %}
@@ -36,11 +38,12 @@
                                         tabindex="0"
                                         :class="{ 'is-selected': selectedCategory.id == '{{ category.category.id }}' }"
 
-                                            {# select category on click, space and enter #}
+                                        {# select category on click, space and enter #}
                                         @click.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
                                         @keydown.space.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
                                         @keydown.enter.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'>
-                                        {{ category.category.name|lower|capitalize }}
+
+                                        <span>{{ category.category.name|lower|capitalize }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -49,7 +52,7 @@
 
                     {# keyword input #}
                     <div class="keyword-input">
-                        <input class="form-control" type="text" name="q" placeholder="Rechercher..." v-model="query"
+                        <input class="form-control" type="text" name="q" placeholder="{{ 'search_placeholder'|trans }}" v-model="query"
                                @keyup.esc="query = ''">
 
                         {# auto-complete suggestions #}
@@ -60,7 +63,7 @@
                                     v-for="suggestion in productSuggestions"
                                     v-text="suggestion.name"
 
-                                        {# select sggestion on click, space, enter #}
+                                    {# select suggestion on click, space, enter #}
                                     @click.prevent="selectSuggestion(suggestion)"
                                     @keydown.space.prevent="selectSuggestion(suggestion)"
                                     @keydown.enter.prevent="selectSuggestion(suggestion)">
@@ -79,21 +82,21 @@
 
                     {# city, department #}
                     <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control"
-                           id="geofilter-label" placeholder="Ville, département...">
+                           id="geofilter-label" placeholder="{{ 'geolocalization_placeholder'|trans }}">
 
                     <em>ou</em>
 
                     {# geolocalization button #}
                     <button type="button" class="btn btn-primary" @click="geoLocateMe">
                         <i class="fa fa-map-marker"></i>
-                        <span class="hidden-xxs">Me localiser</span>
+                        <span class="hidden-xxs">{{ 'geolocate_self'|trans }}</span>
                     </button>
                 </div>
 
                 {# submit button #}
                 <button class="btn btn-primary" type="submit">
                     <i class="fa fa-search"></i>
-                    <span class="hidden-xxs">Rechercher</span>
+                    <span class="hidden-xxs">{{ 'search'|trans }}</span>
                 </button>
             </form>
         </div>
@@ -112,7 +115,7 @@
             data: {
                 selectedCategory: {
                     id: '{{ selectedCategory.id|default('')|e('js') }}' || "",
-                    name: '{{ selectedCategory.name|default('')|lower|capitalize|e('js') }}' || "Toutes les catégories"
+                    name: '{{ selectedCategory.name|default('')|lower|capitalize|e('js') }}' || "{{'all_categories'|trans}}"
                 },
                 productSuggestions: [],
                 query: urlParameters.query || '',
@@ -203,7 +206,7 @@
                         if (e.which === 27) {
                             self.selectedCategory = {
                                 id: '',
-                                name: 'Toutes les catégories'
+                                name: '{{'all_categories'|trans}}'
                             };
                             $categoryPicker.focus();
                             $categoryPicker.removeClass('is-active');
@@ -367,7 +370,7 @@
                 geoLocateMe: function () {
 
                     if (!'geolocation' in navigator) {
-                        notification.createAlert("Géolocalisation impossible.", "danger");
+                        notification.createAlert("{{ 'geolocation_impossible'|trans }}", "danger");
                         return;
                     }
 
@@ -376,20 +379,20 @@
                         vm.geoFilter = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
-                            label: "Autour de moi"
+                            label: "{{ 'around_me'|trans }}"
                         };
 
                         // success message
-                        notification.createAlert('Rechercher "Autour de moi".', "success");
+                        notification.createAlert("{{ 'search_around_me_notification'|trans }}", "success");
 
                     }, function (error) {
 
                         switch (error.code) {
                             case error.PERMISSION_DENIED:
-                                notification.createAlert("Géolocalisation refusée.", "danger");
+                                notification.createAlert("{{ 'geolocation_forbidden'|trans }}", "danger");
                                 break;
                             default:
-                                notification.createAlert("Erreur de géolocalisation.", "danger");
+                                notification.createAlert("{{ 'geolocation_error'|trans }}", "danger");
                                 break;
                         }
                     });
