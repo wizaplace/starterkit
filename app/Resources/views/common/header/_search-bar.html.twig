@@ -82,11 +82,11 @@
 
                     {# city, department #}
                     <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control"
-                           id="geofilter-label" placeholder="{{ 'geolocalization_placeholder'|trans }}">
+                           id="geofilter-label" placeholder="{{ 'geolocation_placeholder'|trans }}">
 
                     <em>ou</em>
 
-                    {# geolocalization button #}
+                    {# geolocation button #}
                     <button type="button" class="btn btn-primary" @click="geoLocateMe">
                         <i class="fa fa-map-marker"></i>
                         <span class="hidden-xxs">{{ 'geolocate_self'|trans }}</span>
