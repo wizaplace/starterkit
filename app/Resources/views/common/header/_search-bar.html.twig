@@ -19,12 +19,28 @@
                         {# categories #}
                         <div class="categories">
                             <ul class="content">
+                                {# Default to 'All categories' #}
+                                <li class="category"
+                                    tabindex="0"
+                                    :class="{ 'is-selected': selectedCategory.id == '' }"
+
+                                    {# select category on click, space and enter #}
+                                    @click.prevent='selectCategory("", "Toutes les catégories")'
+                                    @keydown.space.prevent='selectCategory("", "Toutes les catégories")'
+                                    @keydown.enter.prevent='selectCategory("", "Toutes les catégories")'>
+                                    Toutes les catégories
+                                </li>
+
                                 {% for category in categories %}
                                     <li class="category"
+                                        tabindex="0"
                                         :class="{ 'is-selected': selectedCategory.id == '{{ category.category.id }}' }"
-                                        @click='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
-                                        tabindex="0">
-                                    {{ category.category.name|lower|capitalize }}
+
+                                            {# select category on click, space and enter #}
+                                        @click.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
+                                        @keydown.space.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'
+                                        @keydown.enter.prevent='selectCategory({{ category.category.id }}, "{{ category.category.name|lower|capitalize }}")'>
+                                        {{ category.category.name|lower|capitalize }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -40,10 +56,14 @@
                         <div class="product-suggestions">
                             <ul class="content" v-if="productSuggestions.length">
                                 <li class="suggestion"
+                                    tabindex="0"
                                     v-for="suggestion in productSuggestions"
-                                    @click.prevent="selectSuggestion(suggestion)"
                                     v-text="suggestion.name"
-                                    tabindex="0">
+
+                                        {# select sggestion on click, space, enter #}
+                                    @click.prevent="selectSuggestion(suggestion)"
+                                    @keydown.space.prevent="selectSuggestion(suggestion)"
+                                    @keydown.enter.prevent="selectSuggestion(suggestion)">
                                 </li>
                             </ul>
                         </div>
@@ -102,26 +122,16 @@
             methods: {
                 initCategorySelection: function () {
 
+                    let self = this;
+
                     // toggle selectable categories list
                     // =================================
 
                     let $categoryPicker = $('.category-picker');
-                    let $selectableCategories = $categoryPicker.find('.category');
 
                     // toggle categories list on click
-                    $categoryPicker.on('click', function() {
+                    $categoryPicker.on('click', function () {
                         $(this).toggleClass('is-active');
-                    });
-
-                    // toggle categories list if picker is focused and user press space or enter key
-                    $categoryPicker.on('focus', function () {
-
-                        $(this).on('keydown', function(e) {
-                            if (e.which === 13 || e.which === 32) {
-                                $(this).toggleClass('is-active');
-                                return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
-                            }
-                        });
                     });
 
                     // hide categories list on last selectable category blur event
@@ -143,13 +153,79 @@
 
                         $('.category-picker.is-active').removeClass('is-active');
                     });
+
+
+                    // selectable categories keyboard navigation
+                    $categoryPicker.on('focus', function () {
+
+                        $(this).on('keydown', function (e) {
+
+                            // toggle categories list if picker is focused and user press space or enter key
+                            if (e.which === 13 || e.which === 32) {
+                                $(this).addClass('is-active');
+                                return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
+                            }
+
+                            // focus first selectable category
+                            if (e.which === 40 && $(this).hasClass('is-active')) { // user pressed 'down arrow' key
+                                $(this).find('.category').first().focus();
+                                self.categoryKeyboardNav();
+                                return false; // prevent page to scroll down
+
+                            } else if (e.which === 9 && $(this).hasClass('is-active')) { // user pressed tab key
+                                self.categoryKeyboardNav();
+                            }
+                        });
+                    });
+                },
+
+                categoryKeyboardNav: function () {
+
+                    let self = this;
+                    let $categoryPicker = $('.category-picker');
+                    let $selectableCategories = $categoryPicker .find('.category');
+
+                    $selectableCategories.on('keydown', function (e) {
+
+                        // if user pressed down arrow, focus next category
+                        if (e.which === 40) {
+                            $(this).next().focus();
+                            return false; // prevent page to scroll down
+                        }
+
+                        // if user pressed up arrow key, focus previous category
+                        if (e.which === 38) {
+                            $(this).prev().focus();
+                            return false; // prevent page to scroll up
+                        }
+
+                        // if user pressed esc key, reset selected category
+                        if (e.which === 27) {
+                            self.selectedCategory = {
+                                id: '',
+                                name: 'Toutes les catégories'
+                            };
+                            $categoryPicker.focus();
+                            $categoryPicker.removeClass('is-active');
+                        }
+                    });
                 },
 
                 selectCategory: function (categoryId, categoryName) {
                     this.selectedCategory = {
                         id: categoryId,
                         name: categoryName
-                    }
+                    };
+
+                    let $categoryPicker = $('.category-picker');
+
+                    // focus back on category picker
+                    $categoryPicker.focus();
+
+                    // hide selectable categories
+                    setTimeout(function () {
+                        $categoryPicker.removeClass('is-active');
+                    });
                 },
 
                 // _.debounce is a function provided by lodash
@@ -223,32 +299,24 @@
 
                                 // add event listeners on suggestions for keyboard navigation
                                 // called only here to avoid performance issues
-                                self.keyboardNav();
+                                self.suggestionsKeyboardNav();
 
-                            // if user pressed tab key instead
+                                // if user pressed tab key instead
                             } else if (e.which === 9) {
-                                self.keyboardNav();
+                                self.suggestionsKeyboardNav();
                             }
                         });
                     });
                 },
 
-                // navigate through a list of selectable items with keyboard
-                keyboardNav: function () {
-                    let self = this;
+                // navigate through a list of selectable suggestions with keyboard
+                suggestionsKeyboardNav: function () {
                     let $queryInput = $('[name="q"]');
                     let $productSuggestions = $('.product-suggestions');
 
                     $('.suggestion').on('keydown', function (e) {
 
-                        // if user pressed enter or space, select the suggestion
-                        if (e.which === 13 || e.which === 32) {
-                            self.query = $(this).text();
-                            $queryInput.focus();
-                            return false; // prevent page to scroll if space key was pressed or form to be submitted if enter key was pressed
-                        }
-
-                        // if user pressed down arrow or tab key, focus next suggestion
+                        // if user pressed down arrow, focus next suggestion
                         if (e.which === 40) {
                             $(this).next().focus();
                             return false; // prevent page to scroll down
@@ -267,7 +335,7 @@
 
                         // if user pressed tab key and there are no other suggestion to focus on
                         if (e.which === 9) {
-                            if (! $(this).next().length) {
+                            if (!$(this).next().length) {
                                 $productSuggestions.addClass('hidden');
                             }
                         }
@@ -284,6 +352,16 @@
 
                     // focus back on input field
                     $('[name="q"]').focus();
+                },
+
+                initGoogleMap: function () {
+
+                    // Google Maps library might need some time to boot
+                    setTimeout(function () {
+                        let labelInput = document.getElementById('geofilter-label');
+                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+                    }, 200);
                 },
 
                 geoLocateMe: function () {
@@ -340,9 +418,7 @@
             mounted: function () {
 
                 // initialize the Google Maps autocomplete in search bar
-                let labelInput = document.getElementById('geofilter-label');
-                this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
-                this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+                this.initGoogleMap();
 
                 // input field behaviour
                 this.initProductAutocomplete();
