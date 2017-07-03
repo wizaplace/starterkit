@@ -10,15 +10,11 @@ namespace AppBundle\Twig;
 use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Cms\CmsService;
-use Wizaplace\Exception\NotFound;
 use Wizaplace\Image\ImageService;
-use Wizaplace\User\User;
 use Wizaplace\User\UserService;
 
 class AppExtension extends \Twig_Extension
@@ -27,8 +23,6 @@ class AppExtension extends \Twig_Extension
     private $catalogService;
     /** @var SessionInterface */
     private $session;
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
     /** @var UserService */
     private $userService;
     /** @var BasketService */
@@ -45,7 +39,6 @@ class AppExtension extends \Twig_Extension
     public function __construct(
         CatalogService $catalogService,
         SessionInterface $session,
-        TokenStorageInterface $tokenStorage,
         UserService $userService,
         BasketService $basketService,
         ImageService $imageService,
@@ -55,7 +48,6 @@ class AppExtension extends \Twig_Extension
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
-        $this->tokenStorage = $tokenStorage;
         $this->userService = $userService;
         $this->basketService = $basketService;
         $this->imageService = $imageService;
@@ -99,19 +91,6 @@ class AppExtension extends \Twig_Extension
         }
 
         return $categoryTree->get();
-    }
-
-    public function getCurrentUser(): ?User
-    {
-        $token = $this->tokenStorage->getToken();
-        if ($token instanceof TokenInterface) {
-            $user = $token->getUser();
-            if ($user instanceof \AppBundle\Security\User) {
-                return $user->getWizaplaceUser();
-            }
-        }
-
-        return null;
     }
 
     public function getBasket(): ?Basket

@@ -1,4 +1,4 @@
-{% set accountLink = currentUser() ? path('profile') : path('login') %}
+{% set accountLink = app.user ? path('profile') : path('login') %}
 {% set userBasket = basket() %}
 
 <nav class="top-nav">
