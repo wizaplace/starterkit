@@ -82,11 +82,11 @@
 
                     {# city, department #}
                     <input type="text" name="geo[label]" v-model="geoFilter.label" class="form-control"
-                           id="geofilter-label" placeholder="{{ 'geolocalization_placeholder'|trans }}">
+                           id="geofilter-label" placeholder="{{ 'geolocation_placeholder'|trans }}">
 
                     <em>ou</em>
 
-                    {# geolocalization button #}
+                    {# geolocation button #}
                     <button type="button" class="btn btn-primary" @click="geoLocateMe">
                         <i class="fa fa-map-marker"></i>
                         <span class="hidden-xxs">{{ 'geolocate_self'|trans }}</span>
@@ -135,13 +135,6 @@
                     // toggle categories list on click
                     $categoryPicker.on('click', function () {
                         $(this).toggleClass('is-active');
-                    });
-
-                    // hide categories list on last selectable category blur event
-                    let $lastSelectableCategory = $categoryPicker.find('.category:last-of-type');
-
-                    $lastSelectableCategory.on('blur', function () {
-                        $categoryPicker.removeClass('is-active');
                     });
 
                     // hide categories list when user has clicked somewhere else
@@ -210,6 +203,13 @@
                             };
                             $categoryPicker.focus();
                             $categoryPicker.removeClass('is-active');
+                        }
+
+                        // if user pressed tab key and there are no more selectable category to focus on
+                        if (e.which === 9) {
+                            if (!$(this).next().length) {
+                                $categoryPicker.removeClass('is-active');
+                            }
                         }
                     });
                 },
