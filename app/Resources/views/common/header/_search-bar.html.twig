@@ -137,13 +137,6 @@
                         $(this).toggleClass('is-active');
                     });
 
-                    // hide categories list on last selectable category blur event
-                    let $lastSelectableCategory = $categoryPicker.find('.category:last-of-type');
-
-                    $lastSelectableCategory.on('blur', function () {
-                        $categoryPicker.removeClass('is-active');
-                    });
-
                     // hide categories list when user has clicked somewhere else
                     $(document).on('click', function (e) {
 
@@ -210,6 +203,13 @@
                             };
                             $categoryPicker.focus();
                             $categoryPicker.removeClass('is-active');
+                        }
+
+                        // if user pressed tab key and there are no more selectable category to focus on
+                        if (e.which === 9) {
+                            if (!$(this).next().length) {
+                                $categoryPicker.removeClass('is-active');
+                            }
                         }
                     });
                 },
