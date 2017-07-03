@@ -17,7 +17,10 @@ use Wizaplace\User\UserService;
 
 class AuthController extends Controller
 {
-    const API_KEY = '_apiKey';
+    public function loginAction(): Response
+    {
+        return $this->render('login/login.html.twig');
+    }
 
     public function registerAction(Request $request): Response
     {

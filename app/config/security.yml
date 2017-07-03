@@ -18,7 +18,7 @@ security:
             simple_form:
                 authenticator: AppBundle\Security\FormAuthenticator
                 check_path: login
-                login_path: home # @TODO: a dedicated login page ?
+                login_path: login_form
                 username_parameter: 'email'
                 password_parameter: 'password'
                 post_only: true
