@@ -56,18 +56,14 @@ services:
         public: true
     AppBundle\Security\AuthenticationFailureHandler:
         parent: 'security.authentication.failure_handler'
-        autowire: false
+        autowire: true
         autoconfigure: false
         public: true
-        arguments:
-            $flashBag: '@session.flash_bag'
     AppBundle\Security\AuthenticationSuccessHandler:
         parent: 'security.authentication.success_handler'
-        autowire: false
+        autowire: true
         autoconfigure: false
         public: true
-        arguments:
-            $flashBag: '@session.flash_bag'
 
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
