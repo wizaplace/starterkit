@@ -19,86 +19,139 @@ class AuthController extends Controller
 {
     const API_KEY = '_apiKey';
 
-    /**
-     * @var UserService
-     */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
-    /**
-     * TODO: CSRF token
-     */
     public function loginAction(Request $request): Response
     {
-        $email = $request->request->get('email');
-        $password = $request->request->get('password');
+        // redirection url
+        $requestedUrl = $request->get('redirect_url');
 
-        try {
-            $apiKey = $this->userService->authenticate($email, $password);
-            $this->get('session')->set(self::API_KEY, $apiKey);
-        } catch (BadCredentials $e) {
-            $this->get('session')->getFlashBag()->add('danger', 'Les identifiants ne sont pas valides');
+        // CSRF token validation
+        $submittedToken = $request->get('csrf_token');
+
+        if (! $this->isCsrfTokenValid('login_token', $submittedToken)) {
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
+            return $this->redirect($requestedUrl);
         }
 
-        $referer =  $request->headers->get('referer');
+        // user authentication
+        $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $userService = $this->get(UserService::class);
 
-        return $this->redirect($referer);
+        try {
+            $apiKey = $userService->authenticate($email, $password);
+            $this->get('session')->set(self::API_KEY, $apiKey);
+        } catch (BadCredentials $e) {
+            $this->addFlash('danger', 'Identifiants invalides, merci de réessayer.');
+        }
+
+        // add a success message
+        if ($this->get('session')->get(self::API_KEY)) {
+            $this->addFlash('success', 'Vous vous êtes connecté avec succès.');
+        }
+
+        return $this->redirect($requestedUrl);
     }
 
     public function registerAction(Request $request): Response
     {
+        // redirection url
+        $requestedUrl = $request->get('redirect_url');
+        $referer = $request->headers->get('referer');
+
+        // recaptcha validation
         $recaptchaResponse = $request->request->get('g-recaptcha-response');
         $recaptcha = new ReCaptcha($this->getParameter('recaptcha.secret'));
-        $resp = $recaptcha->verify($recaptchaResponse);
-        if (!$resp->isSuccess()) {
-            $this->get('session')->getFlashBag()->add('danger', 'Souci de Recaptcha, veuillez soumettre le formulaire à nouveau');
-        } else {
-            $email = $request->request->get('email');
-            $password = $request->request->get('password');
+        $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
-            try {
-                $this->userService->register($email, $password);
-                $apiKey = $this->userService->authenticate($email, $password);
-                $this->get('session')->set(self::API_KEY, $apiKey);
-            } catch (BadCredentials $e) {//Ca ne devrait jamais arrivé puisqu'on vient de créer l'utilisateur
-                $this->get('session')->getFlashBag()->add('danger', 'Souci de connection après création du compte');
-            } catch (UserAlreadyExists $e) {
-                $this->get('session')->getFlashBag()->add('warning', 'Cette adresse email est déjà enregistrée. Essayez de vous connecter.');
-            }
+        if (! $recaptchaValidation->isSuccess()) {
+            $this->addFlash('danger', 'Erreur de Recaptcha, merci de réessayer.');
+
+            return $this->redirect($referer);
         }
 
-        return $this->redirectToRoute('home');
+        // form validation
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $terms = $request->get('terms');
+
+        if ($email === null || $password === null || $terms === null) {
+            $this->addFlash('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+
+            return $this->redirect($referer);
+        }
+
+        // user registration and authentication
+        $userService = $this->get(UserService::class);
+
+        try {
+            $userService->register($email, $password);
+            $apiKey = $userService->authenticate($email, $password);
+            $this->get('session')->set(self::API_KEY, $apiKey);
+        } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+            $this->addFlash('danger', 'Erreur de connection après la création du compte.');
+        } catch (UserAlreadyExists $e) {
+            $this->addFlash('danger', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+        }
+
+        // add a success message
+        if ($this->get('session')->get(self::API_KEY)) {
+            $this->addFlash('success', 'Votre compte a bien été créé.');
+        }
+
+        return $this->redirect($requestedUrl);
     }
 
     public function logoutAction(Request $request):Response
     {
-        $token = $request->query->get('token');
-        if ($this->isCsrfTokenValid('logout', $token)) {
-            $this->get('session')->remove(self::API_KEY);
-        } else {
-            $this->get('session')->getFlashBag()->add('danger', 'Souci de token CSRF, Veuillez tenter de renvoyer le formulaire');
-        }
-
+        // redirection url
         $referer = $request->headers->get('referer');
 
-        return $this->redirect($referer);
+        // CSRF token validation
+        $submittedToken = $request->get('csrf_token');
+
+        if (! $this->isCsrfTokenValid('logout_token', $submittedToken)) {
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
+            return $this->redirect($referer);
+        }
+
+        // logout user
+        $this->get('session')->remove(self::API_KEY);
+
+        return $this->redirectToRoute('home');
     }
 
     public function resetPasswordAction(Request $request): Response
     {
-        $token = $request->request->get('token');
-        if (!$this->isCsrfTokenValid('resetPassword', $token)) {
-            die("invalid token");
+        // redirection url
+        $referer = $request->headers->get('referer');
+
+        // CSRF token validation
+        $submittedToken = $request->get('csrf_token');
+
+        if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
+            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
+            return $this->redirect($referer);
         }
 
-        $email = $request->request->get('email');
-        $this->userService->recoverPassword($email);
+        // form validation
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $terms = $request->get('terms');
 
-        $referer = $request->headers->get('referer');
+        if ($email === null) {
+            $this->addFlash('danger', 'Vous devez renseigner votre adresse email, merci de réessayer.');
+
+            return $this->redirect($referer);
+        }
+
+        // send password recovery email
+        $email = $request->request->get('email');
+        $this->get(UserService::class)->recoverPassword($email);
+
+        $this->addFlash('success', 'Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe.');
 
         return $this->redirect($referer);
     }

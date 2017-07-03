@@ -1,0 +1,93 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=faq'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:39:50 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 8a2208
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/8a2208'
+            Content-Length: '37'
+            Content-Type: application/json
+        body: '{"faq":{"type":"cms_page","id":"32"}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/page/32'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:39:50 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: d8d45d
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/d8d45d'
+            Transfer-Encoding: chunked
+            Content-Type: application/json
+        body: '{"id":32,"title":"FAQ","content":"\u003Cblockquote\u003E\n\u003Cdiv class=\u0022container\u0022\u003E\n\u003Ch5\u003EQU\u0026rsquo;EST-CE QU\u0026rsquo;UNE MARKET PLACE \/ PLACE DE MARCHE ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EUne Marketplace est un site permettant une mise en relation entre des vendeurs et des acheteurs afin d\u0026rsquo;effectuer une transaction commerciale. Une Marketplace agit comme un tiers de confiance et offre aux utilisateurs (acheteurs et vendeurs) une garantie de paiement via un site s\u0026eacute;curis\u0026eacute;, et l\u0026rsquo;assurance d\u0026rsquo;une transaction r\u0026eacute;alis\u0026eacute;e dans les meilleures conditions.\u003C\/span\u003E\n\u003Ch5\u003EQUELS SONT LES AVANTAGES D\u0026rsquo;UNE MARKET POUR LE CLIENT ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELes avantages sont multiples : \u0026nbsp;Le client b\u0026eacute;n\u0026eacute;ficie d\u0026rsquo;un catalogue de produits plus large et plus vari\u0026eacute; au meilleur prix.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELe client peut vendre et acheter un article neuf ou d\u0026rsquo;occasion dans diff\u0026eacute;rentes cat\u0026eacute;gories de disciplines sportives, tout en ayant un seul panier, et donc, un seul paiement.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELe client b\u0026eacute;n\u0026eacute;ficie d\u0026rsquo;un paiement s\u0026eacute;curis\u0026eacute;.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELe client utilisateur fait partie d\u0026rsquo;un fichier de clients r\u0026eacute;f\u0026eacute;renc\u0026eacute;s pouvant participer \u0026agrave; des jeux concours, et ainsi gagner des objets d\u0026eacute;dicac\u0026eacute;s par de grands champions.\u003C\/span\u003E\n\u003Ch5\u003EQUEL EST LE ROLE DE \u0026nbsp;Starterkit\u2122 ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EStarterkit\u2122 est une Marketplace (place de march\u0026eacute;) d\u0026eacute;di\u0026eacute;e aux amateurs de sport, professionnels ou particuliers, pour VENDRE et ACHETER des articles de sport neufs et d\u0026rsquo;occasion.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EQue vous soyez vendeur, acheteur, professionnel ou particulier, nous sommes l\u0026agrave; pour vous aider \u0026agrave; mettre en vente votre article ou votre mat\u0026eacute;riel sportif dans les meilleures dispositions et au prix le plus juste.\u0026nbsp;\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EAvec Starterkit\u2122, vous b\u0026eacute;n\u0026eacute;ficiez d\u0026rsquo;un accompagnement d\u0026egrave;s la mise en vente de votre article, et d\u0026rsquo;une visibilit\u0026eacute; accrue sur un site 100% d\u0026eacute;di\u0026eacute; au sport.\u003C\/span\u003E\n\u003Ch5\u003EQUELS SONT LES AVANTAGES DE Starterkit\u2122 ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EAvec Starterkit\u2122 vous avez l\u0027assurance d\u0027acheter des produits soigneusement s\u0026eacute;lectionn\u0026eacute;s parmi les meilleurs revendeurs, sp\u0026eacute;cialis\u0026eacute;s dans chaque sport, et de b\u0026eacute;n\u0026eacute;ficier de conseils d\u0026rsquo;experts.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EVous pouvez vendre et acheter du mat\u0026eacute;riel sportif neuf ou d\u0026rsquo;occasion sur une m\u0026ecirc;me plateforme et n\u0026rsquo;avoir qu\u0026rsquo;un seul panier pour tous ces achats. Vous b\u0026eacute;n\u0026eacute;ficiez des meilleures offres promotionnelles du moment.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELa communication autour de Starterkit\u2122 permet au vendeur d\u0026rsquo;optimiser son catalogue et \u0026agrave; l\u0026rsquo;acheteur de trouver un large choix de produits.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EL\u0027onglet \u0022Que recherchez-vous\u0022 vous permet de trouver pr\u0026eacute;cis\u0026eacute;ment et rapidement l\u0026rsquo;article que vous d\u0026eacute;sirez et dont vous souhaitez faire l\u0027acquisition.\u003C\/span\u003E\n\u003Ch5\u003ECOMMENT SUIVRE L\u0026rsquo;ACTUALIT\u0026Eacute; DE Starterkit\u2122 ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ENous vous invitons \u0026agrave; nous suivre sur nos pages officielles Facebook et Twitter, ainsi qu\u0026rsquo;\u0026agrave; vous inscrire \u0026agrave; notre Newsletter.\u003C\/span\u003E\n\u003Ch5\u003EDISPONIBILIT\u0026Eacute;\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EUne fois votre commande effectu\u0026eacute;e, nous vous confirmerons sa disponibilit\u0026eacute; sous 48 heures (jours ouvrables), suite \u0026agrave; ce d\u0026eacute;lai, la livraison sera organis\u0026eacute;e par le revendeur.\u003C\/span\u003E\n\u003Ch5\u003EREMBOURSEMENT\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ESuite \u0026agrave; l\u0026rsquo;annulation ou au retour de votre commande, le remboursement se fera par le moyen de paiement utilis\u0026eacute; lors de votre transaction.\u003C\/span\u003E\n\u003Ch5\u003EPARTICULIERS, COMMENT METTRE EN VENTE VOS ARTICLES DE SPORT ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EVous souhaitez mettre en vente un article de sport et vous \u0026ecirc;tes un particulier.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ERien de plus simple, nous vous invitons \u0026agrave; aller dans la section VENDRE du site et \u0026agrave; compl\u0026eacute;ter le formulaire de vente.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ECelui-ci sera soumis \u0026agrave; notre mod\u0026eacute;ration, puis Starterkit\u2122 vous informera de la publication de votre annonce.\u003C\/span\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EUne fois l\u0026rsquo;annonce valid\u0026eacute;e, le vendeur a 48h pour valider la disponibilit\u0026eacute; du produit.\u003C\/span\u003E\u003C\/li\u003E\n\u003Cli\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EL\u0026rsquo;acheteur re\u0026ccedil;oit une phrase \u0026laquo; code \u0026raquo; (succession de mots) dont le vendeur aura partiellement connaissance.\u003C\/span\u003E\u003C\/li\u003E\n\u003Cli\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELa livraison en main propre, 2 possibilit\u0026eacute;s :\u003C\/span\u003E\u003C\/li\u003E\n\u003Cli\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EL\u0026rsquo;argent est d\u0026eacute;bloqu\u0026eacute; et sera vers\u0026eacute; sur le compte du vendeur sous 15 jours.\u003C\/span\u003E\u003C\/li\u003E\n\u003C\/ul\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ENous attirons votre attention sur le fait que cette solution ne permet pas de retour du produit.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EStarterkit\u2122 se r\u0026eacute;mun\u0026egrave;re par le biais d\u0027une commission per\u0026ccedil;ue sur le prix de vente TTC, hors frais de transport.\u0026nbsp; Cette commission correspond \u0026agrave; 15% + 0,50 \u0026euro; (frais de gestion),pour les prix de vente TTC.\u003C\/span\u003E\n\u003Ch5\u003ERESPONSABILITE DU VENDEUR\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EAu titre de place de march\u0026eacute;, Starterkit\u2122 est interm\u0026eacute;diaire entre le vendeur et l\u0026rsquo;acheteur.\u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ELe vendeur est, de fait, responsable des informations communiqu\u0026eacute;es sur l\u0026rsquo;article, qui se doivent \u0026ecirc;tre conformes \u0026agrave; la r\u0026eacute;alit\u0026eacute;. Pour \u0026eacute;viter les m\u0026eacute;contentements, il est important que le vendeur communique le maximum d\u0026rsquo;information sur le produit, notamment ses particularit\u0026eacute;s, entre autre ses d\u0026eacute;fauts.\u003C\/span\u003E\n\u003Ch5\u003ECOMMENT ACCEDER AUX CGV, CGU ET MENTIONS LEGALES ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003ENous accordons une attention particuli\u0026egrave;re aux Conditions G\u0026eacute;n\u0026eacute;rales Vendeurs, aux Conditions G\u0026eacute;n\u0026eacute;rales d\u0026rsquo;Utilisation et \u0026agrave; la protection des donn\u0026eacute;es personnelles. \u003C\/span\u003E \u003Cbr \/\u003E\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EPour en prendre connaissance, merci de cliquer sur le lien suivant : \u003Ca href=\u0022https:\/\/Starterkit\u2122.sandbox.wizaplace.com\/conditions-generales-vendeurs.html\u0022\u003ECGVendeurs\u003C\/a\u003E\u0026nbsp;, \u003Ca href=\u0022https:\/\/Starterkit\u2122.sandbox.wizaplace.com\/conditions-generales-d-utilisation.html\u0022\u003ECGU\u003C\/a\u003E\u003C\/span\u003E\n\u003Ch5\u003EMOT DE PASSE OUBLIE ?\u003C\/h5\u003E\n\u003Cspan style=\u0022font-size: 10pt;\u0022\u003EPour r\u0026eacute;initialiser votre mot de passe, cliquez sur \u0026laquo; mot de passe oubli\u0026eacute; \u0026raquo; dans MON COMPTE et indiquez votre email. Vous recevrez en retour, un lien pour r\u0026eacute;initialiser votre nouveau mot de passe\u003C\/span\u003E. ","metaTitle":"FAQ","metaDescription":"Frequently Asked Questions \/ Foire Aux Questions","metaKeywords":"faq,support","slug":"faq"}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/categories/tree'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:39:50 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: e3a0c5
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/e3a0c5'
+            Content-Length: '648'
+            Content-Type: application/json
+        body: '[{"category":{"id":2,"parentId":null,"name":"Cat\u00e9gorie principale","description":"","slug":"categorie-principale","image":null,"position":10,"productCount":0},"children":[]},{"category":{"id":3,"parentId":null,"name":"Informatique","description":"","slug":"informatique","image":null,"position":0,"productCount":3},"children":[{"category":{"id":4,"parentId":3,"name":"\u00c9crans","description":"","slug":"ecrans","image":null,"position":0,"productCount":1},"children":[]}]},{"category":{"id":5,"parentId":null,"name":"Test Category Slug","description":"","slug":"test-category-slug","image":null,"position":0,"productCount":1},"children":[]}]'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/menus'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:39:51 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: e34ef5
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/e34ef5'
+            Content-Length: '2415'
+            Content-Type: application/json
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'

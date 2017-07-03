@@ -1,0 +1,32 @@
+default:
+    extensions:
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            default_session: symfony
+            javascript_session: chrome
+            show_auto: true
+            show_cmd: 'sensible-browser %s'
+            sessions:
+                chrome:
+                    chrome:
+                        api_url: http://localhost:9222
+                symfony:
+                    symfony2: ~
+    suites:
+        javascript:
+            paths: [ '%paths.base%/tests/behat' ]
+            contexts:
+                - \Tests\behat\contexts\WebServerContext
+                - \Tests\behat\contexts\HomePageContext
+                - \Tests\behat\contexts\GenericPageContext
+            filters:
+                tags: '@javascript'
+        symfony:
+            paths: [ '%paths.base%/tests/behat' ]
+            contexts:
+                - \Tests\behat\contexts\SymfonyContext
+                - \Tests\behat\contexts\HomePageContext
+                - \Tests\behat\contexts\GenericPageContext
+            filters:
+                tags: '~@javascript'

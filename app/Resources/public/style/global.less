@@ -1,246 +1,197 @@
-@import 'var';
-
 body {
-    font-family: 'Open Sans', sans-serif;
-    color: #1a2127;
-    font-size:15px;
-    line-height:25px;
+    color: @color-dark;
+    font-family: Lato, Arial, Helvetica, sans-serif;
 }
 
-.text-blue { color: @blue !important;}
-.text-grey  { color: #d5d8dd !important;}
-.text-blue-grey { color: @grey-blue !important;}
-.text-green { color:#35dd0e !important;}
-.text-line-through { text-decoration: line-through; }
-.text-red { color:#ff0000; }
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-form:not(.account-form) {
-    display: inline-block;
-}
-
-h1, .main-title {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 24px;
-
-    @media screen and (max-width: 767px) {
-        margin-top: 2em;
+    li {
+        margin: 0;
     }
 }
 
-h1.big-title, div.big-title {
-    font-size: 38px;
-    font-weight: 900;
-    line-height: 42px;
+select {
+    cursor: pointer;
 }
 
-h1 {
-    margin-top: 0;
-    margin-bottom:40px;
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-
-h2, .title {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 20px;
-}
-h2 { margin-bottom: 20px; }
-
-h3, .light-title {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    color: #1a2127;
-}
-h3 { margin-bottom:10px;}
-
-/* liste */
-ul {  padding-left:0;list-style-type: none; }
-ul li { margin-bottom:10px;}
-
-label, .label {
-    display: inline-block;
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    color:@grey-blue;
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.footer-items {
-    display: flex;
-    justify-content: center;
+// buttons and anchors
+// ===================
 
-    @media screen and (max-width: 1200px) {
-        flex-direction: column;
+a {
+    text-decoration: none;
+    .anchor("dark", true);
+    .not-underlined();
+
+    &.btn-default {
+        .anchor("dark", false);
+    }
+
+    &.btn-primary {
+        .anchor("light", false);
     }
 }
 
-p ul { list-style-type:none;padding-left:20px;}
-p ul { list-style-type:disc;}
-a { color: @grey-blue; }
-a:hover, a:focus {
-    text-decoration:none;
-    color: @blue;
-}
-.btn-group {
-    margin-bottom:40px;
-}
-.btn {
-    background-image: none;
-    background-repeat: no-repeat;
-    text-transform: uppercase;
-    box-shadow: none;
-    text-shadow: none;
-}
-.btn-default:focus, .btn-default:hover { background-color: black;color:white;}
-
-.btn-default {
-    color: @grey-blue;
-    border: 1px solid @grey-blue;
-}
 .btn-primary {
-    background-color: @blue;
-    color: white;
-    border:0;
-}
-.btn.active {
-    background:black;
-    color:white;
+    background-color: @color-tertiary;
+    border-color: @border-color;
+
+    &:hover {
+        background-color: @button-color-hover-dark;
+        border-color: @color-tertiary;
+    }
+
+    &:active, &:focus, &:active&:focus {
+        background-color: @button-color-active-dark;
+        border-color: @color-tertiary;
+    }
 }
 
-/* badges */
-div.badge-promo {
-    background-color: yellow;
-    color: @grey-blue;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 5px;
-    text-transform: uppercase;
-    margin:10px 10px 10px 0;
+
+// placeholders
+// ============
+
+::-webkit-input-placeholder {
+    font-style: italic;
+}
+:-moz-placeholder {
+    font-style: italic;
+}
+::-moz-placeholder {
+    font-style: italic;
+}
+:-ms-input-placeholder {
+    font-style: italic;
 }
 
-div.badge-new {
-    background-color: #3df3cb;
-    color: #1a2127;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 5px;
-    text-transform: uppercase;
-    margin:0;
+
+// icons
+// =====
+
+.icon-checkbox:before {
+    content: @icon-checkbox;
+}
+.icon-checkbox-checked:before {
+    content: @icon-checkbox-checked;
+}
+.icon-radio:before {
+    content: @icon-radio-checked;
+}
+.icon-radio-checked:before {
+    content: @icon-radio-checked;
 }
 
-div.badge-stock {
-    display: inline-block;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #35dd0e;
+
+// checkboxes and radio inputs
+// ===========================
+
+/**
+ * Usage example:
+ * <label class="checkbox">
+ *     <input type="checkbox">
+ *     <span class="input-label">I agree to check that box</span>
+ * </label>
+ */
+
+// add this class to a checkbox enclosing label
+.checkbox {
+    .checkable(@icon-checkbox, @icon-checkbox-checked);
+}
+
+// add this class to a radio enclosing label
+.radio {
+    .checkable(@icon-radio, @icon-radio-checked);
+}
+
+
+// grids
+// =====
+
+.hidden-xxs {
+    @media screen and (max-width: @screen-xxs-max) {
+        display: none;
+    }
+}
+
+.visible-xxs, .visible-xxs-block, .visible-xxs-inline {
+    // hidden on larger screen sizes
+    @media screen and (min-width: @screen-xs-min) {
+        display: none;
+    }
+}
+
+.visible-xxs, .visible-xxs-block {
+    // visible on very small screens
+    @media screen and (max-width: @screen-xxs-max) {
+        display: block;
+    }
+}
+
+.visible-xxs-inline {
+    // visible on very small screens
+    @media screen and (max-width: @screen-xxs-max) {
+        display: inline;
+    }
+}
+
+
+// use mixins defaults in templates
+// ================================
+
+.has-left-icon {
+    .has-left-icon();
+}
+.has-right-icon {
+    .has-right-icon();
+}
+
+.anchor-dark {
+    .anchor("dark", true);
+}
+.anchor-light {
+    .anchor("light", true);
+}
+.anchor-neutral-dark {
+    .anchor("dark", false);
+}
+.anchor-neutral-light {
+    .anchor("light", false);
+}
+
+.faded-dark {
+    color: @color-faded-dark;
+}
+
+.faded-light {
+    color: @color-faded-light;
+}
+
+
+// override Bootstrap defaults
+// ===========================
+
+p {
     margin: 0;
 }
-/* spacer */
-div.big-spacer {
-    height:20px;
-    margin: 20px 0;
-}
-div.spacer {
-    height:10px;
-    margin: 10px 0;
-}
-/* table */
-table.price-table tr td {
-    padding-right:20px;
-    vertical-align: bottom;
-    padding-bottom: 10px;
 
-    .icon {
-        font-size: 5em;
-    }
+.form-control {
+    border-color: @border-color;
+    border-radius: @radius;
 }
 
-table.static-table, table.static-table tr, table.static-table td { border:1px solid black;  }
-table.static-table td {  padding:10px; }
-table.static-table tr td:nth-child(3) {  background-color: #efefef; }
-table.static-table tr th {  padding:10px;  }
-
-/* Box */
-.box { margin:0 0 20px 0;border:1px solid #d5d8dd;}
-.box-header { background-color:#d5d8dd;padding:10px;}
-.box-content {padding:10px;}
-
-
-// custom radio button
-.radio label {
-
-    display: block;
-    max-width: 100%;
-    margin: 0 0 10px;
-    position: relative;
-    padding: 0 0 0 32px;
+label {
     font-weight: normal;
-    cursor: pointer;
-
-    input {
-        position: absolute;
-        height: 24px;
-        width: 24px;
-        text-align: center;
-        margin: 0;
-        left: 0;
-        opacity: 0;
-
-        & + span {
-            position: absolute;
-            content: '';
-            left: 0;
-            top: 3px;
-            width: 19px;
-            height: 21px;
-            background: transparent url("../images/radio.png") no-repeat;
-            background-size: 100%;
-        }
-
-        &:checked + span {
-            background: transparent url("../images/radio_checked.png") no-repeat;
-            background-size: 100%;
-
-            & + span {
-                color: @blue;
-            }
-        }
-    }
 }
-
-.dropdown-toggle {
-    cursor: pointer;
-}
-
-[v-cloak] {
-    display: none;
-}
-
-.btn-link:hover {
-    text-decoration: none;
-}
-
-.order-confirmation {
-    text-align: center;
-
-    & > *:first-child {
-        font-size: 1.6em;
-    }
-
-    .btn {
-        padding: 1em
-    }
-}
-
-// custom icons
-.icon-avatar::before { content: @icon-avatar; }
-.icon-box::before { content: @icon-box; }
-.icon-cart::before { content: @icon-cart; }
-.icon-cb::before { content: @icon-cb; }
-.icon-phone::before { content: @icon-phone; }
-.icon-phone-o::before { content: @icon-phone-o; }
-.icon-shield::before { content: @icon-shield; }

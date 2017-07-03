@@ -32,6 +32,7 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
+        `${nodeModulePath}/lodash/lodash.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
@@ -44,6 +45,7 @@ gulp.task('scripts_dev', function() {
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
+        `${nodeModulePath}/lodash/lodash.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())

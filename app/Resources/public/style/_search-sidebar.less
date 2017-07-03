@@ -1,0 +1,119 @@
+#search-sidebar {
+
+    .sidebar-items {
+        .sidebar-item {
+            padding: 0;
+            width: 100%;
+
+            .sidebar-item-label {
+                padding: 12px;
+                background-color: @grey-light;
+
+                [data-toggle="collapse"] {
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                .filter-name {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .sidebar-item-content {
+                background-color: #fff;
+
+                // categories filter
+                .category {
+                    padding: 12px;
+                    margin: 0;
+                    border-bottom: 1px solid @grey-light;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    &.sub-category {
+                        padding: 0;
+                        border-bottom: none;
+                    }
+
+                    &.selected-category {
+                        & > .category-name {
+                            color: @blue;
+                        }
+                    }
+
+                    .category-name {
+                        margin: 0 0 .5em;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        &.selected {
+                            color: @blue;
+                        }
+
+                        .glyphicon {
+                            font-size: .8em;
+
+                            &.glyphicon-plus {
+                                color: @grey-light;
+                            }
+
+                            &.glyphicon-minus {
+                                color: @blue;
+                            }
+                        }
+                    }
+
+                    .radio {
+                        .category-name {
+                            text-transform: none;
+                            cursor: pointer;
+                            margin-left: 30px;
+                            justify-content: flex-start;
+                            padding-top: .15em; // small adjustment
+
+                            // custom standalone radio button
+                            &.selected {
+                                .check-radio {
+                                    background: transparent url("../images/radio_checked.png") no-repeat;
+                                }
+                            }
+
+                            .check-radio {
+                                position: absolute;
+                                left: 0;
+                                top: 3px;
+                                width: 20px;
+                                height: 20px;
+                                background: transparent url("../images/radio.png") no-repeat;
+                                background-size: 100%;
+
+                                &.selected {
+                                    background: transparent url("../images/radio_checked.png") no-repeat;
+                                }
+                            }
+                        }
+
+                        // last sub level
+                        .sub-category {
+                            .category-name {
+                                font-size: .95em;
+                                font-weight: 400;
+
+                                &::before {
+                                    content: '\2022';
+                                    margin-right: 4px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+

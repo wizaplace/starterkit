@@ -7,8 +7,8 @@ imports:
 parameters:
     locale: fr
     slug.regexp: !php/const:Wizaplace\Seo\SeoService::SLUG_REGEXP
-    recaptcha.key: '6LcVkB0UAAAAAOiX8LA0mDX30VHvg8MCvqxoCIoc'
-    recaptcha.secret: '6LcVkB0UAAAAAGbw1fOkuhXsCNsST18be2_ZEfgl'
+    recaptcha.key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+    recaptcha.secret: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 framework:
     translator:      { fallbacks: ["%locale%"] }
@@ -39,6 +39,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         apiBaseUrl: "%api.base_url%"
+        googleMapsApiKey: '%googlemaps.api_key%'
+
 
 services:
     _defaults:
@@ -53,12 +55,10 @@ services:
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
-        tags: ['controller.service_arguments']
 
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
         class: 'GuzzleHttp\HandlerStack'
-
     wizaplace.http.client:
         class: GuzzleHttp\Client
         arguments:
@@ -81,6 +81,9 @@ services:
         arguments: ['@wizaplace.http.client']
         public: true
     Wizaplace\Seo\SeoService:
+        arguments: ['@wizaplace.http.client']
+        public: true
+    Wizaplace\Cms\CmsService:
         arguments: ['@wizaplace.http.client']
         public: true
     app.twig_extension:

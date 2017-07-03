@@ -1,0 +1,93 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=voluptas-nostrum-ea-consequatur'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:45:32 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: bcd35e
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/bcd35e'
+            Content-Length: '63'
+            Content-Type: application/json
+        body: '{"voluptas-nostrum-ea-consequatur":{"type":"product","id":"4"}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/products/4'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:45:33 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 87ae36
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/87ae36'
+            Content-Length: '831'
+            Content-Type: application/json
+        body: '{"id":4,"code":"5712186209249","supplierReference":"","name":"Voluptas nostrum \u00e9a Consequatur","url":"http:\/\/wizaplace.loc\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","shortDescription":"","description":"","slug":"voluptas-nostrum-ea-consequatur","minPrice":20,"greenTax":0,"isTransactional":true,"weight":1.23,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":7,"name":"Test company"}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}],"declinations":[{"code":"5712186209249","supplierReference":"","price":20,"originalPrice":20,"crossedOutPrice":null,"prices":{"priceWithTaxes":20,"priceWithoutVat":19.59,"vat":0.41},"greenTax":0,"amount":15,"affiliateLink":null,"images":[]}],"attributes":[]}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/search/products?sorting%5Btimestamp%5D=desc&resultsPerPage=6&page=1&query='
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:45:33 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 9f8b52
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/9f8b52'
+            Content-Length: '2894'
+            Content-Type: application/json
+        body: '{"results":[{"productId":1,"name":"optio corporis similique voluptatum","slug":"test-product-slug","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1498134834,"updatedAt":1498134834,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/test-product-slug.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":2,"name":"\u00c9cran","slug":"ecran","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1498134835,"updatedAt":1498134835,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/ecran.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":3,"name":"Souris","slug":"souris","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1498134835,"updatedAt":1498134835,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/souris.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}]},{"productId":4,"name":"Voluptas nostrum \u00e9a Consequatur","slug":"voluptas-nostrum-ea-consequatur","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1498134835,"updatedAt":1498134835,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}]},{"productId":5,"name":"Test Product Slug","slug":"test-product-slug-2","minimumPrice":20,"crossedOutPrice":null,"isAvailable":true,"createdAt":1498134835,"updatedAt":1498134835,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/test-category-slug\/test-product-slug-2.html","subtitle":"","averageRating":null,"attributes":[],"categoryPath":[{"id":5,"name":"Test Category Slug","slug":"test-category-slug"}]}],"pagination":{"page":1,"nbResults":5,"nbPages":1,"resultsPerPage":6},"facets":[{"name":"categories","label":"Cat\u00e9gorie","values":{"3":{"label":"Informatique","count":"3"},"4":{"label":"\u00c9crans","count":"1"},"5":{"label":"Test Category Slug","count":"1"}},"isNumeric":false},{"name":"company_type","label":"Type de vendeur","values":{"V":{"label":"Vendeur professionnel","count":"5"}},"isNumeric":false},{"name":1,"label":"color","values":{"2":{"label":"blue","count":0},"1":{"label":"red","count":0},"3":{"label":"test attribute variant slug","count":0}},"isNumeric":false}]}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/menus'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 22 Jun 2017 12:45:33 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 8860d7
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/8860d7'
+            Content-Length: '2415'
+            Content-Type: application/json
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'

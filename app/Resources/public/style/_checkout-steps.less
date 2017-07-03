@@ -1,0 +1,42 @@
+.checkout-steps-buttons {
+    .btn {
+        cursor: default;
+        border: 1px solid #000;
+
+        &.previous, &.previous:hover {
+            background-color: @grey-light;
+        }
+
+        &:focus, &:active, &:visited {
+            outline: 0;
+            box-shadow: none;
+            background-color: #fff;
+            color: @grey-blue;
+            border-color: #000;
+
+            &.active {
+                color: #fff;
+                background-color: #000;
+            }
+
+            &.previous {
+                background-color: @grey-light;
+            }
+        }
+
+        &:hover {
+            color: @grey-blue;
+            background-color: #fff;
+            border-color: #000;
+        }
+
+        &.active:hover {
+            color: #fff;
+            background-color: #000;
+        }
+
+        .icon {
+            font-size: 2.5em;
+        }
+    }
+}

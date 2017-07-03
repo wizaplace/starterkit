@@ -1,0 +1,142 @@
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    background-color: #000;
+    transition: opacity .2s ease-in-out,
+    z-index 0s ease .3s;
+
+    &.in {
+        z-index: @overlay;
+        opacity: .5;
+        transition: opacity .2s ease-in-out,
+        z-index 0s ease;
+    }
+}
+
+.notifications {
+    position: fixed;
+    top: 5em;
+    left: 2em;
+
+    .alert {
+        position: relative;
+        height: auto;
+        width: auto;
+        z-index: @overlay + 2;
+
+        // animation
+        transform: translate(-100%, 0);
+        opacity: 0;
+        transition: all .5s ease-in;
+
+        &.in {
+            transform: translate(2em, 0);
+            opacity: .95;
+            transition: all .5s ease-out;
+        }
+
+        .close-notification {
+            float: right;
+            padding-left: 1em;
+            font-size: .8em;
+            .anchor("dark");
+            color: rgba(0,0,0,.4);
+        }
+    }
+}
+
+.slide-panel {
+    position: fixed;
+    left: -100vw;
+    top: 0;
+    z-index: @overlay + 1;
+    width: 60vw;
+    height: 100vh;
+    padding: 1em 1.5em;
+    background-color: #fff;
+    box-shadow: @box-shadow;
+    visibility: hidden;
+    transition: left .3s ease-in-out, visibility 0s ease .3s;
+
+    @media screen and (max-width: @screen-xs-max) {
+        width: 100vw;
+    }
+
+    @media screen and (min-width: @screen-md-min) {
+        display: none;
+    }
+
+    // panel animation
+    &.in {
+        visibility: visible;
+        left: 0;
+        transition: left .3s ease-in-out;
+    }
+
+    // close icon
+    & > .close-slide-panel {
+        position: fixed;
+        right: 1.5em;
+        top: 1em;
+        opacity: 0;
+        font-size: 1.5em;
+        .anchor("light");
+        text-shadow: rgba(0,0,0,.3) 3px 3px 3px;
+    }
+
+    // close icon transition
+    &.in > .close-slide-panel {
+        opacity: 1;
+        transition: opacity .4s ease .4s;
+    }
+}
+
+.modal {
+    font-size: 1.4em;
+
+    @media screen and (max-width: @screen-md-max) {
+        font-size: 1.9em;
+    }
+
+    .close-modal {
+        float: right;
+        font-size: .9em;
+        .anchor("dark");
+        color: fade(@color-dark, 75%);
+    }
+
+    .title {
+        font-size: 1em;
+        line-height: 1.2em;
+    }
+
+    .modal-body {
+        p {
+            font-size: .7em;
+            margin-bottom: .5em;
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .btn {
+            font-size: .75em;
+
+            &:last-of-type {
+                margin-left: .75em;
+
+                @media screen and (max-width: 480px) {
+                    margin-left: .25em;
+                }
+            }
+        }
+    }
+}

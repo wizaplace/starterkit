@@ -5,8 +5,6 @@
             {# category filter label #}
             <div class="sidebar-item-label">
                 <a data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="">
-                    <span class="label">Par</span><br>
-
                     <div class="filter-name">
                         <span class="light-title">Catégorie</span>
                         <span class="glyphicon
@@ -31,8 +29,6 @@
             <div v-if="facet.name == 'price'">
                 <div class="sidebar-item-label">
                     <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="">
-                        <span class="label">Par</span><br/>
-
                         <div class="filter-name">
                             <span class="light-title">${ facet.label }</span>
                             <span class="glyphicon glyphicon-menu-up"></span>
@@ -55,8 +51,6 @@
             <div v-if="!facet.isNumeric && facet.values.length != 0">
                 <div class="sidebar-item-label">
                     <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="">
-                        <span class="label">Par</span><br/>
-
                         <div class="filter-name">
                             <span class="light-title">${ facet.label }</span>
                             <span class="glyphicon glyphicon-menu-up"></span>

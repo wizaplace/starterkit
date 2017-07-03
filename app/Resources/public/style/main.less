@@ -1,26 +1,37 @@
-@import 'var';
-@import 'slick';
-@import 'slick-theme';
-@import 'fonts';
-@import 'global';
-@import 'header';
-@import 'footer';
-@import 'breadcrumb';
-@import 'pagination';
-@import 'price-slider';
-@import 'navigation-menu';
-@import 'checkout-steps';
-@import 'carousel';
-@import 'product-showcase';
-@import 'product-card';
-@import 'basket-popup';
-@import 'search-sidebar';
-@import 'mini-gallery';
-@import (inline) "jquery-ui.min.css";
-@import 'home';
-@import 'product';
-@import 'basket';
+// legacy
+@import './_variables';
+@import './_global';
+@import './_fonts';
+@import './_header';
+@import './_basket';
+@import './_breadcrumb';
+@import './_carousel';
+@import './_checkout-steps';
+@import './_footer';
+@import './_home';
+@import (inline) '_jquery-ui.min.css';
+@import './_mini-gallery';
+@import './_navigation-menu';
+@import './_pagination';
+@import './_product';
+@import './_product-card';
+@import './_product-showcase';
+@import './_search-sidebar';
 
 // libs
 @import '../../../../node_modules/bootstrap/less/bootstrap';
 @import '../../../../node_modules/font-awesome/less/font-awesome';
+@import './slick';
+@import './slick-theme';
+
+// project
+@import './variables';
+@import './mixins';
+@import './fonts';
+@import './global';
+@import './components';
+
+// templates
+@import './header/header';
+@import './basket-popin';
+@import './product-card';

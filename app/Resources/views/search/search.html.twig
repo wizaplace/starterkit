@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout-search.html.twig' %}
 
 {% block body %}
 
@@ -316,7 +316,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "{{ path('basket_add_item') }}",
+                        url: "{{ path('basket_add_product') }}",
                         data: { declinationId: declinationId, quantity: 1 },
                         success: function(response) {
                             hydrateModal(response.addedProduct, response.message);
@@ -341,7 +341,7 @@
             },
 
             filters: {
-                price: W.formatPrice
+                price: helper.formatPrice
             }
         });
 

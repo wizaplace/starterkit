@@ -1,0 +1,43 @@
+{% set accountLink = currentUser() ? path('profile') : path('login') %}
+{% set userBasket = basket() %}
+
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-wrapper">
+
+            {# branding #}
+            <div class="branding">
+                <a href="{{ path('home') }}"><img src="{{ asset('images/logo.png') }}" alt="Marketplace logo" class="logo"></a>
+                <span class="marketplace-name">Starter Kit</span>
+            </div>
+
+            {# quick access links #}
+            <ul class="quick-access-links list-inline">
+                <li class="quick-access">
+                    <a href="{{ accountLink }}" class="quick-access-link anchor-light">
+                        <i class="fa fa-user"></i>
+                        <span class="hidden-xs">Mon compte</span>
+                    </a>
+                    <div class="wrapper">
+                        {% include('common/header/_pop-account.html.twig') %}
+                    </div>
+                </li>
+
+                <li class="quick-access">
+                    <a href="{{ path('basket') }}" class="quick-access-link anchor-light">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="hidden-xs">Mon panier</span>
+                    </a>
+                    <div class="wrapper">
+                        {% include('common/header/_pop-basket.html.twig') %}
+                    </div>
+
+                    {# number of items in basket #}
+                    {% if userBasket|default and userBasket.totalQuantity > 0 %}
+                        <span class="basket-badge">{{ userBasket.totalQuantity }}</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

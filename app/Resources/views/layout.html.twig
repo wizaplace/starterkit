@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Starter Kit{% endblock %}</title>
+    <title>{% block title -%}Starter Kit{%- endblock %}</title>
+    {% block meta_description -%}{# <meta name="description" content="page's meta description" /> #}{%- endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('style/app.css') }}">
@@ -14,15 +15,22 @@
 </head>
 <body>
 
-{{ include('common/header.html.twig') }}
-{{ include('common/header/nav-menu.html.twig') }}
-{{ include('common/header/nav-menu-mobile.html.twig') }}
-{{ include('common/header/notifications.html.twig') }}
+<header class="main-header">
+    {% block header %}
+        {% include('common/header/_top.html.twig') %}
+        {% include('common/header/_main.html.twig') %}
+    {% endblock %}
+</header>
 
 {% block body %}{% endblock %}
 
 {% block footer %}{% include('common/footer.html.twig') %}{% endblock %}
 
+{# overlay, modal, notification, etc. #}
+{% include('common/_components.html.twig') %}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ googleMapsApiKey }}&libraries=places" async defer></script>
 <script src="{{ asset('scripts/app.js') }}"></script>
 
 {% block scripts %}{% endblock %}

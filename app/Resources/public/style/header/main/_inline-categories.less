@@ -1,0 +1,118 @@
+// & = .category-wrapper
+&.inline {
+    width: 100%;
+
+    @media screen and (max-width: @screen-sm-max) {
+        display: none;
+    }
+
+    /* root level: categories */
+    .category-menu {
+        // list-inline
+        padding-left: 0;
+        list-style: none;
+        margin-left: -5px;
+
+        // allow some space for static links
+        flex: 0 1 auto;
+
+        display: flex;
+        align-items: center;
+
+        // change to 'flex-start' and 'wrap' if there are lots of categories
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+        @media screen and (max-width: @screen-md-max) {
+            font-size: 1.2em;
+        }
+
+        &.category:first-of-type {
+            margin-left: 1em;
+        }
+
+        .category {
+            display: inline-block; // list-inline
+            position: relative;
+            text-align: center;
+
+            &:not(:first-of-type) {
+                margin-left: 1em;
+            }
+
+            .category-name {
+                color: @color-light;
+            }
+
+            .wrapper {
+                display: none; // starts off hidden
+            }
+
+            &:hover {
+                .category-name {
+                    color: @anchor-color-hover-light;
+
+                    &:active {
+                        color: @anchor-color-active-light;
+                    }
+                }
+
+                .wrapper {
+                    display: block; // shows popunder on hover
+
+                    .popunder(.1s, 300px, "center", true); // duration, horizontal position, with arrow,
+
+                    /* second level: sub-categories */
+                    > .category-sub-menu {
+
+                        display: flex;
+                        flex-direction: column;
+
+                        .category {
+                            text-align: left;
+
+                            .category-name {
+                                color: @color-dark;
+                                text-align: left;
+
+                                &:hover {
+                                    color: @anchor-color-hover-dark;
+                                }
+
+                                &:active {
+                                    color: @anchor-color-active-dark;
+                                }
+                            }
+
+                            /* third level: sub-sub-categories */
+                            .category-sub-menu {
+                                margin-left: 1em;
+
+                                display: flex;
+                                flex-direction: column;
+
+                                .category {
+                                    font-weight: normal;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // first two categories popunder will be aligned on the left
+            &:first-of-type, &:nth-of-type(2) {
+                .wrapper {
+                    .popunder(.1s, 300px, "left", true)
+                }
+            }
+
+            // last category popunder will be aligned on the right
+            &:last-of-type, &:nth-last-of-type(2) {
+                .wrapper {
+                    .popunder(.1s, 300px, "right", true)
+                }
+            }
+        }
+    }
+}

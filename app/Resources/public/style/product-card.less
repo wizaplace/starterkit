@@ -1,67 +1,29 @@
-@import 'var';
-
-/* Product */
-div.product {
-    position:relative;
-    display: inline-block;
-    border: 1px solid #d5d8dd;
-    height:460px;
-    background-color: transparent;
-    padding: 10px 20px;
-    width: 244px;
-}
-div.product div.product-image {
-    height: 188px;
-    padding: 10px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-div.product div.product-caption {
-    height: 177px;
-    border-top: 1px solid #d5d8dd;
-    border-bottom: 1px solid #d5d8dd;
-    padding-top: 15px;
-    overflow: hidden;
-
-    .ellipsis.title {
-        height: 50px;
+.product {
+    .flags {
+        position: absolute;
+        z-index: 2;
+        margin:  auto;
+        color: @color-light;
+        background-color: saturate(@color-tertiary, 30%);
+        font-size: .75em;
+        padding: .25em;
+        opacity: .95;
     }
 
-    .ellipsis:last-child {
-        height: 100px;
-        overflow: hidden;
+    .old-price {
+        text-decoration: line-through;
+        font-size: .9em;
     }
-}
 
-div.top-badge {
-  position:absolute;
-  top:-10px;
-  left:0;
-}
-div.product div.product-price {
-    padding-top:10px;
-}
-div.product div.product-price .promo-price {
-    color: @blue;
-    visibility: hidden;
-}
+    .price {
+        color: @color-tertiary;
+    }
 
-div.product div.product-price .icon {
-    font-size:30px;
-    color: @blue;
-}
-
-a.splash-link {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top:0;
-  left:0;
-}
-
-// get precedence on splash-link
-.add-to-basket {
-    z-index: 100;
+    .image {
+        .no-image {
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+    }
 }
