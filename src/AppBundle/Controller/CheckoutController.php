@@ -11,11 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\Basket\BasketService;
 
 class CheckoutController extends Controller
 {
     const SESSION_BASKET_ATTRIBUTE = '_basketId';
+
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     public function loginAction(): Response
     {
@@ -79,7 +88,7 @@ class CheckoutController extends Controller
     {
         $success = (bool) $request->query->get("status", true);
         if (!$success) {
-            $this->addFlash('error', 'payment failed');
+            $this->addFlash('error', $this->translator->trans('payment_failed'));
 
             return $this->redirect($this->generateUrl('checkout_payment'));
         }
