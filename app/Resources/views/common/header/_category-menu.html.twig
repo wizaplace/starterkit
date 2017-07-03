@@ -1,6 +1,6 @@
 {% set categories = categoryTree() %}
 
-<div class="title hidden-md hidden-lg">Catégories</div>
+<div class="title hidden-md hidden-lg">{{ 'categories'|trans }}</div>
 
 <ul class="category-menu">
     {% for category in categories|slice(0,8) %} {# remove slice filter if you want to display all categories #}

@@ -10,13 +10,13 @@
                 <i class="fa fa-bars"></i>
 
                 {# visible on small and medium screens #}
-                <span class="btn-label hidden-xxs">Voir les catégories</span>
+                <span class="btn-label hidden-xxs">{{ 'see_categories'|trans }}</span>
 
                 {# visible on very small screens #}
-                <span class="btn-label visible-xxs-inline">CATÉGORIES</span>
+                <span class="btn-label visible-xxs-inline">{{ 'categories'|trans|upper }}</span>
             </div>
             <div class="category-wrapper slide-panel">
-                <i class="close-slide-panel fa fa-close" aria-label="fermer"></i>
+                <i class="close-slide-panel fa fa-close" aria-label="{{ 'close'|trans }}"></i>
                 {% include ('common/header/_category-menu.html.twig') %}
             </div>
 
@@ -30,14 +30,14 @@
 
                 <li class="static-link">
                     <a href="#" class="anchor-light">
-                        <span>Nouveautés</span>
+                        <span>{{ 'new_products'|trans }}</span>
                         <i class="fa fa-tags"></i>
                     </a>
                 </li>
 
                 <li class="static-link">
                     <a href="https://www.wizaplace.com" class="anchor-light">
-                        <span>Site externe</span>
+                        <span>{{ 'external_website'|trans }}</span>
                         <i class="fa fa-external-link"></i>
                     </a>
                 </li>

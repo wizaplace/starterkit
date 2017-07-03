@@ -22,7 +22,7 @@
 
                                 {% else %}
 
-                                    <div class="no-image">Pas d'image</div>
+                                    <div class="no-image">{{ 'no_image'|trans }}</div>
 
                                 {% endif %}
                             </div>
@@ -40,13 +40,13 @@
                             {# price #}
                             <div class="price-block">
                                 {% if item.crossedOutPrice|default %}
-                                    <div class="old-price">{{ item.crossedOutPrice|price }}&nbsp;TTC</div>
+                                    <div class="old-price">{{ item.crossedOutPrice|price }}&nbsp;{{ 'including_taxes'|trans }}</div>
                                 {% endif %}
-                                <div class="price">{{ item.individualPrice|price }}&nbsp;TTC</div>
+                                <div class="price">{{ item.individualPrice|price }}&nbsp;{{ 'including_taxes'|trans }}</div>
                             </div>
 
                             {# remove product from basket #}
-                            <a href="{{ path('basket_remove_product', { 'declinationId': item.declinationId }) }}" class="remove-from-basket has-right-icon"><span>Supprimer</span><i class="fa fa-trash-o"></i></a>
+                            <a href="{{ path('basket_remove_product', { 'declinationId': item.declinationId }) }}" class="remove-from-basket has-right-icon"><span>{{ 'delete'|trans }}</span><i class="fa fa-trash-o"></i></a>
                         </div>
                     </article>
 
@@ -55,21 +55,21 @@
         {% endfor %}
 
         <div class="total">
-            <span class="total-label">TOTAL</span>
-            <span class="total-amount">{{ userBasket.total|price }}<span class="tax-detail">&nbsp;TTC</span> </span>
+            <span class="total-label">{{ 'total'|trans|upper }}</span>
+            <span class="total-amount">{{ userBasket.total|price }}<span class="tax-detail">&nbsp;{{ 'including_taxes'|trans }}</span> </span>
         </div>
 
         <ul class="actions list-unstyled">
             <li class="show-basket">
                 <a href="{{ path('basket') }}" class="btn btn-default">
-                    <span>Voir mon panier</span>
+                    <span>{{ 'see_my_basket'|trans }}</span>
                     <i class="fa fa-shopping-cart"></i>
                 </a>
             </li>
 
             <li class="order">
                 <a href="{{ path('checkout_login') }}" class="btn btn-primary">
-                    <span>Passer la commande</span>
+                    <span>{{ 'place_order'|trans }}</span>
                     <i class="fa fa-check"></i>
                 </a>
             </li>
@@ -78,7 +78,5 @@
 
 {# empty basket #}
 {% else %}
-    <div class="content">
-        Votre panier est vide
-    </div>
+    <div class="content">{{ 'your_basket_is_empty'|trans }}</div>
 {% endif %}
