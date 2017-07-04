@@ -25,13 +25,13 @@ Il est d'ailleurs, de manière générale, fortement déconseillé de modifier l
 
 ##### Le filtre par catégorie
 
-Il s'agit ici d'un champ de formulaire dont la valeur de l'attribut `name` est "selected_category_id" et qui contient l'`id` d'une catégorie (voir exemple).
+Il s'agit ici d'un champ de formulaire dont la valeur de l'attribut `name` est "selected_category_id" et qui contient l'`id` d'une catégorie ([voir exemple](#category-tree-example)).
 La liste des catégories et de leurs `id`s respectifs est fournie par l'`API` via le `SDK` (`CatalogService::getCategoryTree`).
 La recherche rapide étant typiquement située dans le header de la marketplace, il est préférable d'utiliser une extension Twig. Cela évite à chaque contrôleur d'avoir à fournir la liste des catégories à sa vue.
-Dans le starter kit, la liste des catégories est récupérable dans le template Twig via un appel à `categoryTree()`. 
+Dans le Starter Kit, la liste des catégories est récupérable dans le template Twig via un appel à `categoryTree()`. 
 
 Le plus simple est d'avoir un élément de type `select` dont les éléments `option` listent les différentes catégories.
-Exemple avec Twig :
+<a name="category-tree-example"></a>Exemple avec Twig :
 ```html
 {% set categories = categoryTree() %}
 
@@ -46,7 +46,7 @@ Exemple avec Twig :
 
 A noter :
 En réalité, on récupère ici l'arbre complet des catégories, c'est à dire les catégories de premier niveau mais également toutes les 'branches' descendantes : les sous-catégories et leurs propres enfants, etc.
-Toutefois, pour la recherche rapide, il est préférable de s'en tenir aux catégories de premier niveau ('catégories root') afin de conserver la simplicité d'utilisation. 
+Toutefois, pour la recherche rapide, il est préférable de n'afficher que les catégories de premier niveau ('catégories root') afin de conserver la simplicité d'utilisation (ce qui est le cas dans l'exemple ci-dessus). 
 L'information n'est pas perdue pour autant, l'arbre complet étant utilisé dans le menu des catégories du `header`.
 
 Un élément `select` étant difficile à styliser, il peut tout à fait être envisagé d'utiliser d'autres types d'éléments pour sélectionner une catégorie filtre.
