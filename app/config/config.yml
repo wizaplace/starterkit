@@ -81,6 +81,8 @@ services:
         public: true
     Wizaplace\Basket\BasketService:
         public: true
+    Wizaplace\Cms\BannerService:
+        public: true
     Wizaplace\User\UserService:
         public: true
     Wizaplace\Order\OrderService:

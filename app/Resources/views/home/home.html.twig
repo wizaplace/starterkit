@@ -2,8 +2,20 @@
 
 {% block body %}
 
-    {# banner #}
-    {% include 'common/carousel.html.twig' %}
+    {# banners #}
+    {# ======= #}
+
+    <div class="banners">
+        {# desktop banners #}
+        {% for banner in desktopBanners %}
+            <img src="{{ banner.imageId|imageUrl(1200) }}" alt="">
+        {% endfor %}
+
+        {# responsive banners #}
+        {% for banner in mobileBanners %}
+            <img src="{{ banner.imageId|imageUrl(768) }}" alt="">
+        {% endfor %}
+    </div>
 
     {# latest products carousel #}
     {% include 'common/product/showcase.html.twig' with {'headerTitle': 'Nouveautés', "products": latestProducts } %}
