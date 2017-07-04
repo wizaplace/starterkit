@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "cookieconsent": "^3.0.4",
     "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-imagemin": "^3.3.0",
