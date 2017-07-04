@@ -17,8 +17,6 @@ class HomeController extends Controller
     public function homeAction(): Response
     {
         // get services from sdk
-        // =====================
-
         $catalogService = $this->get(CatalogService::class);
         $bannerService = $this->get(BannerService::class);
 
@@ -32,7 +30,7 @@ class HomeController extends Controller
         return $this->render('home/home.html.twig', [
             'latestProducts' => $latestProducts,
             'desktopBanners' => $desktopBanners,
-            'mobileBanners' => $mobileBanners
+            'mobileBanners' => $mobileBanners,
         ]);
     }
 }
