@@ -43,5 +43,9 @@
     "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
     "get_my_password_back": "Récupérer mon mot de passe",
     "cancel": "Annuler",
-    "payment_failed": "Une erreur s'est produite lors du paiement"
+    "payment_failed": "Une erreur s'est produite lors du paiement",
+    "cookie_consent_message": "En poursuivant votre navigation, vous acceptez l'utilisation de cookies.",
+    "cookie_consent_dismiss": "OK",
+    "cookie_consent_link": "En savoir plus",
+    "cookie_consent_href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs"
 }
