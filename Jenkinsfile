@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'php:7.1'
+            args '-u 0:0'
+        }
+    }
 
     stages {
         stage('composer install') {
