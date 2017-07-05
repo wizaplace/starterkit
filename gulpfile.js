@@ -33,7 +33,8 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
-        `${nodeModulePath}/coockieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
@@ -44,10 +45,11 @@ gulp.task('scripts_prod', function() {
 gulp.task('scripts_dev', function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
-        `${nodeModulePath}/vue/dist/vue.js`,
+        `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())
