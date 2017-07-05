@@ -5,16 +5,24 @@
     {# banners #}
     {# ======= #}
 
-    <div class="banners">
-        {# desktop banners #}
-        {% for banner in desktopBanners %}
-            <img src="{{ banner.imageId|imageUrl(1200) }}" alt="">
-        {% endfor %}
+    <div class="banners hidden-xs">
+        {# large banners #}
+        <div class="large-screens">
+            {% for banner in desktopBanners %}
+                <a class="image-link" href="{{ banner.link|default("#") }}" {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
+                    <img src="{{ banner.imageId|imageUrl(1920) }}" alt="">
+                </a>
+            {% endfor %}
+        </div>
 
         {# responsive banners #}
-        {% for banner in mobileBanners %}
-            <img src="{{ banner.imageId|imageUrl(768) }}" alt="">
-        {% endfor %}
+        <div class="small-screens">
+            {% for banner in mobileBanners %}
+                <a class="image-link" href="{{ banner.link|default("#") }}" {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
+                    <img src="{{ banner.imageId|imageUrl(768) }}" alt="">
+                </a>
+            {% endfor %}
+        </div>
     </div>
 
     {# latest products carousel #}

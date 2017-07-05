@@ -88,14 +88,14 @@ const ui = {
     // slick
     initSlick: function() {
         // home page banners
-        $('.banners').slick({
-            dot: true,
+        $('.banners').find('[class*="-screens"]').slick({
+            dots: true,
             infinite: true,
             autoplay: true,
             autoplaySpeed: 6000,
             speed: 300, // transition speed
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
         });
     },
 

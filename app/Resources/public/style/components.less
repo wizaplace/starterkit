@@ -159,3 +159,41 @@
         }
     }
 }
+
+// see variable.less file for slick defaults customization
+.slick-slider {
+    .image-link > img {
+        width: 100%;
+        height: auto;
+        max-height: @slick-large-screen-max-height; // safe threshold
+
+        @media screen and (max-width: @screen-md-max) {
+            max-height: @slick-small-screen-max-height; // safe threshold
+        }
+    }
+
+    // arrow positions
+    .slick-prev, .slick-next {
+        z-index: 1;
+
+        &::before {
+            font-size: @slick-arrow-size;
+        }
+    }
+
+    .slick-prev {
+        left: 25px;
+        &[dir="rtl"] {
+            left: auto;
+            right: 25px;
+        }
+    }
+
+    .slick-next {
+        right: 25px;
+        &[dir="rtl"] {
+            left: 25px;
+            right: auto;
+        }
+    }
+}

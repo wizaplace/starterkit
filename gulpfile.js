@@ -78,7 +78,10 @@ gulp.task('jquery', function() {
 
 // images (move)
 gulp.task('images', function () {
-    return gulp.src('./app/Resources/public/images/**/*.*')
+    return gulp.src([
+        './app/Resources/public/images/**/*.*',
+        `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
+    ])
         .pipe(imagemin())
         .pipe(gulp.dest('./web/images'));
 });
@@ -89,6 +92,7 @@ gulp.task('fonts', function () {
         './app/Resources/public/fonts/**/*.*',
         `${nodeModulePath}/font-awesome/fonts/**/*`,
         `${nodeModulePath}/bootstrap/fonts/**/*`,
+        `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
     ]).pipe(gulp.dest('./web/fonts'));
 });
 
