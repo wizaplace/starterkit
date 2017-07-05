@@ -2,7 +2,7 @@ Feature: Home Page
 
   Scenario: Land on home page
     When I am on the homepage
-    Then the response should contain "Catégorie principale"
+    Then the response should contain "Catégorie ppprincipale"
 
   @javascript
   Scenario: Land on home page with JS
