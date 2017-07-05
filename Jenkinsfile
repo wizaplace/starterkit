@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'php:7.1'
-            args '-u 0:0'
-        }
-    }
+    agent none
 
     stages {
         stage('composer install') {
@@ -58,6 +53,7 @@ pipeline {
             }
             post {
                 always {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
                     withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
                         step([
                             $class: 'ViolationsToGitHubRecorder',
@@ -103,14 +99,10 @@ pipeline {
             post {
                 always {
                     junit 'behat-result/*.xml'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
                     archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
                 }
             }
-        }
-    }
-    post {
-        always {
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
         }
     }
 }
