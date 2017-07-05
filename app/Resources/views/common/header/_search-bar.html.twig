@@ -359,11 +359,13 @@
 
                 initGoogleMap: function () {
 
+                    let self = this;
+
                     // Google Maps library might need some time to boot
                     setTimeout(function () {
                         let labelInput = document.getElementById('geofilter-label');
-                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
-                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+                        self.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        self.googleMapsAutocomplete.addListener('place_changed', self.geolocAutocompleted);
                     }, 200);
                 },
 
