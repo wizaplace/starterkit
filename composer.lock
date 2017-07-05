@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9302c8e0fa8937d33873dbc67457a9a",
+    "content-hash": "dfc9aab69193ee045f8ebc325d7c21b7",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2041,16 +2041,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "82bd7c039214b34bb5d12c04f996f05f6581c49f"
+                "reference": "098bb166d51cdf0b0541550d037bb3ad1f8fa846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/82bd7c039214b34bb5d12c04f996f05f6581c49f",
-                "reference": "82bd7c039214b34bb5d12c04f996f05f6581c49f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/098bb166d51cdf0b0541550d037bb3ad1f8fa846",
+                "reference": "098bb166d51cdf0b0541550d037bb3ad1f8fa846",
                 "shasum": ""
             },
             "require": {
@@ -2159,7 +2159,6 @@
                     "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
                     "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
                     "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/",
-                    "Symfony\\Bridge\\Swiftmailer\\": "src/Symfony/Bridge/Swiftmailer/",
                     "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
                     "Symfony\\Bundle\\": "src/Symfony/Bundle/",
                     "Symfony\\Component\\": "src/Symfony/Component/"
@@ -2190,7 +2189,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-06-06T04:00:14+00:00"
+            "time": "2017-07-04T06:03:16+00:00"
         },
         {
             "name": "twig/twig",
@@ -2260,16 +2259,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:wizaplace/wizaplace-php-sdk.git",
-                "reference": "8c1972463d92b092faf0e20ce34973fe197ab346"
+                "reference": "7370caf79a557b182f09d92090be064abf2caa51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/8c1972463d92b092faf0e20ce34973fe197ab346",
-                "reference": "8c1972463d92b092faf0e20ce34973fe197ab346",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/7370caf79a557b182f09d92090be064abf2caa51",
+                "reference": "7370caf79a557b182f09d92090be064abf2caa51",
                 "shasum": ""
             },
             "require": {
@@ -2300,10 +2299,10 @@
             },
             "description": "Wizaplace's PHP SDK",
             "support": {
-                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/0.3.1",
+                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/master",
                 "issues": "https://github.com/wizaplace/wizaplace-php-sdk/issues"
             },
-            "time": "2017-06-29T09:39:40+00:00"
+            "time": "2017-07-03T07:03:50+00:00"
         }
     ],
     "packages-dev": [
@@ -4290,16 +4289,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.2.2",
+            "version": "6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e"
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f2786490399836d2a544a34785c4a8d3ab32cf0e",
-                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa5711d0559fc4b64deba0702be52d41434cbcb7",
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7",
                 "shasum": ""
             },
             "require": {
@@ -4370,7 +4369,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-13T14:07:07+00:00"
+            "time": "2017-07-03T15:54:24+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5124,16 +5123,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "acae7416018ebe5a7a2d79b4221203b2b8aca5d3"
+                "reference": "c2c124b7f9de79f4a64dc011f041a3a2c768b913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/acae7416018ebe5a7a2d79b4221203b2b8aca5d3",
-                "reference": "acae7416018ebe5a7a2d79b4221203b2b8aca5d3",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c2c124b7f9de79f4a64dc011f041a3a2c768b913",
+                "reference": "c2c124b7f9de79f4a64dc011f041a3a2c768b913",
                 "shasum": ""
             },
             "require": {
@@ -5182,7 +5181,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-06-01T14:45:22+00:00"
+            "time": "2017-06-12T13:35:45+00:00"
         },
         {
             "name": "textalk/websocket",
