@@ -21,6 +21,7 @@ $(function() {
 
     // init slick behaviour
     ui.initSlick();
+    ui.initSlickShowcase(); // legacy
 
     // init reCaptcha behaviour
     reCaptcha.init();
