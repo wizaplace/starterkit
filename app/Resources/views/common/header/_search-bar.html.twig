@@ -358,15 +358,9 @@
                 },
 
                 initGoogleMap: function () {
-
-                    let self = this;
-
-                    // Google Maps library might need some time to boot
-                    setTimeout(function () {
-                        let labelInput = document.getElementById('geofilter-label');
-                        self.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
-                        self.googleMapsAutocomplete.addListener('place_changed', self.geolocAutocompleted);
-                    }, 200);
+                    let labelInput = document.getElementById('geofilter-label');
+                    self.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                    self.googleMapsAutocomplete.addListener('place_changed', self.geolocAutocompleted);
                 },
 
                 geoLocateMe: function () {
