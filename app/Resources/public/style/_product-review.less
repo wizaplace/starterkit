@@ -1,0 +1,40 @@
+/* Product reviews */
+.review {
+    align-items: center;
+    border: 1px solid @grey-blue-transparent;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 5px;
+
+    &-info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &-author {
+        font-weight: bold;
+    }
+
+    &-ratings {
+        text-align: center;
+
+        .glyphicon {
+            color: @grey-blue;
+        }
+    }
+
+    &-message {
+        padding: 10px 0;
+        text-align: justify;
+        width: 100%;
+    }
+
+    &-date {
+        font-style: italic;
+        text-align: right;
+        width: 100%;
+    }
+}

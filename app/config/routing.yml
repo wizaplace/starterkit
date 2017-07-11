@@ -174,3 +174,9 @@ cms_page:
     methods: [GET]
     requirements:
         slug: "%slug.regexp%"
+
+# reviews
+create_product_review:
+    path: /product/add_review
+    defaults: { _controller: AppBundle:Product:reviewProduct }
+    methods: [POST]

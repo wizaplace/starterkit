@@ -8,8 +8,11 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Catalog\Review\Author;
+use Wizaplace\Catalog\Review\Review;
 use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
@@ -45,5 +48,17 @@ class ProductController extends Controller
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,
         ]);
+    }
+
+    public function reviewProductAction(ReviewService $reviewService, Request $request)
+    {
+        $reviewService->reviewProduct(
+            $request->request->get('product_id'),
+            $request->request->get('author'),
+            $request->request->get('message'),
+            $request->request->get('rating')
+        );
+
+        return $this->redirect($request->request->get('redirect_url'));
     }
 }
