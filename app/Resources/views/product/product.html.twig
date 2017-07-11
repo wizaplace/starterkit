@@ -93,6 +93,28 @@
                                 <hr />
                             </div>
                         </div>
+                        <div class="row bloc">
+                            {% if reviews|length > 0 %}
+                                {% for review in reviews %}
+                                    <div class="review">
+                                        <div class="review-ratings">
+                                            {% for j in 1..5 %}
+                                                {% if j <= review.rating %}
+                                                    <i class="glyphicon glyphicon-star"></i>
+                                                {% else %}
+                                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <p class="review-message">{{ review.message }}</p>
+                                        <div class="review-info">
+                                            <span>{{ review.author.name }}</span>
+                                            <span>{{ review.postedAt |date }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

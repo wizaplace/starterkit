@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
 
@@ -34,9 +35,15 @@ class ProductController extends Controller
         $catalogService = $this->get(CatalogService::class);
         $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
+        //product Reviews
+        /** @var ReviewService $reviewService */
+        $reviewService = $this->get(ReviewService::class);
+        $reviews = $reviewService->getProductReviews($productId);
+
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'latestProducts' => $latestProducts,
+            'reviews' => $reviews,
         ]);
     }
 }
