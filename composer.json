@@ -17,7 +17,7 @@
         "guzzlehttp/guzzle": "^6.2",
         "roave/security-advisories": "@dev",
         "google/recaptcha": "^1.1",
-        "wizaplace/sdk": "~0.3.1",
+        "wizaplace/sdk": "~0.4.0",
         "bmancone/guzzle-stopwatch-middleware": "0.0.2"
     },
     "require-dev": {
