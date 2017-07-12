@@ -59,6 +59,7 @@ This method can be used when Vagrant cannot be made to work.
 Requirements:
 
 - PHP 7.1
+- Composer
 - NPM
 - Gulp
 
