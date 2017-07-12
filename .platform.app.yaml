@@ -71,7 +71,8 @@ hooks:
     # Deploy hooks can access services but the file system is now read-only.
     deploy: |
       DEPLOY_START=$(date +%s%N)
-      bin/console --env=prod cache:clear
+      bin/console --env=prod cache:clear --no-warmup
       rm -rf var/cache/*
+      bin/console --env=prod cache:warmup
       DEPLOY_END=$(date +%s%N)
       echo "Deploy time: $(expr $DEPLOY_END - $DEPLOY_START)ns"
