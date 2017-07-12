@@ -149,7 +149,7 @@ class BasketController extends Controller
         return $this->redirect($referer);
     }
 
-    public function selectShippingsAction(Request $request): Response
+    public function selectShippingsAction(Request $request): JsonResponse
     {
         $basketId = $this->getBasketId();
 
