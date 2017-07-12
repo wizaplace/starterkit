@@ -103,10 +103,11 @@ class BasketController extends Controller
         $quantity = $request->request->get('quantity');
 
         // remove product from basket if quantity is 0
-        if($quantity == 0) {
+        if ($quantity == 0) {
             $this->basketService->removeProductFromBasket($basketId, $declinationId);
 
             $this->addFlash("success", "Le produit a bien été supprimé de votre panier.");
+
             return new JsonResponse();
         }
 
@@ -142,11 +143,12 @@ class BasketController extends Controller
         } catch (CouponNotInTheBasket $e) {
             //Si le coupon n'est pas dans le panier, on est dans l'état final attendu
         }
+
         $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
     }
-    
+
     public function selectShippingsAction(Request $request): Response
     {
         $basketId = $this->getBasketId();
