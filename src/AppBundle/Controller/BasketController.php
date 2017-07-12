@@ -96,18 +96,24 @@ class BasketController extends Controller
         return $this->redirect($referer);
     }
 
-    public function updateProductQuantityAction(Request $request): Response
+    public function updateProductQuantityAction(Request $request): JsonResponse
     {
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
         $quantity = $request->request->get('quantity');
+
+        // remove product from basket if quantity is 0
+        if($quantity == 0) {
+            $this->basketService->removeProductFromBasket($basketId, $declinationId);
+
+            $this->addFlash("success", "Le produit a bien été supprimé de votre panier.");
+            return new JsonResponse();
+        }
+
         $realQuantity = $this->basketService->updateProductQuantity($basketId, $declinationId, (int) $quantity);
 
-        $basketId = $this->getBasketId();
-        $basket = $this->basketService->getBasket($basketId);
-
-        return $this->render('checkout/basket.html.twig', [
-            'basket' => $basket,
+        return new JsonResponse([
+            'realQuantity' => $realQuantity,
         ]);
     }
 
@@ -139,6 +145,21 @@ class BasketController extends Controller
         $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
+    }
+    
+    public function selectShippingsAction(Request $request): Response
+    {
+        $basketId = $this->getBasketId();
+
+        $shippingGroupId = $request->get('shippingGroupId');
+        $shippingId = $request->get('shippingId');
+
+        $shippings[$shippingGroupId] = $shippingId;
+        $this->basketService->selectShippings($basketId, $shippings);
+
+        return new JsonResponse([
+            'message' => "Mode de livraison mis à jour",
+        ]);
     }
 
     protected function getBasketId(): string
