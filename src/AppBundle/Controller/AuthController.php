@@ -70,11 +70,9 @@ class AuthController extends Controller
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
-
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
             $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
             $this->addFlash('danger', $accountCreationErrorMessage);
-
         } catch (UserAlreadyExists $e) {
             $emailInUseErrorMessage = $this->translator->trans('email_already_in_use');
             $this->addFlash('danger', $emailInUseErrorMessage);
