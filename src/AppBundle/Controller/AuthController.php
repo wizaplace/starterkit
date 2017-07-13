@@ -11,12 +11,21 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
 
 class AuthController extends Controller
 {
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function loginAction(): Response
     {
         return $this->render('login/login.html.twig');
@@ -34,7 +43,9 @@ class AuthController extends Controller
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
         if (! $recaptchaValidation->isSuccess()) {
-            $this->addFlash('danger', 'Erreur de Recaptcha, merci de réessayer.');
+
+            $message = $this->translator->trans('recaptcha_error_message');
+            $this->addFlash('danger', $message);
 
             return $this->redirect($referer);
         }
@@ -45,7 +56,9 @@ class AuthController extends Controller
         $terms = $request->get('terms');
 
         if ($email === null || $password === null || $terms === null) {
-            $this->addFlash('danger', 'Tous les champs doivent être renseignés, merci de réessayer.');
+
+            $message = $this->translator->trans('fields_required_error_message');
+            $this->addFlash('danger', $message);
 
             return $this->redirect($referer);
         }
@@ -57,11 +70,18 @@ class AuthController extends Controller
             $userService->register($email, $password);
             $userService->authenticate($email, $password);
 
-            $this->addFlash('success', 'Votre compte a bien été créé.');
+            $message = $this->translator->trans('account_creation_success_message');
+            $this->addFlash('success', $message);
+
         } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-            $this->addFlash('danger', 'Erreur de connection après la création du compte.');
+
+            $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
+            $this->addFlash('danger', $accountCreationErrorMessage);
+
         } catch (UserAlreadyExists $e) {
-            $this->addFlash('danger', 'Cette adresse email est déjà utilisée, merci de réessayer.');
+
+            $emailInUseErrorMessage = $this->translator->trans('email_already_in_use');
+            $this->addFlash('danger', $emailInUseErrorMessage);
         }
 
         return $this->redirect($requestedUrl);
@@ -76,27 +96,29 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $this->addFlash('warning', "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer.");
+
+            $message = $this->translator->trans('recaptcha_error_message');
+            $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
         }
 
         // form validation
         $email = $request->get('email');
-        $password = $request->get('password');
-        $terms = $request->get('terms');
 
         if ($email === null) {
-            $this->addFlash('danger', 'Vous devez renseigner votre adresse email, merci de réessayer.');
+
+            $message = $this->translator->trans('email_field_required_error_message');
+            $this->addFlash('danger', $message);
 
             return $this->redirect($referer);
         }
 
         // send password recovery email
-        $email = $request->request->get('email');
         $this->get(UserService::class)->recoverPassword($email);
 
-        $this->addFlash('success', 'Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe.');
+        $message = $this->translator->trans('password_reset_confirmation_message');
+        $this->addFlash('success', $message);
 
         return $this->redirect($referer);
     }
