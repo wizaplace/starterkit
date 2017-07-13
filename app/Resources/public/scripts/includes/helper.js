@@ -35,7 +35,14 @@ const helper = {
     },
 
     // used in search results
-    toggleLoadingBox: function toggleLoadingBox (action) {
-        $('.ajax-loading-box').toggle(action);
+    displayLoadingSpinner: function() {
+
+        // display overlay to indicate an operation is running
+        $('#overlay').addClass('is-visible');
+
+        // forbid body to be scrolled
+        $('body').addClass('is-locked');
+
+        $('.loading-spinner').addClass('is-visible');
     },
 };

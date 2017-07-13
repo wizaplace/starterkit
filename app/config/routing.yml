@@ -76,6 +76,11 @@ basket_update_product_quantity:
     defaults: { _controller: AppBundle:Basket:updateProductQuantity }
     methods: [POST]
 
+basket_update_shipping:
+    path: /basket/update/shipping
+    defaults: { _controller: AppBundle:Basket:selectShippings }
+    methods: [POST]
+
 basket_remove_product:
     path: /basket/remove
     defaults: { _controller: AppBundle:Basket:removeProduct }

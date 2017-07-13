@@ -25,11 +25,11 @@ const ui = {
         }
 
         function show($element) {
-            $element.addClass("in");
+            $element.addClass("is-visible");
         }
 
         function hide($element) {
-            $element.removeClass("in");
+            $element.removeClass("is-visible");
         }
     },
 

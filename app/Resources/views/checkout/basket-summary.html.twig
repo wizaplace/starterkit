@@ -1,5 +1,5 @@
 <div class="basket-summary">
-    <h1 class="main-title">Récapitulatif</h1>
+    <h1 class="main-title">{{ 'basket_summary'|trans }}</h1>
 
     {# products #}
     <ul>
@@ -8,7 +8,7 @@
                 <li>
                     <span class="title">{{item.productName}}</span><br />
                     <span class="title text-grey">{{item.quantity}}x</span>
-                    <span class="title">{{item.individualPrice|price}}&nbsp;TTC</span> {# TODO convert to HT #}
+                    <span class="title">{{item.individualPrice|price}}&nbsp;{{ 'including_taxes'|trans }}</span> 
                 </li>
             {% endfor %}
         {% endfor %}
@@ -17,28 +17,28 @@
     <hr />
 
     {# sub total #}
-    <div class="title">Sous total</div>
-    <p>{{ basket.subtotal|price }}&nbsp;TTC</p>{# TODO convert to HT #}
+    <div class="title">{{ 'sub_total'|trans }}</div>
+    <p>{{ basket.subtotal|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
     <br />
 
     {# promo code #}
     {% if basket.totalDiscount %}
-        <div class="title">Promotion</div>
-        <p>- {{ basket.totalDiscount|price }}&nbsp;TTC</p>
+        <div class="title">{{ 'promotion'|trans }}</div>
+        <p>- {{ basket.totalDiscount|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
         <br />
     {% endif %}
 
     {# shipping amount #}
-    <div class="title">Livraison</div>
-    <p>{{ basket.totalShipping|price }}&nbsp;TTC</p>{# TODO convert to HT #}
+    <div class="title">{{ 'shipping'|trans }}</div>
+    <p>{{ basket.totalShipping|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
     <br />
 
     {# total amount #}
-    <div class="title text-blue">Total TTC</div>
-    <div class="big-title text-blue"> {{ basket.total|price }}&nbsp;TTC</div>{# TODO convert to HT #}
+    <div class="title text-blue">{{ 'total' }}&nbsp;{{ 'including_taxes'|trans }}</div>
+    <div class="big-title text-blue"> {{ basket.total|price }}&nbsp;{{ 'including_taxes'|trans }}</div>
     <br />
 
-    <div class="title">Dont TVA et autres taxes</div>
+    <div class="title">{{ 'including_vat_and_taxes'|trans }}</div>
     <span>{{ basket.totalTax|price }}</span>
     <br />
 </div>

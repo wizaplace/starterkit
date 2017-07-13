@@ -1,0 +1,57 @@
+.shipping-group {
+    border: 1px solid @color-tertiary;
+    margin-bottom: 24px;
+    padding: 12px;
+}
+
+.basket-product {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid @color-medium;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+
+    .image {
+        flex: 0 0 150px;
+        margin-right: 12px;
+
+        & > img {
+            height: 150px;
+            max-width: 150px;
+            border: 1px solid @color-secondary;
+            padding: 2px;
+        }
+
+        .no-image {
+            height: 150px;
+            width: 150px;
+        }
+    }
+
+    // name, description, etc.
+    .details {
+        align-self: flex-start;
+
+        .name {
+            font-weight: bold;
+        }
+
+        .crossed-out-price {
+            text-decoration: line-through;
+        }
+    }
+
+    // quantity widget
+    .quantity {
+        .widget-label {
+            font-weight: bold;
+        }
+    }
+}
+
+.no-product {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0;
+}
