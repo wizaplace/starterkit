@@ -1,6 +1,10 @@
 body {
     color: @color-dark;
     font-family: Lato, Arial, Helvetica, sans-serif;
+
+    &.is-locked {
+        overflow: hidden;
+    }
 }
 
 ul {
@@ -26,6 +30,17 @@ select {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.no-image {
+    background-color: @color-medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // default dimension values to be overridden depending on context
+    height: 150px;
+    width: 150px;
 }
 
 // buttons and anchors
