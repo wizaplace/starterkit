@@ -44,7 +44,7 @@ class AuthController extends Controller
 
         if (! $recaptchaValidation->isSuccess()) {
             $message = $this->translator->trans('recaptcha_error_message');
-            $this->addFlash('danger', $message);
+            $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
         }
