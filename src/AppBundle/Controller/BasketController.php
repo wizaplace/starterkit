@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\Basket\Exception\CouponNotInTheBasket;
@@ -24,9 +25,13 @@ class BasketController extends Controller
     /** @var BasketService */
     private $basketService;
 
-    public function __construct(BasketService $basketService)
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(BasketService $basketService, TranslatorInterface $translator)
     {
         $this->basketService = $basketService;
+        $this->translator = $translator;
     }
 
     public function basketAction(): Response
@@ -60,7 +65,7 @@ class BasketController extends Controller
         }
 
         // warning message regarding stock
-        $notEnoughStockMessage = "Le nombre de produits en stock est insuffisant pour votre commande.";
+        $notEnoughStockMessage = $this->translator->trans('not_enough_stock');
         $message = ($addedProduct["quantity"] < $requestedQuantity) ? $notEnoughStockMessage : null;
 
         return new JsonResponse([
@@ -80,7 +85,8 @@ class BasketController extends Controller
         $this->basketService->removeProductFromBasket($basketId, $declinationId);
 
         // add a success message
-        $this->addFlash('success', 'Le produit a bien été supprimé de votre panier.');
+        $message = $this->translator->trans('product_deleted_from_basket');
+        $this->addFlash('success', $message);
 
         return $this->redirect($referer);
     }
@@ -106,7 +112,8 @@ class BasketController extends Controller
         if ($quantity == 0) {
             $this->basketService->removeProductFromBasket($basketId, $declinationId);
 
-            $this->addFlash("success", "Le produit a bien été supprimé de votre panier.");
+            $message = $this->translator->trans('product_deleted_from_basket');
+            $this->addFlash('success', $message);
 
             return new JsonResponse();
         }
@@ -159,8 +166,10 @@ class BasketController extends Controller
         $shippings[$shippingGroupId] = $shippingId;
         $this->basketService->selectShippings($basketId, $shippings);
 
+        $message = $this->translator->trans('shipping_method_updated');
+
         return new JsonResponse([
-            'message' => "Mode de livraison mis à jour",
+            'message' => $message,
         ]);
     }
 
