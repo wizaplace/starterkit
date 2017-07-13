@@ -168,6 +168,13 @@ category:
     requirements:
         slug: "%slug.regexp%"
 
+company:
+    path: /v/{slug}
+    defaults: { _controller: AppBundle:Company:view }
+    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"
+
 cms_page:
     path: /{slug}
     defaults: { _controller: AppBundle:Cms:Page }
@@ -178,5 +185,10 @@ cms_page:
 # reviews
 create_product_review:
     path: /product/add_review
-    defaults: { _controller: AppBundle:Product:reviewProduct }
+    defaults: { _controller: AppBundle:Product:review }
+    methods: [POST]
+
+create_company_review:
+    path: /company/add_review
+    defaults: { _controller: AppBundle:Company:review }
     methods: [POST]

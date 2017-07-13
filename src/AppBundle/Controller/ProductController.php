@@ -8,11 +8,10 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\Review\Author;
-use Wizaplace\Catalog\Review\Review;
 use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
@@ -39,7 +38,6 @@ class ProductController extends Controller
         $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
 
         //product Reviews
-        /** @var ReviewService $reviewService */
         $reviewService = $this->get(ReviewService::class);
         $reviews = $reviewService->getProductReviews($productId);
 
@@ -50,13 +48,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function reviewProductAction(ReviewService $reviewService, Request $request)
+    public function reviewAction(ReviewService $reviewService, Request $request) : RedirectResponse
     {
         $reviewService->reviewProduct(
-            $request->request->get('product_id'),
-            $request->request->get('author'),
-            $request->request->get('message'),
-            $request->request->get('rating')
+            (int) $request->request->get('product_id'),
+            (string) $request->request->get('author'),
+            (string) $request->request->get('message'),
+            (int) $request->request->get('rating')
         );
 
         return $this->redirect($request->request->get('redirect_url'));
