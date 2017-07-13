@@ -101,8 +101,8 @@
                                             <div class="review-info">
                                                 <span class="review-author">{{ review.author.name }}</span>
                                                 <div class="review-ratings">
-                                                    {% for j in 1..5 %}
-                                                        {% if j <= review.rating %}
+                                                    {% for i in 1..5 %}
+                                                        {% if i <= review.rating %}
                                                             <i class="glyphicon glyphicon-star"></i>
                                                         {% else %}
                                                             <i class="glyphicon glyphicon-star-empty"></i>
@@ -118,7 +118,7 @@
                                     {% endfor %}
                                 {% endif %}
                                 <div class="add-review">
-                                    <h2>Laisser un commentaire:</h2>
+                                    <h2>{{ 'client_comment'|trans }}</h2>
                                     {% if app.user %}
                                         <form name="add-reviews" method="post" action="{{ path('create_product_review') }}">
                                             <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">

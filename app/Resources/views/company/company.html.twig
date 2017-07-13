@@ -17,7 +17,7 @@
             <h2>{{ 'contact_info'|trans }}</h2>
             {# TODO: Add company's info (address, phone, fax, email) #}
             {# GOOGLE MAP #}
-            {% if company.location is not null %}
+            {% if company.location|default %}
                 <div id="company-map"></div>
                 <script>
                     $(function(){
@@ -46,8 +46,8 @@
                             <div class="col-md-12">
                                 <h4>
                                     <span class="rank">
-                                        {% for j in 1..5 %}
-                                            {% if j <= review.rating %}
+                                        {% for i in 1..5 %}
+                                            {% if i <= review.rating %}
                                                 <i class="glyphicon glyphicon-star"></i>
                                             {% else %}
                                                 <i class="glyphicon glyphicon-star-empty"></i>
