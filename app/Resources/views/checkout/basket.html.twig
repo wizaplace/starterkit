@@ -217,7 +217,7 @@
             helper.displayLoadingSpinner();
 
             let shippingGroupId = $(this).closest('.shipping-group').data('shipping-group-id');
-            let shippingId = $(this).find('option:selected').val()
+            let shippingId = $(this).find('option:selected').val();
 
             $.ajax({
                 method: "POST",
