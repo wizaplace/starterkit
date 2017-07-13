@@ -79,6 +79,8 @@ services:
         public: true
     Wizaplace\Catalog\CatalogService:
         public: true
+    Wizaplace\Catalog\Review\ReviewService:
+        public: true
     Wizaplace\Basket\BasketService:
         public: true
     Wizaplace\Cms\BannerService:
