@@ -62,6 +62,8 @@
     "account_creation_success_message": "Votre compte a bien été créé",
     "continue_my_shopping": "Continuer mes achats",
     "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
+    "add_a_comment": "Ajoutez un commentaire",
+    "login_to_comment": "Veuillez vous connecter pour pouvoir ajouter un commentaire",
     "get_my_password_back": "Récupérer mon mot de passe",
     "cancel": "Annuler",
     "payment_failed": "Une erreur s'est produite lors du paiement",
