@@ -125,11 +125,11 @@
                                             <input type="hidden" name="product_id" value="{{ product.id }}">
                                             <input type="hidden" name="author" value="{{ app.user.wizaplaceUser.firstName~' '~app.user.wizaplaceUser.lastName }}">
                                             <div>
-                                                <label for="review-rate" class="">{{ 'rating'|trans|capitalize }}</label>
+                                                <label for="review-rate" class="">{{ 'your_rating'|trans }}&nbsp;:</label>
                                                 <input id="review-rate" name="rating" class="js-rating form-control hide" value="3" />
                                             </div>
                                             <div>
-                                                <label for="review-message" class="">{{ 'message'|trans|capitalize }}</label>
+                                                <label for="review-message" class="">{{ 'your_message'|trans }}&nbsp;:</label>
                                                 <textarea id="review-message" name="message" class="form-control" rows="5" cols="72"></textarea>
                                             </div>
                                             <input type="submit" class="btn" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}" />
