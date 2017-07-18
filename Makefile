@@ -33,10 +33,10 @@ lint-xliff:
 	bin/console lint:xliff src
 
 stan:
-	./vendor/bin/phpstan analyse -l 4 src tests
+	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 src tests
 
 stan-ci:
-	./vendor/bin/phpstan --no-interaction analyse -l 4 src tests
+	./vendor/bin/phpstan --no-interaction analyse -c phpstan.neon -l 5 src tests
 
 test: test-phpunit test-behat
 
