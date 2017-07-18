@@ -17,6 +17,8 @@ abstract class VcrWebTestCase extends WebTestCase
     {
         parent::setUp();
 
+        self::bootKernel()->getContainer()->get('cache.app')->clear();
+
         VCR::turnOn();
         $cassette = (new \ReflectionClass($this))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'.yml';
         VCR::insertCassette($cassette);
