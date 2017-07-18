@@ -24,7 +24,7 @@ class ProductController extends Controller
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::PRODUCT()) {
             throw $this->createNotFoundException("Product '${slug}' Not Found");
         }
-        $productId = $slugTarget->getObjectId();
+        $productId = (int) $slugTarget->getObjectId();
 
         $product = $this->get(CatalogService::class)->getProductById($productId);
 
