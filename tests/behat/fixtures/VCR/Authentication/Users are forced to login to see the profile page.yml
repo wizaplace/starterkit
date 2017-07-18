@@ -7,6 +7,7 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            VCR-index: '0'
             Accept: null
     response:
         status:
@@ -14,11 +15,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 03 Jul 2017 15:20:00 GMT'
+            Date: 'Tue, 18 Jul 2017 13:59:23 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: '886723'
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/886723'
-            Content-Length: '924'
+            X-Debug-Token: a37ee8
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/a37ee8'
+            Content-Length: '2415'
             Content-Type: application/json
-        body: '{"1":{"id":1,"name":"Informations","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"}]},"2":{"id":2,"name":"Espace client","items":[{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"}]},"3":{"id":3,"name":"Espace pro","items":[{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Conditions G\u00e9n\u00e9rales de Vente","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"}]}}'
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'
