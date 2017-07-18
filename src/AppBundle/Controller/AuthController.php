@@ -66,7 +66,7 @@ class AuthController extends Controller
 
         try {
             $userService->register($email, $password);
-            $userService->authenticate($email, $password);
+            // @TODO: authenticate
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
