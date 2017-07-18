@@ -14,3 +14,13 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+services:
+    Tests\VcrGuzzleMiddleware: ~
+    wizaplace.guzzle.decorating_handler2:
+        factory: 'GuzzleHttp\HandlerStack::create'
+        class: 'GuzzleHttp\HandlerStack'
+        decorates: 'wizaplace.guzzle.handler'
+        arguments: ['@wizaplace.guzzle.decorating_handler.inner']
+        calls:
+            - ['push', ['@Tests\VcrGuzzleMiddleware']]

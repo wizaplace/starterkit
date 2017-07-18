@@ -7,6 +7,7 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            VCR-index: '0'
             Accept: null
     response:
         status:
@@ -14,11 +15,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Thu, 22 Jun 2017 12:45:34 GMT'
+            Date: 'Tue, 18 Jul 2017 14:00:17 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: cd95ef
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/cd95ef'
+            X-Debug-Token: '118731'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/118731'
             Content-Length: '63'
             Content-Type: application/json
         body: '{"voluptas-nostrum-ea-consequatur":{"type":"product","id":"4"}}'
@@ -30,6 +31,7 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            VCR-index: '1'
             Accept: null
     response:
         status:
@@ -37,11 +39,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Thu, 22 Jun 2017 12:45:34 GMT'
+            Date: 'Tue, 18 Jul 2017 14:00:17 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: '955048'
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/955048'
+            X-Debug-Token: 1c4fbb
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/1c4fbb'
             Content-Length: '831'
             Content-Type: application/json
         body: '{"id":4,"code":"5712186209249","supplierReference":"","name":"Voluptas nostrum \u00e9a Consequatur","url":"http:\/\/wizaplace.loc\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","shortDescription":"","description":"","slug":"voluptas-nostrum-ea-consequatur","minPrice":20,"greenTax":0,"isTransactional":true,"weight":1.23,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":7,"name":"Test company"}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}],"declinations":[{"code":"5712186209249","supplierReference":"","price":20,"originalPrice":20,"crossedOutPrice":null,"prices":{"priceWithTaxes":20,"priceWithoutVat":19.59,"vat":0.41},"greenTax":0,"amount":15,"affiliateLink":null,"images":[]}],"attributes":[]}'
