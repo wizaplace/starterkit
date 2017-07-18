@@ -19,7 +19,8 @@ $kernel = new AppKernel('test', true);
 $request = Request::createFromGlobals();
 
 if ($request->headers->has('vcr-k7')) {
-    VcrHelper::configureVcr(__DIR__.'/../tests/behat/fixtures/VCR/');
+    $vcrMode = $request->headers->has('vcr-new') ? VCR::MODE_NEW_EPISODES : VCR::MODE_NONE;
+    VcrHelper::configureVcr(__DIR__.'/../tests/behat/fixtures/VCR/', $vcrMode);
 
     VCR::turnOn();
     VCR::insertCassette($request->headers->get('vcr-k7'));

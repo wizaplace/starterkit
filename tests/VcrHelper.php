@@ -13,11 +13,11 @@ use VCR\VCR;
 
 class VcrHelper
 {
-    public static function configureVcr(string $fixturesPath)
+    public static function configureVcr(string $fixturesPath, $mode = VCR::MODE_ONCE)
     {
         ini_set('opcache.enable', '0');
         VCR::configure()->setCassettePath($fixturesPath);
-        VCR::configure()->setMode(VCR::MODE_ONCE);
+        VCR::configure()->setMode($mode);
         VCR::configure()->enableLibraryHooks(['stream_wrapper', 'curl'])
             ->addRequestMatcher('headers_custom_matcher', function (Request $first, Request $second) {
                 $headersBags = [$first->getHeaders(), $second->getHeaders()];

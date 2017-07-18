@@ -34,7 +34,12 @@ class WebServerContext extends MinkContext
         }
         $this->setMinkParameter('base_url', $address);
 
-        $this->getSession('chrome')->setRequestHeader('vcr-k7', "{$scope->getFeature()->getTitle()}/{$scope->getScenario()->getTitle()}.yml");
+        $cassette = "{$scope->getFeature()->getTitle()}/{$scope->getScenario()->getTitle()}.yml";
+
+        if (!file_exists(__DIR__.'/../fixtures/VCR/'.$cassette)) {
+            $this->getSession('chrome')->setRequestHeader('vcr-new', '1');
+        }
+        $this->getSession('chrome')->setRequestHeader('vcr-k7', $cassette);
     }
 
     /**
