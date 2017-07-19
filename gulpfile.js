@@ -109,7 +109,7 @@ gulp.task('server', function() {
     gulp.watch('./app/Resources/public/style/**/*.*', ['style', 'browser-reload']);
     gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
     gulp.watch('./app/Resources/public/images/**/*.*', ['images', 'browser-reload']);
-    gulp.watch('./app/Resources/views/*.*', ['browser-reload']);
+    gulp.watch('./app/Resources/views/**/*.*', ['browser-reload']);
 });
 
 gulp.task('browser-reload', function() {
