@@ -10,6 +10,7 @@ const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
+const browserSync = require('browser-sync').create();
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -96,22 +97,37 @@ gulp.task('fonts', function () {
     ]).pipe(gulp.dest('./web/fonts'));
 });
 
-// watchers
-gulp.task('watch', function () {
-    gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev']);
-    gulp.watch('./app/Resources/public/style/**/*.*', ['style']);
-    gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts']);
-    gulp.watch('./app/Resources/public/images/**/*.*', ['images']);
+// serve (for live reload) and watch assets changes
+gulp.task('server', function() {
+    browserSync.init({
+        proxy: "demo.loc",
+        startPath: "/app_dev.php",
+        notify: false
+    });
+
+    gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
+    gulp.watch('./app/Resources/public/style/**/*.*', ['style', 'browser-reload']);
+    gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
+    gulp.watch('./app/Resources/public/images/**/*.*', ['images', 'browser-reload']);
+    gulp.watch('./app/Resources/views/*.*', ['browser-reload']);
 });
 
+gulp.task('browser-reload', function() {
+    browserSync.reload();
+});
+
+
+// tasks
+// =====
+
 // default task (with watcher)
-gulp.task('default', ['dev', 'watch']);
+gulp.task('default', ['dev']);
 
 // common tasks, run both by dev and prod tasks
 gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
 // dev tasks (with watcher and Vue.js dev version)
-gulp.task('dev', ['scripts_dev', 'common']);
+gulp.task('dev', ['scripts_dev', 'common', 'server']);
 
 // prod tasks (without watch task)
 gulp.task('deploy', ['scripts_prod', 'common']);
