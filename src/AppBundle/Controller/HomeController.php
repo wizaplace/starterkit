@@ -21,7 +21,7 @@ class HomeController extends Controller
         $bannerService = $this->get(BannerService::class);
 
         // latest products
-        $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
+        $latestProducts = $catalogService->search('', [], ['createdAt' => 'desc'], 6)->getProducts();
 
         // banners
         $desktopBanners = $bannerService->getHomepageBanners("desktop");
