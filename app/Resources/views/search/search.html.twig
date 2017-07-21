@@ -48,7 +48,7 @@
                             {# promo badge #}
                             <div class="top-badge badge-promo" v-if="product.crossedOutPrice !== null">PROMO</div>
 
-                            <a class="product-detail" :href="'/p/'+product.slug">
+                            <a class="product-detail" :href="'/p/c/'+product.slug">
                                 <div class="product-image" :style="imageStyle(product)"></div>
                                 <div class="product-caption">
                                     <div class="title ellipsis">${product.name}</div>
