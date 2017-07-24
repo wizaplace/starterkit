@@ -62,7 +62,7 @@ hooks:
     build: |
       BUILD_START=$(date +%s%N)
       bin/console --env=prod assets:install --no-debug
-      bin/console --env=prod fos:js-routing:dump
+      bin/console --env=prod fos:js-routing:dump --no-debug
       npm install
       gulp deploy
       rm -f web/app_*.php
