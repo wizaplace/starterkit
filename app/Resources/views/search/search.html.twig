@@ -48,7 +48,7 @@
                             {# promo badge #}
                             <div class="top-badge badge-promo" v-if="product.crossedOutPrice !== null">PROMO</div>
 
-                            <a class="product-detail" :href="'/p/c/'+product.slug">
+                            <a class="product-detail" :href="productUrl(product)">
                                 <div class="product-image" :style="imageStyle(product)"></div>
                                 <div class="product-caption">
                                     <div class="title ellipsis">${product.name}</div>
@@ -272,6 +272,14 @@
                     } else {
                         return "{{ asset('images/no-image.jpg') }}"
                     }
+                },
+
+                productUrl: function (product) {
+                    categorySlugPath = [];
+                    for (let i in product.categoryPath) {
+                        categorySlugPath.push(product.categoryPath[i].slug);
+                    }
+                    return Routing.generate('product', {slug: product.slug, categoryPath: categorySlugPath.join('/')});
                 },
 
                 getDiscount: function(product) {

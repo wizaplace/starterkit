@@ -13,6 +13,12 @@
 
     {# jquery is loaded in the header to allow usage in scripts inlined into templates #}
     <script src="{{ asset('scripts/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    {% if app.debug %}
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    {% else %}
+        <script src="{{ asset('js/fos_js_routes.js') }}"></script>
+    {% endif %}
 </head>
 <body>
 
