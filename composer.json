@@ -18,7 +18,8 @@
         "roave/security-advisories": "@dev",
         "google/recaptcha": "^1.1",
         "wizaplace/sdk": "~0.4.1",
-        "bmancone/guzzle-stopwatch-middleware": "0.0.2"
+        "bmancone/guzzle-stopwatch-middleware": "0.0.2",
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
