@@ -73,8 +73,7 @@
                         }
                     }
 
-                    .picker-label,
-                    .picker-arrow {
+                    .picker-label, .picker-arrow {
                         @media screen and (max-width: @screen-sm-max) {
                             display: none;
                         }
@@ -128,9 +127,7 @@
                         flex-basis: 0;
                         background: darken(saturate(@color-secondary, 5%), 12%);
 
-                        &:hover,
-                        &:focus,
-                        &:active {
+                        &:hover, &:focus, &:active {
                             .picker-icon {
                                 color: darken(@color-primary, 10%);
                                 text-shadow: none;

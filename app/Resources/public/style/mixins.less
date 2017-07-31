@@ -93,9 +93,7 @@
         font-size: 1.2em;
     }
 
-    &:hover,
-    &:focus,
-    &.is-selected {
+    &:hover, &:focus, &.is-selected {
         background-color: fade(@color-tertiary, 10%);
         color: @color-hover-dark;
         outline: 0;
@@ -166,8 +164,7 @@
         }
     }
 
-    &:focus,
-    &:active {
+    &:focus, &:active {
         text-decoration: underline;
     }
 }
@@ -187,8 +184,7 @@
         }
     }
 
-    &:focus,
-    &:active {
+    &:focus, &:active {
         text-decoration: none;
     }
 }
@@ -229,8 +225,7 @@
         }
     }
 
-    &:focus,
-    &:active {
+    &:focus, &:active {
         text-decoration: none;
         color: @@color-active;
     }
@@ -252,8 +247,7 @@
         }
     }
 
-    [type="checkbox"],
-    [type="radio"] {
+    [type="checkbox"], [type="radio"] {
 
         // hide original checkable input
         position: absolute;
@@ -266,8 +260,7 @@
         &:checked {
 
             // change label and input color
-            & ~ .input-label,
-            & ~ .input-label:before {
+            & ~ .input-label, & ~ .input-label:before {
                 color: @color-tertiary;
             }
 

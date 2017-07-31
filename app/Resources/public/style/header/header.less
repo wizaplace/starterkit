@@ -15,8 +15,7 @@
         border-top: none;
     }
 
-    .pac-item,
-    .pac-item-query {
+    .pac-item, .pac-item-query {
         font-size: 1em;
         cursor: pointer;
 
@@ -26,9 +25,7 @@
     }
 
     .pac-item {
-        &:hover,
-        &:focus,
-        &.pac-item-selected {
+        &:hover, &:focus, &.pac-item-selected {
             background-color: fade(@color-tertiary, 10%) !important;
             color: @color-hover-dark;
 
