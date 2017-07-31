@@ -30,7 +30,6 @@
 
     & > .content {
         padding: 1em;
-
         background-color: @background-color-light;
         border-radius: @radius;
         box-shadow: @box-shadow;
@@ -50,7 +49,7 @@
         }
 
         // top arrow
-        &::before {
+        &:before {
             font-family: FontAwesome;
             content: '\f0d8'; // fa-caret-up
             color: @background-color-light;
@@ -94,7 +93,9 @@
         font-size: 1.2em;
     }
 
-    &:hover, &:focus, &.is-selected {
+    &:hover,
+    &:focus,
+    &.is-selected {
         background-color: fade(@color-tertiary, 10%);
         color: @color-hover-dark;
         outline: 0;
@@ -165,7 +166,8 @@
         }
     }
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
         text-decoration: underline;
     }
 }
@@ -185,7 +187,8 @@
         }
     }
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
         text-decoration: none;
     }
 }
@@ -226,7 +229,8 @@
         }
     }
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
         text-decoration: none;
         color: @@color-active;
     }
@@ -237,7 +241,7 @@
         cursor: pointer;
 
         // unchecked version
-        &::before {
+        &:before {
             font-family: @font-family-icon;
             margin-right: .5em;
             vertical-align: -13%; // optically better than 'middle'
@@ -248,7 +252,8 @@
         }
     }
 
-    [type="checkbox"], [type="radio"] {
+    [type="checkbox"],
+    [type="radio"] {
 
         // hide original checkable input
         position: absolute;

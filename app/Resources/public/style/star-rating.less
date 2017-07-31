@@ -11,7 +11,7 @@
 .rating-loading {
     width: 25px;
     height: 25px;
-    font-size: 0px;
+    font-size: 0;
     color: #fff;
     background: ~"transparent url('../images/star-rating-loading.gif') top left no-repeat";
     border: none;
@@ -46,11 +46,13 @@
     padding-left: 2px;
 }
 
-.rating-lg .rating-gly-star, .rating-lg .rating-gly-star .rating-stars:before {
+.rating-lg .rating-gly-star,
+.rating-lg .rating-gly-star .rating-stars:before {
     padding-left: 4px;
 }
 
-.rating-xl .rating-gly-star, .rating-xl .rating-gly-star .rating-stars:before {
+.rating-xl .rating-gly-star,
+.rating-xl .rating-gly-star .rating-stars:before {
     padding-left: 2px;
 }
 
@@ -86,10 +88,10 @@
     white-space: nowrap;
     overflow: hidden;
     color: #49545e;
-    transition: all 0.05s ease-out;
-    -o-transition: all 0.05s ease-out;
-    -moz-transition: all 0.05s ease-out;
-    -webkit-transition: all 0.05s ease-out;
+    transition: all .05s ease-out;
+    -o-transition: all .05s ease-out;
+    -moz-transition: all .05s ease-out;
+    -webkit-transition: all .05s ease-out;
 }
 
 .rating-container .rating-stars:before {
@@ -115,10 +117,10 @@
     white-space: nowrap;
     overflow: hidden;
     color: #e3e3e3;
-    transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    -webkit-transition: all 0.25s ease-out;
+    transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -webkit-transition: all .25s ease-out;
 }
 
 .rating-container-rtl .rating-stars:before {
@@ -151,7 +153,8 @@
 /**
  * Clear rating button
  */
-.star-rating .clear-rating, .star-rating-rtl .clear-rating {
+.star-rating .clear-rating,
+.star-rating-rtl .clear-rating {
     color: #aaa;
     cursor: not-allowed;
     display: inline-block;
@@ -174,7 +177,8 @@
 /**
  * Caption
  */
-.star-rating .caption, .star-rating-rtl .caption {
+.star-rating .caption,
+.star-rating-rtl .caption {
     color: #999;
     display: inline-block;
     vertical-align: middle;
@@ -193,10 +197,15 @@
  * Print
  */
 @media print {
-    .rating-container, .rating-container:before, .rating-container-rtl .rating-stars, .rating-container-rtl .rating-stars:before {
+    .rating-container,
+    .rating-container:before,
+    .rating-container-rtl .rating-stars,
+    .rating-container-rtl .rating-stars:before {
         color: #f3f3f3 !important;
     }
-    .star-rating .clear-rating, .star-rating-rtl .clear-rating {
+
+    .star-rating .clear-rating,
+    .star-rating-rtl .clear-rating {
         display: none;
     }
 }

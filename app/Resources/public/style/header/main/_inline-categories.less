@@ -15,7 +15,6 @@
 
         // allow some space for static links
         flex: 0 1 auto;
-
         display: flex;
         align-items: center;
 
@@ -64,7 +63,6 @@
 
                     /* second level: sub-categories */
                     > .category-sub-menu {
-
                         display: flex;
                         flex-direction: column;
 
@@ -87,7 +85,6 @@
                             /* third level: sub-sub-categories */
                             .category-sub-menu {
                                 margin-left: 1em;
-
                                 display: flex;
                                 flex-direction: column;
 
@@ -101,14 +98,16 @@
             }
 
             // first two categories popunder will be aligned on the left
-            &:first-of-type, &:nth-of-type(2) {
+            &:first-of-type,
+            &:nth-of-type(2) {
                 .wrapper {
                     .popunder(.1s, 300px, "left", true)
                 }
             }
 
             // last category popunder will be aligned on the right
-            &:last-of-type, &:nth-last-of-type(2) {
+            &:last-of-type,
+            &:nth-last-of-type(2) {
                 .wrapper {
                     .popunder(.1s, 300px, "right", true)
                 }

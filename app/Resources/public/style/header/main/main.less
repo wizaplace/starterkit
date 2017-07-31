@@ -9,7 +9,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         padding: 1em 0;
 
         .open-slide-panel {
@@ -17,6 +16,7 @@
             font-size: 1.3em;
             .has-left-icon();
             .anchor("light");
+
             color: @anchor-color-light;
             border: 1px solid @color-light;
             border-radius: @radius;
@@ -29,9 +29,11 @@
             // style change basis on smaller screens
             @media screen and (max-width: @screen-sm-max) {
                 background: darken(saturate(@color-secondary, 5%), 12%);
-                text-shadow: 1px 1px 1px rgba(0,0,0,.3); // subtle pop
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
-                &:hover, &:focus, &:active {
+                &:hover,
+                &:focus,
+                &:active {
                     color: darken(@color-primary, 10%);
                     text-shadow: none;
                 }
@@ -81,11 +83,9 @@
 
             // can expand and stay on one line
             flex: 1 0 auto;
-
             display: flex;
             justify-content: flex-end;
             align-items: center;
-
             font-size: .9em;
             margin-left: 3em;
 
