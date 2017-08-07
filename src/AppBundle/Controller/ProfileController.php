@@ -12,12 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\ApiClient;
+use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
 
 class ProfileController extends Controller
 {
+    private const PASSWORD_MINIMUM_LENGTH = 6;
+
     /** @var TranslatorInterface */
     private $translator;
 
@@ -64,6 +68,9 @@ class ProfileController extends Controller
         $referer = $request->headers->get('referer');
         $submittedToken = $request->get('csrf_token');
 
+        $user = new WizaplaceUser($data);
+        $userService = $this->get(UserService::class);
+
         // CSRF token validation
         if (! $this->isCsrfTokenValid('profile_update_token', $submittedToken)) {
             $message = $this->translator->trans('recaptcha_error_message');
@@ -71,6 +78,45 @@ class ProfileController extends Controller
 
             return $this->redirect($referer);
         }
+
+        // update user's password
+        if (! empty($data['password'])) {
+
+            // check new password corresponds to password rules
+            $newPassword = $data['password']['new'];
+
+            if (strlen($newPassword) < self::PASSWORD_MINIMUM_LENGTH) {
+                $message = $this->translator->trans('update_new_password_error_message', ['%n%' => self::PASSWORD_MINIMUM_LENGTH]);
+                $this->addFlash('danger', $message);
+
+                return $this->redirect($referer);
+            }
+
+            // check user's old credentials
+            $oldPassword = $data['password']['old'];
+            $api = $this->get(ApiClient::class);
+
+            try {
+                $api->authenticate($user->getEmail(), $oldPassword);
+            } catch (BadCredentials $e) {
+                $message = $this->translator->trans('update_old_password_error_message');
+                $this->addFlash('danger', $message);
+
+                return $this->redirect($referer);
+            }
+
+            $userService->changePassword($user->getId(), $newPassword);
+
+            // add a notification
+            $message = $this->translator->trans('update_password_success_message');
+            $this->addFlash('success', $message);
+        }
+
+        // update user's profile
+        $userService->updateUser($user);
+
+        $message = $this->translator->trans('update_profile_success_message');
+        $this->addFlash('success', $message);
 
         // Override shipping address fields with billing ones if both are the same (else do nothing)
         if ($sameAddress) {
@@ -84,24 +130,13 @@ class ProfileController extends Controller
             unset($data['addresses']['shipping'][39]);
         }
 
-        $user = new WizaplaceUser($data);
-
-        // update user's profile
-        $userService = $this->get(UserService::class);
-        $userService->updateUser($user);
-
         // update user's addresses
         if (! empty($data['addresses'])) {
             $userService->updateUserAdresses($user);
-        }
 
-        // TODO: validate and update user's password
-        if (! empty($data['password'])) {
-            $oldPassword = $data['password']['old'];
-            $newPassword = $data['password']['new'];
+            $message = $this->translator->trans('update_addresses_success_message');
+            $this->addFlash('success', $message);
         }
-
-        $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
     }

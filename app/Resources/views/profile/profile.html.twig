@@ -12,7 +12,7 @@
             <div>{{ 'gender'|trans }}</div>
 
             <label class="radio">
-                <input type="radio" value="4"
+                <input type="radio" value="4" required
                     {% if profile.billingAddress.37 == 4 %} checked="checked" {% endif %}
                     {# TODO: manage gender update: name="user[addresses][billing][37]" #}
                         name="willBeChanged"
@@ -21,7 +21,7 @@
             </label>
 
             <label class="radio">
-                <input type="radio" value="3"
+                <input type="radio" value="3" required
                         {% if profile.billingAddress.37 == 3 %} checked="checked" {% endif %}
                         {# TODO: name="user[addresses][billing][37]" #}
                             name="willBeChanged"
