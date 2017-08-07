@@ -81,10 +81,9 @@ class ProfileController extends Controller
 
         // update user's password
         if (! empty($data['password'])) {
-
-            // check new password corresponds to password rules
             $newPassword = $data['password']['new'];
 
+            // check new password corresponds to password rules
             if (strlen($newPassword) < self::PASSWORD_MINIMUM_LENGTH) {
                 $message = $this->translator->trans('update_new_password_error_message', ['%n%' => self::PASSWORD_MINIMUM_LENGTH]);
                 $this->addFlash('danger', $message);
