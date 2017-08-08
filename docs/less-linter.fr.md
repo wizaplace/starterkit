@@ -1,3 +1,5 @@
+# Less-linter
+
 Voici les règles appliquées : 
 
 - pas d'hexadécimal invalide pour les couleurs
