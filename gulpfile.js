@@ -107,7 +107,7 @@ gulp.task('server', function() {
     });
 
     gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
-    gulp.watch('./app/Resources/public/style/**/*.*', ['style', 'browser-reload']);
+    gulp.watch('./app/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
     gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
     gulp.watch('./app/Resources/public/images/**/*.*', ['images', 'browser-reload']);
     gulp.watch('./app/Resources/views/**/*.*', ['browser-reload']);
@@ -137,8 +137,8 @@ gulp.task('default', ['dev']);
 // common tasks, run both by dev and prod tasks
 gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
-// dev tasks (with watcher and Vue.js dev version)
-gulp.task('dev', ['scripts_dev', 'common', 'server']);
+// dev tasks (with watcher, css linter and Vue.js dev version)
+gulp.task('dev', ['scripts_dev', 'common', 'lint-css', 'server']);
 
 // prod tasks (without watch task)
 gulp.task('deploy', ['scripts_prod', 'common']);
