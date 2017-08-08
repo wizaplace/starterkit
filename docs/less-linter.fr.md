@@ -389,7 +389,7 @@ Voici les règles appliquées :
         font-weight: bold;
     }
 ```
-- toujours l'utilisation des `::` pour les sélecteurs
+- toujours l'utilisation des `::` pour les sélecteurs de pseudo-éléments
 ```less
     // invalide : 
     a:before { color: pink; }
