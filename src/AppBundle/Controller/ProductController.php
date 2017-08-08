@@ -35,7 +35,7 @@ class ProductController extends Controller
 
         // latestProducts
         $catalogService = $this->get(CatalogService::class);
-        $latestProducts = $catalogService->search('', [], ['timestamp' => 'desc'], 6)->getProducts();
+        $latestProducts = $catalogService->search('', [], ['createdAt' => 'desc'], 6)->getProducts();
 
         //product Reviews
         $reviewService = $this->get(ReviewService::class);

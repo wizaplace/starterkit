@@ -1,4 +1,14 @@
-Wizaplace front-office demo.
+# Wizaplace front-office demo
+
+The StarterKit is a template web application for creating a front-office for Wizaplace.
+
+It is based on PHP 7.1, Symfony 3 and [our PHP SDK](https://github.com/wizaplace/wizaplace-php-sdk). The front-office connects to Wizaplace through the API ([API documentation](https://sandbox.wizaplace.com/api/v1/doc/)).
+
+## Architecture
+
+![](http://i.imgur.com/uWzynHK.png)
+
+The StarterKit project is meant to be cloned (forked on GitHub for example) for each new front-office project. The cloned version can then be customized to fit the target design.
 
 ## Setup
 
