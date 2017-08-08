@@ -11,6 +11,7 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
+const gulpStylelint = require('gulp-stylelint');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -116,6 +117,16 @@ gulp.task('browser-reload', function() {
     browserSync.reload();
 });
 
+gulp.task('lint-css', function lintCssTask() {
+    return gulp
+        .src('app/Resources/public/style/**/*.less')
+        .pipe(gulpStylelint({
+            reporters: [
+                {formatter: 'string', console: true}
+            ]
+        }))
+    ;
+});
 
 // tasks
 // =====
