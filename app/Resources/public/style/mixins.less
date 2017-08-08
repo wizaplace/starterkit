@@ -49,7 +49,7 @@
         }
 
         // top arrow
-        &:before {
+        &::before {
             font-family: FontAwesome;
             content: '\f0d8'; // fa-caret-up
             color: @background-color-light;
@@ -104,7 +104,7 @@
             background-color: @color-light;
         }
 
-        &:before {
+        &::before {
             font-family: @font-family-icon-lib;
             content: @icon-selected;
             margin-right: .25em;
@@ -236,7 +236,7 @@
         cursor: pointer;
 
         // unchecked version
-        &:before {
+        &::before {
             font-family: @font-family-icon;
             margin-right: .5em;
             vertical-align: -13%; // optically better than 'middle'
@@ -260,12 +260,12 @@
         &:checked {
 
             // change label and input color
-            & ~ .input-label, & ~ .input-label:before {
+            & ~ .input-label, & ~ .input-label::before {
                 color: @color-tertiary;
             }
 
             // change input icon
-            & ~ .input-label:before {
+            & ~ .input-label::before {
                 content: @checked-icon;
             }
         }
