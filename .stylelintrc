@@ -45,7 +45,7 @@
         "value-list-comma-space-after": "always-single-line",
         "value-list-comma-space-before": "never",
         "value-list-max-empty-lines": 0,
-        "selector-class-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-        "selector-id-pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        "selector-class-pattern": "^[a-z][a-z0-9]+(-[a-z0-9]+)*$",
+        "selector-id-pattern": "^[a-z][a-z0-9]+(-[a-z0-9]+)*$"
     }
 }
