@@ -43,6 +43,11 @@ profile:
     defaults: { _controller: AppBundle:Profile:view }
     methods: [GET]
 
+update_user:
+    path: /update-user
+    defaults: { _controller: AppBundle:Profile:updateProfile }
+    methods: [POST]
+
 profile_addresses:
     path: /profil/adresses
     defaults: { _controller: AppBundle:Profile:addresses }
@@ -164,11 +169,6 @@ create_return_form:
     path: /commande/{orderId}/retour
     defaults: { _controller: AppBundle:Order:displayCreateReturn }
     methods: [GET]
-
-update_user:
-    path: /update-user
-    defaults: { _controller: AppBundle:Profile:updateProfile }
-    methods: [POST]
 
 category:
     path: /c/{slug}

@@ -1,43 +1,70 @@
 {% extends 'layout-profile.html.twig' %}
 
 {% block profile_content %}
-    <form>
+
+    {# update user's profile #}
+    <form action="{{ path('update_user') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('profile_update_token') }}">
+        <input type="hidden" name="user[id]" value="{{ profile.id }}">
+
+        {# firstname #}
         <div class="form-group">
-            <label for="">Civilité</label>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-                    Monsieur
-                </label>
-                <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-                    Madame
-                </label>
+            <label for="firstname">{{ 'firstname'|trans }}</label>
+            <input id="firstname" type="text" class="form-control" name="user[firstName]" value="{{ profile.firstname }}">
+        </div>
+
+        {# lastname #}
+        <div class="form-group">
+            <label for="lastname">{{ 'lastname'|trans }}</label>
+            <input id="lastname" type="text" class="form-control" name="user[lastName]" value="{{ profile.lastname }}">
+        </div>
+
+        {# email #}
+        <div class="form-group">
+            <label for="email">{{ 'email'|trans }}</label>
+            <input id="email" type="email" class="form-control" name="user[email]" value="{{ profile.email }}">
+        </div>
+
+        {# password #}
+        <div class="form-group">
+            <label class="checkbox">
+                <input type="checkbox" id="password-update-trigger">
+                <span class="input-label">{{ 'update_my_password'|trans }}</span>
+            </label>
+
+            {# password update (starts off hidden on page load) #}
+            <div id="password-update-block" style="display: none">
+                <div class="form-group">
+                    <label for="current-password">{{ 'current_password'|trans }}</label>
+                    <input id="current-password" type="password" class="form-control" name="user[password][old]" autocomplete="off" disabled required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-password">{{ 'new_password'|trans }}</label>
+                    <input id="new-password" type="password" class="form-control" name="user[password][new]" autocomplete="off" disabled required>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="prenom">Prénom</label>
-            <input type="text" class="form-control" id="prenom">
-        </div>
-        <div class="form-group">
-            <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom">
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox">Recevoir les notifications par email
-            </label>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" value="{{ profile.email }}">
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox">Modifier le mot de passe
-            </label>
-        </div>
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-        <div class="big-spacer"></div>
+
+        <button type="submit" class="btn btn-primary">{{ 'save_changes'|trans }}</button>
     </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function() {
+            {# password update behaviours #}
+            $("#password-update-trigger").on("change", function() {
+
+                let $passwordUpdateBlock = $('#password-update-block');
+
+                {# toggle password update block #}
+                $passwordUpdateBlock.find('input').prop('disabled', function(i, bool) { return !bool; });
+                $passwordUpdateBlock.toggle('slow');
+
+                {# cleanup: clear inputs when fields are hidden #}
+                $passwordUpdateBlock.find('input').val('');
+            });
+        });
+    </script>
 {% endblock %}
