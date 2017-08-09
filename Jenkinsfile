@@ -28,7 +28,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'make npm-install assets'
+                sh 'make npm-install lint-css assets'
             }
         }
         stage('check') {
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 parallel(
                     'lint': {
-                        sh 'make lint-ci'
+                        sh 'make -j lint-ci'
                     },
                     'stan': {
                         sh 'make stan-ci'

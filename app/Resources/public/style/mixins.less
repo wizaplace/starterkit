@@ -30,7 +30,6 @@
 
     & > .content {
         padding: 1em;
-
         background-color: @background-color-light;
         border-radius: @radius;
         box-shadow: @box-shadow;
@@ -105,7 +104,7 @@
             background-color: @color-light;
         }
 
-        &:before {
+        &::before {
             font-family: @font-family-icon-lib;
             content: @icon-selected;
             margin-right: .25em;
@@ -261,13 +260,12 @@
         &:checked {
 
             // change label and input color
-            & ~ .input-label,
-            & ~ .input-label:before {
+            & ~ .input-label, & ~ .input-label::before {
                 color: @color-tertiary;
             }
 
             // change input icon
-            & ~ .input-label:before {
+            & ~ .input-label::before {
                 content: @checked-icon;
             }
         }
