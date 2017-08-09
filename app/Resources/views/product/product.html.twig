@@ -93,6 +93,53 @@
                                 <hr />
                             </div>
                         </div>
+                        <div class="row bloc">
+                            <div class="col-md-12">
+                                {% if reviews|length > 0 %}
+                                    {% for review in reviews %}
+                                        <div class="review">
+                                            <div class="review-info">
+                                                <span class="review-author">{{ review.author.name }}</span>
+                                                <div class="review-ratings">
+                                                    {% for i in 1..5 %}
+                                                        {% if i <= review.rating %}
+                                                            <i class="glyphicon glyphicon-star"></i>
+                                                        {% else %}
+                                                            <i class="glyphicon glyphicon-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <p class="review-message">{{ review.message |capitalize }}</p>
+                                            <div class="review-date">
+                                                <span>{{ review.postedAt|date('d/m/Y') }}</span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="add-review">
+                                    <h2>{{ 'add_a_comment'|trans }}</h2>
+                                    {% if app.user %}
+                                        <form name="add-reviews" method="post" action="{{ path('create_product_review') }}">
+                                            <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+                                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                                            <input type="hidden" name="author" value="{{ app.user.wizaplaceUser.firstName~' '~app.user.wizaplaceUser.lastName }}">
+                                            <div>
+                                                <label for="review-rate" class="">{{ 'your_rating'|trans }}&nbsp;:</label>
+                                                <input id="review-rate" name="rating" class="js-rating form-control hide" value="3" />
+                                            </div>
+                                            <div>
+                                                <label for="review-message" class="">{{ 'your_message'|trans }}&nbsp;:</label>
+                                                <textarea id="review-message" name="message" class="form-control" rows="5" cols="72"></textarea>
+                                            </div>
+                                            <input type="submit" class="btn" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}" />
+                                        </form>
+                                    {% else %}
+                                        <a href="{{ path('login') }}">{{ 'login_to_comment'|trans }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

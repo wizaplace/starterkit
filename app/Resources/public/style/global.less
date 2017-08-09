@@ -1,6 +1,10 @@
 body {
     color: @color-dark;
     font-family: Lato, Arial, Helvetica, sans-serif;
+
+    &.is-locked {
+        overflow: hidden;
+    }
 }
 
 ul {
@@ -26,6 +30,17 @@ select {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.no-image {
+    background-color: @color-medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // default dimension values to be overridden depending on context
+    height: 150px;
+    width: 150px;
 }
 
 // buttons and anchors
@@ -60,40 +75,43 @@ a {
     }
 }
 
-
 // placeholders
 // ============
 
 ::-webkit-input-placeholder {
     font-style: italic;
 }
+
 :-moz-placeholder {
     font-style: italic;
 }
+
 ::-moz-placeholder {
     font-style: italic;
 }
+
 :-ms-input-placeholder {
     font-style: italic;
 }
 
-
 // icons
 // =====
 
-.icon-checkbox:before {
+.icon-checkbox::before {
     content: @icon-checkbox;
 }
-.icon-checkbox-checked:before {
+
+.icon-checkbox-checked::before {
     content: @icon-checkbox-checked;
 }
-.icon-radio:before {
-    content: @icon-radio-checked;
-}
-.icon-radio-checked:before {
+
+.icon-radio::before {
     content: @icon-radio-checked;
 }
 
+.icon-radio-checked::before {
+    content: @icon-radio-checked;
+}
 
 // checkboxes and radio inputs
 // ===========================
@@ -115,7 +133,6 @@ a {
 .radio {
     .checkable(@icon-radio, @icon-radio-checked);
 }
-
 
 // grids
 // =====
@@ -147,13 +164,13 @@ a {
     }
 }
 
-
 // use mixins defaults in templates
 // ================================
 
 .has-left-icon {
     .has-left-icon();
 }
+
 .has-right-icon {
     .has-right-icon();
 }
@@ -161,12 +178,15 @@ a {
 .anchor-dark {
     .anchor("dark", true);
 }
+
 .anchor-light {
     .anchor("light", true);
 }
+
 .anchor-neutral-dark {
     .anchor("dark", false);
 }
+
 .anchor-neutral-light {
     .anchor("light", false);
 }
@@ -178,7 +198,6 @@ a {
 .faded-light {
     color: @color-faded-light;
 }
-
 
 // override Bootstrap defaults
 // ===========================

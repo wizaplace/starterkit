@@ -1,0 +1,51 @@
+{
+    "rules": {
+        "block-no-empty": true,
+        "color-no-invalid-hex": true,
+        "declaration-block-no-duplicate-properties": [
+            true,
+            {
+                "ignore": [
+                    "consecutive-duplicates-with-different-values"
+                ]
+            }
+        ],
+        "function-calc-no-unspaced-operator": true,
+        "keyframe-declaration-no-important": true,
+        "property-no-unknown": true,
+        "selector-pseudo-class-no-unknown": true,
+        "selector-pseudo-element-no-unknown": true,
+        "unit-no-unknown": true,
+        "block-closing-brace-newline-after": "always",
+        "block-closing-brace-newline-before": "always-multi-line",
+        "block-closing-brace-space-before": "always-single-line",
+        "block-opening-brace-newline-after": "always-multi-line",
+        "block-opening-brace-space-after": "always-single-line",
+        "block-opening-brace-space-before": "always",
+        "color-hex-case": null,
+        "color-hex-length": null,
+        "declaration-block-semicolon-newline-after": "always",
+        "declaration-block-semicolon-space-after": "always-single-line",
+        "declaration-block-semicolon-space-before": "never",
+        "declaration-block-single-line-max-declarations": 1,
+        "declaration-colon-space-after": "always-single-line",
+        "declaration-colon-space-before": "never",
+        "function-comma-space-after": "always",
+        "function-comma-space-before": "never",
+        "function-parentheses-newline-inside": "always-multi-line",
+        "function-parentheses-space-inside": "never",
+        "indentation": 4,
+        "max-empty-lines": 1,
+        "no-eol-whitespace": true,
+        "no-missing-end-of-source-newline": true,
+        "selector-max-empty-lines": 0,
+        "selector-pseudo-element-colon-notation": "double",
+        "value-list-comma-newline-after": "always-multi-line",
+        "value-list-comma-newline-before": "never-multi-line",
+        "value-list-comma-space-after": "always-single-line",
+        "value-list-comma-space-before": "never",
+        "value-list-max-empty-lines": 0,
+        "selector-class-pattern": "^[a-z][a-z0-9]+(-[a-z0-9]+)*$",
+        "selector-id-pattern": "^[a-z][a-z0-9]+(-[a-z0-9]+)*$"
+    }
+}

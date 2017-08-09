@@ -7,6 +7,7 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            VCR-index: '0'
             Accept: null
     response:
         status:
@@ -14,14 +15,14 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 03 Jul 2017 15:20:00 GMT'
+            Date: 'Mon, 24 Jul 2017 11:42:13 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: f441ec
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/f441ec'
-            Content-Length: '924'
+            X-Debug-Token: d79b6a
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/d79b6a'
+            Content-Length: '2415'
             Content-Type: application/json
-        body: '{"1":{"id":1,"name":"Informations","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"}]},"2":{"id":2,"name":"Espace client","items":[{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"}]},"3":{"id":3,"name":"Espace pro","items":[{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Conditions G\u00e9n\u00e9rales de Vente","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"}]}}'
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'
 -
     request:
         method: GET
@@ -31,6 +32,7 @@
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
             Authorization: 'Basic dXNlckB3aXphcGxhY2UuY29tOnBhc3N3b3Jk'
+            VCR-index: '0'
             Accept: null
     response:
         status:
@@ -38,14 +40,14 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 03 Jul 2017 15:20:01 GMT'
+            Date: 'Mon, 24 Jul 2017 11:42:13 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 78a349
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/78a349'
-            Content-Length: '61'
+            X-Debug-Token: '111004'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/111004'
+            Content-Length: '60'
             Content-Type: application/json
-        body: '{"id":3,"apiKey":"\/0UfttrgGDdlstXgUDf26h3+2PTgxQO6rIXgD8wh"}'
+        body: '{"id":3,"apiKey":"AWB35xydI6jQ8+V2JyUCdsSYH+249D2O+Nd0voBr"}'
 -
     request:
         method: GET
@@ -54,7 +56,8 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
-            Authorization: 'token /0UfttrgGDdlstXgUDf26h3+2PTgxQO6rIXgD8wh'
+            Authorization: 'token AWB35xydI6jQ8+V2JyUCdsSYH+249D2O+Nd0voBr'
+            VCR-index: '1'
             Accept: null
     response:
         status:
@@ -62,11 +65,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 03 Jul 2017 15:20:01 GMT'
+            Date: 'Mon, 24 Jul 2017 11:42:13 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: '8e5482'
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/8e5482'
+            X-Debug-Token: b9400f
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/b9400f'
             Content-Length: '465'
             Content-Type: application/json
         body: '{"id":3,"email":"user@wizaplace.com","firstName":"Paul","lastName":"Martin","addresses":{"billing":{"37":"1","firstname":"Paul","lastname":"Martin","39":null,"phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR"},"shipping":{"38":"1","firstname":"Paul","lastname":"Martin","40":null,"phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR"}}}'
@@ -78,7 +81,8 @@
             Host: wizaplace.loc
             Accept-Encoding: null
             User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
-            Authorization: 'token /0UfttrgGDdlstXgUDf26h3+2PTgxQO6rIXgD8wh'
+            Authorization: 'token AWB35xydI6jQ8+V2JyUCdsSYH+249D2O+Nd0voBr'
+            VCR-index: '0'
             Accept: null
     response:
         status:
@@ -86,11 +90,61 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 03 Jul 2017 15:20:01 GMT'
+            Date: 'Mon, 24 Jul 2017 11:42:14 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 0a735d
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/0a735d'
-            Content-Length: '924'
+            X-Debug-Token: 080f8c
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/080f8c'
+            Content-Length: '2415'
             Content-Type: application/json
-        body: '{"1":{"id":1,"name":"Informations","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"}]},"2":{"id":2,"name":"Espace client","items":[{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"}]},"3":{"id":3,"name":"Espace pro","items":[{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Conditions G\u00e9n\u00e9rales de Vente","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"}]}}'
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/users/3'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Authorization: 'token AWB35xydI6jQ8+V2JyUCdsSYH+249D2O+Nd0voBr'
+            VCR-index: '0'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Mon, 24 Jul 2017 11:42:14 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: e9d0ba
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/e9d0ba'
+            Content-Length: '465'
+            Content-Type: application/json
+        body: '{"id":3,"email":"user@wizaplace.com","firstName":"Paul","lastName":"Martin","addresses":{"billing":{"37":"1","firstname":"Paul","lastname":"Martin","39":null,"phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR"},"shipping":{"38":"1","firstname":"Paul","lastname":"Martin","40":null,"phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR"}}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/menus'
+        headers:
+            Host: wizaplace.loc
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
+            Authorization: 'token AWB35xydI6jQ8+V2JyUCdsSYH+249D2O+Nd0voBr'
+            VCR-index: '1'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Mon, 24 Jul 2017 11:42:14 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 6cc4ca
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/6cc4ca'
+            Content-Length: '2415'
+            Content-Type: application/json
+        body: '{"1":{"id":1,"name":"Liens rapides header","items":[{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"},{"name":"FAQ","position":0,"url":"https:\/\/wizaplace.loc\/faq-2.html"},{"name":"Wishliste","position":0,"url":"https:\/\/wizaplace.loc\/wishliste.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]},"2":{"id":2,"name":"Top menu","items":[{"name":" Toutes les cat\u00e9gories","position":0,"url":"https:\/\/wizaplace.loc\/"}]},"3":{"id":3,"name":"Informations","items":[{"name":"Mentions l\u00e9gales","position":0,"url":"https:\/\/wizaplace.loc\/mentions-legales.html"},{"name":"CGV","position":0,"url":"https:\/\/wizaplace.loc\/conditions-generales-de-vente.html"},{"name":"Retours produits","position":0,"url":"https:\/\/wizaplace.loc\/retours-produits.html"},{"name":"Modes de livraison","position":0,"url":"https:\/\/wizaplace.loc\/modes-de-livraison.html"},{"name":"Les paiements","position":0,"url":"https:\/\/wizaplace.loc\/les-paiements.html"},{"name":"Protection des donn\u00e9es","position":0,"url":"https:\/\/wizaplace.loc\/protection-des-donnees.html"},{"name":"Qui sommes-nous ?","position":0,"url":"https:\/\/wizaplace.loc\/qui-sommes-nous.html"},{"name":"Les marchands","position":0,"url":"https:\/\/wizaplace.loc\/les-marchands.html"},{"name":"Le blog","position":0,"url":"https:\/\/wizaplace.loc\/le-blog.html"}]},"4":{"id":4,"name":"Espace client","items":[{"name":"FAQ \/ Aide","position":0,"url":"https:\/\/wizaplace.loc\/faq-aide.html"},{"name":"Passer une commande","position":0,"url":"https:\/\/wizaplace.loc\/passer-une-commande.html"},{"name":"Suivi de commande","position":0,"url":"https:\/\/wizaplace.loc\/suivi-de-commande.html"},{"name":"Retourner un article","position":0,"url":"https:\/\/wizaplace.loc\/retourner-un-article.html"},{"name":"Cr\u00e9er un SAV","position":0,"url":"https:\/\/wizaplace.loc\/creer-un-sav.html"},{"name":"Contact","position":0,"url":"https:\/\/wizaplace.loc\/contact.html"}]},"5":{"id":5,"name":"Espace pro","items":[{"name":"Annoncer sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/annoncer-sur-la-plateforme.html"},{"name":"Proposer un partenariat","position":0,"url":"https:\/\/wizaplace.loc\/proposer-un-partenariat.html"},{"name":"Vendre sur la plateforme","position":0,"url":"https:\/\/wizaplace.loc\/vendre-sur-la-plateforme.html"}]}}'

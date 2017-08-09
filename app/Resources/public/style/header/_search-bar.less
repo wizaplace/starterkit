@@ -37,6 +37,7 @@
             // auto-complete
             .product-suggestions {
                 .popunder(.3s, 100%);
+
                 cursor: pointer;
 
                 .suggestion {
@@ -53,11 +54,11 @@
                     color: darken(saturate(@color-primary, 5%), 12%);
                     cursor: pointer;
                     .remove-border-radius-right();
+
                     background: @color-secondary;
                     flex: 0 1 auto;
                     max-width: 164px; // just enough for default category name
                     user-select: none;
-
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -65,7 +66,7 @@
                     .picker-icon {
                         font-size: 2em;
                         color: @color-light;
-                        text-shadow: 1px 1px 1px rgba(0,0,0,.3); // subtle pop
+                        text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
                         @media screen and (min-width: @screen-md-min) {
                             display: none;
@@ -79,7 +80,7 @@
                     }
 
                     .picker-label {
-                        white-space:nowrap;
+                        white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
@@ -92,10 +93,12 @@
                         display: none; // starts off hidden
 
                         .popunder();
+
                         cursor: pointer;
 
                         .category {
                             .popin-list-item();
+
                             color: @color-dark;
                             padding: .25em;
                         }
@@ -139,6 +142,7 @@
 
                     [name="q"] {
                         .remove-border-radius-left();
+
                         border-left: 0;
                     }
 
@@ -170,6 +174,7 @@
                 // remove radius on smaller screens and push away submit button
                 @media screen and (max-width: @screen-md-max) {
                     .remove-border-radius-top();
+
                     margin-bottom: 1em;
                 }
             }

@@ -25,11 +25,11 @@ const ui = {
         }
 
         function show($element) {
-            $element.addClass("in");
+            $element.addClass("is-visible");
         }
 
         function hide($element) {
-            $element.removeClass("in");
+            $element.removeClass("is-visible");
         }
     },
 
@@ -87,6 +87,20 @@ const ui = {
 
     // slick
     initSlick: function() {
+        // home page banners
+        $('.banners').find('[class*="-screens"]').slick({
+            dots: true,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 6000,
+            speed: 300, // transition speed
+            slidesToShow: 1,
+            slidesToScroll: 1,
+        });
+    },
+
+    // slick legacy
+    initSlickShowcase: function() {
         let $arrows = $('.arrows');
         let $next = $arrows.children('.products-next');
         let $prev = $arrows.children('.products-prev');

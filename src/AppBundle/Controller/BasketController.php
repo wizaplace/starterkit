@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\Basket\Exception\CouponNotInTheBasket;
@@ -24,9 +25,13 @@ class BasketController extends Controller
     /** @var BasketService */
     private $basketService;
 
-    public function __construct(BasketService $basketService)
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(BasketService $basketService, TranslatorInterface $translator)
     {
         $this->basketService = $basketService;
+        $this->translator = $translator;
     }
 
     public function basketAction(): Response
@@ -60,7 +65,7 @@ class BasketController extends Controller
         }
 
         // warning message regarding stock
-        $notEnoughStockMessage = "Le nombre de produits en stock est insuffisant pour votre commande.";
+        $notEnoughStockMessage = $this->translator->trans('not_enough_stock');
         $message = ($addedProduct["quantity"] < $requestedQuantity) ? $notEnoughStockMessage : null;
 
         return new JsonResponse([
@@ -80,7 +85,8 @@ class BasketController extends Controller
         $this->basketService->removeProductFromBasket($basketId, $declinationId);
 
         // add a success message
-        $this->addFlash('success', 'Le produit a bien été supprimé de votre panier.');
+        $message = $this->translator->trans('product_deleted_from_basket');
+        $this->addFlash('success', $message);
 
         return $this->redirect($referer);
     }
@@ -96,18 +102,26 @@ class BasketController extends Controller
         return $this->redirect($referer);
     }
 
-    public function updateProductQuantityAction(Request $request): Response
+    public function updateProductQuantityAction(Request $request): JsonResponse
     {
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
         $quantity = $request->request->get('quantity');
+
+        // remove product from basket if quantity is 0
+        if ($quantity == 0) {
+            $this->basketService->removeProductFromBasket($basketId, $declinationId);
+
+            $message = $this->translator->trans('product_deleted_from_basket');
+            $this->addFlash('success', $message);
+
+            return new JsonResponse();
+        }
+
         $realQuantity = $this->basketService->updateProductQuantity($basketId, $declinationId, (int) $quantity);
 
-        $basketId = $this->getBasketId();
-        $basket = $this->basketService->getBasket($basketId);
-
-        return $this->render('checkout/basket.html.twig', [
-            'basket' => $basket,
+        return new JsonResponse([
+            'realQuantity' => $realQuantity,
         ]);
     }
 
@@ -136,9 +150,27 @@ class BasketController extends Controller
         } catch (CouponNotInTheBasket $e) {
             //Si le coupon n'est pas dans le panier, on est dans l'état final attendu
         }
+
         $referer = $request->headers->get('referer');
 
         return $this->redirect($referer);
+    }
+
+    public function selectShippingsAction(Request $request): JsonResponse
+    {
+        $basketId = $this->getBasketId();
+
+        $shippingGroupId = $request->get('shippingGroupId');
+        $shippingId = $request->get('shippingId');
+
+        $shippings[$shippingGroupId] = $shippingId;
+        $this->basketService->selectShippings($basketId, $shippings);
+
+        $message = $this->translator->trans('shipping_method_updated');
+
+        return new JsonResponse([
+            'message' => $message,
+        ]);
     }
 
     protected function getBasketId(): string

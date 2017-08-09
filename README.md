@@ -1,6 +1,20 @@
-Wizaplace front-office demo.
+# Wizaplace front-office demo
+
+The StarterKit is a template web application for creating a front-office for Wizaplace.
+
+It is based on PHP 7.1, Symfony 3 and [our PHP SDK](https://github.com/wizaplace/wizaplace-php-sdk). The front-office connects to Wizaplace through the API ([API documentation](https://sandbox.wizaplace.com/api/v1/doc/)).
+
+## Architecture
+
+![](http://i.imgur.com/uWzynHK.png)
+
+The StarterKit project is meant to be cloned (forked on GitHub for example) for each new front-office project. The cloned version can then be customized to fit the target design.
 
 ## Setup
+
+### Using Vagrant
+
+**This is the recommended solution.**
 
 Requirements:
 
@@ -28,7 +42,7 @@ The website is now reachable at [http://demo.loc/](http://demo.loc/).
 
 At any time you can rebuild everything by running `make dev-from-scratch` again.
 
-## Customization
+#### Customization
 
 You can customize your local Vagrant configuration by creating a file named `Vagrantfile.local`, for example:
 
@@ -47,3 +61,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network 'forwarded_port', guest: 3306, host: 3306
 end
 ```
+
+### Without Vagrant
+
+This method can be used when Vagrant cannot be made to work.
+
+Requirements:
+
+- PHP 7.1
+- Composer
+- NPM
+- Gulp
+
+```
+make install
+# Run the built-in webserver
+bin/console server:run
+```
+
+The application should be available at http://localhost:8000/

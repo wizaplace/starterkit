@@ -58,21 +58,15 @@
 @button-color-hover-light: @color-hover-light;
 @button-color-active-light: @color-active-light;
 
-
 // borders
 @border-color: lighten(@color-primary, 30%);
 @radius: 3px;
 
-
 // z-indexes
-// =========
-
 @overlay: 10;
-
 
 // logo
 @logo-width: 80px;
-
 
 // price slider
 @handle-color: #fff;
@@ -87,6 +81,25 @@
 @slider-background-color: #bbb;
 @slider-range-background-color: #b542a4;
 
+// slick carousel
+@slick-font-path: "../fonts/";
+@slick-font-family: "slick";
+@slick-loader-path: "../images/";
+@slick-arrow-color: white;
+@slick-dot-color: black;
+@slick-dot-color-active: @slick-dot-color;
+@slick-prev-character: "←";
+@slick-next-character: "→";
+@slick-dot-character: "•";
+@slick-dot-size: 14px;
+@slick-opacity-default: .75;
+@slick-opacity-on-hover: 1;
+@slick-opacity-not-active: .25;
+
+// not in original library defaults
+@slick-arrow-size: 32px;
+@slick-large-screen-max-height: 250px; // safe threshold for large screen images
+@slick-small-screen-max-height: 500px; // safe threshold for small screen images
 
 // custom icons content
 // ====================
@@ -95,15 +108,13 @@
 @icon-radio: "\e902";
 @icon-radio-checked: "\e903";
 
-
 // grids
 // =====
 
 @screen-xxs-max: 480px;
 @screen-xs-min: (@screen-xxs-max + 1);
 
-
 // misc
 // ====
 
-@box-shadow: 2px 2px 2px 2px rgba(0,0,0,.3);
+@box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .3);

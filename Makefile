@@ -11,7 +11,7 @@ composer-install:
 composer-install-ci:
 	composer install --no-interaction --no-progress --ignore-platform-reqs
 
-lint: lint-php lint-twig lint-yaml lint-xliff
+lint: lint-php lint-twig lint-yaml lint-xliff lint-css
 
 lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff
 
@@ -32,11 +32,14 @@ lint-xliff:
 	bin/console lint:xliff app
 	bin/console lint:xliff src
 
+lint-css:
+	gulp lint-css
+
 stan:
-	./vendor/bin/phpstan analyse -l 4 src tests
+	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 src tests
 
 stan-ci:
-	./vendor/bin/phpstan --no-interaction analyse -l 4 src tests
+	./vendor/bin/phpstan --no-interaction analyse -c phpstan.neon -l 5 src tests
 
 test: test-phpunit test-behat
 
@@ -62,4 +65,4 @@ assets:
 dev-from-scratch:
 	vagrant destroy -f && vagrant up
 
-.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff stan stan-ci test test-phpunit test-phpunit-ci test-behat test-behat-ci dev-from-scratch
+.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff lint-css stan stan-ci test test-phpunit test-phpunit-ci test-behat test-behat-ci dev-from-scratch

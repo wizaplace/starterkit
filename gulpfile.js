@@ -10,6 +10,8 @@ const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
+const browserSync = require('browser-sync').create();
+const gulpStylelint = require('gulp-stylelint');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -33,7 +35,8 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
-        `${nodeModulePath}/coockieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
@@ -44,10 +47,11 @@ gulp.task('scripts_prod', function() {
 gulp.task('scripts_dev', function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
-        `${nodeModulePath}/vue/dist/vue.js`,
+        `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
+        `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './app/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())
@@ -76,7 +80,10 @@ gulp.task('jquery', function() {
 
 // images (move)
 gulp.task('images', function () {
-    return gulp.src('./app/Resources/public/images/**/*.*')
+    return gulp.src([
+        './app/Resources/public/images/**/*.*',
+        `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
+    ])
         .pipe(imagemin())
         .pipe(gulp.dest('./web/images'));
 });
@@ -87,25 +94,51 @@ gulp.task('fonts', function () {
         './app/Resources/public/fonts/**/*.*',
         `${nodeModulePath}/font-awesome/fonts/**/*`,
         `${nodeModulePath}/bootstrap/fonts/**/*`,
+        `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
     ]).pipe(gulp.dest('./web/fonts'));
 });
 
-// watchers
-gulp.task('watch', function () {
-    gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev']);
-    gulp.watch('./app/Resources/public/style/**/*.*', ['style']);
-    gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts']);
-    gulp.watch('./app/Resources/public/images/**/*.*', ['images']);
+// serve (for live reload) and watch assets changes
+gulp.task('server', function() {
+    browserSync.init({
+        proxy: "demo.loc",
+        startPath: "/app_dev.php",
+        notify: false
+    });
+
+    gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
+    gulp.watch('./app/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
+    gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
+    gulp.watch('./app/Resources/public/images/**/*.*', ['images', 'browser-reload']);
+    gulp.watch('./app/Resources/views/**/*.*', ['browser-reload']);
 });
 
+gulp.task('browser-reload', function() {
+    browserSync.reload();
+});
+
+gulp.task('lint-css', function lintCssTask() {
+    return gulp
+        .src('app/Resources/public/style/**/*.less')
+        .pipe(gulpStylelint({
+            reporters: [
+                {formatter: 'string', console: true}
+            ]
+        }))
+    ;
+});
+
+// tasks
+// =====
+
 // default task (with watcher)
-gulp.task('default', ['dev', 'watch']);
+gulp.task('default', ['dev']);
 
 // common tasks, run both by dev and prod tasks
 gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
-// dev tasks (with watcher and Vue.js dev version)
-gulp.task('dev', ['scripts_dev', 'common']);
+// dev tasks (with watcher, css linter and Vue.js dev version)
+gulp.task('dev', ['scripts_dev', 'common', 'lint-css', 'server']);
 
 // prod tasks (without watch task)
 gulp.task('deploy', ['scripts_prod', 'common']);

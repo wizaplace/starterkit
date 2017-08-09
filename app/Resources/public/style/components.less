@@ -8,13 +8,14 @@
     opacity: 0;
     background-color: #000;
     transition: opacity .2s ease-in-out,
-    z-index 0s ease .3s;
+        z-index 0s ease .3s;
 
-    &.in {
+    &.is-visible {
         z-index: @overlay;
         opacity: .5;
-        transition: opacity .2s ease-in-out,
-        z-index 0s ease;
+        transition:
+            opacity .2s ease-in-out,
+            z-index 0s ease;
     }
 }
 
@@ -44,8 +45,8 @@
             float: right;
             padding-left: 1em;
             font-size: .8em;
+            color: rgba(0, 0, 0, .4);
             .anchor("dark");
-            color: rgba(0,0,0,.4);
         }
     }
 }
@@ -85,8 +86,8 @@
         top: 1em;
         opacity: 0;
         font-size: 1.5em;
+        text-shadow: rgba(0, 0, 0, .3) 3px 3px 3px;
         .anchor("light");
-        text-shadow: rgba(0,0,0,.3) 3px 3px 3px;
     }
 
     // close icon transition
@@ -106,8 +107,8 @@
     .close-modal {
         float: right;
         font-size: .9em;
-        .anchor("dark");
         color: fade(@color-dark, 75%);
+        .anchor("dark");
     }
 
     .title {
@@ -157,5 +158,90 @@
         .cc-compliance {
             background: @color-secondary;
         }
+    }
+}
+
+// see variable.less file for slick defaults customization
+.slick-slider {
+    .image-link > img {
+        width: 100%;
+        height: auto;
+        max-height: @slick-large-screen-max-height; // safe threshold
+
+        @media screen and (max-width: @screen-md-max) {
+            max-height: @slick-small-screen-max-height; // safe threshold
+        }
+    }
+
+    // arrow positions
+    .slick-prev, .slick-next {
+        z-index: 1;
+
+        &::before {
+            font-size: @slick-arrow-size;
+        }
+    }
+
+    .slick-prev {
+        left: 25px;
+
+        &[dir="rtl"] {
+            left: auto;
+            right: 25px;
+        }
+    }
+
+    .slick-next {
+        right: 25px;
+
+        &[dir="rtl"] {
+            left: 25px;
+            right: auto;
+        }
+    }
+}
+
+.loading-spinner {
+    position: fixed;
+    z-index: @overlay + 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    opacity: .8;
+    display: none;
+
+    &.is-visible {
+        display: block;
+    }
+
+    & > * {
+        width: 18px;
+        height: 18px;
+        background-color: #eee;
+        border-radius: 100%;
+        display: inline-block;
+        animation: loading 1.4s infinite ease-in-out both;
+    }
+
+    .bounce1 {
+        animation-delay: -.32s;
+    }
+
+    .bounce2 {
+        animation-delay: -.16s;
+    }
+}
+
+// loading spinner animation
+@keyframes loading {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
     }
 }

@@ -28,6 +28,7 @@ Vagrantfile.local
 /web/css
 /web/js
 /web/fonts
+/web/bundles
 
 # CI artifacts
 coke-*.xml
