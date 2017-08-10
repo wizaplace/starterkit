@@ -28,6 +28,11 @@ class ProductController extends Controller
 
         $product = $this->get(CatalogService::class)->getProductById($productId);
 
+        // serialize available options
+        $availableOptions = array_map(function($option) {
+            return $option->expose();
+        }, $product->getOptions());
+
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
             return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
@@ -43,6 +48,7 @@ class ProductController extends Controller
 
         return $this->render('product/product.html.twig', [
             'product' => $product,
+            'availableOptions' => $availableOptions,
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,
         ]);

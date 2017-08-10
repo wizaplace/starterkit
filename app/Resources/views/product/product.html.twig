@@ -166,7 +166,8 @@
                 data: {
                     productId: {{ product.id }},
                     quantity: 1,
-                    options: []
+                    availableOptions: [],
+                    declinationOptions: [],
                 },
 
                 methods: {
@@ -201,7 +202,8 @@
                 },
 
                 mounted: function() {
-                    this.availableOptions = {{ product.options|json_encode }};
+                    this.availableOptions = {{ availableOptions|json_encode|raw }};
+                    this.declinationOptions = "" //todo;
                 }
             });
 
