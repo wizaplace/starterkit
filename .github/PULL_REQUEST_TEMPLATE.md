@@ -1,4 +1,4 @@
-#Checklist
+# Checklist
 
 - [ ] commande `make test` lancée et successful
 - [ ] commande `make lint` lancée et successful
