@@ -52,9 +52,10 @@ class BasketController extends Controller
         $product = $this->get(CatalogService::class)->getProductById($declinationId);
 
         //  get product data
+        $addedProduct = [];
         $addedProduct["name"] = $product->getName();
         $addedProduct["price"] = $product->getDeclinations()["0"]->getPrice();
-        $addedProduct["quantity"] = $this->basketService->addProductToBasket($basketId, $declinationId, $requestedQuantity);
+        $addedProduct["quantity"] = $this->basketService->addProductToBasket($basketId, $declinationId, (int) $requestedQuantity);
 
         // get product main image
         $productImages = $product->getDeclinations()["0"]->getImages();
