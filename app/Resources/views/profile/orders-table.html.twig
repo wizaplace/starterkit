@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for order in orders %}
+        {% for order in orders|default %}
             <tr>
                 <td><a href="{{ path('order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
                 <td>{{ order.timestamp.format('d-m-y') }}</td>
