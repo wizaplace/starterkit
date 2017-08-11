@@ -112,7 +112,7 @@ class ProfileController extends Controller
         }
 
         // update user's profile
-        $userService->updateUser($user);
+        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
 
         $message = $this->translator->trans('update_profile_success_message');
         $this->addFlash('success', $message);
