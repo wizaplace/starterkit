@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for return in orderReturns %}
+    {% for return in orderReturns|default %}
         <tr>
             <td rowspan="{{ return.items|length }}">{{ return.id }}</td>
             <td rowspan="{{ return.items|length }}">{{ return.orderId }}</td>
