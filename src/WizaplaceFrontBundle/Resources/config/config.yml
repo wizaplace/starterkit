@@ -1,0 +1,57 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    WizaplaceFrontBundle\:
+        resource: '../../'
+        exclude: '../../{Twig,Entity,Repository}'
+#    WizaplaceFrontBundle\Controller\:
+#        resource: '../../Controller'
+#        public: true
+    WizaplaceFrontBundle\Security\AuthenticationFailureHandler:
+        parent: 'security.authentication.failure_handler'
+        autowire: true
+        autoconfigure: false
+        public: true
+    WizaplaceFrontBundle\Security\AuthenticationSuccessHandler:
+        parent: 'security.authentication.success_handler'
+        autowire: true
+        autoconfigure: false
+        public: true
+
+    wizaplace.guzzle.handler:
+        factory: 'GuzzleHttp\HandlerStack::create'
+        class: 'GuzzleHttp\HandlerStack'
+    wizaplace.http.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                base_uri: '%api.base_url%'
+                handler: '@wizaplace.guzzle.handler'
+    Wizaplace\ApiClient:
+        arguments: ['@wizaplace.http.client']
+        public: true
+    Wizaplace\Catalog\CatalogService:
+        public: true
+    Wizaplace\Catalog\Review\ReviewService:
+        public: true
+    Wizaplace\Basket\BasketService:
+        public: true
+    Wizaplace\Cms\BannerService:
+        public: true
+    Wizaplace\User\UserService:
+        public: true
+    Wizaplace\Order\OrderService:
+        public: true
+    Wizaplace\Image\ImageService:
+        public: true
+    Wizaplace\Seo\SeoService:
+        public: true
+    Wizaplace\Cms\CmsService:
+        public: true
+    WizaplaceFrontBundle\Twig\AppExtension:
+        arguments:
+            $cache: '@cache.app'
+            $recaptchaKey: '%recaptcha.key%'

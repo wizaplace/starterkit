@@ -5,7 +5,7 @@
  * @license     Proprietary
  */
 
-namespace AppBundle\Twig;
+namespace WizaplaceFrontBundle\Twig;
 
 use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
