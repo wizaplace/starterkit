@@ -80,3 +80,7 @@ bin/console server:run
 ```
 
 The application should be available at http://localhost:8000/
+
+## Development
+
+To compile assets, simply run `gulp`. Gulp will watch changes and recompile Javascript, CSS, etc. automatically.
