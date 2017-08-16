@@ -8,17 +8,19 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Catalog\DeclinationOption;
 use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
 
 class ProductController extends Controller
 {
-    public function viewAction(SeoService $seoService, string $categoryPath, string $slug) : Response
+    public function viewAction(SeoService $seoService, string $categoryPath, string $slug, Request $request) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
         if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::PRODUCT()) {
@@ -28,10 +30,16 @@ class ProductController extends Controller
 
         $product = $this->get(CatalogService::class)->getProductById($productId);
 
-        // serialize available options
-        $availableOptions = array_map(function($option) {
-            return $option->expose();
-        }, $product->getOptions());
+        // Recovering the declinationId from url, if none passed, declination = first declination of the product
+        if (!$declinationId = $request->query->get('d')) {
+            $declinationId = $product->getDeclinations()[0]->getId();
+        }
+
+        $declination = $product->getDeclination($declinationId);
+
+        $declinationVariantIds = array_map(function (DeclinationOption $option) {
+            return $option->getVariantId();
+        }, $declination->getOptions());
 
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
@@ -48,10 +56,25 @@ class ProductController extends Controller
 
         return $this->render('product/product.html.twig', [
             'product' => $product,
-            'availableOptions' => $availableOptions,
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,
+            'declination' => $declination,
+            'declinationVariantIds' => $declinationVariantIds,
         ]);
+    }
+
+    public function getDeclinationIdAction(Request $request): JsonResponse
+    {
+        $productId = $request->query->get('productId');
+        $variantIds = $request->query->get('variantIds');
+
+        $catalogService = $this->get(CatalogService::class);
+
+        $product = $catalogService->getProductById($productId);
+        $declination = $product->getDeclinationFromOptions($variantIds);
+
+
+        return new JsonResponse($declination->getId());
     }
 
     public function reviewAction(ReviewService $reviewService, Request $request) : RedirectResponse

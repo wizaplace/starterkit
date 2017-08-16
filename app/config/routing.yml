@@ -131,6 +131,11 @@ product:
     options:
         expose: true
 
+get_declination_id:
+    path:   /product/get-declination-id
+    defaults: { _controller: AppBundle:Product:getDeclinationId }
+    methods: [GET]
+
 
 # panier (Create, Update, Delete)
 

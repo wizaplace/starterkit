@@ -15,9 +15,9 @@
     <ul class="options">
         {% for option in product.options  %}
             <li class="option-name">{{ option.name }}
-                <select title="{{ 'select' }}" data-id="{{ option.id }}" @change="updateDeclination">
+                <select title="{{ 'select' }}" data-id="{{ option.id }}" onchange="updateDeclination(this)">
                     {% for variant in option.variants %}
-                        <option value="{{ variant.id }}">{{ variant.name }}</option>
+                        <option value="{{ variant.id }}" {% if variant.id in declinationVariantIds %}selected{% endif %}>{{ variant.name }}</option>
                     {% endfor %}
                 </select>
             </li>

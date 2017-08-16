@@ -166,8 +166,6 @@
                 data: {
                     productId: {{ product.id }},
                     quantity: 1,
-                    availableOptions: [],
-                    declinationOptions: [],
                 },
 
                 methods: {
@@ -183,11 +181,6 @@
                         }
                     },
 
-                    updateDeclination: function() {
-                        // todo: gather all options keys and values ids
-
-                    },
-
                     submitBasket: function() {
 
                         $.ajax({
@@ -200,11 +193,6 @@
                         });
                     }
                 },
-
-                mounted: function() {
-                    this.availableOptions = {{ availableOptions|json_encode|raw }};
-                    this.declinationOptions = "" //todo;
-                }
             });
 
             $('.slider-for').slick({
@@ -226,6 +214,29 @@
                 arrows: false
             });
         });
+
+        function updateDeclination(select){
+            //getting the <ul> parent of the select and get all the select below it
+            let list = $(select).parent().parent().children().children('select');
+            let selectedVariantsIds = [];
+            let route = "{{ path('product', {'slug': product.slug, 'categoryPath':product.categorySlugs|join('/')}) }}";
+
+            list.each(function(){
+                selectedVariantsIds.push($(this).val());
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "{{ path('get_declination_id') }}",
+                data: {
+                    productId: {{ product.id }},
+                    variantIds: selectedVariantsIds
+                },
+                success: function(response) {
+                    window.location.replace(route+'?d='+response);
+                }
+            });
+        }
     </script>
 
 {% endblock %}
