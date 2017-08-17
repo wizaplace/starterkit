@@ -216,26 +216,7 @@
         });
 
         function updateDeclination(select){
-            //getting the <ul> parent of the select and get all the select below it
-            let list = $(select).parent().parent().children().children('select');
-            let selectedVariantsIds = [];
-            let route = "{{ path('product', {'slug': product.slug, 'categoryPath':product.categorySlugs|join('/')}) }}";
-
-            list.each(function(){
-                selectedVariantsIds.push($(this).val());
-            });
-
-            $.ajax({
-                type: "GET",
-                url: "{{ path('get_declination_id') }}",
-                data: {
-                    productId: {{ product.id }},
-                    variantIds: selectedVariantsIds
-                },
-                success: function(response) {
-                    window.location.replace(route+'?d='+response);
-                }
-            });
+            window.location.replace($(select).find(':selected').data('url'));
         }
     </script>
 

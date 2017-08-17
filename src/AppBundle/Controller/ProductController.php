@@ -8,12 +8,12 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\DeclinationOption;
+use Wizaplace\Catalog\Option;
+use Wizaplace\Catalog\OptionVariant;
 use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
@@ -35,11 +35,6 @@ class ProductController extends Controller
             $declinationId = $product->getDeclinations()[0]->getId();
         }
 
-        $declination = $product->getDeclination($declinationId);
-
-        $declinationVariantIds = array_map(function (DeclinationOption $option) {
-            return $option->getVariantId();
-        }, $declination->getOptions());
 
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
@@ -54,27 +49,43 @@ class ProductController extends Controller
         $reviewService = $this->get(ReviewService::class);
         $reviews = $reviewService->getProductReviews($productId);
 
+        $declination = $product->getDeclination($declinationId);
+        $variantIdByOptionId = [];
+        foreach ($declination->getOptions() as $option) {
+            $variantIdByOptionId[$option->getId()] = $option->getVariantId();
+        }
+
+        $options = array_map(function (Option $option) use ($product, $variantIdByOptionId, $categoryPath, $slug) {
+            return [
+                'id' => $option->getId(),
+                'name' => $option->getName(),
+                'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId, $categoryPath, $slug) {
+                    $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
+
+                    $variantIdByOptionId[$option->getId()] = $variant->getId();
+                    $declinationId = $product->getDeclinationFromOptions($variantIdByOptionId)->getId();
+
+                    return [
+                        'id' => $variant->getId(),
+                        'name' => $variant->getName(),
+                        'selected' => $isSelected,
+                        'url' => $this->generateUrl('product', [
+                            'categoryPath' => $categoryPath,
+                            'slug' => $slug,
+                            'd' => $declinationId,
+                        ]),
+                    ];
+                }, $option->getVariants()),
+            ];
+        }, $product->getOptions());
+
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,
             'declination' => $declination,
-            'declinationVariantIds' => $declinationVariantIds,
+            'options' => $options,
         ]);
-    }
-
-    public function getDeclinationIdAction(Request $request): JsonResponse
-    {
-        $productId = $request->query->get('productId');
-        $variantIds = $request->query->get('variantIds');
-
-        $catalogService = $this->get(CatalogService::class);
-
-        $product = $catalogService->getProductById($productId);
-        $declination = $product->getDeclinationFromOptions($variantIds);
-
-
-        return new JsonResponse($declination->getId());
     }
 
     public function reviewAction(ReviewService $reviewService, Request $request) : RedirectResponse

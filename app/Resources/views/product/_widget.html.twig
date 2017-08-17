@@ -13,11 +13,11 @@
     <h4>{{ 'options'|trans }} :</h4>
 
     <ul class="options">
-        {% for option in product.options  %}
+        {% for option in options  %}
             <li class="option-name">{{ option.name }}
                 <select title="{{ 'select' }}" data-id="{{ option.id }}" onchange="updateDeclination(this)">
                     {% for variant in option.variants %}
-                        <option value="{{ variant.id }}" {% if variant.id in declinationVariantIds %}selected{% endif %}>{{ variant.name }}</option>
+                        <option value="{{ variant.id }}" data-url="{{ variant.url }}" {% if variant.selected %}selected{% endif %}>{{ variant.name }}</option>
                     {% endfor %}
                 </select>
             </li>
