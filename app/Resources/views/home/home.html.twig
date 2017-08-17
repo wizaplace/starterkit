@@ -58,12 +58,10 @@
 
             var declinationId = $(this).data('id');
             var quantity = 1;
-            var product = {
+            var productInfo = {
                 name: $(this).data('name'),
-                minimumPrice: $(this).data('price'),
-                mainImage: {
-                    id: $(this).data('image-id'),
-                },
+                price: $(this).data('price'),
+                image: $(this).data('image'),
             };
 
             $.ajax({
@@ -71,7 +69,7 @@
                 url: "{{ path('basket_add_product') }}",
                 data: { declinationId: declinationId, quantity: quantity },
                 success: function(response) {
-                    hydrateModal(product, quantity, response.message);
+                    hydrateModal(productInfo, quantity, response.message);
                 }
             });
         });

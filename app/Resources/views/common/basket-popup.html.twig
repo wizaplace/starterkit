@@ -45,9 +45,9 @@
     function hydrateModal(productInfo, quantity, message) {
         $productName.html(productInfo.name);
         $productQuantity.html(quantity);
-        $productPrice.html(productInfo.minimumPrice);
-        if (!!productInfo.mainImage && !!productInfo.mainImage.id) {
-            $productImage.attr('src', '{{ apiBaseUrl }}image/' + productInfo.mainImage.id + '?w=100&h=100');
+        $productPrice.html(productInfo.price);
+        if (!!productInfo.image) {
+            $productImage.attr('src', productInfo.image);
         } else {
             $productImage.attr('src', '{{ asset('images/no-image.jpg') }}');
         }

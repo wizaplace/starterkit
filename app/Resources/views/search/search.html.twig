@@ -324,12 +324,17 @@
                  * Add the product to the basket
                  */
                 submitBasket: function(product) {
+                    var productInfo = {
+                        name: product.name,
+                        price: product.minimumPrice,
+                        image: this.imageUrl(product),
+                    };
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",
                         data: { declinationId: product.productId, quantity: 1 },
                         success: function(response) {
-                            hydrateModal(product, 1, response.message);
+                            hydrateModal(productInfo, 1, response.message);
                         }
                     });
                 },

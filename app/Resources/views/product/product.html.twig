@@ -188,14 +188,12 @@
                             url: "{{ path('basket_add_product') }}",
                             data: { declinationId: this.productId, quantity: quantity },
                             success: function(response) {
-                                var declination = {
+                                var declinationInfo = {
                                     name: {{ product.name|json_encode|raw }},
-                                    minimumPrice: {{ declination.priceWithoutVat|json_encode|raw }},
-                                    mainImage: {
-                                        id: {{ (declination.images|length > 0) ? declination.images|first.id : 'null' }},
-                                    },
+                                    price: {{ declination.priceWithoutVat|json_encode|raw }},
+                                    image: {{ (declination.images|length > 0) ? declination.images|first.id|imageUrl|json_encode|raw : 'null' }},
                                 };
-                                hydrateModal(declination, quantity, response.message);
+                                hydrateModal(declinationInfo, quantity, response.message);
                             }
                         });
                     }

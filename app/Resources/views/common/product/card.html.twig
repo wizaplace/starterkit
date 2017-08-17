@@ -31,7 +31,7 @@
             <button class="add-to-basket btn btn-link pull-right" data-id="{{ product.id }}"
                     data-name="{{ product.name|e('html_attr') }}"
                     data-price="{{ product.minimumPrice }}"
-                    data-image-id="{{ product.mainImage ? product.mainImage.id : '' }}"
+                    data-image="{{ product.mainImage ? product.mainImage|imageUrl : '' }}"
                     title="Ajouter au panier">
                 <span class="fa fa-shopping-cart"></span>
             </button>
