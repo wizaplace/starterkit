@@ -35,7 +35,6 @@ class ProductController extends Controller
             $declinationId = $product->getDeclinations()[0]->getId();
         }
 
-
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
             return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
