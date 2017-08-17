@@ -7,9 +7,6 @@ services:
     WizaplaceFrontBundle\:
         resource: '../../'
         exclude: '../../{Twig,Entity,Repository}'
-#    WizaplaceFrontBundle\Controller\:
-#        resource: '../../Controller'
-#        public: true
     WizaplaceFrontBundle\Security\AuthenticationFailureHandler:
         parent: 'security.authentication.failure_handler'
         autowire: true
