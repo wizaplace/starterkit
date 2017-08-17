@@ -15,8 +15,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\Basket\Exception\CouponNotInTheBasket;
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Image\ImageService;
 
 class BasketController extends Controller
 {
@@ -48,30 +46,16 @@ class BasketController extends Controller
     {
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
-        $requestedQuantity = $request->request->get('quantity');
-        $product = $this->get(CatalogService::class)->getProductById($declinationId);
+        $requestedQuantity = (int) $request->request->get('quantity');
 
-        //  get product data
-        $addedProduct = [];
-        $addedProduct["name"] = $product->getName();
-        $addedProduct["price"] = $product->getDeclinations()["0"]->getPrice();
-        $addedProduct["quantity"] = $this->basketService->addProductToBasket($basketId, $declinationId, (int) $requestedQuantity);
-
-        // get product main image
-        $productImages = $product->getDeclinations()["0"]->getImages();
-        if (count($productImages)) {
-            $imageId = reset($productImages)->getId();
-            $imageService = $this->get(ImageService::class);
-            $addedProduct["imageLink"] = $imageService->getImageLink($imageId, 100, 100);
-        }
+        $addedQuantity = $this->basketService->addProductToBasket($basketId, $declinationId, $requestedQuantity);
 
         // warning message regarding stock
         $notEnoughStockMessage = $this->translator->trans('not_enough_stock');
-        $message = ($addedProduct["quantity"] < $requestedQuantity) ? $notEnoughStockMessage : null;
+        $message = ($addedQuantity < $requestedQuantity) ? $notEnoughStockMessage : null;
 
         return new JsonResponse([
-            "addedProduct" => $addedProduct,
-            "message" => $message,
+            'message' => $message,
         ]);
     }
 

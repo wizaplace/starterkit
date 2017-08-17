@@ -42,12 +42,15 @@
     });
 
     // Hydrate modal with added product info
-    function hydrateModal(product, message) {
-
-        $productName.html(product.name);
-        $productQuantity.html(product.quantity);
-        $productPrice.html(product.price);
-        $productImage.attr("src", product.imageLink);
+    function hydrateModal(productInfo, quantity, message) {
+        $productName.html(productInfo.name);
+        $productQuantity.html(quantity);
+        $productPrice.html(productInfo.minimumPrice);
+        if (!!productInfo.mainImage && !!productInfo.mainImage.id) {
+            $productImage.attr('src', '{{ apiBaseUrl }}image/' + productInfo.mainImage.id + '?w=100&h=100');
+        } else {
+            $productImage.attr('src', '{{ asset('images/no-image.jpg') }}');
+        }
         $message.html(message);
 
         // Show modal
