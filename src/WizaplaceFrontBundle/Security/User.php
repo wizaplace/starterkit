@@ -6,7 +6,7 @@
  */
 declare(strict_types = 1);
 
-namespace AppBundle\Security;
+namespace WizaplaceFrontBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wizaplace\Authentication\ApiKey;

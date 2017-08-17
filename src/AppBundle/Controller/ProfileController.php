@@ -7,7 +7,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +16,7 @@ use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
+use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
 {

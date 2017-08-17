@@ -5,7 +5,7 @@ security:
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         wizaplace:
-            id: AppBundle\Security\UserProvider
+            id: WizaplaceFrontBundle\Security\UserProvider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -16,7 +16,7 @@ security:
         main:
             anonymous: ~
             simple_form:
-                authenticator: AppBundle\Security\FormAuthenticator
+                authenticator: WizaplaceFrontBundle\Security\FormAuthenticator
                 check_path: login
                 login_path: login_form
                 username_parameter: 'email'
@@ -29,8 +29,8 @@ security:
                 default_target_path: home
                 target_path_parameter: redirect_url
                 use_referer: false
-                failure_handler: AppBundle\Security\AuthenticationFailureHandler
-                success_handler: AppBundle\Security\AuthenticationSuccessHandler
+                failure_handler: WizaplaceFrontBundle\Security\AuthenticationFailureHandler
+                success_handler: WizaplaceFrontBundle\Security\AuthenticationSuccessHandler
             logout:
                 path: logout
                 target: home
