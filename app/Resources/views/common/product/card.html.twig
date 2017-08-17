@@ -28,7 +28,13 @@
         </div>
 
         {% if product.declinationCount <= 1 %}
-            <button class="add-to-basket btn btn-link pull-right" data-id="{{ product.id }}" title="Ajouter au panier"><span class="fa fa-shopping-cart"></span></button>
+            <button class="add-to-basket btn btn-link pull-right" data-id="{{ product.id }}"
+                    data-name="{{ product.name|e('html_attr') }}"
+                    data-price="{{ product.minimumPrice }}"
+                    data-image="{{ product.mainImage ? product.mainImage|imageUrl(100, 100) : '' }}"
+                    title="Ajouter au panier">
+                <span class="fa fa-shopping-cart"></span>
+            </button>
         {% endif %}
     </div>
 </div>

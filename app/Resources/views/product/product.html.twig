@@ -182,13 +182,18 @@
                     },
 
                     submitBasket: function() {
-
+                        var quantity = this.quantity;
                         $.ajax({
                             type: "POST",
                             url: "{{ path('basket_add_product') }}",
-                            data: { declinationId: this.productId, quantity: this.quantity },
+                            data: { declinationId: this.productId, quantity: quantity },
                             success: function(response) {
-                                hydrateModal(response.addedProduct, response.message);
+                                var declinationInfo = {
+                                    name: {{ product.name|json_encode|raw }},
+                                    price: {{ declination.priceWithoutVat|json_encode|raw }},
+                                    image: {{ (declination.images|length > 0) ? declination.images|first.id|imageUrl(100, 100)|json_encode|raw : 'null' }},
+                                };
+                                hydrateModal(declinationInfo, quantity, response.message);
                             }
                         });
                     }
