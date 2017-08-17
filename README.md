@@ -10,6 +10,25 @@ It is based on PHP 7.1, Symfony 3 and [our PHP SDK](https://github.com/wizaplace
 
 The StarterKit project is meant to be cloned (forked on GitHub for example) for each new front-office project. The cloned version can then be customized to fit the target design.
 
+## Features
+
+The StarterKit is a project in development. While all features are implemented in the PHP SDK, some pages and features may be missing in the StarterKit. If you need them, you will need to create or modify the Symfony routes/controlers/views to add them.
+
+This is the list of pages and features we will be adding soon in the StarterKit:
+
+- [ ] Brand page ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Catalog/CatalogService.php#L112) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Catalog%2Fpaths%2F~1catalog~1attributes~1variants~1%7BattributeVariantId%7D%2Fget))
+- Product page:
+    - [ ] Add the product to favorites ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Favorite/FavoriteService.php#L62-L67) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Favorites%2Fpaths%2F~1user~1favorites~1declinations~1%7BdeclinationId%7D%2Fpost))
+    - [ ] Send a message to the vendor ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Discussion/DiscussionService.php#L16-L37) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Discussion%2Fpaths%2F~1discussions%2Fpost))
+    - [ ] Report a product (in development, available in a few days)
+- My Account:
+    - [ ] List of favorite products ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Favorite/FavoriteService.php#L22-L29) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Favorites%2Fpaths%2F~1user~1favorites~1declinations%2Fget))
+    - [ ] List of discussions with vendors ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Discussion/DiscussionService.php#L16-L37) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Discussion%2Fpaths%2F~1discussions%2Fget))
+    - [ ] SAV: uses the user/vendor discussion (see above)
+    - [ ] Newsletters/mailing lists ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/MailingList/MailingListService.php#L39) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/MailingLists))
+- [ ] Form to sign up as a professional vendor ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Company/CompanyService.php#L16-L19) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Companies%2Fpaths%2F~1companies%2Fpost))
+- [ ] List of brands (in development, available in a few days)
+
 ## Setup
 
 ### Using Vagrant
@@ -80,3 +99,9 @@ bin/console server:run
 ```
 
 The application should be available at http://localhost:8000/
+
+## Development
+
+To compile assets, simply run `gulp`. Gulp will watch changes and recompile Javascript, CSS, etc. automatically.
+
+Here are our integration guidelines: [wizaplace/integration-guidelines](https://github.com/wizaplace/integration-guidelines).
