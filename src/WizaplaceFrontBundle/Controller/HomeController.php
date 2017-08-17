@@ -9,23 +9,32 @@ namespace WizaplaceFrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Cms\BannerService;
+use WizaplaceFrontBundle\Service\ProductListService;
 
 class HomeController extends Controller
 {
+    /** @var ProductListService */
+    private $productListService;
+
+    /** @var BannerService */
+    private $bannerService;
+
+    public function __construct(ProductListService $productListService, BannerService $bannerService)
+    {
+        $this->productListService = $productListService;
+        $this->bannerService = $bannerService;
+    }
+
+
     public function homeAction(): Response
     {
-        // get services from sdk
-        $catalogService = $this->get(CatalogService::class);
-        $bannerService = $this->get(BannerService::class);
-
         // latest products
-        $latestProducts = $catalogService->search('', [], ['createdAt' => 'desc'], 6)->getProducts();
+        $latestProducts = $this->productListService->getLatestProducts();
 
         // banners
-        $desktopBanners = $bannerService->getHomepageBanners("desktop");
-        $mobileBanners = $bannerService->getHomepageBanners("mobile");
+        $desktopBanners = $this->bannerService->getHomepageBanners("desktop");
+        $mobileBanners = $this->bannerService->getHomepageBanners("mobile");
 
         return $this->render('@WizaplaceFront/home/home.html.twig', [
             'latestProducts' => $latestProducts,
