@@ -49,7 +49,7 @@ class SearchController extends Controller
             throw new NotFound('Variant '.$slug.' not found');
         }
         $catalogService = $this->get(CatalogService::class);
-        $selectedVariant = $catalogService->getAttributeVariant($selectedVariantId);
+        $selectedVariant = $catalogService->getAttributeVariant((int) $selectedVariantId);
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
 
