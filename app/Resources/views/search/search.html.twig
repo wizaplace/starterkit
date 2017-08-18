@@ -45,7 +45,11 @@
 
                 {% if selectedVariant|default %}
                     <h1>{{ selectedVariant.name }}</h1>
-                    <img src="{{ selectedVariant.image.id|imageUrl }}">
+                    {% if selectedVariant.image %}
+                        <img src="{{ selectedVariant.image.id|imageUrl }}">
+                    {% else %}
+                        <img src="{{ asset('images/no-image.jpg') }}">
+                    {% endif %}
                 {% endif %}
 
                 <div class="row">
