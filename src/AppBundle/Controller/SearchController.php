@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Exception\NotFound;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
@@ -74,10 +75,14 @@ class SearchController extends Controller
         $filters = [];
         $filters['companies'] = $companyId;
 
+        $reviewService = $this->get(ReviewService::class);
+        $reviews = $reviewService->getCompanyReviews($companyId);
+
         return $this->render('search/company.html.twig', [
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'company' => $company,
+            'reviews' => $reviews,
         ]);
     }
 }

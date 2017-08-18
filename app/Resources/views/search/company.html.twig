@@ -1,5 +1,65 @@
 {% extends 'search/search.html.twig' %}
 
 {% block pageContent %}
-    {#{{ dump(company) }}#}
+    {#
+        You have access to :
+
+        company.id
+        company.name
+        company.description
+        company.address
+        company.phoneNumber
+        company.professionnal
+        company.slug
+        company.image.id (if company.image is set)
+        company.location.latitude (if company.location is set)
+        company.location.longitude (if company.location is set)
+        company.averageRating
+        company.terms
+
+        for review in reviews
+
+            review.author.name
+            review.author.id
+            review.author.email
+            review.message
+            review.postedAt
+            review.rating
+
+        You can add reviews :
+
+        BE ADVISED -> User needs to be able to review a Company, you can check that with $reviewService
+        in your Controller
+
+        Example :
+
+        <form name="add-reviews" method="post" action="{{ path('create_company_review') }}">
+            <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+            <input type="hidden" name="company_id" value="{{ company.id }}">
+            <div>
+                <label for="review-rate" class="">{{ 'rating'|trans|capitalize }}</label>
+                <input id="review-rate" name="rating" class="js-rating form-control hide" value="3" />
+            </div>
+            <div>
+                <label for="review-message" class="">{{ 'message'|trans|capitalize }}</label>
+                <textarea id="review-message" name="message" class="form-control" rows="5" cols="72"></textarea>
+            </div>
+            <input type="submit" class="btn" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}" />
+        </form>
+    #}
+    <h1>{{ company.name }}</h1>
+    <p>{{ company.description }}</p>
+    {% if company.image %}
+        <img src="{{ company.image.id|imageUrl }}">
+    {% else %}
+        <img src="{{ asset('images/no-image.jpg') }}">
+    {% endif %}
+    <h2>{{ 'company_average_rating'|trans }}</h2>
+    {% for i in 1..5 %}
+        {% if i <= company.averageRating %}
+            <i class="glyphicon glyphicon-star"></i>
+        {% else %}
+            <i class="glyphicon glyphicon-star-empty"></i>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

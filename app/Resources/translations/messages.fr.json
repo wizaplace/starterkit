@@ -88,5 +88,6 @@
     "cookie_consent_message": "En poursuivant votre navigation, vous acceptez l'utilisation de cookies.",
     "cookie_consent_dismiss": "OK",
     "cookie_consent_link": "En savoir plus",
-    "cookie_consent_href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs"
+    "cookie_consent_href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs",
+    "company_average_rating": "Note moyenne"
 }
