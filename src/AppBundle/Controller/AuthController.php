@@ -7,7 +7,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Security\User;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,7 @@ use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
+use WizaplaceFrontBundle\Security\User;
 
 class AuthController extends Controller
 {
