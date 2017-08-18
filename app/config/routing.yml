@@ -184,7 +184,7 @@ category:
 
 company:
     path: /v/{slug}
-    defaults: { _controller: AppBundle:Company:view }
+    defaults: { _controller: AppBundle:Search:company }
     methods: [GET]
     requirements:
         slug: "%slug.regexp%"

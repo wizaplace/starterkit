@@ -53,10 +53,31 @@ class SearchController extends Controller
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
 
-        return $this->render('search/search.html.twig', [
+        return $this->render('search/variant-attribute.html.twig', [
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'selectedVariant' => $selectedVariant,
+        ]);
+    }
+
+    public function companyAction(string $slug, Request $request): Response
+    {
+        $seoService = $this->get(SeoService::class);
+        $slugTarget = $seoService->resolveSlug($slug);
+
+        if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::COMPANY()) {
+            throw $this->createNotFoundException("Company '${slug}' Not Found'");
+        }
+        $companyId = (int) $slugTarget->getObjectId();
+
+        $company = $this->get(CatalogService::class)->getCompanyById($companyId);
+        $filters = [];
+        $filters['companies'] = $companyId;
+
+        return $this->render('search/company.html.twig', [
+            'searchQuery' => $request->query->get('q'),
+            'filters' => $filters,
+            'company' => $company,
         ]);
     }
 }

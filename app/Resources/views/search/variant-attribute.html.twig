@@ -1,0 +1,12 @@
+{% extends 'search/search.html.twig' %}
+
+{% block pageContent %}
+    {% if selectedVariant|default %}
+        <h1>{{ selectedVariant.name }}</h1>
+        {% if selectedVariant.image %}
+            <img src="{{ selectedVariant.image.id|imageUrl }}">
+        {% else %}
+            <img src="{{ asset('images/no-image.jpg') }}">
+        {% endif %}
+    {% endif %}
+{% endblock %}
