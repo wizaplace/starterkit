@@ -42,6 +42,12 @@
 
             {# search result #}
             <div class="col-md-10">
+
+                {% if selectedVariant|default %}
+                    <h1>{{ selectedVariant.name }}</h1>
+                    <img src="{{ selectedVariant.image.id|imageUrl }}">
+                {% endif %}
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product" v-for="product in products">

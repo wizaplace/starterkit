@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\Catalog\CatalogService;
+use Wizaplace\Exception\NotFound;
+use Wizaplace\Seo\SeoService;
+use Wizaplace\Seo\SlugTargetType;
 
 class SearchController extends Controller
 {
@@ -29,6 +32,31 @@ class SearchController extends Controller
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'selectedCategory' => $selectedCategory,
+        ]);
+    }
+
+    public function variantAction(string $slug, Request $request): Response
+    {
+        $seoService = $this->get(SeoService::class);
+        $slugTarget = $seoService->resolveSlug($slug);
+        if ($slugTarget) {
+            if ($slugTarget->getObjectType() == SlugTargetType::ATTRIBUTE_VARIANT()) {
+                $selectedVariantId = $slugTarget->getObjectId();
+            } else {
+                throw new NotFound('Variant '.$slugTarget->getObjectType().' is not an attribute\'s variant.');
+            }
+        } else {
+            throw new NotFound('Variant '.$slug.' not found');
+        }
+        $catalogService = $this->get(CatalogService::class);
+        $selectedVariant = $catalogService->getAttributeVariant($selectedVariantId);
+        $filters = [];
+        $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
+
+        return $this->render('search/search.html.twig', [
+            'searchQuery' => $request->query->get('q'),
+            'filters' => $filters,
+            'selectedVariant' => $selectedVariant,
         ]);
     }
 }
