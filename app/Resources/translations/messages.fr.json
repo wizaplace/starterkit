@@ -89,5 +89,11 @@
     "cookie_consent_message": "En poursuivant votre navigation, vous acceptez l'utilisation de cookies.",
     "cookie_consent_dismiss": "OK",
     "cookie_consent_link": "En savoir plus",
-    "cookie_consent_href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs"
+    "cookie_consent_href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs",
+    "crossedoutprice_new": "%price% HT",
+    "crossedoutprice_original": "Au lieu de %price% HT",
+    "crossedoutprice_promo": "promo",
+    "greentax": "Eco taxe : %tax%",
+    "add_to_basket": "ajouter au panier",
+    "out_of_stock": "rupture de stock"
 }
