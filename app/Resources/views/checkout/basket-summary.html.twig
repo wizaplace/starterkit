@@ -3,13 +3,15 @@
 
     {# products #}
     <ul>
-        {% for company in basket.companyGroups %}
-            {% for item in company.shippingGroups.0.items %}
-                <li>
-                    <span class="title">{{item.productName}}</span><br />
-                    <span class="title text-grey">{{item.quantity}}x</span>
-                    <span class="title">{{item.individualPrice|price}}&nbsp;{{ 'including_taxes'|trans }}</span> 
-                </li>
+        {% for companyGroup in basket.companyGroups %}
+            {% for shippingGroup in companyGroup.shippingGroups %}
+                {% for item in shippingGroup.items %}
+                    <li>
+                        <span class="title">{{item.productName}}</span><br />
+                        <span class="title text-grey">{{item.quantity}}x</span>
+                        <span class="title">{{item.individualPrice|price}}&nbsp;{{ 'including_taxes'|trans }}</span>
+                    </li>
+                {% endfor %}
             {% endfor %}
         {% endfor %}
     </ul>
