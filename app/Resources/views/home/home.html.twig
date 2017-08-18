@@ -56,15 +56,20 @@
     <script>
         $(".add-to-basket").on("click", function() {
 
-            var declinationId = $(this).data("id");
+            var declinationId = $(this).data('id');
             var quantity = 1;
+            var productInfo = {
+                name: $(this).data('name'),
+                price: $(this).data('price'),
+                image: $(this).data('image'),
+            };
 
             $.ajax({
                 type: "POST",
                 url: "{{ path('basket_add_product') }}",
                 data: { declinationId: declinationId, quantity: quantity },
                 success: function(response) {
-                    hydrateModal(response.addedProduct, response.message);
+                    hydrateModal(productInfo, quantity, response.message);
                 }
             });
         });

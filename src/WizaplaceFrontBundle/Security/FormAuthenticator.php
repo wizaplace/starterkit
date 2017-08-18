@@ -6,7 +6,7 @@
  */
 declare(strict_types = 1);
 
-namespace AppBundle\Security;
+namespace WizaplaceFrontBundle\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

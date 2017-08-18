@@ -65,7 +65,7 @@
                                     <span v-if="product.crossedOutPrice !== null" class="title text-blue text-line-through">${product.crossedOutPrice|price}&nbsp;TTC</span>
                                     <span v-else class="title">${product.minimumPrice|price}&nbsp;TTC</span><br />
                                 </div>
-                                <button class="add-to-basket btn btn-link pull-right" @click="submitBasket(product.productId)" title="Ajouter au panier">
+                                <button class="add-to-basket btn btn-link pull-right" @click="submitBasket(product)" title="Ajouter au panier">
                                     <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span>
                                 </button>
                             </div>
@@ -323,14 +323,21 @@
                     return this.filters['categories'] == categoryId;
                 },
 
-                submitBasket: function(declinationId) {
-
+                /**
+                 * Add the product to the basket
+                 */
+                submitBasket: function(product) {
+                    var productInfo = {
+                        name: product.name,
+                        price: product.minimumPrice,
+                        image: this.imageUrl(product),
+                    };
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",
-                        data: { declinationId: declinationId, quantity: 1 },
+                        data: { declinationId: product.productId, quantity: 1 },
                         success: function(response) {
-                            hydrateModal(response.addedProduct, response.message);
+                            hydrateModal(productInfo, 1, response.message);
                         }
                     });
                 },
