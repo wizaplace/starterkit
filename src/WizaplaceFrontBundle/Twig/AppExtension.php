@@ -7,13 +7,14 @@
 
 namespace WizaplaceFrontBundle\Twig;
 
-use AppBundle\Security\ApiKeyToken;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wizaplace\Basket\Basket;
 use Wizaplace\Basket\BasketService;
 use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Cms\CmsService;
+use Wizaplace\Image\Image;
 use Wizaplace\Image\ImageService;
 use Wizaplace\User\UserService;
 
@@ -35,6 +36,8 @@ class AppExtension extends \Twig_Extension
     private $cache;
     /** @var string */
     private $recaptchaKey;
+    /** @var Packages */
+    private $assets;
 
     public function __construct(
         CatalogService $catalogService,
@@ -44,7 +47,8 @@ class AppExtension extends \Twig_Extension
         ImageService $imageService,
         CmsService $cmsService,
         CacheItemPoolInterface $cache,
-        string $recaptchaKey
+        string $recaptchaKey,
+        Packages $assets
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
@@ -54,6 +58,7 @@ class AppExtension extends \Twig_Extension
         $this->cmsService = $cmsService;
         $this->cache = $cache;
         $this->recaptchaKey = $recaptchaKey;
+        $this->assets = $assets;
     }
 
     public function getFunctions()
@@ -76,8 +81,20 @@ class AppExtension extends \Twig_Extension
         ];
     }
 
-    public function imageUrl(int $imageId, int $width = null, int $height = null): string
+    /**
+     * @param int|Image|null $image An Image object, an image ID or null.
+     * @param int|null $width
+     * @param int|null $height
+     * @return string
+     */
+    public function imageUrl($image, int $width = null, int $height = null): string
     {
+        if ($image === null) {
+            return $this->assets->getUrl('images/no-image.jpg');
+        }
+
+        $imageId = ($image instanceof Image) ? $image->getId() : $image;
+
         return $this->imageService->getImageLink($imageId, $width, $height);
     }
 
