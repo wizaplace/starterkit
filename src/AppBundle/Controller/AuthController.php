@@ -7,11 +7,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Security\User;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
@@ -66,7 +69,13 @@ class AuthController extends Controller
 
         try {
             $userService->register($email, $password);
-            // @TODO: authenticate
+
+            // Authenticate the user
+            $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
+            $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
+            $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->start(); // Ensure the session exists
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
