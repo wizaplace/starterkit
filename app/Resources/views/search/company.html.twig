@@ -1,10 +1,11 @@
 {% extends 'search/search.html.twig' %}
 
-{% block pageContent %}
+{% block searchHeader %}
     <h1>{{ company.name }}</h1>
     <p>{{ company.description }}</p>
     <img src="{{ company.image|imageUrl }}">
     <h2>{{ 'company_average_rating'|trans }}</h2>
+
     {% for i in 1..5 %}
         {% if i <= company.averageRating %}
             <i class="glyphicon glyphicon-star"></i>
@@ -12,9 +13,7 @@
             <i class="glyphicon glyphicon-star-empty"></i>
         {% endif %}
     {% endfor %}
-{% endblock %}
 
-{% block addReview %}
     {% if canUserReviewCompany %}
         <form name="add-reviews" method="post" action="{{ path('create_company_review') }}">
             <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
@@ -30,4 +29,5 @@
             <input type="submit" class="btn" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}" />
         </form>
     {% endif %}
+
 {% endblock %}

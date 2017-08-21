@@ -37,32 +37,28 @@ class SearchController extends Controller
         ]);
     }
 
-    public function attributeVariantAction(string $slug, Request $request): Response
+    public function attributeVariantAction(string $slug): Response
     {
         $seoService = $this->get(SeoService::class);
         $slugTarget = $seoService->resolveSlug($slug);
-        if ($slugTarget) {
-            if ($slugTarget->getObjectType() == SlugTargetType::ATTRIBUTE_VARIANT()) {
-                $selectedVariantId = $slugTarget->getObjectId();
-            } else {
-                throw new NotFound('Variant '.$slugTarget->getObjectType().' is not an attribute\'s variant.');
-            }
-        } else {
-            throw new NotFound('Variant '.$slug.' not found');
+        if (!$slugTarget || $slugTarget->getObjectType() != SlugTargetType::ATTRIBUTE_VARIANT()) {
+            throw $this->createNotFoundException('Variant '.$slug.' not found');
         }
+        $selectedVariantId = $slugTarget->getObjectId();
+
         $catalogService = $this->get(CatalogService::class);
         $selectedVariant = $catalogService->getAttributeVariant((int) $selectedVariantId);
+
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
 
         return $this->render('search/variant-attribute.html.twig', [
-            'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'selectedVariant' => $selectedVariant,
         ]);
     }
 
-    public function companyAction(string $slug, Request $request): Response
+    public function companyAction(string $slug): Response
     {
         $seoService = $this->get(SeoService::class);
         $slugTarget = $seoService->resolveSlug($slug);
@@ -81,7 +77,6 @@ class SearchController extends Controller
         $canUserReviewCompany = $reviewService->canUserReviewCompany($companyId);
 
         return $this->render('search/company.html.twig', [
-            'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'company' => $company,
             'reviews' => $reviews,
