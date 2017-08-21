@@ -9,7 +9,7 @@
                 <p>{{ reviews|length }} {{ 'reviews'|trans }}</p>
             {% endif %}
             {% if company.image is not null %}
-                <img class="img-responsive center-block" src="{{ company.image.id|imageUrl(768) }}">
+                <img class="img-responsive center-block" src="{{ company.image|imageUrl(768) }}">
             {% endif %}
             <p>{{ company.description }}</p>
         </div>

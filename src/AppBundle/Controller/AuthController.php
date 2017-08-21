@@ -11,10 +11,13 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
+use WizaplaceFrontBundle\Security\User;
 
 class AuthController extends Controller
 {
@@ -35,15 +38,15 @@ class AuthController extends Controller
     {
         // redirection url
         $requestedUrl = $request->get('redirect_url');
-        $referer = $request->headers->get('referer');
+        $referer = $request->headers->get('referer') ?? $this->get('router')->generate('home');
 
         // recaptcha validation
         $recaptchaResponse = $request->request->get('g-recaptcha-response');
         $recaptcha = new ReCaptcha($this->getParameter('recaptcha.secret'));
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
-        if (! $recaptchaValidation->isSuccess()) {
-            $message = $this->translator->trans('recaptcha_error_message');
+        if (!$recaptchaValidation->isSuccess()) {
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
@@ -66,7 +69,13 @@ class AuthController extends Controller
 
         try {
             $userService->register($email, $password);
-            // @TODO: authenticate
+
+            // Authenticate the user
+            $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
+            $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
+            $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->start(); // Ensure the session exists
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
@@ -90,7 +99,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $message = $this->translator->trans('recaptcha_error_message');
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);

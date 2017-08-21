@@ -17,13 +17,9 @@
                             {# main image #}
                             <div class="image">
                                 {% if item.mainImage %}
-
-                                    <img src="{{ item.mainImage.id|imageUrl(60) }}" alt="{{ item.productName }}" style="width: 60px;">
-
+                                    <img src="{{ item.mainImage|imageUrl(60) }}" alt="{{ item.productName }}" style="width: 60px;">
                                 {% else %}
-
                                     <div class="no-image">{{ 'no_image'|trans }}</div>
-
                                 {% endif %}
                             </div>
                         </div>

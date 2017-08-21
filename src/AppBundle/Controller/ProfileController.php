@@ -73,7 +73,7 @@ class ProfileController extends Controller
 
         // CSRF token validation
         if (! $this->isCsrfTokenValid('profile_update_token', $submittedToken)) {
-            $message = $this->translator->trans('recaptcha_error_message');
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);

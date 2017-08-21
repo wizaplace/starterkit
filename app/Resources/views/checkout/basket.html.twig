@@ -23,7 +23,7 @@
                                         {% if product.mainImage|default %}
 
                                             {# actual image (dimensions are constrained to avoid displaying a HiRes picture instead of a thumbnail) #}
-                                            <img src="{{ product.mainImage.id|imageUrl(150, 150) }}" alt="">
+                                            <img src="{{ product.mainImage|imageUrl(150, 150) }}" alt="">
 
                                         {% else %}
                                             {# product without image #}
