@@ -15,6 +15,7 @@ use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Exception\NotFound;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
+use Wizaplace\User\UserService;
 
 class SearchController extends Controller
 {
@@ -36,7 +37,7 @@ class SearchController extends Controller
         ]);
     }
 
-    public function variantAction(string $slug, Request $request): Response
+    public function attributeVariantAction(string $slug, Request $request): Response
     {
         $seoService = $this->get(SeoService::class);
         $slugTarget = $seoService->resolveSlug($slug);
@@ -77,12 +78,14 @@ class SearchController extends Controller
 
         $reviewService = $this->get(ReviewService::class);
         $reviews = $reviewService->getCompanyReviews($companyId);
+        $canUserReviewCompany = $reviewService->canUserReviewCompany($companyId);
 
         return $this->render('search/company.html.twig', [
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'company' => $company,
             'reviews' => $reviews,
+            'canUserReviewCompany' => $canUserReviewCompany,
         ]);
     }
 }

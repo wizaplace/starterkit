@@ -14,7 +14,7 @@ search:
 
 attribute_variant:
     path: /a/{slug}
-    defaults: { _controller: AppBundle:Search:variant }
+    defaults: { _controller: AppBundle:Search:attributeVariant }
     methods: [GET]
 
 # Auth
