@@ -1,9 +1,3 @@
-{% if company.image %}
-    {% set imageId = company.image.id %}
-{% else %}
-    {% set imageId = null %}
-{% endif %}
-
 {% extends 'search/search.html.twig' %}
 
 {% block pageContent %}
@@ -55,7 +49,7 @@
     #}
     <h1>{{ company.name }}</h1>
     <p>{{ company.description }}</p>
-    <img src="{{ imageId|imageUrl }}">
+    <img src="{{ company.image|imageUrl }}">
     <h2>{{ 'company_average_rating'|trans }}</h2>
     {% for i in 1..5 %}
         {% if i <= company.averageRating %}
