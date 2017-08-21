@@ -26,6 +26,10 @@ class ProductListService
      */
     public function getLatestProducts(int $maxProductCount = 6) : array
     {
+        if ($maxProductCount === 0) {
+            return [];
+        }
+
         return $this->productService->search('', [], ['createdAt' => 'desc'], $maxProductCount)->getProducts();
     }
 }
