@@ -1,3 +1,9 @@
+{% if company.image %}
+    {% set imageId = company.image.id %}
+{% else %}
+    {% set imageId = null %}
+{% endif %}
+
 {% extends 'search/search.html.twig' %}
 
 {% block pageContent %}
@@ -28,7 +34,7 @@
 
         You can add reviews :
 
-        BE ADVISED -> User needs to be able to review a Company, you can check that with $reviewService
+        /!\ BE ADVISED /!\ -> User needs to be able to review a Company, you can check that with $reviewService
         in your Controller
 
         Example :
@@ -49,11 +55,7 @@
     #}
     <h1>{{ company.name }}</h1>
     <p>{{ company.description }}</p>
-    {% if company.image %}
-        <img src="{{ company.image.id|imageUrl }}">
-    {% else %}
-        <img src="{{ asset('images/no-image.jpg') }}">
-    {% endif %}
+    <img src="{{ imageId|imageUrl }}">
     <h2>{{ 'company_average_rating'|trans }}</h2>
     {% for i in 1..5 %}
         {% if i <= company.averageRating %}

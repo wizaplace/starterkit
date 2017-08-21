@@ -12,7 +12,7 @@ search:
     defaults: { _controller: AppBundle:Search:search }
     methods: [GET]
 
-variant:
+attribute_variant:
     path: /a/{slug}
     defaults: { _controller: AppBundle:Search:variant }
     methods: [GET]

@@ -1,10 +1,21 @@
-{% extends 'search/search.html.twig' %}
+{% if selectedVariant.image %}
+    {% set imageId = selectedVariant.image.id %}
+{% elseif %}
+    {% set imageId = null %}
+{% endif %}
 
+{% extends 'search/search.html.twig' %}
+{#
+        You have access to :
+            selectedVariant.id
+            selectedVariant.name
+            selectedVariant.slug
+            selectedVariant.attributeId
+            selectedVariant.image.id (if selectedVariant.image is set)
+
+    #}
 {% block pageContent %}
+    {{ selectedVariant. }}
     <h1>{{ selectedVariant.name }}</h1>
-    {% if selectedVariant.image %}
-        <img src="{{ selectedVariant.image.id|imageUrl }}">
-    {% else %}
-        <img src="{{ asset('images/no-image.jpg') }}">
-    {% endif %}
+    <img src="{{ imageId|imageUrl }}">
 {% endblock %}
