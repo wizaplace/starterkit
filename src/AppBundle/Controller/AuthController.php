@@ -46,7 +46,7 @@ class AuthController extends Controller
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
         if (!$recaptchaValidation->isSuccess()) {
-            $message = $this->translator->trans('recaptcha_error_message');
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
@@ -99,7 +99,7 @@ class AuthController extends Controller
         $submittedToken = $request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $message = $this->translator->trans('recaptcha_error_message');
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
