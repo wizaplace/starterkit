@@ -53,3 +53,8 @@ services:
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
+    AppBundle\Controller\HomeController:
+        parent: WizaplaceFrontBundle\Controller\HomeController
+        autowire: true
+        autoconfigure: false
+        public: true

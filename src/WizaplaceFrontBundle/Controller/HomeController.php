@@ -20,17 +20,21 @@ class HomeController extends Controller
     /** @var BannerService */
     private $bannerService;
 
-    public function __construct(ProductListService $productListService, BannerService $bannerService)
+    /** @var int */
+    private $latestProductsMaxCount;
+
+    public function __construct(ProductListService $productListService, BannerService $bannerService, int $latestProductsMaxCount)
     {
         $this->productListService = $productListService;
         $this->bannerService = $bannerService;
+        $this->latestProductsMaxCount = $latestProductsMaxCount;
     }
 
 
     public function homeAction(): Response
     {
         // latest products
-        $latestProducts = $this->productListService->getLatestProducts();
+        $latestProducts = $this->productListService->getLatestProducts($this->latestProductsMaxCount);
 
         // banners
         $desktopBanners = $this->bannerService->getHomepageBanners("desktop");
