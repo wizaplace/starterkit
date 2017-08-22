@@ -32,7 +32,7 @@ class CompanyController extends Controller
         $reviewService = $this->get(ReviewService::class);
         $reviews = $reviewService->getCompanyReviews($companyId);
 
-        return $this->render('company/company.html.twig', [
+        return $this->render('@App/company/company.html.twig', [
             'company' => $company,
             'reviews' => $reviews,
         ]);

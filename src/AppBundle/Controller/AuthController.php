@@ -31,7 +31,7 @@ class AuthController extends Controller
 
     public function loginAction(): Response
     {
-        return $this->render('login/login.html.twig');
+        return $this->render('@App/login/login.html.twig');
     }
 
     public function registerAction(Request $request): Response

@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $filters['categories'] = $categoryId;
 
         return $this->render(
-            'search/search.html.twig',
+            '@App/search/search.html.twig',
             [
                     'categories' => $categories,
                     'currentCategory' => $currentCategory,

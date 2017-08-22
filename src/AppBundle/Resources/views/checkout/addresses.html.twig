@@ -1,0 +1,38 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    {# steps breadcrumb #}
+    {% include '@App/checkout/steps.html.twig' with {step: 3} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-offset-2 col-lg-5">
+                {{ include('@App/common/user_addresses_forms/addresses.html.twig') }}
+                <div class="spacer"></div>
+                <a id="payment-link" href="{{ path('checkout_payment') }}" class="btn btn-lg btn-primary pull-right">Choisir un mode de paiement</a>
+            </div>
+
+            <div class="col-xs-12 col-sm-offset-2 col-sm-4 col-lg-offset-1 col-lg-4">
+                {% include '@App/checkout/basket-summary.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            $("#payment-link").on("click", function(e) {
+
+                let $requiredInputs = $("input[required]");
+                $requiredInputs.each(function() {
+                    if (!$(this).val()) {
+                        e.preventDefault();
+
+                        //TODO : alert user
+                    }
+                });
+
+                return true;
+            });
+        });
+    </script>
+{% endblock %}

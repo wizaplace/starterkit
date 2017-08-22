@@ -25,7 +25,7 @@ class SearchController extends Controller
             $filters['categories'] = $selectedCategoryId;
         }
 
-        return $this->render('search/search.html.twig', [
+        return $this->render('@App/search/search.html.twig', [
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'selectedCategory' => $selectedCategory,

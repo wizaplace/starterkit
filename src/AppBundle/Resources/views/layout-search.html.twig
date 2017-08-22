@@ -1,0 +1,8 @@
+{% extends '@App/layout.html.twig' %}
+
+{# add search-header template #}
+{% block header %}
+    {% include('@App/common/header/_top.html.twig') %}
+    {% include('@App/common/header/_search-bar.html.twig') %}
+    {% include('@App/common/header/_main.html.twig') %}
+{% endblock %}

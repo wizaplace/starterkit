@@ -1,0 +1,11 @@
+{% set user = app.user.wizaplaceUser %}
+<form action="{{ path("update_user") }}" method="post">
+    <input type="hidden" name="user[id]" value="{{ user.id }}" >
+    <input type="hidden" name="user[email]" value="{{ user.email }}" >
+    <input type="hidden" name="user[lastName]" value="{{ user.lastname }}" >
+    <input type="hidden" name="user[firstName]" value="{{ user.firstname }}" >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token('profile_update_token') }}">
+    {% include '@App/common/user_addresses_forms/billing.html.twig' %}
+    {% include '@App/common/user_addresses_forms/shipping.html.twig' %}
+    <button type="submit" class="btn btn-default">Enregistrer les modifications</button>
+</form>
