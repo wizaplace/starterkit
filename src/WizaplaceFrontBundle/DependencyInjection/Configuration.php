@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('home')->addDefaultsIfNotSet()->info('Home page configuration')
                     ->children()
                         ->integerNode('latest_products_max_count')
+                            ->treatNullLike(0)
                             ->info('Max number of latest products to be fetched.')
                             ->defaultValue(6)
                             ->end()
