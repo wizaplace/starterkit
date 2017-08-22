@@ -23,8 +23,6 @@ class WizaplaceFrontExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
 
-
-
         $loader->load("config_{$container->getParameter('kernel.environment')}.yml");
 
         $config = $this->processConfiguration(new Configuration(), $configs);
