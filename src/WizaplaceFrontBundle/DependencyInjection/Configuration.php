@@ -20,11 +20,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('home')->addDefaultsIfNotSet()
+                ->arrayNode('home')->addDefaultsIfNotSet()->info('Home page configuration')
                     ->children()
-                        ->integerNode('latest_products_max_count')->defaultValue(6)->end()
+                        ->integerNode('latest_products_max_count')
+                            ->info('Max number of latest products to be fetched.')
+                            ->defaultValue(6)
+                            ->end()
                     ->end()
-                ->end() // twitter
+                ->end()
             ->end()
         ;
 
