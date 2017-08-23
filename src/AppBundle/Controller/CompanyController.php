@@ -11,10 +11,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Catalog\Review\ReviewService;
-use Wizaplace\Seo\SeoService;
-use Wizaplace\Seo\SlugTargetType;
 
 class CompanyController extends Controller
 {
