@@ -38,7 +38,7 @@ class CmsController extends Controller
 
         $page = $this->cmsService->getPage($pageId);
 
-        return $this->render('cms/page.html.twig', [
+        return $this->render('@App/cms/page.html.twig', [
             'page' => $page,
         ]);
     }

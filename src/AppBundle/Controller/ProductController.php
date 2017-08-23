@@ -78,7 +78,7 @@ class ProductController extends Controller
             ];
         }, $product->getOptions());
 
-        return $this->render('product/product.html.twig', [
+        return $this->render('@App/product/product.html.twig', [
             'product' => $product,
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,

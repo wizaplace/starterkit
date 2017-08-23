@@ -1,0 +1,87 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="text-center">
+            <h1>{{ company.name }}</h1>
+            {% if reviews|length > 0 %}
+                <p>{{ reviews|length }} {{ 'reviews'|trans }}</p>
+            {% endif %}
+            {% if company.image is not null %}
+                <img class="img-responsive center-block" src="{{ company.image|imageUrl(768) }}">
+            {% endif %}
+            <p>{{ company.description }}</p>
+        </div>
+        <div class="col-sm-10 col-sm-offset-1">
+            <h2>{{ 'contact_info'|trans }}</h2>
+            {# TODO: Add company's info (address, phone, fax, email) #}
+            {# GOOGLE MAP #}
+            {% if company.location|default %}
+                <div id="company-map"></div>
+                <script>
+                    $(function(){
+                        let coordinates = {lat: {{ company.location.latitude }}, lng: {{ company.location.longitude }}};
+                        let map = new google.maps.Map(document.getElementById('company-map'), {
+                            zoom: 18,
+                            center: coordinates,
+                        });
+                        new google.maps.Marker({
+                            position: coordinates,
+                            map: map,
+                            title: {{ company.name|json_encode|raw }},
+                        });
+                    });
+                </script>
+            {% endif %}
+            {#// GOOGLE MAP #}
+        </div>
+        <div class="col-sm-12">
+            <h2>{{ 'client_comments'|trans }}</h2>
+            {% if reviews|length > 0 %}
+                <div class="comments col-xs-12">
+
+                    {% for review in reviews %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>
+                                    <span class="rank">
+                                        {% for i in 1..5 %}
+                                            {% if i <= review.rating %}
+                                                <i class="glyphicon glyphicon-star"></i>
+                                            {% else %}
+                                                <i class="glyphicon glyphicon-star-empty"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                </h4>
+                                <p>{{ review.author.name }}</p>
+                                <p>{{ review.message|escape }}</p>
+                                <p>{{ review.postedAt|date }}</p>
+                            </div>
+                        </div><br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <h3 id="add-review">{{ 'add_client_comments'|trans }}</h3><br>
+            {% if app.user %} {# TODO: Add a condition to know if user can post a review #}
+                <form name="add-reviews" method="post" action="{{ path('create_company_review') }}">
+                    <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+                    <input type="hidden" name="company_id" value="{{ company.id }}">
+                    <div>
+                        <label for="review-rate" class="">{{ 'rating'|trans|capitalize }}</label>
+                        <input id="review-rate" name="rating" class="js-rating form-control hide" value="3" />
+                    </div>
+                    <div>
+                        <label for="review-message" class="">{{ 'message'|trans|capitalize }}</label>
+                        <textarea id="review-message" name="message" class="form-control" rows="5" cols="72"></textarea>
+                    </div>
+                    <input type="submit" class="btn" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}" />
+                </form>
+            {% else %}
+                {{ 'authentified_user_required'|trans }}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

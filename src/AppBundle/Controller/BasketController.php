@@ -37,7 +37,7 @@ class BasketController extends Controller
         $basketId = $this->getBasketId();
         $basket = $this->basketService->getBasket($basketId);
 
-        return $this->render('checkout/basket.html.twig', [
+        return $this->render('@App/checkout/basket.html.twig', [
             'basket' => $basket,
         ]);
     }

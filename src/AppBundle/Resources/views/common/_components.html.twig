@@ -1,0 +1,40 @@
+{# password reset (modal window) #}
+{% include('@App/common/_password-reset.html.twig') %}
+
+{# display page wide overlay by adding class 'in' #}
+<div id="overlay"></div>
+
+{# notifications #}
+<div class="notifications">
+    {% for type, messages in app.session.flashbag.all %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                <span>{{ message }}</span>
+                <i class="close-notification fa fa-close" data-dismiss="alert"></i>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{# loading spinner #}
+<div class="loading-spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+
+{# cookie consent #}
+<div id="cookie-consent"></div>
+<script>
+    $(function() {
+        window.cookieconsent.initialise({
+            container: document.getElementById('cookie-consent'),
+            content: {
+                message: '{{ 'cookie_consent_message'|trans }}',
+                dismiss: '{{ 'cookie_consent_dismiss'|trans }}',
+                link: '{{ 'cookie_consent_link'|trans }}', {# replace with empty string to hide link #}
+                href: '{{ 'cookie_consent_href'|trans }}'
+            }
+        })
+    });
+</script>

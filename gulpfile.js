@@ -37,7 +37,7 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './app/Resources/public/scripts/**/*.*',
+        './src/AppBundle/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./web/scripts'));
@@ -52,7 +52,7 @@ gulp.task('scripts_dev', function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './app/Resources/public/scripts/**/*.*',
+        './src/AppBundle/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
@@ -62,7 +62,7 @@ gulp.task('scripts_dev', function() {
 
 // style (less)
 gulp.task('style', function () {
-    return gulp.src('./app/Resources/public/style/main.less')
+    return gulp.src('./src/AppBundle/Resources/public/style/main.less')
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('app.css'))
@@ -81,7 +81,7 @@ gulp.task('jquery', function() {
 // images (move)
 gulp.task('images', function () {
     return gulp.src([
-        './app/Resources/public/images/**/*.*',
+        './src/AppBundle/Resources/public/images/**/*.*',
         `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
     ])
         .pipe(imagemin())
@@ -91,7 +91,7 @@ gulp.task('images', function () {
 // fonts (move)
 gulp.task('fonts', function () {
     return gulp.src([
-        './app/Resources/public/fonts/**/*.*',
+        './src/AppBundle/Resources/public/fonts/**/*.*',
         `${nodeModulePath}/font-awesome/fonts/**/*`,
         `${nodeModulePath}/bootstrap/fonts/**/*`,
         `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
@@ -106,11 +106,11 @@ gulp.task('server', function() {
         notify: false
     });
 
-    gulp.watch('./app/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
-    gulp.watch('./app/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
-    gulp.watch('./app/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
-    gulp.watch('./app/Resources/public/images/**/*.*', ['images', 'browser-reload']);
-    gulp.watch('./app/Resources/views/**/*.*', ['browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/images/**/*.*', ['images', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/views/**/*.*', ['browser-reload']);
 });
 
 gulp.task('browser-reload', function() {
@@ -119,7 +119,7 @@ gulp.task('browser-reload', function() {
 
 gulp.task('lint-css', function lintCssTask() {
     return gulp
-        .src('app/Resources/public/style/**/*.less')
+        .src('src/AppBundle/Resources/public/style/**/*.less')
         .pipe(gulpStylelint({
             reporters: [
                 {formatter: 'string', console: true}
