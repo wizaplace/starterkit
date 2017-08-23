@@ -14,7 +14,7 @@ search:
 
 attribute_variant:
     path: /a/{slug}
-    defaults: { _controller: AppBundle:Search:attributeVariant }
+    defaults: { _controller: AppBundle:Attribute:viewVariant }
     methods: [GET]
 
 # Auth
@@ -184,7 +184,7 @@ category:
 
 company:
     path: /v/{slug}
-    defaults: { _controller: AppBundle:Search:company }
+    defaults: { _controller: AppBundle:Company:view }
     methods: [GET]
     requirements:
         slug: "%slug.regexp%"
