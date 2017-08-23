@@ -1,0 +1,12 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    {# show user's discussions #}
+    <ul>
+        {% for discussion in discussions %}
+            <li>
+                <p><a href="{{ path('profile_message', {'discussion_id': discussion.id}) }}">{{ discussion.recipient }}&nbsp;:&nbsp;{{ discussion.title }}</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
