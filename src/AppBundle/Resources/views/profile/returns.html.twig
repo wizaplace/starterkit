@@ -1,0 +1,13 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <div class="spacer"></div>
+    <label>Commandes terminées, retour produit possible</label>
+    <div class="spacer"></div>
+    {{ include('@App/profile/orders-table.html.twig') }}
+
+    <div class="spacer"></div>
+    <label>Retour produits</label>
+    <div class="spacer"></div>
+    {{ include('@App/profile/return-table.html.twig') }}
+{% endblock %}
