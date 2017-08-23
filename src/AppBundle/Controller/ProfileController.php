@@ -32,14 +32,14 @@ class ProfileController extends Controller
 
     public function viewAction(): Response
     {
-        return $this->render('profile/profile.html.twig', [
+        return $this->render('@App/profile/profile.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }
 
     public function addressesAction(): Response
     {
-        return $this->render('profile/addresses.html.twig', [
+        return $this->render('@App/profile/addresses.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }
@@ -48,7 +48,7 @@ class ProfileController extends Controller
     {
         $orders = $this->get(OrderService::class)->getOrders();
 
-        return $this->render('profile/orders.html.twig', [
+        return $this->render('@App/profile/orders.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
             'orders' => $orders,
         ]);
@@ -56,7 +56,7 @@ class ProfileController extends Controller
 
     public function returnsAction(): Response
     {
-        return $this->render('profile/returns.html.twig', [
+        return $this->render('@App/profile/returns.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }
@@ -73,7 +73,7 @@ class ProfileController extends Controller
 
         // CSRF token validation
         if (! $this->isCsrfTokenValid('profile_update_token', $submittedToken)) {
-            $message = $this->translator->trans('recaptcha_error_message');
+            $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);

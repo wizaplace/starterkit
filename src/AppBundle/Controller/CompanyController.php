@@ -18,7 +18,6 @@ use Wizaplace\Seo\SlugTargetType;
 
 class CompanyController extends Controller
 {
-
     public function reviewAction(ReviewService $reviewService, Request $request) : RedirectResponse
     {
         $reviewService->reviewCompany(
