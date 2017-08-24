@@ -12,6 +12,11 @@ search:
     defaults: { _controller: AppBundle:Search:search }
     methods: [GET]
 
+attribute_variant:
+    path: /a/{slug}
+    defaults: { _controller: AppBundle:Attribute:viewVariant }
+    methods: [GET]
+
 # Auth
 login: # see security.yml
     path: /login
