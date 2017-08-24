@@ -16,7 +16,6 @@ The StarterKit is a project in development. While all features are implemented i
 
 This is the list of pages and features we will be adding soon in the StarterKit:
 
-- [ ] Brand page ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Catalog/CatalogService.php#L112) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Catalog%2Fpaths%2F~1catalog~1attributes~1variants~1%7BattributeVariantId%7D%2Fget))
 - Product page:
     - [ ] Add the product to favorites ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Favorite/FavoriteService.php#L62-L67) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Favorites%2Fpaths%2F~1user~1favorites~1declinations~1%7BdeclinationId%7D%2Fpost))
     - [ ] Send a message to the vendor ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Discussion/DiscussionService.php#L16-L37) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Discussion%2Fpaths%2F~1discussions%2Fpost))
