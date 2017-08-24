@@ -15,9 +15,12 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
+use Wizaplace\Company\CompanyRegistration;
+use Wizaplace\Company\CompanyService;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
 use WizaplaceFrontBundle\Security\User;
+use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 
 class AuthController extends Controller
 {
@@ -122,5 +125,79 @@ class AuthController extends Controller
         $this->addFlash('success', $message);
 
         return $this->redirect($referer);
+    }
+
+    public function registerCompanyAction(Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            // redirection url
+            $requestedUrl = $request->get('redirect_url');
+            $referer = $request->headers->get('referer');
+
+            // form validation
+            $email = $request->get('email');
+            $password = $request->get('password');
+            $firstName = $request->get('firstname');
+            $lastName = $request->get('lastname');
+
+            // form company validation
+            $name = $request->get('company_name');
+            $phoneNumber = $request->get('company_phone');
+            $legalStatus = $request->get('company_status');
+            $zipcode = $request->get('company_zipcode');
+            $siret = $request->get('company_siret');
+            $city = $request->get('company_city');
+            $address = $request->get('company_address');
+
+            // Symfony => PSR7 adapter
+            $psr7Factory = new DiactorosFactory();
+            $psr7Request = $psr7Factory->createRequest($request);
+            $uploadedFiles = $psr7Request->getUploadedFiles();
+            $idCard = $uploadedFiles['id_card_file'];
+            $kbis = $uploadedFiles['kbis_file'];
+
+            if (! $email || ! $password || ! $firstName || ! $lastName || ! $name || ! $phoneNumber || ! $legalStatus ||
+                ! $zipcode || ! $siret || ! $city || ! $address || ! $idCard || ! $kbis) {
+                $notification = $this->translator->trans('fields_required_error_message');
+                $this->addFlash('danger', $notification);
+
+                return $this->redirect($referer);
+            }
+
+            // user registration and authentication
+            $companyService = $this->get(CompanyService::class);
+
+            try {
+                $this->registerAndAuthenticate($email, $password, $firstName, $lastName);
+
+                $registration = new CompanyRegistration($name, $email);
+                $registration->setName($name);
+                $registration->setEmail($email);
+                $registration->setZipcode($zipcode);
+                $registration->setAddress($address);
+                $registration->setCity($city);
+                $registration->setLegalStatus($legalStatus);
+                $registration->setPhoneNumber($phoneNumber);
+                $registration->setSiretNumber($siret);
+                $registration->addUploadedFile("kbis", $kbis);
+                $registration->addUploadedFile("idCard", $idCard);
+                $companyService->register($registration);
+
+                $notification = $this->translator->trans('account_creation_success_message');
+                $this->addFlash('success', $notification);
+
+                return $this->redirect($requestedUrl);
+            } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+                $accountCreationErrorNotification = $this->translator->trans('account_creation_error_message');
+                $this->addFlash('danger', $accountCreationErrorNotification);
+            } catch (UserAlreadyExists $e) {
+                $emailInUseErrorNotification = $this->translator->trans('email_already_in_use');
+                $this->addFlash('danger', $emailInUseErrorNotification);
+            }
+
+            return $this->redirect($referer);
+        }
+
+        return $this->render('login/register-company.html.twig');
     }
 }
