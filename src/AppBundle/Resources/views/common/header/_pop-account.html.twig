@@ -47,7 +47,7 @@
     {# register form #}
     <div class="content popunder-register hidden" id="popunder-register">
         <p class="title">{{ 'create_my_account'|trans }}</p>
-        <form method="post" action="{{ path('register') }}">
+        <form method="post" action="{{ path('register_user') }}">
             <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
 
             {# email #}

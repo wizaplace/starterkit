@@ -34,10 +34,10 @@ class AuthController extends Controller
 
     public function loginAction(): Response
     {
-        return $this->render('@App/login/login.html.twig');
+        return $this->render('@App/auth/login.html.twig');
     }
 
-    public function registerAction(Request $request): Response
+    public function registerUserAction(Request $request): Response
     {
         // redirection url
         $requestedUrl = $request->get('redirect_url');
@@ -198,6 +198,6 @@ class AuthController extends Controller
             return $this->redirect($referer);
         }
 
-        return $this->render('login/register-company.html.twig');
+        return $this->render('vendor-registration.html.twig');
     }
 }
