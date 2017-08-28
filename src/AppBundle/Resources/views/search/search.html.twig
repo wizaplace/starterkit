@@ -218,6 +218,8 @@
                 },
 
                 goToPage: function (page) {
+                    page = Math.max(1, page); // cannot go below page 1
+                    page = Math.min(this.pagination.nbPages, page); // cannot go over total number of pages
                     this.pagination.page = page;
 
                     // got to page top

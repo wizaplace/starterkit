@@ -1,0 +1,28 @@
+.discussion-messages {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        padding: 1rem;
+        border-radius: .3rem;
+        max-width: 65%;
+        margin-bottom: 1rem;
+
+        small {
+            float: right;
+        }
+    }
+
+    .user-message {
+        background: fade(@color-primary, 10%);
+    }
+
+    .company-message {
+        align-self: flex-end;
+        background: fade(@color-tertiary, 10%);
+    }
+}
+
+[name="discussion_message"] {
+    width: 100%;
+}

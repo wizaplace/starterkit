@@ -1,0 +1,22 @@
+{# 'contact vendor' modal #}
+<div class="discussion-modal modal fade" tabindex="-1" role="dialog" id="discussion-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+
+            <form action="{{ path('profile_discussion_create') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
+                <input type="hidden" name="return_url" value="{{ app.request.uri }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                {# discussion title #}
+                <h3>{{ 'discussion_title'|trans({'%product_name%': product.name}) }}</h3>
+
+                {# required message content #}
+                <textarea name="discussion_message" required></textarea> <br>
+
+                <button type="submit" class="btn">{{ 'send'|trans }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'cancel'|trans }}</button>
+            </form>
+        </div>
+    </div>
+</div>
