@@ -19,7 +19,7 @@ This is the list of pages and features we will be adding soon in the StarterKit:
 - Product page:
     - [ ] Add the product to favorites ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Favorite/FavoriteService.php#L62-L67) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Favorites%2Fpaths%2F~1user~1favorites~1declinations~1%7BdeclinationId%7D%2Fpost))
     - [ ] Send a message to the vendor ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Discussion/DiscussionService.php#L16-L37) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Discussion%2Fpaths%2F~1discussions%2Fpost))
-    - [ ] Report a product (in development, available in a few days)
+    - [ ] Report a product ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/ed32657f91f42821574d6b1cda5b471b4ff197be/src/Catalog/CatalogService.php#L129-L135) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Catalog%2Fpaths%2F~1catalog~1products~1%7BproductId%7D~1report%2Fpost))
 - My Account:
     - [ ] List of favorite products ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Favorite/FavoriteService.php#L22-L29) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Favorites%2Fpaths%2F~1user~1favorites~1declinations%2Fget))
     - [ ] List of discussions with vendors ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/master/src/Discussion/DiscussionService.php#L16-L37) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Discussion%2Fpaths%2F~1discussions%2Fget))
