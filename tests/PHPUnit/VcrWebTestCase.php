@@ -10,6 +10,7 @@ namespace Tests\PHPUnit;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use VCR\VCR;
+use WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware;
 
 abstract class VcrWebTestCase extends WebTestCase
 {
@@ -17,16 +18,21 @@ abstract class VcrWebTestCase extends WebTestCase
     {
         parent::setUp();
 
-        self::bootKernel()->getContainer()->get('cache.app')->clear();
+        $kernel = self::bootKernel();
+        $kernel->getContainer()->get('cache.app')->clear();
 
-        VCR::turnOn();
+        $vcr = $kernel->getContainer()->get(VcrGuzzleMiddleware::class)->getVcr();
+
+        $vcr->configure()->setCassettePath(dirname((new \ReflectionClass(static::class))->getFileName()));
+        $vcr->configure()->enableLibraryHooks([]);
+        $vcr->turnOn();
         $cassette = (new \ReflectionClass($this))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'.yml';
-        VCR::insertCassette($cassette);
+        $vcr->insertCassette($cassette);
     }
 
     protected function tearDown(): void
     {
-        VCR::turnOff();
+        self::$kernel->getContainer()->get(VcrGuzzleMiddleware::class)->getVcr()->turnOff();
 
         parent::tearDown();
     }

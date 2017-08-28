@@ -5,21 +5,18 @@
         url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=voluptas-nostrum-ea-consequatur'
         headers:
             Host: wizaplace.loc
-            Accept-Encoding: null
-            User-Agent: 'GuzzleHttp/6.2.1 curl/7.38.0 PHP/7.1.5-1+0~20170522123046.25+jessie~1.gbpb8686b'
             VCR-index: '0'
-            Accept: null
     response:
         status:
             http_version: '1.1'
             code: '200'
             message: OK
         headers:
-            Date: 'Tue, 18 Jul 2017 14:00:12 GMT'
+            Date: 'Thu, 24 Aug 2017 14:53:59 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: f9f9d3
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/f9f9d3'
+            X-Debug-Token: '049626'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/049626'
             Content-Length: '63'
             Content-Type: application/json
         body: '{"voluptas-nostrum-ea-consequatur":{"type":"product","id":"4"}}'

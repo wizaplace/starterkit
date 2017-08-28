@@ -1,0 +1,4 @@
+home:
+    path: /
+    defaults: { _controller: WizaplaceFrontBundle:Home:home }
+    methods: [GET]
