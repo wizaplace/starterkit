@@ -4,10 +4,38 @@
     <section class="container">
         <h1>{{ 'vendor_registration'|trans }}</h1>
 
-        {# shop info #}
-        <h2>{{ 'your_shop'|trans }}</h2>
+        {# registration form #}
+        <form action="{{ path('register_vendor') }}" method="POST">
 
-        {# shop admin info #}
-        <h2>{{ 'your_shop_admin'|trans }}</h2>
+            {# shop info #}
+            <fieldset>
+                <legend>{{ 'your_shop'|trans }}</legend>
+
+                {# company name #}
+                <label for="company-name">{{ 'shop_name'|trans }}</label>
+                <input id="company-name" name="company_name">
+
+                <label for="company-address">{{ 'shop_address'|trans }}</label>
+                <input id="company-address" name="company_address">
+
+                <label for="company-phone">{{ 'shop_phone'|trans }}</label>
+                <input id="company-phone" name="company_phone" type="tel">
+
+                <label for="company-zipcode">{{ 'shop_zipcode'|trans }}</label>
+                <input id="company-zipcode" name="company_zipcode">
+
+                <label for="company-city">{{ 'shop_city'|trans }}</label>
+                <input id="company-city" name="company_city">
+
+            </fieldset>
+
+
+            {# shop admin info #}
+            <fieldset>
+                <legend>{{ 'your_shop_admin'|trans }}</legend>
+
+            </fieldset>
+
+        </form>
     </section>
 {% endblock %}

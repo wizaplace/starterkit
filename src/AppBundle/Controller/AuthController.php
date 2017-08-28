@@ -130,24 +130,27 @@ class AuthController extends Controller
     public function registerCompanyAction(Request $request): Response
     {
         if ($request->isMethod('POST')) {
-            // redirection url
+            // redirect url
             $requestedUrl = $request->get('redirect_url');
             $referer = $request->headers->get('referer');
 
-            // form validation
+            // company info
+            $name = $request->get('company_name');
+            $phoneNumber = $request->get('company_phone');
+            $address = $request->get('company_address');
+            $zipcode = $request->get('company_zipcode');
+            $city = $request->get('company_city');
+            $country = $request->get('company_country');
+            $legalStatus = $request->get('company_status');
+            $siret = $request->get('company_siret');
+            $rcs = $request->get('company_rcs');
+            $vat = $request->get('company_vat');
+
+            // company admin info
             $email = $request->get('email');
             $password = $request->get('password');
             $firstName = $request->get('firstname');
             $lastName = $request->get('lastname');
-
-            // form company validation
-            $name = $request->get('company_name');
-            $phoneNumber = $request->get('company_phone');
-            $legalStatus = $request->get('company_status');
-            $zipcode = $request->get('company_zipcode');
-            $siret = $request->get('company_siret');
-            $city = $request->get('company_city');
-            $address = $request->get('company_address');
 
             // Symfony => PSR7 adapter
             $psr7Factory = new DiactorosFactory();
@@ -157,7 +160,7 @@ class AuthController extends Controller
             $kbis = $uploadedFiles['kbis_file'];
 
             if (! $email || ! $password || ! $firstName || ! $lastName || ! $name || ! $phoneNumber || ! $legalStatus ||
-                ! $zipcode || ! $siret || ! $city || ! $address || ! $idCard || ! $kbis) {
+                ! $zipcode || ! $siret || ! $rcs || ! $vat || ! $city || ! $country || ! $address || ! $idCard || ! $kbis) {
                 $notification = $this->translator->trans('fields_required_error_message');
                 $this->addFlash('danger', $notification);
 
@@ -198,6 +201,6 @@ class AuthController extends Controller
             return $this->redirect($referer);
         }
 
-        return $this->render('vendor-registration.html.twig');
+        return $this->render('@App/auth/vendor-registration.html.twig');
     }
 }
