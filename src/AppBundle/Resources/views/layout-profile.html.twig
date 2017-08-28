@@ -28,6 +28,16 @@
                             </ul>
                         </div>
                     </div>
+
+                    {# user discussions #}
+                    <div class="box">
+                        <div class="box-header">{{ 'discussion_service'|trans }}</div>
+                        <div class="box-content">
+                            <ul>
+                                <li><a href="{{ path("profile_discussions") }}">{{ 'my_discussions'|trans }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 {% endblock %}
             </div>
 
@@ -37,4 +47,3 @@
         </div>
     </div>
 {% endblock %}
-

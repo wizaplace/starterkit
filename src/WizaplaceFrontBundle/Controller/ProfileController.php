@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
+use Wizaplace\Discussion\DiscussionService;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
@@ -138,6 +139,31 @@ class ProfileController extends Controller
         }
 
         return $this->redirect($referer);
+    }
+
+    public function discussionsAction(): Response
+    {
+        $discussionService = $this->get(DiscussionService::class);
+        $discussions = $discussionService->getDiscussions();
+
+        return $this->render('@App/profile/discussions.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+            'discussions' => $discussions,
+        ]);
+    }
+
+    public function discussionAction(int $id): Response
+    {
+        $discussionService = $this->get(DiscussionService::class);
+
+        $discussion = $discussionService->getDiscussion($id);
+        $messages = $discussionService->getMessages($id);
+
+        return $this->render('@App/profile/discussion.html.twig', [
+            'discussion' => $discussion,
+            'messages' => $messages,
+            'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
     }
 
     // This method sole purpose is the return type hint.

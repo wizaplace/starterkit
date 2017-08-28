@@ -95,6 +95,17 @@
     "crossedoutprice_original": "Au lieu de %price% HT",
     "crossedoutprice_promo": "promo",
     "greentax": "Eco taxe : %tax%",
+    "new": "Nouveau",
+    "sold_by": "vendu par",
+    "contact_vendor": "Contacter le marchand",
+    "message_sent_success_notification": "Votre message a bien été envoyé",
+    "message_sent_error_notification": "Le message n'a pas pu être envoyé, veuillez réessayer",
+    "discussion_service": "Messagerie",
+    "my_discussions": "Mes messages",
+    "no_messages": "Il n'y a aucun message",
+    "add_message": "Ecrivez un message",
+    "you": "Vous",
+    "discussion_title": "À propos du produit : %product_name%",
     "add_to_basket": "ajouter au panier",
     "out_of_stock": "rupture de stock"
 }

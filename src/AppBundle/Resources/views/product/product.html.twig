@@ -12,13 +12,23 @@
                 <div class="row bloc">
                     <div class="col-md-12 ">
                         {% if product.creationDate.timestamp > date('-7days', 'Europe/Paris').timestamp %}
-                            <div class="badge-new">Nouveau</div><br />
+                            <div class="badge-new">{{ 'new'|trans }}</div><br />
                         {% endif %}
                         <div class="big-title">{{ product.name }}</div>
                         <br />
                         <div class="text-blue-grey">
                             {{ product.shortDescription|striptags|raw }}<br />
                         </div>
+
+                        {# product's vendor #}
+                        <p>{{ 'sold_by'|trans }}&nbsp;:&nbsp;{{ product.companies[0].name }}</p>
+
+                        {# open contact vendor modal #}
+                        <a data-toggle="modal" href="#discussion-modal">{{ 'contact_vendor'|trans }}</a>
+
+                        {# actual discussion modal #}
+                        {% include '@App/common/_discussion-modal.html.twig' %}
+
                     </div>
                 </div>
 

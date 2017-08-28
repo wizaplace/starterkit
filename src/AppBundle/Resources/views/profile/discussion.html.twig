@@ -1,0 +1,39 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <h4>{{ discussion.recipient }}&nbsp;:&nbsp;{{ discussion.title }}</h4>
+
+    <ul class="discussion-messages">
+        {% for message in messages %}
+
+            {# user messages #}
+            {% if(message.isAuthor) %}
+                <li class="user-message">
+                    <small>{{ message.date|date('d/m/Y - H:m:s') }}</small>
+                    <p><b>{{ profil.firstname|default('you'|trans) }}&nbsp;:&nbsp;</b></p>
+                    <p>{{ message.content|striptags('<br>')|raw }}</p>
+                </li>
+
+            {# company responses #}
+            {% else %}
+                <li class="company-message">
+                    <small>{{ message.date|date('d/m/Y - H:m:s') }}</small>
+                    <p><b>{{ discussion.recipient|default }}&nbsp;:&nbsp;</b></p>
+                    <p>{{ message.content|striptags('<br>')|raw }}</p>
+                </li>
+            {% endif %}
+
+        {% else %}
+            <p>{{ 'no_messages'|trans }}</p>
+        {% endfor %}
+    </ul>
+
+    {# add a new message to the discussion #}
+    <form action="{{ path('profile_message_create', { 'id': discussion.id }) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
+        <input type="hidden" name="return_url" value="{{ app.request.uri }}">
+        <textarea name="discussion_message" placeholder="{{ 'add_message'|trans }}" required></textarea>
+        <button type="submit">{{ 'send'|trans }}</button>
+    </form>
+
+{% endblock %}
