@@ -20,10 +20,10 @@ use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
 {
-    private const PASSWORD_MINIMUM_LENGTH = 6;
+    protected const PASSWORD_MINIMUM_LENGTH = 6;
 
     /** @var TranslatorInterface */
-    private $translator;
+    protected $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
