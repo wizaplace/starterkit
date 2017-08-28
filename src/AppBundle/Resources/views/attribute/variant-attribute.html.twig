@@ -1,0 +1,6 @@
+{% extends '@App/search/search.html.twig' %}
+
+{% block searchHeader %}
+    <h1>{{ selectedVariant.name }}</h1>
+    <img src="{{ selectedVariant.image|imageUrl }}">
+{% endblock %}

@@ -42,6 +42,9 @@
 
             {# search result #}
             <div class="col-md-10">
+
+                {% block searchHeader %}{% endblock %}
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product" v-for="product in products">
@@ -118,10 +121,14 @@
 
     {# price slider template #}
     <template id="slider-template">
-        <div class="clearfix">
-            <div id="facet-slider"></div>
-            <span class="facet-range-min" v-text="currentMin + ' €'"></span>
-            <span class="facet-range-max" v-text="currentMax + ' €'"></span>
+        <div class="range-slider">
+            <div class="range-slider-wrapper">
+                <div id="facet-slider"></div>
+                <div class="range-values">
+                    <span class="facet-range-min" v-text="currentMin + ' €'"></span>
+                    <span class="facet-range-max" v-text="currentMax + ' €'"></span>
+                </div>
+            </div>
         </div>
     </template>
 

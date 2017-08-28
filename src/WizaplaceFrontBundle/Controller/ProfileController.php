@@ -1,8 +1,7 @@
 <?php
 /**
- * @author      Wizacha DevTeam <dev@wizacha.com>
- * @copyright   Copyright (c) Wizacha
- * @license     Proprietary
+ * @copyright Copyright (c) Wizacha
+ * @license Proprietary
  */
 declare(strict_types = 1);
 
@@ -22,10 +21,10 @@ use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
 {
-    private const PASSWORD_MINIMUM_LENGTH = 6;
+    protected const PASSWORD_MINIMUM_LENGTH = 6;
 
     /** @var TranslatorInterface */
-    private $translator;
+    protected $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
@@ -34,14 +33,14 @@ class ProfileController extends Controller
 
     public function viewAction(): Response
     {
-        return $this->render('@App/profile/profile.html.twig', [
+        return $this->render('@WizaplaceFront/profile/profile.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }
 
     public function addressesAction(): Response
     {
-        return $this->render('@App/profile/addresses.html.twig', [
+        return $this->render('@WizaplaceFront/profile/addresses.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }
@@ -50,7 +49,7 @@ class ProfileController extends Controller
     {
         $orders = $this->get(OrderService::class)->getOrders();
 
-        return $this->render('@App/profile/orders.html.twig', [
+        return $this->render('@WizaplaceFront/profile/orders.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
             'orders' => $orders,
         ]);
@@ -58,7 +57,7 @@ class ProfileController extends Controller
 
     public function returnsAction(): Response
     {
-        return $this->render('@App/profile/returns.html.twig', [
+        return $this->render('@WizaplaceFront/profile/returns.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
         ]);
     }

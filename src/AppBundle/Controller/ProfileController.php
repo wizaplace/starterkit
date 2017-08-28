@@ -10,7 +10,6 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use WizaplaceFrontBundle\Security\User;
 use WizaplaceFrontBundle\Controller\ProfileController as BaseController;
 
 class ProfileController extends BaseController
@@ -38,11 +37,5 @@ class ProfileController extends BaseController
     public function updateProfileAction(Request $request)
     {
         return parent::updateProfileAction($request);
-    }
-
-    // This method sole purpose is the return type hint.
-    protected function getUser(): User
-    {
-        return parent::getUser();
     }
 }

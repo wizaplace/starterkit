@@ -1,0 +1,81 @@
+/* Component based on jquery-ui range-slider */
+
+// default values
+@handle-color: @color-secondary;
+@handle-color-active: #fff;
+@handle-border-width: 3px;
+@handle-border-color: @color-primary;
+@handle-height: 20px;
+@handle-width: 20px;
+@handle-border-radius: 50%; // round
+
+@slider-height: 9px;
+@slider-background-color: @color-medium;
+@slider-range-background-color: @color-primary;
+
+.range-slider {
+    .range-slider-wrapper {
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: calc(@handle-height * 1.1);
+            margin-bottom: 1em;
+        }
+
+        .ui-slider {
+            position: relative;
+            text-align: left;
+            background-color: @slider-background-color;
+            top: calc((@handle-height - @slider-height) / 2);
+            left: calc(@handle-width / 2 - @handle-border-width);
+            width: calc(~'100% - (@{handle-width} + (@{handle-border-width}))');
+            height: @slider-height;
+
+            .ui-slider-handle {
+                position: absolute;
+                z-index: 2;
+                width: @handle-width;
+                height: @handle-height;
+                cursor: grab;
+                -ms-touch-action: none;
+                touch-action: none;
+                outline: 0;
+                border-radius: @handle-border-radius;
+                top: calc(((@handle-height / 2) * -1) + (@slider-height / 2) - (@handle-border-width / 4));
+                margin-left: calc((@handle-width / 2 - @handle-border-width) * -1);
+
+                &.ui-state-active {
+                    cursor: grabbing;
+                    cursor: -moz-grabbing;
+                    cursor: -webkit-grabbing;
+                }
+            }
+
+            .ui-slider-range {
+                position: absolute;
+                z-index: 1;
+                display: block;
+                border: 0;
+                background-color: @slider-range-background-color;
+                top: 0;
+                height: 100%;
+            }
+        }
+
+        // handles
+        .ui-state-default,
+        .ui-widget-content .ui-state-default,
+        .ui-widget-header .ui-state-default {
+            border: @handle-border-width solid @handle-border-color;
+            background: @handle-color;
+            font-weight: normal;
+        }
+
+        // slider
+        .ui-widget-content .ui-state-active {
+            border: @handle-border-width solid @handle-border-color;
+            background: @handle-color-active;
+            font-weight: normal;
+        }
+    }
+}
