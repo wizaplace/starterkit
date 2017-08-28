@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3184e76c611949cf3f37f5b7ae04f38e",
+    "content-hash": "d5536d7261505e342daf4434927b7b4c",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2364,16 +2364,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.7.0",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:wizaplace/wizaplace-php-sdk.git",
-                "reference": "ab376132d3516fd217be196cba1915e0fda204d4"
+                "reference": "c43f26b8eaeca50d8dc198a12164b9c8da518c3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/ab376132d3516fd217be196cba1915e0fda204d4",
-                "reference": "ab376132d3516fd217be196cba1915e0fda204d4",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/c43f26b8eaeca50d8dc198a12164b9c8da518c3a",
+                "reference": "c43f26b8eaeca50d8dc198a12164b9c8da518c3a",
                 "shasum": ""
             },
             "require": {
@@ -2404,12 +2404,15 @@
                     "Wizaplace\\Tests\\": "tests/"
                 }
             },
+            "license": [
+                "proprietary"
+            ],
             "description": "Wizaplace's PHP SDK",
             "support": {
-                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/0.7.0",
+                "source": "https://github.com/wizaplace/wizaplace-php-sdk/tree/0.7.1",
                 "issues": "https://github.com/wizaplace/wizaplace-php-sdk/issues"
             },
-            "time": "2017-08-18T08:55:46+00:00"
+            "time": "2017-08-28T11:48:19+00:00"
         }
     ],
     "packages-dev": [
