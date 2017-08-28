@@ -63,7 +63,7 @@ profile_returns:
     defaults: { _controller: AppBundle:Profile:returns }
     methods: [GET]
 
-profile_messages:
+profile_discussions:
     path: /profil/messagerie
     defaults: { _controller: AppBundle:Profile:discussions }
     methods: [GET]
@@ -73,10 +73,12 @@ profile_discussion_create:
     defaults: { _controller: AppBundle:Discussion:create }
     methods: [POST]
 
-profile_message:
-    path: /profil/message
+profile_discussion:
+    path: /profil/messagerie/discussion/{id}
     defaults: { _controller: AppBundle:Profile:discussion }
     methods: [GET]
+    requirements:
+        id: \d+
 
 profile_message_create:
     path: /profil/messagerie/nouveau-message

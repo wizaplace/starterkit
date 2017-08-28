@@ -27,7 +27,7 @@ class DiscussionController extends Controller
     public function createAction(Request $request): Response
     {
         // CSRF token validation
-        $referer = $request->headers->get('referer');
+        $referer = $request->headers->get('referer') ?? $request->request->get('return_url');
         $submittedToken = $request->request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('discussion_token', $submittedToken)) {
@@ -75,7 +75,7 @@ class DiscussionController extends Controller
         }
 
         // add a message to the discussion
-        $discussionId = (int) $request->get('discussion_id');
+        $discussionId = (int) $request->get('id');
         $discussionMessage = $request->get('discussion_message');
         $discussionService = $this->get(DiscussionService::class);
 
@@ -89,18 +89,12 @@ class DiscussionController extends Controller
             return $this->redirect($referer);
         }
 
-        $discussion = $discussionService->getDiscussion($discussionId);
-        $messages = $discussionService->getMessages($discussionId);
-
         // add success notification
         $notification = $this->translator->trans('message_sent_success_notification');
         $this->addFlash('success', $notification);
 
-        return $this->redirectToRoute('profile_message', [
-            'discussion_id' => $discussionId,
-            'discussion' => $discussion,
-            'messages' => $messages,
-            'profile' => $this->getUser()->getWizaplaceUser(),
+        return $this->redirectToRoute('profile_discussion', [
+            'id' => $discussionId,
         ]);
     }
 }

@@ -5,6 +5,7 @@
 
             <form action="{{ path('profile_discussion_create') }}" method="POST">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
+                <input type="hidden" name="return_url" value="{{ app.request.uri }}">
                 <input type="hidden" name="product_id" value="{{ product.id }}">
 
                 {# discussion title #}

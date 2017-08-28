@@ -153,13 +153,12 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function discussionAction(Request $request): Response
+    public function discussionAction(int $id): Response
     {
-        $discussionId = (int) $request->get('discussion_id');
         $discussionService = $this->get(DiscussionService::class);
 
-        $discussion = $discussionService->getDiscussion($discussionId);
-        $messages = $discussionService->getMessages($discussionId);
+        $discussion = $discussionService->getDiscussion($id);
+        $messages = $discussionService->getMessages($id);
 
         return $this->render('@App/profile/discussion.html.twig', [
             'discussion' => $discussion,

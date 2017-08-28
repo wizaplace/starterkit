@@ -29,9 +29,9 @@
     </ul>
 
     {# add a new message to the discussion #}
-    <form action="{{ path('profile_message_create') }}" method="POST">
+    <form action="{{ path('profile_message_create', { 'id': discussion.id }) }}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
-        <input type="hidden" name="discussion_id" value="{{ discussion.id }}">
+        <input type="hidden" name="return_url" value="{{ app.request.uri }}">
         <textarea name="discussion_message" placeholder="{{ 'add_message'|trans }}" required></textarea>
         <button type="submit">{{ 'send'|trans }}</button>
     </form>
