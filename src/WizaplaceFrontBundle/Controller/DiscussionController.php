@@ -64,7 +64,7 @@ class DiscussionController extends Controller
     public function createMessageAction(Request $request): Response
     {
         // CSRF token validation
-        $referer = $request->headers->get('referer');
+        $referer = $request->headers->get('referer') ?? $request->request->get('return_url');
         $submittedToken = $request->request->get('csrf_token');
 
         if (! $this->isCsrfTokenValid('discussion_token', $submittedToken)) {
