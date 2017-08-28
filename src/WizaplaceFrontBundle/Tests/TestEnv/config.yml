@@ -1,0 +1,108 @@
+parameters:
+    locale: fr
+    recaptcha.key: 'dummy_key'
+    api.base_url: 'http://wizaplace.loc/api/v1/'
+
+framework:
+    test: ~
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    secret: 'secret'
+    router:
+        resource: '%kernel.root_dir%/routing.yml'
+        strict_requirements: true
+    profiler:
+        collect: false
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        storage_id: session.storage.mock_file
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/WizaplaceFrontBundle/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: true
+    strict_variables: true
+    exception_controller: 'WizaplaceFrontBundle\Tests\TestEnv\Controller\ExceptionController:showAction'
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ['!event']
+
+security:
+     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+        providers:
+            wizaplace:
+                id: WizaplaceFrontBundle\Security\UserProvider
+
+        firewalls:
+            # disables authentication for assets and the profiler, adapt it according to your needs
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+
+            main:
+                anonymous: ~
+                simple_form:
+                    authenticator: WizaplaceFrontBundle\Security\FormAuthenticator
+                    check_path: login
+                    login_path: login_form
+                    username_parameter: 'email'
+                    password_parameter: 'password'
+                    post_only: true
+                    csrf_parameter: csrf_token
+                    csrf_token_id: login_token
+                    csrf_token_generator: security.csrf.token_manager
+                    # post-login redirection config
+                    default_target_path: home
+                    target_path_parameter: redirect_url
+                    use_referer: false
+                    failure_handler: WizaplaceFrontBundle\Security\AuthenticationFailureHandler
+                    success_handler: WizaplaceFrontBundle\Security\AuthenticationSuccessHandler
+                logout:
+                    path: logout
+                    target: home
+                    csrf_parameter: csrf_token
+                    csrf_token_id: logout_token
+                    csrf_token_generator: security.csrf.token_manager
+
+services:
+    WizaplaceFrontBundle\Tests\TestEnv\Service\TwigEngineLogger:
+        decorates: templating.engine.twig
+        arguments: [ '@WizaplaceFrontBundle\Tests\TestEnv\Service\TwigEngineLogger.inner' ]
+        public: true
+    WizaplaceFrontBundle\Tests\TestEnv\Controller\ExceptionController:
+        autowire: true
+        parent: twig.controller.exception
+    VCR\Configuration:
+        calls:
+            - ['setMode', [!php/const:VCR\VCR::MODE_ONCE]]
+    WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware:
+        autowire: true
+    wizaplace.guzzle.decorating_handler2:
+        factory: 'GuzzleHttp\HandlerStack::create'
+        class: 'GuzzleHttp\HandlerStack'
+        decorates: 'wizaplace.guzzle.handler'
+        arguments: ['@wizaplace.guzzle.decorating_handler2.inner']
+        calls:
+            - ['push', ['@WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware']]
