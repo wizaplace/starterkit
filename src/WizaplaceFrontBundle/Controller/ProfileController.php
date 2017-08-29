@@ -15,7 +15,6 @@ use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Discussion\DiscussionService;
 use Wizaplace\Order\OrderService;
-use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
 use WizaplaceFrontBundle\Security\User;
 
@@ -69,7 +68,12 @@ class ProfileController extends Controller
         $referer = $request->headers->get('referer');
         $submittedToken = $request->get('csrf_token');
 
-        $user = new WizaplaceUser($data);
+        $userId = (int) $data['id'];
+        $userEmail = (string) $data['email'];
+        $userFirstname = (string) $data['firstName'];
+        $userLastname = (string) $data['lastName'];
+        $userBillingAddress = $data['addresses']['billing'] ?? [];
+        $userShippingAddress = $data['addresses']['shipping'] ?? [];
         $userService = $this->get(UserService::class);
 
         // CSRF token validation
@@ -97,7 +101,7 @@ class ProfileController extends Controller
             $api = $this->get(ApiClient::class);
 
             try {
-                $api->authenticate($user->getEmail(), $oldPassword);
+                $api->authenticate($userEmail, $oldPassword);
             } catch (BadCredentials $e) {
                 $message = $this->translator->trans('update_old_password_error_message');
                 $this->addFlash('danger', $message);
@@ -105,7 +109,7 @@ class ProfileController extends Controller
                 return $this->redirect($referer);
             }
 
-            $userService->changePassword($user->getId(), $newPassword);
+            $userService->changePassword($userId, $newPassword);
 
             // add a notification
             $message = $this->translator->trans('update_password_success_message');
@@ -113,7 +117,7 @@ class ProfileController extends Controller
         }
 
         // update user's profile
-        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
+        $userService->updateUser($userId, $userEmail, $userFirstname, $userLastname);
 
         $message = $this->translator->trans('update_profile_success_message');
         $this->addFlash('success', $message);
