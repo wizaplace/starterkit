@@ -6,33 +6,83 @@
 
         {# registration form #}
         <form action="{{ path('register_vendor') }}" method="POST">
+            {# user will be redircted to home page after validation is successful #}
+            <input type="hidden" name="redirect_url" value="{{ path('home') }}">
 
-            {# shop info #}
+            {# user will be redirected back here if validation fails (eventual fall back for the HTTP header referer field) #}
+            <input type="hidden" name="return_url" value="{{ app.request.uri }}">
+
+            {# company info #}
             <fieldset>
-                <legend>{{ 'your_shop'|trans }}</legend>
+                <legend>{{ 'your_company'|trans }}</legend>
 
-                {# company name #}
-                <label for="company-name">{{ 'shop_name'|trans }}</label>
+                <label for="company-name">{{ 'company_name'|trans }}</label>
                 <input id="company-name" name="company_name">
 
-                <label for="company-address">{{ 'shop_address'|trans }}</label>
+                <label for="company-address">{{ 'company_address'|trans }}</label>
                 <input id="company-address" name="company_address">
 
-                <label for="company-phone">{{ 'shop_phone'|trans }}</label>
-                <input id="company-phone" name="company_phone" type="tel">
-
-                <label for="company-zipcode">{{ 'shop_zipcode'|trans }}</label>
+                <label for="company-zipcode">{{ 'company_zipcode'|trans }}</label>
                 <input id="company-zipcode" name="company_zipcode">
 
-                <label for="company-city">{{ 'shop_city'|trans }}</label>
+                <label for="company-city">{{ 'company_city'|trans }}</label>
                 <input id="company-city" name="company_city">
 
+                {# TODO: replace with non hidden countries selector #}
+                <input type="hidden" name="company_country" value="France">
+
+                <label for="company-status">{{ 'company_legal_status'|trans }}</label>
+                <input id="company-status" name="company_status">
+
+                <label for="company-capital">{{ 'company_capital'|trans }}</label>
+                <input type="number" id="company-capital" name="company_capital">
+
+                <label for="company-siret">{{ 'company_siret'|trans }}</label>
+                <input id="company-siret" name="company_siret">
+
+                <label for="company-rcs">{{ 'company_rcs'|trans }}</label>
+                <input id="company-rcs" name="company_rcs">
+
+                <label for="company-vat">{{ 'company_vat'|trans }}</label>
+                <input id="company-vat" name="company_vat">
+
+                <label for="company-description">{{ 'company_description'|trans }}</label>
+                <textarea id="company-description" name="company_description"></textarea>
             </fieldset>
 
-
-            {# shop admin info #}
+            {# company admin info #}
             <fieldset>
-                <legend>{{ 'your_shop_admin'|trans }}</legend>
+                <legend>{{ 'your_company_admin'|trans }}</legend>
+
+                <label for="admin-firstname">{{ 'admin_firstname'|trans }}</label>
+                <input id="admin-firstname" name="admin_firstname">
+
+                <label for="admin-lastname">{{ 'admin_lastname'|trans }}</label>
+                <input id="admin-lastname" name="admin_lastname">
+
+                <label for="admin-email">{{ 'admin_email'|trans }}</label>
+                <input id="admin-email" name="admin_email" type="email">
+
+                <label for="admin-phone">{{ 'admin_phone'|trans }}</label>
+                <input id="admin-phone" name="admin_phone" type="tel">
+
+                <label for="admin-url">{{ 'admin_url'|trans }}</label>
+                <input id="admin-url" name="admin_url" type="url">
+            </fieldset>
+
+            {# company legal documents #}
+            <fieldset>
+                <legend>{{ 'your_company_legal_documents'|trans }}</legend>
+                <p><strong>{{ 'company_documents_max_size'|trans }}</strong></p>
+
+                <label for="admin-document-card-id">{{ 'admin_document_id_card'|trans }}</label>
+                <input id="admin-document-card-id" name="admin_document_id_card" type="file">
+
+                <label for="company-document-kbis">{{ 'company_document_kbis'|trans }}</label>
+                <input id="company-document-kbis" name="company_document_kbis" type="file">
+
+                <label for="company-document-bic">{{ 'company_document_bic'|trans }}</label>
+                <input id="company-document-bic" name="company_document_bic" type="file">
 
             </fieldset>
 

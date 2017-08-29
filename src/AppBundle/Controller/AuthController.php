@@ -131,36 +131,40 @@ class AuthController extends Controller
     {
         if ($request->isMethod('POST')) {
             // redirect url
-            $requestedUrl = $request->get('redirect_url');
-            $referer = $request->headers->get('referer');
+            $requestedUrl = $request->request->get('redirect_url');
+            $referer = $request->headers->get('referer') ?? $request->request->get('return_url');
 
             // company info
             $name = $request->get('company_name');
-            $phoneNumber = $request->get('company_phone');
             $address = $request->get('company_address');
             $zipcode = $request->get('company_zipcode');
             $city = $request->get('company_city');
             $country = $request->get('company_country');
             $legalStatus = $request->get('company_status');
+            $capital = $request->get('company_capital');
             $siret = $request->get('company_siret');
             $rcs = $request->get('company_rcs');
             $vat = $request->get('company_vat');
 
             // company admin info
-            $email = $request->get('email');
-            $password = $request->get('password');
-            $firstName = $request->get('firstname');
-            $lastName = $request->get('lastname');
+            $password = $request->get('admin_password');
+            $firstName = $request->get('admin_firstname');
+            $lastName = $request->get('admin_lastname');
+            $phoneNumber = $request->get('admin_phone');
+            $email = $request->get('admin_email');
+            $url = $request->get('admin_url');
 
             // Symfony => PSR7 adapter
             $psr7Factory = new DiactorosFactory();
             $psr7Request = $psr7Factory->createRequest($request);
             $uploadedFiles = $psr7Request->getUploadedFiles();
-            $idCard = $uploadedFiles['id_card_file'];
-            $kbis = $uploadedFiles['kbis_file'];
+            $idCard = $uploadedFiles['company_document_id_card'];
+            $kbis = $uploadedFiles['company_document_kbis'];
+            $bic = $uploadedFiles['company_document_bic']; // RIB
 
-            if (! $email || ! $password || ! $firstName || ! $lastName || ! $name || ! $phoneNumber || ! $legalStatus ||
-                ! $zipcode || ! $siret || ! $rcs || ! $vat || ! $city || ! $country || ! $address || ! $idCard || ! $kbis) {
+            if (! $email || ! $password || ! $firstName || ! $lastName || ! $name || ! $phoneNumber || ! $url ||
+                ! $legalStatus || ! $zipcode || ! $capital || ! $siret || ! $rcs || ! $vat || ! $city || ! $country ||
+                ! $address || ! $idCard || ! $kbis || ! $bic || ! $capital) {
                 $notification = $this->translator->trans('fields_required_error_message');
                 $this->addFlash('danger', $notification);
 
