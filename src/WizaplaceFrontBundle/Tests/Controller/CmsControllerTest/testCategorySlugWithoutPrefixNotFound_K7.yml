@@ -1,0 +1,22 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=informatique'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 30 Aug 2017 08:58:26 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: c8a1a3
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/c8a1a3'
+            Content-Length: '45'
+            Content-Type: application/json
+        body: '{"informatique":{"type":"category","id":"3"}}'

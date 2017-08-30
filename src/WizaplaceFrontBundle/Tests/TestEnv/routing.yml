@@ -2,3 +2,10 @@ home:
     path: /
     defaults: { _controller: WizaplaceFrontBundle:Home:home }
     methods: [GET]
+
+cms_page:
+    path: /{slug}
+    defaults: { _controller: WizaplaceFrontBundle:Cms:Page }
+    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"
