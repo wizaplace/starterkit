@@ -1,0 +1,43 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=test-cms-page-slug'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 30 Aug 2017 09:11:33 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 8463df
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/8463df'
+            Content-Length: '52'
+            Content-Type: application/json
+        body: '{"test-cms-page-slug":{"type":"cms_page","id":"31"}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/cms/page/31'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '1'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 30 Aug 2017 09:11:34 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 2577d6
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/2577d6'
+            Content-Length: '133'
+            Content-Type: application/json
+        body: '{"id":31,"title":"Test Cms Page Slug","content":"","metaTitle":"","metaDescription":"","metaKeywords":"","slug":"test-cms-page-slug"}'
