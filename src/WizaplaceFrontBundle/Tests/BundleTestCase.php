@@ -6,7 +6,7 @@
  */
 declare(strict_types = 1);
 
-namespace WizaplaceFrontBundle\Tests\Controller;
+namespace WizaplaceFrontBundle\Tests;
 
 use Symfony\Bridge\Monolog\Formatter\ConsoleFormatter;
 use Symfony\Bundle\FrameworkBundle\Client;
@@ -28,7 +28,7 @@ abstract class BundleTestCase extends WebTestCase
     protected function setUp()
     {
         parent::setUp();
-        self::$cassetteName = (new \ReflectionClass(static::class))->getShortName().'_K7.yml';
+        self::$cassetteName = (new \ReflectionClass(static::class))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'_K7.yml';
     }
 
     protected static function createClient(array $options = array(), array $server = array())

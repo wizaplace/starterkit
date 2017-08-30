@@ -4,5 +4,5 @@ services:
 	- Lookyman\PHPStan\Symfony\ServiceMap(var/cache/dev/appDevDebugProjectContainer.xml)
 parameters:
     excludes_analyse:
-        - src/WizaplaceFrontBundle/Tests/Controller/BundleTestCase.php
+        - src/WizaplaceFrontBundle/Tests/BundleTestCase.php
         - tests/PHPUnit/VcrWebTestCase.php
