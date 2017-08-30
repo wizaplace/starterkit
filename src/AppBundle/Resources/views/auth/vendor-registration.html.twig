@@ -5,7 +5,7 @@
         <h1>{{ 'vendor_registration'|trans }}</h1>
 
         {# registration form #}
-        <form action="{{ path('register_vendor') }}" method="POST">
+        <form action="{{ path('register_vendor') }}" method="POST" class="vendor-registration" enctype="multipart/form-data">
             {# user will be redircted to home page after validation is successful #}
             <input type="hidden" name="redirect_url" value="{{ path('home') }}">
 
@@ -16,35 +16,38 @@
             <fieldset>
                 <legend>{{ 'your_company'|trans }}</legend>
 
-                <label for="company-name">{{ 'company_name'|trans }}</label>
-                <input id="company-name" name="company_name">
+                <label for="company-name" class="required">{{ 'company_name'|trans }}</label>
+                <input id="company-name" name="company_name" required>
 
-                <label for="company-address">{{ 'company_address'|trans }}</label>
-                <input id="company-address" name="company_address">
+                <label for="company-address" class="required">{{ 'company_address'|trans }}</label>
+                <input id="company-address" name="company_address" required>
 
-                <label for="company-zipcode">{{ 'company_zipcode'|trans }}</label>
-                <input id="company-zipcode" name="company_zipcode">
+                <label for="company-zipcode" class="required">{{ 'company_zipcode'|trans }}</label>
+                <input id="company-zipcode" name="company_zipcode" required>
 
-                <label for="company-city">{{ 'company_city'|trans }}</label>
-                <input id="company-city" name="company_city">
+                <label for="company-city" class="required">{{ 'company_city'|trans }}</label>
+                <input id="company-city" name="company_city" required>
 
-                {# TODO: replace with non hidden countries selector #}
-                <input type="hidden" name="company_country" value="France">
+                {# TODO: add other countries #}
+                <label for="company-country" class="required">{{ 'company_country'|trans }}</label>
+                <select id="company-country" name="company_country">
+                    <option value="France">France</option>
+                </select>
 
-                <label for="company-status">{{ 'company_legal_status'|trans }}</label>
-                <input id="company-status" name="company_status">
+                <label for="company-status" class="required">{{ 'company_legal_status'|trans }}</label>
+                <input id="company-status" name="company_status" required>
 
-                <label for="company-capital">{{ 'company_capital'|trans }}</label>
-                <input type="number" id="company-capital" name="company_capital">
+                <label for="company-capital" class="required">{{ 'company_capital'|trans }}</label>
+                <input type="number" id="company-capital" name="company_capital" required>
 
-                <label for="company-siret">{{ 'company_siret'|trans }}</label>
-                <input id="company-siret" name="company_siret">
+                <label for="company-siret" class="required">{{ 'company_siret'|trans }}</label>
+                <input id="company-siret" name="company_siret" required>
 
-                <label for="company-rcs">{{ 'company_rcs'|trans }}</label>
-                <input id="company-rcs" name="company_rcs">
+                <label for="company-rcs" class="required">{{ 'company_rcs'|trans }}</label>
+                <input id="company-rcs" name="company_rcs" required>
 
-                <label for="company-vat">{{ 'company_vat'|trans }}</label>
-                <input id="company-vat" name="company_vat">
+                <label for="company-vat" class="required">{{ 'company_vat'|trans }}</label>
+                <input id="company-vat" name="company_vat" required>
 
                 <label for="company-description">{{ 'company_description'|trans }}</label>
                 <textarea id="company-description" name="company_description"></textarea>
@@ -54,20 +57,28 @@
             <fieldset>
                 <legend>{{ 'your_company_admin'|trans }}</legend>
 
-                <label for="admin-firstname">{{ 'admin_firstname'|trans }}</label>
-                <input id="admin-firstname" name="admin_firstname">
+                <label for="admin-firstname" class="required">{{ 'admin_firstname'|trans }}</label>
+                <input id="admin-firstname" name="admin_firstname" required>
 
-                <label for="admin-lastname">{{ 'admin_lastname'|trans }}</label>
-                <input id="admin-lastname" name="admin_lastname">
+                <label for="admin-lastname" class="required">{{ 'admin_lastname'|trans }}</label>
+                <input id="admin-lastname" name="admin_lastname" required>
 
-                <label for="admin-email">{{ 'admin_email'|trans }}</label>
-                <input id="admin-email" name="admin_email" type="email">
+                <label for="admin-email" class="required">{{ 'admin_email'|trans }}</label>
+                <input id="admin-email" name="admin_email" type="email" required>
 
-                <label for="admin-phone">{{ 'admin_phone'|trans }}</label>
-                <input id="admin-phone" name="admin_phone" type="tel">
+                <label for="admin-password" class="required">{{ 'admin_password'|trans }}</label>
+                <input id="admin-password" name="admin_password" type="password" required>
+
+                <label for="admin-phone" class="required">{{ 'admin_phone'|trans }}</label>
+                <input id="admin-phone" name="admin_phone" type="tel" required>
 
                 <label for="admin-url">{{ 'admin_url'|trans }}</label>
                 <input id="admin-url" name="admin_url" type="url">
+
+                <label class="checkbox">
+                    <input id="vat-checkbox" type="checkbox">
+                    <span class="input-label">{{ 'admin_no_vat_checkbox'|trans }}</span>
+                </label>
             </fieldset>
 
             {# company legal documents #}
@@ -75,17 +86,45 @@
                 <legend>{{ 'your_company_legal_documents'|trans }}</legend>
                 <p><strong>{{ 'company_documents_max_size'|trans }}</strong></p>
 
-                <label for="admin-document-card-id">{{ 'admin_document_id_card'|trans }}</label>
-                <input id="admin-document-card-id" name="admin_document_id_card" type="file">
+                <label for="admin-document-card-id" class="required">{{ 'admin_document_id_card'|trans }}</label>
+                <input id="admin-document-card-id" name="admin_document_id_card" type="file" required>
 
-                <label for="company-document-kbis">{{ 'company_document_kbis'|trans }}</label>
-                <input id="company-document-kbis" name="company_document_kbis" type="file">
+                <label for="company-document-kbis" class="required">{{ 'company_document_kbis'|trans }}</label>
+                <input id="company-document-kbis" name="company_document_kbis" type="file" required>
 
-                <label for="company-document-bic">{{ 'company_document_bic'|trans }}</label>
-                <input id="company-document-bic" name="company_document_bic" type="file">
-
+                <label for="company-document-bic" class="required">{{ 'company_document_bic'|trans }}</label>
+                <input id="company-document-bic" name="company_document_bic" type="file" required>
             </fieldset>
 
+            {# terms of service and terms of sales #}
+            <label class="checkbox">
+                <input type="checkbox" required>
+                <span class="input-label required">{{ 'vendor_registration_terms_checkbox'|trans|raw }}</span>
+            </label>
+
+            <button type="submit">{{ 'send'|trans }}</button>
         </form>
     </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // VAT checkbox behaviour:
+        // when the "I don't have a VAT number" checkbox is ticked, the corresponding field is not required anymore
+        let $vatInput = $('#company-vat');
+
+        $('#vat-checkbox').on('change', function() {
+            if ($(this).is(':checked') ) {
+                $vatInput.attr('required', false); // field not required anymore
+                $vatInput.val(''); // wipe eventual input content
+            } else {
+                $vatInput.attr('required', true);
+            }
+
+            $('[for="company-vat"]').toggleClass('required'); // toggle asterisk
+            $vatInput.prop('disabled', function(i, bool) { return !bool; }); // toggle field disabled attribute
+        });
+
+
+    </script>
 {% endblock %}
