@@ -8,19 +8,17 @@
 namespace AppBundle\Controller;
 
 use ReCaptcha\ReCaptcha;
+use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Company\CompanyRegistration;
 use Wizaplace\Company\CompanyService;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
 use WizaplaceFrontBundle\Controller\AuthController as BaseController;
-use WizaplaceFrontBundle\Security\User;
-use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
+use WizaplaceFrontBundle\Service\AuthenticationService;
 
 class AuthController extends BaseController
 {
@@ -73,18 +71,15 @@ class AuthController extends BaseController
         try {
             $userService->register($email, $password);
 
-            // Authenticate the user
-            $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
-            $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
-            $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
-            $this->get('session')->start(); // Ensure the session exists
+            try {
+                $this->get(AuthenticationService::class)->authenticate($email, $password);
+            } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+                $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
+                $this->addFlash('danger', $accountCreationErrorMessage);
+            }
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
-        } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-            $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
-            $this->addFlash('danger', $accountCreationErrorMessage);
         } catch (UserAlreadyExists $e) {
             $emailInUseErrorMessage = $this->translator->trans('email_already_in_use');
             $this->addFlash('danger', $emailInUseErrorMessage);
@@ -179,7 +174,13 @@ class AuthController extends BaseController
             $companyService = $this->get(CompanyService::class);
 
             try {
-                $this->registerAndAuthenticate($email, $password, $firstName, $lastName);
+                $this->get(UserService::class)->register($email, $password, $firstName, $lastName);
+                try {
+                    $this->get(AuthenticationService::class)->authenticate($email, $password);
+                } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+                    $accountCreationErrorNotification = $this->translator->trans('account_creation_error_message');
+                    $this->addFlash('danger', $accountCreationErrorNotification);
+                }
 
                 $registration = new CompanyRegistration($name, $email);
                 $registration->setName($name);
@@ -201,9 +202,6 @@ class AuthController extends BaseController
                 $this->addFlash('success', $notification);
 
                 return $this->redirect($requestedUrl);
-            } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-                $accountCreationErrorNotification = $this->translator->trans('account_creation_error_message');
-                $this->addFlash('danger', $accountCreationErrorNotification);
             } catch (UserAlreadyExists $e) {
                 $emailInUseErrorNotification = $this->translator->trans('email_already_in_use');
                 $this->addFlash('danger', $emailInUseErrorNotification);
@@ -213,21 +211,5 @@ class AuthController extends BaseController
         }
 
         return $this->render('@App/auth/vendor-registration.html.twig');
-    }
-
-    private function registerAndAuthenticate(
-        string $email,
-        string $password,
-        string $firstName,
-        string $lastName
-    ): void {
-        $userService = $this->get(UserService::class);
-        $userService->register($email, $password, $firstName, $lastName);
-
-        $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
-        $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
-        $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
-        $this->get('session')->start(); // Ensure the session exists
     }
 }
