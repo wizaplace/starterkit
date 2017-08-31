@@ -19,7 +19,9 @@
         "google/recaptcha": "^1.1",
         "wizaplace/sdk": "~0.7.2",
         "bmancone/guzzle-stopwatch-middleware": "0.0.2",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "symfony/psr-http-message-bridge": "^1.0",
+        "zendframework/zend-diactoros": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

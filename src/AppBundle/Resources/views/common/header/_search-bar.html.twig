@@ -360,8 +360,8 @@
 
                     initGoogleMap: function () {
                         let labelInput = document.getElementById('geofilter-label');
-                        self.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
-                        self.googleMapsAutocomplete.addListener('place_changed', self.geolocAutocompleted);
+                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
                     },
 
                     geoLocateMe: function () {
@@ -401,7 +401,6 @@
                         let place = this.googleMapsAutocomplete.getPlace();
 
                         if (!place.geometry) {
-
                             // user entered a place that was not suggested and pressed Enter, or the request failed
                             this.geoFilter = {};
                             return;

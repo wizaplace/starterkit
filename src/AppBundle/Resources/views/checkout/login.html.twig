@@ -31,7 +31,7 @@
 
                 {# account creation #}
                 <h1 class="main-title">Créer un compte </h1>
-                <form method="post" action="{{ path('register') }}" class="account-form" autocomplete="off">
+                <form method="post" action="{{ path('register_user') }}" class="account-form" autocomplete="off">
                     <input type="hidden" name="redirect_url" value="{{ path('checkout_addresses') }}">
 
                     <div class="form-group">
