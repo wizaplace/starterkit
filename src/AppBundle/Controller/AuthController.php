@@ -132,7 +132,7 @@ class AuthController extends Controller
         if ($request->isMethod('POST')) {
             // redirect url
             $requestedUrl = $request->get('redirect_url');
-            $referer = $request->headers->get('referer') ?? $request->get('return_url');
+            $referer = $request->get('return_url');
 
             // company info
             $name = $request->get('company_name');
@@ -218,8 +218,8 @@ class AuthController extends Controller
     private function registerAndAuthenticate(
         string $email,
         string $password,
-        string $firstName = '',
-        string $lastName = ''
+        string $firstName,
+        string $lastName
     ): void {
         $userService = $this->get(UserService::class);
         $userService->register($email, $password, $firstName, $lastName);
