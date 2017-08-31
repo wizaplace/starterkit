@@ -1,3 +1,6 @@
+imports:
+    - { resource: security.yml }
+
 parameters:
     locale: fr
     recaptcha.key: 'dummy_key'
@@ -49,43 +52,6 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
             channels: ['!event']
-
-security:
-     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-        providers:
-            wizaplace:
-                id: WizaplaceFrontBundle\Security\UserProvider
-
-        firewalls:
-            # disables authentication for assets and the profiler, adapt it according to your needs
-            dev:
-                pattern: ^/(_(profiler|wdt)|css|images|js)/
-                security: false
-
-            main:
-                anonymous: ~
-                simple_form:
-                    authenticator: WizaplaceFrontBundle\Security\FormAuthenticator
-                    check_path: login
-                    login_path: login_form
-                    username_parameter: 'email'
-                    password_parameter: 'password'
-                    post_only: true
-                    csrf_parameter: csrf_token
-                    csrf_token_id: login_token
-                    csrf_token_generator: security.csrf.token_manager
-                    # post-login redirection config
-                    default_target_path: home
-                    target_path_parameter: redirect_url
-                    use_referer: false
-                    failure_handler: WizaplaceFrontBundle\Security\AuthenticationFailureHandler
-                    success_handler: WizaplaceFrontBundle\Security\AuthenticationSuccessHandler
-                logout:
-                    path: logout
-                    target: home
-                    csrf_parameter: csrf_token
-                    csrf_token_id: logout_token
-                    csrf_token_generator: security.csrf.token_manager
 
 services:
     WizaplaceFrontBundle\Tests\TestEnv\Service\TwigEngineLogger:
