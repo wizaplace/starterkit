@@ -400,12 +400,7 @@
 
                         let place = this.googleMapsAutocomplete.getPlace();
 
-                        console.log(place);
-                        console.log(place.geometry.location.lat());
-
-
                         if (!place.geometry) {
-
                             // user entered a place that was not suggested and pressed Enter, or the request failed
                             this.geoFilter = {};
                             return;
