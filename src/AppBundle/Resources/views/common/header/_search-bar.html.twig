@@ -360,8 +360,8 @@
 
                     initGoogleMap: function () {
                         let labelInput = document.getElementById('geofilter-label');
-                        self.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
-                        self.googleMapsAutocomplete.addListener('place_changed', self.geolocAutocompleted);
+                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
                     },
 
                     geoLocateMe: function () {
@@ -399,6 +399,10 @@
                     geolocAutocompleted: function () {
 
                         let place = this.googleMapsAutocomplete.getPlace();
+
+                        console.log(place);
+                        console.log(place.geometry.location.lat());
+
 
                         if (!place.geometry) {
 

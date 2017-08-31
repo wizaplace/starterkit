@@ -1,7 +1,17 @@
-fieldset {
-    margin-bottom: 1rem;
+form.vendor-registration {
+    fieldset {
+        margin-bottom: 5rem;
+        > * { display: block; }
+    }
 
-    > * {
-        display: block;
+    input, select, textarea {
+        margin-bottom: 1.5rem;
+    }
+
+    .required::after {
+        content: '*';
+        font-weight: bold;
+        color: @color-tertiary;
     }
 }
+

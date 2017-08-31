@@ -131,8 +131,8 @@ class AuthController extends Controller
     {
         if ($request->isMethod('POST')) {
             // redirect url
-            $requestedUrl = $request->request->get('redirect_url');
-            $referer = $request->headers->get('referer') ?? $request->request->get('return_url');
+            $requestedUrl = $request->get('redirect_url');
+            $referer = $request->headers->get('referer') ?? $request->get('return_url');
 
             // company info
             $name = $request->get('company_name');
@@ -145,33 +145,37 @@ class AuthController extends Controller
             $siret = $request->get('company_siret');
             $rcs = $request->get('company_rcs');
             $vat = $request->get('company_vat');
+            $description = $request->get('company_description');
 
             // company admin info
-            $password = $request->get('admin_password');
             $firstName = $request->get('admin_firstname');
             $lastName = $request->get('admin_lastname');
-            $phoneNumber = $request->get('admin_phone');
             $email = $request->get('admin_email');
+            $phoneNumber = $request->get('admin_phone');
+            $password = $request->get('admin_password');
             $url = $request->get('admin_url');
+
+            $terms = $request->get('terms');
 
             // Symfony => PSR7 adapter
             $psr7Factory = new DiactorosFactory();
             $psr7Request = $psr7Factory->createRequest($request);
             $uploadedFiles = $psr7Request->getUploadedFiles();
-            $idCard = $uploadedFiles['company_document_id_card'];
+
+            $idCard = $uploadedFiles['admin_document_id_card'];
             $kbis = $uploadedFiles['company_document_kbis'];
             $bic = $uploadedFiles['company_document_bic']; // RIB
 
-            if (! $email || ! $password || ! $firstName || ! $lastName || ! $name || ! $phoneNumber || ! $url ||
-                ! $legalStatus || ! $zipcode || ! $capital || ! $siret || ! $rcs || ! $vat || ! $city || ! $country ||
-                ! $address || ! $idCard || ! $kbis || ! $bic || ! $capital) {
+            if (! $email || ! $firstName || ! $lastName || ! $name || ! $password || ! $phoneNumber ||
+                ! $legalStatus || ! $zipcode || ! $capital || ! $siret || ! $rcs || ! $city || ! $country ||
+                ! $address || ! $idCard || ! $kbis || ! $bic || ! $capital || ! $terms) {
                 $notification = $this->translator->trans('fields_required_error_message');
                 $this->addFlash('danger', $notification);
 
                 return $this->redirect($referer);
             }
 
-            // user registration and authentication
+            // user and company registration + authentication
             $companyService = $this->get(CompanyService::class);
 
             try {
@@ -186,8 +190,11 @@ class AuthController extends Controller
                 $registration->setLegalStatus($legalStatus);
                 $registration->setPhoneNumber($phoneNumber);
                 $registration->setSiretNumber($siret);
-                $registration->addUploadedFile("kbis", $kbis);
-                $registration->addUploadedFile("idCard", $idCard);
+                $registration->setDescription($description);
+                $registration->addUploadedFile('kbis', $kbis);
+                $registration->addUploadedFile('idCard', $idCard);
+                $registration->addUploadedFile('bic', $bic);
+
                 $companyService->register($registration);
 
                 $notification = $this->translator->trans('account_creation_success_message');
@@ -202,9 +209,25 @@ class AuthController extends Controller
                 $this->addFlash('danger', $emailInUseErrorNotification);
             }
 
-            return $this->redirect($referer);
+            return $this->redirect($requestedUrl);
         }
 
         return $this->render('@App/auth/vendor-registration.html.twig');
+    }
+
+    private function registerAndAuthenticate(
+        string $email,
+        string $password,
+        string $firstName = '',
+        string $lastName = ''
+    ): void {
+        $userService = $this->get(UserService::class);
+        $userService->register($email, $password, $firstName, $lastName);
+
+        $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
+        $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
+        $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
+        $this->get('security.token_storage')->setToken($token);
+        $this->get('session')->start(); // Ensure the session exists
     }
 }
