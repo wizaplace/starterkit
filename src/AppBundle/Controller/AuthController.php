@@ -8,7 +8,6 @@
 namespace AppBundle\Controller;
 
 use ReCaptcha\ReCaptcha;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -19,10 +18,11 @@ use Wizaplace\Company\CompanyRegistration;
 use Wizaplace\Company\CompanyService;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
+use WizaplaceFrontBundle\Controller\AuthController as BaseController;
 use WizaplaceFrontBundle\Security\User;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     /** @var TranslatorInterface */
     private $translator;
@@ -32,9 +32,9 @@ class AuthController extends Controller
         $this->translator = $translator;
     }
 
-    public function loginAction(): Response
+    public function loginAction(Request $request): Response
     {
-        return $this->render('@App/auth/login.html.twig');
+        return parent::loginAction($request);
     }
 
     public function registerUserAction(Request $request): Response

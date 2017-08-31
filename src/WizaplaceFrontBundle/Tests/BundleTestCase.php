@@ -11,6 +11,7 @@ namespace WizaplaceFrontBundle\Tests;
 use Symfony\Bridge\Monolog\Formatter\ConsoleFormatter;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
 use WizaplaceFrontBundle\Tests\TestEnv\Service\TwigEngineLogger;
 use WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware;
 use WizaplaceFrontBundle\Tests\TestEnv\TestKernel;
@@ -91,5 +92,16 @@ MSG;
 
 
         $this->assertSame($expectedCode, $response->getStatusCode(), $message);
+    }
+
+    final protected function generateCsrfToken(string $tokenId, Client $client): string
+    {
+        $csrfToken = $client->getContainer()->get('security.csrf.token_manager')->refreshToken($tokenId)->getValue();
+
+        // Put the token in the client's session
+        $client->getRequest()->getSession()->set(SessionTokenStorage::SESSION_NAMESPACE.'/'.$tokenId, $csrfToken);
+        $client->getRequest()->getSession()->save();
+
+        return $csrfToken;
     }
 }
