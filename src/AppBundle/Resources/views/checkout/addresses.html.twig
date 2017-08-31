@@ -27,7 +27,7 @@
                     if (!$(this).val()) {
                         e.preventDefault();
 
-                        //TODO : alert user
+                        notification.createAlert({{ 'fields_required_error_message'|trans }}, "warning");
                     }
                 });
 

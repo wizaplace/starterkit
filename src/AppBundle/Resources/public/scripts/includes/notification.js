@@ -33,7 +33,7 @@ const notification = {
     /**
      * helper to create notifications
      * uses Bootstrap classes: "success", "warning", "danger", eg.:
-     * createAlert("Hello world!", "success");
+     * notification.createAlert("Hello world!", "success");
      */
     createAlert: function(message, type) {
         let $notifications = $(".notifications");

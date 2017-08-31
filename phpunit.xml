@@ -5,7 +5,7 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.0/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="tests/PHPUnit/bootstrap.php"
+         bootstrap="vendor/autoload.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
@@ -15,6 +15,9 @@
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests/PHPUnit</directory>
+        </testsuite>
+        <testsuite name="WizaplaceFrontBundle Test Suite">
+            <directory>src/WizaplaceFrontBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
