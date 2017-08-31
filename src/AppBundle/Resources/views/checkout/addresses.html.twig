@@ -1,38 +1,55 @@
 {% extends '@App/layout.html.twig' %}
 
 {% block body %}
+    {% set user = app.user.wizaplaceUser %}
+
     {# steps breadcrumb #}
     {% include '@App/checkout/steps.html.twig' with {step: 3} %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-lg-offset-2 col-lg-5">
-                {{ include('@App/common/user_addresses_forms/addresses.html.twig') }}
-                <div class="spacer"></div>
-                <a id="payment-link" href="{{ path('checkout_payment') }}" class="btn btn-lg btn-primary pull-right">Choisir un mode de paiement</a>
+
+        <form action="{{ path('update_user') }}" method="POST">
+            <input type="hidden" name="return_url" value="{{ app.request.uri }}" >
+            <input type="hidden" name="user[id]" value="{{ user.id }}" >
+            <input type="hidden" name="user[email]" value="{{ user.email }}" >
+            <input type="hidden" name="user[lastName]" value="{{ user.lastname }}" >
+            <input type="hidden" name="user[firstName]" value="{{ user.firstname }}" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('profile_update_token') }}">
+
+            {# billing address #}
+            {% include('@App/checkout/addresses/_billing_address.html.twig') %}
+
+            {# different addresses checkbox #}
+            <label class="checkbox">
+                <input type="checkbox" id="differentAddress">
+                <span class="input-label">{{ 'different_shipping_address'|trans }}</span>
+            </label>
+
+            {# shipping address #}
+            <div id="shipping-address-wrapper" class="hidden"> {# hidden on page load #}
+                {% include('@App/checkout/addresses/_shipping_address.html.twig') %}
             </div>
 
-            <div class="col-xs-12 col-sm-offset-2 col-sm-4 col-lg-offset-1 col-lg-4">
-                {% include '@App/checkout/basket-summary.html.twig' %}
-            </div>
-        </div>
+            <a type="submit" class="btn btn-primary" href="{{ path('checkout_payment') }}">{{ 'choose_paiement'|trans }}</a>
+        </form>
+
+        {# basket summary #}
+        {% include '@App/checkout/_basket-summary.html.twig' %}
     </div>
+{% endblock %}
 
+{% block scripts %}
     <script>
-        $(function() {
-            $("#payment-link").on("click", function(e) {
 
-                let $requiredInputs = $("input[required]");
-                $requiredInputs.each(function() {
-                    if (!$(this).val()) {
-                        e.preventDefault();
+        // toggle shipping address if different from billing address
+        // =========================================================
 
-                        notification.createAlert({{ 'fields_required_error_message'|trans }}, "warning");
-                    }
-                });
+        let differentShippingAddress = false;
 
-                return true;
-            });
+        // toggle on click event
+        $('#differentAddress').on('click', function() {
+            differentShippingAddress = ! differentShippingAddress;
+            $('#shipping-address-wrapper').toggleClass('hidden');
         });
     </script>
 {% endblock %}

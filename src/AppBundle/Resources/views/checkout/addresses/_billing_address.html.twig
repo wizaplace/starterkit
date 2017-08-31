@@ -1,0 +1,68 @@
+{# gender #}
+<div class="form-group">
+    <p class="required">{{ 'gender'|trans }}</p>
+
+    <label class="radio">
+        <input type="radio" name="user[addresses][billing][37]" value="4" {% if user.billingAddress.37 == 4 %} checked {% endif %}>
+        <span class="input-label">{{ 'mr'|trans }}</span>
+    </label>
+
+    <label class="radio">
+        <input type="radio" name="user[addresses][billing][37]" value="3" {% if user.billingAddress.37 == 3 %} checked {% endif %}>
+        <span class="input-label">{{ 'mrs'|trans }}</span>
+    </label>
+</div>
+
+{# first name #}
+<div class="form-group">
+    <label for="firstname" class="required">{{ 'firstname'|trans }}</label>
+    <input id="firstname" class="form-control" name="user[addresses][billing][firstname]" value="{{ user.billingAddress.firstname }}" required>
+</div>
+
+{# last name #}
+<div class="form-group">
+    <label for="lastname" class="required">{{ 'lastname'|trans }}</label>
+    <input id="lastname" class="form-control" name="user[addresses][billing][lastname]" value="{{ user.billingAddress.lastname }}" required>
+</div>
+
+{# user's company #}
+<div class="form-group">
+    <label for="company">{{ 'company'|trans }}</label>
+    <input id="company" class="form-control" name="user[addresses][billing][39]" value="{{ user.billingAddress.39 }}">
+</div>
+
+{# phone number #}
+<div class="form-group">
+    <label for="telephone" class="required">{{ 'phone_number'|trans }}</label>
+    <input id="telephone" class="form-control" name="user[addresses][billing][phone]" value="{{ user.billingAddress.phone }}" required>
+</div>
+
+{# address #}
+<div class="form-group">
+    <label for="address" class="required">{{ 'address'|trans }}</label>
+    <input id="address" class="form-control" name="user[addresses][billing][address]" value="{{ user.billingAddress.address }}" required>
+</div>
+
+{# address 2 #}
+<div class="form-group">
+    <label for="address2">{{ 'address2'|trans }}</label>
+    <input id="address2" class="form-control" name="user[addresses][billing][address_2]" value="{{ user.billingAddress.address_2 }}">
+</div>
+
+{# zipcode #}
+<div class="form-group">
+    <label for="zipcode" class="required">{{ 'zipcode'|trans }}</label>
+    <input id="zipcode" class="form-control" name="user[addresses][billing][zipcode]" value="{{ user.billingAddress.zipcode }}" required>
+</div>
+
+{# city #}
+<div class="form-group">
+    <label for="city" class="required">{{ 'city'|trans }}</label>
+    <input id="city" class="form-control" name="user[addresses][billing][city]" value="{{ user.billingAddress.city }}" required>
+</div>
+
+{# country #}
+<div class="form-group">
+    <label for="country" class="required">{{ 'country'|trans }}</label>
+    <input id="country" class="form-control" name="user[addresses][billing][country]" value="{{ user.billingAddress.country }}" required>
+</div>

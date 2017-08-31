@@ -66,7 +66,8 @@ class ProfileController extends Controller
     {
         $data = $request->request->get('user');
         $sameAddress = $request->request->get('sameAddress');
-        $referer = $request->headers->get('referer');
+        $referer = $request->headers->get('referer') ?? $request->get('return_url');
+        $requestedUrl = $request->get('requested_url') ?? $referer;
         $submittedToken = $request->get('csrf_token');
 
         $user = new WizaplaceUser($data);
@@ -138,7 +139,7 @@ class ProfileController extends Controller
             $this->addFlash('success', $message);
         }
 
-        return $this->redirect($referer);
+        return $this->redirect($requestedUrl);
     }
 
     public function discussionsAction(): Response
