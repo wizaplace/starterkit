@@ -9,7 +9,7 @@
             {# user messages #}
             {% if(message.isAuthor) %}
                 <li class="user-message">
-                    <small>{{ message.date|date('d/m/Y - H:m:s') }}</small>
+                    <small>{{ message.date|date('d/m/Y - H:i:s') }}</small>
                     <p><b>{{ profil.firstname|default('you'|trans) }}&nbsp;:&nbsp;</b></p>
                     <p>{{ message.content|striptags('<br>')|raw }}</p>
                 </li>
@@ -17,7 +17,7 @@
             {# company responses #}
             {% else %}
                 <li class="company-message">
-                    <small>{{ message.date|date('d/m/Y - H:m:s') }}</small>
+                    <small>{{ message.date|date('d/m/Y - H:i:s') }}</small>
                     <p><b>{{ discussion.recipient|default }}&nbsp;:&nbsp;</b></p>
                     <p>{{ message.content|striptags('<br>')|raw }}</p>
                 </li>
