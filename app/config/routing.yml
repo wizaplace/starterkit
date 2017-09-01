@@ -72,6 +72,11 @@ profile_returns:
     defaults: { _controller: AppBundle:Profile:returns }
     methods: [GET]
 
+profile_after_sale_service:
+    path: /profil/sav
+    defaults: { _controller: AppBundle:Profile:afterSalesService }
+    methods: [GET]
+
 profile_discussions:
     path: /profil/messagerie
     defaults: { _controller: AppBundle:Profile:discussions }

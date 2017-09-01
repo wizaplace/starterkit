@@ -155,7 +155,8 @@
             "date": "Date",
             "shipping_name": "Transporteur",
             "total": "Total",
-            "status": "Statut"
+            "status": "Statut",
+            "start_discussion": "Action"
         },
         "body": {
             "total": "%price% TTC",
@@ -175,5 +176,13 @@
                 "PARENT_ORDER": "Parente"
             }
         }
-    }
+    },
+    "discussion_modal": {
+        "after_sales_service": {
+            "title": "Faire une demande auprès du SAV",
+            "message_label": "Message"
+        }
+    },
+    "after_sales_service_label": "SAV",
+    "orders_label": "Commandes"
 }
