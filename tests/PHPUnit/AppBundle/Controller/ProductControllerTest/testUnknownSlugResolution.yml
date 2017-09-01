@@ -1,0 +1,22 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=404'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 24 Aug 2017 14:54:01 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 74eef9
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/74eef9'
+            Content-Length: '2'
+            Content-Type: application/json
+        body: '{}'

@@ -14,3 +14,17 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+services:
+    VCR\Configuration:
+        calls:
+            - ['setMode', [!php/const:VCR\VCR::MODE_ONCE]]
+    WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware:
+        autowire: true
+    wizaplace.guzzle.decorating_handler2:
+        factory: 'GuzzleHttp\HandlerStack::create'
+        class: 'GuzzleHttp\HandlerStack'
+        decorates: 'wizaplace.guzzle.handler'
+        arguments: ['@wizaplace.guzzle.decorating_handler2.inner']
+        calls:
+            - ['push', ['@WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware']]

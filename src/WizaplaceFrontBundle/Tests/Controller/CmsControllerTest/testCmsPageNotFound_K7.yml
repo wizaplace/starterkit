@@ -1,0 +1,22 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=cms404'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 30 Aug 2017 08:52:24 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 7a2136
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/7a2136'
+            Content-Length: '2'
+            Content-Type: application/json
+        body: '{}'

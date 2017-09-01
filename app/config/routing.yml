@@ -31,16 +31,20 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
-register:
-    path: /register
-    defaults: { _controller: AppBundle:Auth:Register }
-    methods: [POST]
-
-
 reset_password:
     path: /password
     defaults: { _controller: AppBundle:Auth:resetPassword }
     methods: [POST]
+
+register_user:
+    path: /inscription-utilisateur
+    defaults: { _controller: AppBundle:Auth:registerUser }
+    methods: [POST]
+
+register_vendor:
+    path: /inscription-vendeur
+    defaults: { _controller: AppBundle:Auth:registerCompany}
+    methods: [GET, POST]
 
 # Profile
 profile:
@@ -120,7 +124,6 @@ basket_remove_product:
     path: /basket/remove
     defaults: { _controller: AppBundle:Basket:removeProduct }
     methods: [GET]
-
 
 #checkout
 checkout_login:

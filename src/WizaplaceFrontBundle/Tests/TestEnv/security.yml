@@ -1,0 +1,30 @@
+security:
+    providers:
+        wizaplace:
+            id: WizaplaceFrontBundle\Security\UserProvider
+
+    firewalls:
+        main:
+            anonymous: ~
+            simple_form:
+                authenticator: WizaplaceFrontBundle\Security\FormAuthenticator
+                check_path: login
+                login_path: login_form
+                username_parameter: !php/const:WizaplaceFrontBundle\Controller\AuthController::EMAIL_FIELD_NAME
+                password_parameter: !php/const:WizaplaceFrontBundle\Controller\AuthController::PASSWORD_FIELD_NAME
+                post_only: true
+                csrf_parameter: !php/const:WizaplaceFrontBundle\Controller\AuthController::CSRF_FIELD_NAME
+                csrf_token_id: !php/const:WizaplaceFrontBundle\Controller\AuthController::CSRF_LOGIN_ID
+                csrf_token_generator: security.csrf.token_manager
+                # post-login redirection config
+                default_target_path: home
+                target_path_parameter: !php/const:WizaplaceFrontBundle\Controller\AuthController::REDIRECT_URL_FIELD_NAME
+                use_referer: false
+                failure_handler: WizaplaceFrontBundle\Security\AuthenticationFailureHandler
+                success_handler: WizaplaceFrontBundle\Security\AuthenticationSuccessHandler
+            logout:
+                path: logout
+                target: home
+                csrf_parameter: !php/const:WizaplaceFrontBundle\Controller\AuthController::CSRF_FIELD_NAME
+                csrf_token_id: !php/const:WizaplaceFrontBundle\Controller\AuthController::CSRF_LOGOUT_ID
+                csrf_token_generator: security.csrf.token_manager

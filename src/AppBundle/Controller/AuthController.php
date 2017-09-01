@@ -8,18 +8,19 @@
 namespace AppBundle\Controller;
 
 use ReCaptcha\ReCaptcha;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
+use Wizaplace\Company\CompanyRegistration;
+use Wizaplace\Company\CompanyService;
 use Wizaplace\User\UserAlreadyExists;
 use Wizaplace\User\UserService;
-use WizaplaceFrontBundle\Security\User;
+use WizaplaceFrontBundle\Controller\AuthController as BaseController;
+use WizaplaceFrontBundle\Service\AuthenticationService;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     /** @var TranslatorInterface */
     private $translator;
@@ -29,12 +30,12 @@ class AuthController extends Controller
         $this->translator = $translator;
     }
 
-    public function loginAction(): Response
+    public function loginAction(Request $request): Response
     {
-        return $this->render('@App/login/login.html.twig');
+        return parent::loginAction($request);
     }
 
-    public function registerAction(Request $request): Response
+    public function registerUserAction(Request $request): Response
     {
         // redirection url
         $requestedUrl = $request->get('redirect_url');
@@ -70,18 +71,15 @@ class AuthController extends Controller
         try {
             $userService->register($email, $password);
 
-            // Authenticate the user
-            $apiKey = $this->get(ApiClient::class)->authenticate($email, $password);
-            $user = new User($apiKey, $userService->getProfileFromId($apiKey->getId()));
-            $token = new UsernamePasswordToken($user, null, 'register', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
-            $this->get('session')->start(); // Ensure the session exists
+            try {
+                $this->get(AuthenticationService::class)->authenticate($email, $password);
+            } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+                $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
+                $this->addFlash('danger', $accountCreationErrorMessage);
+            }
 
             $message = $this->translator->trans('account_creation_success_message');
             $this->addFlash('success', $message);
-        } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
-            $accountCreationErrorMessage = $this->translator->trans('account_creation_error_message');
-            $this->addFlash('danger', $accountCreationErrorMessage);
         } catch (UserAlreadyExists $e) {
             $emailInUseErrorMessage = $this->translator->trans('email_already_in_use');
             $this->addFlash('danger', $emailInUseErrorMessage);
@@ -122,5 +120,96 @@ class AuthController extends Controller
         $this->addFlash('success', $message);
 
         return $this->redirect($referer);
+    }
+
+    public function registerCompanyAction(Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            // redirect url
+            $requestedUrl = $request->get('redirect_url');
+            $referer = $request->get('return_url');
+
+            // company info
+            $name = $request->get('company_name');
+            $address = $request->get('company_address');
+            $zipcode = $request->get('company_zipcode');
+            $city = $request->get('company_city');
+            $country = $request->get('company_country');
+            $legalStatus = $request->get('company_status');
+            $capital = $request->get('company_capital');
+            $siret = $request->get('company_siret');
+            $rcs = $request->get('company_rcs');
+            $vat = $request->get('company_vat');
+            $description = $request->get('company_description');
+
+            // company admin info
+            $firstName = $request->get('admin_firstname');
+            $lastName = $request->get('admin_lastname');
+            $email = $request->get('admin_email');
+            $phoneNumber = $request->get('admin_phone');
+            $password = $request->get('admin_password');
+            $url = $request->get('admin_url');
+
+            $terms = $request->get('terms');
+
+            // Symfony => PSR7 adapter
+            $psr7Factory = new DiactorosFactory();
+            $psr7Request = $psr7Factory->createRequest($request);
+            $uploadedFiles = $psr7Request->getUploadedFiles();
+
+            $idCard = $uploadedFiles['admin_document_id_card'];
+            $kbis = $uploadedFiles['company_document_kbis'];
+            $bic = $uploadedFiles['company_document_bic']; // RIB
+
+            if (! $email || ! $firstName || ! $lastName || ! $name || ! $password || ! $phoneNumber ||
+                ! $legalStatus || ! $zipcode || ! $capital || ! $siret || ! $rcs || ! $city || ! $country ||
+                ! $address || ! $idCard || ! $kbis || ! $bic || ! $capital || ! $terms) {
+                $notification = $this->translator->trans('fields_required_error_message');
+                $this->addFlash('danger', $notification);
+
+                return $this->redirect($referer);
+            }
+
+            // user and company registration + authentication
+            $companyService = $this->get(CompanyService::class);
+
+            try {
+                $this->get(UserService::class)->register($email, $password, $firstName, $lastName);
+                try {
+                    $this->get(AuthenticationService::class)->authenticate($email, $password);
+                } catch (BadCredentials $e) { // Cela ne devrait jamais arriver puisqu'on vient de créer l'utilisateur
+                    $accountCreationErrorNotification = $this->translator->trans('account_creation_error_message');
+                    $this->addFlash('danger', $accountCreationErrorNotification);
+                }
+
+                $registration = new CompanyRegistration($name, $email);
+                $registration->setName($name);
+                $registration->setEmail($email);
+                $registration->setZipcode($zipcode);
+                $registration->setAddress($address);
+                $registration->setCity($city);
+                $registration->setLegalStatus($legalStatus);
+                $registration->setPhoneNumber($phoneNumber);
+                $registration->setSiretNumber($siret);
+                $registration->setDescription($description);
+                $registration->addUploadedFile('kbis', $kbis);
+                $registration->addUploadedFile('idCard', $idCard);
+                $registration->addUploadedFile('bic', $bic);
+
+                $companyService->register($registration);
+
+                $notification = $this->translator->trans('account_creation_success_message');
+                $this->addFlash('success', $notification);
+
+                return $this->redirect($requestedUrl);
+            } catch (UserAlreadyExists $e) {
+                $emailInUseErrorNotification = $this->translator->trans('email_already_in_use');
+                $this->addFlash('danger', $emailInUseErrorNotification);
+            }
+
+            return $this->redirect($requestedUrl);
+        }
+
+        return $this->render('@App/auth/vendor-registration.html.twig');
     }
 }

@@ -1,0 +1,24 @@
+home:
+    path: /
+    defaults: { _controller: WizaplaceFrontBundle:Home:home }
+    methods: [GET]
+
+login: # see security.yml
+    path: /login
+    methods: [POST]
+
+login_form:
+    path: /login
+    defaults: { _controller: WizaplaceFrontBundle:Auth:login }
+    methods: [GET]
+
+logout: # see security.yml
+    path: /logout
+    methods: [GET]
+
+cms_page:
+    path: /{slug}
+    defaults: { _controller: WizaplaceFrontBundle:Cms:Page }
+    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"

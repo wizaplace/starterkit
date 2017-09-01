@@ -67,12 +67,12 @@ pipeline {
                                 useUsernamePassword: false,
                                 useUsernamePasswordCredentials: false,
                                 usernamePasswordCredentialsId: '',
-                                createCommentWithAllSingleFileComments: true,
+                                createCommentWithAllSingleFileComments: false,
                                 createSingleFileComments: true,
                                 commentOnlyChangedContent: true,
                                 minSeverity: 'INFO',
                                 violationConfigs: [
-                                    [ pattern: '.*/coke-checkstyle\\.xml$', reporter: 'CHECKSTYLE' ],
+                                    [ pattern: '.*/coke-checkstyle\\.xml$', parser: 'CHECKSTYLE', reporter: 'coke' ],
                                 ]
                             ]
                         ])
@@ -83,24 +83,6 @@ pipeline {
                         cloverReportDir: './',
                         cloverReportFileName: 'clover.xml'
                     ])
-                }
-            }
-        }
-        stage('behat') {
-            agent {
-                dockerfile {
-                    dir 'tests/behat/docker'
-                    args '-u 0:0'
-                }
-            }
-            steps {
-                sh '/entrypoint.sh'
-            }
-            post {
-                always {
-                    junit 'behat-result/*.xml'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/screenshots/**/*.png'
                 }
             }
         }
