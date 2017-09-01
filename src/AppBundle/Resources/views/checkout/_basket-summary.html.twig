@@ -7,40 +7,34 @@
             {% for shippingGroup in companyGroup.shippingGroups %}
                 {% for item in shippingGroup.items %}
                     <li>
-                        <span class="title">{{item.productName}}</span><br />
-                        <span class="title text-grey">{{item.quantity}}x</span>
-                        <span class="title">{{item.individualPrice|price}}&nbsp;{{ 'including_taxes'|trans }}</span>
+                        <p>{{item.productName}}</p>
+                        <span>{{item.quantity}}x</span>
+                        <span>{{item.individualPrice|price}}&nbsp;{{ 'including_taxes'|trans }}</span>
                     </li>
                 {% endfor %}
             {% endfor %}
         {% endfor %}
     </ul>
-    <div class="spacer"></div>
-    <hr />
+    <hr>
 
     {# sub total #}
-    <div class="title">{{ 'sub_total'|trans }}</div>
+    <div>{{ 'sub_total'|trans }}</div>
     <p>{{ basket.subtotal|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
-    <br />
 
     {# promo code #}
     {% if basket.totalDiscount %}
-        <div class="title">{{ 'promotion'|trans }}</div>
+        <div>{{ 'promotion'|trans }}</div>
         <p>- {{ basket.totalDiscount|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
-        <br />
     {% endif %}
 
     {# shipping amount #}
-    <div class="title">{{ 'shipping'|trans }}</div>
+    <div>{{ 'shipping'|trans }}</div>
     <p>{{ basket.totalShipping|price }}&nbsp;{{ 'including_taxes'|trans }}</p>
-    <br />
 
     {# total amount #}
-    <div class="title text-blue">{{ 'total' }}&nbsp;{{ 'including_taxes'|trans }}</div>
-    <div class="big-title text-blue"> {{ basket.total|price }}&nbsp;{{ 'including_taxes'|trans }}</div>
-    <br />
+    <div>{{ 'total' }}&nbsp;{{ 'including_taxes'|trans }}</div>
+    <div> {{ basket.total|price }}&nbsp;{{ 'including_taxes'|trans }}</div>
 
-    <div class="title">{{ 'including_vat_and_taxes'|trans }}</div>
+    <div>{{ 'including_vat_and_taxes'|trans }}</div>
     <span>{{ basket.totalTax|price }}</span>
-    <br />
 </div>
