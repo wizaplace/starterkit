@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-offset-2 col-lg-5">
-                <h1 class="main-title">Mode de paiement</h1>
+                <h1 class="main-title">{{ 'choose_payment'|trans }}</h1>
                 <form method="post" action="{{ path('checkout_submit_payment') }}">
                     <div class="panel">
                         <ul>
@@ -22,43 +22,43 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                        <button type="submit" class="btn btn-primary">Procéder au paiement</button>
+                        <button type="submit" class="btn btn-primary">{{ 'proceed_payment'|trans }}</button>
                     </div>
                 </form>
 
                 <div class="spacer"></div>
 
-                <h1 class="main-title">Mode de livraison</h1>
+                <h1 class="main-title">{{ 'shipping_methods'|trans }}</h1>
 
                 <div class="spacer"></div>
 
-                <h1 class="main-title">Adresse de facturation</h1>
-                Civilité : {{ user.billingAddress.title|trans }}<br />
-                Prénom : {{ user.billingAddress.firstname }}<br />
-                Nom : {{ user.billingAddress.lastname }} <br />
-                Société : {{ user.billingAddress.company }}<br />
-                Téléphone : {{ user.billingAddress.phone }} <br />
-                Adresse : {{ user.billingAddress.address }}<br />
-                Complément adresse : {{ user.billingAddress.address_2 }} <br />
-                Code postal : {{ user.billingAddress.zipcode }}<br />
-                Ville : {{ user.billingAddress.city }}<br />
-                Pays : {{ user.billingAddress.country }}<br />
-                <a class="btn btn-default" href="{{ path('checkout_addresses') }}">Modifier</a>
+                <h1 class="main-title">{{ 'billing_address'|trans }}</h1>
+                {{ 'civility'|trans }} : {{ user.billingAddress.title|trans }}<br />
+                {{ 'firstname'|trans }} : {{ user.billingAddress.firstname }}<br />
+                {{ 'lastname'|trans }} : {{ user.billingAddress.lastname }} <br />
+                {{ 'company'|trans }} : {{ user.billingAddress.company }}<br />
+                {{ 'phone_number'|trans }} : {{ user.billingAddress.phone }} <br />
+                {{ 'address'|trans }} : {{ user.billingAddress.address }}<br />
+                {{ 'address2'|trans }} : {{ user.billingAddress.address_2 }} <br />
+                {{ 'zipcode'|trans }} : {{ user.billingAddress.zipcode }}<br />
+                {{ 'city'|trans }} : {{ user.billingAddress.city }}<br />
+                {{ 'country'|trans }} : {{ user.billingAddress.country }}<br />
+                <a class="btn btn-default" href="{{ path('checkout_addresses') }}">{{ 'modify'|trans }}</a>
 
                 <div class="spacer"></div>
-                <h1 class="main-title">Adresse de livraison</h1>
+                <h1 class="main-title">{{ 'shipping_address'|trans }}</h1>
 
-                Civilité : {{ user.shippingAddress.title|trans }}<br />
-                Prénom : {{ user.shippingAddress.firstname }}<br />
-                Nom : {{ user.shippingAddress.lastname }} <br />
-                Société : {{ user.shippingAddress.company }}<br />
-                Téléphone : {{ user.shippingAddress.phone }} <br />
-                Adresse : {{ user.shippingAddress.address }}<br />
-                Complément adresse : {{ user.shippingAddress.address_2 }} <br />
-                Code postal : {{ user.shippingAddress.zipcode }}<br />
-                Ville : {{ user.shippingAddress.city }}<br />
-                Pays : {{ user.shippingAddress.country }}<br />
-                <a class="btn btn-default" href="{{ path('checkout_addresses') }}">Modifier</a>
+                {{ 'civility'|trans }} : {{ user.shippingAddress.title|trans }}<br />
+                {{ 'firstname'|trans }} : {{ user.shippingAddress.firstname }}<br />
+                {{ 'lastname'|trans }} : {{ user.shippingAddress.lastname }} <br />
+                {{ 'company'|trans }} : {{ user.shippingAddress.company }}<br />
+                {{ 'phone_number'|trans }} : {{ user.shippingAddress.phone }} <br />
+                {{ 'address'|trans }} : {{ user.shippingAddress.address }}<br />
+                {{ 'address2'|trans }} : {{ user.shippingAddress.address_2 }} <br />
+                {{ 'zipcode'|trans }} : {{ user.shippingAddress.zipcode }}<br />
+                {{ 'city'|trans }} : {{ user.shippingAddress.city }}<br />
+                {{ 'country'|trans }} : {{ user.shippingAddress.country }}<br />
+                <a class="btn btn-default" href="{{ path('checkout_addresses') }}">{{ 'modify'|trans }}</a>
             </div>
 
             <div class="col-xs-12 col-sm-offset-2 col-sm-4 col-lg-offset-1 col-lg-4">

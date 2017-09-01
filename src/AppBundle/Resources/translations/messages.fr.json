@@ -30,7 +30,7 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "forgotten_password": "Mot de passe oublié",
-    "gender": "Civilité",
+    "civility": "Civilité",
     "mrs": "Madame",
     "mr": "Monsieur",
     "firstname": "Prénom",
@@ -42,7 +42,10 @@
     "city": "Ville",
     "country": "Pays",
     "phone_number": "Numéro de téléphone",
+    "billing_address": "Adresse de facturation",
+    "shipping_address": "Adresse de livraison",
     "validate": "Valider",
+    "modify": "Modifier",
     "create_my_account": "Créer mon compte",
     "update_my_password": "Modifier mon mot de passe",
     "current_password": "Mot de passe actuel",
@@ -82,7 +85,9 @@
     "password_reset_confirmation_message": "Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe",
     "email_already_in_use": "Cette adresse email est déjà utilisée, merci de réessayer",
     "account_creation_success_message": "Votre compte a bien été créé",
-    "choose_paiement": "Choisir un mode de paiement",
+    "choose_payment": "Choisir un mode de paiement",
+    "proceed_payment": "Procéder au paiement",
+    "payment_mean": "Mode de paiement",
     "continue_my_shopping": "Continuer mes achats",
     "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
     "add_a_comment": "Ajoutez un commentaire",
@@ -155,8 +160,7 @@
             "date": "Date",
             "shipping_name": "Transporteur",
             "total": "Total",
-            "status": "Statut",
-            "start_discussion": "Action"
+            "status": "Statut"
         },
         "body": {
             "total": "%price% TTC",
@@ -176,13 +180,5 @@
                 "PARENT_ORDER": "Parente"
             }
         }
-    },
-    "discussion_modal": {
-        "after_sales_service": {
-            "title": "Faire une demande auprès du SAV",
-            "message_label": "Message"
-        }
-    },
-    "after_sales_service_label": "SAV",
-    "orders_label": "Commandes"
+    }
 }

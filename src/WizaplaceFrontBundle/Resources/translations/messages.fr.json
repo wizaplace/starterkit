@@ -29,7 +29,7 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "forgotten_password": "Mot de passe oublié",
-    "gender": "Civilité",
+    "civility": "Civilité",
     "mrs": "Madame",
     "mr": "Monsieur",
     "firstname": "Prénom",

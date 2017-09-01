@@ -24,7 +24,7 @@
         {% include('@App/common/user_addresses/_shipping_address.html.twig') %}
     </div>
 
-    <button type="submit" class="btn btn-primary">{{ 'choose_paiement'|trans }}</button>
+    <button type="submit" class="btn btn-primary">{{ 'choose_payment'|trans }}</button>
 </form>
 
 <script>
@@ -44,7 +44,7 @@
 
         function toggleShippingForm(bool) {
 
-            // gender required attribute
+            // civility required attribute
             $('[type="radio"]').attr('required', bool);
 
             // every input field placed after a 'label.required' required attribute
