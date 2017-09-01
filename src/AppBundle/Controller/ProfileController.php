@@ -34,6 +34,11 @@ class ProfileController extends BaseController
         return parent::returnsAction();
     }
 
+    public function afterSalesServiceAction(): Response
+    {
+        return parent::afterSalesServiceAction();
+    }
+
     public function updateProfileAction(Request $request)
     {
         return parent::updateProfileAction($request);
