@@ -16,10 +16,10 @@ lint: lint-php lint-twig lint-yaml lint-xliff lint-css
 lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff
 
 lint-php:
-	./vendor/bin/coke
+	./vendor/bin/phpcs
 
 lint-php-ci:
-	./vendor/bin/coke --report-checkstyle=coke-checkstyle.xml --report-full
+	./vendor/bin/phpcs --report-checkstyle=phpcs-checkstyle.xml --report-full
 
 lint-twig:
 	bin/console lint:twig app src
