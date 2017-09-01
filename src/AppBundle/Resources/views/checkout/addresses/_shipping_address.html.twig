@@ -3,12 +3,12 @@
     <p class="required">{{ 'gender'|trans }}</p>
 
     <label class="radio">
-        <input type="radio" name="user[addresses][shipping][38]" value="4" {% if user.shippingAddress.38 == 4 %} checked {% endif %}>
+        <input type="radio" name="user[addresses][shipping][title]" value="mr" {% if user.shippingAddress.title == 'mr' %} checked {% endif %}>
         <span class="input-label">{{ 'mr'|trans }}</span>
     </label>
 
     <label class="radio">
-        <input type="radio" name="user[addresses][shipping][38]" value="3" {% if user.shippingAddress.38 == 3 %} checked {% endif %}>
+        <input type="radio" name="user[addresses][shipping][title]" value="mrs" {% if user.shippingAddress.title == 'mrs' %} checked {% endif %}>
         <span class="input-label">{{ 'mrs'|trans }}</span>
     </label>
 </div>
@@ -28,7 +28,7 @@
 {# user's company #}
 <div class="form-group">
     <label for="company">{{ 'company'|trans }}</label>
-    <input id="company" class="form-control" name="user[addresses][shipping][40]" value="{{ user.shippingAddress.40 }}">
+    <input id="company" class="form-control" name="user[addresses][shipping][company]" value="{{ user.shippingAddress.company }}">
 </div>
 
 {# phone number #}

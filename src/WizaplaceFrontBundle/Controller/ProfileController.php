@@ -65,13 +65,10 @@ class ProfileController extends Controller
     public function updateProfileAction(Request $request)
     {
         $data = $request->request->get('user');
-        $sameAddress = $request->request->get('sameAddress');
         $referer = $request->headers->get('referer') ?? $request->get('return_url');
         $requestedUrl = $request->get('requested_url') ?? $referer;
         $submittedToken = $request->get('csrf_token');
-
-        $user = new WizaplaceUser($data);
-        $userService = $this->get(UserService::class);
+        $addressesAreIdentical = $request->request->getBoolean('addresses_are_identical');
 
         // CSRF token validation
         if (! $this->isCsrfTokenValid('profile_update_token', $submittedToken)) {
@@ -113,23 +110,19 @@ class ProfileController extends Controller
             $this->addFlash('success', $message);
         }
 
+        // Override shipping address fields with billing ones if both are the same (else do nothing)
+        if ($addressesAreIdentical) {
+            // actual override
+            $data['addresses']['shipping'] = $data['addresses']['billing'];
+        }
+
         // update user's profile
+        $user = new WizaplaceUser($data);
+        $userService = $this->get(UserService::class);
         $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
 
         $message = $this->translator->trans('update_profile_success_message');
         $this->addFlash('success', $message);
-
-        // Override shipping address fields with billing ones if both are the same (else do nothing)
-        if ($sameAddress) {
-            // actual override
-            $data['addresses']['shipping'] = $data['addresses']['billing'];
-
-            // Petite manip pour les champs de profil qui ont un Id qui est different dans billing et shipping
-            $data['addresses']['shipping'][38] = $data['addresses']['shipping'][37];
-            unset($data['addresses']['shipping'][37]);
-            $data['addresses']['shipping'][40] = $data['addresses']['shipping'][39];
-            unset($data['addresses']['shipping'][39]);
-        }
 
         // update user's addresses
         if (! empty($data['addresses'])) {

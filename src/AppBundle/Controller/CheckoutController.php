@@ -46,8 +46,12 @@ class CheckoutController extends Controller
         $basketId = $this->getBasketId();
         $basket = $this->get(BasketService::class)->getBasket($basketId);
 
+        $user = $this->getUser()->getWizaplaceUser();
+        $addressesAreIdentical = $user->getBillingAddress() === $user->getShippingAddress();
+
         return $this->render('@App/checkout/addresses.html.twig', [
             'basket' => $basket,
+            'addressesAreIdentical' => $addressesAreIdentical,
         ]);
     }
 
