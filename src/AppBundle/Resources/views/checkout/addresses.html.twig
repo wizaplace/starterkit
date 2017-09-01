@@ -3,83 +3,15 @@
 {% block body %}
     {% set user = app.user.wizaplaceUser %}
 
-    {# steps breadcrumb #}
-    {% include '@App/checkout/steps.html.twig' with {step: 3} %}
-
     <div class="container">
 
-        <form action="{{ path('update_user') }}" method="POST">
-            <input type="hidden" name="return_url" value="{{ app.request.uri }}" >
-            <input type="hidden" name="requested_url" value="{{ path('checkout_payment') }}" >
-            <input type="hidden" name="addresses_are_identical" value="{{ addressesAreIdentical }}" >
-            <input type="hidden" name="user[id]" value="{{ user.id }}" >
-            <input type="hidden" name="user[email]" value="{{ user.email }}" >
-            <input type="hidden" name="user[lastName]" value="{{ user.lastname }}" >
-            <input type="hidden" name="user[firstName]" value="{{ user.firstname }}" >
-            <input type="hidden" name="csrf_token" value="{{ csrf_token('profile_update_token') }}">
+        {# steps breadcrumb #}
+        {% include '@App/checkout/steps.html.twig' with {step: 3} %}
 
-            {# billing address #}
-            {% include('@App/checkout/addresses/_billing_address.html.twig') %}
-
-            {# different addresses checkbox #}
-            <label class="checkbox">
-                <input type="checkbox" id="differentAddress">
-                <span class="input-label">{{ 'different_shipping_address'|trans }}</span>
-            </label>
-
-            {# shipping address #}
-            <div id="shipping-address-wrapper" class="hidden"> {# hidden on page load #}
-                {% include('@App/checkout/addresses/_shipping_address.html.twig') %}
-            </div>
-
-            <button type="submit" class="btn btn-primary">{{ 'choose_paiement'|trans }}</button>
-        </form>
+        {# user addresses forms #}
+        {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': path('checkout_payment') } %}
 
         {# basket summary #}
         {% include '@App/checkout/_basket-summary.html.twig' %}
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script>
-
-        // 'different addresses' behaviour
-        // ===============================
-
-        let addressesAreIdentical = '{{ addressesAreIdentical|e('js') }}';
-        let $shippingAddressForm = $('#shipping-address-wrapper');
-        let $differentAddressesCheckbox = $('#differentAddress');
-
-        // on page load, if shipping address is different
-        if (! addressesAreIdentical) {
-            toggleShippingForm(true);
-        }
-
-        function toggleShippingForm(bool) {
-
-            // gender required attribute
-            $('[type="radio"]').attr('required', bool);
-
-            // every input field placed after a 'label.required' required attribute
-            $('label.required + input').attr('required', bool);
-
-            // tick/untick the checkbox
-            $differentAddressesCheckbox.attr('checked', bool);
-
-            // display/hide shipping address form
-            $shippingAddressForm.toggleClass('hidden');
-        }
-
-        // toggle on click event
-        $differentAddressesCheckbox.on('click', function() {
-
-            // toggle boolean
-            addressesAreIdentical = ! addressesAreIdentical;
-
-            // change corresponding form hidden input
-            $('[name="addresses_are_identical"]').val(addressesAreIdentical);
-
-            toggleShippingForm(! addressesAreIdentical);
-        });
-    </script>
 {% endblock %}
