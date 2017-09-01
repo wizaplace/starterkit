@@ -3,5 +3,34 @@
 {% block profile_content %}
     <label>SAV</label>
     <div class="spacer"></div>
-    {{ include('@App/profile/orders-table.html.twig') }}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'order_table.header.command_id' | trans }}</th>
+                <th>{{ 'order_table.header.date' | trans }}</th>
+                <th>{{ 'order_table.header.shipping_name' | trans }}</th>
+                <th>{{ 'order_table.header.total' | trans }}</th>
+                <th>{{ 'order_table.header.start_discussion' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders|default %}
+                <tr>
+                    <td><a href="{{ path('order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
+                    <td>{{ order.timestamp.format('d-m-y') }}</td>
+                    <td>{{ order.shippingName }}</td>
+                    <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
+                    <td>
+                        {# open contact vendor modal #}
+                        <a data-toggle="modal" href="#discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
+
+                        {# actual discussion modal #}
+                        {% include '@App/common/_discussion-modal.html.twig' with { 'orderItems': order.orderItems, 'order_id': order.id } %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
