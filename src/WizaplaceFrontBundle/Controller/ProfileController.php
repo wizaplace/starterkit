@@ -14,6 +14,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Discussion\DiscussionService;
+use Wizaplace\Order\Order;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
 use Wizaplace\User\UserService;
@@ -59,6 +60,19 @@ class ProfileController extends Controller
     {
         return $this->render('@WizaplaceFront/profile/returns.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
+    }
+
+    public function afterSalesServiceAction(): Response
+    {
+        $orders = $this->get(OrderService::class)->getOrders();
+        $completedOrders = array_filter($orders, function (Order $order) {
+            return $order->getStatus() === "COMPLETED";
+        });
+
+        return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
+            'profile' => $this->getUser()->getWizaplaceUser(),
+            'orders' => $completedOrders,
         ]);
     }
 
