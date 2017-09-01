@@ -23,10 +23,10 @@
                     <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
                     <td>
                         {# open contact vendor modal #}
-                        <a data-toggle="modal" href="#discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
+                        <a data-toggle="modal" href="#order-discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
 
                         {# actual discussion modal #}
-                        {% include '@App/common/_discussion-modal.html.twig' with { 'orderItems': order.orderItems, 'order_id': order.id } %}
+                        {% include '@App/profile/_discussion-modal.html.twig' with { 'order': order } %}
                     </td>
                 </tr>
             {% endfor %}
