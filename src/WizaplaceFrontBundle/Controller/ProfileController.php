@@ -70,7 +70,7 @@ class ProfileController extends Controller
     public function afterSalesServiceAction(): Response
     {
         $orders = $this->get(OrderService::class)->getOrders();
-        $completedOrders = array_filter($orders, function (Order $order) {
+        $completedOrders = array_filter($orders, function (Order $order): bool {
             return $order->getStatus() === "COMPLETED";
         });
 
