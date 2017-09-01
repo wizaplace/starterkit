@@ -31,7 +31,7 @@ Vagrantfile.local
 /web/bundles
 
 # CI artifacts
-coke-*.xml
+*-checkstyle.xml
 phpunit-result.xml
 behat-result
 *pid
