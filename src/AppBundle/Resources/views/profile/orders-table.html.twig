@@ -1,3 +1,5 @@
+{% set currentRoute = app.request.get('_route') %}
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -6,7 +8,11 @@
                 <th>{{ 'order_table.header.date' | trans }}</th>
                 <th>{{ 'order_table.header.shipping_name' | trans }}</th>
                 <th>{{ 'order_table.header.total' | trans }}</th>
-                <th>{{ 'order_table.header.status' | trans }}</th>
+                {% if currentRoute == 'profile_orders' %}
+                    <th>{{ 'order_table.header.status' | trans }}</th>
+                {% elseif currentRoute == 'profile_after_sale_service' %}
+                    <th>{{ 'order_table.header.start_discussion' | trans }}</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -16,9 +22,17 @@
                 <td>{{ order.timestamp.format('d-m-y') }}</td>
                 <td>{{ order.shippingName }}</td>
                 <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
-                <td>
-                    {{ ('order_table.body.status.'~order.status) | trans }}
-                </td>
+                {% if currentRoute == 'profile_orders' %}
+                    <td>{{ ('order_table.body.status.'~order.status) | trans }}</td>
+                {% elseif currentRoute == 'profile_after_sale_service' %}
+                    <td>
+                        {# open contact vendor modal #}
+                        <a data-toggle="modal" href="#discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
+
+                        {# actual discussion modal #}
+                        {% include '@App/common/_discussion-modal.html.twig' with { 'products': order.orderItems, 'order_id': order.id } %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
