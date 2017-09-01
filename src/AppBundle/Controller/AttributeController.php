@@ -26,7 +26,7 @@ class AttributeController extends Controller
         $selectedVariantId = $slugTarget->getObjectId();
 
         $catalogService = $this->get(CatalogService::class);
-        $selectedVariant = $catalogService->getAttributeVariant((int) $selectedVariantId);
+        $selectedVariant = $catalogService->getAttributeVariant($selectedVariantId);
 
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
