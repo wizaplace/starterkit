@@ -30,7 +30,7 @@
                         <a data-toggle="modal" href="#discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
 
                         {# actual discussion modal #}
-                        {% include '@App/common/_discussion-modal.html.twig' with { 'products': order.orderItems, 'order_id': order.id } %}
+                        {% include '@App/common/_discussion-modal.html.twig' with { 'orderItems': order.orderItems, 'order_id': order.id } %}
                     </td>
                 {% endif %}
             </tr>
