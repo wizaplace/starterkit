@@ -69,9 +69,9 @@ class ProfileController extends Controller
     public function updateProfileAction(Request $request)
     {
         $data = $request->request->get('user');
-        $referer = $request->headers->get('referer') ?? $request->get('return_url');
-        $requestedUrl = $request->get('requested_url') ?? $referer;
-        $submittedToken = $request->get('csrf_token');
+        $referer = $request->request->get('return_url') ?? $request->headers->get('referer');
+        $requestedUrl = $request->request->get('requested_url') ?? $referer;
+        $submittedToken = $request->request->get('csrf_token');
         $addressesAreIdentical = $request->request->getBoolean('addresses_are_identical');
 
         // CSRF token validation
@@ -81,6 +81,17 @@ class ProfileController extends Controller
 
             return $this->redirect($referer);
         }
+
+        // Override shipping address fields with billing ones if both are the same (else do nothing)
+        if ($addressesAreIdentical) {
+            // actual override
+            $data['addresses']['shipping'] = $data['addresses']['billing'];
+        }
+
+        // update user's profile
+        $user = new WizaplaceUser($data);
+        $userService = $this->get(UserService::class);
+        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
 
         // update user's password
         if (! empty($data['password'])) {
@@ -113,17 +124,6 @@ class ProfileController extends Controller
             $message = $this->translator->trans('update_password_success_message');
             $this->addFlash('success', $message);
         }
-
-        // Override shipping address fields with billing ones if both are the same (else do nothing)
-        if ($addressesAreIdentical) {
-            // actual override
-            $data['addresses']['shipping'] = $data['addresses']['billing'];
-        }
-
-        // update user's profile
-        $user = new WizaplaceUser($data);
-        $userService = $this->get(UserService::class);
-        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
 
         $message = $this->translator->trans('update_profile_success_message');
         $this->addFlash('success', $message);
