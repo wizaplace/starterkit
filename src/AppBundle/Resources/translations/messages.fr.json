@@ -139,5 +139,32 @@
     "you": "Vous",
     "discussion_title": "À propos du produit : %product_name%",
     "add_to_basket": "ajouter au panier",
-    "out_of_stock": "rupture de stock"
+    "out_of_stock": "rupture de stock",
+    "order_table": {
+        "header": {
+            "command_id": "N° Cde",
+            "date": "Date",
+            "shipping_name": "Transporteur",
+            "total": "Total",
+            "status": "Statut"
+        },
+        "body": {
+            "total": "%price% TTC",
+            "status": {
+                "STANDBY_BILLING": "Attente de paiement",
+                "STANDBY_VENDOR": "Validation vendeur",
+                "PROCESSING_SHIPPING": "Envoi en cours",
+                "PROCESSED": "Traitée",
+                "COMPLETED": "Terminée",
+                "BILLING_FAILED": "Paiement échoué",
+                "VENDOR_DECLINED": "Refusée par le vendeur",
+                "STANDBY_SUPPLYING": "Attente d'approvisionnement",
+                "UNPAID": "Impayée",
+                "REFUNDED": "Remboursée",
+                "CANCELED": "Annulée",
+                "IMCOMPLETED": "Imcomplète",
+                "PARENT_ORDER": "Parente"
+            }
+        }
+    }
 }
