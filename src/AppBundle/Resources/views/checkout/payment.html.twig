@@ -33,19 +33,13 @@
                 <div class="spacer"></div>
 
                 <h1 class="main-title">Adresse de facturation</h1>
-                Civilité :
-                {% if user.billingAddress.37 == 4 %}
-                    Monsieur
-                {% elseif user.billingAddress.37 == 3 %}
-                    Madame
-                {% endif %}
-                <br />
+                Civilité : {{ user.billingAddress.title|trans }}<br />
                 Prénom : {{ user.billingAddress.firstname }}<br />
                 Nom : {{ user.billingAddress.lastname }} <br />
-                Société : {{ user.billingAddress.39 }}<br />
-                Téléphone :{{ user.billingAddress.phone }} <br />
+                Société : {{ user.billingAddress.company }}<br />
+                Téléphone : {{ user.billingAddress.phone }} <br />
                 Adresse : {{ user.billingAddress.address }}<br />
-                Complément adresse :{{ user.billingAddress.address_2 }} <br />
+                Complément adresse : {{ user.billingAddress.address_2 }} <br />
                 Code postal : {{ user.billingAddress.zipcode }}<br />
                 Ville : {{ user.billingAddress.city }}<br />
                 Pays : {{ user.billingAddress.country }}<br />
@@ -54,19 +48,13 @@
                 <div class="spacer"></div>
                 <h1 class="main-title">Adresse de livraison</h1>
 
-                Civilité :
-                {% if user.shippingAddress.38 == 4 %}
-                    Monsieur
-                {% elseif user.shippingAddress.38 == 3 %}
-                    Madame
-                {% endif %}
-                <br />
+                Civilité : {{ user.shippingAddress.title|trans }}<br />
                 Prénom : {{ user.shippingAddress.firstname }}<br />
                 Nom : {{ user.shippingAddress.lastname }} <br />
-                Société : {{ user.shippingAddress.40 }}<br />
-                Téléphone :{{ user.shippingAddress.phone }} <br />
+                Société : {{ user.shippingAddress.company }}<br />
+                Téléphone : {{ user.shippingAddress.phone }} <br />
                 Adresse : {{ user.shippingAddress.address }}<br />
-                Complément adresse :{{ user.shippingAddress.address_2 }} <br />
+                Complément adresse : {{ user.shippingAddress.address_2 }} <br />
                 Code postal : {{ user.shippingAddress.zipcode }}<br />
                 Ville : {{ user.shippingAddress.city }}<br />
                 Pays : {{ user.shippingAddress.country }}<br />
@@ -74,7 +62,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-offset-2 col-sm-4 col-lg-offset-1 col-lg-4">
-                {% include '@App/checkout/basket-summary.html.twig' %}
+                {% include '@App/checkout/_basket-summary.html.twig' %}
             </div>
         </div>
     </div>

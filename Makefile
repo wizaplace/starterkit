@@ -16,10 +16,10 @@ lint: lint-php lint-twig lint-yaml lint-xliff lint-css
 lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff
 
 lint-php:
-	./vendor/bin/coke
+	./vendor/bin/phpcs
 
 lint-php-ci:
-	./vendor/bin/coke --report-checkstyle=coke-checkstyle.xml --report-full
+	./vendor/bin/phpcs --report-checkstyle=phpcs-checkstyle.xml --report-full
 
 lint-twig:
 	bin/console lint:twig app src
@@ -39,7 +39,8 @@ stan:
 	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 src tests
 
 stan-ci:
-	./vendor/bin/phpstan --no-interaction analyse -c phpstan.neon -l 5 src tests
+	./vendor/bin/phpstan --no-interaction --no-progress analyse --errorFormat=checkstyle -c phpstan.neon -l 5 src tests > phpstan-checkstyle.xml || \
+	(sed -i 's/<error/<error source="phpstan"/g' phpstan-checkstyle.xml && false)
 
 test: test-phpunit test-behat
 

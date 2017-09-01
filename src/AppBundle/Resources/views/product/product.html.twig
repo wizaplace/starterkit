@@ -1,5 +1,9 @@
 {% extends '@App/layout.html.twig' %}
 
+{% block meta %}
+    <link rel="canonical" href="{{ path('product', {'slug': product.slug, 'categoryPath': product.categorySlugs|join('/')}) }}" />
+{% endblock %}
+
 {% block body %}
     {% set declination = product.declinations.0 %}
     {% set inStock = declination.amount > 0 %}
