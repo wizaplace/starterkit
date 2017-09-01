@@ -1,0 +1,7 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <label>SAV</label>
+    <div class="spacer"></div>
+    {{ include('@App/profile/orders-table.html.twig') }}
+{% endblock %}
