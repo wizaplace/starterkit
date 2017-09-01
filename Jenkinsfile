@@ -67,12 +67,12 @@ pipeline {
                                 useUsernamePassword: false,
                                 useUsernamePasswordCredentials: false,
                                 usernamePasswordCredentialsId: '',
-                                createCommentWithAllSingleFileComments: true,
+                                createCommentWithAllSingleFileComments: false,
                                 createSingleFileComments: true,
                                 commentOnlyChangedContent: true,
                                 minSeverity: 'INFO',
                                 violationConfigs: [
-                                    [ pattern: '.*/coke-checkstyle\\.xml$', reporter: 'CHECKSTYLE' ],
+                                    [ pattern: '.*/coke-checkstyle\\.xml$', parser: 'CHECKSTYLE', reporter: 'coke' ],
                                 ]
                             ]
                         ])
