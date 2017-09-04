@@ -9,7 +9,7 @@
         {% include '@App/checkout/steps.html.twig' with {step: 3} %}
 
         {# user addresses forms #}
-        {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': path('checkout_payment') } %}
+        {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': path('checkout_payment'), 'submit_text': 'choose_payment' } %}
 
         {# basket summary #}
         {% include '@App/checkout/_basket-summary.html.twig' %}

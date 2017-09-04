@@ -1,5 +1,5 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
-    {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': app.request.uri} %}
+    {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': app.request.uri, 'submit_text': 'save_changes' } %}
 {% endblock %}
