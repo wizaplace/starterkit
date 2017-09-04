@@ -8,7 +8,6 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Tests;
 
-use Symfony\Bridge\Monolog\Formatter\ConsoleFormatter;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
@@ -26,10 +25,14 @@ abstract class BundleTestCase extends WebTestCase
 
     protected static $class = TestKernel::class;
 
+    /** @var Client */
+    protected $client;
+
     protected function setUp()
     {
         parent::setUp();
         self::$cassetteName = (new \ReflectionClass(static::class))->getShortName().DIRECTORY_SEPARATOR.$this->getName().'_K7.yml';
+        $this->client = static::createClient();
     }
 
     protected static function createClient(array $options = array(), array $server = array())
@@ -50,6 +53,7 @@ abstract class BundleTestCase extends WebTestCase
     {
         self::$cassetteName = null;
         self::$kernel->getContainer()->get(VcrGuzzleMiddleware::class)->getVcr()->turnOff();
+        $this->client = null;
         parent::tearDown();
     }
 

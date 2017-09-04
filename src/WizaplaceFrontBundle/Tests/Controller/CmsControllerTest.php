@@ -15,10 +15,9 @@ class CmsControllerTest extends BundleTestCase
 {
     public function testCmsPage()
     {
-        $client = static::createClient();
-        $client->request('GET', '/test-cms-page-slug');
+        $this->client->request('GET', '/test-cms-page-slug');
 
-        $this->assertResponseCodeEquals(Response::HTTP_OK, $client);
+        $this->assertResponseCodeEquals(Response::HTTP_OK, $this->client);
         $data = $this->getRenderedData('@WizaplaceFront/cms/page.html.twig');
 
         /** @var Page $page */
@@ -29,27 +28,24 @@ class CmsControllerTest extends BundleTestCase
 
     public function testCmsPageNotFound()
     {
-        $client = static::createClient();
-        $client->request('GET', '/cms404'); // valid slug that doesn't exist at all
+        $this->client->request('GET', '/cms404'); // valid slug that doesn't exist at all
 
-        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $client);
+        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $this->client);
     }
 
     public function testInvalidSlugNotFound()
     {
-        $client = static::createClient();
-        $client->request('GET', '/invalid+*slug'); // invalid slug
+        $this->client->request('GET', '/invalid+*slug'); // invalid slug
 
-        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $client);
+        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $this->client);
     }
 
     public function testCategorySlugWithoutPrefixNotFound()
     {
         // We use a valid category slug, but without the `/c/` prefix so it hits the CMS controller.
         // This should give a 404
-        $client = static::createClient();
-        $client->request('GET', '/informatique');
+        $this->client->request('GET', '/informatique');
 
-        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $client);
+        $this->assertResponseCodeEquals(Response::HTTP_NOT_FOUND, $this->client);
     }
 }
