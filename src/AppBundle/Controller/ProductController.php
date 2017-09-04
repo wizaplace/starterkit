@@ -15,6 +15,7 @@ use Wizaplace\Catalog\CatalogService;
 use Wizaplace\Catalog\Option;
 use Wizaplace\Catalog\OptionVariant;
 use Wizaplace\Catalog\Review\ReviewService;
+use Wizaplace\Favorite\FavoriteService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
 
@@ -78,12 +79,19 @@ class ProductController extends Controller
             ];
         }, $product->getOptions());
 
+        $isFavorite = false;
+        if ($this->getUser() !== null) {
+            $favoriteService = $this->get(FavoriteService::class);
+            $isFavorite = $favoriteService->isInFavorites($declinationId);
+        }
+
         return $this->render('@App/product/product.html.twig', [
             'product' => $product,
             'latestProducts' => $latestProducts,
             'reviews' => $reviews,
             'declination' => $declination,
             'options' => $options,
+            'isFavorite' => $isFavorite,
         ]);
     }
 
