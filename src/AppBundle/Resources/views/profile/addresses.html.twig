@@ -1,5 +1,11 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
+
+    {#
+     # user addresses forms:
+     # 'requested_url' will be used when the form is valid
+     # 'submit_text' corresponds to the form submit element's label
+     #}
     {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': app.request.uri, 'submit_text': 'save_changes' } %}
 {% endblock %}

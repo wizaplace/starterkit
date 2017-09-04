@@ -8,7 +8,11 @@
         {# steps breadcrumb #}
         {% include '@App/checkout/steps.html.twig' with {step: 3} %}
 
-        {# user addresses forms #}
+        {#
+         # user addresses forms:
+         # 'requested_url' will be used when the form is valid
+         # 'submit_text' corresponds to the form submit element's label
+         #}
         {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': path('checkout_payment'), 'submit_text': 'choose_payment' } %}
 
         {# basket summary #}
