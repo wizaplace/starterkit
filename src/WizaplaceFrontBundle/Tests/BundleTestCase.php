@@ -52,6 +52,7 @@ abstract class BundleTestCase extends WebTestCase
     protected function tearDown()
     {
         self::$cassetteName = null;
+        $this->client = null;
         self::$kernel->getContainer()->get(VcrGuzzleMiddleware::class)->getVcr()->turnOff();
         $this->client = null;
         parent::tearDown();
