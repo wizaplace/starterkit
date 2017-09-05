@@ -1,16 +1,16 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
-    <label>{{ 'favorites.label' | trans }}</label>
+    <label>{{ 'profile.favorites.label' | trans }}</label>
     <div class="spacer"></div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'favorites.header.name' | trans }}</th>
-                <th>{{ 'favorites.header.companyName' | trans }}</th>
-                <th>{{ 'favorites.header.priceWithTaxes' | trans }}</th>
-                <th>{{ 'favorites.header.action' | trans }}</th>
+                <th>{{ 'profile.favorites.header.name' | trans }}</th>
+                <th>{{ 'profile.favorites.header.companyName' | trans }}</th>
+                <th>{{ 'profile.favorites.header.priceWithTaxes' | trans }}</th>
+                <th>{{ 'profile.favorites.header.action' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td>{{ favorite.name }}</td>
                     <td>{{ favorite.company.name }}</td>
                     <td>{{ favorite.priceWithTaxes }}</td>
-                    <td><a href="{{ path('product', {'categoryPath': favorite.categoryPath[0].slug, 'slug': favorite.slug}) }}">{{ 'favorites.body.see_product' | trans }}</a></td>
+                    <td><a href="{{ path('product', {'categoryPath': favorite.categoryPath[0].slug, 'slug': favorite.slug}) }}">{{ 'profile.favorites.body.see_product' | trans }}</a></td>
                 </tr>
             {% endfor %}
             </tbody>
