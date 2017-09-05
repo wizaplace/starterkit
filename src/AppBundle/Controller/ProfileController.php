@@ -39,6 +39,11 @@ class ProfileController extends BaseController
         return parent::afterSalesServiceAction();
     }
 
+    public function favoritesAction(): Response
+    {
+        return parent::favoritesAction();
+    }
+
     public function updateProfileAction(Request $request)
     {
         return parent::updateProfileAction($request);
