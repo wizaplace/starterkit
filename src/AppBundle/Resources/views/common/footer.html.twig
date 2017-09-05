@@ -1,11 +1,23 @@
 {%  set menus = menus() %}
 <footer>
     <div class="container">
+
+        {# newsletter #}
+        <form id="newsletter-subscription-form" action="{{ path('newsletter_subscribe') }}" method="POST" class="form-horizontal" >
+            <label for="email">{{ 'subscribe_to_newsletter'|trans }}</label>
+            <input id="email" type="email" name="email" placeholder="email" required>
+            <button type="submit">{{ 'subscribe_me'|trans }}</button>
+        </form>
+
+        {# menus #}
         {% for menuBatch in menus|batch(4) %}
             <div class="row">
+
                 {% for menu in menuBatch %}
-                    <nav class="col-lg-3 col-sm-3">
+                    <nav class="col-sm-3">
+
                         <h4>{{ menu.name }}</h4>
+
                         <ul class="footer-items">
                             {% for menuItem in menu.items %}
                                 <li><a href="{{ menuItem.url }}" class="light-title">{{ menuItem.name }}</a></li>
@@ -15,8 +27,27 @@
                 {% endfor %}
             </div>
         {% endfor %}
-        <p class="light-title text-grey text-center">
-            Copyright ® 1998 — 2017
-        </p>
     </div>
 </footer>
+
+<script>
+    $(function() {
+
+        // submit user's email for newsletter subscription
+        $('#newsletter-subscription-form').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: {
+                    email: $('[name="email"]').val(),
+                }
+            }).done(function() {
+                notification.createAlert('{{ "newsletter_subscription_success_message"|trans }}', 'success')
+            }).fail(function(response) {
+                notification.createAlert(response.responseText, 'danger')
+            });
+        });
+    });
+</script>

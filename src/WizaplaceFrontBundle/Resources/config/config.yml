@@ -55,6 +55,8 @@ services:
         public: true
     Wizaplace\Discussion\DiscussionService:
         public: true
+    Wizaplace\MailingList\MailingListService:
+        public: true
     WizaplaceFrontBundle\Twig\AppExtension:
         arguments:
             $cache: '@cache.app'
