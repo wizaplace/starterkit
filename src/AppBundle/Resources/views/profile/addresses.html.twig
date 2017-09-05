@@ -1,5 +1,11 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
-    {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': app.request.uri} %}
+
+    {#
+     # user address forms:
+     # 'requested_url' will be used to redirect the user if the form is validated after submission
+     # 'submit_text' corresponds to the form submit button's text
+     #}
+    {% include '@App/common/user_addresses/_addresses.html.twig' with {'requested_url': app.request.uri, 'submit_text': 'save_changes' } %}
 {% endblock %}

@@ -17,9 +17,8 @@ class HomeControllerTest extends BundleTestCase
 {
     public function testHome()
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
-        $this->assertResponseCodeEquals(Response::HTTP_OK, $client);
+        $this->client->request('GET', '/');
+        $this->assertResponseCodeEquals(Response::HTTP_OK, $this->client);
 
         $renderedData = $this->getRenderedData('@WizaplaceFront/home/home.html.twig');
 
