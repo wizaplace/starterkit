@@ -77,6 +77,11 @@ profile_after_sale_service:
     defaults: { _controller: AppBundle:Profile:afterSalesService }
     methods: [GET]
 
+profile_favorites:
+    path: /profil/favoris
+    defaults: { _controller: AppBundle:Profile:favorites }
+    methods: [GET]
+
 profile_discussions:
     path: /profil/messagerie
     defaults: { _controller: AppBundle:Profile:discussions }

@@ -192,9 +192,25 @@
                 "returns": "Retours",
                 "after_sales_service": "SAV"
             },
+            "favorites": {
+                "title": "Mes Favoris",
+                "list": "Liste"
+            },
             "discussions": {
                 "title": "Messagerie",
                 "messages": "Mes messages"
+            }
+        },
+        "favorites": {
+            "label": "Favoris",
+            "header": {
+                "name": "Nom",
+                "companyName": "Marchand",
+                "priceWithTaxes": "Prix TTC",
+                "action": "Action"
+            },
+            "body": {
+                "see_product": "Voir la fiche produit"
             }
         }
     }

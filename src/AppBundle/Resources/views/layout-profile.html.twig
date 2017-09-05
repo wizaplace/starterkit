@@ -30,6 +30,16 @@
                         </div>
                     </div>
 
+                    {# user favorites #}
+                    <div class="box">
+                        <div class="box-header">{{ 'profile.layout.favorites.title' | trans }}</div>
+                        <div class="box-content">
+                            <ul>
+                                <li><a href="{{ path('profile_favorites') }}">{{ 'profile.layout.favorites.list' | trans }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                     {# user discussions #}
                     <div class="box">
                         <div class="box-header">{{ 'profile.layout.discussions.title' | trans }}</div>
