@@ -45,7 +45,7 @@
                                 <img src="{{ asset('images/no-image.jpg') }}" class="img-responsive" />
                             {% endif %}
 
-                            {# The favorite management only dislays if user is connected #}
+                            {# The favorite management is only shown when user is connected #}
                             {% if app.user %}
                                 <div id="favorite-management">
                                     <a href="#" @click="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove' |trans }}</a>
@@ -233,7 +233,7 @@
                                 self.isFavorite = true;
                             },
                             error: function () {
-                                // TODO: notify user that the product is already in his favorites
+                                notification.createAlert("{{'product.favorite.already_favored'|trans}}", "danger");
                             }
                         });
                     },

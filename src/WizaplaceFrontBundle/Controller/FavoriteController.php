@@ -20,7 +20,7 @@ class FavoriteController extends Controller
         $declinationId = $request->request->get('declinationId');
         $favoriteService->addDeclinationToUserFavorites($declinationId);
 
-        return new JsonResponse();
+        return new JsonResponse($declinationId);
     }
 
     public function removeFromFavoriteAction(FavoriteService $favoriteService, Request $request): JsonResponse
@@ -28,6 +28,6 @@ class FavoriteController extends Controller
         $declinationId = $request->request->get('declinationId');
         $favoriteService->removeDeclinationToUserFavorites($declinationId);
 
-        return new JsonResponse();
+        return new JsonResponse($declinationId);
     }
 }
