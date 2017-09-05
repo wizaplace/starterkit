@@ -17,6 +17,7 @@ use Wizaplace\Cms\CmsService;
 use Wizaplace\Image\Image;
 use Wizaplace\Image\ImageService;
 use Wizaplace\User\UserService;
+use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class AppExtension extends \Twig_Extension
 {
@@ -38,6 +39,8 @@ class AppExtension extends \Twig_Extension
     private $recaptchaKey;
     /** @var Packages */
     private $assets;
+    /** @var ProductUrlGenerator */
+    private $productUrlGenerator;
 
     public function __construct(
         CatalogService $catalogService,
@@ -48,7 +51,8 @@ class AppExtension extends \Twig_Extension
         CmsService $cmsService,
         CacheItemPoolInterface $cache,
         string $recaptchaKey,
-        Packages $assets
+        Packages $assets,
+        ProductUrlGenerator $productUrlGenerator
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
@@ -59,6 +63,7 @@ class AppExtension extends \Twig_Extension
         $this->cache = $cache;
         $this->recaptchaKey = $recaptchaKey;
         $this->assets = $assets;
+        $this->productUrlGenerator = $productUrlGenerator;
     }
 
     public function getFunctions()
@@ -77,6 +82,7 @@ class AppExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl']),
+            new \Twig_SimpleFilter('productUrl', [$this->productUrlGenerator, 'generateProductUrl']),
             new \Twig_SimpleFilter('price', [$this, 'formatPrice']),
         ];
     }

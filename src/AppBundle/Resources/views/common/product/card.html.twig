@@ -4,7 +4,7 @@
         <div class="top-badge badge-promo">PROMO</div>
     {% endif %}
 
-    <a href="{{ path('product', {'slug': product.slug, 'categoryPath':product.categorySlugs|join('/')}) }}" title="Voir le produit" class="product-detail">
+    <a href="{{ product|productUrl }}" title="Voir le produit" class="product-detail">
         <div class="product-image" style="background-image: url('{{product.mainImage|imageUrl(351, 351)}}')"></div>
 
         <div class="product-caption">

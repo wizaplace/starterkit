@@ -10,6 +10,10 @@ services:
     WizaplaceFrontBundle\Controller\:
         resource: '../../Controller'
         public: true
+    WizaplaceFrontBundle\Service\ProductUrlGenerator:
+        public: true
+    WizaplaceFrontBundle\Service\AuthenticationService:
+        public: true
     WizaplaceFrontBundle\Security\AuthenticationFailureHandler:
         parent: 'security.authentication.failure_handler'
         autowire: true
@@ -56,6 +60,8 @@ services:
     Wizaplace\Discussion\DiscussionService:
         public: true
     Wizaplace\MailingList\MailingListService:
+        public: true
+    Wizaplace\Favorite\FavoriteService:
         public: true
     WizaplaceFrontBundle\Twig\AppExtension:
         arguments:
