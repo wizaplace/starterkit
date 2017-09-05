@@ -1,7 +1,7 @@
 {% extends '@App/layout.html.twig' %}
 
 {% block meta %}
-    <link rel="canonical" href="{{ path('product', {'slug': product.slug, 'categoryPath': product.categorySlugs|join('/')}) }}" />
+    <link rel="canonical" href="{{ product|productUrl }}" />
 {% endblock %}
 
 {% block body %}
