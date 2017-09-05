@@ -180,5 +180,11 @@
                 "PARENT_ORDER": "Parente"
             }
         }
+    },
+    "product": {
+        "favorite": {
+            "add": "Ajouter dans mes favoris",
+            "remove": "Enlever de mes favoris"
+        }
     }
 }
