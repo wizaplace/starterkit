@@ -53,8 +53,6 @@ class NewsletterController extends Controller
             return $response;
         }
 
-        $response = new JsonResponse();
-        $response->setStatusCode(200);
-        return new $response;
+        return new JsonResponse();
     }
 }
