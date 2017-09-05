@@ -34,19 +34,25 @@
     $(function() {
 
         // submit user's email for newsletter subscription
-        $('#newsletter-subscription-form').submit(function(e) {
+        $('#newsletter-subscription-form').on('submit', function(e) {
             e.preventDefault();
+            let method = $(this).attr('method');
+            let url = $(this).attr('action');
+            let $email = $(this).find('[name="email"]');
+            let email = $email.val();
 
             $.ajax({
-                method: $(this).attr('method'),
-                url: $(this).attr('action'),
+                method: method,
+                url: url,
                 data: {
-                    email: $('[name="email"]').val(),
+                    email: email,
                 }
             }).done(function() {
-                notification.createAlert('{{ "newsletter_subscription_success_message"|trans }}', 'success')
+                notification.createAlert('{{ "newsletter_subscription_success_message"|trans }}', 'success');
             }).fail(function(response) {
-                notification.createAlert(response.responseText, 'danger')
+                notification.createAlert(response.responseText, 'danger');
+            }).always(function() {
+                $email.attr('value', ''); // clean up
             });
         });
     });
