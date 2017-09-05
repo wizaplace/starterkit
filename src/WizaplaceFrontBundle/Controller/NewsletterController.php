@@ -53,6 +53,6 @@ class NewsletterController extends Controller
             return $response;
         }
 
-        return new JsonResponse();
+        return new JsonResponse($email);
     }
 }
