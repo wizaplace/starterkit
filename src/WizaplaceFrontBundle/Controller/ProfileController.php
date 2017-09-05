@@ -14,6 +14,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\ApiClient;
 use Wizaplace\Authentication\BadCredentials;
 use Wizaplace\Discussion\DiscussionService;
+use Wizaplace\Favorite\FavoriteService;
 use Wizaplace\Order\Order;
 use Wizaplace\Order\OrderService;
 use Wizaplace\User\User as WizaplaceUser;
@@ -77,6 +78,15 @@ class ProfileController extends Controller
         return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
             'orders' => $completedOrders,
+        ]);
+    }
+
+    public function favoritesAction(): Response
+    {
+        $favorites = $this->get(FavoriteService::class)->getAll();
+
+        return $this->render('@WizaplaceFront/profile/favorites.html.twig', [
+            'favorites' => $favorites,
         ]);
     }
 
