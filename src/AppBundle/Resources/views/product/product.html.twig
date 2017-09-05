@@ -190,7 +190,7 @@
                     productId: {{ product.id }},
                     quantity: 1,
                     declinationId: '{{ declination.id }}',
-                    isFavorite: {% if isFavorite %}true{% else %}false{% endif %},
+                    isFavorite: {{ isFavorite|json_encode|raw }},
                 },
 
                 methods: {
