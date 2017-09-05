@@ -184,7 +184,8 @@
     "product": {
         "favorite": {
             "add": "Ajouter dans mes favoris",
-            "remove": "Enlever de mes favoris"
+            "remove": "Enlever de mes favoris",
+            "already_favored": "Ce produit est déjà dans vos favoris"
         }
     }
 }
