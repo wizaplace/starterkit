@@ -25,7 +25,7 @@
                         </div>
 
                         {# product's vendor #}
-                        <p>{{ 'sold_by'|trans }}&nbsp;:&nbsp;{{ product.companies[0].name }}</p>
+                        <p>{{ 'sold_by'|trans }}:&nbsp;{{ product.companies[0].name }}</p>
 
                         {# open contact vendor modal #}
                         <a data-toggle="modal" href="#discussion-modal">{{ 'contact_vendor'|trans }}</a>
@@ -44,6 +44,15 @@
                             {% else %}
                                 <img src="{{ asset('images/no-image.jpg') }}" class="img-responsive" />
                             {% endif %}
+
+                            {# The favorite management only dislays if user is connected #}
+                            {% if app.user %}
+                                <div id="favorite-management">
+                                    <a href="#" @click="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove' |trans }}</a>
+                                    <a href="#" @click="addToFavorite" v-else>{{ 'product.favorite.add' |trans }}</a>
+                                </div>
+                            {% endif %}
+
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -180,6 +189,8 @@
                 data: {
                     productId: {{ product.id }},
                     quantity: 1,
+                    declinationId: '{{ declination.id }}',
+                    isFavorite: {% if isFavorite %}true{% else %}false{% endif %},
                 },
 
                 methods: {
@@ -208,6 +219,33 @@
                                     image: {{ (declination.images|length > 0) ? declination.images|first|imageUrl(100, 100)|json_encode|raw : 'null' }},
                                 };
                                 hydrateModal(declinationInfo, quantity, response.message);
+                            }
+                        });
+                    },
+
+                    addToFavorite: function () {
+                        var self = this;
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ path('add_to_favorites') }}",
+                            data: { declinationId: this.declinationId },
+                            success: function(response) {
+                                self.isFavorite = true;
+                            },
+                            error: function () {
+                                console.log('oops');
+                            }
+                        });
+                    },
+
+                    removeFromFavorite: function () {
+                        var self = this;
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ path('remove_from_favorites') }}",
+                            data: { declinationId: this.declinationId },
+                            success: function(response) {
+                                self.isFavorite = false;
                             }
                         });
                     }
