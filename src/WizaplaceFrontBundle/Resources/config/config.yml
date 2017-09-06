@@ -59,6 +59,8 @@ services:
         public: true
     Wizaplace\Discussion\DiscussionService:
         public: true
+    Wizaplace\MailingList\MailingListService:
+        public: true
     Wizaplace\Favorite\FavoriteService:
         public: true
     WizaplaceFrontBundle\Twig\AppExtension:
