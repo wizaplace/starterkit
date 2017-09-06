@@ -100,18 +100,9 @@ profile_message_create:
     methods: [POST]
 
 # newsletter
-profile_newsletter:
-    path: /profil/newsletter
-    defaults: { _controller: AppBundle:Profile:newsletter }
-
 newsletter_subscribe:
     path: /newsletter/subscribe
     defaults: { _controller: AppBundle:Newsletter:subscribe }
-    methods: [POST]
-
-newsletter_unsubscribe:
-    path: /newsletter/unsubscribe
-    defaults: { _controller: AppBundle:Newsletter:unsubscribe }
     methods: [POST]
 
 # basket
