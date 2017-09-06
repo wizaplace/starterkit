@@ -9,33 +9,43 @@
                 {% block profile_menu %}
                     {# user account #}
                     <div class="box">
-                        <div class="box-header">Mon compte</div>
+                        <div class="box-header">{{ 'profile.layout.account.title' | trans }}</div>
                         <div class="box-content">
                             <ul>
-                                <li><a href="{{ path("profile") }}">Profil</a></li>
-                                <li><a href="{{ path("profile_addresses") }}">Adresses</a></li>
+                                <li><a href="{{ path("profile") }}">{{ 'profile.layout.account.profile' | trans }}</a></li>
+                                <li><a href="{{ path("profile_addresses") }}">{{ 'profile.layout.account.addresses' | trans }}</a></li>
                             </ul>
                         </div>
                     </div>
 
                     {# user purchases #}
                     <div class="box">
-                        <div class="box-header">Mes achats</div>
+                        <div class="box-header">{{ 'profile.layout.purchases.title' | trans }}</div>
                         <div class="box-content">
                             <ul>
-                                <li><a href="{{ path("profile_orders") }}">Commandes</a></li>
-                                <li><a href="{{ path("profile_returns") }}">Retours</a></li>
-                                <li><a href="{{ path("profile_after_sale_service") }}">SAV</a></li>
+                                <li><a href="{{ path("profile_orders") }}">{{ 'profile.layout.purchases.orders' | trans }}</a></li>
+                                <li><a href="{{ path("profile_returns") }}">{{ 'profile.layout.purchases.returns' | trans }}</a></li>
+                                <li><a href="{{ path("profile_after_sale_service") }}">{{ 'profile.layout.purchases.after_sales_service' | trans }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {# user favorites #}
+                    <div class="box">
+                        <div class="box-header">{{ 'profile.layout.favorites.title' | trans }}</div>
+                        <div class="box-content">
+                            <ul>
+                                <li><a href="{{ path('profile_favorites') }}">{{ 'profile.layout.favorites.list' | trans }}</a></li>
                             </ul>
                         </div>
                     </div>
 
                     {# user discussions #}
                     <div class="box">
-                        <div class="box-header">{{ 'discussion_service'|trans }}</div>
+                        <div class="box-header">{{ 'profile.layout.discussions.title' | trans }}</div>
                         <div class="box-content">
                             <ul>
-                                <li><a href="{{ path("profile_discussions") }}">{{ 'my_discussions'|trans }}</a></li>
+                                <li><a href="{{ path("profile_discussions") }}">{{ 'profile.layout.discussions.messages' | trans }}</a></li>
                             </ul>
                         </div>
                     </div>

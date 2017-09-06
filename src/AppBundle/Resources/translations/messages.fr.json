@@ -146,8 +146,6 @@
     "contact_vendor": "Contacter le marchand",
     "message_sent_success_notification": "Votre message a bien été envoyé",
     "message_sent_error_notification": "Le message n'a pas pu être envoyé, veuillez réessayer",
-    "discussion_service": "Messagerie",
-    "my_discussions": "Mes messages",
     "no_messages": "Il n'y a aucun message",
     "add_message": "Ecrivez un message",
     "you": "Vous",
@@ -186,6 +184,41 @@
             "add": "Ajouter dans mes favoris",
             "remove": "Enlever de mes favoris",
             "already_favored": "Ce produit est déjà dans vos favoris"
+        }
+    },
+    "profile": {
+        "layout": {
+            "account": {
+                "title": "Mon compte",
+                "profile": "Profil",
+                "addresses": "Adresses"
+            },
+            "purchases": {
+                "title": "Mes achats",
+                "orders": "Commandes",
+                "returns": "Retours",
+                "after_sales_service": "SAV"
+            },
+            "favorites": {
+                "title": "Mes Favoris",
+                "list": "Liste"
+            },
+            "discussions": {
+                "title": "Messagerie",
+                "messages": "Mes messages"
+            }
+        },
+        "favorites": {
+            "label": "Favoris",
+            "header": {
+                "name": "Nom",
+                "companyName": "Marchand",
+                "priceWithTaxes": "Prix TTC",
+                "action": "Action"
+            },
+            "body": {
+                "see_product": "Voir la fiche produit"
+            }
         }
     }
 }

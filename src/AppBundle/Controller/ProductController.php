@@ -18,9 +18,18 @@ use Wizaplace\Catalog\Review\ReviewService;
 use Wizaplace\Favorite\FavoriteService;
 use Wizaplace\Seo\SeoService;
 use Wizaplace\Seo\SlugTargetType;
+use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class ProductController extends Controller
 {
+    /** @var ProductUrlGenerator */
+    private $productUrlGenerator;
+
+    public function __construct(ProductUrlGenerator $productUrlGenerator)
+    {
+        $this->productUrlGenerator = $productUrlGenerator;
+    }
+
     public function viewAction(SeoService $seoService, string $categoryPath, string $slug, Request $request) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
@@ -38,7 +47,7 @@ class ProductController extends Controller
 
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
-            return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
+            return $this->redirect($this->productUrlGenerator->generateUrlFromProduct($product));
         }
 
         // latestProducts
@@ -55,11 +64,11 @@ class ProductController extends Controller
             $variantIdByOptionId[$option->getId()] = $option->getVariantId();
         }
 
-        $options = array_map(function (Option $option) use ($product, $variantIdByOptionId, $categoryPath, $slug) {
+        $options = array_map(function (Option $option) use ($product, $variantIdByOptionId) {
             return [
                 'id' => $option->getId(),
                 'name' => $option->getName(),
-                'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId, $categoryPath, $slug) {
+                'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId) {
                     $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
 
                     $variantIdByOptionId[$option->getId()] = $variant->getId();
@@ -69,11 +78,7 @@ class ProductController extends Controller
                         'id' => $variant->getId(),
                         'name' => $variant->getName(),
                         'selected' => $isSelected,
-                        'url' => $this->generateUrl('product', [
-                            'categoryPath' => $categoryPath,
-                            'slug' => $slug,
-                            'd' => $declinationId,
-                        ]),
+                        'url' => $this->productUrlGenerator->generateUrlFromProduct($product, $declinationId),
                     ];
                 }, $option->getVariants()),
             ];
