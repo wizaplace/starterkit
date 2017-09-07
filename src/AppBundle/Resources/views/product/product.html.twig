@@ -122,19 +122,21 @@
 
             {# general characteristics #}
             <h3>{{ 'general_characteristics'|trans }}</h3>
-
-            <table>
-                {% for attribute in product.attributes %}
-                    <tr>
-                        <td>{{ attribute.name }}</td>
-                        <td>
-                            {% for value in attribute.value %}
-                                {{ value }}
-                            {% endfor %}
-                        </td>
-                    </tr>
+            <ul>
+                {% for attribute in product.attributes if attribute.children|length == 0 %}
+                    <li>{{ attribute.name }}&nbsp;:&nbsp;{{ attribute.value|join(', ') }}</li>
                 {% endfor %}
-            </table>
+            </ul>
+
+            {# grouped attributes #}
+            {% for attribute in product.attributes if attribute.children|length > 1 %}
+                <h3>{{ attribute.name }}</h3>
+                <ul>
+                    {% for attribute in attribute.children %}
+                        <li>{{ attribute.name }}&nbsp;:&nbsp;{{ attribute.value|join(', ') }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
 
             <hr>
 
