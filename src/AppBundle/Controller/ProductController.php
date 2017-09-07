@@ -68,8 +68,10 @@ class ProductController extends Controller
                 'id' => $option->getId(),
                 'name' => $option->getName(),
                 'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId) {
-                    $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
-
+                    $isSelected = false;
+                    if (isset($variantIdByOptionId[$option->getId()])) {
+                        $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
+                    }
                     $variantIdByOptionId[$option->getId()] = $variant->getId();
                     $declinationId = $product->getDeclinationFromOptions($variantIdByOptionId)->getId();
 
