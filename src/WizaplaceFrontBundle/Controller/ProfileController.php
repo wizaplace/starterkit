@@ -19,7 +19,6 @@ use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
 use Wizaplace\SDK\User\UpdateUserCommand;
-use Wizaplace\SDK\User\User as WizaplaceUser;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
 use WizaplaceFrontBundle\Service\UserAddressesService;
@@ -142,7 +141,7 @@ class ProfileController extends Controller
             $api = $this->get(ApiClient::class);
 
             try {
-                $api->authenticate($user->getEmail(), $oldPassword);
+                $api->authenticate($data['email'], $oldPassword);
             } catch (BadCredentials $e) {
                 $message = $this->translator->trans('update_old_password_error_message');
                 $this->addFlash('danger', $message);
@@ -150,7 +149,7 @@ class ProfileController extends Controller
                 return $this->redirect($referer);
             }
 
-            $userService->changePassword($user->getId(), $newPassword);
+            $userService->changePassword($data['id'], $newPassword);
 
             // add a notification
             $message = $this->translator->trans('update_password_success_message');
