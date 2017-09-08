@@ -12,11 +12,11 @@ use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\Authentication\BadCredentials;
-use Wizaplace\Company\CompanyRegistration;
-use Wizaplace\Company\CompanyService;
-use Wizaplace\User\UserAlreadyExists;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\Authentication\BadCredentials;
+use Wizaplace\SDK\Company\CompanyRegistration;
+use Wizaplace\SDK\Company\CompanyService;
+use Wizaplace\SDK\User\UserAlreadyExists;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Controller\AuthController as BaseController;
 use WizaplaceFrontBundle\Service\AuthenticationService;
 

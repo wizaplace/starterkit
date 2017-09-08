@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\Basket\BasketService;
-use Wizaplace\Basket\Exception\CouponAlreadyPresent;
-use Wizaplace\Basket\Exception\CouponNotInTheBasket;
+use Wizaplace\SDK\Basket\BasketService;
+use Wizaplace\SDK\Basket\Exception\CouponAlreadyPresent;
+use Wizaplace\SDK\Basket\Exception\CouponNotInTheBasket;
 
 class BasketController extends Controller
 {

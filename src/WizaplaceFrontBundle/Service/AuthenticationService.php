@@ -10,9 +10,9 @@ namespace WizaplaceFrontBundle\Service;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Wizaplace\ApiClient;
-use Wizaplace\Authentication\BadCredentials;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\ApiClient;
+use Wizaplace\SDK\Authentication\BadCredentials;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
 
 class AuthenticationService

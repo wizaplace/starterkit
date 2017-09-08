@@ -6,7 +6,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    slug.regexp: !php/const:Wizaplace\Seo\SeoService::SLUG_REGEXP
+    slug.regexp: !php/const:Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
     recaptcha.key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
     recaptcha.secret: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 

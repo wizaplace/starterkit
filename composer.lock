@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fb468d58dd6b5fa6e11a974bfe887a2",
+    "content-hash": "539e41a9d43026e2a61d8659c0925d7b",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2425,16 +2425,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.7.3",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "88d2acd06a90b566ad99af5e9c32261ebacff613"
+                "reference": "04706a07efbbe89a5b568cc917ccefc8d35f53c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/88d2acd06a90b566ad99af5e9c32261ebacff613",
-                "reference": "88d2acd06a90b566ad99af5e9c32261ebacff613",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/04706a07efbbe89a5b568cc917ccefc8d35f53c2",
+                "reference": "04706a07efbbe89a5b568cc917ccefc8d35f53c2",
                 "shasum": ""
             },
             "require": {
@@ -2457,7 +2457,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Wizaplace\\": "src/"
+                    "Wizaplace\\SDK\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2465,7 +2465,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-09-06T13:13:03+00:00"
+            "time": "2017-09-08T07:27:43+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -2795,7 +2795,7 @@
             "support": {
                 "source": "https://github.com/hectorj/phpstan-symfony/tree/master"
             },
-            "time": "2017-07-18 10:15:23"
+            "time": "2017-07-18T10:15:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",

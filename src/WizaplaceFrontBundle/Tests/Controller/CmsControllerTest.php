@@ -8,7 +8,7 @@ declare(strict_types = 1);
 namespace WizaplaceFrontBundle\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Cms\Page;
+use Wizaplace\SDK\Cms\Page;
 use WizaplaceFrontBundle\Tests\BundleTestCase;
 
 class CmsControllerTest extends BundleTestCase

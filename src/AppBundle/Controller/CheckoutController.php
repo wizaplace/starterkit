@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\Basket\BasketService;
+use Wizaplace\SDK\Basket\BasketService;
 
 class CheckoutController extends Controller
 {

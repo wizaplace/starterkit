@@ -11,14 +11,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\ApiClient;
-use Wizaplace\Authentication\BadCredentials;
-use Wizaplace\Discussion\DiscussionService;
-use Wizaplace\Favorite\FavoriteService;
-use Wizaplace\Order\Order;
-use Wizaplace\Order\OrderService;
-use Wizaplace\User\User as WizaplaceUser;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\ApiClient;
+use Wizaplace\SDK\Authentication\BadCredentials;
+use Wizaplace\SDK\Discussion\DiscussionService;
+use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\Order\Order;
+use Wizaplace\SDK\Order\OrderService;
+use Wizaplace\SDK\Order\OrderStatus;
+use Wizaplace\SDK\User\UpdateUserAddressCommand;
+use Wizaplace\SDK\User\UpdateUserAddressesCommand;
+use Wizaplace\SDK\User\UpdateUserCommand;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
@@ -28,9 +31,13 @@ class ProfileController extends Controller
     /** @var TranslatorInterface */
     protected $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    /** @var UserService */
+    protected $userService;
+
+    public function __construct(TranslatorInterface $translator, UserService $userService)
     {
         $this->translator = $translator;
+        $this->userService = $userService;
     }
 
     public function viewAction(): Response
@@ -72,7 +79,7 @@ class ProfileController extends Controller
     {
         $orders = $this->get(OrderService::class)->getOrders();
         $completedOrders = array_filter($orders, function (Order $order): bool {
-            return $order->getStatus() === "COMPLETED";
+            return $order->getStatus()->equals(OrderStatus::COMPLETED());
         });
 
         return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
@@ -113,9 +120,14 @@ class ProfileController extends Controller
         }
 
         // update user's profile
-        $user = new WizaplaceUser($data);
         $userService = $this->get(UserService::class);
-        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
+        $updateUserCommand = new UpdateUserCommand();
+        $updateUserCommand
+            ->setUserId($data['id'])
+            ->setEmail($data['email'])
+            ->setFirstName($data['firstName'])
+            ->setLastName($data['lastName']);
+        $userService->updateUser($updateUserCommand);
 
         // update user's password
         if (! empty($data['password'])) {
@@ -134,7 +146,7 @@ class ProfileController extends Controller
             $api = $this->get(ApiClient::class);
 
             try {
-                $api->authenticate($user->getEmail(), $oldPassword);
+                $api->authenticate($data['email'], $oldPassword);
             } catch (BadCredentials $e) {
                 $message = $this->translator->trans('update_old_password_error_message');
                 $this->addFlash('danger', $message);
@@ -142,7 +154,7 @@ class ProfileController extends Controller
                 return $this->redirect($referer);
             }
 
-            $userService->changePassword($user->getId(), $newPassword);
+            $userService->changePassword($data['id'], $newPassword);
 
             // add a notification
             $message = $this->translator->trans('update_password_success_message');
@@ -154,7 +166,7 @@ class ProfileController extends Controller
 
         // update user's addresses
         if (! empty($data['addresses'])) {
-            $userService->updateUserAdresses($user);
+            $this->updateUserAdresses($data);
 
             $message = $this->translator->trans('update_addresses_success_message');
             $this->addFlash('success', $message);
@@ -192,5 +204,39 @@ class ProfileController extends Controller
     protected function getUser(): User
     {
         return parent::getUser();
+    }
+
+    final protected function updateUserAdresses(array $data): void
+    {
+        $shippingAddress = new UpdateUserAddressCommand();
+        $shippingAddress
+            ->setFirstName($data['addresses']['shipping']['firstName'])
+            ->setLastName($data['addresses']['shipping']['lastName'])
+            ->setCompany($data['addresses']['shipping']['company'])
+            ->setPhone($data['addresses']['shipping']['phone'])
+            ->setAddress($data['addresses']['shipping']['address'])
+            ->setAddressSecondLine($data['addresses']['shipping']['address_2'])
+            ->setZipCode($data['addresses']['shipping']['zipcode'])
+            ->setCity($data['addresses']['shipping']['city'])
+            ->setCountry($data['addresses']['shipping']['country']);
+        $billingAddress = new UpdateUserAddressCommand();
+        $billingAddress
+            ->setFirstName($data['addresses']['billing']['firstName'])
+            ->setLastName($data['addresses']['billing']['lastName'])
+            ->setCompany($data['addresses']['billing']['company'])
+            ->setPhone($data['addresses']['billing']['phone'])
+            ->setAddress($data['addresses']['billing']['address'])
+            ->setAddressSecondLine($data['addresses']['billing']['address_2'])
+            ->setZipCode($data['addresses']['billing']['zipcode'])
+            ->setCity($data['addresses']['billing']['city'])
+            ->setCountry($data['addresses']['billing']['country']);
+        $updateUserAddressesCommand = new UpdateUserAddressesCommand();
+        $updateUserAddressesCommand
+            ->setUserId($data['id'])
+            ->setShippingAddress($shippingAddress)
+            ->setBillingAddress($billingAddress)
+        ;
+
+        $this->userService->updateUserAdresses($updateUserAddressesCommand);
     }
 }

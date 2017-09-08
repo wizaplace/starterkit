@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\Discussion\DiscussionService;
+use Wizaplace\SDK\Discussion\DiscussionService;
 
 class DiscussionController extends Controller
 {

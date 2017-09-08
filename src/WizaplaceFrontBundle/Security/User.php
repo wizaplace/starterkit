@@ -9,9 +9,9 @@ declare(strict_types = 1);
 namespace WizaplaceFrontBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Wizaplace\Authentication\ApiKey;
-use Wizaplace\User\User as WizaplaceUser;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\Authentication\ApiKey;
+use Wizaplace\SDK\User\User as WizaplaceUser;
+use Wizaplace\SDK\User\UserService;
 
 class User implements UserInterface, \Serializable
 {

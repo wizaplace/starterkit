@@ -8,10 +8,10 @@ declare(strict_types = 1);
 namespace WizaplaceFrontBundle\Service;
 
 use Symfony\Component\Routing\RouterInterface;
-use Wizaplace\Catalog\DeclinationSummary;
-use Wizaplace\Catalog\Product;
-use Wizaplace\Catalog\ProductCategory;
-use Wizaplace\Catalog\ProductSummary;
+use Wizaplace\SDK\Catalog\DeclinationSummary;
+use Wizaplace\SDK\Catalog\Product;
+use Wizaplace\SDK\Catalog\ProductCategory;
+use Wizaplace\SDK\Catalog\ProductSummary;
 
 class ProductUrlGenerator
 {

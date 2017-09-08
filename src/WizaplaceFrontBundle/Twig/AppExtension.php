@@ -10,13 +10,13 @@ namespace WizaplaceFrontBundle\Twig;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Wizaplace\Basket\Basket;
-use Wizaplace\Basket\BasketService;
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Cms\CmsService;
-use Wizaplace\Image\Image;
-use Wizaplace\Image\ImageService;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\Basket\Basket;
+use Wizaplace\SDK\Basket\BasketService;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Cms\CmsService;
+use Wizaplace\SDK\Image\Image;
+use Wizaplace\SDK\Image\ImageService;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class AppExtension extends \Twig_Extension

@@ -7,10 +7,10 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Service;
 
-use Wizaplace\Cms\CmsService;
-use Wizaplace\Cms\Page;
-use Wizaplace\Seo\SeoService;
-use Wizaplace\Seo\SlugTargetType;
+use Wizaplace\SDK\Cms\CmsService;
+use Wizaplace\SDK\Cms\Page;
+use Wizaplace\SDK\Seo\SeoService;
+use Wizaplace\SDK\Seo\SlugTargetType;
 
 class CmsPageService
 {
