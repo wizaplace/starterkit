@@ -18,10 +18,11 @@ use Wizaplace\SDK\Favorite\FavoriteService;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
+use Wizaplace\SDK\User\UpdateUserAddressCommand;
+use Wizaplace\SDK\User\UpdateUserAddressesCommand;
 use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
-use WizaplaceFrontBundle\Service\UserAddressesService;
 
 class ProfileController extends Controller
 {
@@ -30,9 +31,13 @@ class ProfileController extends Controller
     /** @var TranslatorInterface */
     protected $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    /** @var UserService */
+    protected $userService;
+
+    public function __construct(TranslatorInterface $translator, UserService $userService)
     {
         $this->translator = $translator;
+        $this->userService = $userService;
     }
 
     public function viewAction(): Response
@@ -161,10 +166,7 @@ class ProfileController extends Controller
 
         // update user's addresses
         if (! empty($data['addresses'])) {
-            $userAddressesService = $this->get(UserAddressesService::class);
-            $updateUserAddressesCommand = $userAddressesService->generateUpdateUserAdressesCommand($data);
-
-            $userService->updateUserAdresses($updateUserAddressesCommand);
+            $this->updateUserAdresses($data);
 
             $message = $this->translator->trans('update_addresses_success_message');
             $this->addFlash('success', $message);
@@ -202,5 +204,39 @@ class ProfileController extends Controller
     protected function getUser(): User
     {
         return parent::getUser();
+    }
+
+    final protected function updateUserAdresses(array $data): void
+    {
+        $shippingAddress = new UpdateUserAddressCommand();
+        $shippingAddress
+            ->setFirstName($data['addresses']['shipping']['firstName'])
+            ->setLastName($data['addresses']['shipping']['lastName'])
+            ->setCompany($data['addresses']['shipping']['company'])
+            ->setPhone($data['addresses']['shipping']['phone'])
+            ->setAddress($data['addresses']['shipping']['address'])
+            ->setAddressSecondLine($data['addresses']['shipping']['address_2'])
+            ->setZipCode($data['addresses']['shipping']['zipcode'])
+            ->setCity($data['addresses']['shipping']['city'])
+            ->setCountry($data['addresses']['shipping']['country']);
+        $billingAddress = new UpdateUserAddressCommand();
+        $billingAddress
+            ->setFirstName($data['addresses']['billing']['firstName'])
+            ->setLastName($data['addresses']['billing']['lastName'])
+            ->setCompany($data['addresses']['billing']['company'])
+            ->setPhone($data['addresses']['billing']['phone'])
+            ->setAddress($data['addresses']['billing']['address'])
+            ->setAddressSecondLine($data['addresses']['billing']['address_2'])
+            ->setZipCode($data['addresses']['billing']['zipcode'])
+            ->setCity($data['addresses']['billing']['city'])
+            ->setCountry($data['addresses']['billing']['country']);
+        $updateUserAddressesCommand = new UpdateUserAddressesCommand();
+        $updateUserAddressesCommand
+            ->setUserId($data['id'])
+            ->setShippingAddress($shippingAddress)
+            ->setBillingAddress($billingAddress)
+        ;
+
+        $this->userService->updateUserAdresses($updateUserAddressesCommand);
     }
 }
