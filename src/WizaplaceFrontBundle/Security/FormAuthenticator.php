@@ -14,9 +14,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimpleFormAuthenticatorInterface;
-use Wizaplace\ApiClient;
-use Wizaplace\Authentication\BadCredentials;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\ApiClient;
+use Wizaplace\SDK\Authentication\BadCredentials;
+use Wizaplace\SDK\User\UserService;
 
 class FormAuthenticator implements SimpleFormAuthenticatorInterface
 {

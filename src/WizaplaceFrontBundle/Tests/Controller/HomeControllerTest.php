@@ -9,8 +9,8 @@ declare(strict_types = 1);
 namespace WizaplaceFrontBundle\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\ProductSummary;
-use Wizaplace\Cms\Banner;
+use Wizaplace\SDK\Catalog\ProductSummary;
+use Wizaplace\SDK\Cms\Banner;
 use WizaplaceFrontBundle\Tests\BundleTestCase;
 
 class HomeControllerTest extends BundleTestCase

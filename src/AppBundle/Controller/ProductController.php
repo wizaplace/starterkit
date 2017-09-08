@@ -11,12 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\Option;
-use Wizaplace\Catalog\OptionVariant;
-use Wizaplace\Catalog\Review\ReviewService;
-use Wizaplace\Seo\SeoService;
-use Wizaplace\Seo\SlugTargetType;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\Option;
+use Wizaplace\SDK\Catalog\OptionVariant;
+use Wizaplace\SDK\Catalog\Review\ReviewService;
+use Wizaplace\SDK\Seo\SeoService;
+use Wizaplace\SDK\Seo\SlugTargetType;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class ProductController extends Controller

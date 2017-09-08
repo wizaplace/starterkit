@@ -12,10 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\Review\ReviewService;
-use Wizaplace\Seo\SeoService;
-use Wizaplace\Seo\SlugTargetType;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\Review\ReviewService;
+use Wizaplace\SDK\Seo\SeoService;
+use Wizaplace\SDK\Seo\SlugTargetType;
 
 class CompanyController extends Controller
 {

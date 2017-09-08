@@ -9,8 +9,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Order\OrderService;
-use Wizaplace\User\ApiKey;
+use Wizaplace\SDK\Order\OrderService;
 
 class OrderController extends Controller
 {

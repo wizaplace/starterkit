@@ -10,7 +10,7 @@ namespace WizaplaceFrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Cms\BannerService;
+use Wizaplace\SDK\Cms\BannerService;
 use WizaplaceFrontBundle\Service\ProductListService;
 
 class HomeController extends Controller

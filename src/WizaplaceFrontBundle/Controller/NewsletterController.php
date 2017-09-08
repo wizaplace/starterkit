@@ -12,9 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\MailingList\Exception\MailingListDoesNotExist;
-use Wizaplace\MailingList\Exception\UserAlreadySubscribed;
-use Wizaplace\MailingList\MailingListService;
+use Wizaplace\SDK\MailingList\Exception\MailingListDoesNotExist;
+use Wizaplace\SDK\MailingList\Exception\UserAlreadySubscribed;
+use Wizaplace\SDK\MailingList\MailingListService;
 
 class NewsletterController extends Controller
 {

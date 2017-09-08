@@ -10,7 +10,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\CatalogService;
 
 class SearchController extends Controller
 {

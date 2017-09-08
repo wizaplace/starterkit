@@ -7,8 +7,8 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Tests\Service;
 
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Favorite\FavoriteService;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Favorite\FavoriteService;
 use WizaplaceFrontBundle\Service\AuthenticationService;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 use WizaplaceFrontBundle\Tests\BundleTestCase;

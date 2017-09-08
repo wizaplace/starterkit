@@ -5,7 +5,7 @@ parameters:
     locale: fr
     recaptcha.key: 'dummy_key'
     api.base_url: 'http://wizaplace.loc/api/v1/'
-    slug.regexp: !php/const:Wizaplace\Seo\SeoService::SLUG_REGEXP
+    slug.regexp: !php/const:Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
 
 framework:
     test: ~

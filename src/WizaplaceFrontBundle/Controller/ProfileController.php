@@ -11,14 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\ApiClient;
-use Wizaplace\Authentication\BadCredentials;
-use Wizaplace\Discussion\DiscussionService;
-use Wizaplace\Favorite\FavoriteService;
-use Wizaplace\Order\Order;
-use Wizaplace\Order\OrderService;
-use Wizaplace\User\User as WizaplaceUser;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\ApiClient;
+use Wizaplace\SDK\Authentication\BadCredentials;
+use Wizaplace\SDK\Discussion\DiscussionService;
+use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\Order\Order;
+use Wizaplace\SDK\Order\OrderService;
+use Wizaplace\SDK\User\User as WizaplaceUser;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
