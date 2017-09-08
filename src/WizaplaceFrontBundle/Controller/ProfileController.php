@@ -18,6 +18,7 @@ use Wizaplace\SDK\Favorite\FavoriteService;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
+use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\User as WizaplaceUser;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
@@ -116,7 +117,13 @@ class ProfileController extends Controller
         // update user's profile
         $user = new WizaplaceUser($data);
         $userService = $this->get(UserService::class);
-        $userService->updateUser($user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
+        $updateUserCommand = new UpdateUserCommand();
+        $updateUserCommand
+            ->setUserId($user->getId())
+            ->setEmail($user->getEmail())
+            ->setFirstName($user->getFirstname())
+            ->setLastName($user->getLastname());
+        $userService->updateUser($updateUserCommand);
 
         // update user's password
         if (! empty($data['password'])) {
