@@ -54,9 +54,9 @@ class ProductUrlGeneratorTest extends BundleTestCase
 
         $favoriteService = $container->get(FavoriteService::class);
 
-        $favoriteService->addDeclinationToUserFavorites(1);
+        $favoriteService->addDeclinationToUserFavorites('1');
         $declinations = $favoriteService->getAll();
-        $favoriteService->removeDeclinationToUserFavorites(1); // cleanup
+        $favoriteService->removeDeclinationToUserFavorites('1'); // cleanup
 
         $result = $container->get(ProductUrlGenerator::class)->generateProductUrl($declinations[0]);
 
