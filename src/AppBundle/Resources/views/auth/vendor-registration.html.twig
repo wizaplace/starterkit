@@ -6,10 +6,10 @@
 
         {# registration form #}
         <form action="{{ path('register_vendor') }}" method="POST" class="vendor-registration" enctype="multipart/form-data">
-            {# user will be redircted to home page after validation is successful #}
+            {# redirect to home page on success #}
             <input type="hidden" name="redirect_url" value="{{ path('home') }}">
 
-            {# user will be redirected back here if validation fails (eventual fall back for the HTTP header referer field) #}
+            {# redirect here on fail #}
             <input type="hidden" name="return_url" value="{{ app.request.uri }}">
 
             {# company info #}

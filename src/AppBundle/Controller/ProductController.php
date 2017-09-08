@@ -11,16 +11,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\Option;
-use Wizaplace\Catalog\OptionVariant;
-use Wizaplace\Catalog\Review\ReviewService;
-use Wizaplace\Favorite\FavoriteService;
-use Wizaplace\Seo\SeoService;
-use Wizaplace\Seo\SlugTargetType;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\Option;
+use Wizaplace\SDK\Catalog\OptionVariant;
+use Wizaplace\SDK\Catalog\Review\ReviewService;
+use Wizaplace\SDK\Seo\SeoService;
+use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\Seo\SlugTargetType;
+use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class ProductController extends Controller
 {
+    /** @var ProductUrlGenerator */
+    private $productUrlGenerator;
+
+    public function __construct(ProductUrlGenerator $productUrlGenerator)
+    {
+        $this->productUrlGenerator = $productUrlGenerator;
+    }
+
     public function viewAction(SeoService $seoService, string $categoryPath, string $slug, Request $request) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
@@ -29,7 +38,8 @@ class ProductController extends Controller
         }
         $productId = (int) $slugTarget->getObjectId();
 
-        $product = $this->get(CatalogService::class)->getProductById($productId);
+        $catalogService = $this->get(CatalogService::class);
+        $product = $catalogService->getProductById($productId);
 
         // Recovering the declinationId from url, if none passed, declination = first declination of the product
         if (!$declinationId = $request->query->get('d')) {
@@ -38,11 +48,10 @@ class ProductController extends Controller
 
         $realCategoryPath = implode('/', $product->getCategorySlugs());
         if ($categoryPath !== $realCategoryPath) {
-            return $this->redirect($this->generateUrl('product', ['categoryPath' => $realCategoryPath, 'slug' => $product->getSlug()]));
+            return $this->redirect($this->productUrlGenerator->generateUrlFromProduct($product));
         }
 
         // latestProducts
-        $catalogService = $this->get(CatalogService::class);
         $latestProducts = $catalogService->search('', [], ['createdAt' => 'desc'], 6)->getProducts();
 
         //product Reviews
@@ -55,13 +64,15 @@ class ProductController extends Controller
             $variantIdByOptionId[$option->getId()] = $option->getVariantId();
         }
 
-        $options = array_map(function (Option $option) use ($product, $variantIdByOptionId, $categoryPath, $slug) {
+        $options = array_map(function (Option $option) use ($product, $variantIdByOptionId) {
             return [
                 'id' => $option->getId(),
                 'name' => $option->getName(),
-                'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId, $categoryPath, $slug) {
-                    $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
-
+                'variants' => array_map(function (OptionVariant $variant) use ($product, $option, $variantIdByOptionId) {
+                    $isSelected = false;
+                    if (isset($variantIdByOptionId[$option->getId()])) {
+                        $isSelected = $variantIdByOptionId[$option->getId()] === $variant->getId();
+                    }
                     $variantIdByOptionId[$option->getId()] = $variant->getId();
                     $declinationId = $product->getDeclinationFromOptions($variantIdByOptionId)->getId();
 
@@ -69,11 +80,7 @@ class ProductController extends Controller
                         'id' => $variant->getId(),
                         'name' => $variant->getName(),
                         'selected' => $isSelected,
-                        'url' => $this->generateUrl('product', [
-                            'categoryPath' => $categoryPath,
-                            'slug' => $slug,
-                            'd' => $declinationId,
-                        ]),
+                        'url' => $this->productUrlGenerator->generateUrlFromProduct($product, $declinationId),
                     ];
                 }, $option->getVariants()),
             ];

@@ -16,6 +16,12 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
+product:
+    path: /p/{categoryPath}/{slug}
+    requirements:
+        categoryPath: "(%slug.regexp%/)*%slug.regexp%"
+        slug: "%slug.regexp%"
+
 cms_page:
     path: /{slug}
     defaults: { _controller: WizaplaceFrontBundle:Cms:Page }

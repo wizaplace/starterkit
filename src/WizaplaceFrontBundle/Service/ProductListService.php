@@ -8,8 +8,8 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Service;
 
-use Wizaplace\Catalog\CatalogService;
-use Wizaplace\Catalog\ProductSummary;
+use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\ProductSummary;
 
 class ProductListService
 {

@@ -12,7 +12,13 @@ const ui = {
 
         // slide panel can be closed with a click on close button or overlay
         $closeButton.on("click", close);
-        $overlay.on("click", close);
+        $overlay.on("click", function() {
+
+            // do nothing if there's a loading spinner
+            if($('.loading-spinner').hasClass('is-visible')) { return false; }
+
+            close();
+        });
 
         function open() {
             show($overlay);

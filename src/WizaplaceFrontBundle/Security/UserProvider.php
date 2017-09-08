@@ -11,8 +11,8 @@ namespace WizaplaceFrontBundle\Security;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Wizaplace\ApiClient;
-use Wizaplace\User\UserService;
+use Wizaplace\SDK\ApiClient;
+use Wizaplace\SDK\User\UserService;
 
 class UserProvider implements UserProviderInterface
 {

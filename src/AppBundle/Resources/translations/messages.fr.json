@@ -5,6 +5,10 @@
     "categories": "Catégories",
     "see_categories": "Voir les catégories",
     "select_a_category": "Sélectionner une catégorie",
+    "product_description": "Description du produit",
+    "technical_characteristics": "Caractéristiques techniques",
+    "general_characteristics": "Caractéristiques générales",
+    "select": "Sélectionnez",
     "all_categories": "Toutes les catégories",
     "search_placeholder": "Rechercher...",
     "email_placeholder": "E-mail...",
@@ -46,6 +50,11 @@
     "shipping_address": "Adresse de livraison",
     "validate": "Valider",
     "modify": "Modifier",
+    "subscribe_to_newsletter": "M'abonner à la newsletter",
+    "subscribe_me": "M'abonner",
+    "newsletter_subscription_success_message": "Vous êtes désormais inscrit à la newsletter",
+    "newsletter_not_found_error_message": "Cette newsletter n'existe pas",
+    "newsletter_already_subscribed_error_message": "Vous avez déjà souscrit à cette newsletter",
     "create_my_account": "Créer mon compte",
     "update_my_password": "Modifier mon mot de passe",
     "current_password": "Mot de passe actuel",
@@ -61,8 +70,11 @@
     "delete": "Supprimer",
     "excluding_taxes": "HT",
     "including_taxes": "TTC",
+    "supplier_reference": "Référence fournisseur",
+    "ean_code": "Code EAN",
     "including_vat_and_taxes": "Dont TVA et autres taxes",
-    "quantity": "Quantity",
+    "quantity": "Quantité",
+    "customers_reviews": "Commentaires des clients",
     "total": "Total",
     "sub_total": "Sous total",
     "price": "Prix",
@@ -153,6 +165,7 @@
     "you": "Vous",
     "discussion_title": "À propos du produit : %product_name%",
     "add_to_basket": "ajouter au panier",
+    "in_stock": "en stock",
     "out_of_stock": "rupture de stock",
     "order_table": {
         "header": {
@@ -186,6 +199,41 @@
             "add": "Ajouter dans mes favoris",
             "remove": "Enlever de mes favoris",
             "already_favored": "Ce produit est déjà dans vos favoris"
+        }
+    },
+    "profile": {
+        "layout": {
+            "account": {
+                "title": "Mon compte",
+                "profile": "Profil",
+                "addresses": "Adresses"
+            },
+            "purchases": {
+                "title": "Mes achats",
+                "orders": "Commandes",
+                "returns": "Retours",
+                "after_sales_service": "SAV"
+            },
+            "favorites": {
+                "title": "Mes Favoris",
+                "list": "Liste"
+            },
+            "discussions": {
+                "title": "Messagerie",
+                "messages": "Mes messages"
+            }
+        },
+        "favorites": {
+            "label": "Favoris",
+            "header": {
+                "name": "Nom",
+                "companyName": "Marchand",
+                "priceWithTaxes": "Prix TTC",
+                "action": "Action"
+            },
+            "body": {
+                "see_product": "Voir la fiche produit"
+            }
         }
     }
 }

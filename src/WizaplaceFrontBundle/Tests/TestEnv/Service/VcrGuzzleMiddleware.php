@@ -9,7 +9,6 @@ declare(strict_types = 1);
 namespace WizaplaceFrontBundle\Tests\TestEnv\Service;
 
 use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 use VCR\Configuration;
@@ -36,13 +35,17 @@ class VcrGuzzleMiddleware
             $request = $request->withHeader('VCR-index', (string) $this->index)->withoutHeader('User-Agent');
             $this->index++;
 
-            $vcrResponse = $this->vcr->handleRequest(new Request(
+            $vcrRequest = new Request(
                 $request->getMethod(),
                 (string) $request->getUri(),
                 array_map(static function (array $headers) : string {
                     return reset($headers);
                 }, $request->getHeaders())
-            ));
+            );
+            if ($request->getBody()->getSize() > 0) {
+                $vcrRequest->setBody($request->getBody()->getContents());
+            }
+            $vcrResponse = $this->vcr->handleRequest($vcrRequest);
 
             $psr7Response = new Response(
                 (int) $vcrResponse->getStatusCode(),

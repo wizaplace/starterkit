@@ -10,6 +10,10 @@ services:
     WizaplaceFrontBundle\Controller\:
         resource: '../../Controller'
         public: true
+    WizaplaceFrontBundle\Service\ProductUrlGenerator:
+        public: true
+    WizaplaceFrontBundle\Service\AuthenticationService:
+        public: true
     WizaplaceFrontBundle\Security\AuthenticationFailureHandler:
         parent: 'security.authentication.failure_handler'
         autowire: true
@@ -30,30 +34,34 @@ services:
             -
                 base_uri: '%api.base_url%'
                 handler: '@wizaplace.guzzle.handler'
-    Wizaplace\ApiClient:
+    Wizaplace\SDK\ApiClient:
         arguments: ['@wizaplace.http.client']
         public: true
-    Wizaplace\Catalog\CatalogService:
+    Wizaplace\SDK\Catalog\CatalogService:
         public: true
-    Wizaplace\Catalog\Review\ReviewService:
+    Wizaplace\SDK\Catalog\Review\ReviewService:
         public: true
-    Wizaplace\Basket\BasketService:
+    Wizaplace\SDK\Basket\BasketService:
         public: true
-    Wizaplace\Cms\BannerService:
+    Wizaplace\SDK\Cms\BannerService:
         public: true
-    Wizaplace\User\UserService:
+    Wizaplace\SDK\User\UserService:
         public: true
-    Wizaplace\Order\OrderService:
+    Wizaplace\SDK\Order\OrderService:
         public: true
-    Wizaplace\Image\ImageService:
+    Wizaplace\SDK\Image\ImageService:
         public: true
-    Wizaplace\Seo\SeoService:
+    Wizaplace\SDK\Seo\SeoService:
         public: true
-    Wizaplace\Cms\CmsService:
+    Wizaplace\SDK\Cms\CmsService:
         public: true
-    Wizaplace\Company\CompanyService:
+    Wizaplace\SDK\Company\CompanyService:
         public: true
-    Wizaplace\Discussion\DiscussionService:
+    Wizaplace\SDK\Discussion\DiscussionService:
+        public: true
+    Wizaplace\SDK\MailingList\MailingListService:
+        public: true
+    Wizaplace\SDK\Favorite\FavoriteService:
         public: true
     Wizaplace\Favorite\FavoriteService:
         public: true
