@@ -24,6 +24,8 @@ services:
         autowire: true
         autoconfigure: false
         public: true
+    WizaplaceFrontBundle\Service\UserAdressesService:
+        public: true
 
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'

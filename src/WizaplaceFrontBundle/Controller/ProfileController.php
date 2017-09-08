@@ -18,10 +18,13 @@ use Wizaplace\SDK\Favorite\FavoriteService;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
+use Wizaplace\SDK\User\UpdateUserAddressCommand;
+use Wizaplace\SDK\User\UpdateUserAddressesCommand;
 use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\User as WizaplaceUser;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
+use WizaplaceFrontBundle\Service\UserAddressesService;
 
 class ProfileController extends Controller
 {
@@ -162,7 +165,10 @@ class ProfileController extends Controller
 
         // update user's addresses
         if (! empty($data['addresses'])) {
-            $userService->updateUserAdresses($user);
+            $userAddressesService = $this->get(UserAddressesService::class);
+            $updateUserAddressesCommand = $userAddressesService->generateUpdateUserAdressesCommand($user);
+
+            $userService->updateUserAdresses($updateUserAddressesCommand);
 
             $message = $this->translator->trans('update_addresses_success_message');
             $this->addFlash('success', $message);
