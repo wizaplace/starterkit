@@ -172,14 +172,11 @@ product:
     options:
         expose: true
 
-
 # panier (Create, Update, Delete)
-
 clean_basket:
     path: /basket/clean
     defaults: { _controller: AppBundle:Basket:cleanBasket }
     methods: [POST]
-
 
 basket_add_coupon:
     path: /basket/add_coupon
@@ -241,4 +238,15 @@ create_product_review:
 create_company_review:
     path: /company/add_review
     defaults: { _controller: AppBundle:Company:review }
+    methods: [POST]
+
+#favorites
+add_to_favorites:
+    path: /favorites/add
+    defaults: { _controller: WizaplaceFrontBundle:Favorite:addToFavorite }
+    methods: [POST]
+
+remove_from_favorites:
+    path: /favorites/remove
+    defaults: { _controller: WizaplaceFrontBundle:Favorite:removeFromFavorite }
     methods: [POST]

@@ -46,6 +46,14 @@
                 <img src="{{ asset('images/no-image.jpg') }}">
             {% endif %}
 
+            {# The favorite management is only shown when user is connected #}
+            {% if app.user %}
+                <div id="favorite-management">
+                    <a href="#" @click="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove' |trans }}</a>
+                    <a href="#" @click="addToFavorite" v-else>{{ 'product.favorite.add' |trans }}</a>
+                </div>
+            {% endif %}
+
             <hr>
 
             {# product long description #}
@@ -214,6 +222,8 @@
             data: {
                 productId: {{ product.id }},
                 quantity: 1,
+                declinationId: '{{ declination.id }}',
+                isFavorite: {{ isFavorite|json_encode|raw }},
             },
 
             methods: {
@@ -245,6 +255,35 @@
                         }
                     });
                 },
+
+                addToFavorite: function (event) {
+                    event.preventDefault();
+                    var self = this;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('add_to_favorites') }}",
+                        data: { declinationId: this.declinationId },
+                        success: function(response) {
+                            self.isFavorite = true;
+                        },
+                        error: function () {
+                            notification.createAlert("{{'product.favorite.already_favored'|trans}}", "danger");
+                        }
+                    });
+                },
+
+                removeFromFavorite: function (event) {
+                    event.preventDefault();
+                    var self = this;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('remove_from_favorites') }}",
+                        data: { declinationId: this.declinationId },
+                        success: function(response) {
+                            self.isFavorite = false;
+                        }
+                    });
+                }
             },
         });
 

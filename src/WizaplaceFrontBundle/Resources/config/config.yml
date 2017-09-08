@@ -63,6 +63,8 @@ services:
         public: true
     Wizaplace\SDK\Favorite\FavoriteService:
         public: true
+    Wizaplace\Favorite\FavoriteService:
+        public: true
     WizaplaceFrontBundle\Twig\AppExtension:
         arguments:
             $cache: '@cache.app'
