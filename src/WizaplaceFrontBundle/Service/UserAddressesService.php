@@ -18,8 +18,8 @@ class UserAddressesService
     {
         $shippingAddress = new UpdateUserAddressCommand();
         $shippingAddress
-            ->setFirstName($user->getShippingAddress()->getFirstname())
-            ->setLastName($user->getShippingAddress()->getLastname())
+            ->setFirstName($user->getShippingAddress()->getFirstName())
+            ->setLastName($user->getShippingAddress()->getLastName())
             ->setCompany($user->getShippingAddress()->getCompany())
             ->setPhone($user->getShippingAddress()->getPhone())
             ->setAddress($user->getShippingAddress()->getAddress())
@@ -29,8 +29,8 @@ class UserAddressesService
             ->setCountry($user->getShippingAddress()->getCountry());
         $billingAddress = new UpdateUserAddressCommand();
         $billingAddress
-            ->setFirstName($user->getBillingAddress()->getFirstname())
-            ->setLastName($user->getBillingAddress()->getLastname())
+            ->setFirstName($user->getBillingAddress()->getFirstName())
+            ->setLastName($user->getBillingAddress()->getLastName())
             ->setCompany($user->getBillingAddress()->getCompany())
             ->setPhone($user->getBillingAddress()->getPhone())
             ->setAddress($user->getBillingAddress()->getAddress())
