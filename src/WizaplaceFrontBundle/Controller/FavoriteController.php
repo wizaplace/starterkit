@@ -11,7 +11,7 @@ namespace WizaplaceFrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wizaplace\Favorite\FavoriteService;
+use Wizaplace\SDK\Favorite\FavoriteService;
 
 class FavoriteController extends Controller
 {

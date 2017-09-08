@@ -256,7 +256,8 @@
                     });
                 },
 
-                addToFavorite: function () {
+                addToFavorite: function (event) {
+                    event.preventDefault();
                     var self = this;
                     $.ajax({
                         type: "POST",
@@ -271,7 +272,8 @@
                     });
                 },
 
-                removeFromFavorite: function () {
+                removeFromFavorite: function (event) {
+                    event.preventDefault();
                     var self = this;
                     $.ajax({
                         type: "POST",
