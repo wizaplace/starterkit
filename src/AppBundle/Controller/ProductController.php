@@ -37,7 +37,8 @@ class ProductController extends Controller
         }
         $productId = (int) $slugTarget->getObjectId();
 
-        $product = $this->get(CatalogService::class)->getProductById($productId);
+        $catalogService = $this->get(CatalogService::class);
+        $product = $catalogService->getProductById($productId);
 
         // Recovering the declinationId from url, if none passed, declination = first declination of the product
         if (!$declinationId = $request->query->get('d')) {
@@ -50,7 +51,6 @@ class ProductController extends Controller
         }
 
         // latestProducts
-        $catalogService = $this->get(CatalogService::class);
         $latestProducts = $catalogService->search('', [], ['createdAt' => 'desc'], 6)->getProducts();
 
         //product Reviews
