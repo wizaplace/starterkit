@@ -18,8 +18,6 @@ use Wizaplace\SDK\Favorite\FavoriteService;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
-use Wizaplace\SDK\User\UpdateUserAddressCommand;
-use Wizaplace\SDK\User\UpdateUserAddressesCommand;
 use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\User as WizaplaceUser;
 use Wizaplace\SDK\User\UserService;
@@ -118,14 +116,13 @@ class ProfileController extends Controller
         }
 
         // update user's profile
-        $user = new WizaplaceUser($data);
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
         $updateUserCommand
-            ->setUserId($user->getId())
-            ->setEmail($user->getEmail())
-            ->setFirstName($user->getFirstname())
-            ->setLastName($user->getLastname());
+            ->setUserId($data['id'])
+            ->setEmail($data['email'])
+            ->setFirstName($data['firstName'])
+            ->setLastName($data['lastName']);
         $userService->updateUser($updateUserCommand);
 
         // update user's password
@@ -166,7 +163,7 @@ class ProfileController extends Controller
         // update user's addresses
         if (! empty($data['addresses'])) {
             $userAddressesService = $this->get(UserAddressesService::class);
-            $updateUserAddressesCommand = $userAddressesService->generateUpdateUserAdressesCommand($user);
+            $updateUserAddressesCommand = $userAddressesService->generateUpdateUserAdressesCommand($data);
 
             $userService->updateUserAdresses($updateUserAddressesCommand);
 

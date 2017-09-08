@@ -14,33 +14,33 @@ use Wizaplace\SDK\User\User;
 
 class UserAddressesService
 {
-    public function generateUpdateUserAdressesCommand(User $user)
+    public function generateUpdateUserAdressesCommand(array $data)
     {
         $shippingAddress = new UpdateUserAddressCommand();
         $shippingAddress
-            ->setFirstName($user->getShippingAddress()->getFirstName())
-            ->setLastName($user->getShippingAddress()->getLastName())
-            ->setCompany($user->getShippingAddress()->getCompany())
-            ->setPhone($user->getShippingAddress()->getPhone())
-            ->setAddress($user->getShippingAddress()->getAddress())
-            ->setAddressSecondLine($user->getShippingAddress()->getAddressSecondLine())
-            ->setZipCode($user->getShippingAddress()->getZipCode())
-            ->setCity($user->getShippingAddress()->getCity())
-            ->setCountry($user->getShippingAddress()->getCountry());
+            ->setFirstName($data['addresses']['shipping']['firstName'])
+            ->setLastName($data['addresses']['shipping']['lastName'])
+            ->setCompany($data['addresses']['shipping']['company'])
+            ->setPhone($data['addresses']['shipping']['phone'])
+            ->setAddress($data['addresses']['shipping']['address'])
+            ->setAddressSecondLine($data['addresses']['shipping']['address_2'])
+            ->setZipCode($data['addresses']['shipping']['zipcode'])
+            ->setCity($data['addresses']['shipping']['city'])
+            ->setCountry($data['addresses']['shipping']['country']);
         $billingAddress = new UpdateUserAddressCommand();
         $billingAddress
-            ->setFirstName($user->getBillingAddress()->getFirstName())
-            ->setLastName($user->getBillingAddress()->getLastName())
-            ->setCompany($user->getBillingAddress()->getCompany())
-            ->setPhone($user->getBillingAddress()->getPhone())
-            ->setAddress($user->getBillingAddress()->getAddress())
-            ->setAddressSecondLine($user->getBillingAddress()->getAddressSecondLine())
-            ->setZipCode($user->getBillingAddress()->getZipCode())
-            ->setCity($user->getBillingAddress()->getCity())
-            ->setCountry($user->getBillingAddress()->getCountry());
+            ->setFirstName($data['addresses']['billing']['firstName'])
+            ->setLastName($data['addresses']['billing']['lastName'])
+            ->setCompany($data['addresses']['billing']['company'])
+            ->setPhone($data['addresses']['billing']['phone'])
+            ->setAddress($data['addresses']['billing']['address'])
+            ->setAddressSecondLine($data['addresses']['billing']['address_2'])
+            ->setZipCode($data['addresses']['billing']['zipcode'])
+            ->setCity($data['addresses']['billing']['city'])
+            ->setCountry($data['addresses']['billing']['country']);
         $updateUserAddressesCommand = new UpdateUserAddressesCommand();
         $updateUserAddressesCommand
-            ->setUserId($user->getId())
+            ->setUserId($data['id'])
             ->setShippingAddress($shippingAddress)
             ->setBillingAddress($billingAddress)
         ;
