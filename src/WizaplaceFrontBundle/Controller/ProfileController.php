@@ -17,6 +17,7 @@ use Wizaplace\SDK\Discussion\DiscussionService;
 use Wizaplace\SDK\Favorite\FavoriteService;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
+use Wizaplace\SDK\Order\OrderStatus;
 use Wizaplace\SDK\User\User as WizaplaceUser;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Security\User;
@@ -72,7 +73,7 @@ class ProfileController extends Controller
     {
         $orders = $this->get(OrderService::class)->getOrders();
         $completedOrders = array_filter($orders, function (Order $order): bool {
-            return $order->getStatus() === "COMPLETED";
+            return $order->getStatus() === OrderStatus::COMPLETED();
         });
 
         return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
