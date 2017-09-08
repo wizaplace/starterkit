@@ -74,7 +74,7 @@ class ProfileController extends Controller
     {
         $orders = $this->get(OrderService::class)->getOrders();
         $completedOrders = array_filter($orders, function (Order $order): bool {
-            return $order->getStatus() === OrderStatus::COMPLETED();
+            return $order->getStatus()->equals(OrderStatus::COMPLETED());
         });
 
         return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
