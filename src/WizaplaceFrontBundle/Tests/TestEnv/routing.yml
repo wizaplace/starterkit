@@ -18,6 +18,7 @@ logout: # see security.yml
 
 product:
     path: /p/{categoryPath}/{slug}
+    defaults: { _controller: WizaplaceFrontBundle:Product:view }
     requirements:
         categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
