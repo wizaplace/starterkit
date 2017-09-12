@@ -12,11 +12,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Thu, 24 Aug 2017 14:53:59 GMT'
+            Date: 'Tue, 12 Sep 2017 12:40:41 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: e0cfdb
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/e0cfdb'
+            X-Debug-Token: ede12d
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ede12d'
             Content-Length: '2'
             Content-Type: application/json
         body: '{}'

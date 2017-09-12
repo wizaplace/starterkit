@@ -1,0 +1,64 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=informatique'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 12 Sep 2017 12:40:38 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: b1b84c
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/b1b84c'
+            Content-Length: '45'
+            Content-Type: application/json
+        body: '{"informatique":{"type":"category","id":"3"}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/categories/3'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '1'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 12 Sep 2017 12:40:38 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 6c8fc8
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/6c8fc8'
+            Content-Length: '128'
+            Content-Type: application/json
+        body: '{"id":3,"parentId":null,"name":"Informatique","description":"","slug":"informatique","image":null,"position":0,"productCount":3}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/categories/tree'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '2'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 12 Sep 2017 12:40:38 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: c7f9b6
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/c7f9b6'
+            Content-Length: '648'
+            Content-Type: application/json
+        body: '[{"category":{"id":2,"parentId":null,"name":"Cat\u00e9gorie principale","description":"","slug":"categorie-principale","image":null,"position":10,"productCount":0},"children":[]},{"category":{"id":3,"parentId":null,"name":"Informatique","description":"","slug":"informatique","image":null,"position":0,"productCount":3},"children":[{"category":{"id":4,"parentId":3,"name":"\u00c9crans","description":"","slug":"ecrans","image":null,"position":0,"productCount":2},"children":[]}]},{"category":{"id":5,"parentId":null,"name":"Test Category Slug","description":"","slug":"test-category-slug","image":null,"position":0,"productCount":2},"children":[]}]'

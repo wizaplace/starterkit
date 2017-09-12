@@ -13,9 +13,6 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests/PHPUnit</directory>
-        </testsuite>
         <testsuite name="WizaplaceFrontBundle Test Suite">
             <directory>src/WizaplaceFrontBundle/Tests</directory>
         </testsuite>

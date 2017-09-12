@@ -36,10 +36,10 @@ lint-css:
 	gulp lint-css
 
 stan:
-	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 src tests
+	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 app src
 
 stan-ci:
-	./vendor/bin/phpstan --no-interaction --no-progress analyse --errorFormat=checkstyle -c phpstan.neon -l 5 src tests > phpstan-checkstyle.xml || \
+	./vendor/bin/phpstan --no-interaction --no-progress analyse --errorFormat=checkstyle -c phpstan.neon -l 5 app src > phpstan-checkstyle.xml || \
 	(sed -i 's/<error/<error source="phpstan"/g' phpstan-checkstyle.xml && false)
 
 test: test-phpunit test-behat

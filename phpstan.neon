@@ -5,4 +5,3 @@ services:
 parameters:
     excludes_analyse:
         - src/WizaplaceFrontBundle/Tests/BundleTestCase.php
-        - tests/PHPUnit/VcrWebTestCase.php
