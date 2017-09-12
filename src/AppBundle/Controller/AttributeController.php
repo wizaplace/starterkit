@@ -20,7 +20,7 @@ class AttributeController extends Controller
     {
         $seoService = $this->get(SeoService::class);
         $slugTarget = $seoService->resolveSlug($slug);
-        if (!$slugTarget || $slugTarget->getObjectType() != SlugTargetType::ATTRIBUTE_VARIANT()) {
+        if (!$slugTarget || !$slugTarget->getObjectType()->equals(SlugTargetType::ATTRIBUTE_VARIANT())) {
             throw $this->createNotFoundException('Variant '.$slug.' not found');
         }
         $selectedVariantId = $slugTarget->getObjectId();

@@ -91,10 +91,10 @@ class BasketController extends Controller
     {
         $basketId = $this->getBasketId();
         $declinationId = $request->request->get('declinationId');
-        $quantity = $request->request->get('quantity');
+        $quantity = $request->request->getInt('quantity');
 
         // remove product from basket if quantity is 0
-        if ($quantity == 0) {
+        if ($quantity === 0) {
             $this->basketService->removeProductFromBasket($basketId, $declinationId);
 
             $message = $this->translator->trans('product_deleted_from_basket');
@@ -103,7 +103,7 @@ class BasketController extends Controller
             return new JsonResponse();
         }
 
-        $realQuantity = $this->basketService->updateProductQuantity($basketId, $declinationId, (int) $quantity);
+        $realQuantity = $this->basketService->updateProductQuantity($basketId, $declinationId, $quantity);
 
         return new JsonResponse([
             'realQuantity' => $realQuantity,

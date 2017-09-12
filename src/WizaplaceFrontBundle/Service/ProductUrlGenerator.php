@@ -30,13 +30,15 @@ class ProductUrlGenerator
     {
         if ($product instanceof Product) {
             return $this->generateUrlFromProduct($product, $declinationId);
-        } elseif ($product instanceof ProductSummary) {
-            return $this->generateUrlFromProductSummary($product, $declinationId);
-        } elseif ($product instanceof DeclinationSummary) {
-            return $this->generateUrlFromProductDeclinationSummary($product);
-        } else {
-            throw new \InvalidArgumentException('Cannot generate an url from given $product');
         }
+        if ($product instanceof ProductSummary) {
+            return $this->generateUrlFromProductSummary($product, $declinationId);
+        }
+        if ($product instanceof DeclinationSummary) {
+            return $this->generateUrlFromProductDeclinationSummary($product);
+        }
+
+        throw new \InvalidArgumentException('Cannot generate an url from given $product');
     }
 
     public function generateUrlFromProduct(Product $product, ?string $declinationId = null): string

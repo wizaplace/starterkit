@@ -24,7 +24,7 @@ class CompanyController extends Controller
         $seoService = $this->get(SeoService::class);
         $slugTarget = $seoService->resolveSlug($slug);
 
-        if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::COMPANY()) {
+        if (is_null($slugTarget) || !$slugTarget->getObjectType()->equals(SlugTargetType::COMPANY())) {
             throw $this->createNotFoundException("Company '${slug}' Not Found'");
         }
         $companyId = (int) $slugTarget->getObjectId();

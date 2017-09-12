@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function viewAction(SeoService $seoService, string $slug) : Response
     {
         $slugTarget = $seoService->resolveSlug($slug);
-        if (is_null($slugTarget) || $slugTarget->getObjectType() != SlugTargetType::CATEGORY()) {
+        if (is_null($slugTarget) || !$slugTarget->getObjectType()->equals(SlugTargetType::CATEGORY())) {
             throw $this->createNotFoundException("Category '${slug}' Not Found");
         }
         $categoryId = (int) $slugTarget->getObjectId();
