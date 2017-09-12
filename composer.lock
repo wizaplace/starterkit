@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "70b5844ccdb1cd680527bfba9b1428f7",
+    "content-hash": "6bbfa9aeb55dc1c3325c1685d66237b9",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2478,16 +2478,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.8.0",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "04706a07efbbe89a5b568cc917ccefc8d35f53c2"
+                "reference": "99d56b8cce89d7b83ce7733b86e01efddf230048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/04706a07efbbe89a5b568cc917ccefc8d35f53c2",
-                "reference": "04706a07efbbe89a5b568cc917ccefc8d35f53c2",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/99d56b8cce89d7b83ce7733b86e01efddf230048",
+                "reference": "99d56b8cce89d7b83ce7733b86e01efddf230048",
                 "shasum": ""
             },
             "require": {
@@ -2501,13 +2501,10 @@
                 "phpstan/phpstan": "^0.8.0",
                 "phpunit/phpunit": "^6.1",
                 "roave/security-advisories": "dev-master",
-                "squizlabs/php_codesniffer": "^2.0",
-                "wizaplace/php-coding-standard": "^1.0"
+                "squizlabs/php_codesniffer": "^3.0",
+                "wizaplace/php-coding-standard": "^1.1.2"
             },
             "type": "library",
-            "extra": {
-                "codetastic": "wizaplace/php-coding-standard"
-            },
             "autoload": {
                 "psr-4": {
                     "Wizaplace\\SDK\\": "src/"
@@ -2518,7 +2515,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-09-08T07:27:43+00:00"
+            "time": "2017-09-12T08:13:11+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
