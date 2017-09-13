@@ -77,6 +77,11 @@ profile_return:
     defaults: { _controller: AppBundle:Profile:return }
     methods: [GET]
 
+profile_create_return:
+    path: /profil/retour/creation
+    defaults: { _controller: AppBundle:Profile:createOrderReturn }
+    methods: [GET, POST]
+
 profile_after_sale_service:
     path: /profil/sav
     defaults: { _controller: AppBundle:Profile:afterSalesService }
