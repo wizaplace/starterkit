@@ -1,13 +1,74 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
+    <label>{{ 'profile.returns.title' | trans }}</label>
     <div class="spacer"></div>
-    <label>Commandes terminées, retour produit possible</label>
-    <div class="spacer"></div>
-    {{ include('@App/profile/orders-table.html.twig') }}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'order_table.header.command_id' | trans }}</th>
+                <th>{{ 'order_table.header.date' | trans }}</th>
+                <th>{{ 'order_table.header.shipping_name' | trans }}</th>
+                <th>{{ 'order_table.header.total' | trans }}</th>
+                <th>{{ 'order_table.header.status' | trans }}</th>
+                <th>{{ 'order_table.header.action' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders|default %}
+                <tr>
+                    <td><a href="{{ path('order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
+                    <td>{{ order.timestamp.format('d-m-y') }}</td>
+                    <td>{{ order.shippingName }}</td>
+                    <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        {# open contact vendor modal #}
+                        <a data-toggle="modal" href="#order-return-modal-{{ order.id }}">{{ 'profile.returns.create'|trans }}</a>
+
+                        {# actual discussion modal #}
+                        {% include '@App/profile/_return-modal.html.twig' with { 'order': order, 'reasons': reasons } %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <div class="spacer"></div>
-    <label>Retour produits</label>
+    <label>{{ 'profile.returns.title' | trans }}</label>
     <div class="spacer"></div>
-    {{ include('@App/profile/return-table.html.twig') }}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'return_table.header.order_id' | trans }}</th>
+                <th>{{ 'return_table.header.date' | trans }}</th>
+                <th>{{ 'return_table.header.items' | trans }}</th>
+                <th>{{ 'return_table.header.status' | trans }}</th>
+                <th>{{ 'return_table.header.see_more' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for return in returns|default %}
+                <tr>
+                    <td><a href="{{ path('order', {'orderId': return.id}) }}" class="text-blue">{{ return.id }}</a></td>
+                    <td>{{ return.createdAt.format('d-m-y') }}</td>
+                    <td>
+                        <ul>
+                            {% for item in return.items %}
+                                <li>{{ item.productName }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ return.status }}</td>
+                    <td>
+                        <a href="{{ path('profile_return', {'orderReturnId': return.id}) }}">{{ 'profile.returns.see_more' | trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

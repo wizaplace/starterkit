@@ -71,8 +71,19 @@ class ProfileController extends Controller
 
     public function returnsAction(): Response
     {
+        $orderService = $this->get(OrderService::class);
+        $orders = $orderService->getOrders();
+
+        $validOrders = array_filter($orders, function (Order $order) {
+            return $order->getStatus() !== OrderStatus::COMPLETED();
+        });
+        $reasons = $orderService->getReturnReasons();
+        $returns = $orderService->getOrderReturns();
+
         return $this->render('@WizaplaceFront/profile/returns.html.twig', [
-            'profile' => $this->getUser()->getWizaplaceUser(),
+            'orders' => $validOrders,
+            'reasons' => $reasons,
+            'returns' => $returns,
         ]);
     }
 
