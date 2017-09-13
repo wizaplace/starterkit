@@ -15,6 +15,7 @@ use Wizaplace\SDK\ApiClient;
 use Wizaplace\SDK\Authentication\BadCredentials;
 use Wizaplace\SDK\Discussion\DiscussionService;
 use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\Order\CreateOrderReturn;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\Order\OrderStatus;
@@ -97,6 +98,25 @@ class ProfileController extends Controller
             'orderReturn' => $orderReturn,
             'returnReasons' => $returnReasons,
         ]);
+    }
+
+    public function createOrderReturnAction(Request $request)
+    {
+        $orderService = $this->get(OrderService::class);
+        $order = $orderService->getOrder((int) $request->get('order_id'));
+        $createOrderReturn = new CreateOrderReturn((int) $request->get('order_id'), $request->get('return_message'));
+        $selectedItems = array_keys($request->request->get('return')['selected']);
+        $selectedReasons = $request->request->get('return')['reasons'];
+
+        foreach ($order->getOrderItems() as $orderItem) {
+            $id = $orderItem->getDeclinationId();
+            if (in_array($id, $selectedItems)) {
+                $createOrderReturn->addItem($id, (int) $selectedReasons[$id], $orderItem->getAmount());
+            }
+        }
+        $orderService->createOrderReturn($createOrderReturn);
+
+        return $this->redirectToRoute('profile_returns');
     }
 
     public function afterSalesServiceAction(): Response
