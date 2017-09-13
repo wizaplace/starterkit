@@ -1,0 +1,44 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <label>{{ 'profile.return.title' | trans }}</label>
+    <h2>{{ 'profile.return.order.title' | trans }}</h2>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>{{ 'profile.return.order.id' | trans }}</th>
+            <th>{{ 'profile.return.order.created_at' | trans }}</th>
+            <th>{{ 'profile.return.order.status' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ orderReturn.orderId }}</td>
+            <td>{{ orderReturn.createdAt|date }}</td>
+            <td>{{ orderReturn.status }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>{{ 'profile.return.item.title' | trans }}</h2>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>{{ 'profile.return.item.name' | trans }}</th>
+            <th>{{ 'profile.return.order.price' | trans }}</th>
+            <th>{{ 'profile.return.order.amount' | trans }}</th>
+            <th>{{ 'profile.return.order.reason' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in orderReturn.items %}
+            <tr>
+                <td>{{ item.productName }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ returnReasons[item.reason].name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
