@@ -19,7 +19,7 @@ use VCR\Videorecorder;
 class VcrGuzzleMiddleware
 {
     /** @var int */
-    private $index = 0;
+    private static $index = 0;
 
     /** @var Videorecorder */
     private $vcr;
@@ -32,8 +32,8 @@ class VcrGuzzleMiddleware
     public function __invoke(callable $handler)
     {
         return function (RequestInterface $request, array $options) {
-            $request = $request->withHeader('VCR-index', (string) $this->index)->withoutHeader('User-Agent');
-            $this->index++;
+            $request = $request->withHeader('VCR-index', (string) self::$index)->withoutHeader('User-Agent');
+            self::$index++;
 
             $vcrRequest = new Request(
                 $request->getMethod(),
@@ -62,5 +62,9 @@ class VcrGuzzleMiddleware
     public function getVcr(): Videorecorder
     {
         return $this->vcr;
+    }
+
+    public function resetRequestIndex(): void {
+        self::$index = 0;
     }
 }

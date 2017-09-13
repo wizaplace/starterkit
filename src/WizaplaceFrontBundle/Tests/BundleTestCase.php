@@ -38,6 +38,7 @@ abstract class BundleTestCase extends WebTestCase
     protected static function createClient(array $options = array(), array $server = array())
     {
         $client = parent::createClient($options, $server);
+        self::$kernel->getContainer()->get(VcrGuzzleMiddleware::class)->resetRequestIndex();
         $vcr = self::$kernel->getContainer()->get(VcrGuzzleMiddleware::class)->getVcr();
 
         $vcr->configure()->setCassettePath(dirname((new \ReflectionClass(static::class))->getFileName()));
@@ -69,6 +70,11 @@ abstract class BundleTestCase extends WebTestCase
         $this->assertCount(1, $fullRenderedData[$templateName]);
 
         return $fullRenderedData[$templateName][0]['parameters'];
+    }
+
+    final protected function clearRenderedData(): void
+    {
+        self::$kernel->getContainer()->get(TwigEngineLogger::class)->clearRenderedData();
     }
 
     /**

@@ -63,4 +63,9 @@ class TwigEngineLogger implements EngineInterface
     {
         return $this->rendered;
     }
+
+    public function clearRenderedData(): void
+    {
+        $this->rendered = [];
+    }
 }
