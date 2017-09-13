@@ -1,0 +1,71 @@
+{# 'contact vendor' modal #}
+<div class="discussion-modal modal fade" tabindex="-1" role="dialog" id="order-return-modal-{{ order.id }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form action="{{ path('profile_create_return') }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
+                        <input type="hidden" name="return_url" value="{{ app.request.uri }}">
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <h3>{{ 'return_modal.title' | trans }}</h3>
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>{{ 'return_modal.order.header.id' | trans }}</th>
+                                <th>{{ 'return_modal.order.header.date' | trans }}</th>
+                                <th>{{ 'return_modal.order.header.total' | trans }}</th>
+                                <th>{{ 'return_modal.order.header.status' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.timestamp|date }}</td>
+                                <td>{{ order.total }}</td>
+                                <td>{{ order.status.value }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>{{ 'return_modal.item.header.selection' | trans }}</th>
+                                <th>{{ 'return_modal.item.header.product' | trans }}</th>
+                                <th>{{ 'return_modal.item.header.price' | trans }}</th>
+                                <th>{{ 'return_modal.item.header.quantity' | trans }}</th>
+                                <th>
+                                    <label for="return-reasons">{{ 'return_modal.item.header.return_reason' | trans }}</label>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in order.orderItems %}
+                                <tr>
+                                    <td><input type="checkbox" name="return[selected][{{ item.declinationId }}]" id="item-{{ item.declinationId }}"></td>
+                                    <td>{{ item.productName }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.amount }}</td>
+                                    <td>
+                                        <select name="return[reasons][{{ item.declinationId }}]" id="return[reasons][{{ item.declinationId }}]">
+                                            {% for reason in reasons %}
+                                                <option value="{{ reason.id }}">{{ reason.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {#required message content #}
+                        <h4>{{ 'return_modal.message_label' | trans }}</h4>
+                        <textarea name="return_message" required></textarea>
+                        <br>
+                        <input type="submit" value="{{ 'return_modal.submit' | trans }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
