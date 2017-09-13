@@ -87,6 +87,18 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function returnAction(int $orderReturnId): Response
+    {
+        $orderService = $this->get(OrderService::class);
+        $orderReturn = $orderService->getOrderReturn($orderReturnId);
+        $returnReasons = $orderService->getReturnReasons();
+
+        return $this->render('@WizaplaceFront/profile/return.html.twig', [
+            'orderReturn' => $orderReturn,
+            'returnReasons' => $returnReasons,
+        ]);
+    }
+
     public function afterSalesServiceAction(): Response
     {
         $orders = $this->get(OrderService::class)->getOrders();

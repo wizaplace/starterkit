@@ -34,6 +34,11 @@ class ProfileController extends BaseController
         return parent::returnsAction();
     }
 
+    public function returnAction(int $orderReturnId): Response
+    {
+        return parent::returnAction($orderReturnId);
+    }
+
     public function afterSalesServiceAction(): Response
     {
         return parent::afterSalesServiceAction();
