@@ -1,0 +1,138 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/users/authenticate'
+        headers:
+            Authorization: 'Basic dXNlckB3aXphcGxhY2UuY29tOnBhc3N3b3Jk'
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:47 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: ae35f1
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ae35f1'
+            Content-Length: '60'
+            Content-Type: application/json
+        body: '{"id":3,"apiKey":"Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s"}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/users/3'
+        headers:
+            Host: wizaplace.loc
+            Authorization: 'token Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s'
+            VCR-index: '1'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:48 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: ac8175
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ac8175'
+            Content-Length: '552'
+            Content-Type: application/json
+        body: '{"id":3,"title":"mr","email":"user@wizaplace.com","firstName":"Paul","lastName":"Martin","addresses":{"billing":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""},"shipping":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""}}}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/users/3'
+        headers:
+            Host: wizaplace.loc
+            Authorization: 'token Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s'
+            VCR-index: '2'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:48 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 7d30f5
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/7d30f5'
+            Content-Length: '552'
+            Content-Type: application/json
+        body: '{"id":3,"title":"mr","email":"user@wizaplace.com","firstName":"Paul","lastName":"Martin","addresses":{"billing":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""},"shipping":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""}}}'
+-
+    request:
+        method: PUT
+        url: 'http://wizaplace.loc/api/v1/users/3'
+        headers:
+            Content-Length: '69'
+            Content-Type: application/x-www-form-urlencoded
+            Host: wizaplace.loc
+            Authorization: 'token Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s'
+            VCR-index: '3'
+        body: 'email=user%40wizaplace.com&title=mrs&firstName=Janet&lastName=Jackson'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:48 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 82f459
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/82f459'
+            Content-Length: '555'
+            Content-Type: application/json
+        body: '{"id":3,"title":"mrs","email":"user@wizaplace.com","firstName":"Janet","lastName":"Jackson","addresses":{"billing":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""},"shipping":{"title":"mr","firstname":"Paul","lastname":"Martin","company":"","phone":"01234567890","address":"40 rue Laure Diebold","address_2":"","zipcode":"69009","city":"Lyon","country":"FR","37":4,"38":4,"40":"","39":""}}}'
+-
+    request:
+        method: PUT
+        url: 'http://wizaplace.loc/api/v1/users/3/addresses'
+        headers:
+            Content-Length: '595'
+            Content-Type: application/x-www-form-urlencoded
+            Host: wizaplace.loc
+            Authorization: 'token Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s'
+            VCR-index: '4'
+        body: 'billing%5Btitle%5D=mrs&billing%5Bfirstname%5D=Janet&billing%5Blastname%5D=Jackson&billing%5Bcompany%5D=Acme+Inc&billing%5Bphone%5D=0123456798&billing%5Baddress%5D=24+rue+de+la+Gare&billing%5Baddress_2%5D=1er+%C3%A9tage&billing%5Bzipcode%5D=69009&billing%5Bcity%5D=Lyon&billing%5Bcountry%5D=FR&shipping%5Btitle%5D=mrs&shipping%5Bfirstname%5D=Janet&shipping%5Blastname%5D=Jackson&shipping%5Bcompany%5D=Acme+Inc&shipping%5Bphone%5D=0123456798&shipping%5Baddress%5D=24+rue+de+la+Gare&shipping%5Baddress_2%5D=1er+%C3%A9tage&shipping%5Bzipcode%5D=69009&shipping%5Bcity%5D=Lyon&shipping%5Bcountry%5D=FR'
+    response:
+        status:
+            http_version: '1.1'
+            code: '204'
+            message: 'No Content'
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:48 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: b38939
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/b38939'
+            Content-Length: '0'
+            Content-Type: 'text/html; charset=UTF-8'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/users/3'
+        headers:
+            Host: wizaplace.loc
+            Authorization: 'token Au4Po39AKNHomAeDqSb+SZJkYXSZcpbX++EOXx+s'
+            VCR-index: '5'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 13 Sep 2017 09:15:49 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: '517457'
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/517457'
+            Content-Length: '629'
+            Content-Type: application/json
+        body: '{"id":3,"title":"mrs","email":"user@wizaplace.com","firstName":"Janet","lastName":"Jackson","addresses":{"billing":{"title":"mrs","firstname":"Janet","lastname":"Jackson","company":"Acme Inc","phone":"0123456798","address":"24 rue de la Gare","address_2":"1er \u00e9tage","zipcode":"69009","city":"Lyon","country":"FR","37":3,"38":3,"40":"Acme Inc","39":"Acme Inc"},"shipping":{"title":"mrs","firstname":"Janet","lastname":"Jackson","company":"Acme Inc","phone":"0123456798","address":"24 rue de la Gare","address_2":"1er \u00e9tage","zipcode":"69009","city":"Lyon","country":"FR","37":3,"38":3,"40":"Acme Inc","39":"Acme Inc"}}}'
