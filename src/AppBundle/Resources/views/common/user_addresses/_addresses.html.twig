@@ -4,10 +4,10 @@
     <input type="hidden" name="return_url" value="{{ app.request.uri }}" >
     <input type="hidden" name="requested_url" value="{{ requested_url|default(path('home')) }}" >
     <input type="hidden" name="addresses_are_identical" value="{{ addressesAreIdentical }}" >
-    <input type="hidden" name="user[id]" value="{{ user.id }}" >
     <input type="hidden" name="user[email]" value="{{ user.email }}" >
     <input type="hidden" name="user[lastName]" value="{{ user.lastname }}" >
     <input type="hidden" name="user[firstName]" value="{{ user.firstname }}" >
+    <input type="hidden" name="user[title]" value="{{ user.title|default }}" >
     <input type="hidden" name="csrf_token" value="{{ csrf_token('profile_update_token') }}">
 
     {# billing address #}

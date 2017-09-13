@@ -16,6 +16,21 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
+profile:
+    path: /profil
+    defaults: { _controller: WizaplaceFrontBundle:Profile:view }
+    methods: [GET]
+
+update_user:
+    path: /update-user
+    defaults: { _controller: WizaplaceFrontBundle:Profile:updateProfile }
+    methods: [POST]
+
+profile_addresses:
+    path: /profil/adresses
+    defaults: { _controller: WizaplaceFrontBundle:Profile:addresses }
+    methods: [GET]
+
 product:
     path: /p/{categoryPath}/{slug}
     defaults: { _controller: WizaplaceFrontBundle:Product:view }

@@ -22,6 +22,7 @@ use Wizaplace\SDK\User\UpdateUserAddressCommand;
 use Wizaplace\SDK\User\UpdateUserAddressesCommand;
 use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\UserService;
+use Wizaplace\SDK\User\UserTitle;
 use WizaplaceFrontBundle\Security\User;
 
 class ProfileController extends Controller
@@ -123,10 +124,11 @@ class ProfileController extends Controller
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
         $updateUserCommand
-            ->setUserId($data['id'])
+            ->setUserId($this->getUser()->getWizaplaceUser()->getId())
             ->setEmail($data['email'])
             ->setFirstName($data['firstName'])
-            ->setLastName($data['lastName']);
+            ->setLastName($data['lastName'])
+            ->setTitle(new UserTitle($data['title']));
         $userService->updateUser($updateUserCommand);
 
         // update user's password
@@ -154,7 +156,7 @@ class ProfileController extends Controller
                 return $this->redirect($referer);
             }
 
-            $userService->changePassword($data['id'], $newPassword);
+            $userService->changePassword($this->getUser()->getWizaplaceUser()->getId(), $newPassword);
 
             // add a notification
             $message = $this->translator->trans('update_password_success_message');
@@ -218,7 +220,8 @@ class ProfileController extends Controller
             ->setAddressSecondLine($data['addresses']['shipping']['address_2'])
             ->setZipCode($data['addresses']['shipping']['zipcode'])
             ->setCity($data['addresses']['shipping']['city'])
-            ->setCountry($data['addresses']['shipping']['country']);
+            ->setCountry($data['addresses']['shipping']['country'])
+            ->setTitle(new UserTitle($data['addresses']['shipping']['title']));
         $billingAddress = new UpdateUserAddressCommand();
         $billingAddress
             ->setFirstName($data['addresses']['billing']['firstName'])
@@ -229,10 +232,11 @@ class ProfileController extends Controller
             ->setAddressSecondLine($data['addresses']['billing']['address_2'])
             ->setZipCode($data['addresses']['billing']['zipcode'])
             ->setCity($data['addresses']['billing']['city'])
-            ->setCountry($data['addresses']['billing']['country']);
+            ->setCountry($data['addresses']['billing']['country'])
+            ->setTitle(new UserTitle($data['addresses']['billing']['title']));
         $updateUserAddressesCommand = new UpdateUserAddressesCommand();
         $updateUserAddressesCommand
-            ->setUserId($data['id'])
+            ->setUserId($this->getUser()->getWizaplaceUser()->getId())
             ->setShippingAddress($shippingAddress)
             ->setBillingAddress($billingAddress)
         ;
