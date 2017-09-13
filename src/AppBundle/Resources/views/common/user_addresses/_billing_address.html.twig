@@ -16,13 +16,13 @@
 {# first name #}
 <div class="form-group">
     <label for="firstname" class="required">{{ 'firstname'|trans }}</label>
-    <input id="firstname" class="form-control" name="user[addresses][billing][firstname]" value="{{ user.billingAddress.firstname }}" required>
+    <input id="firstname" class="form-control" name="user[addresses][billing][firstName]" value="{{ user.billingAddress.firstname }}" required>
 </div>
 
 {# last name #}
 <div class="form-group">
     <label for="lastname" class="required">{{ 'lastname'|trans }}</label>
-    <input id="lastname" class="form-control" name="user[addresses][billing][lastname]" value="{{ user.billingAddress.lastname }}" required>
+    <input id="lastname" class="form-control" name="user[addresses][billing][lastName]" value="{{ user.billingAddress.lastname }}" required>
 </div>
 
 {# user's company #}
@@ -46,7 +46,7 @@
 {# address 2 #}
 <div class="form-group">
     <label for="address2">{{ 'address2'|trans }}</label>
-    <input id="address2" class="form-control" name="user[addresses][billing][address_2]" value="{{ user.billingAddress.address_2 }}">
+    <input id="address2" class="form-control" name="user[addresses][billing][address_2]" value="{{ user.billingAddress.addressSecondLine }}">
 </div>
 
 {# zipcode #}
