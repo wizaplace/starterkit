@@ -64,7 +64,8 @@ class VcrGuzzleMiddleware
         return $this->vcr;
     }
 
-    public function resetRequestIndex(): void {
+    public function resetRequestIndex(): void
+    {
         self::$index = 0;
     }
 }
