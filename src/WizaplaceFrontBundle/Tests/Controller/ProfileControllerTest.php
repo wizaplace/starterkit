@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace WizaplaceFrontBundle\Tests\Controller;
 
-use AppBundle\Controller\AuthController;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\SDK\User\User;
 use Wizaplace\SDK\User\UserAddress;
 use Wizaplace\SDK\User\UserTitle;
+use WizaplaceFrontBundle\Controller\AuthController;
 use WizaplaceFrontBundle\Tests\BundleTestCase;
 
 class ProfileControllerTest extends BundleTestCase
