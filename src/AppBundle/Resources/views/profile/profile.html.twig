@@ -11,12 +11,12 @@
             <p class="required">{{ 'civility'|trans }}</p>
 
             <label class="radio">
-                <input type="radio" name="user[title]" value="mr" {% if user.billingAddress.title == 'mr' %} checked {% endif %} required>
+                <input type="radio" name="user[title]" value="mr" {% if profile.title == 'mr' %} checked {% endif %} required>
                 <span class="input-label">{{ 'mr'|trans }}</span>
             </label>
 
             <label class="radio">
-                <input type="radio" name="user[title]" value="mrs" {% if user.billingAddress.title == 'mrs' %} checked {% endif %}>
+                <input type="radio" name="user[title]" value="mrs" {% if profile.title == 'mrs' %} checked {% endif %}>
                 <span class="input-label">{{ 'mrs'|trans }}</span>
             </label>
         </div>
