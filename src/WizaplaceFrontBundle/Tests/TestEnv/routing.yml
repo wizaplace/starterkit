@@ -23,6 +23,13 @@ product:
         categoryPath: "(%slug.regexp%/)*%slug.regexp%"
         slug: "%slug.regexp%"
 
+category:
+    path: /c/{slug}
+    defaults: { _controller: WizaplaceFrontBundle:Category:view }
+    methods: [GET]
+    requirements:
+        slug: "%slug.regexp%"
+
 cms_page:
     path: /{slug}
     defaults: { _controller: WizaplaceFrontBundle:Cms:Page }

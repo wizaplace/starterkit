@@ -2,5 +2,4 @@
 <ruleset>
     <rule ref="vendor/wizaplace/php-coding-standard/Wizaplace/ruleset.xml"/>
     <file>src</file>
-    <file>tests</file>
 </ruleset>
