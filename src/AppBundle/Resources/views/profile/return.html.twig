@@ -15,7 +15,7 @@
         <tr>
             <td>{{ orderReturn.orderId }}</td>
             <td>{{ orderReturn.createdAt|date }}</td>
-            <td>{{ orderReturn.status }}</td>
+            <td>{{ ('profile.return.table.status.'~orderReturn.status) | trans }}</td>
         </tr>
         </tbody>
     </table>
@@ -24,9 +24,9 @@
         <thead>
         <tr>
             <th>{{ 'profile.return.item.name' | trans }}</th>
-            <th>{{ 'profile.return.order.price' | trans }}</th>
-            <th>{{ 'profile.return.order.amount' | trans }}</th>
-            <th>{{ 'profile.return.order.reason' | trans }}</th>
+            <th>{{ 'profile.return.item.price' | trans }}</th>
+            <th>{{ 'profile.return.item.quantity' | trans }}</th>
+            <th>{{ 'profile.return.item.reason' | trans }}</th>
         </tr>
         </thead>
         <tbody>
