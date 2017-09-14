@@ -8,14 +8,14 @@
                         <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
                         <input type="hidden" name="return_url" value="{{ app.request.uri }}">
                         <input type="hidden" name="order_id" value="{{ order.id }}">
-                        <h3>{{ 'return_modal.title' | trans }}</h3>
+                        <h3>{{ 'profile.return.table.title' | trans }}</h3>
                         <table class="table table-responsive">
                             <thead>
                             <tr>
-                                <th>{{ 'return_modal.order.header.id' | trans }}</th>
-                                <th>{{ 'return_modal.order.header.date' | trans }}</th>
-                                <th>{{ 'return_modal.order.header.total' | trans }}</th>
-                                <th>{{ 'return_modal.order.header.status' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.id' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.date' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.total' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.status' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,12 +30,12 @@
                         <table class="table table-responsive">
                             <thead>
                             <tr>
-                                <th>{{ 'return_modal.item.header.selection' | trans }}</th>
-                                <th>{{ 'return_modal.item.header.product' | trans }}</th>
-                                <th>{{ 'return_modal.item.header.price' | trans }}</th>
-                                <th>{{ 'return_modal.item.header.quantity' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.selection' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.product' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.price' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.quantity' | trans }}</th>
                                 <th>
-                                    <label for="return-reasons">{{ 'return_modal.item.header.return_reason' | trans }}</label>
+                                    <label for="return-reasons">{{ 'profile.return.table.item.return_reason' | trans }}</label>
                                 </th>
                             </tr>
                             </thead>
@@ -59,10 +59,10 @@
                         </table>
 
                         {#required message content #}
-                        <h4>{{ 'return_modal.message_label' | trans }}</h4>
+                        <h4>{{ 'profile.return.table.message_label' | trans }}</h4>
                         <textarea name="return_message" required></textarea>
                         <br>
-                        <input type="submit" value="{{ 'return_modal.submit' | trans }}">
+                        <input type="submit" value="{{ 'profile.return.table.submit' | trans }}">
                     </form>
                 </div>
             </div>

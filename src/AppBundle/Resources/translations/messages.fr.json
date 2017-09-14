@@ -167,13 +167,15 @@
     "add_to_basket": "ajouter au panier",
     "in_stock": "en stock",
     "out_of_stock": "rupture de stock",
+    "orders": "Commandes",
     "order_table": {
         "header": {
             "command_id": "N° Cde",
             "date": "Date",
             "shipping_name": "Transporteur",
             "total": "Total",
-            "status": "Statut"
+            "status": "Statut",
+            "action": "Action"
         },
         "body": {
             "total": "%price% TTC",
@@ -233,6 +235,51 @@
             },
             "body": {
                 "see_product": "Voir la fiche produit"
+            }
+        },
+        "return": {
+            "title": "Retours",
+            "create": "Créer un retour",
+            "see_more": "Voir",
+            "order": {
+                "title": "Commande",
+                "id": "id",
+                "created_at": "date",
+                "status": "statut"
+            },
+            "item": {
+                "title": "produit",
+                "name": "Nom",
+                "price": "prix",
+                "quantity": "quantité",
+                "reason": "raison"
+            },
+            "table": {
+                "title": "Créer un retour",
+                "order": {
+                    "id": "N° de commande",
+                    "date": "date",
+                    "items": "produits",
+                    "status": "statut",
+                    "see_more": "détail",
+                    "total": "total"
+                },
+                "item": {
+                    "selection": "Selection",
+                    "product": "produit",
+                    "price": "prix",
+                    "quantity": "quantité",
+                    "return_reason": "raison du retour"
+                },
+                "status": {
+                    "R": "Demande de retour en cours",
+                    "A": "Réception enregistrée",
+                    "C": "Terminée",
+                    "D": "Refusée par le vendeur"
+                },
+                "message_label": "Contenu du message",
+                "submit": "Envoyer"
+
             }
         }
     }

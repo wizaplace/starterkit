@@ -1,7 +1,7 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
-    <label>{{ 'profile.returns.title' | trans }}</label>
+    <label>{{ 'orders' | trans }}</label>
     <div class="spacer"></div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -22,10 +22,10 @@
                     <td>{{ order.timestamp.format('d-m-y') }}</td>
                     <td>{{ order.shippingName }}</td>
                     <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
-                    <td>{{ order.status }}</td>
+                    <td>{{ ('order_table.body.status.'~order.status) | trans }}</td>
                     <td>
                         {# open contact vendor modal #}
-                        <a data-toggle="modal" href="#order-return-modal-{{ order.id }}">{{ 'profile.returns.create'|trans }}</a>
+                        <a data-toggle="modal" href="#order-return-modal-{{ order.id }}">{{ 'profile.return.create'|trans }}</a>
 
                         {# actual discussion modal #}
                         {% include '@App/profile/_return-modal.html.twig' with { 'order': order, 'reasons': reasons } %}
@@ -37,17 +37,17 @@
     </div>
 
     <div class="spacer"></div>
-    <label>{{ 'profile.returns.title' | trans }}</label>
+    <label>{{ 'profile.return.title' | trans }}</label>
     <div class="spacer"></div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'return_table.header.order_id' | trans }}</th>
-                <th>{{ 'return_table.header.date' | trans }}</th>
-                <th>{{ 'return_table.header.items' | trans }}</th>
-                <th>{{ 'return_table.header.status' | trans }}</th>
-                <th>{{ 'return_table.header.see_more' | trans }}</th>
+                <th>{{ 'profile.return.table.order.id' | trans }}</th>
+                <th>{{ 'profile.return.table.order.date' | trans }}</th>
+                <th>{{ 'profile.return.table.order.items' | trans }}</th>
+                <th>{{ 'profile.return.table.order.status' | trans }}</th>
+                <th>{{ 'profile.return.table.order.see_more' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -62,9 +62,9 @@
                             {% endfor %}
                         </ul>
                     </td>
-                    <td>{{ return.status }}</td>
+                    <td>{{ ('profile.return.table.status.'~return.status) | trans }}</td>
                     <td>
-                        <a href="{{ path('profile_return', {'orderReturnId': return.id}) }}">{{ 'profile.returns.see_more' | trans }}</a>
+                        <a href="{{ path('profile_return', {'orderReturnId': return.id}) }}">{{ 'profile.return.see_more' | trans }}</a>
                     </td>
                 </tr>
             {% endfor %}
