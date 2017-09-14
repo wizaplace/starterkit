@@ -120,11 +120,6 @@ class ProfileController extends Controller
             $data['addresses']['shipping'] = $data['addresses']['billing'];
         }
 
-        // TODO: This is a quick fix, need to improve it @FIXME
-        if ($data['title'] === '') {
-            $data['title'] = null;
-        }
-
         // update user's profile
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
@@ -133,7 +128,7 @@ class ProfileController extends Controller
             ->setEmail($data['email'])
             ->setFirstName($data['firstName'])
             ->setLastName($data['lastName'])
-            ->setTitle(new UserTitle($data['title']));
+            ->setTitle(empty($data['title']) ? null : new UserTitle($data['title']));
         $userService->updateUser($updateUserCommand);
 
         // update user's password
