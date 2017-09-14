@@ -163,6 +163,11 @@ class ProfileController extends Controller
             $data['addresses']['shipping'] = $data['addresses']['billing'];
         }
 
+        // TODO: This is a quick fix, need to improve it @FIXME
+        if ($data['title'] === '') {
+            $data['title'] = null;
+        }
+
         // update user's profile
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
