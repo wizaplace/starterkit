@@ -76,7 +76,7 @@ class ProfileController extends Controller
         $orders = $orderService->getOrders();
 
         $validOrders = array_filter($orders, function (Order $order) {
-            return $order->getStatus() !== OrderStatus::COMPLETED();
+            return ($order->getStatus() == OrderStatus::PROCESSING_SHIPPING() || $order->getStatus() == OrderStatus::PROCESSED());
         });
         $reasons = $orderService->getReturnReasons();
         $returns = $orderService->getOrderReturns();
