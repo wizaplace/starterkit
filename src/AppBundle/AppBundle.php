@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright Copyright (c) Wizacha
+ * @license Proprietary
+ */
 
 namespace AppBundle;
 
