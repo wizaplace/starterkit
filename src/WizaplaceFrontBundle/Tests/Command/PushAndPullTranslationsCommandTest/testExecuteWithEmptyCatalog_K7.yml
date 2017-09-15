@@ -1,0 +1,48 @@
+
+-
+    request:
+        method: POST
+        url: 'http://wizaplace.loc/api/v1/translations/front/fr'
+        headers:
+            Content-Length: '309'
+            Authorization: 'Basic c3lzdGVtOkZha2VTZWNyZXQ='
+            Host: wizaplace.loc
+            Content-Type: application/x-xliff+xml
+            VCR-index: '0'
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"en\" target-language=\"fr\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body/>\n  </file>\n</xliff>\n"
+    response:
+        status:
+            http_version: '1.1'
+            code: '204'
+            message: 'No Content'
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:44 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 520ba0
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/520ba0'
+            Content-Length: '0'
+            Content-Type: 'text/html; charset=UTF-8'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/translations/front/fr'
+        headers:
+            Host: wizaplace.loc
+            Accept: application/x-xliff+xml
+            VCR-index: '1'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:45 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: public
+            Last-Modified: 'Fri, 15 Sep 2017 08:00:45 GMT'
+            X-Debug-Token: 315a45
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/315a45'
+            Content-Length: '309'
+            Content-Type: application/x-xliff+xml
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"fr\" target-language=\"fr\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body/>\n  </file>\n</xliff>\n"

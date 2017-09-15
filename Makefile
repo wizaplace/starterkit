@@ -1,3 +1,5 @@
+ENV ?= "dev"
+
 
 all: install
 
@@ -65,5 +67,11 @@ assets:
 
 dev-from-scratch:
 	vagrant destroy -f && vagrant up
+
+translations:
+	rm -f var/translations/*.xliff
+	rm -f var/cache/$(ENV)/translations/*
+	bin/console --env=$(ENV) wizaplace:translations:push
+	bin/console --env=$(ENV) wizaplace:translations:pull
 
 .PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff lint-css stan stan-ci test test-phpunit test-phpunit-ci test-behat test-behat-ci dev-from-scratch

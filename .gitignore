@@ -7,6 +7,9 @@
 !/var/logs
 /var/logs/*
 !var/logs/.gitkeep
+!/var/translations
+/var/translations/*
+!var/translations/.gitkeep
 !/var/sessions
 /var/sessions/*
 /node_modules/*

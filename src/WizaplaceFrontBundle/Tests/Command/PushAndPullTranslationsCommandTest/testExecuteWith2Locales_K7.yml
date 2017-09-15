@@ -1,0 +1,95 @@
+
+-
+    request:
+        method: POST
+        url: 'http://wizaplace.loc/api/v1/translations/front/fr'
+        headers:
+            Content-Length: '660'
+            Authorization: 'Basic c3lzdGVtOkZha2VTZWNyZXQ='
+            Host: wizaplace.loc
+            Content-Type: application/x-xliff+xml
+            VCR-index: '0'
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"en\" target-language=\"fr\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body>\n      <trans-unit id=\"f0b75976f003b4690235c35d3a5d41c4\" resname=\"test_message\">\n        <source>test_message</source>\n        <target>bonjour</target>\n      </trans-unit>\n      <trans-unit id=\"232540c6fd9d24ff7c7e6ccf2fb77380\" resname=\"food_cheese\">\n        <source>food_cheese</source>\n        <target>fromage</target>\n      </trans-unit>\n    </body>\n  </file>\n</xliff>\n"
+    response:
+        status:
+            http_version: '1.1'
+            code: '204'
+            message: 'No Content'
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:47 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 81fc2c
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/81fc2c'
+            Content-Length: '0'
+            Content-Type: 'text/html; charset=UTF-8'
+-
+    request:
+        method: POST
+        url: 'http://wizaplace.loc/api/v1/translations/front/en'
+        headers:
+            Content-Length: '651'
+            Authorization: 'Basic c3lzdGVtOkZha2VTZWNyZXQ='
+            Host: wizaplace.loc
+            Content-Type: application/x-xliff+xml
+            VCR-index: '1'
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"en\" target-language=\"en\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body>\n      <trans-unit id=\"f0b75976f003b4690235c35d3a5d41c4\" resname=\"test_message\">\n        <source>test_message</source>\n        <target>hello</target>\n      </trans-unit>\n      <trans-unit id=\"33bad3cf4ba2066e225dbebbce112868\" resname=\"food_meat\">\n        <source>food_meat</source>\n        <target>meat</target>\n      </trans-unit>\n    </body>\n  </file>\n</xliff>\n"
+    response:
+        status:
+            http_version: '1.1'
+            code: '204'
+            message: 'No Content'
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:47 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 0c368e
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/0c368e'
+            Content-Length: '0'
+            Content-Type: 'text/html; charset=UTF-8'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/translations/front/fr'
+        headers:
+            Host: wizaplace.loc
+            Accept: application/x-xliff+xml
+            VCR-index: '2'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:48 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: public
+            Last-Modified: 'Fri, 15 Sep 2017 08:00:48 GMT'
+            X-Debug-Token: 01ceb6
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/01ceb6'
+            Content-Length: '660'
+            Content-Type: application/x-xliff+xml
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"fr\" target-language=\"fr\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body>\n      <trans-unit id=\"232540c6fd9d24ff7c7e6ccf2fb77380\" resname=\"food_cheese\">\n        <source>food_cheese</source>\n        <target>fromage</target>\n      </trans-unit>\n      <trans-unit id=\"f0b75976f003b4690235c35d3a5d41c4\" resname=\"test_message\">\n        <source>test_message</source>\n        <target>bonjour</target>\n      </trans-unit>\n    </body>\n  </file>\n</xliff>\n"
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/translations/front/en'
+        headers:
+            Host: wizaplace.loc
+            Accept: application/x-xliff+xml
+            VCR-index: '3'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Fri, 15 Sep 2017 08:00:49 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: public
+            Last-Modified: 'Fri, 15 Sep 2017 08:00:48 GMT'
+            X-Debug-Token: 00bac6
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/00bac6'
+            Content-Length: '651'
+            Content-Type: application/x-xliff+xml
+        body: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xliff xmlns=\"urn:oasis:names:tc:xliff:document:1.2\" version=\"1.2\">\n  <file source-language=\"fr\" target-language=\"en\" datatype=\"plaintext\" original=\"file.ext\">\n    <header>\n      <tool tool-id=\"symfony\" tool-name=\"Symfony\"/>\n    </header>\n    <body>\n      <trans-unit id=\"33bad3cf4ba2066e225dbebbce112868\" resname=\"food_meat\">\n        <source>food_meat</source>\n        <target>meat</target>\n      </trans-unit>\n      <trans-unit id=\"f0b75976f003b4690235c35d3a5d41c4\" resname=\"test_message\">\n        <source>test_message</source>\n        <target>hello</target>\n      </trans-unit>\n    </body>\n  </file>\n</xliff>\n"
