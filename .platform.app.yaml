@@ -47,6 +47,7 @@ mounts:
     '/var/cache': 'shared:files/cache'
     '/var/logs': 'shared:files/logs'
     '/var/sessions': 'shared:files/sessions'
+    '/var/translations': 'shared:files/translations'
 
 dependencies:
     nodejs:
@@ -62,20 +63,39 @@ hooks:
     build: |
       set -e
       BUILD_START=$(date +%s%N)
+
+      # install and compile frontend assets
       bin/console --env=prod assets:install --no-debug
       bin/console --env=prod fos:js-routing:dump --no-debug
       npm install
       gulp deploy
+
+      # remove envs other than prod
       rm -f web/app_*.php
+
+      # use our custom php.ini
       cp .platform.php.ini php.ini
+
+      # push our local translations to the backend
+      bin/console --env=prod wizaplace:translations:push
+
       BUILD_END=$(date +%s%N)
       echo "Build time: $(expr $BUILD_END - $BUILD_START)ns"
     # Deploy hooks can access services but the file system is now read-only.
     deploy: |
       set -e
       DEPLOY_START=$(date +%s%N)
+
+      # cache
       bin/console --env=prod cache:clear --no-warmup
       rm -rf var/cache/*
       bin/console --env=prod cache:warmup
+
       DEPLOY_END=$(date +%s%N)
       echo "Deploy time: $(expr $DEPLOY_END - $DEPLOY_START)ns"
+
+crons:
+    translations:
+        # regularly pull translations' values from the backend
+        spec: '*/5 * * * *'
+        cmd: 'php bin/console --env=prod wizaplace:translations:pull && rm -f var/cache/prod/translations/* && bin/console --env=prod cache:warmup'

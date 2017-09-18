@@ -11,7 +11,10 @@ parameters:
     recaptcha.secret: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 framework:
-    translator:      { fallbacks: ["%locale%"] }
+    translator:
+        fallbacks: ["%locale%"]
+        # load translations pulled from the backend in addition to normal translations files (backend overrides local)
+        paths: ["%kernel.project_dir%/var/translations"]
     secret:          "%secret%"
     router:
         resource: "%kernel.project_dir%/app/config/routing.yml"

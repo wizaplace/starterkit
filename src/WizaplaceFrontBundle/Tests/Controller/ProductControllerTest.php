@@ -17,7 +17,7 @@ class ProductControllerTest extends BundleTestCase
 {
     public function testSimpleProductView()
     {
-        $this->client->request('GET', '/p/informatique/ecrans/voluptas-nostrum-ea-consequatur');
+        $this->client->request('GET', '/p/informatique/ecrans/ecran-pc-full-hd-noir');
         $this->assertResponseCodeEquals(Response::HTTP_OK, $this->client);
 
         $renderedData = $this->getRenderedData('@WizaplaceFront/product/product.html.twig');
@@ -30,7 +30,7 @@ class ProductControllerTest extends BundleTestCase
         $this->assertArrayHasKey('isFavorite', $renderedData);
 
         $this->assertInstanceOf(Product::class, $renderedData['product']);
-        $this->assertSame('4', $renderedData['product']->getId());
+        $this->assertSame('3', $renderedData['product']->getId());
 
         $this->assertFalse($renderedData['isFavorite']);
 
@@ -39,7 +39,18 @@ class ProductControllerTest extends BundleTestCase
 
         $this->assertCount(0, $renderedData['reviews']);
 
-        $this->assertCount(0, $renderedData['options']);
+        $this->assertCount(1, $renderedData['options']);
+        foreach ($renderedData['options'] as $option) {
+            $this->assertArrayHasKey('id', $option);
+            $this->assertArrayHasKey('name', $option);
+            $this->assertArrayHasKey('variants', $option);
+            foreach ($option['variants'] as $variant) {
+                $this->assertArrayHasKey('id', $variant);
+                $this->assertArrayHasKey('name', $variant);
+                $this->assertArrayHasKey('selected', $variant);
+                $this->assertArrayHasKey('url', $variant);
+            }
+        }
     }
 
     public function testValidCategorySlugResolution()

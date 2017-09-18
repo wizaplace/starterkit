@@ -12,11 +12,11 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 04 Sep 2017 12:14:00 GMT'
+            Date: 'Fri, 15 Sep 2017 14:01:11 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 5befd6
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/5befd6'
-            Content-Length: '913'
+            X-Debug-Token: d346fb
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/d346fb'
+            Content-Length: '1245'
             Content-Type: application/json
-        body: '{"id":1,"code":"6086375420678","supplierReference":"","name":"optio corporis similique voluptatum","url":"http:\/\/wizaplace.loc\/informatique\/test-product-slug.html","shortDescription":"","description":"","slug":"test-product-slug","minPrice":20,"greenTax":0,"isTransactional":true,"weight":1.23,"averageRating":null,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":7,"name":"Test company","slug":"test-company","isProfessional":true,"image":null}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}],"geolocation":null,"video":null,"declinations":[{"id":"1_0","code":"6086375420678","supplierReference":"","price":20,"originalPrice":20,"crossedOutPrice":null,"prices":{"priceWithTaxes":20,"priceWithoutVat":19.59,"vat":0.41},"greenTax":0,"amount":15,"affiliateLink":null,"images":[],"options":[],"isBrandNew":true}],"attributes":[],"options":[]}'
+        body: '{"id":1,"code":"978020137962","supplierReference":"INFO-001","name":"Z11 Plus Bo\u00eetier PC en Acier ATX","url":"http:\/\/wizaplace.loc\/informatique\/test-product-slug.html","shortDescription":"","description":"","slug":"test-product-slug","minPrice":67.9,"greenTax":0,"isTransactional":true,"weight":1.23,"averageRating":null,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0},{"name":"Lettre prioritaire","image":null,"firstRate":0,"nextRate":0},{"name":"Colissmo","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}],"geolocation":null,"video":null,"declinations":[{"id":"1_0","code":"978020137962","supplierReference":"INFO-001","price":67.9,"originalPrice":67.9,"crossedOutPrice":null,"prices":{"priceWithTaxes":67.9,"priceWithoutVat":66.5,"vat":1.4},"greenTax":0,"amount":13,"affiliateLink":null,"images":[],"options":[],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}}],"attributes":[],"options":[]}'

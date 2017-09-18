@@ -6,11 +6,14 @@ parameters:
     recaptcha.key: 'dummy_key'
     api.base_url: 'http://wizaplace.loc/api/v1/'
     slug.regexp: !php/const:Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
+    wizaplace.system_user_password: 'FakeSecret'
 
 framework:
     test: ~
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator:
+        fallbacks: ["%locale%"]
+        paths: ["%kernel.project_dir%/var/translations"]
     secret: 'secret'
     router:
         resource: '%kernel.root_dir%/routing.yml'

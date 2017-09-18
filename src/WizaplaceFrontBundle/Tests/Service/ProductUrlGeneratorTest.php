@@ -40,7 +40,7 @@ class ProductUrlGeneratorTest extends BundleTestCase
     public function testGeneratingUrlFromProductSummary()
     {
         $container = self::$kernel->getContainer();
-        $product = $container->get(CatalogService::class)->search('optio corporis similique voluptatum')->getProducts()[0];
+        $product = $container->get(CatalogService::class)->search('Z11 Plus Boîtier PC en Acier ATX')->getProducts()[0];
 
         $result = $container->get(ProductUrlGenerator::class)->generateProductUrl($product);
 

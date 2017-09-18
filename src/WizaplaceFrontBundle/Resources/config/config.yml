@@ -12,6 +12,18 @@ services:
         public: true
     WizaplaceFrontBundle\Service\ProductUrlGenerator:
         public: true
+    WizaplaceFrontBundle\Command\PushTranslationsCommand:
+        arguments:
+            $translatorBag: '@translator.default'
+            $locales: [ '%locale%' ]
+            $defaultLocale: '%kernel.default_locale%'
+            $systemUserPassword: '%wizaplace.system_user_password%'
+        public: true
+    WizaplaceFrontBundle\Command\PullTranslationsCommand:
+        arguments:
+            $locales: [ '%locale%' ]
+            $translationsDir: "%kernel.project_dir%/var/translations"
+        public: true
     WizaplaceFrontBundle\Service\AuthenticationService:
         public: true
     WizaplaceFrontBundle\Security\AuthenticationFailureHandler:
@@ -62,6 +74,8 @@ services:
     Wizaplace\SDK\MailingList\MailingListService:
         public: true
     Wizaplace\SDK\Favorite\FavoriteService:
+        public: true
+    Wizaplace\SDK\Translation\TranslationService:
         public: true
     WizaplaceFrontBundle\Twig\AppExtension:
         arguments:
