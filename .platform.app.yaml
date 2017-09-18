@@ -60,6 +60,7 @@ dependencies:
 hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
+      set -e
       BUILD_START=$(date +%s%N)
       bin/console --env=prod assets:install --no-debug
       bin/console --env=prod fos:js-routing:dump --no-debug
@@ -71,6 +72,7 @@ hooks:
       echo "Build time: $(expr $BUILD_END - $BUILD_START)ns"
     # Deploy hooks can access services but the file system is now read-only.
     deploy: |
+      set -e
       DEPLOY_START=$(date +%s%N)
       bin/console --env=prod cache:clear --no-warmup
       rm -rf var/cache/*
