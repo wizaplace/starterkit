@@ -39,6 +39,7 @@
     "mr": "Monsieur",
     "firstname": "Prénom",
     "lastname": "Nom",
+    "birthday": "Date de naissance",
     "company": "Société",
     "address": "Adresse",
     "address2": "Complément d'adresse",
