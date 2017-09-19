@@ -30,6 +30,8 @@ class ProfileController extends Controller
 {
     protected const PASSWORD_MINIMUM_LENGTH = 6;
 
+    protected const DOB_FORMAT = 'd/m/Y';
+
     /** @var TranslatorInterface */
     protected $translator;
 
@@ -163,9 +165,6 @@ class ProfileController extends Controller
             $data['addresses']['shipping'] = $data['addresses']['billing'];
         }
 
-        // format date
-        $birthday = \DateTime::createFromFormat('d/m/Y', $data['birthday']);
-
         // update user's profile
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
@@ -174,8 +173,14 @@ class ProfileController extends Controller
             ->setEmail($data['email'])
             ->setFirstName($data['firstName'])
             ->setLastName($data['lastName'])
-            ->setBirthday($birthday)
             ->setTitle(empty($data['title']) ? null : new UserTitle($data['title']));
+
+        if (!empty($data['birthday'])) {
+            // format date
+            $birthday = \DateTime::createFromFormat(static::DOB_FORMAT, $data['birthday']);
+            $updateUserCommand->setBirthday($birthday);
+        }
+
         $userService->updateUser($updateUserCommand);
 
         // update user's password
