@@ -33,6 +33,15 @@
             <input id="lastname" type="text" class="form-control" name="user[lastName]" value="{{ profile.lastname }}">
         </div>
 
+        {# birthday #}
+        <div class="form-group">
+            <label for="birthday">{{ 'birthday'|trans }}</label>
+            <div class="input-group">
+                <input id="birthday" type="text" class="form-control" name="user[birthday]" value="{{ profile.birthday|date('d/m/Y') }}">
+                <div class="input-group-btn"><button type="button" class="btn" id="datepicker-button"><i class="glyphicon glyphicon-calendar"></i></button></div>
+            </div>
+        </div>
+
         {# email #}
         <div class="form-group">
             <label for="email">{{ 'email'|trans }}</label>
@@ -78,6 +87,26 @@
 
                 {# cleanup: clear inputs when fields are hidden #}
                 $passwordUpdateBlock.find('input').val('');
+            });
+
+            {# birthday date picker #}
+            let datePickerOptions = {
+                dateFormat: 'dd/mm/yy',
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                monthNamesShort: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Dec" ],
+                yearRange: '-100:+0',
+                firstDay: 1,
+                changeMonth: true,
+                changeYear: true,
+            };
+
+            $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+
+            $('#birthday').datepicker(datePickerOptions);
+
+            $('#datepicker-button').on('click', function() {
+                $('#birthday').datepicker("show");
             });
         });
     </script>

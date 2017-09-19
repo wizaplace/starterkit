@@ -163,6 +163,9 @@ class ProfileController extends Controller
             $data['addresses']['shipping'] = $data['addresses']['billing'];
         }
 
+        // format date
+        $birthday = \DateTime::createFromFormat('d/m/Y', $data['birthday']);
+
         // update user's profile
         $userService = $this->get(UserService::class);
         $updateUserCommand = new UpdateUserCommand();
@@ -171,6 +174,7 @@ class ProfileController extends Controller
             ->setEmail($data['email'])
             ->setFirstName($data['firstName'])
             ->setLastName($data['lastName'])
+            ->setBirthday($birthday)
             ->setTitle(empty($data['title']) ? null : new UserTitle($data['title']));
         $userService->updateUser($updateUserCommand);
 
