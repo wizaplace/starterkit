@@ -10,6 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider "virtualbox" do |v|
       v.memory = 1536
       v.customize ['modifyvm', :id, '--cableconnected1', 'on']
+      v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
     end
 
     # Hostname
