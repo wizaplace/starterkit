@@ -16,10 +16,10 @@ use WizaplaceFrontBundle\Service\ProductListService;
 class HomeController extends Controller
 {
     /** @var ProductListService */
-    private $productListService;
+    protected $productListService;
 
     /** @var BannerService */
-    private $bannerService;
+    protected $bannerService;
 
     /**
      * @var int Max number of latest products to be fetched.
