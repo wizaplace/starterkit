@@ -85,7 +85,7 @@ profile_create_return:
 profile_after_sale_service:
     path: /profil/sav
     defaults: { _controller: AppBundle:Profile:afterSalesService }
-    methods: [GET]
+    methods: [GET, POST]
 
 profile_favorites:
     path: /profil/favoris

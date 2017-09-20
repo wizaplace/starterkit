@@ -14,7 +14,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\SDK\ApiClient;
 use Wizaplace\SDK\Authentication\BadCredentials;
 use Wizaplace\SDK\Discussion\DiscussionService;
+use Wizaplace\SDK\Exception\NotFound;
+use Wizaplace\SDK\Exception\SomeParametersAreInvalid;
 use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\Order\AfterSalesServiceRequest;
 use Wizaplace\SDK\Order\CreateOrderReturn;
 use Wizaplace\SDK\Order\Order;
 use Wizaplace\SDK\Order\OrderService;
@@ -121,15 +124,52 @@ class ProfileController extends Controller
         return $this->redirectToRoute('profile_returns');
     }
 
-    public function afterSalesServiceAction(): Response
+    public function afterSalesServiceAction(Request $request): Response
     {
+        if ($request->getMethod() === 'POST') {
+            if (empty($request->request->get('return')['selected'])) {
+                $message = $this->translator->trans('flash.warning.no_selected_items');
+                $this->addFlash('warning', $message);
+
+                return $this->redirectToRoute('profile_after_sale_service');
+            }
+            if ($request->request->get('return_message') === '') {
+                $message = $this->translator->trans('flash.warning.message_cannot_be_empty');
+                $this->addFlash('warning', $message);
+
+                return $this->redirectToRoute('profile_after_sale_service');
+            }
+
+            $afterSalesServiceRequest = new AfterSalesServiceRequest();
+            $afterSalesServiceRequest->setOrderId((int) $request->request->get('order_id'));
+            $afterSalesServiceRequest->setItemsDeclinationsIds(array_keys($request->request->get('return')['selected']));
+            $afterSalesServiceRequest->setComments($request->request->get('return_message'));
+
+            try {
+                $this->get(OrderService::class)->sendAfterSalesServiceRequest($afterSalesServiceRequest);
+            } catch (NotFound $e) {
+                $message = $this->translator->trans('flash.warning.order_not_found');
+                $this->addFlash('danger', $message);
+
+                return $this->redirectToRoute('profile_after_sale_service');
+            } catch (SomeParametersAreInvalid $e) {
+                $message = $this->translator->trans('flash.warning.no_selected_items');
+                $this->addFlash('danger', $message);
+
+                return $this->redirectToRoute('profile_after_sale_service');
+            }
+            $message = $this->translator->trans('flash.success.email_sent');
+            $this->addFlash('success', $message);
+
+            return $this->redirectToRoute('profile_after_sale_service');
+        }
+
         $orders = $this->get(OrderService::class)->getOrders();
         $completedOrders = array_filter($orders, function (Order $order): bool {
             return $order->getStatus()->equals(OrderStatus::COMPLETED());
         });
 
         return $this->render('@WizaplaceFront/profile/after-sales-service.html.twig', [
-            'profile' => $this->getUser()->getWizaplaceUser(),
             'orders' => $completedOrders,
         ]);
     }

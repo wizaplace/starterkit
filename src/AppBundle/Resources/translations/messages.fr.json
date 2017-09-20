@@ -283,5 +283,16 @@
 
             }
         }
+    },
+    "flash": {
+        "success": {
+            "email_sent": "Un email vient d'être envoyé"
+        },
+        "warning": {
+            "no_selected_items": "Vous devez selectionner au moins un produit",
+            "message_cannot_be_empty": "Le message ne peut pas être vide",
+            "order_not_found": "La commande n'a pas été trouvée"
+        }
     }
+
 }
