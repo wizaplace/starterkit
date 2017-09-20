@@ -1,7 +1,7 @@
 {% extends '@App/layout-profile.html.twig' %}
 
 {% block profile_content %}
-    <label>{{ 'after_sales_service_label' | trans }}</label>
+    <label>{{ 'after_sales_service.label' | trans }}</label>
     <div class="spacer"></div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -11,7 +11,7 @@
                 <th>{{ 'order_table.header.date' | trans }}</th>
                 <th>{{ 'order_table.header.shipping_name' | trans }}</th>
                 <th>{{ 'order_table.header.total' | trans }}</th>
-                <th>{{ 'order_table.header.start_discussion' | trans }}</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -23,10 +23,10 @@
                     <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
                     <td>
                         {# open contact vendor modal #}
-                        <a data-toggle="modal" href="#order-discussion-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
+                        <a data-toggle="modal" href="#after-sales-service-return-modal-{{ order.id }}">{{ 'contact_vendor'|trans }}</a>
 
                         {# actual discussion modal #}
-                        {% include '@App/profile/_discussion-modal.html.twig' with { 'order': order } %}
+                        {% include '@App/profile/_after-sales-service-modal.html.twig' with { 'order': order } %}
                     </td>
                 </tr>
             {% endfor %}

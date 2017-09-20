@@ -44,9 +44,9 @@ class ProfileController extends BaseController
         return parent::createOrderReturnAction($request);
     }
 
-    public function afterSalesServiceAction(): Response
+    public function afterSalesServiceAction(Request $request): Response
     {
-        return parent::afterSalesServiceAction();
+        return parent::afterSalesServiceAction($request);
     }
 
     public function favoritesAction(): Response
