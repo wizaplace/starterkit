@@ -293,6 +293,10 @@
             "message_cannot_be_empty": "Le message ne peut pas être vide",
             "order_not_found": "La commande n'a pas été trouvée"
         }
+    },
+    "after_sales_service": {
+        "label": "SAV",
+        "no_orders": "Vous n'avez pas de commandes éligibles au SAV"
     }
 
 }
