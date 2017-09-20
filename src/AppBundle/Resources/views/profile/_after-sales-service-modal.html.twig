@@ -1,0 +1,61 @@
+{# 'contact vendor' modal #}
+<div class="discussion-modal modal fade" tabindex="-1" role="dialog" id="after-sales-service-return-modal-{{ order.id }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form action="{{ path('profile_after_sale_service') }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token('discussion_token') }}">
+                        <input type="hidden" name="return_url" value="{{ app.request.uri }}">
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <h3>{{ 'profile.return.table.title' | trans }}</h3>
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>{{ 'profile.return.table.order.id' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.date' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.total' | trans }}</th>
+                                <th>{{ 'profile.return.table.order.status' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.timestamp|date }}</td>
+                                <td>{{ order.total }}</td>
+                                <td>{{ order.status.value }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>{{ 'profile.return.table.item.selection' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.product' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.price' | trans }}</th>
+                                <th>{{ 'profile.return.table.item.quantity' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in order.orderItems %}
+                                <tr>
+                                    <td><input type="checkbox" name="return[selected][{{ item.declinationId }}]" id="item-{{ item.declinationId }}"></td>
+                                    <td>{{ item.productName }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.amount }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {#required message content #}
+                        <h4>{{ 'profile.return.table.message_label' | trans }}</h4>
+                        <textarea name="return_message" required></textarea>
+                        <br>
+                        <input type="submit" value="{{ 'profile.return.table.submit' | trans }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
