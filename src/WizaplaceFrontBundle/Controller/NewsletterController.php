@@ -18,6 +18,8 @@ use Wizaplace\SDK\MailingList\MailingListService;
 
 class NewsletterController extends Controller
 {
+    protected const DEFAULT_MAILING_LIST_ID = 1;
+
     /** @var TranslatorInterface */
     private $translator;
 
@@ -30,13 +32,36 @@ class NewsletterController extends Controller
     {
         $mailingListId = $request->request->getInt('newsletter_id');
         if (! $mailingListId) {
-            $mailingListId = 1; // default marketplace mailing list id is 1
+            $mailingListId = self::DEFAULT_MAILING_LIST_ID;
         }
         $email = $request->request->get('email');
+        $this->subscribe($mailingListId, $email);
+
+        return new JsonResponse($email);
+    }
+
+    public function toggleNewsletterSubscriptionAction(): JsonResponse
+    {
+        $mailingListService = $this->get(MailingListService::class);
+        $userIsSubscribed = $mailingListService->isSubscribed(self::DEFAULT_MAILING_LIST_ID);
+        $email = $this->getUser()->getWizaplaceUser()->getEmail();
+
+        // toggle user's subscription regarding their last subscription status
+        if ($userIsSubscribed) {
+            $this->unsubscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+        } else {
+            $this->subscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+        }
+
+        return new JsonResponse();
+    }
+
+    private function subscribe(int $newsletterId, string $email): JsonResponse
+    {
         $mailingListService = $this->get(MailingListService::class);
 
         try {
-            $mailingListService->subscribe($mailingListId, $email);
+            $mailingListService->subscribe($newsletterId, $email);
         } catch (MailingListDoesNotExist $e) {
             $response = new JsonResponse();
             $message = $this->translator->trans('newsletter_not_found_error_message');
@@ -53,6 +78,12 @@ class NewsletterController extends Controller
             return $response;
         }
 
-        return new JsonResponse($email);
+        return new JsonResponse();
+    }
+
+    private function unsubscribe(int $newsletterId, string $email): void
+    {
+        $mailingListService = $this->get(MailingListService::class);
+        $mailingListService->unsubscribe($newsletterId, $email);
     }
 }

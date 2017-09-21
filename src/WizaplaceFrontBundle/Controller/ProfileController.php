@@ -28,12 +28,13 @@ use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\UserService;
 use Wizaplace\SDK\User\UserTitle;
 use WizaplaceFrontBundle\Security\User;
+use Wizaplace\SDK\MailingList\MailingListService;
 
 class ProfileController extends Controller
 {
     protected const PASSWORD_MINIMUM_LENGTH = 6;
-
     protected const DOB_FORMAT = 'd/m/Y';
+    protected const DEFAULT_MAILING_LIST_ID = 1;
 
     /** @var TranslatorInterface */
     protected $translator;
@@ -291,6 +292,16 @@ class ProfileController extends Controller
             'discussion' => $discussion,
             'messages' => $messages,
             'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
+    }
+
+    public function newsletterAction(): Response
+    {
+        $mailingListService = $this->get(MailingListService::class);
+        $userIsSubscribed = $mailingListService->isSubscribed(self::DEFAULT_MAILING_LIST_ID);
+
+        return $this->render('@App/profile/newsletter.html.twig', [
+            'userIsSubscribed' => $userIsSubscribed,
         ]);
     }
 

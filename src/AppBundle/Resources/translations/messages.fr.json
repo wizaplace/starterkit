@@ -56,6 +56,7 @@
     "newsletter_subscription_success_message": "Vous êtes désormais inscrit à la newsletter",
     "newsletter_not_found_error_message": "Cette newsletter n'existe pas",
     "newsletter_already_subscribed_error_message": "Vous avez déjà souscrit à cette newsletter",
+    "newsletter_subscription_update_success_message": "Votre abonnement à la newsletter a bien été mis à jour",
     "create_my_account": "Créer mon compte",
     "update_my_password": "Modifier mon mot de passe",
     "current_password": "Mot de passe actuel",
@@ -209,7 +210,8 @@
             "account": {
                 "title": "Mon compte",
                 "profile": "Profil",
-                "addresses": "Adresses"
+                "addresses": "Adresses",
+                "newsletter": "Newsletter"
             },
             "purchases": {
                 "title": "Mes achats",
