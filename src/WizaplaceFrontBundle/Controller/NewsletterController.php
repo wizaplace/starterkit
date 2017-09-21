@@ -35,9 +35,9 @@ class NewsletterController extends Controller
             $mailingListId = self::DEFAULT_MAILING_LIST_ID;
         }
         $email = $request->request->get('email');
-        $this->subscribe($mailingListId, $email);
+        $response = $this->subscribe($mailingListId, $email);
 
-        return new JsonResponse($email);
+        return $response;
     }
 
     public function toggleNewsletterSubscriptionAction(): JsonResponse
@@ -48,12 +48,12 @@ class NewsletterController extends Controller
 
         // toggle user's subscription regarding their last subscription status
         if ($userIsSubscribed) {
-            $this->unsubscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+            $response = $this->unsubscribe(self::DEFAULT_MAILING_LIST_ID, $email);
         } else {
-            $this->subscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+            $response = $this->subscribe(self::DEFAULT_MAILING_LIST_ID, $email);
         }
 
-        return new JsonResponse();
+        return $response;
     }
 
     private function subscribe(int $newsletterId, string $email): JsonResponse
@@ -81,9 +81,11 @@ class NewsletterController extends Controller
         return new JsonResponse();
     }
 
-    private function unsubscribe(int $newsletterId, string $email): void
+    private function unsubscribe(int $newsletterId, string $email): JsonResponse
     {
         $mailingListService = $this->get(MailingListService::class);
         $mailingListService->unsubscribe($newsletterId, $email);
+
+        return new JsonResponse();
     }
 }

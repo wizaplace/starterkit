@@ -25,11 +25,14 @@
                         subscribeToNewsletter: subscribeToNewsletter,
                     }
                 }).done(function () {
-                    // remove overlay and spinner
-                    helper.removeLoadingSpinner();
-
                     // display a success notification
                     notification.createAlert("{{ 'newsletter_subscription_update_success_message'|trans|e('js') }}", 'success');
+                }).fail(function (response) {
+                    // display an error notification
+                    notification.createAlert(response, 'danger');
+                }).always(function() {
+                    // remove overlay and spinner
+                    helper.removeLoadingSpinner();
                 });
             });
         });
