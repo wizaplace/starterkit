@@ -17,6 +17,7 @@ use Wizaplace\SDK\Discussion\DiscussionService;
 use Wizaplace\SDK\Exception\NotFound;
 use Wizaplace\SDK\Exception\SomeParametersAreInvalid;
 use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\MailingList\MailingListService;
 use Wizaplace\SDK\Order\AfterSalesServiceRequest;
 use Wizaplace\SDK\Order\CreateOrderReturn;
 use Wizaplace\SDK\Order\Order;
@@ -28,7 +29,6 @@ use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\UserService;
 use Wizaplace\SDK\User\UserTitle;
 use WizaplaceFrontBundle\Security\User;
-use Wizaplace\SDK\MailingList\MailingListService;
 
 class ProfileController extends Controller
 {
@@ -300,7 +300,7 @@ class ProfileController extends Controller
         $mailingListService = $this->get(MailingListService::class);
         $userIsSubscribed = $mailingListService->isSubscribed(self::DEFAULT_MAILING_LIST_ID);
 
-        return $this->render('@App/profile/newsletter.html.twig', [
+        return $this->render('@WizaplaceFront/profile/newsletter.html.twig', [
             'userIsSubscribed' => $userIsSubscribed,
         ]);
     }
