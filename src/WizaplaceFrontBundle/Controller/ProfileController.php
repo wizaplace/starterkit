@@ -229,8 +229,8 @@ class ProfileController extends Controller
             $newPassword = $data['password']['new'];
 
             // check new password corresponds to password rules
-            if (strlen($newPassword) < self::PASSWORD_MINIMUM_LENGTH) {
-                $message = $this->translator->trans('update_new_password_error_message', ['%n%' => self::PASSWORD_MINIMUM_LENGTH]);
+            if (strlen($newPassword) < static::PASSWORD_MINIMUM_LENGTH) {
+                $message = $this->translator->trans('update_new_password_error_message', ['%n%' => static::PASSWORD_MINIMUM_LENGTH]);
                 $this->addFlash('danger', $message);
 
                 return $this->redirect($referer);
@@ -275,7 +275,7 @@ class ProfileController extends Controller
         $discussionService = $this->get(DiscussionService::class);
         $discussions = $discussionService->getDiscussions();
 
-        return $this->render('@App/profile/discussions.html.twig', [
+        return $this->render('@WizaplaceFront/profile/discussions.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
             'discussions' => $discussions,
         ]);
@@ -288,7 +288,7 @@ class ProfileController extends Controller
         $discussion = $discussionService->getDiscussion($id);
         $messages = $discussionService->getMessages($id);
 
-        return $this->render('@App/profile/discussion.html.twig', [
+        return $this->render('@WizaplaceFront/profile/discussion.html.twig', [
             'discussion' => $discussion,
             'messages' => $messages,
             'profile' => $this->getUser()->getWizaplaceUser(),
