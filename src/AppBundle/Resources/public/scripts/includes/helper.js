@@ -34,7 +34,6 @@ const helper = {
         return price.replace('.', ',') + '€';
     },
 
-    // used in search results
     displayLoadingSpinner: function() {
 
         // display overlay to indicate an operation is running
@@ -45,4 +44,10 @@ const helper = {
 
         $('.loading-spinner').addClass('is-visible');
     },
+
+    removeLoadingSpinner: function() {
+        $('#overlay').removeClass('is-visible');
+        $('body').removeClass('is-locked');
+        $('.loading-spinner').removeClass('is-visible');
+    }
 };

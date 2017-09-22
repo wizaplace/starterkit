@@ -58,4 +58,9 @@ class ProfileController extends BaseController
     {
         return parent::updateProfileAction($request);
     }
+
+    public function newsletterAction(): Response
+    {
+        return parent::newsletterAction();
+    }
 }

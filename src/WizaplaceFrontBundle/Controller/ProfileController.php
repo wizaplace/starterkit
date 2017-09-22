@@ -17,6 +17,7 @@ use Wizaplace\SDK\Discussion\DiscussionService;
 use Wizaplace\SDK\Exception\NotFound;
 use Wizaplace\SDK\Exception\SomeParametersAreInvalid;
 use Wizaplace\SDK\Favorite\FavoriteService;
+use Wizaplace\SDK\MailingList\MailingListService;
 use Wizaplace\SDK\Order\AfterSalesServiceRequest;
 use Wizaplace\SDK\Order\CreateOrderReturn;
 use Wizaplace\SDK\Order\Order;
@@ -32,8 +33,8 @@ use WizaplaceFrontBundle\Security\User;
 class ProfileController extends Controller
 {
     protected const PASSWORD_MINIMUM_LENGTH = 6;
-
     protected const DOB_FORMAT = 'd/m/Y';
+    protected const DEFAULT_MAILING_LIST_ID = 1;
 
     /** @var TranslatorInterface */
     protected $translator;
@@ -291,6 +292,16 @@ class ProfileController extends Controller
             'discussion' => $discussion,
             'messages' => $messages,
             'profile' => $this->getUser()->getWizaplaceUser(),
+        ]);
+    }
+
+    public function newsletterAction(): Response
+    {
+        $mailingListService = $this->get(MailingListService::class);
+        $userIsSubscribed = $mailingListService->isSubscribed(static::DEFAULT_MAILING_LIST_ID);
+
+        return $this->render('@WizaplaceFront/profile/newsletter.html.twig', [
+            'userIsSubscribed' => $userIsSubscribed,
         ]);
     }
 

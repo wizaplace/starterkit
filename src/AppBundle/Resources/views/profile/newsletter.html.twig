@@ -1,0 +1,40 @@
+{% extends '@App/layout-profile.html.twig' %}
+
+{% block profile_content %}
+    <label class="checkbox">
+        <input type="checkbox" value="1" id="profile-newsletter-subscription" {% if userIsSubscribed %} checked {% endif %}>
+        <span class="input-label">{{ 'subscribe_to_newsletter'|trans }}</span>
+    </label>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function() {
+            $('#profile-newsletter-subscription').on('click', function() {
+
+                // show loading spinner and overlay
+                helper.displayLoadingSpinner();
+
+                let subscribeToNewsletter = $(this).prop('checked');
+
+                // update user's subscription
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('newsletter_toggle') }}",
+                    data: {
+                        subscribeToNewsletter: subscribeToNewsletter,
+                    }
+                }).done(function () {
+                    // display a success notification
+                    notification.createAlert("{{ 'newsletter_subscription_update_success_message'|trans|e('js') }}", 'success');
+                }).fail(function (response) {
+                    // display an error notification
+                    notification.createAlert(response, 'danger');
+                }).always(function() {
+                    // remove overlay and spinner
+                    helper.removeLoadingSpinner();
+                });
+            });
+        });
+    </script>
+{% endblock %}
