@@ -274,7 +274,7 @@ class ProfileController extends Controller
         $discussionService = $this->get(DiscussionService::class);
         $discussions = $discussionService->getDiscussions();
 
-        return $this->render('@App/profile/discussions.html.twig', [
+        return $this->render('@WizaplaceFront/profile/discussions.html.twig', [
             'profile' => $this->getUser()->getWizaplaceUser(),
             'discussions' => $discussions,
         ]);
@@ -287,7 +287,7 @@ class ProfileController extends Controller
         $discussion = $discussionService->getDiscussion($id);
         $messages = $discussionService->getMessages($id);
 
-        return $this->render('@App/profile/discussion.html.twig', [
+        return $this->render('@WizaplaceFront/profile/discussion.html.twig', [
             'discussion' => $discussion,
             'messages' => $messages,
             'profile' => $this->getUser()->getWizaplaceUser(),
