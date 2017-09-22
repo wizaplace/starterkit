@@ -32,7 +32,7 @@ class NewsletterController extends Controller
     {
         $mailingListId = $request->request->getInt('newsletter_id');
         if (! $mailingListId) {
-            $mailingListId = self::DEFAULT_MAILING_LIST_ID;
+            $mailingListId = static::DEFAULT_MAILING_LIST_ID;
         }
         $email = $request->request->get('email');
         $response = $this->subscribe($mailingListId, $email);
@@ -43,14 +43,14 @@ class NewsletterController extends Controller
     public function toggleNewsletterSubscriptionAction(): JsonResponse
     {
         $mailingListService = $this->get(MailingListService::class);
-        $userIsSubscribed = $mailingListService->isSubscribed(self::DEFAULT_MAILING_LIST_ID);
+        $userIsSubscribed = $mailingListService->isSubscribed(static::DEFAULT_MAILING_LIST_ID);
         $email = $this->getUser()->getWizaplaceUser()->getEmail();
 
         // toggle user's subscription regarding their last subscription status
         if ($userIsSubscribed) {
-            $response = $this->unsubscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+            $response = $this->unsubscribe(static::DEFAULT_MAILING_LIST_ID, $email);
         } else {
-            $response = $this->subscribe(self::DEFAULT_MAILING_LIST_ID, $email);
+            $response = $this->subscribe(static::DEFAULT_MAILING_LIST_ID, $email);
         }
 
         return $response;

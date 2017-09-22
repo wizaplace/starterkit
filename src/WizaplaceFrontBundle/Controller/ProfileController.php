@@ -298,7 +298,7 @@ class ProfileController extends Controller
     public function newsletterAction(): Response
     {
         $mailingListService = $this->get(MailingListService::class);
-        $userIsSubscribed = $mailingListService->isSubscribed(self::DEFAULT_MAILING_LIST_ID);
+        $userIsSubscribed = $mailingListService->isSubscribed(static::DEFAULT_MAILING_LIST_ID);
 
         return $this->render('@WizaplaceFront/profile/newsletter.html.twig', [
             'userIsSubscribed' => $userIsSubscribed,
