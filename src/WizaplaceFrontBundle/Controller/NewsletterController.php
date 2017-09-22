@@ -56,7 +56,7 @@ class NewsletterController extends Controller
         return $response;
     }
 
-    private function subscribe(int $newsletterId, string $email): JsonResponse
+    protected function subscribe(int $newsletterId, string $email): JsonResponse
     {
         $mailingListService = $this->get(MailingListService::class);
 
@@ -81,7 +81,7 @@ class NewsletterController extends Controller
         return new JsonResponse();
     }
 
-    private function unsubscribe(int $newsletterId, string $email): JsonResponse
+    protected function unsubscribe(int $newsletterId, string $email): JsonResponse
     {
         $mailingListService = $this->get(MailingListService::class);
         $mailingListService->unsubscribe($newsletterId, $email);
