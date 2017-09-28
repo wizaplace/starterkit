@@ -39,7 +39,7 @@ class BasketService
                 $this->basket = $this->baseService->getBasket($basketId);
             } catch (ClientException $e) {
                 if ($e->getResponse()->getStatusCode() === 404) {
-                    $this->forgetBasketId();
+                    $this->forgetBasket();
 
                     return $this->getBasket();
                 }
@@ -94,6 +94,11 @@ class BasketService
         return $this->baseService->checkout($this->getBasketId(), $paymentId, $acceptTerms, $redirectUrl);
     }
 
+    public function forgetBasket(): void
+    {
+        $this->session->remove(self::ID_SESSION_KEY);
+    }
+
     /**
      * Gets current basket ID, or create a new one
      * @return string
@@ -108,10 +113,5 @@ class BasketService
         }
 
         return $basketId;
-    }
-
-    private function forgetBasketId(): void
-    {
-        $this->session->remove(self::ID_SESSION_KEY);
     }
 }

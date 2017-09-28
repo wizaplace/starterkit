@@ -96,6 +96,7 @@ class CheckoutController extends Controller
 
             return $this->redirect($this->generateUrl('checkout_payment'));
         }
+        $this->get(\WizaplaceFrontBundle\Service\BasketService::class)->forgetBasket();
 
         $orderIds = $request->query->get("orderIds", []);
 
