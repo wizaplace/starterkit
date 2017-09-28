@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\SDK\Basket\BasketService;
+use WizaplaceFrontBundle\Service\BasketService;
 
 class CheckoutController extends Controller
 {
@@ -33,8 +33,7 @@ class CheckoutController extends Controller
             return $this->redirect($this->generateUrl('checkout_addresses'));
         }
 
-        $basketId = $this->getBasketId();
-        $basket = $this->get(BasketService::class)->getBasket($basketId);
+        $basket = $this->get(BasketService::class)->getBasket();
 
         return $this->render('@App/checkout/login.html.twig', [
             'basket' => $basket,
@@ -43,8 +42,7 @@ class CheckoutController extends Controller
 
     public function addressesAction(): Response
     {
-        $basketId = $this->getBasketId();
-        $basket = $this->get(BasketService::class)->getBasket($basketId);
+        $basket = $this->get(BasketService::class)->getBasket();
 
         $user = $this->getUser()->getWizaplaceUser();
         $addressesAreIdentical = $user->getBillingAddress() === $user->getShippingAddress();
@@ -58,9 +56,8 @@ class CheckoutController extends Controller
     public function paymentAction(): Response
     {
         $basketService = $this->get(BasketService::class);
-        $basketId = $this->getBasketId();
-        $basket = $basketService->getBasket($basketId);
-        $payments = $basketService->getPayments($basketId);
+        $basket = $basketService->getBasket();
+        $payments = $basketService->getPayments();
 
         return $this->render('@App/checkout/payment.html.twig', [
             'basket' => $basket,
@@ -73,7 +70,6 @@ class CheckoutController extends Controller
         $basketService = $this->get(BasketService::class);
         $paymentId = $request->request->get('paymentId');
         $paymentInfo = $basketService->checkout(
-            $this->getBasketId(),
             $paymentId,
             true,
             $this->generateUrl('checkout_complete', [], UrlGeneratorInterface::ABSOLUTE_URL)
@@ -96,24 +92,12 @@ class CheckoutController extends Controller
 
             return $this->redirect($this->generateUrl('checkout_payment'));
         }
-        $this->get(\WizaplaceFrontBundle\Service\BasketService::class)->forgetBasket();
+        $this->get(BasketService::class)->forgetBasket();
 
         $orderIds = $request->query->get("orderIds", []);
 
         return $this->render('@App/checkout/confirmation.html.twig', [
             'orderIds' => $orderIds,
         ]);
-    }
-
-    protected function getBasketId(): string
-    {
-        $basketId = $this->get('session')->get(self::SESSION_BASKET_ATTRIBUTE);
-
-        if (null === $basketId) {
-            $basketId = $this->get(BasketService::class)->create();
-            $this->get('session')->set(self::SESSION_BASKET_ATTRIBUTE, $basketId);
-        }
-
-        return $basketId;
     }
 }
