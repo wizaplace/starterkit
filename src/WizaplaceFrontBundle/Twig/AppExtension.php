@@ -7,6 +7,7 @@
 
 namespace WizaplaceFrontBundle\Twig;
 
+use GuzzleHttp\Exception\ClientException;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -122,7 +123,16 @@ class AppExtension extends \Twig_Extension
         if (!$basketId) {
             return null;
         }
-        $basket = $this->basketService->getBasket($basketId);
+        try {
+            $basket = $this->basketService->getBasket($basketId);
+        } catch (ClientException $e) {
+            if ($e->getResponse()->getStatusCode() === 404) {
+                $basket = null;
+                $this->session->remove(\AppBundle\Controller\BasketController::SESSION_BASKET_ATTRIBUTE);
+            } else {
+                throw $e;
+            }
+        }
 
         return $basket;
     }
