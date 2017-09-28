@@ -54,7 +54,7 @@ services:
     Wizaplace\SDK\Catalog\Review\ReviewService:
         public: true
     Wizaplace\SDK\Basket\BasketService:
-        public: true
+        public: false
     Wizaplace\SDK\Cms\BannerService:
         public: true
     Wizaplace\SDK\User\UserService:
