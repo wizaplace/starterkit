@@ -85,7 +85,7 @@ class CheckoutController extends Controller
         }
 
         // @FIXME : display $paymentInfo->getHtml()
-        return $this->redirect($this->generateUrl('checkout_complete'));
+        return $this->redirectToRoute('checkout_complete');
     }
 
     public function completeAction(Request $request): Response
