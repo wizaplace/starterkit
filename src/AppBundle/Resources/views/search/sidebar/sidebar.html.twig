@@ -23,7 +23,7 @@
             {% include('@App/search/sidebar/categories.html.twig') %}
         </li>
 
-        <li v-for="facet in facets" class="sidebar-item" v-if="facet.name != 'categories'">
+        <li v-for="facet in facets" :key="facet.name" class="sidebar-item" v-if="facet.name != 'categories'">
 
             {# price slider #}
             <div v-if="facet.name == 'price'">
