@@ -88,7 +88,7 @@ class AuthController extends BaseController
         return $this->redirect($requestedUrl);
     }
 
-    public function resetPasswordAction(Request $request): Response
+    public function initiateResetPasswordAction(Request $request): Response
     {
         // redirection url
         $referer = $request->headers->get('referer');
@@ -211,5 +211,15 @@ class AuthController extends BaseController
         }
 
         return $this->render('@App/auth/vendor-registration.html.twig');
+    }
+
+    public function resetPasswordFormAction(string $token)
+    {
+        return parent::resetPasswordFormAction($token);
+    }
+
+    public function submitResetPasswordAction(Request $request)
+    {
+        return parent::submitResetPasswordAction($request);
     }
 }

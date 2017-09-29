@@ -10,7 +10,9 @@ namespace WizaplaceFrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\SDK\User\UserService;
 
 class AuthController extends Controller
 {
@@ -57,5 +59,31 @@ class AuthController extends Controller
         $this->get('session')->start();
 
         return $this->render('@WizaplaceFront/auth/login.html.twig');
+    }
+
+    public function resetPasswordFormAction(string $token)
+    {
+        return $this->render('@WizaplaceFront/auth/reset-password.html.twig', [
+            'token' => $token,
+        ]);
+    }
+
+    public function submitResetPasswordAction(Request $request)
+    {
+        $token = $request->request->get('token');
+        $newPassword = $request->request->get('newPassword');
+
+        if (empty($token)) {
+            throw new BadRequestHttpException("missing token for password reset");
+        }
+
+        if (empty($newPassword)) {
+            $this->addFlash('warning', $this->get(TranslatorInterface::class)->trans('error_new_password_required'));
+        }
+
+        $this->get(UserService::class)->changePasswordWithRecoveryToken($token, $newPassword);
+        $this->addFlash('success', $this->get(TranslatorInterface::class)->trans('password_changed'));
+
+        return $this->redirectToRoute('login_form');
     }
 }
