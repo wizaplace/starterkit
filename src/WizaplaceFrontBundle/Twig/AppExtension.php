@@ -7,17 +7,15 @@
 
 namespace WizaplaceFrontBundle\Twig;
 
-use GuzzleHttp\Exception\ClientException;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Wizaplace\SDK\Basket\Basket;
-use Wizaplace\SDK\Basket\BasketService;
 use Wizaplace\SDK\Catalog\CatalogService;
 use Wizaplace\SDK\Cms\CmsService;
 use Wizaplace\SDK\Image\Image;
 use Wizaplace\SDK\Image\ImageService;
 use Wizaplace\SDK\User\UserService;
+use WizaplaceFrontBundle\Service\BasketService;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class AppExtension extends \Twig_Extension
@@ -73,7 +71,7 @@ class AppExtension extends \Twig_Extension
             //Le service est appelé directement pour pouvoir mettre du cache dessus.
             new \Twig_SimpleFunction('categoryTree', [$this, 'getCategoryTree']),
             new \Twig_SimpleFunction('currentUser', [$this, 'getCurrentUser']),
-            new \Twig_SimpleFunction('basket', [$this, 'getBasket']),
+            new \Twig_SimpleFunction('basket', [$this->basketService, 'getBasket']),
             new \Twig_SimpleFunction('recaptchaKey', [$this, 'getRecaptchaKey']),
             new \Twig_SimpleFunction('menus', [$this->cmsService, 'getAllMenus']),
         ];
@@ -115,26 +113,6 @@ class AppExtension extends \Twig_Extension
         }
 
         return $categoryTree->get();
-    }
-
-    public function getBasket(): ?Basket
-    {
-        $basketId = $this->session->get(\AppBundle\Controller\BasketController::SESSION_BASKET_ATTRIBUTE, null);
-        if (!$basketId) {
-            return null;
-        }
-        try {
-            $basket = $this->basketService->getBasket($basketId);
-        } catch (ClientException $e) {
-            if ($e->getResponse()->getStatusCode() === 404) {
-                $basket = null;
-                $this->session->remove(\AppBundle\Controller\BasketController::SESSION_BASKET_ATTRIBUTE);
-            } else {
-                throw $e;
-            }
-        }
-
-        return $basket;
     }
 
     public function getRecaptchaKey(): string
