@@ -46,6 +46,15 @@ class AuthController extends Controller
      */
     public const CSRF_LOGOUT_ID = 'logout_token';
 
+    /** @var TranslatorInterface */
+    protected $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
+
     public function loginAction(Request $request): Response
     {
         if ($this->getUser()) {
@@ -78,11 +87,11 @@ class AuthController extends Controller
         }
 
         if (empty($newPassword)) {
-            $this->addFlash('warning', $this->get(TranslatorInterface::class)->trans('error_new_password_required'));
+            $this->addFlash('warning', $this->translator->trans('error_new_password_required'));
         }
 
         $this->get(UserService::class)->changePasswordWithRecoveryToken($token, $newPassword);
-        $this->addFlash('success', $this->get(TranslatorInterface::class)->trans('password_changed'));
+        $this->addFlash('success', $this->translator->trans('password_changed'));
 
         return $this->redirectToRoute('login_form');
     }
