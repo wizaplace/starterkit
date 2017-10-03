@@ -16,6 +16,11 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
+reset_password_initiate:
+    path: /password
+    defaults: { _controller: WizaplaceFrontBundle:Auth:initiateResetPassword }
+    methods: [POST]
+
 reset_password_form:
     path: /reset-password/{token}
     defaults: { _controller: WizaplaceFrontBundle:Auth:resetPasswordForm }

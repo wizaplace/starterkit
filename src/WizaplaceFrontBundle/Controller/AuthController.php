@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\SDK\User\UserService;
 
@@ -73,12 +74,12 @@ class AuthController extends Controller
     public function initiateResetPasswordAction(Request $request): Response
     {
         // redirection url
-        $referer = $request->headers->get('referer');
+        $referer = $request->headers->get('referer') ?? $this->generateUrl('home');
 
         // CSRF token validation
         $submittedToken = $request->get('csrf_token');
 
-        if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
+        if (!$this->isCsrfTokenValid('password_token', $submittedToken)) {
             $message = $this->translator->trans('csrf_error_message');
             $this->addFlash('warning', $message);
 
@@ -96,7 +97,8 @@ class AuthController extends Controller
         }
 
         // send password recovery email
-        $this->get(UserService::class)->recoverPassword($email, new Uri($this->generateUrl('reset_password_form', ['token' => ''])));
+        $recoveryUrl = new Uri(str_replace('token_placeholder', '', $this->generateUrl('reset_password_form', ['token' => 'token_placeholder'], UrlGeneratorInterface::ABSOLUTE_URL)));
+        $this->get(UserService::class)->recoverPassword($email, $recoveryUrl);
 
         $message = $this->translator->trans('password_reset_confirmation_message');
         $this->addFlash('success', $message);
