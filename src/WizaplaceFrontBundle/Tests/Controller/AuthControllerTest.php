@@ -46,4 +46,49 @@ class AuthControllerTest extends BundleTestCase
         $this->client->request('GET', '/login');
         $this->assertResponseCodeEquals(Response::HTTP_OK, $this->client);
     }
+
+    public function testInitResetPassword()
+    {
+        $this->client->request('GET', '/login');
+        $this->assertResponseCodeEquals(Response::HTTP_OK, $this->client);
+
+        $this->client->request('POST', '/password', [
+            'email' => 'customer-4@world-company.com',
+            'csrf_token' => $this->generateCsrfToken('password_token', $this->client),
+        ]);
+
+        $this->assertResponseCodeEquals(Response::HTTP_FOUND, $this->client);
+        $this->assertSame('http://localhost/login', $this->client->getResponse()->headers->get('Location'));
+    }
+
+    public function testResetPasswordForm()
+    {
+        $token = md5('fake_secret_token');
+        $this->client->request('GET', '/reset-password/'.$token);
+
+        $this->assertSame([
+            'token' => $token,
+        ], $this->getRenderedData('@WizaplaceFront/auth/reset-password.html.twig'));
+    }
+
+    public function testSubmitResetPassword()
+    {
+        $this->client->request('POST', '/reset-password', [
+            'newPassword' => 'newPassword2',
+            'token' => md5('fake_secret_token'),
+        ]);
+        $this->assertResponseCodeEquals(Response::HTTP_FOUND, $this->client);
+        $this->assertSame('/login', $this->client->getResponse()->headers->get('Location'));
+
+        // submit the login form
+        $this->client->request('POST', '/login', [
+            AuthController::EMAIL_FIELD_NAME => 'customer-4@world-company.com',
+            AuthController::PASSWORD_FIELD_NAME => 'newPassword2',
+            AuthController::REDIRECT_URL_FIELD_NAME => '/',
+            AuthController::CSRF_FIELD_NAME => $this->generateCsrfToken(AuthController::CSRF_LOGIN_ID, $this->client),
+        ]);
+
+        $this->assertResponseCodeEquals(Response::HTTP_FOUND, $this->client);
+        $this->assertSame('http://localhost/', $this->client->getResponse()->headers->get('Location'));
+    }
 }

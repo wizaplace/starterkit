@@ -31,9 +31,19 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
-reset_password:
+reset_password_initiate:
     path: /password
-    defaults: { _controller: AppBundle:Auth:resetPassword }
+    defaults: { _controller: AppBundle:Auth:initiateResetPassword }
+    methods: [POST]
+
+reset_password_form:
+    path: /reset-password/{token}
+    defaults: { _controller: AppBundle:Auth:resetPasswordForm }
+    methods: [GET]
+
+reset_password_submit:
+    path: /reset-password
+    defaults: { _controller: AppBundle:Auth:submitResetPassword }
     methods: [POST]
 
 register_user:

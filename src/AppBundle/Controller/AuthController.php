@@ -11,7 +11,6 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\SDK\Authentication\BadCredentials;
 use Wizaplace\SDK\Company\CompanyRegistration;
 use Wizaplace\SDK\Company\CompanyService;
@@ -22,14 +21,6 @@ use WizaplaceFrontBundle\Service\AuthenticationService;
 
 class AuthController extends BaseController
 {
-    /** @var TranslatorInterface */
-    private $translator;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
     public function loginAction(Request $request): Response
     {
         return parent::loginAction($request);
@@ -88,38 +79,9 @@ class AuthController extends BaseController
         return $this->redirect($requestedUrl);
     }
 
-    public function resetPasswordAction(Request $request): Response
+    public function initiateResetPasswordAction(Request $request): Response
     {
-        // redirection url
-        $referer = $request->headers->get('referer');
-
-        // CSRF token validation
-        $submittedToken = $request->get('csrf_token');
-
-        if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $message = $this->translator->trans('csrf_error_message');
-            $this->addFlash('warning', $message);
-
-            return $this->redirect($referer);
-        }
-
-        // form validation
-        $email = $request->get('email');
-
-        if ($email === null) {
-            $message = $this->translator->trans('email_field_required_error_message');
-            $this->addFlash('danger', $message);
-
-            return $this->redirect($referer);
-        }
-
-        // send password recovery email
-        $this->get(UserService::class)->recoverPassword($email);
-
-        $message = $this->translator->trans('password_reset_confirmation_message');
-        $this->addFlash('success', $message);
-
-        return $this->redirect($referer);
+        return parent::initiateResetPasswordAction($request);
     }
 
     public function registerCompanyAction(Request $request): Response
@@ -211,5 +173,15 @@ class AuthController extends BaseController
         }
 
         return $this->render('@App/auth/vendor-registration.html.twig');
+    }
+
+    public function resetPasswordFormAction(string $token)
+    {
+        return parent::resetPasswordFormAction($token);
+    }
+
+    public function submitResetPasswordAction(Request $request)
+    {
+        return parent::submitResetPasswordAction($request);
     }
 }
