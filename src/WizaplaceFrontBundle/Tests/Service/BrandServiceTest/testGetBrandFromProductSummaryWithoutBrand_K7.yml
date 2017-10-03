@@ -1,0 +1,22 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/search/products?resultsPerPage=12&page=1&query=Z11%20Plus%20Bo%C3%AEtier%20PC%20en%20Acier%20ATX'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 10 Oct 2017 13:34:53 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: b3816f
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/b3816f'
+            Content-Length: '2405'
+            Content-Type: application/json
+        body: '{"results":[{"productId":1,"name":"Z11 Plus Bo\u00eetier PC en Acier ATX","slug":"test-product-slug","minimumPrice":67.9,"crossedOutPrice":null,"isAvailable":true,"createdAt":1507642161,"updatedAt":1507642161,"transactionMode":"T","conditions":["N"],"declinationCount":1,"affiliateLink":null,"mainImage":null,"url":"\/informatique\/test-product-slug.html","subtitle":"","shortDescription":"","averageRating":null,"attributes":[],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"}],"companies":[{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}],"geolocation":null}],"pagination":{"page":1,"nbResults":1,"nbPages":1,"resultsPerPage":12},"facets":[{"name":"categories","label":"Cat\u00e9gorie","values":{"3":{"label":"Informatique","count":"1","position":"0"}},"isNumeric":false},{"name":10,"label":"color","values":{"22":{"label":"blue","count":0,"position":0},"21":{"label":"red","count":0,"position":1},"23":{"label":"test attribute variant slug","count":0,"position":2}},"isNumeric":false},{"name":4,"label":"Commentaire","values":[],"isNumeric":false},{"name":1,"label":"Couleur","values":{"2":{"label":"Blanc","count":0,"position":0},"1":{"label":"Bleu","count":0,"position":1},"3":{"label":"Rouge","count":0,"position":2}},"isNumeric":false},{"name":8,"label":"Compl\u00e9ment adresse","values":[],"isNumeric":false},{"name":6,"label":"Couleur secondaire","values":{"11":{"label":"Jaune","count":0,"position":0},"12":{"label":"Orange","count":0,"position":1},"10":{"label":"Vert","count":0,"position":2},"13":{"label":"Violet","count":0,"position":3}},"isNumeric":false},{"name":7,"label":"Pointure","values":{"14":{"label":"38","count":0,"position":0},"15":{"label":"39","count":0,"position":1},"16":{"label":"40","count":0,"position":2},"17":{"label":"41","count":0,"position":3},"18":{"label":"42","count":0,"position":4},"19":{"label":"43","count":0,"position":5},"20":{"label":"44","count":0,"position":6}},"isNumeric":false},{"name":3,"label":"Marque","values":{"8":{"label":"Adidas","count":0,"position":0},"7":{"label":"Nike","count":0,"position":1},"9":{"label":"Puma","count":0,"position":2}},"isNumeric":false},{"name":2,"label":"Taille","values":{"6":{"label":"L","count":0,"position":0},"5":{"label":"M","count":0,"position":1},"4":{"label":"S","count":0,"position":2}},"isNumeric":false}]}'

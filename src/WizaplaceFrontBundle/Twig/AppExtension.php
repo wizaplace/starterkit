@@ -16,6 +16,7 @@ use Wizaplace\SDK\Image\Image;
 use Wizaplace\SDK\Image\ImageService;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Service\BasketService;
+use WizaplaceFrontBundle\Service\BrandService;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
 
 class AppExtension extends \Twig_Extension
@@ -40,6 +41,8 @@ class AppExtension extends \Twig_Extension
     private $assets;
     /** @var ProductUrlGenerator */
     private $productUrlGenerator;
+    /** @var BrandService */
+    private $brandService;
 
     public function __construct(
         CatalogService $catalogService,
@@ -51,7 +54,8 @@ class AppExtension extends \Twig_Extension
         CacheItemPoolInterface $cache,
         string $recaptchaKey,
         Packages $assets,
-        ProductUrlGenerator $productUrlGenerator
+        ProductUrlGenerator $productUrlGenerator,
+        BrandService $brandService
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
@@ -63,6 +67,7 @@ class AppExtension extends \Twig_Extension
         $this->recaptchaKey = $recaptchaKey;
         $this->assets = $assets;
         $this->productUrlGenerator = $productUrlGenerator;
+        $this->brandService = $brandService;
     }
 
     public function getFunctions()
@@ -83,6 +88,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl']),
             new \Twig_SimpleFilter('productUrl', [$this->productUrlGenerator, 'generateProductUrl']),
             new \Twig_SimpleFilter('price', [$this, 'formatPrice']),
+            new \Twig_SimpleFilter('brand', [$this->brandService, 'getBrand']),
         ];
     }
 

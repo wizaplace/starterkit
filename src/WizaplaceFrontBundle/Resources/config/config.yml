@@ -10,6 +10,8 @@ services:
     WizaplaceFrontBundle\Controller\:
         resource: '../../Controller'
         public: true
+    WizaplaceFrontBundle\Service\BrandService:
+        public: true
     WizaplaceFrontBundle\Service\ProductUrlGenerator:
         public: true
     WizaplaceFrontBundle\Command\PushTranslationsCommand:

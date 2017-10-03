@@ -1,0 +1,43 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/products/5'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 10 Oct 2017 13:34:52 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: ea9044
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/ea9044'
+            Content-Length: '3823'
+            Content-Type: application/json
+        body: '{"id":5,"code":"32094574920","supplierReference":"TEST-ATTRIBUTES","name":"Product with complex attributes","url":"http:\/\/wizaplace.loc\/special-category-dedicated-to-specific-tests\/product-with-complex-attributes.html","shortDescription":"","description":"","slug":"product-with-complex-attributes","minPrice":15,"greenTax":0,"isTransactional":true,"weight":1.23,"averageRating":null,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0},{"name":"Lettre prioritaire","image":null,"firstRate":0,"nextRate":0},{"name":"Colissmo","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}],"categoryPath":[{"id":5,"name":"Special category dedicated to specific tests","slug":"special-category-dedicated-to-specific-tests"}],"geolocation":null,"video":null,"declinations":[{"id":"5_0","code":"32094574920","supplierReference":"TEST-ATTRIBUTES","price":15,"originalPrice":15,"crossedOutPrice":null,"prices":{"priceWithTaxes":15,"priceWithoutVat":14.69,"vat":0.31},"greenTax":0,"amount":15,"affiliateLink":null,"images":[],"options":[],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}}],"attributes":[{"id":4,"name":"Commentaire","value":"Commentaire #12M%M_\u00b009\u00a3*\/.?","valueIds":[],"children":[],"subfeatures":[],"imageUrls":[],"type":"FREE_TEXT"},{"id":1,"name":"Couleur","value":["Blanc","Rouge"],"valueIds":[2,3],"children":[],"subfeatures":[],"imageUrls":[],"type":"CHECKBOX_MULTIPLE"},{"id":5,"name":"Groupe attributs","value":null,"valueIds":[],"children":[{"id":8,"name":"Compl\u00e9ment adresse","value":"Compl\u00e9ment d\u0027adresse pour la stepo","valueIds":[],"children":[],"subfeatures":[],"imageUrls":[],"type":"FREE_TEXT"},{"id":6,"name":"Couleur secondaire","value":["Orange"],"valueIds":[12],"children":[],"subfeatures":[],"imageUrls":[],"type":"CHECKBOX_MULTIPLE"},{"id":7,"name":"Pointure","value":["44"],"valueIds":[20],"children":[],"subfeatures":[],"imageUrls":[],"type":"LIST_TEXT"}],"subfeatures":[{"id":8,"name":"Compl\u00e9ment adresse","value":"Compl\u00e9ment d\u0027adresse pour la stepo","valueIds":[],"children":[],"subfeatures":[],"imageUrls":[],"type":"FREE_TEXT"},{"id":6,"name":"Couleur secondaire","value":["Orange"],"valueIds":[12],"children":[],"subfeatures":[],"imageUrls":[],"type":"CHECKBOX_MULTIPLE"},{"id":7,"name":"Pointure","value":["44"],"valueIds":[20],"children":[],"subfeatures":[],"imageUrls":[],"type":"LIST_TEXT"}],"imageUrls":[],"type":"GROUP"},{"id":3,"name":"Marque","value":["Puma"],"valueIds":[9],"children":[],"subfeatures":[],"imageUrls":[],"type":"LIST_BRAND"},{"id":2,"name":"Taille","value":["M"],"valueIds":[5],"children":[],"subfeatures":[],"imageUrls":[],"type":"LIST_TEXT"},{"id":null,"name":"Free attribute multiple","value":["r\u00e9ponse - 1 #","r\u00e9ponse - 2 @",4985],"valueIds":[],"children":[],"subfeatures":[],"imageUrls":null,"type":"FREE"},{"id":null,"name":"Free attribute simple","value":["valeur simple du free attribute #12M%M_\u00b009\u00a3*\/.?"],"valueIds":[],"children":[],"subfeatures":[],"imageUrls":null,"type":"FREE"},{"id":null,"name":"Free attribute simple mais en tableau","value":["une bien belle valeur d\u00e9j\u00e0 encapsul\u00e9e"],"valueIds":[],"children":[],"subfeatures":[],"imageUrls":null,"type":"FREE"},{"id":null,"name":"Free attribute integer ?","value":[92254094],"valueIds":[],"children":[],"subfeatures":[],"imageUrls":null,"type":"FREE"},{"id":null,"name":"Free attribute integer mais en tableau","value":["la m\u00eame histoire par ici"],"valueIds":[],"children":[],"subfeatures":[],"imageUrls":null,"type":"FREE"}],"options":[],"attachments":[]}'
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/attributes/variants/9'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '1'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Tue, 10 Oct 2017 13:34:52 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 7bec9f
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/7bec9f'
+            Content-Length: '82'
+            Content-Type: application/json
+        body: '{"id":9,"attributeId":3,"name":"Puma","slug":"puma","description":"","image":null}'
