@@ -58,6 +58,7 @@ class ProfileController extends Controller
     public function addressesAction(): Response
     {
         $user = $this->getUser()->getWizaplaceUser();
+        // @codingStandardsIgnoreLine
         $addressesAreIdentical = $user->getBillingAddress() == $user->getShippingAddress();
 
         return $this->render('@WizaplaceFront/profile/addresses.html.twig', [
