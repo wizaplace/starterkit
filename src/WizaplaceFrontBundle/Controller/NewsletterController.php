@@ -21,7 +21,7 @@ class NewsletterController extends Controller
     protected const DEFAULT_MAILING_LIST_ID = 1;
 
     /** @var TranslatorInterface */
-    private $translator;
+    protected $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
