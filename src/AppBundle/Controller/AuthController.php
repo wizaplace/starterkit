@@ -81,36 +81,7 @@ class AuthController extends BaseController
 
     public function initiateResetPasswordAction(Request $request): Response
     {
-        // redirection url
-        $referer = $request->headers->get('referer');
-
-        // CSRF token validation
-        $submittedToken = $request->get('csrf_token');
-
-        if (! $this->isCsrfTokenValid('password_token', $submittedToken)) {
-            $message = $this->translator->trans('csrf_error_message');
-            $this->addFlash('warning', $message);
-
-            return $this->redirect($referer);
-        }
-
-        // form validation
-        $email = $request->get('email');
-
-        if ($email === null) {
-            $message = $this->translator->trans('email_field_required_error_message');
-            $this->addFlash('danger', $message);
-
-            return $this->redirect($referer);
-        }
-
-        // send password recovery email
-        $this->get(UserService::class)->recoverPassword($email);
-
-        $message = $this->translator->trans('password_reset_confirmation_message');
-        $this->addFlash('success', $message);
-
-        return $this->redirect($referer);
+        return parent::initiateResetPasswordAction($request);
     }
 
     public function registerCompanyAction(Request $request): Response
