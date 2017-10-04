@@ -7,6 +7,7 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Controller;
 
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Uri;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -126,7 +127,17 @@ class AuthController extends Controller
             $this->addFlash('warning', $this->translator->trans('error_new_password_required'));
         }
 
-        $this->get(UserService::class)->changePasswordWithRecoveryToken($token, $newPassword);
+        try {
+            $this->get(UserService::class)->changePasswordWithRecoveryToken($token, $newPassword);
+        } catch (ClientException $e) {
+            if ($e->getResponse()->getStatusCode() === 404) {
+                $this->addFlash('error', $this->translator->trans('invalid_password_reset_token'));
+
+                return $this->redirectToRoute('reset_password_form', ['token' => $token]);
+            }
+
+            throw $e;
+        }
         $this->addFlash('success', $this->translator->trans('password_changed'));
 
         return $this->redirectToRoute('login_form');
