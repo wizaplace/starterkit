@@ -21,7 +21,8 @@
         "bmancone/guzzle-stopwatch-middleware": "0.0.2",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "symfony/psr-http-message-bridge": "^1.0",
-        "zendframework/zend-diactoros": "^1.5"
+        "zendframework/zend-diactoros": "^1.5",
+        "sentry/sentry-symfony": "^0.8.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

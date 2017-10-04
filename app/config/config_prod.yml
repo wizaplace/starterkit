@@ -5,6 +5,9 @@ parameters:
     api.base_url: 'https://sandbox.wizaplace.com/api/v1/'
     googlemaps.api_key: 'AIzaSyC6pzFn22J8wZ9OMuYBButVwUKvmo5Jx1w' #@TODO: change me
     wizaplace.system_user_password: '%env(WIZAPLACE_SYSTEM_USER_PASSWORD)%'
+    # default env values
+    env(SENTRY_DSN): ~
+    env(WIZAPLACE_SYSTEM_USER_PASSWORD): ~
 
 monolog:
     handlers:
@@ -18,3 +21,6 @@ monolog:
             level: debug
         console:
             type:  console
+
+sentry:
+    dsn: "%env(SENTRY_DSN)%"
