@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4505977d7020de8e9eea7744d0ca179d",
+    "content-hash": "94e6ebed6e0fb25d08b3e895ce02b246",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2602,16 +2602,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.9.6",
+            "version": "0.9.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "512a76313132b8923c82724bbe0d17d033dada48"
+                "reference": "12fb42bf10dda4c4e033987f6a56231a1bec5ab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/512a76313132b8923c82724bbe0d17d033dada48",
-                "reference": "512a76313132b8923c82724bbe0d17d033dada48",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/12fb42bf10dda4c4e033987f6a56231a1bec5ab6",
+                "reference": "12fb42bf10dda4c4e033987f6a56231a1bec5ab6",
                 "shasum": ""
             },
             "require": {
@@ -2639,7 +2639,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-09-29T14:16:22+00:00"
+            "time": "2017-10-06T13:27:46+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
