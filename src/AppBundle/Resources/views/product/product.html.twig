@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-    {% set declination = product.declinations.0 %}
     {% set inStock = declination.amount > 0 %}
 
     <section id="product-page">
@@ -228,7 +227,7 @@
 
             methods: {
                 increaseQuantity: function() {
-                    if(this.quantity < {{ product.declinations.0.amount|e('js') }}) {
+                    if(this.quantity < {{ declination.amount|e('js') }}) {
                         this.quantity ++;
                     }
                 },
@@ -244,7 +243,7 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",
-                        data: { declinationId: this.productId, quantity: quantity },
+                        data: { declinationId: this.declinationId, quantity: quantity },
                         success: function(response) {
                             var declinationInfo = {
                                 name: {{ product.name|json_encode|raw }},
