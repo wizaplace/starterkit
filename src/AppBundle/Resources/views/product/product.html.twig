@@ -219,7 +219,6 @@
             delimiters: ['${','}'],
             el: '#product-page',
             data: {
-                productId: {{ product.id }},
                 quantity: 1,
                 declinationId: '{{ declination.id }}',
                 isFavorite: {{ isFavorite|json_encode|raw }},

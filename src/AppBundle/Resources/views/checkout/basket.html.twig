@@ -16,7 +16,7 @@
 
                             {# display all products in this company/shipping group #}
                             {% for product in shippingGroup.items %}
-                                <article class="basket-product" data-product-id="{{ product.declinationId }}">
+                                <article class="basket-product" data-declination-id="{{ product.declinationId }}">
 
                                     {# product image #}
                                     <div class="image">
@@ -193,7 +193,7 @@
             // show overlay and spinner
             helper.displayLoadingSpinner();
 
-            let declinationId = $inputField.closest('.basket-product').data('product-id');
+            let declinationId = $inputField.closest('.basket-product').data('declination-id');
 
             $.ajax({
                 method: "POST",
