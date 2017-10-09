@@ -136,7 +136,7 @@
             </ul>
 
             {# grouped attributes #}
-            {% for attribute in product.attributes if attribute.children|length > 1 %}
+            {% for attribute in product.attributes if attribute.children|length > 0 %}
                 <h3>{{ attribute.name }}</h3>
                 <ul>
                     {% for attribute in attribute.children %}
