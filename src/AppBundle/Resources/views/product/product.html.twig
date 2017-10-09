@@ -220,7 +220,6 @@
             delimiters: ['${','}'],
             el: '#product-page',
             data: {
-                productId: {{ product.id }},
                 quantity: 1,
                 declinationId: '{{ declination.id }}',
                 isFavorite: {{ isFavorite|json_encode|raw }},
@@ -244,7 +243,7 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",
-                        data: { declinationId: this.productId, quantity: quantity },
+                        data: { declinationId: this.declinationId, quantity: quantity },
                         success: function(response) {
                             var declinationInfo = {
                                 name: {{ product.name|json_encode|raw }},
