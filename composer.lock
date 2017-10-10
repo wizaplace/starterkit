@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "94e6ebed6e0fb25d08b3e895ce02b246",
+    "content-hash": "715d06ab2d13ce43ded714406244aa42",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2602,16 +2602,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.9.7",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "12fb42bf10dda4c4e033987f6a56231a1bec5ab6"
+                "reference": "825e86301a1ffccb9c335714f1739bc70035507b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/12fb42bf10dda4c4e033987f6a56231a1bec5ab6",
-                "reference": "12fb42bf10dda4c4e033987f6a56231a1bec5ab6",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/825e86301a1ffccb9c335714f1739bc70035507b",
+                "reference": "825e86301a1ffccb9c335714f1739bc70035507b",
                 "shasum": ""
             },
             "require": {
@@ -2639,7 +2639,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-10-06T13:27:46+00:00"
+            "time": "2017-10-10T10:10:51+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -4242,16 +4242,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.4.0",
+            "version": "6.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61"
+                "reference": "b770d8ba7e60295ee91d69d5a5e01ae833cac220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1bcaca096998de32c29535fdd2dea0c475e8f61",
-                "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b770d8ba7e60295ee91d69d5a5e01ae833cac220",
+                "reference": "b770d8ba7e60295ee91d69d5a5e01ae833cac220",
                 "shasum": ""
             },
             "require": {
@@ -4322,7 +4322,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-06T03:14:57+00:00"
+            "time": "2017-10-07T17:53:53+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
