@@ -15,6 +15,7 @@ use Wizaplace\SDK\Cms\CmsService;
 use Wizaplace\SDK\Image\Image;
 use Wizaplace\SDK\Image\ImageService;
 use Wizaplace\SDK\User\UserService;
+use WizaplaceFrontBundle\Service\AttributeVariantUrlGenerator;
 use WizaplaceFrontBundle\Service\BasketService;
 use WizaplaceFrontBundle\Service\BrandService;
 use WizaplaceFrontBundle\Service\ProductUrlGenerator;
@@ -41,8 +42,8 @@ class AppExtension extends \Twig_Extension
     private $assets;
     /** @var ProductUrlGenerator */
     private $productUrlGenerator;
-    /** @var BrandService */
-    private $brandService;
+    /** @var AttributeVariantUrlGenerator */
+    private $attributeVariantUrlGenerator;
 
     public function __construct(
         CatalogService $catalogService,
@@ -55,7 +56,7 @@ class AppExtension extends \Twig_Extension
         string $recaptchaKey,
         Packages $assets,
         ProductUrlGenerator $productUrlGenerator,
-        BrandService $brandService
+        AttributeVariantUrlGenerator $attributeVariantUrlGenerator
     ) {
         $this->catalogService = $catalogService;
         $this->session = $session;
@@ -67,7 +68,7 @@ class AppExtension extends \Twig_Extension
         $this->recaptchaKey = $recaptchaKey;
         $this->assets = $assets;
         $this->productUrlGenerator = $productUrlGenerator;
-        $this->brandService = $brandService;
+        $this->attributeVariantUrlGenerator = $attributeVariantUrlGenerator;
     }
 
     public function getFunctions()
@@ -88,7 +89,8 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl']),
             new \Twig_SimpleFilter('productUrl', [$this->productUrlGenerator, 'generateProductUrl']),
             new \Twig_SimpleFilter('price', [$this, 'formatPrice']),
-            new \Twig_SimpleFilter('brand', [$this->brandService, 'getBrand']),
+            new \Twig_SimpleFilter('brand', [$this->catalogService, 'getBrand']),
+            new \Twig_SimpleFilter('brandUrl', [$this->attributeVariantUrlGenerator, 'generateAttributeVariantUrl']),
         ];
     }
 

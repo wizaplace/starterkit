@@ -10,7 +10,7 @@ services:
     WizaplaceFrontBundle\Controller\:
         resource: '../../Controller'
         public: true
-    WizaplaceFrontBundle\Service\BrandService:
+    WizaplaceFrontBundle\Service\AttributeVariantUrlGenerator:
         public: true
     WizaplaceFrontBundle\Service\ProductUrlGenerator:
         public: true

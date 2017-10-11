@@ -1,0 +1,22 @@
+
+-
+    request:
+        method: GET
+        url: 'http://wizaplace.loc/api/v1/catalog/attributes/variants/2'
+        headers:
+            Host: wizaplace.loc
+            VCR-index: '0'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 11 Oct 2017 12:28:38 GMT'
+            Server: 'Apache/2.4.10 (Debian)'
+            Cache-Control: 'no-cache, private'
+            X-Debug-Token: 0deea5
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/0deea5'
+            Content-Length: '84'
+            Content-Type: application/json
+        body: '{"id":2,"attributeId":1,"name":"Blanc","slug":"blanc","description":"","image":null}'
