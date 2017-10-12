@@ -1,0 +1,41 @@
+path.data: /app/var/filebeat/data
+path.logs: /app/var/filebeat/logs
+
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/access.log
+  fields:
+    document_type: apache_access
+  tags: ["apache", "access", "front"]
+
+- input_type: log
+  paths:
+    - /var/log/error.log
+  fields:
+    document_type: apache_error
+  tags: ["apache", "error"]
+
+#- input_type: log
+#  paths:
+#    - /app/var/logs/prod.json
+#  tags: ["monolog", "front"]
+#  json.keys_under_root: true
+#  fields:
+#    document_type: app
+
+- input_type: log
+  paths:
+    - /var/log/deploy.log
+  fields:
+    document_type: deploy
+
+- input_type: log
+  paths:
+    - /var/log/php.access.log
+  fields:
+    document_type: php_access
+  tags: ["php", "access", "front"]
+
+output.logstash:
+  hosts: ["logs.wizacha.com:5044"]
