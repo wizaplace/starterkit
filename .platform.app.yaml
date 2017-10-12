@@ -48,6 +48,7 @@ mounts:
     '/var/logs': 'shared:files/logs'
     '/var/sessions': 'shared:files/sessions'
     '/var/translations': 'shared:files/translations'
+    '/var/filebeat': 'shared:files/filebeat'
 
 dependencies:
     nodejs:
