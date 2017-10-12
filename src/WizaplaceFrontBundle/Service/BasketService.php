@@ -51,31 +51,41 @@ class BasketService
 
     public function addProductToBasket(string $declinationId, int $quantity): int
     {
+        $this->basket = null;
+
         return $this->baseService->addProductToBasket($this->getBasketId(), $declinationId, $quantity);
     }
 
     public function removeProductFromBasket(string $declinationId): void
     {
+        $this->basket = null;
+
         $this->baseService->removeProductFromBasket($this->getBasketId(), $declinationId);
     }
 
     public function cleanBasket(): void
     {
+        $this->basket = null;
+
         $this->baseService->cleanBasket($this->getBasketId());
     }
 
     public function updateProductQuantity(string $declinationId, int $quantity): int
     {
+        $this->basket = null;
+
         return $this->baseService->updateProductQuantity($this->getBasketId(), $declinationId, $quantity);
     }
 
     public function addCoupon(string $coupon): void
     {
+        $this->basket = null;
         $this->baseService->addCoupon($this->getBasketId(), $coupon);
     }
 
     public function removeCoupon(string $coupon): void
     {
+        $this->basket = null;
         $this->baseService->removeCoupon($this->getBasketId(), $coupon);
     }
 
@@ -86,16 +96,20 @@ class BasketService
 
     public function selectShippings(array $selections): void
     {
+        $this->basket = null;
         $this->baseService->selectShippings($this->getBasketId(), $selections);
     }
 
     public function checkout(int $paymentId, bool $acceptTerms, string $redirectUrl): PaymentInformation
     {
+        $this->basket = null;
+
         return $this->baseService->checkout($this->getBasketId(), $paymentId, $acceptTerms, $redirectUrl);
     }
 
     public function forgetBasket(): void
     {
+        $this->basket = null;
         $this->session->remove(self::ID_SESSION_KEY);
     }
 
