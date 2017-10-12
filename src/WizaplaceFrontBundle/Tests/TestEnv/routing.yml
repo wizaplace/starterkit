@@ -60,6 +60,11 @@ category:
     requirements:
         slug: "%slug.regexp%"
 
+attribute_variant:
+    path: /a/{slug}
+    #defaults: { _controller: WizaplaceFrontBundle:Attribute:viewVariant }
+    methods: [GET]
+
 cms_page:
     path: /{slug}
     defaults: { _controller: WizaplaceFrontBundle:Cms:Page }

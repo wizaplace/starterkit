@@ -7,7 +7,7 @@ declare(strict_types = 1);
 
 namespace WizaplaceFrontBundle\Service;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wizaplace\SDK\Catalog\DeclinationSummary;
 use Wizaplace\SDK\Catalog\Product;
 use Wizaplace\SDK\Catalog\ProductCategory;
@@ -15,12 +15,12 @@ use Wizaplace\SDK\Catalog\ProductSummary;
 
 class ProductUrlGenerator
 {
-    /** @var RouterInterface */
-    private $router;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -75,7 +75,7 @@ class ProductUrlGenerator
      */
     private function generateUrl(string $productSlug, array $categoryPath, ?string $declinationId = null): string
     {
-        return $this->router->generate('product', [
+        return $this->urlGenerator->generate('product', [
             'categoryPath' => join('/', $categoryPath),
             'slug' => $productSlug,
             'd' => $declinationId,
