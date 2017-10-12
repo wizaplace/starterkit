@@ -22,7 +22,7 @@ class BasketService
     /** @var SessionInterface */
     private $session;
 
-    /** @var Basket */
+    /** @var null|Basket */
     private $basket;
 
     public function __construct(\Wizaplace\SDK\Basket\BasketService $baseService, SessionInterface $session)
