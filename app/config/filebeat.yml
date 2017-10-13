@@ -14,7 +14,7 @@ filebeat.prospectors:
     - /var/log/error.log
   fields:
     document_type: apache_error
-  tags: ["apache", "error"]
+  tags: ["apache", "error", "front"]
 
 #- input_type: log
 #  paths:
@@ -29,6 +29,7 @@ filebeat.prospectors:
     - /var/log/deploy.log
   fields:
     document_type: deploy
+  tags: ["deploy", "front"]
 
 - input_type: log
   paths:
