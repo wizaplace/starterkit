@@ -28,6 +28,10 @@ web:
             # The front-controller script which determines where to send
             # non-static requests.
             passthru: '/app.php'
+            rules:
+                # Provide a longer TTL (2 weeks) for aggregated assets files.
+                '^/(bundles|fonts|images|js|scripts|style)':
+                    expires: 2w
         # Allow uploaded files to be served, but do not run scripts.
         # Missing files get mapped to the front controller above.
         '/files':
