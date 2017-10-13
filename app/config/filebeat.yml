@@ -16,13 +16,13 @@ filebeat.prospectors:
     document_type: apache_error
   tags: ["apache", "error", "front"]
 
-#- input_type: log
-#  paths:
-#    - /app/var/logs/prod.json
-#  tags: ["monolog", "front"]
-#  json.keys_under_root: true
-#  fields:
-#    document_type: app
+- input_type: log
+  paths:
+    - /app/var/logs/prod.json
+  tags: ["monolog", "front"]
+  json.keys_under_root: true
+  fields:
+    document_type: app
 
 - input_type: log
   paths:
