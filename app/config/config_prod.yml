@@ -11,14 +11,14 @@ parameters:
 
 monolog:
     handlers:
-        main:
+        logstash:
             type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            handler:      logstash_file
+        logstash_file:
+            type:         stream
+            level:        'warning'
+            path:         "%kernel.logs_dir%/prod.json"
+            formatter:    monolog.formatter.logstash
         console:
             type:  console
 
