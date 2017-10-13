@@ -54,6 +54,10 @@ mounts:
     '/var/translations': 'shared:files/translations'
     '/var/filebeat': 'shared:files/filebeat'
 
+runtime:
+    extensions:
+        - newrelic
+
 dependencies:
     nodejs:
         gulp: "^3.9"
