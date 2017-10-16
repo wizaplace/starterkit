@@ -103,6 +103,8 @@ hooks:
       deployID="$(cat /app/var/buildID).$(cat /proc/sys/kernel/random/uuid)"
       echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
+      echo "${deployID}" > /app/web/version.txt
+
       # cache
       bin/console --env=prod cache:clear --no-warmup
       rm -rf var/cache/*
