@@ -6,6 +6,11 @@ home:
     defaults: { _controller: AppBundle:Home:home }
     methods: [GET]
 
+version:
+    path: /version.json
+    defaults: { _controller: WizaplaceFrontBundle:Monitoring:version }
+    methods: [GET]
+
 # Search
 search:
     path: /recherche
