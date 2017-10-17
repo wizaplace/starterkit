@@ -8,6 +8,11 @@ parameters:
     # default env values
     env(SENTRY_DSN): ~
     env(WIZAPLACE_SYSTEM_USER_PASSWORD): ~
+    env(PLATFORM_TREE_ID): ~
+
+framework:
+    assets:
+        version: "%env(PLATFORM_TREE_ID)%"
 
 monolog:
     handlers:
