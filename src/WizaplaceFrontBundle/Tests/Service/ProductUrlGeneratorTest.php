@@ -18,7 +18,7 @@ class ProductUrlGeneratorTest extends BundleTestCase
     public function testGeneratingUrlFromProduct()
     {
         $container = self::$kernel->getContainer();
-        $product = $container->get(CatalogService::class)->getProductById(1);
+        $product = $container->get(CatalogService::class)->getProductById('1');
 
         $result = $container->get(ProductUrlGenerator::class)->generateProductUrl($product);
 
@@ -28,7 +28,7 @@ class ProductUrlGeneratorTest extends BundleTestCase
     public function testGeneratingUrlFromProductWithDeclinationId()
     {
         $container = self::$kernel->getContainer();
-        $product = $container->get(CatalogService::class)->getProductById(1);
+        $product = $container->get(CatalogService::class)->getProductById('1');
 
         $declinationId = $product->getDeclinations()[0]->getId();
 

@@ -78,7 +78,7 @@ class ProductController extends Controller
         $latestProducts = $this->productListService->getLatestProducts(6);
 
         //product Reviews
-        $reviews = $this->reviewService->getProductReviews((int) $product->getId()); // @FIXME: MVP ids are strings
+        $reviews = $this->reviewService->getProductReviews($product->getId());
 
         $declination = $product->getDeclination($declinationId);
         $variantIdByOptionId = [];
@@ -129,7 +129,7 @@ class ProductController extends Controller
         if (is_null($slugTarget) || !$slugTarget->getObjectType()->equals(SlugTargetType::PRODUCT())) {
             return null;
         }
-        $productId = (int) $slugTarget->getObjectId();
+        $productId = $slugTarget->getObjectId();
 
         return $this->catalogService->getProductById($productId);
     }

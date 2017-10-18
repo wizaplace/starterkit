@@ -23,7 +23,7 @@ class ProductController extends BaseController
     public function reviewAction(ReviewService $reviewService, Request $request) : RedirectResponse
     {
         $reviewService->reviewProduct(
-            (int) $request->request->get('product_id'),
+            (string) $request->request->get('product_id'),
             (string) $request->request->get('author'),
             (string) $request->request->get('message'),
             (int) $request->request->get('rating')
