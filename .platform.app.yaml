@@ -82,7 +82,7 @@ hooks:
       gulp deploy
 
       # remove envs other than prod
-      if [ ${PLATFORM_BRANCH} = "master" ]; then
+      if [ "${PLATFORM_BRANCH}" = "master" ]; then
         rm -f web/app_*.php
       fi
 
