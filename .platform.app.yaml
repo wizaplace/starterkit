@@ -87,10 +87,11 @@ hooks:
       cp .platform.php.ini php.ini
 
       # download filebeat
-      wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.5.2-linux-x86_64.tar.gz
-      tar xfz filebeat-5.5.2-linux-x86_64.tar.gz
-      cp filebeat-5.5.2-linux-x86_64/filebeat bin/filebeat
-      rm -rf filebeat-5.5.2-linux-x86_64 filebeat-5.5.2-linux-x86_64.tar.gz
+      FILEBEAT_VERSION=5.6.3
+      wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+      tar xfz filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+      cp filebeat-${FILEBEAT_VERSION}-linux-x86_64/filebeat bin/filebeat
+      rm -rf filebeat-${FILEBEAT_VERSION}-linux-x86_64 filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
 
       # push our local translations to the backend
       bin/console --env=prod wizaplace:translations:push
