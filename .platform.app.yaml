@@ -70,7 +70,9 @@ dependencies:
 hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
-      set -e
+      set -euo pipefail
+      IFS=$'\n\t'
+
       buildID=$(cat /proc/sys/kernel/random/uuid)
       echo "[`date --iso-8601=seconds`] build_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${buildID}"
       echo "${buildID}" > /app/var/buildID
@@ -99,7 +101,9 @@ hooks:
       echo "[`date --iso-8601=seconds`] build_end ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${buildID}"
     # Deploy hooks can access services but the file system is now read-only.
     deploy: |
-      set -e
+      set -euo pipefail
+      IFS=$'\n\t'
+
       deployID="$(cat /app/var/buildID).$(cat /proc/sys/kernel/random/uuid)"
       echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
