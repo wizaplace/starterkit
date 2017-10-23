@@ -83,9 +83,6 @@ hooks:
       npm install
       gulp deploy
 
-      # remove envs other than prod
-      rm -f web/app_*.php
-
       # use our custom php.ini
       cp .platform.php.ini php.ini
 
