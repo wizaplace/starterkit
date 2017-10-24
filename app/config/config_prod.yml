@@ -26,8 +26,20 @@ monolog:
             level:        'warning'
             path:         "%kernel.logs_dir%/prod.json"
             formatter:    monolog.formatter.logstash
+        sentry:
+            type:         raven
+            level:        'warning'
+            client_id:    '\Raven_Client'
         console:
             type:  console
 
-sentry:
-    dsn: "%env(SENTRY_DSN)%"
+services:
+    \Raven_Client:
+        class: \Raven_Client
+        arguments:
+            - "%env(SENTRY_DSN)%"
+            -
+                auto_log_stacks: true
+                install_default_breadcrumb_handlers: false
+                install_shutdown_handler: false
+                release: "%env(PLATFORM_TREE_ID)%"

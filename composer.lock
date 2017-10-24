@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96d3f95c5b9fbe3312dca05c78c50ea7",
+    "content-hash": "3f50402649eb563a88152b9c33c87f69",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -1824,65 +1824,6 @@
                 "logging"
             ],
             "time": "2017-08-02T16:38:25+00:00"
-        },
-        {
-            "name": "sentry/sentry-symfony",
-            "version": "0.8.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "5d961ce94bc186bfe1392525dd2718c18209cea4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/5d961ce94bc186bfe1392525dd2718c18209cea4",
-                "reference": "5d961ce94bc186bfe1392525dd2718c18209cea4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "sentry/sentry": ">=1.5.0",
-                "symfony/config": "^2.7|^3.0",
-                "symfony/console": "^2.7|^3.0",
-                "symfony/dependency-injection": "^2.7|^3.0",
-                "symfony/event-dispatcher": "^2.7|^3.0",
-                "symfony/http-kernel": "^2.7|^3.0",
-                "symfony/security-core": "^2.7|^3.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.8.0",
-                "phpunit/phpunit": "^4.6.6"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.8.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sentry\\SentryBundle\\": "src/Sentry/SentryBundle"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Cramer",
-                    "email": "dcramer@gmail.com"
-                }
-            ],
-            "description": "Symfony integration for Sentry (http://getsentry.com)",
-            "homepage": "http://getsentry.com",
-            "keywords": [
-                "errors",
-                "logging",
-                "sentry",
-                "symfony"
-            ],
-            "time": "2017-08-24T13:52:04+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
