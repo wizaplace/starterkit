@@ -29,7 +29,10 @@ monolog:
         sentry:
             type:         raven
             level:        'warning'
-            client_id:    '\Raven_Client'
+            client_id:    \Raven_Client
+        sentry_breadcrumbs:
+            type:         service
+            id:           \Raven_Breadcrumbs_MonologHandler
         console:
             type:  console
 
@@ -43,3 +46,7 @@ services:
                 install_default_breadcrumb_handlers: false
                 install_shutdown_handler: false
                 release: "%env(PLATFORM_TREE_ID)%"
+    \Raven_Breadcrumbs_MonologHandler:
+        class: \Raven_Breadcrumbs_MonologHandler
+        arguments:
+            - "@\\Raven_Client"
