@@ -43,9 +43,22 @@ services:
         tags:
             - { name: monolog.processor, method: processRecord }
 
+    wizaplace.http.log.formatter:
+        class: GuzzleHttp\MessageFormatter
+        arguments:
+            - "Wizaplace API call: \"{method} {target}\" code:{code} error:\"{error}\""
+    wizaplace.http.log:
+        factory: 'GuzzleHttp\Middleware::log'
+        class: 'callable'
+        arguments:
+            - '@logger'
+            - '@wizaplace.http.log.formatter'
+            - 'info'
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
         class: 'GuzzleHttp\HandlerStack'
+        calls:
+            - ['push', ['@wizaplace.http.log']]
     wizaplace.http.client:
         class: GuzzleHttp\Client
         arguments:
