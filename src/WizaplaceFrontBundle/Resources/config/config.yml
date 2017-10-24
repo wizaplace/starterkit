@@ -38,6 +38,10 @@ services:
         autowire: true
         autoconfigure: false
         public: true
+    WizaplaceFrontBundle\Security\UserDataMonologProcessor:
+        autowire: true
+        tags:
+            - { name: monolog.processor, method: processRecord }
 
     wizaplace.guzzle.handler:
         factory: 'GuzzleHttp\HandlerStack::create'
