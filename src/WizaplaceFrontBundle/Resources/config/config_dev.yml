@@ -5,21 +5,10 @@ services:
     Leadz\GuzzleHttp\Stopwatch\StopwatchMiddleware:
         arguments:
             - '@debug.stopwatch'
-    wizaplace.http.log.formatter:
-        class: GuzzleHttp\MessageFormatter
-        arguments:
-            - "Wizaplace API call: \"{method} {target}\" code:{code} error:\"{error}\""
-    wizaplace.http.log:
-        factory: 'GuzzleHttp\Middleware::log'
-        class: 'callable'
-        arguments:
-            - '@logger'
-            - '@wizaplace.http.log.formatter'
     wizaplace.guzzle.decorating_handler:
         factory: 'GuzzleHttp\HandlerStack::create'
         class: 'GuzzleHttp\HandlerStack'
         decorates: 'wizaplace.guzzle.handler'
         arguments: ['@wizaplace.guzzle.decorating_handler.inner']
         calls:
-            - ['push', ['@wizaplace.http.log']]
             - ['push', ['@Leadz\GuzzleHttp\Stopwatch\StopwatchMiddleware']]
