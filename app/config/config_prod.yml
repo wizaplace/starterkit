@@ -26,6 +26,11 @@ monolog:
             level:        'warning'
             path:         "%kernel.logs_dir%/prod.json"
             formatter:    monolog.formatter.logstash
+        sentry_fingers_crossed:
+            type:         fingers_crossed
+            handler:      sentry
+            excluded_404s:
+                - ^/
         sentry:
             type:         raven
             level:        'warning'
