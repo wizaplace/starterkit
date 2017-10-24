@@ -106,7 +106,6 @@ hooks:
       echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
       # cache
-      bin/console --env=prod cache:clear --no-warmup
       rm -rf var/cache/*
       bin/console --env=prod cache:warmup
 
