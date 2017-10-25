@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f50402649eb563a88152b9c33c87f69",
+    "content-hash": "cf39504743846d3fdf43737a828d350a",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -997,6 +997,49 @@
             "time": "2015-11-10T17:04:01+00:00"
         },
         {
+            "name": "jean85/pretty-package-versions",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jean85/pretty-package-versions.git",
+                "reference": "cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9",
+                "reference": "cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9",
+                "shasum": ""
+            },
+            "require": {
+                "ocramius/package-versions": "^1.1.3",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jean85\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Lai",
+                    "email": "alessandro.lai85@gmail.com"
+                }
+            ],
+            "description": "A wrapper for ocramius/pretty-package-versions to get pretty versions strings",
+            "keywords": [
+                "package versions"
+            ],
+            "time": "2017-09-06T15:48:57+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
@@ -1117,6 +1160,55 @@
                 "enum"
             ],
             "time": "2017-06-28T16:24:08+00:00"
+        },
+        {
+            "name": "ocramius/package-versions",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ocramius/PackageVersions.git",
+                "reference": "72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7",
+                "reference": "72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": "~7.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3",
+                "ext-zip": "*",
+                "humbug/humbug": "dev-master",
+                "phpunit/phpunit": "^5.7.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "PackageVersions\\Installer",
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PackageVersions\\": "src/PackageVersions"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com"
+                }
+            ],
+            "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
+            "time": "2017-09-06T15:24:43+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1461,12 +1553,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "140175d0d4a71950b045fb87cc7d979340b9f16e"
+                "reference": "79b84a692e79ecd56af8d304ff45613ba8e627fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/140175d0d4a71950b045fb87cc7d979340b9f16e",
-                "reference": "140175d0d4a71950b045fb87cc7d979340b9f16e",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/79b84a692e79ecd56af8d304ff45613ba8e627fd",
+                "reference": "79b84a692e79ecd56af8d304ff45613ba8e627fd",
                 "shasum": ""
             },
             "conflict": {
@@ -1474,7 +1566,7 @@
                 "amphp/artax": ">=2,<2.0.6|<1.0.6",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "bugsnag/bugsnag-laravel": ">=2,<2.0.2",
-                "cakephp/cakephp": ">=3,<3.0.15|>=2,<2.4.99|>=2.5,<2.5.99|>=2.6,<2.6.12|>=1.3,<1.3.18|>=2.7,<2.7.6|>=3.1,<3.1.4",
+                "cakephp/cakephp": ">=2,<2.4.99|>=1.3,<1.3.18|>=3,<3.0.15|>=2.5,<2.5.99|>=2.6,<2.6.12|>=2.7,<2.7.6|>=3.1,<3.1.4",
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
                 "cartalyst/sentry": "<2.1",
                 "codeigniter/framework": "<=3.0.6",
@@ -1533,21 +1625,21 @@
                 "symfony/http-foundation": ">=2,<2.3.27|>=2.4,<2.5.11|>=2.6,<2.6.6",
                 "symfony/http-kernel": ">=2,<2.3.29|>=2.4,<2.5.12|>=2.6,<2.6.8",
                 "symfony/routing": ">=2,<2.0.19",
-                "symfony/security": ">=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5|>=2.3,<2.3.37|>=2.4,<2.6.13|>=2.7,<2.7.9|>=2,<2.0.25|>=2.1,<2.1.13|>=2.2,<2.2.9",
-                "symfony/security-core": ">=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5|>=2.8,<2.8.6|>=3,<3.0.6|>=2.4,<2.6.13|>=2.7,<2.7.9",
+                "symfony/security": ">=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5|>=2,<2.0.25|>=2.1,<2.1.13|>=2.2,<2.2.9|>=2.3,<2.3.37|>=2.4,<2.6.13|>=2.7,<2.7.9",
+                "symfony/security-core": ">=2.8,<2.8.6|>=3,<3.0.6|>=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5|>=2.4,<2.6.13|>=2.7,<2.7.9",
                 "symfony/security-http": ">=2.4,<2.7.13|>=2.3,<2.3.41|>=2.8,<2.8.6|>=3,<3.0.6",
                 "symfony/serializer": ">=2,<2.0.11",
-                "symfony/symfony": ">=2,<2.3.41|>=2.4,<2.7.13|>=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5|>=2.8,<2.8.6|>=3,<3.0.6",
+                "symfony/symfony": ">=2,<2.3.41|>=2.4,<2.7.13|>=2.8,<2.8.6|>=3,<3.0.6|>=2.7.30,<2.7.32|>=2.8.23,<2.8.25|>=3.2.10,<3.2.12|>=3.3.3,<3.3.5",
                 "symfony/translation": ">=2,<2.0.17",
                 "symfony/validator": ">=2,<2.0.24|>=2.1,<2.1.12|>=2.2,<2.2.5|>=2.3,<2.3.3",
                 "symfony/web-profiler-bundle": ">=2,<2.3.19|>=2.4,<2.4.9|>=2.5,<2.5.4",
                 "symfony/yaml": ">=2,<2.0.22|>=2.1,<2.1.7",
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
-                "thelia/thelia": ">=2.1.0-beta1,<2.1.3|>=2.1,<2.1.2",
+                "thelia/thelia": ">=2.1,<2.1.2|>=2.1.0-beta1,<2.1.3",
                 "twig/twig": "<1.20",
-                "typo3/cms": ">=6.2,<6.2.30|>=8,<8.7.5|>=7,<7.6.22",
-                "typo3/flow": ">=2.3,<2.3.16|>=3,<3.0.10|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5|>=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1",
-                "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4",
+                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.22|>=8,<8.7.5",
+                "typo3/flow": ">=2.3,<2.3.16|>=3,<3.0.10|>=1.1,<1.1.1|>=2,<2.0.1|>=1,<1.0.4|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5",
+                "typo3/neos": ">=1.2,<1.2.13|>=2,<2.0.4|>=1.1,<1.1.3",
                 "willdurand/js-translation-bundle": "<2.1.1",
                 "yiisoft/yii": ">=1.1.14,<1.1.15",
                 "yiisoft/yii2": "<2.0.5",
@@ -1591,7 +1683,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-09-11T12:05:25+00:00"
+            "time": "2017-10-25T07:49:51+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2546,26 +2638,27 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "0.11.0",
+            "version": "0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "2481239f211288471fed9f56f6cd108b844b0b04"
+                "reference": "fe6306910f9abab160b802b7931ad99dbb7a720c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/2481239f211288471fed9f56f6cd108b844b0b04",
-                "reference": "2481239f211288471fed9f56f6cd108b844b0b04",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/fe6306910f9abab160b802b7931ad99dbb7a720c",
+                "reference": "fe6306910f9abab160b802b7931ad99dbb7a720c",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.2",
                 "guzzlehttp/psr7": "^1.4",
+                "jean85/pretty-package-versions": "^1.0",
                 "myclabs/php-enum": "^1.5",
                 "php": ">=7.1"
             },
             "require-dev": {
-                "php-vcr/php-vcr": "1.3.1",
+                "php-vcr/php-vcr": "^1.4.1",
                 "phpstan/phpstan": "^0.8.0",
                 "phpunit/phpunit": "^6.1",
                 "roave/security-advisories": "dev-master",
@@ -2583,7 +2676,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-10-18T09:20:53+00:00"
+            "time": "2017-10-25T08:39:45+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -2641,16 +2734,16 @@
     "packages-dev": [
         {
             "name": "beberlei/assert",
-            "version": "v2.7.6",
+            "version": "v2.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "8726e183ebbb0169cb6cb4832e22ebd355524563"
+                "reference": "be6aa40e3f2d2f0766f159409ab9a80c8db6ca23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/8726e183ebbb0169cb6cb4832e22ebd355524563",
-                "reference": "8726e183ebbb0169cb6cb4832e22ebd355524563",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/be6aa40e3f2d2f0766f159409ab9a80c8db6ca23",
+                "reference": "be6aa40e3f2d2f0766f159409ab9a80c8db6ca23",
                 "shasum": ""
             },
             "require": {
@@ -2692,7 +2785,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2017-05-04T02:00:24+00:00"
+            "time": "2017-10-20T15:59:40+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2796,49 +2889,6 @@
             "time": "2017-07-20T08:51:22+00:00"
         },
         {
-            "name": "jean85/pretty-package-versions",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9",
-                "reference": "cda6ed1bfbcf7a3736b8943466ad8b1b5c0cc7c9",
-                "shasum": ""
-            },
-            "require": {
-                "ocramius/package-versions": "^1.1.3",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jean85\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alessandro Lai",
-                    "email": "alessandro.lai85@gmail.com"
-                }
-            ],
-            "description": "A wrapper for ocramius/pretty-package-versions to get pretty versions strings",
-            "keywords": [
-                "package versions"
-            ],
-            "time": "2017-09-06T15:48:57+00:00"
-        },
-        {
             "name": "lookyman/phpstan-symfony",
             "version": "dev-master",
             "source": {
@@ -2917,37 +2967,40 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "doctrine/collections": "1.*",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
-                }
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "homepage": "https://github.com/myclabs/DeepCopy",
             "keywords": [
                 "clone",
                 "copy",
@@ -2955,7 +3008,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-04-12T18:52:22+00:00"
+            "time": "2017-10-19T19:58:43+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -3470,55 +3523,6 @@
             "time": "2017-09-02T17:10:46+00:00"
         },
         {
-            "name": "ocramius/package-versions",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7",
-                "reference": "72b226d2957e9e6a9ed09aeaa29cabd840d1a3b7",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": "~7.0"
-            },
-            "require-dev": {
-                "composer/composer": "^1.3",
-                "ext-zip": "*",
-                "humbug/humbug": "dev-master",
-                "phpunit/phpunit": "^5.7.5"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "PackageVersions\\Installer",
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PackageVersions\\": "src/PackageVersions"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com"
-                }
-            ],
-            "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2017-09-06T15:24:43+00:00"
-        },
-        {
             "name": "phar-io/manifest",
             "version": "1.0.1",
             "source": {
@@ -3622,16 +3626,16 @@
         },
         {
             "name": "php-vcr/php-vcr",
-            "version": "1.3.2",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-vcr/php-vcr.git",
-                "reference": "3ef8ab7e3b6549a044d2d37ad95749174bafbdab"
+                "reference": "64210e53949a13856c99cce4ab7a3ff66819633f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-vcr/php-vcr/zipball/3ef8ab7e3b6549a044d2d37ad95749174bafbdab",
-                "reference": "3ef8ab7e3b6549a044d2d37ad95749174bafbdab",
+                "url": "https://api.github.com/repos/php-vcr/php-vcr/zipball/64210e53949a13856c99cce4ab7a3ff66819633f",
+                "reference": "64210e53949a13856c99cce4ab7a3ff66819633f",
                 "shasum": ""
             },
             "require": {
@@ -3650,7 +3654,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -3669,7 +3673,7 @@
                 }
             ],
             "description": "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.",
-            "time": "2016-12-23T13:28:14+00:00"
+            "time": "2017-10-18T16:04:20+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
