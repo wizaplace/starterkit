@@ -29,6 +29,7 @@ use Wizaplace\SDK\User\UpdateUserCommand;
 use Wizaplace\SDK\User\UserService;
 use Wizaplace\SDK\User\UserTitle;
 use WizaplaceFrontBundle\Security\User;
+use Symfony\Component\Intl\Intl;
 
 class ProfileController extends Controller
 {
@@ -60,10 +61,12 @@ class ProfileController extends Controller
         $user = $this->getUser()->getWizaplaceUser();
         // @codingStandardsIgnoreLine
         $addressesAreIdentical = $user->getBillingAddress() == $user->getShippingAddress();
+        $countries = Intl::getRegionBundle()->getCountryNames();
 
         return $this->render('@WizaplaceFront/profile/addresses.html.twig', [
             'profile' => $user,
             'addressesAreIdentical' => $addressesAreIdentical,
+            'countries' => $countries,
         ]);
     }
 
