@@ -82,6 +82,11 @@ profile_orders:
     defaults: { _controller: AppBundle:Profile:orders }
     methods: [GET]
 
+profile_order:
+    path: /profil/commande/{orderId}
+    defaults: { _controller: AppBundle:Profile:order }
+    methods: [GET]
+
 profile_returns:
     path: /profil/retours
     defaults: { _controller: AppBundle:Profile:returns }
