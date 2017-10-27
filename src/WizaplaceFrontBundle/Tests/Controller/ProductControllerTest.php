@@ -74,9 +74,9 @@ class ProductControllerTest extends BundleTestCase
     public function testNonCanonicalCategoryPathIsRedirected()
     {
         $this->client->followRedirects(false);
-        $this->client->request('GET', '/p/informatitititique/ecrans/voluptas-nostrum-ea-consequatur');
+        $this->client->request('GET', '/p/informatitititique/ecrans/ecran-pc-full-hd-noir');
         $response = $this->client->getResponse();
         $this->assertResponseCodeEquals(Response::HTTP_FOUND, $this->client);
-        $this->assertEquals('/p/informatique/ecrans/voluptas-nostrum-ea-consequatur', $response->headers->get('Location'));
+        $this->assertEquals('/p/informatique/ecrans/ecran-pc-full-hd-noir', $response->headers->get('Location'));
     }
 }
