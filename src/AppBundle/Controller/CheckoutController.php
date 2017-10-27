@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WizaplaceFrontBundle\Service\BasketService;
+use Symfony\Component\Intl\Intl;
 
 class CheckoutController extends Controller
 {
@@ -47,10 +48,12 @@ class CheckoutController extends Controller
         $user = $this->getUser()->getWizaplaceUser();
         // @codingStandardsIgnoreLine
         $addressesAreIdentical = $user->getBillingAddress() == $user->getShippingAddress();
+        $countries = Intl::getRegionBundle()->getCountryNames();
 
         return $this->render('@App/checkout/addresses.html.twig', [
             'basket' => $basket,
             'addressesAreIdentical' => $addressesAreIdentical,
+            'countries' => $countries,
         ]);
     }
 
