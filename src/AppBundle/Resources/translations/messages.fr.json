@@ -299,6 +299,13 @@
     "after_sales_service": {
         "label": "SAV",
         "no_orders": "Vous n'avez pas de commandes éligibles au SAV"
+    },
+    "basket": {
+        "comment": {
+            "basket_content": "Commentaire panier",
+            "product_content": "Commentaire produit",
+            "validate": "Soumettre"
+        }
     }
 
 }

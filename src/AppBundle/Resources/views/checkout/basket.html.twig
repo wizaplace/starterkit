@@ -1,10 +1,16 @@
 {% extends '@App/layout.html.twig' %}
 
 {% block body %}
-    <section class="basket">
+    <section class="basket" id="basket">
         <div class="container">
             {# steps breadcrumb #}
             {% include '@App/checkout/steps.html.twig' with {step: 1} %}
+
+            <hr>
+            {% if basket.totalQuantity > 0 %}
+                <basket-comment :basketComment="'{{ basket.comment }}'"></basket-comment>
+            {% endif %}
+            <hr>
 
             {# basket products are grouped per company #}
             {% if basket.companyGroups|default %}
@@ -61,17 +67,22 @@
                                         </div>
                                     </article>
                                 </article>
+                                <product-comment
+                                    :declination-id="'{{ product.declinationId }}'"
+                                    :product-comment="'{{ product.comment }}'"
+                                ></product-comment>
                             {% endfor %}
+                            <hr>
 
                             {# display shipping available options for this group of products #}
                             <select class="select-shipping" title="{{ 'select_shipping_method'|trans }}">
                             {% for shipping in shippingGroup.shippings %}
-                                    <option value="{{ shipping.id }}" {% if shipping.selected %}selected{% endif %} >
-                                        {{ shipping.name }}
-                                        {% if shipping.deliveryTime|default %}({{ shipping.deliveryTime }}){% endif %}
-                                        -
-                                        {{ shipping.price }}
-                                    </option>
+                                <option value="{{ shipping.id }}" {% if shipping.selected %}selected{% endif %} >
+                                    {{ shipping.name }}
+                                    {% if shipping.deliveryTime|default %}({{ shipping.deliveryTime }}){% endif %}
+                                    -
+                                    {{ shipping.price }}
+                                </option>
                             {% endfor %}
                             </select>
                         </div>
@@ -161,7 +172,24 @@
             {% endif %}
         </div>
     </section>
+    <template id="basketComment">
+        <div class="basket-comment">
+            <p>{{ 'basket.comment.basket_content'|trans }}</p>
+            <textarea name="comment-content" v-model="comment"></textarea>
+            <button @click="updateComment()">{{ 'basket.comment.validate'|trans }}</button>
+        </div>
+    </template>
+    <template id="productComment">
+        <div class="basket-comment">
+            <p>{{ 'basket.comment.product_content'|trans }}</p>
+            <textarea name="comment-content" v-model="comment"></textarea>
+            <button @click="updateComment()">{{ 'basket.comment.validate'|trans }}</button>
+        </div>
+    </template>
 
+{% endblock %}
+
+{% block scripts %}
     <script>
 
         {# quantity updates / page reload #}
@@ -193,7 +221,7 @@
             // show overlay and spinner
             helper.displayLoadingSpinner();
 
-            let declinationId = $inputField.closest('.basket-product').data('declination-id');
+            var declinationId = $inputField.closest('.basket-product').data('declination-id');
 
             $.ajax({
                 method: "POST",
@@ -216,8 +244,8 @@
             // show overlay and spinner
             helper.displayLoadingSpinner();
 
-            let shippingGroupId = $(this).closest('.shipping-group').data('shipping-group-id');
-            let shippingId = $(this).find('option:selected').val();
+            var shippingGroupId = $(this).closest('.shipping-group').data('shipping-group-id');
+            var shippingId = $(this).find('option:selected').val();
 
             $.ajax({
                 method: "POST",
@@ -229,6 +257,58 @@
             }).done(function () {
                 window.location.reload();
             });
+        });
+
+        Vue.component('basket-comment', {
+            template: '#basketComment',
+            props: ['basketComment'],
+            data: function () {
+                return {
+                    comment: this.basketComment
+                }
+            },
+            methods: {
+                updateComment: function(){
+                    var self = this;
+                    helper.displayLoadingSpinner();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('basket_update_comments') }}",
+                        data: { comment: this.comment },
+                        success: function(response) {
+                            helper.removeLoadingSpinner();
+                        }
+                    });
+                }
+            }
+        });
+
+        Vue.component('product-comment', {
+            template: '#productComment',
+            props: ['declination-id', 'product-comment'],
+            data: function () {
+                return {
+                    comment: this.productComment
+                }
+            },
+            methods: {
+                updateComment: function(){
+                    var self = this;
+                    helper.displayLoadingSpinner();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('basket_update_comments') }}",
+                        data: { declinationId: this.declinationId, comment: this.comment },
+                        success: function(response) {
+                            helper.removeLoadingSpinner();
+                        }
+                    });
+                }
+            }
+        });
+
+        var vm = new Vue({
+            el: '#basket'
         });
     </script>
 {% endblock %}
