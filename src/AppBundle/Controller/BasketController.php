@@ -159,10 +159,10 @@ class BasketController extends Controller
         $comments = [];
 
         // if $declinationId is not empty or null, it means $comment is a productComment
-        if ($declinationId && $comment) {
+        if ($declinationId) {
             $comments[] = new ProductComment($declinationId, $comment);
         // else if there is only $comment, it means it is a basketComment
-        } elseif ($comment) {
+        } else {
             $comments[] = new BasketComment($comment);
         }
 
