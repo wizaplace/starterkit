@@ -10,6 +10,7 @@ namespace WizaplaceFrontBundle\Service;
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wizaplace\SDK\Basket\Basket;
+use Wizaplace\SDK\Basket\Comment;
 use Wizaplace\SDK\Basket\PaymentInformation;
 
 class BasketService
@@ -111,6 +112,14 @@ class BasketService
     {
         $this->basket = null;
         $this->session->remove(self::ID_SESSION_KEY);
+    }
+
+    /**
+     * @param $comments Comment[]
+     */
+    public function updateComments(array $comments): void
+    {
+        $this->baseService->updateComments($this->getBasketId(), $comments);
     }
 
     /**
