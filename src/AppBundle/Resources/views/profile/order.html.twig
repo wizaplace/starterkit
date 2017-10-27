@@ -14,6 +14,7 @@
                     <th class="hidden-xs">Date</th>
                     <th>Total HT</th>
                     <th>Statut</th>
+                    <th>Commentaire Client</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,7 @@
                         {% elseif order.status =="PARENT_ORDER" %}Parente
                         {% endif %}
                     </td>
+                    <td>{{ order.customerComment }}</td>
                 </tr>
             </tbody>
         </table>
