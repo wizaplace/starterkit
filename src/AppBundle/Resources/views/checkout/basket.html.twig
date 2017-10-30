@@ -8,7 +8,7 @@
 
             <hr>
             {% if basket.totalQuantity > 0 %}
-                <basket-comment :basket-comment="'{{ basket.comment }}'"></basket-comment>
+                <basket-comment :comment="'{{ basket.comment }}'"></basket-comment>
             {% endif %}
             <hr>
 
@@ -69,7 +69,7 @@
                                 </article>
                                 <product-comment
                                     :declination-id="'{{ product.declinationId }}'"
-                                    :product-comment="'{{ product.comment }}'"
+                                    :comment="'{{ product.comment }}'"
                                 ></product-comment>
                             {% endfor %}
                             <hr>
@@ -172,15 +172,17 @@
             {% endif %}
         </div>
     </section>
-    <template id="basketComment">
+
+
+    <template id="basket-comment">
         <div class="basket-comment">
             <p>{{ 'basket.comment.basket_content'|trans }}</p>
             <textarea name="comment-content" v-model="comment"></textarea>
             <button @click="updateComment()">{{ 'basket.comment.validate'|trans }}</button>
         </div>
     </template>
-    <template id="productComment">
-        <div class="basket-comment">
+    <template id="product-comment">
+        <div class="product-comment">
             <p>{{ 'basket.comment.product_content'|trans }}</p>
             <textarea name="comment-content" v-model="comment"></textarea>
             <button @click="updateComment()">{{ 'basket.comment.validate'|trans }}</button>
@@ -260,16 +262,14 @@
         });
 
         Vue.component('basket-comment', {
-            template: '#basketComment',
-            props: ['basketComment'],
+            template: '#basket-comment',
+            props: ['comment'],
             data: function () {
                 return {
-                    comment: this.basketComment
                 }
             },
             methods: {
                 updateComment: function(){
-                    var self = this;
                     helper.displayLoadingSpinner();
                     $.ajax({
                         type: "POST",
@@ -284,16 +284,14 @@
         });
 
         Vue.component('product-comment', {
-            template: '#productComment',
-            props: ['declination-id', 'product-comment'],
+            template: '#product-comment',
+            props: ['declination-id', 'comment'],
             data: function () {
                 return {
-                    comment: this.productComment
                 }
             },
             methods: {
                 updateComment: function(){
-                    var self = this;
                     helper.displayLoadingSpinner();
                     $.ajax({
                         type: "POST",
