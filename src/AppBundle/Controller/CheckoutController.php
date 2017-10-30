@@ -83,9 +83,11 @@ class CheckoutController extends Controller
         if ($paymentRedirectUrl) {
             return $this->redirect($paymentRedirectUrl);
         }
+        $htmlContent = $paymentInfo->getHtml();
 
-        // @FIXME : display $paymentInfo->getHtml()
-        return $this->redirectToRoute('checkout_complete');
+        return $this->render('@App/checkout/payment-transfer-info.html.twig', [
+            'htmlContent' => $htmlContent,
+        ]);
     }
 
     public function completeAction(Request $request): Response
