@@ -12,8 +12,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\SDK\Basket\BasketComment;
 use Wizaplace\SDK\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\SDK\Basket\Exception\CouponNotInTheBasket;
+use Wizaplace\SDK\Basket\ProductComment;
+use Wizaplace\SDK\Catalog\Product;
 use WizaplaceFrontBundle\Service\BasketService;
 
 class BasketController extends Controller
@@ -146,5 +149,27 @@ class BasketController extends Controller
         return new JsonResponse([
             'message' => $message,
         ]);
+    }
+
+    public function updateCommentsAction(Request $request): JsonResponse
+    {
+        $comment = $request->get('comment');
+        $declinationId = $request->get('declinationId');
+
+        $comments = [];
+
+        // if $declinationId is not empty or null, it means $comment is a productComment
+        if ($declinationId) {
+            $comments[] = new ProductComment($declinationId, $comment);
+        // else if there is only $comment, it means it is a basketComment
+        } else {
+            $comments[] = new BasketComment($comment);
+        }
+
+        if (!empty($comments)) {
+            $this->basketService->updateComments($comments);
+        }
+
+        return new JsonResponse();
     }
 }

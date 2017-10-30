@@ -14,6 +14,7 @@
                     <th class="hidden-xs">Date</th>
                     <th>Total HT</th>
                     <th>Statut</th>
+                    <th>Commentaire Client</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,7 @@
                         {% elseif order.status =="PARENT_ORDER" %}Parente
                         {% endif %}
                     </td>
+                    <td>{{ order.customerComment }}</td>
                 </tr>
             </tbody>
         </table>
@@ -52,15 +54,17 @@
                         <th>Nom du produit</th>
                         <th>Quantité</th>
                         <th>Prix unitaire HT</th>
+                        <th>Commentaire</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in order.orderItem %}
+                    {% for orderItem in order.orderItems %}
 
                         <tr>
-                            <td>{{ product.productName }}</td>
-                            <td>{{ product.amount }}</td>
-                            <td>{{ product.price|price }}&nbsp;TTC</td>
+                            <td>{{ orderItem.productName }}</td>
+                            <td>{{ orderItem.amount }}</td>
+                            <td>{{ orderItem.price|price }}&nbsp;TTC</td>
+                            <td>{{ orderItem.customerComment }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

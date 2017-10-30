@@ -82,6 +82,11 @@ profile_orders:
     defaults: { _controller: AppBundle:Profile:orders }
     methods: [GET]
 
+profile_order:
+    path: /profil/commande/{orderId}
+    defaults: { _controller: AppBundle:Profile:order }
+    methods: [GET]
+
 profile_returns:
     path: /profil/retours
     defaults: { _controller: AppBundle:Profile:returns }
@@ -212,9 +217,15 @@ basket_add_coupon:
     path: /basket/add_coupon
     defaults: { _controller: AppBundle:Basket:addCoupon }
     methods: [POST]
+
 basket_remove_coupon:
     path: /basket/remove_coupon
     defaults: { _controller: AppBundle:Basket:removeCoupon }
+    methods: [POST]
+
+basket_update_comments:
+    path: /basket/update_comments
+    defaults: { _controller: AppBundle:Basket:updateComments }
     methods: [POST]
 
 # orders

@@ -2,7 +2,7 @@
 -
     request:
         method: GET
-        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=voluptas-nostrum-ea-consequatur'
+        url: 'http://wizaplace.loc/api/v1/seo/slugs?slugs%5B0%5D=ecran-pc-full-hd-noir'
         headers:
             Host: wizaplace.loc
             VCR-index: '0'
@@ -12,18 +12,19 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 11 Sep 2017 14:25:32 GMT'
+            Date: 'Fri, 27 Oct 2017 09:57:38 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 7ae8f0
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/7ae8f0'
-            Content-Length: '63'
+            Content-Language: fr
+            X-Debug-Token: eeb9c6
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/eeb9c6'
+            Content-Length: '53'
             Content-Type: application/json
-        body: '{"voluptas-nostrum-ea-consequatur":{"type":"product","id":"4"}}'
+        body: '{"ecran-pc-full-hd-noir":{"type":"product","id":"3"}}'
 -
     request:
         method: GET
-        url: 'http://wizaplace.loc/api/v1/catalog/products/4'
+        url: 'http://wizaplace.loc/api/v1/catalog/products/3'
         headers:
             Host: wizaplace.loc
             VCR-index: '1'
@@ -33,11 +34,12 @@
             code: '200'
             message: OK
         headers:
-            Date: 'Mon, 11 Sep 2017 14:25:33 GMT'
+            Date: 'Fri, 27 Oct 2017 09:57:39 GMT'
             Server: 'Apache/2.4.10 (Debian)'
             Cache-Control: 'no-cache, private'
-            X-Debug-Token: 614cde
-            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/614cde'
-            Content-Length: '1140'
+            Content-Language: fr
+            X-Debug-Token: 6d9e1f
+            X-Debug-Token-Link: 'http://wizaplace.loc/_profiler/6d9e1f'
+            Content-Length: '3229'
             Content-Type: application/json
-        body: '{"id":4,"code":"5712186209249","supplierReference":"","name":"Voluptas nostrum \u00e9a Consequatur","url":"http:\/\/wizaplace.loc\/informatique\/ecrans\/voluptas-nostrum-ea-consequatur.html","shortDescription":"","description":"","slug":"voluptas-nostrum-ea-consequatur","minPrice":20,"greenTax":0,"isTransactional":true,"weight":1.23,"averageRating":null,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":8,"name":"Test company","slug":"test-company-4","isProfessional":true,"image":null,"averageRating":null}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}],"geolocation":null,"video":null,"declinations":[{"id":"4_0","code":"5712186209249","supplierReference":"","price":20,"originalPrice":20,"crossedOutPrice":null,"prices":{"priceWithTaxes":20,"priceWithoutVat":19.59,"vat":0.41},"greenTax":0,"amount":15,"affiliateLink":null,"images":[],"options":[],"isBrandNew":true,"company":{"id":8,"name":"Test company","slug":"test-company-4","isProfessional":true,"image":null,"averageRating":null}}],"attributes":[],"options":[]}'
+        body: '{"id":3,"code":"0000001","supplierReference":"INFO-ECRAN-001","name":"Ecran PC Full HD Noir","url":"http:\/\/wizaplace.loc\/informatique\/ecrans\/ecran-pc-full-hd-noir.html","shortDescription":"","description":"","slug":"ecran-pc-full-hd-noir","minPrice":15.5,"greenTax":0,"isTransactional":true,"weight":1.23,"averageRating":null,"shippings":[{"name":"TNT Express","image":null,"firstRate":0,"nextRate":0},{"name":"Lettre prioritaire","image":null,"firstRate":0,"nextRate":0},{"name":"Colissmo","image":null,"firstRate":0,"nextRate":0}],"companies":[{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}],"categoryPath":[{"id":3,"name":"Informatique","slug":"informatique"},{"id":4,"name":"\u00c9crans","slug":"ecrans"}],"geolocation":null,"video":{"thumbnailUrl":"\/\/s3-eu-west-1.amazonaws.com\/wizachatest\/videos\/414375b2-61cb-4260-b82b-4a2636cb5673\/480-00001.png","videoUrl":"\/\/s3-eu-west-1.amazonaws.com\/wizachatest\/videos\/414375b2-61cb-4260-b82b-4a2636cb5673\/480.mp4"},"declinations":[{"id":"3_8_7","code":"size_13","isAvailable":true,"supplierReference":"INFO-ECRAN-001","price":15.5,"originalPrice":15.5,"crossedOutPrice":null,"prices":{"priceWithTaxes":15.5,"priceWithoutVat":15.18,"vat":0.32},"greenTax":0,"amount":10,"affiliateLink":null,"images":[],"options":[{"id":8,"name":"size","variantId":7,"variantName":"13"}],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}},{"id":"3_8_8","code":"size_15","isAvailable":true,"supplierReference":"INFO-ECRAN-001","price":15.5,"originalPrice":15.5,"crossedOutPrice":null,"prices":{"priceWithTaxes":15.5,"priceWithoutVat":15.18,"vat":0.32},"greenTax":0,"amount":10,"affiliateLink":null,"images":[],"options":[{"id":8,"name":"size","variantId":8,"variantName":"15"}],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}},{"id":"3_8_9","code":"size_17","isAvailable":true,"supplierReference":"INFO-ECRAN-001","price":15.5,"originalPrice":15.5,"crossedOutPrice":null,"prices":{"priceWithTaxes":15.5,"priceWithoutVat":15.18,"vat":0.32},"greenTax":0,"amount":10,"affiliateLink":null,"images":[],"options":[{"id":8,"name":"size","variantId":9,"variantName":"17"}],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}},{"id":"3_8_10","code":"size_21","isAvailable":true,"supplierReference":"INFO-ECRAN-001","price":15.5,"originalPrice":15.5,"crossedOutPrice":null,"prices":{"priceWithTaxes":15.5,"priceWithoutVat":15.18,"vat":0.32},"greenTax":0,"amount":10,"affiliateLink":null,"images":[],"options":[{"id":8,"name":"size","variantId":10,"variantName":"21"}],"isBrandNew":true,"company":{"id":3,"name":"The World Company Inc.","slug":"the-world-company-inc.","isProfessional":true,"image":null,"averageRating":null}}],"attributes":[],"options":[{"id":8,"name":"size","variants":[{"id":7,"name":"13"},{"id":8,"name":"15"},{"id":9,"name":"17"},{"id":10,"name":"21"}]}],"attachments":[]}'

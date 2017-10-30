@@ -80,6 +80,15 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function orderAction(int $orderId): Response
+    {
+        $order = $this->get(OrderService::class)->getOrder($orderId);
+
+        return $this->render('@WizaplaceFront/profile/order.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
     public function returnsAction(): Response
     {
         $orderService = $this->get(OrderService::class);
