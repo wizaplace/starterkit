@@ -21,6 +21,8 @@ filebeat.prospectors:
     - /app/var/logs/prod.json
   tags: ["front"]
   json.keys_under_root: true
+  fields:
+    document_type: app
 
 - input_type: log
   paths:
