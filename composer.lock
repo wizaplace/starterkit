@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f0cd4ac23f697899f237b647c1e3970",
+    "content-hash": "a7e0809abf47fb12b5f9f1e555ba2e5a",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2637,6 +2637,62 @@
             "time": "2014-01-20T22:35:06+00:00"
         },
         {
+            "name": "wizaplace/front-bundle",
+            "version": "v0.1.0-alpha.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:wizaplace/wizaplace-front-bundle.git",
+                "reference": "75da48af10054a0a79836b3929a55cde8d42585c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/75da48af10054a0a79836b3929a55cde8d42585c",
+                "reference": "75da48af10054a0a79836b3929a55cde8d42585c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "roave/security-advisories": "@dev",
+                "symfony/monolog-bundle": "^3.1",
+                "symfony/symfony": "^3.3",
+                "twig/twig": "^2.4",
+                "wizaplace/sdk": "^0.11.3"
+            },
+            "require-dev": {
+                "bmancone/guzzle-stopwatch-middleware": "^1.0",
+                "lookyman/phpstan-symfony": "@dev",
+                "php-vcr/php-vcr": "^1.4",
+                "phpstan/phpstan": "^0.8.5",
+                "phpunit/phpunit": "^6.4",
+                "sensio/distribution-bundle": "^5.0",
+                "squizlabs/php_codesniffer": "^3.1",
+                "symfony/phpunit-bridge": "^3.3",
+                "wizaplace/php-coding-standard": "^1.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "WizaplaceFrontBundle\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "WizaplaceFrontBundle\\Tests\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Wizaplace",
+                    "email": "dev@wizaplace.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/wizaplace/wizaplace-front-bundle/tree/v0.1.0-alpha.1",
+                "issues": "https://github.com/wizaplace/wizaplace-front-bundle/issues"
+            },
+            "time": "2017-10-30T10:51:02+00:00"
+        },
+        {
             "name": "wizaplace/sdk",
             "version": "0.11.4",
             "source": {
@@ -2963,7 +3019,7 @@
             "support": {
                 "source": "https://github.com/hectorj/phpstan-symfony/tree/master"
             },
-            "time": "2017-07-18T10:15:23+00:00"
+            "time": "2017-07-18 10:15:23"
         },
         {
             "name": "myclabs/deep-copy",
@@ -5195,6 +5251,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "roave/security-advisories": 20,
+        "wizaplace/front-bundle": 15,
         "lookyman/phpstan-symfony": 20
     },
     "prefer-stable": false,
