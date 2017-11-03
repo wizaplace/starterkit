@@ -28,10 +28,13 @@ monolog:
             formatter:    monolog.formatter.logstash
         sentry_fingers_crossed:
             type:         fingers_crossed
-            handler:      sentry
+            handler:      sentry_buffer
             action_level: 'warning'
             excluded_404s:
                 - ^/
+        sentry_buffer:
+            type: buffer
+            handler: sentry
         sentry:
             type:         raven
             level:        'warning'
