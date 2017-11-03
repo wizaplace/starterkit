@@ -26,12 +26,9 @@ monolog:
             type:         stream
             path:         "%kernel.logs_dir%/prod.json"
             formatter:    monolog.formatter.logstash
-        sentry_fingers_crossed:
-            type:         fingers_crossed
-            handler:      sentry
-            action_level: 'warning'
-            excluded_404s:
-                - ^/
+        sentry_buffer:
+            type: buffer
+            handler: sentry
         sentry:
             type:         raven
             level:        'warning'
