@@ -9,6 +9,7 @@ namespace WizaplaceFrontBundle\Service;
 
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Wizaplace\SDK\Authentication\AuthenticationRequired;
 use Wizaplace\SDK\Basket\Basket;
 use Wizaplace\SDK\Basket\Comment;
 use Wizaplace\SDK\Basket\PaymentInformation;
@@ -131,7 +132,17 @@ class BasketService
         $basketId = $this->session->get(self::ID_SESSION_KEY);
 
         if (null === $basketId) {
-            $basketId = $this->baseService->create();
+            try {
+                $basketId = $this->baseService->getUserBasketId();
+            } catch (AuthenticationRequired $e) {
+                /* Silent, we will create a new basket ID right after */
+            }
+
+            if (null === $basketId) {
+                $basketId = $this->baseService->create();
+                $this->baseService->setUserBasketId($basketId);
+            }
+
             $this->session->set(self::ID_SESSION_KEY, $basketId);
         }
 
