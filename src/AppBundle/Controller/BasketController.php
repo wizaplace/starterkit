@@ -16,7 +16,7 @@ use Wizaplace\SDK\Basket\BasketComment;
 use Wizaplace\SDK\Basket\Exception\CouponAlreadyPresent;
 use Wizaplace\SDK\Basket\Exception\CouponNotInTheBasket;
 use Wizaplace\SDK\Basket\ProductComment;
-use Wizaplace\SDK\Catalog\Product;
+use Wizaplace\SDK\Catalog\DeclinationId;
 use WizaplaceFrontBundle\Service\BasketService;
 
 class BasketController extends Controller
@@ -44,7 +44,7 @@ class BasketController extends Controller
 
     public function addProductAction(Request $request): JsonResponse
     {
-        $declinationId = $request->request->get('declinationId');
+        $declinationId = new DeclinationId($request->request->get('declinationId'));
         $requestedQuantity = (int) $request->request->get('quantity');
 
         $addedQuantity = $this->basketService->addProductToBasket($declinationId, $requestedQuantity);
@@ -63,7 +63,7 @@ class BasketController extends Controller
         // redirection url
         $referer = $request->headers->get('referer');
 
-        $declinationId = $request->get('declinationId');
+        $declinationId = new DeclinationId($request->get('declinationId'));
 
         $this->basketService->removeProductFromBasket($declinationId);
 
@@ -87,7 +87,7 @@ class BasketController extends Controller
 
     public function updateProductQuantityAction(Request $request): JsonResponse
     {
-        $declinationId = $request->request->get('declinationId');
+        $declinationId = new DeclinationId($request->request->get('declinationId'));
         $quantity = $request->request->getInt('quantity');
 
         // remove product from basket if quantity is 0
@@ -154,7 +154,7 @@ class BasketController extends Controller
     public function updateCommentsAction(Request $request): JsonResponse
     {
         $comment = $request->get('comment');
-        $declinationId = $request->get('declinationId');
+        $declinationId = new DeclinationId($request->get('declinationId'));
 
         $comments = [];
 
