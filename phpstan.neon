@@ -2,6 +2,3 @@ includes:
 	- vendor/lookyman/phpstan-symfony/extension.neon
 services:
 	- Lookyman\PHPStan\Symfony\ServiceMap(var/cache/dev/appDevDebugProjectContainer.xml)
-parameters:
-    excludes_analyse:
-        - src/WizaplaceFrontBundle/Tests/BundleTestCase.php

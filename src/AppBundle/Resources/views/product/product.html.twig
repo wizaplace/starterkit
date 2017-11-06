@@ -19,11 +19,6 @@
                 {% endfor %}
             </ol>
 
-            {# badge 'new' #}
-            {% if product.creationDate.timestamp > date('-7days', 'Europe/Paris').timestamp %}
-                <div class="badge">{{ 'new'|trans }}</div>
-            {% endif %}
-
             {# product name #}
             <h1>{{ product.name }}</h1>
 
