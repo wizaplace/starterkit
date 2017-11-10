@@ -1,24 +1,19 @@
 // & = .category-wrapper
 &.slide-panel {
     overflow-y: auto;
-    background-color: @color-primary;
+    background-color: #777;
 
     .title {
         font-size: 2.2em;
         font-weight: bold;
-        color: @color-light;
+        color: #ccc;
         text-align: center;
         padding: .25em 0 1em;
-        border-bottom: 2px solid @color-tertiary;
+        border-bottom: 2px solid #999;
     }
 
     .category-menu {
         margin-top: 2em;
-
-        // global
-        .category-name {
-            .anchor("light");
-        }
 
         > .category {
             margin: 1.8em 3em 0 0;
@@ -31,9 +26,9 @@
                 position: absolute;
                 font-size: 1.2em;
                 padding: .6em;
-                background-color: @color-tertiary;
-                border-radius: @radius;
-                color: @color-light;
+                background-color: #999;
+                border-radius: 10px;
+                color: #ccc;
                 transition: transform .1s ease-in; // rotate icon back
             }
 
@@ -65,10 +60,6 @@
                     .category {
                         font-size: .9em;
                         font-weight: normal;
-
-                        .category-name {
-                            .anchor("light");
-                        }
                     }
                 }
             }

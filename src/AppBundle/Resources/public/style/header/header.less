@@ -10,8 +10,7 @@
 .pac-container {
     margin-top: .8em;
     padding: .5em;
-    border-radius: @radius;
-    box-shadow: @box-shadow;
+    border-radius: 10px;
 
     > :first-child {
         border-top: none;
@@ -28,11 +27,11 @@
 
     .pac-item {
         &:hover, &:focus, &.pac-item-selected {
-            background-color: fade(@color-tertiary, 10%) !important;
-            color: @color-hover-dark;
+            background-color: fade(#999, 10%) !important;
+            color: #333;
 
             & .pac-item-query {
-                color: @color-hover-dark;
+                color: #333;
             }
 
             // place google sprite sheet on pink marker position

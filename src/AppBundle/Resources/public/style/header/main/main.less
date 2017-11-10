@@ -2,7 +2,7 @@
 // ===================================
 
 .main-menu {
-    background: @color-primary;
+    background: #777;
     font-size: 1.2em;
 
     .main-menu-wrapper {
@@ -14,12 +14,10 @@
         .open-slide-panel {
             padding: .25em .75em;
             font-size: 1.3em;
-            .has-left-icon();
-            .anchor("light");
 
-            color: @anchor-color-light;
-            border: 1px solid @color-light;
-            border-radius: @radius;
+            color: #ccc;
+            border: 1px solid #ccc;
+            border-radius: 10px;
 
             // hide button from medium screens
             @media screen and(min-width: @screen-md-min) {
@@ -28,11 +26,11 @@
 
             // style change basis on smaller screens
             @media screen and (max-width: @screen-sm-max) {
-                background: darken(saturate(@color-secondary, 5%), 12%);
+                background: darken(saturate(#aaa, 5%), 12%);
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
                 &:hover, &:focus, &:active {
-                    color: darken(@color-primary, 10%);
+                    color: darken(#777, 10%);
                     text-shadow: none;
                 }
             }
@@ -41,10 +39,6 @@
                 font-size: 1.8em;
                 width: 100%;
                 text-align: center;
-            }
-
-            @media screen and (max-width: @screen-xxs-max) {
-                font-size: 1.6em;
             }
         }
 

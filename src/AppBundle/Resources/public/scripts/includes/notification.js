@@ -5,7 +5,7 @@ const notification = {
     // hide notification behaviour
     initAlerts: function() {
         let $alerts = $(".notifications .alert");
-        $alerts.addClass("in"); // animate in
+        $alerts.addClass("is-visible"); // animate in
 
         let self = this;
         $alerts.each(function(index, alert) {
@@ -22,7 +22,7 @@ const notification = {
 
     // remove alert from DOM
     removeAlert: function(alert) {
-        $(alert).removeClass('in'); // animate out
+        $(alert).removeClass('is-visible'); // animate out
 
         // wait 1 second for the animation to be done
         setTimeout(function(){
