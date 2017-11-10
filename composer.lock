@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "049acb318b78f3442b985ac25ceb880c",
+    "content-hash": "a11d1df3347f04f230efe29472fc6b70",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2683,16 +2683,16 @@
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.0.0-alpha.2",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "b901d939d6a5f934ccd4112c51cb3df5ac2fd045"
+                "reference": "e00d79fe5c4e93ee20abcb83eaf0d5ae6ee21638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/b901d939d6a5f934ccd4112c51cb3df5ac2fd045",
-                "reference": "b901d939d6a5f934ccd4112c51cb3df5ac2fd045",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/e00d79fe5c4e93ee20abcb83eaf0d5ae6ee21638",
+                "reference": "e00d79fe5c4e93ee20abcb83eaf0d5ae6ee21638",
                 "shasum": ""
             },
             "require": {
@@ -2721,7 +2721,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-11-06T13:20:27+00:00"
+            "time": "2017-11-06T15:55:15+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -5240,7 +5240,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "roave/security-advisories": 20,
-        "wizaplace/sdk": 15,
         "lookyman/phpstan-symfony": 20
     },
     "prefer-stable": false,
