@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "141004337ec70383b9d1becd8d5840e4",
+    "content-hash": "049acb318b78f3442b985ac25ceb880c",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2638,16 +2638,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "dev-sdk-v1.0.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:wizaplace/wizaplace-front-bundle.git",
-                "reference": "f09282ae53863f2affd65989056c70bb933177cd"
+                "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
+                "reference": "45e8a5c952c068165fc93dd31df95abf7e3e4590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/f09282ae53863f2affd65989056c70bb933177cd",
-                "reference": "f09282ae53863f2affd65989056c70bb933177cd",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/45e8a5c952c068165fc93dd31df95abf7e3e4590",
+                "reference": "45e8a5c952c068165fc93dd31df95abf7e3e4590",
                 "shasum": ""
             },
             "require": {
@@ -2656,7 +2656,7 @@
                 "symfony/monolog-bundle": "^3.1",
                 "symfony/symfony": "^3.3",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "v1.0.0-alpha.2"
+                "wizaplace/sdk": "^1.0.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -2675,22 +2675,11 @@
                     "WizaplaceFrontBundle\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "WizaplaceFrontBundle\\Tests\\": "tests/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Wizaplace",
-                    "email": "dev@wizaplace.com"
-                }
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
             ],
-            "support": {
-                "source": "https://github.com/wizaplace/wizaplace-front-bundle/tree/sdk-v1.0.0",
-                "issues": "https://github.com/wizaplace/wizaplace-front-bundle/issues"
-            },
-            "time": "2017-11-06 13:53:41"
+            "time": "2017-11-10T13:14:11+00:00"
         },
         {
             "name": "wizaplace/sdk",
@@ -5252,7 +5241,6 @@
     "stability-flags": {
         "roave/security-advisories": 20,
         "wizaplace/sdk": 15,
-        "wizaplace/front-bundle": 20,
         "lookyman/phpstan-symfony": 20
     },
     "prefer-stable": false,
