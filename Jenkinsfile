@@ -46,14 +46,10 @@ pipeline {
                     'stan': {
                         sh 'make stan-ci'
                     },
-                    'test': {
-                        sh 'make test-phpunit-ci'
-                    }
                 )
             }
             post {
                 always {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'var/logs/test.log'
                     archiveArtifacts allowEmptyArchive: true, artifacts: 'phpcs-checkstyle.xml'
                     archiveArtifacts allowEmptyArchive: true, artifacts: 'phpstan-checkstyle.xml'
                     withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
@@ -79,12 +75,6 @@ pipeline {
                             ]
                         ])
                     }
-                    junit 'phpunit-result.xml'
-                    step([
-                        $class: 'CloverPublisher',
-                        cloverReportDir: './',
-                        cloverReportFileName: 'clover.xml'
-                    ])
                 }
             }
         }

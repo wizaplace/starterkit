@@ -44,21 +44,6 @@ stan-ci:
 	./vendor/bin/phpstan --no-interaction --no-progress analyse --errorFormat=checkstyle -c phpstan.neon -l 5 app src > phpstan-checkstyle.xml || \
 	(sed -i 's/<error/<error source="phpstan"/g' phpstan-checkstyle.xml && false)
 
-test: test-phpunit test-behat
-
-test-phpunit:
-	./vendor/bin/phpunit --configuration ./phpunit.xml
-
-test-phpunit-ci:
-	chmod -R 777 ./var/logs
-	php -dxdebug.coverage_enable=1 ./vendor/bin/phpunit --configuration ./phpunit.xml --log-junit ./phpunit-result.xml --coverage-clover ./clover.xml
-
-test-behat:
-	php -d opcache.enable=0 vendor/bin/behat --config behat.yml
-
-test-behat-ci:
-	php -d opcache.enable=0 vendor/bin/behat --config behat.yml --format=pretty --out=std --format=junit --out=behat-result
-
 npm-install:
 	npm install
 
@@ -74,4 +59,4 @@ translations:
 	bin/console --env=$(ENV) wizaplace:translations:push
 	bin/console --env=$(ENV) wizaplace:translations:pull
 
-.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff lint-css stan stan-ci test test-phpunit test-phpunit-ci test-behat test-behat-ci dev-from-scratch
+.PHONY: all install install-ci composer-install composer-install-ci npm-install assets lint lint-ci lint-php lint-php-ci lint-yaml lint-twig lint-xliff lint-css stan stan-ci dev-from-scratch
