@@ -1,5 +1,5 @@
 .search-bar {
-    background-color: #aaa;
+    background-color: @gray-light;
 
     .wrapper {
         padding: 2em 0;
@@ -18,7 +18,7 @@
             }
 
             .group {
-                background: lighten(#aaa, 12%);
+                background: @gray-light;
                 border-radius: 10px;
                 padding: .75em;
                 margin-right: .75em;
@@ -45,7 +45,7 @@
                 flex-basis: 50%; // of the container width
 
                 .category-picker {
-                    color: darken(saturate(#777, 5%), 12%);
+                    color: @gray;
                     cursor: pointer;
                     background: #aaa;
                     flex: 0 1 auto;
@@ -57,7 +57,7 @@
 
                     .picker-icon {
                         font-size: 2em;
-                        color: #aaa;
+                        color: @gray-light;
                         text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
                         @media screen and (min-width: @screen-md-min) {
@@ -78,7 +78,7 @@
                     }
 
                     &:hover {
-                        background: darken(saturate(#aaa, 5%), 12%);
+                        background: @gray;
                     }
 
                     .categories {
@@ -87,16 +87,16 @@
                         cursor: pointer;
 
                         .category {
-                            color: #333;
+                            color: @gray-dark;
                             padding: .25em;
                         }
                     }
 
                     &.is-active {
-                        background: darken(saturate(#aaa, 5%), 12%);
+                        background: @gray;
 
                         .picker-icon {
-                            color: darken(#777, 10%);
+                            color: @gray;
                             text-shadow: none;
                         }
 
@@ -113,11 +113,11 @@
 
                     @media screen and (max-width: @screen-sm-max) {
                         flex-basis: 0;
-                        background: darken(saturate(#aaa, 5%), 12%);
+                        background: @gray;
 
                         &:hover, &:focus, &:active {
                             .picker-icon {
-                                color: darken(#777, 10%);
+                                color: @gray;
                                 text-shadow: none;
                             }
                         }

@@ -2,7 +2,7 @@
 // ===================================
 
 .main-menu {
-    background: #777;
+    background: @gray-lighter;
     font-size: 1.2em;
 
     .main-menu-wrapper {
@@ -16,7 +16,7 @@
             font-size: 1.3em;
 
             color: #ccc;
-            border: 1px solid #ccc;
+            border: 1px solid @gray;
             border-radius: 10px;
 
             // hide button from medium screens
@@ -30,7 +30,7 @@
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
                 &:hover, &:focus, &:active {
-                    color: darken(#777, 10%);
+                    color: @gray;
                     text-shadow: none;
                 }
             }
@@ -66,9 +66,6 @@
 
             // large screens
             @import './_inline-categories';
-
-            // small screen
-            @import './_slide-categories';
         }
 
         .static-links {

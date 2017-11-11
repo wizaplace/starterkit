@@ -40,19 +40,23 @@
             }
 
             .category-name {
-                color: #ccc;
+                color: @gray;
             }
 
             .wrapper {
                 display: none; // starts off hidden
+
+                > .content {
+                    position: absolute;
+                }
             }
 
             &:hover {
                 .category-name {
-                    color: #ccc;
+                    color: @gray;
 
                     &:active {
-                        color: #ccc;
+                        color: @gray;
                     }
                 }
 
@@ -68,15 +72,15 @@
                             text-align: left;
 
                             .category-name {
-                                color: #333;
+                                color: @gray;
                                 text-align: left;
 
                                 &:hover {
-                                    color: #333;
+                                    color: @gray;
                                 }
 
                                 &:active {
-                                    color: #333;
+                                    color: @gray;
                                 }
                             }
 

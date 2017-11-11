@@ -2,7 +2,7 @@
 // ===========================
 
 .top-nav {
-    background-color: #777;
+    background-color: @gray-light;
 
     .nav-wrapper {
         padding: 1em 0;
@@ -25,7 +25,7 @@
             }
 
             .marketplace-name {
-                color: #ccc;
+                color: #fff;
                 font-weight: bold;
                 font-size: 2em;
 
@@ -68,6 +68,8 @@
                 }
 
                 .quick-access-link {
+                    color: @gray-lighter;
+
                     @media screen and (max-width: @screen-xs-max) {
                         i {
                             font-size: 3em;
@@ -82,15 +84,19 @@
 
                 &:hover, &.in {
                     .quick-access-link {
-                        color: #ccc;
+                        color: @gray-lighter;
 
                         &:active {
-                            color: #ccc;
+                            color: @gray-lighter;
                         }
                     }
 
                     .wrapper {
                         display: block; // shows popunder on hover
+
+                        > .content {
+                            position: absolute;
+                        }
 
                         // even on hover state, doesn't show on small screens
                         @media screen and (max-width: @screen-xs-max) {
@@ -102,12 +108,12 @@
                 .basket-badge {
                     font-weight: bold;
                     vertical-align: super;
-                    color: #ccc;
+                    color: @gray-light;
                     font-size: .6em;
                     border-radius: 100%;
                     padding: .35em .7em;
                     margin-left: .35em;
-                    background-color: #999;
+                    background-color: @gray;
                     user-select: none;
                     cursor: pointer;
 
@@ -135,17 +141,17 @@
                     cursor: pointer;
 
                     a {
-                        color: #999;
+                        color: @gray;
 
                         &:hover {
                             text-decoration: underline;
                         }
 
                         &:visited {
-                            color: #999;
+                            color: @gray;
 
                             &:hover {
-                                color: #999;
+                                color: @gray;
                             }
                         }
                     }
@@ -172,7 +178,7 @@
                     text-align: right;
 
                     font-size: .7em;
-                    color: #444;
+                    color: @gray;
                     font-style: italic;
                 }
 
@@ -187,7 +193,7 @@
 
                     .logout {
                         width: 100%;
-                        color: #333;
+                        color: @gray;
                     }
                 }
             }
@@ -197,7 +203,7 @@
                     font-size: .8em;
                     display: flex;
                     padding-bottom: .75em;
-                    border-bottom: 1px solid #bbb;
+                    border-bottom: 1px solid @gray;
                     margin-bottom: 1em;
 
                     .image-block {
@@ -206,7 +212,7 @@
                         margin-right: .5em;
 
                         .image {
-                            background-color: #bbb;
+                            background-color: @gray;
                             max-width: 60px;
                         }
 
@@ -230,12 +236,12 @@
                         }
 
                         .quantity {
-                            color: #444;
+                            color: @gray;
                             font-size: .9em;
                         }
 
                         .remove-from-basket {
-                            color: #444;
+                            color: @gray;
                             align-self: flex-end;
                         }
                     }
@@ -247,7 +253,7 @@
                     justify-content: space-between;
                     align-items: flex-start;
                     padding: 0 .25em .75em;
-                    border-bottom: 1px solid #bbb;
+                    border-bottom: 1px solid @gray;
                     margin-bottom: 1em;
 
                     .total-amount {
