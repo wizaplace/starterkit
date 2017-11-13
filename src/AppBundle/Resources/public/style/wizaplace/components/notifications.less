@@ -1,0 +1,30 @@
+.notifications {
+    position: fixed;
+    top: 5rem;
+    left: 2rem;
+
+    .alert {
+        position: relative;
+        height: auto;
+        width: auto;
+        z-index: @zindex-overlay + 2; // over an eventual modal
+
+        // animation
+        transform: translate(-100%, 0);
+        opacity: 0;
+        transition: all .5s ease-in;
+
+        &.is-visible {
+            transform: translate(2em, 0);
+            opacity: .95;
+            transition: all .5s ease-out;
+        }
+
+        .close-notification {
+            float: right;
+            padding-left: 1em;
+            font-size: .8em;
+            color: rgba(0, 0, 0, .4);
+        }
+    }
+}

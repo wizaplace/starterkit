@@ -1,6 +1,5 @@
 // legacy
-@import '_variables';
-@import '_fonts';
+@import 'header/header';
 @import '_breadcrumb';
 @import '_checkout-steps';
 @import '_mini-gallery';
@@ -13,6 +12,9 @@
 @import '_search-sidebar';
 @import (inline) '_jquery-ui.min.css';
 
+// global
+@import 'wizaplace/variables.less';
+
 // libs
 @import '../../../../../node_modules/bootstrap/less/bootstrap';
 @import '../../../../../node_modules/font-awesome/less/font-awesome';
@@ -21,16 +23,14 @@
 @import (inline) '../../../../../node_modules/cookieconsent/build/cookieconsent.min.css';
 @import (inline) 'jquery-ui-date-picker.min.css';
 
-// project
-@import 'variables';
-@import 'mixins';
-@import 'fonts';
-@import 'global';
-@import 'range-slider';
-@import 'components';
+// components
+@import 'wizaplace/components/overlay';
+@import 'wizaplace/components/range-slider';
+@import 'wizaplace/components/slick-carousel';
+@import 'wizaplace/components/notifications';
+@import 'wizaplace/components/cookie-consent';
 
 // templates
-@import 'header/header';
 @import 'footer';
 @import 'basket';
 @import 'home';

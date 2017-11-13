@@ -2,7 +2,7 @@
 
 <div class="title hidden-md hidden-lg">{{ 'categories'|trans }}</div>
 
-<ul class="category-menu">
+<ul class="category-menu list-inline">
     {% for category in categories|slice(0,8) %} {# remove slice filter if you want to display all categories #}
 
         <li class="category">

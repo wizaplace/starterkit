@@ -1,5 +1,5 @@
 .search-bar {
-    background-color: @color-secondary;
+    background-color: @gray-light;
 
     .wrapper {
         padding: 2em 0;
@@ -18,8 +18,8 @@
             }
 
             .group {
-                background: lighten(@color-secondary, 12%);
-                border-radius: @radius;
+                background: @gray-light;
+                border-radius: 10px;
                 padding: .75em;
                 margin-right: .75em;
                 display: flex;
@@ -36,13 +36,7 @@
 
             // auto-complete
             .product-suggestions {
-                .popunder(.3s, 100%);
-
                 cursor: pointer;
-
-                .suggestion {
-                    .popin-list-item();
-                }
             }
 
             // keyword and category query group
@@ -51,11 +45,9 @@
                 flex-basis: 50%; // of the container width
 
                 .category-picker {
-                    color: darken(saturate(@color-primary, 5%), 12%);
+                    color: @gray;
                     cursor: pointer;
-                    .remove-border-radius-right();
-
-                    background: @color-secondary;
+                    background: #aaa;
                     flex: 0 1 auto;
                     max-width: 164px; // just enough for default category name
                     user-select: none;
@@ -65,7 +57,7 @@
 
                     .picker-icon {
                         font-size: 2em;
-                        color: @color-light;
+                        color: @gray-light;
                         text-shadow: 1px 1px 1px rgba(0, 0, 0, .3); // subtle pop
 
                         @media screen and (min-width: @screen-md-min) {
@@ -86,29 +78,25 @@
                     }
 
                     &:hover {
-                        background: darken(saturate(@color-secondary, 5%), 12%);
+                        background: @gray;
                     }
 
                     .categories {
                         display: none; // starts off hidden
 
-                        .popunder();
-
                         cursor: pointer;
 
                         .category {
-                            .popin-list-item();
-
-                            color: @color-dark;
+                            color: @gray-dark;
                             padding: .25em;
                         }
                     }
 
                     &.is-active {
-                        background: darken(saturate(@color-secondary, 5%), 12%);
+                        background: @gray;
 
                         .picker-icon {
-                            color: darken(@color-primary, 10%);
+                            color: @gray;
                             text-shadow: none;
                         }
 
@@ -125,11 +113,11 @@
 
                     @media screen and (max-width: @screen-sm-max) {
                         flex-basis: 0;
-                        background: darken(saturate(@color-secondary, 5%), 12%);
+                        background: @gray;
 
                         &:hover, &:focus, &:active {
                             .picker-icon {
-                                color: darken(@color-primary, 10%);
+                                color: @gray;
                                 text-shadow: none;
                             }
                         }
@@ -141,19 +129,12 @@
                     flex: 1 0 70%;
 
                     [name="q"] {
-                        .remove-border-radius-left();
-
                         border-left: 0;
                     }
 
                     @media screen and (max-width: @screen-md-max) {
                         flex-basis: 80%;
                     }
-                }
-
-                // remove radius on smaller screens
-                @media screen and (max-width: @screen-md-max) {
-                    .remove-border-radius-bottom();
                 }
             }
 
@@ -173,8 +154,6 @@
 
                 // remove radius on smaller screens and push away submit button
                 @media screen and (max-width: @screen-md-max) {
-                    .remove-border-radius-top();
-
                     margin-bottom: 1em;
                 }
             }
@@ -188,10 +167,6 @@
 
                 @media screen and (max-width: @screen-xs-max) {
                     font-size: 1.4em;
-                }
-
-                @media screen and (max-width: @screen-xxs-max) {
-                    font-size: 1.7em;
                 }
             }
         }

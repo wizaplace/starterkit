@@ -2,7 +2,7 @@
 // ===========================
 
 .top-nav {
-    background-color: @color-primary;
+    background-color: @gray-light;
 
     .nav-wrapper {
         padding: 1em 0;
@@ -20,12 +20,12 @@
             align-items: center;
 
             .logo {
-                width: @logo-width;
+                width: 80px;
                 margin-right: 2em;
             }
 
             .marketplace-name {
-                color: @color-light;
+                color: #fff;
                 font-weight: bold;
                 font-size: 2em;
 
@@ -54,26 +54,8 @@
             }
 
             .quick-access {
-                &:first-of-type {
-                    .wrapper {
-                        .popunder(.2s, 250px, "left", true);
-
-                        @media screen and (max-width: @screen-md-max) {
-                            .popunder(.2s, 300px, "left", true);
-                        }
-                    }
-                }
-
                 &:last-of-type {
                     margin-left: 1em;
-
-                    .wrapper {
-                        .popunder(.2s, 350px, "right", true);
-
-                        @media screen and (max-width: @screen-md-max) {
-                            .popunder(.2s, 400px, "right", true);
-                        }
-                    }
 
                     @media screen and (max-width: @screen-xs-max) {
                         margin: 0;
@@ -86,7 +68,7 @@
                 }
 
                 .quick-access-link {
-                    .has-left-icon(.2em);
+                    color: @gray-lighter;
 
                     @media screen and (max-width: @screen-xs-max) {
                         i {
@@ -102,15 +84,19 @@
 
                 &:hover, &.in {
                     .quick-access-link {
-                        color: @anchor-color-hover-light;
+                        color: @gray-lighter;
 
                         &:active {
-                            color: @anchor-color-active-light;
+                            color: @gray-lighter;
                         }
                     }
 
                     .wrapper {
                         display: block; // shows popunder on hover
+
+                        > .content {
+                            position: absolute;
+                        }
 
                         // even on hover state, doesn't show on small screens
                         @media screen and (max-width: @screen-xs-max) {
@@ -122,12 +108,12 @@
                 .basket-badge {
                     font-weight: bold;
                     vertical-align: super;
-                    color: @color-light;
+                    color: @gray-light;
                     font-size: .6em;
                     border-radius: 100%;
                     padding: .35em .7em;
                     margin-left: .35em;
-                    background-color: @color-tertiary;
+                    background-color: @gray;
                     user-select: none;
                     cursor: pointer;
 
@@ -143,9 +129,6 @@
                 }
 
                 .btn {
-                    // add some space between text and icon
-                    .has-right-icon();
-
                     font-size: .75em;
 
                     &.validate {
@@ -158,19 +141,17 @@
                     cursor: pointer;
 
                     a {
-                        .anchor("dark");
-
-                        color: @color-tertiary;
+                        color: @gray;
 
                         &:hover {
                             text-decoration: underline;
                         }
 
                         &:visited {
-                            color: @color-tertiary;
+                            color: @gray;
 
                             &:hover {
-                                color: @color-tertiary;
+                                color: @gray;
                             }
                         }
                     }
@@ -195,11 +176,9 @@
                     display: block;
                     padding-top: .5em;
                     text-align: right;
-                    .anchor("dark");
-                    .underlined();
 
                     font-size: .7em;
-                    color: @color-faded-dark;
+                    color: @gray;
                     font-style: italic;
                 }
 
@@ -210,16 +189,11 @@
                         &:nth-last-child(2) {
                             margin-bottom: .75em;
                         }
-
-                        > * {
-                            .anchor("dark");
-                            .has-left-icon();
-                        }
                     }
 
                     .logout {
                         width: 100%;
-                        color: @color-dark;
+                        color: @gray;
                     }
                 }
             }
@@ -229,7 +203,7 @@
                     font-size: .8em;
                     display: flex;
                     padding-bottom: .75em;
-                    border-bottom: 1px solid @color-medium;
+                    border-bottom: 1px solid @gray;
                     margin-bottom: 1em;
 
                     .image-block {
@@ -238,7 +212,7 @@
                         margin-right: .5em;
 
                         .image {
-                            background-color: @color-medium;
+                            background-color: @gray;
                             max-width: 60px;
                         }
 
@@ -262,14 +236,12 @@
                         }
 
                         .quantity {
-                            color: @color-faded-dark;
+                            color: @gray;
                             font-size: .9em;
                         }
 
                         .remove-from-basket {
-                            .anchor("dark");
-
-                            color: @color-faded-dark;
+                            color: @gray;
                             align-self: flex-end;
                         }
                     }
@@ -281,12 +253,12 @@
                     justify-content: space-between;
                     align-items: flex-start;
                     padding: 0 .25em .75em;
-                    border-bottom: 1px solid @color-medium;
+                    border-bottom: 1px solid @gray;
                     margin-bottom: 1em;
 
                     .total-amount {
                         font-weight: bold;
-                        color: @color-tertiary;
+                        color: #999;
 
                         .tax-detail {
                             font-weight: normal;

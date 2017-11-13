@@ -306,6 +306,19 @@
             "product_content": "Commentaire produit",
             "validate": "Soumettre"
         }
-    }
+    },
 
+    "header": {
+        "account": {
+            "label": "Mon compte",
+            "menu": {
+                "item1": "Mon profil",
+                "item2": "Mes commandes",
+                "item3": "Ma messagerie"
+            }
+        },
+        "basket": {
+            "label": "Mon panier"
+        }
+    }
 }
