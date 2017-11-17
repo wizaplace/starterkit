@@ -33,9 +33,9 @@
         // 'different addresses' behaviour
         // ===============================
 
-        let addressesAreIdentical = '{{ addressesAreIdentical|e('js') }}';
-        let $shippingAddressForm = $('#shipping-address-wrapper');
-        let $differentAddressesCheckbox = $('#differentAddress');
+        var addressesAreIdentical = '{{ addressesAreIdentical|e('js') }}';
+        var $shippingAddressForm = $('#shipping-address-wrapper');
+        var $differentAddressesCheckbox = $('#differentAddress');
 
         // on page load, if shipping address is different
         if (! addressesAreIdentical) {
