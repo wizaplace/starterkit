@@ -9,7 +9,7 @@ type: 'php:7.1'
 # On PHP, there are multiple build flavors available. Pretty much everyone
 # except Drupal 7 users will want the composer flavor.
 build:
-  flavor: 'composer'
+  flavor: 'none'
 
 # The relationships of the application with services or other applications.
 # The left-hand side is the name of the relationship as it will be exposed
@@ -58,14 +58,6 @@ runtime:
     extensions:
         - newrelic
 
-dependencies:
-    nodejs:
-        gulp: "^3.9"
-        gulp-less: "^3.3.0"
-        gulp-concat: "^2.6.1"
-        babelify: "^7.3.0"
-        browserify: "^13.1.0"
-
 # The hooks that will be triggered when the package is deployed.
 hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
@@ -77,11 +69,13 @@ hooks:
       echo "[`date --iso-8601=seconds`] build_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${buildID}"
       echo "${buildID}" > /app/app/buildID
 
+      composer --no-ansi --no-interaction install --no-progress --prefer-dist --optimize-autoloader --no-dev
+
       # install and compile frontend assets
       bin/console --env=prod assets:install --no-debug
       bin/console --env=prod fos:js-routing:dump --no-debug
-      npm install
-      gulp deploy
+      npm install --quiet --no-progress
+      /app/node_modules/.bin/gulp deploy
       rm -rf /app/node_modules
 
       # use our custom php.ini
