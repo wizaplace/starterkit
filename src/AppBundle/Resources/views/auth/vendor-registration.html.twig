@@ -111,7 +111,7 @@
     <script>
         // VAT checkbox behaviour:
         // when the "I don't have a VAT number" checkbox is ticked, the corresponding field is not required anymore
-        let $vatInput = $('#company-vat');
+        var $vatInput = $('#company-vat');
 
         $('#vat-checkbox').on('change', function() {
             if ($(this).is(':checked') ) {

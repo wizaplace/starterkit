@@ -239,7 +239,7 @@
                 },
 
                 submitBasket: function() {
-                    let self = this;
+                    var self = this;
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",

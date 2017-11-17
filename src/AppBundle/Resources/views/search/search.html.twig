@@ -285,7 +285,7 @@
 
                 productUrl: function (product) {
                     categorySlugPath = [];
-                    for (let i in product.categoryPath) {
+                    for (var i in product.categoryPath) {
                         categorySlugPath.push(product.categoryPath[i].slug);
                     }
                     return Routing.generate('product', {slug: product.slug, categoryPath: categorySlugPath.join('/')});

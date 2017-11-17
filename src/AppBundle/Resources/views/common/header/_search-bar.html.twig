@@ -107,10 +107,10 @@
     <script>
         $(function () {
 
-            let search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
-            let urlParameters = search.restoreSearchFromUrl(); // used in search page
+            var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
+            var urlParameters = search.restoreSearchFromUrl(); // used in search page
 
-            let vm = new Vue({
+            var vm = new Vue({
                 el: '#search-bar',
 
                 data: {
@@ -126,12 +126,12 @@
                 methods: {
                     initCategorySelection: function () {
 
-                        let self = this;
+                        var self = this;
 
                         // toggle selectable categories list
                         // =================================
 
-                        let $categoryPicker = $('.category-picker');
+                        var $categoryPicker = $('.category-picker');
 
                         // toggle categories list on click
                         $categoryPicker.on('click', function () {
@@ -142,7 +142,7 @@
                         $(document).on('click', function (e) {
 
                             // doesn't hide if user has clicked on a listed category
-                            let $target = $(e.target);
+                            var $target = $(e.target);
 
                             if ($target.closest('.category-picker').length) {
                                 return;
@@ -178,9 +178,9 @@
 
                     categoryKeyboardNav: function () {
 
-                        let self = this;
-                        let $categoryPicker = $('.category-picker');
-                        let $selectableCategories = $categoryPicker .find('.category');
+                        var self = this;
+                        var $categoryPicker = $('.category-picker');
+                        var $selectableCategories = $categoryPicker .find('.category');
 
                         $selectableCategories.on('keydown', function (e) {
 
@@ -221,7 +221,7 @@
                             name: categoryName
                         };
 
-                        let $categoryPicker = $('.category-picker');
+                        var $categoryPicker = $('.category-picker');
 
                         // focus back on category picker
                         $categoryPicker.focus();
@@ -236,7 +236,7 @@
                     // to limit how often a particularly expensive operation can be run.
                     productAutocomplete: _.debounce(function () {
 
-                            let self = this;
+                            var self = this;
 
                             search.autocomplete(this.query, function (results) {
 
@@ -256,9 +256,9 @@
 
                     // watch user query input to display corresponding product suggestions (auto-completion)
                     initProductAutocomplete: function () {
-                        let self = this;
-                        let $queryInput = $('[name="q"]');
-                        let $productSuggestions = $('.product-suggestions');
+                        var self = this;
+                        var $queryInput = $('[name="q"]');
+                        var $productSuggestions = $('.product-suggestions');
 
                         // show suggestions when:
                         // - user has typed at least 3 characters
@@ -279,7 +279,7 @@
                         $(document).on('click', function (e) {
 
                             // doesn't hide if user has clicked on a suggestion or in the input field
-                            let $target = $(e.target);
+                            var $target = $(e.target);
 
                             if ($target.hasClass('suggestion') || $target[0] === $queryInput[0]) {
                                 return;
@@ -315,8 +315,8 @@
 
                     // navigate through a list of selectable suggestions with keyboard
                     suggestionsKeyboardNav: function () {
-                        let $queryInput = $('[name="q"]');
-                        let $productSuggestions = $('.product-suggestions');
+                        var $queryInput = $('[name="q"]');
+                        var $productSuggestions = $('.product-suggestions');
 
                         $('.suggestion').on('keydown', function (e) {
 
@@ -359,7 +359,7 @@
                     },
 
                     initGoogleMap: function () {
-                        let labelInput = document.getElementById('geofilter-label');
+                        var labelInput = document.getElementById('geofilter-label');
                         this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
                         this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
                     },
@@ -398,7 +398,7 @@
                     // called when the user autocompletes a place with Google Maps
                     geolocAutocompleted: function () {
 
-                        let place = this.googleMapsAutocomplete.getPlace();
+                        var place = this.googleMapsAutocomplete.getPlace();
 
                         if (!place.geometry) {
                             // user entered a place that was not suggested and pressed Enter, or the request failed
