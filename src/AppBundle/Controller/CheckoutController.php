@@ -10,10 +10,10 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WizaplaceFrontBundle\Service\BasketService;
-use Symfony\Component\Intl\Intl;
 
 class CheckoutController extends Controller
 {
@@ -81,7 +81,7 @@ class CheckoutController extends Controller
 
         $paymentRedirectUrl = $paymentInfo->getRedirectUrl();
         if ($paymentRedirectUrl) {
-            return $this->redirect($paymentRedirectUrl);
+            return $this->redirect((string) $paymentRedirectUrl);
         }
         $htmlContent = $paymentInfo->getHtml();
 
