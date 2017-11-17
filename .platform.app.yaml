@@ -82,6 +82,7 @@ hooks:
       bin/console --env=prod fos:js-routing:dump --no-debug
       npm install
       gulp deploy
+      rm -rf /app/node_modules
 
       # use our custom php.ini
       cp .platform.php.ini php.ini
