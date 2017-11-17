@@ -1,42 +1,24 @@
-.main-header {
-    @import '_top';
-    @import 'main/main';
-    @import '_search-bar';
-
-    margin-bottom: 5rem;
-}
-
-// Google place library auto-complete
-.pac-container {
-    margin-top: .8em;
-    padding: .5em;
-    border-radius: 10px;
-
-    > :first-child {
-        border-top: none;
+#masthead {
+    .header-top {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
-    .pac-item, .pac-item-query {
-        font-size: 1em;
-        cursor: pointer;
+    // basket show/hide behaviour
+    .basket {
+        position: relative;
 
-        @media screen and (max-width: @screen-sm-max) {
-            font-size: 1.2em;
+        .basket-content {
+            position: absolute;
+
+            // basket is hidden by default
+            display: none;
         }
-    }
 
-    .pac-item {
-        &:hover, &:focus, &.pac-item-selected {
-            color: @gray;
-
-            & .pac-item-query {
-                color: @gray;
-            }
-
-            // place google sprite sheet on pink marker position
-            // (see https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png)
-            .pac-icon-marker {
-                background-position: 16px -161px;
+        &:hover {
+            .basket-content {
+                display: block;
             }
         }
     }

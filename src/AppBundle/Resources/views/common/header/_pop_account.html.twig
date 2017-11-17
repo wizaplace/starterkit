@@ -1,0 +1,33 @@
+{% if app.user %}
+
+    {# user account links #}
+    <ul class="list-unstyled">
+        <li><a href="{{ path('profile') }}">{{ 'header.account.menu.profile'|trans }}</a></li>
+        <li><a href="{{ path('profile_orders') }}">{{ 'header.account.menu.orders'|trans }}</a></li>
+        <li><a href="{{ path('profile_discussions') }}">{{ 'header.account.menu.discussion'|trans }}</a></li>
+        <li><a href="{{ path('logout', { 'csrf_token': csrf_token('logout_token') }) }}">{{ 'header.account.menu.logout'|trans }}</a></li>
+    </ul>
+
+{% else %}
+
+    <p>{{ 'header.account.menu.login'|trans }}</p>
+
+    {# login form #}
+    <form action="{{ path('login') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('login_token') }}">
+        <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
+
+        {# credentials #}
+        <input type="email" name="email" placeholder="{{ 'header.account.menu.email'|trans }}" required>
+        <input type="password" name="password" placeholder="{{ 'header.account.menu.password'|trans }}" required>
+
+        {# forgotten password link #}
+        <a href="#password-reset-modal" data-toggle="modal" rel="nofollow">{{ 'header.account.menu.forgotten-password'|trans }}</a>
+
+        {# submit button #}
+        <button type="submit">{{ 'header.account.menu.validate'|trans }}</button>
+    </form>
+
+    {# link to registration page #}
+    <a href="{{ path('login') }}">{{ 'header.account.menu.create_account'|trans }}</a>
+{% endif %}

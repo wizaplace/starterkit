@@ -1,43 +1,41 @@
 {% set accountLink = app.user ? path('profile') : path('login') %}
 {% set userBasket = basket ?? basket() %}
 
-<nav class="top-nav">
-    <div class="container">
-        <div class="nav-wrapper">
+<div class="header-top">
 
-            {# branding #}
-            <div class="branding">
-                <a href="{{ path('home') }}"><img src="{{ asset('images/logo.png') }}" alt="" class="logo"></a>
-                <span class="marketplace-name">{{ 'marketplace_name'|trans }}</span>
-            </div>
+    {# branding #}
+    <div class="branding">
+        <a href="{{ path('home') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="" class="logo">
+            <span>{{ 'header.branding.marketplace_name'|trans }}</span>
+        </a>
+    </div>
 
-            {# quick access links #}
-            <ul class="quick-access-links list-inline">
-                <li class="quick-access">
-                    <a href="{{ accountLink }}" class="quick-access-link anchor-light">
-                        <i class="fa fa-user"></i>
-                        <span class="hidden-xs">{{ 'my_account'|trans }}</span>
-                    </a>
-                    <div class="wrapper">
-                        {% include('@App/common/header/_pop-account.html.twig') %}
-                    </div>
-                </li>
+    {# user account #}
+    <div class="dropdown">
 
-                <li class="quick-access">
-                    <a href="{{ path('basket') }}" class="quick-access-link anchor-light">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="hidden-xs">{{ 'my_basket'|trans }}</span>
-                    </a>
-                    <div class="wrapper">
-                        {% include('@App/common/header/_pop-basket.html.twig') %}
-                    </div>
+        {# small screens: display a link to login page#}
+        <a href="{{ path('profile') }}" class="hidden-md hidden-lg">{{ 'header.account.label'|trans }}</a>
 
-                    {# number of items in basket #}
-                    {% if userBasket|default and userBasket.totalQuantity > 0 %}
-                        <span class="basket-badge">{{ userBasket.totalQuantity }}</span>
-                    {% endif %}
-                </li>
-            </ul>
+        {# large screens #}
+        <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.account.label'|trans }}</a>
+        <div class="dropdown-menu">
+            {% include('@App/common/header/_pop_account.html.twig') %}
         </div>
     </div>
-</nav>
+
+    {# basket #}
+    <div class="basket">
+
+        {# label #}
+        <span>{{ 'header.basket.label'|trans }}</span>
+
+        {# number of items in basket #}
+        {% if userBasket|default and userBasket.totalQuantity > 0 %}
+            <span>({{ userBasket.totalQuantity }})</span>
+        {% endif %}
+
+        {# content #}
+        {% include('@App/common/header/_pop_basket.html.twig') %}
+    </div>
+</div>

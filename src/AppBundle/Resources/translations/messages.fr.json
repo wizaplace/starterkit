@@ -29,11 +29,8 @@
     "my_profile": "Mon profil",
     "my_purchases": "Mes achats",
     "my_messaging_service": "Ma messagerie",
-    "logout_self": "Me déconnecter",
-    "login_self": "Me connecter",
     "email": "E-mail",
     "password": "Mot de passe",
-    "forgotten_password": "Mot de passe oublié",
     "civility": "Civilité",
     "mrs": "Madame",
     "mr": "Monsieur",
@@ -68,7 +65,6 @@
     "update_profile_success_message": "Votre profil a bien été mis à jour",
     "save_changes": "Enregistrer les modifications",
     "terms_of_service_acceptance": "J'accepte les <a href='%link%'>Conditions Générales d'Utilisation</a>",
-    "no_image": "Pas d'image",
     "delete": "Supprimer",
     "excluding_taxes": "HT",
     "including_taxes": "TTC",
@@ -103,7 +99,6 @@
     "proceed_payment": "Procéder au paiement",
     "payment_mean": "Mode de paiement",
     "continue_my_shopping": "Continuer mes achats",
-    "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
     "add_a_comment": "Ajoutez un commentaire",
     "login_to_comment": "Veuillez vous connecter pour pouvoir ajouter un commentaire",
     "your_rating": "Votre note",
@@ -140,7 +135,6 @@
     "terms_of_sales": "Conditions générales de vente",
     "terms_of_sales_url": "#",
     "vendor_registration_terms_checkbox": "J'ai lu et j'accepte les <a href='%terms_of_services_url%'>Conditions Générales d'Utilisation</a> et les <a href='%terms_of_sales_url%'>Conditions Générales de Vente</a>",
-    "get_my_password_back": "Récupérer mon mot de passe",
     "cancel": "Annuler",
     "send": "Envoyer",
     "options": "Options",
@@ -309,16 +303,49 @@
     },
 
     "header": {
+        "branding": {
+            "marketplace_name": "Starter Kit"
+        },
         "account": {
             "label": "Mon compte",
             "menu": {
-                "item1": "Mon profil",
-                "item2": "Mes commandes",
-                "item3": "Ma messagerie"
+                "profile": "Mon profil",
+                "orders": "Mes commandes",
+                "discussion": "Ma messagerie",
+                "login": "Me connecter",
+                "logout": "Me déconnecter",
+                "email": "E-mail",
+                "password": "Mot de passe",
+                "forgotten-password": "Mot de passe oublié",
+                "validate": "Valider",
+                "create_account": "Créer mon compte"
             }
         },
         "basket": {
-            "label": "Mon panier"
+            "label": "Mon panier",
+            "no_image": "Pas d'image",
+            "delete": "Supprimer",
+            "total": "Total",
+            "empty": "Votre panier est vide",
+            "button": {
+                "see_basket": "Voir mon panier",
+                "place_order": "Passer la commande"
+            }
+        }
+    },
+
+    "auth": {
+        "modal": {
+            "label": "Récupérer mon mot de passe",
+            "message": "Veuillez renseigner votre adresse e-mail",
+            "placeholder": "E-mail",
+            "button": {
+                "cancel": "Annuler",
+                "validate": "Valider"
+            }
+        },
+        "notification": {
+            "success": "Vous vous êtes connecté avec succès"
         }
     }
 }

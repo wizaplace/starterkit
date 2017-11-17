@@ -166,7 +166,7 @@ basket_update_shipping:
     defaults: { _controller: AppBundle:Basket:selectShippings }
     methods: [POST]
 
-basket_remove_product:
+basket_remove_item:
     path: /basket/remove
     defaults: { _controller: AppBundle:Basket:removeProduct }
     methods: [GET]
