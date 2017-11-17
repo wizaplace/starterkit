@@ -168,7 +168,7 @@ basket_update_shipping:
 
 basket_remove_item:
     path: /basket/remove
-    defaults: { _controller: AppBundle:Basket:removeProduct }
+    defaults: { _controller: AppBundle:Basket:removeItem }
     methods: [GET]
 
 #checkout

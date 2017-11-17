@@ -58,7 +58,7 @@ class BasketController extends Controller
         ]);
     }
 
-    public function removeProductAction(Request $request): Response
+    public function removeItemAction(Request $request): Response
     {
         // redirection url
         $referer = $request->headers->get('referer');
@@ -68,7 +68,7 @@ class BasketController extends Controller
         $this->basketService->removeProductFromBasket($declinationId);
 
         // add a success message
-        $message = $this->translator->trans('product_deleted_from_basket');
+        $message = $this->translator->trans('basket.notification.success.item_deleted');
         $this->addFlash('success', $message);
 
         return $this->redirect($referer);

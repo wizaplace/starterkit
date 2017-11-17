@@ -299,6 +299,11 @@
             "basket_content": "Commentaire panier",
             "product_content": "Commentaire produit",
             "validate": "Soumettre"
+        },
+        "notification": {
+            "success": {
+                "item_deleted": "Le produit a bien été supprimé du panier"
+            }
         }
     },
 
