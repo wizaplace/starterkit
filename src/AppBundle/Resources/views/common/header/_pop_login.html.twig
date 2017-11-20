@@ -1,0 +1,15 @@
+{# login form #}
+<form action="{{ path('login') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token('login_token') }}">
+    <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
+
+    {# credentials #}
+    <input type="email" name="email" placeholder="{{ 'header.login.form.email'|trans }}" required>
+    <input type="password" name="password" placeholder="{{ 'header.login.form.password'|trans }}" required>
+
+    {# forgotten password link #}
+    <a href="#password-reset-modal" data-toggle="modal" rel="nofollow">{{ 'header.login.form.forgotten-password'|trans }}</a>
+
+    {# submit button #}
+    <button type="submit">{{ 'header.login.form.validate'|trans }}</button>
+</form>

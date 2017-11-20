@@ -93,8 +93,6 @@
     "email_field_required_error_message": "L'adresse email doit être renseignée, merci de réessayer",
     "account_creation_error_message": "Erreur de connection après la création du compte",
     "password_reset_confirmation_message": "Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe",
-    "email_already_in_use": "Cette adresse email est déjà utilisée, merci de réessayer",
-    "account_creation_success_message": "Votre compte a bien été créé",
     "choose_payment": "Choisir un mode de paiement",
     "proceed_payment": "Procéder au paiement",
     "payment_mean": "Mode de paiement",
@@ -285,7 +283,7 @@
             "email_sent": "Un email vient d'être envoyé"
         },
         "warning": {
-            "no_selected_items": "Vous devez selectionner au moins un produit",
+            "no_selected_items": "Vous devez sélectionner au moins un produit",
             "message_cannot_be_empty": "Le message ne peut pas être vide",
             "order_not_found": "La commande n'a pas été trouvée"
         }
@@ -317,13 +315,24 @@
                 "profile": "Mon profil",
                 "orders": "Mes commandes",
                 "discussion": "Ma messagerie",
-                "login": "Me connecter",
-                "logout": "Me déconnecter",
+                "logout": "Me déconnecter"
+            }
+        },
+        "login": {
+            "label": "Me connecter",
+            "form": {
                 "email": "E-mail",
                 "password": "Mot de passe",
                 "forgotten-password": "Mot de passe oublié",
-                "validate": "Valider",
-                "create_account": "Créer mon compte"
+                "validate": "Valider"
+            }
+        },
+        "register": {
+            "label": "Créer mon compte",
+            "form": {
+                "email": "E-mail",
+                "password": "Mot de passe",
+                "terms": "J'accepte les <a href='%link%'>Conditions Générales d'Utilisation</a>"
             }
         },
         "basket": {
@@ -349,8 +358,25 @@
                 "validate": "Valider"
             }
         },
-        "notification": {
-            "success": "Vous vous êtes connecté avec succès"
+        "login": {
+            "notification": {
+                "success": "Vous vous êtes connecté avec succès",
+                "error": {
+                    "invalid_credentials": "Identifiants invalides, merci de réessayer",
+                    "invalid_csrf_token": "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer"
+                }
+            }
+        },
+        "register": {
+            "notification": {
+                "success": "Votre compte a bien été créé",
+                "error": {
+                    "email_already_in_use": "Cette adresse email est déjà utilisée, merci de réessayer",
+                    "terms_acceptance": "Vous devez accepter les Conditions Générales d'Utilisation",
+                    "mandatory_fields": "Tous les champs marqués avec un astérisque doivent être renseignés",
+                    "invalid_recaptcha_token": "Le challenge anti-robot a échoué, merci de réessayer"
+                }
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ class AuthController extends BaseController
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 
         if (!$recaptchaValidation->isSuccess()) {
-            $message = $this->translator->trans('csrf_error_message');
+            $message = $this->translator->trans('auth.register.notification.error.invalid_recaptcha_token');
             $this->addFlash('warning', $message);
 
             return $this->redirect($referer);
@@ -50,7 +50,7 @@ class AuthController extends BaseController
         $terms = $request->get('terms');
 
         if ($email === null || $password === null || $terms === null) {
-            $message = $this->translator->trans('fields_required_error_message');
+            $message = $this->translator->trans('auth.register.notification.error.mandatory_fields');
             $this->addFlash('danger', $message);
 
             return $this->redirect($referer);
@@ -69,10 +69,10 @@ class AuthController extends BaseController
                 $this->addFlash('danger', $accountCreationErrorMessage);
             }
 
-            $message = $this->translator->trans('account_creation_success_message');
+            $message = $this->translator->trans('auth.register.notification.success');
             $this->addFlash('success', $message);
         } catch (UserAlreadyExists $e) {
-            $emailInUseErrorMessage = $this->translator->trans('email_already_in_use');
+            $emailInUseErrorMessage = $this->translator->trans('auth.register.notification.error.email_already_in_use');
             $this->addFlash('danger', $emailInUseErrorMessage);
         }
 

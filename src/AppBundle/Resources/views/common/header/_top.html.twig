@@ -11,18 +11,51 @@
         </a>
     </div>
 
-    {# user account #}
-    <div class="dropdown">
+    {% if app.user %}
 
-        {# small screens: display a link to login page#}
-        <a href="{{ path('profile') }}" class="hidden-md hidden-lg">{{ 'header.account.label'|trans }}</a>
+        {# user is logged in #}
+        <div class="dropdown">
 
-        {# large screens #}
-        <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.account.label'|trans }}</a>
-        <div class="dropdown-menu">
-            {% include('@App/common/header/_pop_account.html.twig') %}
+            {# small screens: display a link to profile page #}
+            <a href="{{ path('profile') }}" class="hidden-md hidden-lg">{{ 'header.account.label'|trans }}</a>
+
+            {# large screens #}
+            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.account.label'|trans }}</a>
+            <div class="dropdown-menu">
+                {% include('@App/common/header/_pop_account.html.twig') %}
+            </div>
         </div>
-    </div>
+
+    {% else %}
+
+        {# login form #}
+        <div class="dropdown">
+
+            {# small screens: display a link to login page #}
+            <a href="{{ path('login') }}" class="hidden-md hidden-lg">{{ 'header.login.label'|trans }}</a>
+
+            {# large screens #}
+            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.login.label'|trans }}</a>
+            <div class="dropdown-menu">
+                {% include('@App/common/header/_pop_login.html.twig') %}
+            </div>
+        </div>
+
+
+        {# registration form #}
+        <div class="dropdown">
+
+            {# small screens: display a link to login page #}
+            <a href="{{ path('login') }}" class="hidden-md hidden-lg">{{ 'header.register.label'|trans }}</a>
+
+            {# large screens #}
+            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.register.label'|trans }}</a>
+            <div class="dropdown-menu">
+                {% include('@App/common/header/_pop_register.html.twig') %}
+            </div>
+        </div>
+
+    {% endif %}
 
     {# basket #}
     <div class="basket">
