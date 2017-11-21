@@ -10,16 +10,13 @@
     "general_characteristics": "Caractéristiques générales",
     "select": "Sélectionnez",
     "all_categories": "Toutes les catégories",
-    "search_placeholder": "Rechercher...",
     "email_placeholder": "E-mail...",
-    "geolocation_placeholder": "Ville, département...",
     "geolocate_self": "Me localiser",
     "geolocation_impossible": "Géolocalisation impossible",
     "geolocation_forbidden": "Géolocalisation refusée",
     "geolocation_error": "Erreur de géolocalisation",
     "search_around_me_notification": "Rechercher \"Autour de moi\"",
     "around_me": "Autour de moi",
-    "search": "Rechercher",
     "close": "Fermer",
     "different_shipping_address": "Mon adresse de livraison est différente",
     "new_products": "Nouveautés",
@@ -345,6 +342,9 @@
                 "see_basket": "Voir mon panier",
                 "place_order": "Passer la commande"
             }
+        },
+        "category": {
+            "display_children": "Déplier"
         }
     },
 
@@ -377,6 +377,16 @@
                     "invalid_recaptcha_token": "Le challenge anti-robot a échoué, merci de réessayer"
                 }
             }
+        }
+    },
+
+    "search": {
+        "searchbar": {
+            "select_category": "Sélectionner une catégorie",
+            "all_categories": "Toutes les catégories",
+            "search_input_placeholder": "Rechercher",
+            "geoloc_input_placeholder": "Ville, département",
+            "button": "Rechercher"
         }
     }
 }

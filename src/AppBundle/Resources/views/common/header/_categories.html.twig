@@ -1,44 +1,88 @@
 {% set categories = categoryTree() %}
 
-<div class="title hidden-md hidden-lg">{{ 'categories'|trans }}</div>
+<ul class="categories list-inline">
+    {% for category in categories %}
 
-<ul class="category-menu list-inline">
-    {% for category in categories|slice(0,8) %} {# remove slice filter if you want to display all categories #}
+        {# root level #}
+        {# ========== #}
 
-        <li class="category">
+        <li class="category dropdown">
 
-            <div class="category-name-group">
-                {% if category.children %}
-                    <i class="menu-toggle fa fa-plus hidden-md hidden-lg"></i>
-                {% endif %}
+            {# link to category page #}
+            <a href="{{ path('category', {'slug': category.category.slug}) }}">{{ category.category.name }}</a>
 
-                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
-            </div>
+            {# eventual children #}
+            {% if category.children %}
 
-            <div class="wrapper">
+                <a href="#" data-toggle="dropdown">({{ 'header.category.display_children'|trans }})</a>
 
-                {% if category.children %}
-                    <ul class="content category-sub-menu">
+                {# second level #}
+                {# ============ #}
 
-                        {% for category in category.children %}
+                {# hidden by default #}
+                <ul class="dropdown-menu">
 
-                            <li class="category">
-                                <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
-                                <ul class="category-sub-menu">
+                    {% for category in category.children %}
+                        <li>
+                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
 
-                                    {% for category in category.children %}
+                            {# third level #}
+                            {# =========== #}
 
-                                        <li class="category">
-                                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
-                                        </li>
-
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+                            <ul>
+                                {% for category in category.children %}
+                                    <li>
+                                        <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>
+
+{#<div class="title hidden-md hidden-lg">{{ 'categories'|trans }}</div>#}
+
+{#<ul class="category-menu list-inline">#}
+    {#{% for category in categories|slice(0,8) %} #}{# remove slice filter if you want to display all categories #}
+
+        {#<li class="category">#}
+
+            {#<div class="category-name-group">#}
+                {#{% if category.children %}#}
+                    {#<i class="menu-toggle fa fa-plus hidden-md hidden-lg"></i>#}
+                {#{% endif %}#}
+
+                {#<a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>#}
+            {#</div>#}
+
+            {#<div class="wrapper">#}
+
+                {#{% if category.children %}#}
+                    {#<ul class="content category-sub-menu">#}
+
+                        {#{% for category in category.children %}#}
+
+                            {#<li class="category">#}
+                                {#<a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>#}
+                                {#<ul class="category-sub-menu">#}
+
+                                    {#{% for category in category.children %}#}
+
+                                        {#<li class="category">#}
+                                            {#<a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>#}
+                                        {#</li>#}
+
+                                    {#{% endfor %}#}
+                                {#</ul>#}
+                            {#</li>#}
+                        {#{% endfor %}#}
+                    {#</ul>#}
+                {#{% endif %}#}
+            {#</div>#}
+        {#</li>#}
+    {#{% endfor %}#}
+{#</ul>#}
