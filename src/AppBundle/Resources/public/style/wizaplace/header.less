@@ -1,0 +1,44 @@
+#masthead {
+    .header-top {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 5rem;
+        border-bottom: 1px solid blue;
+    }
+
+    // basket show/hide behaviour on hover event
+    .basket {
+        position: relative;
+
+        .basket-content {
+            position: absolute;
+
+            // basket is hidden by default
+            display: none;
+        }
+
+        &:hover {
+            .basket-content {
+                display: block;
+            }
+        }
+    }
+
+    .searchbar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 5rem;
+        border-bottom: 1px solid blue;
+    }
+
+    .categories {
+        margin-bottom: 5rem;
+        border-bottom: 1px solid blue;
+
+        .category {
+            margin: 1rem;
+        }
+    }
+}
