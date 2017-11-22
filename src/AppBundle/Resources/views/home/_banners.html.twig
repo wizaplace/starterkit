@@ -1,0 +1,19 @@
+{# large banners #}
+<div class="js-slick-banner hidden-xs">
+    {% for banner in desktopBanners %}
+        <a href="{{ banner.link|default("#") }}"
+                {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
+            <img src="{{ banner.imageId|imageUrl(1920) }}" alt="">
+        </a>
+    {% endfor %}
+</div>
+
+{# responsive banners #}
+<div class="js-slick-banner visible-xs">
+    {% for banner in mobileBanners %}
+        <a href="{{ banner.link|default("#") }}"
+                {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
+            <img src="{{ banner.imageId|imageUrl(768) }}" alt="">
+        </a>
+    {% endfor %}
+</div>

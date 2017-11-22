@@ -3,27 +3,7 @@
 {% block body %}
 
     {# banners #}
-    {# ======= #}
-
-    <div class="banners hidden-xs">
-        {# large banners #}
-        <div class="large-screens">
-            {% for banner in desktopBanners %}
-                <a class="image-link" href="{{ banner.link|default("#") }}" {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
-                    <img src="{{ banner.imageId|imageUrl(1920) }}" alt="">
-                </a>
-            {% endfor %}
-        </div>
-
-        {# responsive banners #}
-        <div class="small-screens">
-            {% for banner in mobileBanners %}
-                <a class="image-link" href="{{ banner.link|default("#") }}" {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
-                    <img src="{{ banner.imageId|imageUrl(768) }}" alt="">
-                </a>
-            {% endfor %}
-        </div>
-    </div>
+    {% include('@App/home/_banners.html.twig') %}
 
     {# latest products carousel #}
     {% include '@App/common/product/showcase.html.twig' with {'headerTitle': 'Nouveautés', "products": latestProducts } %}
