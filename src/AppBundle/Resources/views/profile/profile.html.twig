@@ -79,7 +79,7 @@
             {# password update behaviours #}
             $("#password-update-trigger").on("change", function() {
 
-                let $passwordUpdateBlock = $('#password-update-block');
+                var $passwordUpdateBlock = $('#password-update-block');
 
                 {# toggle password update block #}
                 $passwordUpdateBlock.find('input').prop('disabled', function(i, bool) { return !bool; });
@@ -90,7 +90,7 @@
             });
 
             {# birthday date picker #}
-            let datePickerOptions = {
+            var datePickerOptions = {
                 dateFormat: 'dd/mm/yy',
                 dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
                 dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],

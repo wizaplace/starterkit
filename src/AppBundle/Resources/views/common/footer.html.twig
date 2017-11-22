@@ -36,10 +36,10 @@
         // submit user's email for newsletter subscription
         $('#newsletter-subscription-form').on('submit', function(e) {
             e.preventDefault();
-            let method = $(this).attr('method');
-            let url = $(this).attr('action');
-            let $email = $(this).find('[name="email"]');
-            let email = $email.val();
+            var method = $(this).attr('method');
+            var url = $(this).attr('action');
+            var $email = $(this).find('[name="email"]');
+            var email = $email.val();
 
             $.ajax({
                 method: method,
