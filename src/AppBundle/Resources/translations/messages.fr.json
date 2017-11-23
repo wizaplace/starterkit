@@ -10,16 +10,13 @@
     "general_characteristics": "Caractéristiques générales",
     "select": "Sélectionnez",
     "all_categories": "Toutes les catégories",
-    "search_placeholder": "Rechercher...",
     "email_placeholder": "E-mail...",
-    "geolocation_placeholder": "Ville, département...",
     "geolocate_self": "Me localiser",
     "geolocation_impossible": "Géolocalisation impossible",
     "geolocation_forbidden": "Géolocalisation refusée",
     "geolocation_error": "Erreur de géolocalisation",
     "search_around_me_notification": "Rechercher \"Autour de moi\"",
     "around_me": "Autour de moi",
-    "search": "Rechercher",
     "close": "Fermer",
     "different_shipping_address": "Mon adresse de livraison est différente",
     "new_products": "Nouveautés",
@@ -29,11 +26,8 @@
     "my_profile": "Mon profil",
     "my_purchases": "Mes achats",
     "my_messaging_service": "Ma messagerie",
-    "logout_self": "Me déconnecter",
-    "login_self": "Me connecter",
     "email": "E-mail",
     "password": "Mot de passe",
-    "forgotten_password": "Mot de passe oublié",
     "civility": "Civilité",
     "mrs": "Madame",
     "mr": "Monsieur",
@@ -68,7 +62,6 @@
     "update_profile_success_message": "Votre profil a bien été mis à jour",
     "save_changes": "Enregistrer les modifications",
     "terms_of_service_acceptance": "J'accepte les <a href='%link%'>Conditions Générales d'Utilisation</a>",
-    "no_image": "Pas d'image",
     "delete": "Supprimer",
     "excluding_taxes": "HT",
     "including_taxes": "TTC",
@@ -97,13 +90,10 @@
     "email_field_required_error_message": "L'adresse email doit être renseignée, merci de réessayer",
     "account_creation_error_message": "Erreur de connection après la création du compte",
     "password_reset_confirmation_message": "Vous allez recevoir un email afin de pouvoir réinitialiser votre mot de passe",
-    "email_already_in_use": "Cette adresse email est déjà utilisée, merci de réessayer",
-    "account_creation_success_message": "Votre compte a bien été créé",
     "choose_payment": "Choisir un mode de paiement",
     "proceed_payment": "Procéder au paiement",
     "payment_mean": "Mode de paiement",
     "continue_my_shopping": "Continuer mes achats",
-    "fill_your_email_address": "Veuillez renseigner votre adresse e-mail",
     "add_a_comment": "Ajoutez un commentaire",
     "login_to_comment": "Veuillez vous connecter pour pouvoir ajouter un commentaire",
     "your_rating": "Votre note",
@@ -140,7 +130,6 @@
     "terms_of_sales": "Conditions générales de vente",
     "terms_of_sales_url": "#",
     "vendor_registration_terms_checkbox": "J'ai lu et j'accepte les <a href='%terms_of_services_url%'>Conditions Générales d'Utilisation</a> et les <a href='%terms_of_sales_url%'>Conditions Générales de Vente</a>",
-    "get_my_password_back": "Récupérer mon mot de passe",
     "cancel": "Annuler",
     "send": "Envoyer",
     "options": "Options",
@@ -291,7 +280,7 @@
             "email_sent": "Un email vient d'être envoyé"
         },
         "warning": {
-            "no_selected_items": "Vous devez selectionner au moins un produit",
+            "no_selected_items": "Vous devez sélectionner au moins un produit",
             "message_cannot_be_empty": "Le message ne peut pas être vide",
             "order_not_found": "La commande n'a pas été trouvée"
         }
@@ -305,20 +294,99 @@
             "basket_content": "Commentaire panier",
             "product_content": "Commentaire produit",
             "validate": "Soumettre"
+        },
+        "notification": {
+            "success": {
+                "item_deleted": "Le produit a bien été supprimé du panier"
+            }
         }
     },
 
     "header": {
+        "branding": {
+            "marketplace_name": "Starter Kit"
+        },
         "account": {
             "label": "Mon compte",
             "menu": {
-                "item1": "Mon profil",
-                "item2": "Mes commandes",
-                "item3": "Ma messagerie"
+                "profile": "Mon profil",
+                "orders": "Mes commandes",
+                "discussion": "Ma messagerie",
+                "logout": "Me déconnecter"
+            }
+        },
+        "login": {
+            "label": "Me connecter",
+            "form": {
+                "email": "E-mail",
+                "password": "Mot de passe",
+                "forgotten-password": "Mot de passe oublié",
+                "validate": "Valider"
+            }
+        },
+        "register": {
+            "label": "Créer mon compte",
+            "form": {
+                "email": "E-mail",
+                "password": "Mot de passe",
+                "terms": "J'accepte les <a href='%link%'>Conditions Générales d'Utilisation</a>"
             }
         },
         "basket": {
-            "label": "Mon panier"
+            "label": "Mon panier",
+            "no_image": "Pas d'image",
+            "delete": "Supprimer",
+            "total": "Total",
+            "empty": "Votre panier est vide",
+            "button": {
+                "see_basket": "Voir mon panier",
+                "place_order": "Passer la commande"
+            }
+        },
+        "category": {
+            "display_children": "Déplier"
+        }
+    },
+
+    "auth": {
+        "modal": {
+            "label": "Récupérer mon mot de passe",
+            "message": "Veuillez renseigner votre adresse e-mail",
+            "placeholder": "E-mail",
+            "button": {
+                "cancel": "Annuler",
+                "validate": "Valider"
+            }
+        },
+        "login": {
+            "notification": {
+                "success": "Vous vous êtes connecté avec succès",
+                "error": {
+                    "invalid_credentials": "Identifiants invalides, merci de réessayer",
+                    "invalid_csrf_token": "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer"
+                }
+            }
+        },
+        "register": {
+            "notification": {
+                "success": "Votre compte a bien été créé",
+                "error": {
+                    "email_already_in_use": "Cette adresse email est déjà utilisée, merci de réessayer",
+                    "terms_acceptance": "Vous devez accepter les Conditions Générales d'Utilisation",
+                    "mandatory_fields": "Tous les champs marqués avec un astérisque doivent être renseignés",
+                    "invalid_recaptcha_token": "Le challenge anti-robot a échoué, merci de réessayer"
+                }
+            }
+        }
+    },
+
+    "search": {
+        "searchbar": {
+            "select_category": "Sélectionner une catégorie",
+            "all_categories": "Toutes les catégories",
+            "search_input_placeholder": "Rechercher",
+            "geoloc_input_placeholder": "Ville, département",
+            "button": "Rechercher"
         }
     }
 }

@@ -1,0 +1,20 @@
+{# registration form #}
+<form method="post" action="{{ path('register_user') }}">
+    <input type="hidden" name="redirect_url" value="{{ app.request.uri }}">
+
+    {# credentials #}
+    <input type="email" name="email" placeholder="{{ 'header.register.form.email'|trans }}" required>
+    <input type="password" name="password" placeholder="{{ 'header.register.form.password'|trans }}" required>
+
+    {# terms #}
+    <label for="header-terms">{{ 'header.register.form.terms'|trans({'%link%': '#'})|raw }}</label>
+    <input id="header-terms" type="checkbox" name="terms" value="1" required>
+
+    {# invisible reCaptcha button #}
+    <button type="button" class="trigger-recaptcha validate" id="g-recaptcha-header" data-sitekey="{{ recaptchaKey() }}">
+        {{'validate'|trans}}
+    </button>
+
+    {# reCaptcha mechanism #}
+    <button type="submit" class="hidden"></button>
+</form>

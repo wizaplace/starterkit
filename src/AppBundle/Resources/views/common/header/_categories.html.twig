@@ -1,0 +1,45 @@
+{% set categories = categoryTree() %}
+
+<ul class="categories list-inline">
+    {% for category in categories %}
+
+        {# root level #}
+        {# ========== #}
+
+        <li class="category dropdown">
+
+            {# link to category page #}
+            <a href="{{ path('category', {'slug': category.category.slug}) }}">{{ category.category.name }}</a>
+
+            {# eventual children #}
+            {% if category.children %}
+
+                <a href="#" data-toggle="dropdown">({{ 'header.category.display_children'|trans }})</a>
+
+                {# second level #}
+                {# ============ #}
+
+                {# hidden by default #}
+                <ul class="dropdown-menu">
+
+                    {% for category in category.children %}
+                        <li>
+                            <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
+
+                            {# third level #}
+                            {# =========== #}
+
+                            <ul>
+                                {% for category in category.children %}
+                                    <li>
+                                        <a href="{{ path('category', {'slug': category.category.slug}) }}" class="category-name">{{ category.category.name|lower|capitalize }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

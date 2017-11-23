@@ -24,12 +24,7 @@
 </head>
 <body>
 
-<header class="main-header">
-    {% block header %}
-        {% include('@App/common/header/_top.html.twig') %}
-        {% include('@App/common/header/_main.html.twig') %}
-    {% endblock %}
-</header>
+{% block header %}{% include('@App/common/_header.html.twig') %}{% endblock %}
 
 {% block body %}{% endblock %}
 

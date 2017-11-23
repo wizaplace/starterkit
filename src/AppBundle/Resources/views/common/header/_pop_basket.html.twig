@@ -1,0 +1,59 @@
+<div class="basket-content">
+
+    {# show user basket if not empty #}
+    {% if userBasket|default and userBasket.totalQuantity > 0 %}
+
+            {# basket items groupped by vendor companies #}
+            {% for company in userBasket.companyGroups %}
+
+                {# basket items groupped by shipping #}
+                {% for shipping in company.shippingGroups %}
+
+                    {# basket item #}
+                    {% for item in shipping.items %}
+
+                        {# item image #}
+                        {% if item.mainImage %}
+                            <img src="{{ item.mainImage|imageUrl(60) }}" alt="{{ item.productName }}">
+                        {% else %}
+                            <div>{{ 'header.basket.no_image'|trans }}</div>
+                        {% endif %}
+
+                        {# item name #}
+                        <div>{{ item.productName }}</div>
+
+                        {# item quantity #}
+                        <div>{{ item.quantity }}</div>
+
+                        {# crossedout price #}
+                        {% if item.crossedOutPrice|default %}
+                            <div>{{ item.crossedOutPrice|price }}</div>
+                        {% endif %}
+
+                        {# price #}
+                        <div>{{ item.individualPrice|price }}</div>
+
+                        {# remove item from basket #}
+                        <a href="{{ path('basket_remove_item', { 'declinationId': item.declinationId }) }}">{{ 'header.basket.delete'|trans }}</a>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+
+            {# total #}
+            <span>
+                {# label #}
+                {{ 'header.basket.total'|trans }} :
+
+                {# value #}
+                {{ userBasket.total|price }}
+            </span>
+
+            {# basket actions #}
+            <a href="{{ path('basket') }}">{{ 'header.basket.button.see_basket'|trans }}</a>
+            <a href="{{ path('checkout_login') }}">{{ 'header.basket.button.place_order'|trans }}</a>
+
+    {# empty basket #}
+    {% else %}
+        <div>{{ 'header.basket.empty'|trans }}</div>
+    {% endif %}
+</div>
