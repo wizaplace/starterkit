@@ -1,0 +1,67 @@
+{# 'add product to basket' modal #}
+<div class="basket-modal modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h5 class="modal-title">{{ 'product.add_to_basket_modal.title'|trans }}</h5>
+            </div>
+
+            {# this part will be hydrated with selected product data (see script below) #}
+            <div class="modal-body">
+                <div class="product-name"></div>
+                <div class="product-quantity"></div>
+                <div class="product-price"></div>
+                <div class="message"></div>
+                <img class="product-image" src="" alt="">
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal">{{ 'product.add_to_basket_modal.action.continue_shopping'|trans }}</button>
+                <a href="{{ path('basket') }}">{{ 'product.add_to_basket_modal.action.see_basket'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var $modalRoot = $(".basket-modal");
+    var $productName = $modalRoot.find(".product-name");
+    var $productPrice = $modalRoot.find(".product-price");
+    var $productQuantity = $modalRoot.find(".product-quantity");
+    var $productImage = $modalRoot.find(".product-image");
+    var $message = $modalRoot.find(".message");
+
+    {# reload page to update basket info and clear modal data #}
+    $modalRoot.on('hidden.bs.modal', function () {
+        location.reload();
+    });
+
+    {# hydrate modal with collected product data (see 'common/product/card.html.twig') #}
+    function hydrateModal(productData, quantity, message) {
+
+        {# hydrate product name #}
+        $productName.html(productData.name);
+
+        {# hydrate quantity in basket #}
+        $productQuantity.html(quantity);
+
+        {# hydrate price #}
+        $productPrice.html(productData.price);
+
+        {# hydrate image #}
+        if (productData.image) {
+            $productImage.attr('src', productData.image);
+            $productImage.attr('alt', productData.name);
+        } else {
+            $productImage.attr('src', '{{ asset('images/no-image.jpg') }}');
+        }
+
+        {# message is returned with ajax call #}
+        $message.html(message);
+
+        {# display modal #}
+        $modalRoot.modal();
+    }
+</script>
