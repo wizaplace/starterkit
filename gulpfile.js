@@ -142,3 +142,24 @@ gulp.task('dev', ['scripts_dev', 'common', 'lint-css', 'server']);
 
 // prod tasks (without watch task)
 gulp.task('deploy', ['scripts_prod', 'common']);
+
+
+// ==================================================================================
+
+// demo
+// ====
+
+const sass = require('gulp-sass');
+
+gulp.task('sass', () => {
+    return gulp.src('./src/AppBundle/Resources/public/style/demo/main.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(concat('demo.css'))
+        .pipe(postcss([ autoprefixer() ]))
+        .pipe(cleanCSS())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./web/style'));
+});
+
+gulp.task('demo', ['dev', 'sass']);
