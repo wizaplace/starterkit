@@ -2,7 +2,7 @@ const slick = {
     init: function () {
 
         // home page banners
-        $('[class*="js-slick-banner"]').slick({
+        $('.js-slick-banner').slick({
             dots: true,
             infinite: true,
             autoplay: true,
@@ -13,7 +13,7 @@ const slick = {
         });
 
         // product group
-        $('[class*="js-slick-product-group"]').slick({
+        $('.js-slick-product-group').slick({
             dots: true,
             infinite: true,
             autoplay: true,
