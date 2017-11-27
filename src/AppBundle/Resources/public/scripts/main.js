@@ -20,7 +20,7 @@ $(function() {
     ui.initCategoryToggle();
 
     // init slick behaviour
-    ui.initSlick();
+    slick.init();
     ui.initSlickShowcase(); // legacy
 
     // init reCaptcha behaviour
