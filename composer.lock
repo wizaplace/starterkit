@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c895c31458c7781092d3e849513f5783",
+    "content-hash": "1df0a78d9b39e4fbfa952ec579cee94a",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2638,16 +2638,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.2.1",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "df28ff93af044c79ef36d84c727eeb58580380f8"
+                "reference": "c89ba18de5bd80f7fcabf253163deb646be64339"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/df28ff93af044c79ef36d84c727eeb58580380f8",
-                "reference": "df28ff93af044c79ef36d84c727eeb58580380f8",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/c89ba18de5bd80f7fcabf253163deb646be64339",
+                "reference": "c89ba18de5bd80f7fcabf253163deb646be64339",
                 "shasum": ""
             },
             "require": {
@@ -2679,20 +2679,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2017-11-15T10:39:49+00:00"
+            "time": "2017-11-28T09:52:55+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "6c185d4231e065659e0f0dd5c6a1bb4c148e73ce"
+                "reference": "8e15a3e0f2ed73b4586b8b03c44b1c50056ca781"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/6c185d4231e065659e0f0dd5c6a1bb4c148e73ce",
-                "reference": "6c185d4231e065659e0f0dd5c6a1bb4c148e73ce",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/8e15a3e0f2ed73b4586b8b03c44b1c50056ca781",
+                "reference": "8e15a3e0f2ed73b4586b8b03c44b1c50056ca781",
                 "shasum": ""
             },
             "require": {
@@ -2721,7 +2721,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-11-14T16:03:49+00:00"
+            "time": "2017-11-22T15:23:06+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

@@ -55,6 +55,8 @@ mounts:
     '/var/filebeat': 'shared:files/filebeat'
 
 runtime:
+    sizing_hints:
+        request_memory: 15
     extensions:
         - newrelic
 
