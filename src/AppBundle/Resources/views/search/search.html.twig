@@ -333,7 +333,7 @@
                  * Add the product to the basket
                  */
                 submitBasket: function(product) {
-                    var productInfo = {
+                    var productData = {
                         name: product.name,
                         price: product.minimumPrice,
                         image: this.imageUrl(product),
@@ -343,7 +343,7 @@
                         url: "{{ path('basket_add_product') }}",
                         data: { declinationId: product.productId, quantity: 1 },
                         success: function(response) {
-                            hydrateModal(productInfo, 1, response.message);
+                            hydrateModal(productData, 1, response.message);
                         }
                     });
                 },

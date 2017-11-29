@@ -192,6 +192,25 @@
             "add": "Ajouter dans mes favoris",
             "remove": "Enlever de mes favoris",
             "already_favored": "Ce produit est déjà dans vos favoris"
+        },
+        "card": {
+            "label": {
+                "promo": "Promo",
+                "new": "Nouveau"
+            },
+            "action": {
+                "see_product": "Voir le produit",
+                "add_to_basket": "Ajouter au panier",
+                "add_to_favorites": "Ajouter à mes favoris",
+                "remove_from_favorites": "Supprimer de mes favoris"
+            }
+        },
+        "add_to_basket_modal": {
+            "title": "Ajouté au panier",
+            "action": {
+                "continue_shopping": "Continuer mes achats",
+                "see_basket": "Voir mon panier"
+            }
         }
     },
     "profile": {
@@ -289,6 +308,7 @@
         "label": "SAV",
         "no_orders": "Vous n'avez pas de commandes éligibles au SAV"
     },
+
     "basket": {
         "comment": {
             "basket_content": "Commentaire panier",
@@ -387,6 +407,14 @@
             "search_input_placeholder": "Rechercher",
             "geoloc_input_placeholder": "Ville, département",
             "button": "Rechercher"
+        }
+    },
+
+    "home": {
+        "section": {
+            "latest_products": {
+                "title": "Nouveautés"
+            }
         }
     }
 }

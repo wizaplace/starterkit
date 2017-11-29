@@ -1,36 +1,51 @@
-<div class="product">
+<article class="product">
 
+    {# display a promo label if need be #}
     {% if product.crossedOutPrice %}
-        <div class="top-badge badge-promo">PROMO</div>
+        <span>{{ 'product.card.label.promo'|trans }}</span>
     {% endif %}
 
-    <a href="{{ product|productUrl }}" title="Voir le produit" class="product-detail">
-        <div class="product-image" style="background-image: url('{{product.mainImage|imageUrl(351, 351)}}')"></div>
+    {# clickable part of the product card #}
+    <a href="{{ product|productUrl }}" title="{{ 'product.card.action.see_product'|trans }}">
 
-        <div class="product-caption">
-            <div class="title">{{ product.name }}</div>
-            <div class="ellipsis">{{ product.subtitle }}</div>
-        </div>
+        {# product image #}
+        <img src="{{ product.mainImage|imageUrl(350, 350) }}" alt="{{ product.name }}">
+
+        {# product name #}
+        <div>{{ product.name }}</div>
+
+        {# product description #}
+        <div>{{ product.subtitle }}</div>
     </a>
 
-    <div class="product-price">
-        <div class="pull-left">
-            {% if product.crossedOutPrice %}
-                <span class="title">{{ product.minimumPrice|price }}&nbsp;TTC </span><br />
-                <span class="title text-blue text-line-through">{{ product.crossedOutPrice|price }}&nbsp;TTC</span>
-            {% else %}
-                <span class="title">{{ product.minimumPrice|price }}&nbsp;TTC</span><br />
-            {% endif %}
-        </div>
+    {# show crossed out price if need be... #}
+    {% if product.crossedOutPrice %}
 
-        {% if product.declinationCount <= 1 %}
-            <button class="add-to-basket btn btn-link pull-right" data-id="{{ product.id }}"
-                    data-name="{{ product.name|e('html_attr') }}"
-                    data-price="{{ product.minimumPrice }}"
-                    data-image="{{ product.mainImage|imageUrl(100, 100) }}"
-                    title="Ajouter au panier">
-                <span class="fa fa-shopping-cart"></span>
-            </button>
-        {% endif %}
-    </div>
-</div>
+        {# crossed out price #}
+        <div><s>{{ product.crossedOutPrice|price }}</s></div>
+
+        {# regular price #}
+        <div>{{ product.minimumPrice|price }}</div>
+
+    {# ...or show only regular price #}
+    {% else %}
+        <div>{{ product.minimumPrice|price }}</div>
+    {% endif %}
+
+    {# product can be added to basket or favorites if it has only one declination #}
+    {% if product.declinationCount < 2 %}
+        <button class="js-add-to-basket" title="{{ 'product.card.action.add_to_basket'|trans }}"
+
+                {# store product id for later use #}
+                data-id="{{ product.id }}"
+
+                {# store data to be displayed in confirmation modal #}
+                data-name="{{ product.name|e('html_attr') }}"
+                data-price="{{ product.minimumPrice }}"
+                data-image="{{ product.mainImage|imageUrl(120, 120) }}">
+
+            {# button label #}
+            {{ 'product.card.action.add_to_basket'|trans }}
+        </button>
+    {% endif %}
+</article>
