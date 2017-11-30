@@ -5,8 +5,8 @@
 
     {# newsletter #}
     <form id="js-subscription-form" action="{{ path('newsletter_subscribe') }}" method="POST">
-        <label for="email">{{ 'footer.newsletter.label'|trans }}</label>
-        <input id="email" type="email" name="email" placeholder="{{ 'footer.newsletter.placeholder'|trans }}" required>
+        <label for="subscription-email">{{ 'footer.newsletter.label'|trans }}</label>
+        <input id="subscription-email" type="email" name="email" placeholder="{{ 'footer.newsletter.placeholder'|trans }}" required>
         <button type="submit">{{ 'footer.newsletter.validate'|trans }}</button>
     </form>
 
