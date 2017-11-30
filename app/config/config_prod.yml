@@ -5,7 +5,13 @@ parameters:
     api.base_url: 'https://sandbox.wizaplace.com/api/v1/'
     googlemaps.api_key: 'AIzaSyC6pzFn22J8wZ9OMuYBButVwUKvmo5Jx1w' #@TODO: change me
     wizaplace.system_user_password: '%env(WIZAPLACE_SYSTEM_USER_PASSWORD)%'
+    api.connect_timeout: '%env(API_CONNECT_TIMEOUT)%'
+    api.read_timeout: '%env(API_READ_TIMEOUT)%'
+    api.timeout: '%env(API_TIMEOUT)%'
     # default env values
+    env(API_CONNECT_TIMEOUT): 3
+    env(API_READ_TIMEOUT): 5
+    env(API_TIMEOUT): 5
     env(SENTRY_DSN): ~
     env(WIZAPLACE_SYSTEM_USER_PASSWORD): ~
     env(PLATFORM_TREE_ID): ~
