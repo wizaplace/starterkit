@@ -2,11 +2,11 @@
 
     {# display a promo label if need be #}
     {% if product.crossedOutPrice %}
-        <span>{{ 'product.card.label.promo'|trans }}</span>
+        <span>{{ 'product.badge.promo'|trans }}</span>
     {% endif %}
 
     {# clickable part of the product card #}
-    <a href="{{ product|productUrl }}" title="{{ 'product.card.action.see_product'|trans }}">
+    <a href="{{ product|productUrl }}" title="{{ 'product.action.see_product'|trans }}">
 
         {# product image #}
         <img src="{{ product.mainImage|imageUrl(350, 350) }}" alt="{{ product.name }}">
@@ -34,7 +34,7 @@
 
     {# product can be added to basket or favorites if it has only one declination #}
     {% if product.declinationCount < 2 %}
-        <button class="js-add-to-basket" title="{{ 'product.card.action.add_to_basket'|trans }}"
+        <button class="js-add-to-basket" title="{{ 'product.action.add_to_basket'|trans }}"
 
                 {# store product id for later use #}
                 data-id="{{ product.id }}"
@@ -45,7 +45,7 @@
                 data-image="{{ product.mainImage|imageUrl(120, 120) }}">
 
             {# button label #}
-            {{ 'product.card.action.add_to_basket'|trans }}
+            {{ 'product.action.add_to_basket'|trans }}
         </button>
     {% endif %}
 </article>

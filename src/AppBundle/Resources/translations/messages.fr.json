@@ -93,9 +93,6 @@
     "payment_mean": "Mode de paiement",
     "continue_my_shopping": "Continuer mes achats",
     "add_a_comment": "Ajoutez un commentaire",
-    "login_to_comment": "Veuillez vous connecter pour pouvoir ajouter un commentaire",
-    "your_rating": "Votre note",
-    "your_message": "Votre message",
     "professional_vendor_link": "Je suis un vendeur professionnel",
     "vendor_registration": "Inscription vendeur professionnel",
     "your_company": "Votre boutique",
@@ -140,11 +137,8 @@
     "company_average_rating": "Note moyenne",
     "crossedoutprice_new": "%price% HT",
     "crossedoutprice_original": "Au lieu de %price% HT",
-    "crossedoutprice_promo": "promo",
     "greentax": "Eco taxe : %tax%",
     "new": "Nouveau",
-    "sold_by": "vendu par",
-    "contact_vendor": "Contacter le marchand",
     "message_sent_success_notification": "Votre message a bien été envoyé",
     "message_sent_error_notification": "Le message n'a pas pu être envoyé, veuillez réessayer",
     "discussion_service": "Messagerie",
@@ -154,8 +148,6 @@
     "you": "Vous",
     "discussion_title": "À propos du produit : %product_name%",
     "add_to_basket": "ajouter au panier",
-    "in_stock": "en stock",
-    "out_of_stock": "rupture de stock",
     "orders": "Commandes",
     "order_table": {
         "header": {
@@ -185,23 +177,20 @@
             }
         }
     },
+
     "product": {
         "favorite": {
-            "add": "Ajouter dans mes favoris",
-            "remove": "Enlever de mes favoris",
-            "already_favored": "Ce produit est déjà dans vos favoris"
+            "add": "Ajouter à mes favoris",
+            "remove": "Supprimer de mes favoris",
+            "already_favored": "Ce produit est déjà dans vos favoris",
+            "successfully_added": "Le produit a bien été ajouté à vos favoris",
+            "successfully_removed": "Le produit a bien été supprimé de vos favoris"
         },
-        "card": {
-            "label": {
-                "promo": "Promo",
-                "new": "Nouveau"
-            },
-            "action": {
-                "see_product": "Voir le produit",
-                "add_to_basket": "Ajouter au panier",
-                "add_to_favorites": "Ajouter à mes favoris",
-                "remove_from_favorites": "Supprimer de mes favoris"
-            }
+        "action": {
+            "see_product": "Voir le produit",
+            "add_to_basket": "Ajouter au panier",
+            "add_to_favorites": "Ajouter à mes favoris",
+            "remove_from_favorites": "Supprimer de mes favoris"
         },
         "add_to_basket_modal": {
             "title": "Ajouté au panier",
@@ -209,8 +198,34 @@
                 "continue_shopping": "Continuer mes achats",
                 "see_basket": "Voir mon panier"
             }
+        },
+        "page": {
+            "contact_vendor": {
+                "label": "Contacter le marchand",
+                "modal": {
+                    "button": {
+                        "cancel": "Annuler",
+                        "send": "Envoyer"
+                    }
+                }
+            }
+        },
+        "stock": {
+            "in_stock": "en stock",
+            "out_of_stock": "rupture de stock"
+        },
+        "badge": {
+            "promo": "Promo",
+            "new": "Nouveau"
+        },
+        "review": {
+            "rating": "Votre note",
+            "message": "Votre message",
+            "login_constraint": "Vous devez être connecté pour poster un commentaire",
+            "validate": "Envoyer"
         }
     },
+
     "profile": {
         "layout": {
             "account": {
@@ -292,6 +307,7 @@
             }
         }
     },
+
     "flash": {
         "success": {
             "email_sent": "Un email vient d'être envoyé"
@@ -302,6 +318,7 @@
             "order_not_found": "La commande n'a pas été trouvée"
         }
     },
+
     "after_sales_service": {
         "label": "SAV",
         "no_orders": "Vous n'avez pas de commandes éligibles au SAV"
@@ -417,6 +434,7 @@
     },
 
     "home": {
+        "label": "Accueil",
         "section": {
             "latest_products": {
                 "title": "Nouveautés"
