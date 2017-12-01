@@ -4,6 +4,7 @@
     <div class="big-spacer"></div>
     <form method="post" action="{{ path('login') }}" class="container">
         <input type="hidden" name="{{ constant('AppBundle\\Controller\\AuthController::CSRF_FIELD_NAME') }}" value="{{ csrf_token(constant('AppBundle\\Controller\\AuthController::CSRF_LOGIN_ID')) }}">
+        <input type="hidden" name="{{ constant('AppBundle\\Controller\\AuthController::REDIRECT_URL_FIELD_NAME') }}" value="{{ redirectUrl }}">
 
         {# email #}
         <div class="form-group">

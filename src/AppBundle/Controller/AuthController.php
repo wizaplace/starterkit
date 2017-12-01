@@ -23,7 +23,19 @@ class AuthController extends BaseController
 {
     public function loginAction(Request $request): Response
     {
-        return parent::loginAction($request);
+        $redirectUrl = $request->get(static::REDIRECT_URL_FIELD_NAME, null) ?? $this->generateUrl('home');
+
+        // redirect already logged in user
+        if ($this->getUser()) {
+            return $this->redirect($redirectUrl);
+        }
+
+        // logging in requires an existing session
+        $this->get('session')->start();
+
+        return $this->render('@App/auth/login.html.twig', [
+            'redirectUrl' => $redirectUrl,
+        ]);
     }
 
     public function registerUserAction(Request $request): Response
