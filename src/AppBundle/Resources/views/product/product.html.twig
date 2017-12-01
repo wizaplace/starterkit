@@ -12,204 +12,243 @@
 
             {# breadcrumb #}
             <ol class="breadcrumb">
-                <li><a href="{{ path("home") }}">Accueil</a></li>
+                <li><a href="{{ path("home") }}">{{ 'home.label'|trans }}</a></li>
 
+                {# create links from product categories #}
                 {% for category in product.categoryPath %}
-                    <li><a href="{{ path('category', {slug: category.slug}) }}">{{category.name}}</a></li>
+                    <li><a href="{{ path('category', { slug: category.slug }) }}">{{ category.name }}</a></li>
                 {% endfor %}
             </ol>
 
-            {# product name #}
-            <h1>{{ product.name }}</h1>
 
-            {# product short description #}
-            <p>{{ product.shortDescription|striptags|raw }}</p>
+            {# product general info block #}
+            <div class="demo-block column">
 
-            {# product brand #}
-            {% set brand = product|brand %}
-            {% if brand is not null %}
-                <p><a href="{{ brand|brandUrl }}">{{ brand }}</a></p>
-            {% endif %}
+                {# product name #}
+                <h1>{{ product.name }}</h1>
 
-            {# product's vendor #}
-            <p>{{ 'sold_by'|trans }}&nbsp;:&nbsp;{{ product.companies[0].name }}</p>
+                {# product short description #}
+                <p>{{ product.shortDescription|striptags|raw }}</p>
 
-            {# open 'contact vendor' modal #}
-            <p><a data-toggle="modal" href="#discussion-modal">{{ 'contact_vendor'|trans }}</a></p>
-
-            <hr>
-
-            {# product image #}
-            {% if declination.images %}
-                {% include '@App/common/product/image-gallery.html.twig' with {'images': declination.images } %}
-            {% else %}
-                <img src="{{ asset('images/no-image.jpg') }}">
-            {% endif %}
-
-            {# The favorite management is only shown when user is connected #}
-            {% if app.user %}
-                <div id="favorite-management">
-                    <a href="#" @click="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove' |trans }}</a>
-                    <a href="#" @click="addToFavorite" v-else>{{ 'product.favorite.add' |trans }}</a>
-                </div>
-            {% endif %}
-
-            <hr>
-
-            {# product long description #}
-            <p>{{ 'supplier_reference'|trans }}&nbsp;:&nbsp;{{ product.supplierReference }}</p>
-            <p>{{ 'ean_code'|trans }}&nbsp;:&nbsp;{{ product.code }}</p>
-            <p>{{ 'in_stock'|trans|capitalize }}&nbsp;:&nbsp;
-                {% if inStock %}
-                    {{ 'in_stock'|trans }}
-                {% else %}
-                    {{ 'out_of_stock'|trans }}
+                {# product brand ('brand' and 'brandUrl' are Twig filter extensions provided by the WizaplaceFrontBundle) #}
+                {% set brand = product|brand %}
+                {% if brand|default() %}
+                    <a href="{{ brand|brandUrl }}">{{ brand.name }}</a>
                 {% endif %}
-            </p>
 
-            <hr>
+                {# product's vendor #}
+                <p>{{ product.companies[0].name }}</p>
 
-            {# price - if product has promo #}
-            {% if declination.crossedoutprice %}
-                <div>{{ 'crossedoutprice_new'|trans({'%price%': declination.pricewithoutvat|price }) }}</div>
-                <div class="badge">{{ 'crossedoutprice_promo'|trans|upper }}</div>
-                <div>{{ 'crossedoutprice_original'|trans({'%price%': declination.crossedoutprice|price }) }}</div>
+                {# user must be logged in to contact vendor #}
+                {% if app.user %}
 
-            {# price - without promo #}
-            {% else %}
-                <div>{{ 'crossedoutprice_new'|trans({'%price%': declination.priceWithoutVat|price }) }}</div>
-            {% endif %}
+                    {# trigger 'contact vendor' modal #}
+                    <a data-toggle="modal" href="#discussion-modal">{{ 'product.contact_vendor.label'|trans }}</a>
 
-            {# including greentax #}
-            <div>{{ 'greentax'|trans({'%tax%': declination.greenTax|price }) }}</div>
-
-            <hr>
-
-            {# options selector #}
-            {% if options %}
-                <h3>{{ 'options'|trans }} :</h3>
-
-                <ul>
-                    {% for option in options  %}
-                        <li class="option-name">{{ option.name }}
-                            <select title="{{ 'select'|trans }}" data-id="{{ option.id }}" onchange="updateDeclination(this)">
-                                {% for variant in option.variants %}
-                                    <option value="{{ variant.id }}" data-url="{{ variant.url }}" {% if variant.selected %}selected{% endif %}>{{ variant.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <hr>
-            {% endif %}
-
-            {# add to basket #}
-            <h3>{{ 'quantity'|trans }}</h3>
-            <div class="quantity-widget">
-                <input type="number" :value="quantity" v-model="quantity" {% if not inStock %} disabled {% endif %}>
-                <button class="btn btn-default" type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
-                <button class="btn btn-default" type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
-
-                {% if inStock %}
-                    <button class="btn btn-primary" type="button" @click="submitBasket">{{ 'add_to_basket'|trans }}</button>
                 {% else %}
-                    <button class="btn btn-primary" type="button" disabled>{{ 'out_of_stock'|trans }}</button>
+                    <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.contact_vendor.login_constraint'|trans }}</a>
                 {% endif %}
             </div>
 
-            <hr>
 
-            {# product long description #}
-            <h2>{{ 'product_description'|trans }}</h2>
-            <p>{{ product.description|striptags('<br><p>')|raw }}</p>
+            {# product images #}
+            <div class="demo-block column">
+                {% if declination.images %}
+                    <br>
+                    <div class="js-slick-declination-images">
 
-            <hr>
+                        {# featured image #}
+                        <div class="slider-for">
+                            {% for image in declination.images %}
+                                <div><img src="{{ image|imageUrl(350, 350)}}"></div> {# empty div element is needed to avoid a height of 1px #}
+                            {% endfor %}
+                        </div>
 
-            <h2>{{ 'technical_characteristics'|trans }}</h2>
+                        {# thumbnails #}
+                        <div class="slider-nav">
+                            {% for image in declination.images %}
+                                <div><img src="{{ image|imageUrl(150, 150)}}"></div> {# empty div element is needed to avoid a height of 1px #}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <img src="{{ asset('images/no-image.jpg') }}">
+                {% endif %}
+            </div>
 
-            {# general characteristics #}
-            <h3>{{ 'general_characteristics'|trans }}</h3>
-            <ul>
-                {% for attribute in product.attributes if attribute.children|length == 0 %}
-                    <li>{{ attribute.name }}&nbsp;:&nbsp;{{ attribute.value|join(', ') }}</li>
-                {% endfor %}
-            </ul>
+            {# favorites (only logged in users can add/remove product to/from their favorites) #}
+            {% if app.user %}
+                <a href="#" @click.prevent="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove'|trans }}</a>
+                <a href="#" @click.prevent="addToFavorite" v-else>{{ 'product.favorite.add'|trans }}</a>
+            {% endif %}
 
-            {# grouped attributes #}
-            {% for attribute in product.attributes if attribute.children|length > 0 %}
-                <h3>{{ attribute.name }}</h3>
+
+            {# product detail data #}
+            <div class="demo-block column">
+
+                {# supplier reference #}
+                <div>{{ product.supplierReference }}</div>
+
+                {# product code (EAN) #}
+                <div>{{ product.code }}</div>
+
+                {# product is/isn't in stock #}
+                {% if inStock %}
+                    <div>{{ 'product.stock.in_stock'|trans }}</div>
+                {% else %}
+                    <div>{{ 'product.stock.out_of_stock'|trans }}</div>
+                {% endif %}
+
+
+                {# price #}
+
+                {# price (with promo) #}
+                {% if declination.crossedoutprice %}
+
+                    {# '|price' filter is provided by WizaplaceFrontBundle and return a price and euro symbol (€) #}
+                    <div>{{ declination.pricewithoutvat|price }}</div>
+                    <div><s>{{ declination.crossedoutprice|price }}</s></div>
+
+                {# price (without promo) #}
+                {% else %}
+                    <div>{{ declination.priceWithoutVat|price }}</div>
+                {% endif %}
+
+                {# greentax #}
+                <div>{{ declination.greenTax|price }}</div>
+            </div>
+
+
+            {# options selector #}
+            {% if options %}
+                <div class="demo-block column">
+                    <ul>
+                        {% for option in options  %}
+                            <li>{{ option.name }}
+                                <select data-id="{{ option.id }}" onchange="updateDeclination(this)">
+                                    {% for variant in option.variants %}
+                                        <option value="{{ variant.id }}" data-url="{{ variant.url }}" {% if variant.selected %}selected{% endif %}>{{ variant.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+
+            {# change quantity / add to basket #}
+            <div class="demo-block">
+                <input type="number" :value="quantity" v-model="quantity" {% if not inStock %} disabled {% endif %}>
+                <button type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
+                <button type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
+
+                {% if inStock %}
+                    <button type="button" @click="addToBasket">{{ 'product.action.add_to_basket'|trans }}</button>
+                {% else %}
+                    <button type="button" disabled>{{ 'product.stock.out_of_stock'|trans }}</button>
+                {% endif %}
+            </div>
+
+
+            {# long description #}
+            <div class="demo-block column">
+                <div>{{ product.description|striptags('<br><p>')|raw }}</div>
+            </div>
+
+
+            {# attributes #}
+            <div class="demo-block column">
+
+                {# simple attributes #}
                 <ul>
-                    {% for attribute in attribute.children %}
-                        <li>{{ attribute.name }}&nbsp;:&nbsp;{{ attribute.value|join(', ') }}</li>
+                    {% for attribute in product.attributes if attribute.children|length == 0 %}
+                        <li>{{ attribute.name }} : {{ attribute.value|join(', ') }}</li>
                     {% endfor %}
                 </ul>
-            {% endfor %}
 
-            <hr>
+                {# grouped attributes #}
+                {% for attribute in product.attributes if attribute.children|length > 0 %}
+                    <h4>{{ attribute.name }}</h4>
+                    <ul>
+                        {% for attribute in attribute.children %}
+                            <li>{{ attribute.name }} : {{ attribute.value|join(', ') }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+
 
             {# customer reviews #}
-            <h2>{{ 'customers_reviews'|trans }}</h2>
-            {% for review in reviews if reviews|length > 0 %}
+            <div class="demo-block column">
 
-                {# customer name #}
-                <span>{{ review.author.name }}</span>
+                {% for review in reviews if reviews|length > 0 %}
 
-                {# rating #}
-                {% for i in 1..5 %}
-                    {% if i <= review.rating %}
-                        <i class="glyphicon glyphicon-star"></i>
-                    {% else %}
-                        <i class="glyphicon glyphicon-star-empty"></i>
-                    {% endif %}
+                    {# reviewer name #}
+                    <div>{{ review.author.name }}</div>
+
+                    {# date #}
+                    <div>{{ review.postedAt|date('d/m/Y') }}</div>
+
+                    {# rating #}
+                    <div>
+                        {% for i in 1..5 %}
+                            {% if i <= review.rating %}
+                                <i class="glyphicon glyphicon-star"></i>
+                            {% else %}
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    {# review message #}
+                    <div>{{ review.message }}</div>
                 {% endfor %}
+            </div>
 
-                {# review message #}
-                <p>{{ review.message |capitalize }}</p>
-                <span>{{ review.postedAt|date('d/m/Y') }}</span>
-
-                <hr>
-            {% endfor %}
 
             {# 'add your own review' #}
-            <div class="add-review">
-                <h2>{{ 'add_a_comment'|trans }}</h2>
 
-                {# user is logged in #}
-                {% if app.user %}
-                    <form method="post" action="{{ path('create_product_review') }}">
+            {# user is logged in #}
+            {% if app.user %}
+                <form method="post" action="{{ path('create_product_review') }}">
+                    <div class="demo-block column">
                         <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
                         <input type="hidden" name="product_id" value="{{ product.id }}">
                         <input type="hidden" name="author" value="{{ app.user.wizaplaceUser.firstName~' '~app.user.wizaplaceUser.lastName }}">
 
                         {# star rating #}
-                        <label for="review-rate" class="">{{ 'your_rating'|trans }}&nbsp;:</label>
-                        <input id="review-rate" name="rating" class="js-rating form-control hide" value="3">
+                        <label for="review-rating">{{ 'product.review.rating'|trans }}</label>
+                        <input id="review-rating" name="rating" class="js-rating" value="3">
 
                         {# message input #}
-                        <label for="review-message">{{ 'your_message'|trans }}&nbsp;:</label>
-                        <textarea id="review-message" name="message" class="form-control" rows="5" cols="72"></textarea>
+                        <label for="review-message">{{ 'product.review.message'|trans }}</label>
+                        <textarea id="review-message" name="message"></textarea>
 
                         {# review submit button #}
-                        <input type="submit" class="btn btn-primary" name="dispatch[discussion.add]" value="{{ 'send'|trans|upper }}">
-                    </form>
+                        <input type="submit" name="dispatch[discussion.add]" value="{{ 'product.review.validate'|trans|upper }}">
+                    </div>
+                </form>
 
-                {# user is not looged in #}
-                {% else %}
-                    <a href="{{ path('login') }}">{{ 'login_to_comment'|trans }}</a>
-                {% endif %}
+            {# user is not logged in #}
+            {% else %}
+                <div class="demo-block column">
+                    <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.review.login_constraint'|trans }}</a>
+                </div>
+            {% endif %}
+
+            {# products carousel #}
+            <div class="js-slick-product-group">
+                {% for product in latestProducts %}
+                    {% include '@App/common/product/card.html.twig' with { "product": product } %}
+                {% endfor %}
             </div>
 
-            <hr>
-
-            {# products slideshows #}
-            {% include '@App/common/product/showcase.html.twig' with {'headerTitle': 'Autres "Bornes Wifi', "products" : latestProducts } %}
-            {% include '@App/common/product/showcase.html.twig' with {'headerTitle': 'Accéssoires "Réseaux', "products" : latestProducts } %}
         </div>
     </section>
 
-    {# modals #}
-    {% include '@App/common/basket-popup.html.twig' %}
+    {# include modals #}
+    {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
     {% include '@App/product/_discussion-modal.html.twig' %}
 
 {% endblock %}
@@ -222,7 +261,7 @@
             data: {
                 quantity: 1,
                 declinationId: '{{ declination.id }}',
-                isFavorite: {{ isFavorite|json_encode|raw }},
+                isFavorite: {{ isFavorite|json_encode }},
             },
 
             methods: {
@@ -238,7 +277,8 @@
                     }
                 },
 
-                submitBasket: function() {
+                addToBasket: function() {
+
                     var self = this;
                     $.ajax({
                         type: "POST",
@@ -255,15 +295,16 @@
                     });
                 },
 
-                addToFavorite: function (event) {
-                    event.preventDefault();
+                addToFavorite: function () {
+
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: "{{ path('add_to_favorites') }}",
                         data: { declinationId: this.declinationId },
-                        success: function(response) {
+                        success: function() {
                             self.isFavorite = true;
+                            notification.createAlert("{{'product.favorite.successfully_added'|trans}}", "success");
                         },
                         error: function () {
                             notification.createAlert("{{'product.favorite.already_favored'|trans}}", "danger");
@@ -271,15 +312,16 @@
                     });
                 },
 
-                removeFromFavorite: function (event) {
-                    event.preventDefault();
+                removeFromFavorite: function () {
+
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: "{{ path('remove_from_favorites') }}",
                         data: { declinationId: this.declinationId },
-                        success: function(response) {
+                        success: function() {
                             self.isFavorite = false;
+                            notification.createAlert("{{'product.favorite.successfully_removed'|trans}}", "success");
                         }
                     });
                 }
@@ -287,27 +329,13 @@
         });
 
         function updateDeclination(select){
+
+            {# display spinner while new page is loading #}
             helper.displayLoadingSpinner();
-            window.location.replace($(select).find(':selected').data('url'));
+
+            {# redirect to selected declination url #}
+            var redirectUrl = $(select).find(':selected').data('url');
+            window.location.replace(redirectUrl);
         }
-
-        $('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '.slider-nav'
-        });
-
-        $('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            asNavFor: '.slider-for',
-            infinite: true,
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true,
-            arrows: false
-        });
     </script>
 {% endblock %}
