@@ -13,11 +13,7 @@
                     {% for item in shipping.items %}
 
                         {# item image #}
-                        {% if item.mainImage %}
-                            <img src="{{ item.mainImage|imageUrl(60) }}" alt="{{ item.productName }}">
-                        {% else %}
-                            <div>{{ 'header.basket.no_image'|trans }}</div>
-                        {% endif %}
+                        <img src="{{ item.mainImage|imageUrl(60) }}" alt="{{ item.productName }}">
 
                         {# item name #}
                         <div>{{ item.productName }}</div>
