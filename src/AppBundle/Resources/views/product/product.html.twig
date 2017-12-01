@@ -39,8 +39,15 @@
                 {# product's vendor #}
                 <p>{{ product.companies[0].name }}</p>
 
-                {# trigger 'contact vendor' modal #}
-                <a data-toggle="modal" href="#discussion-modal">{{ 'product.page.contact_vendor.label'|trans }}</a>
+                {# user must be logged in to contact vendor #}
+                {% if app.user %}
+
+                    {# trigger 'contact vendor' modal #}
+                    <a data-toggle="modal" href="#discussion-modal">{{ 'product.contact_vendor.label'|trans }}</a>
+
+                {% else %}
+                    <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.contact_vendor.login_constraint'|trans }}</a>
+                {% endif %}
             </div>
 
 

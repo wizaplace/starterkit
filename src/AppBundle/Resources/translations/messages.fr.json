@@ -199,16 +199,15 @@
                 "see_basket": "Voir mon panier"
             }
         },
-        "page": {
-            "contact_vendor": {
-                "label": "Contacter le marchand",
-                "modal": {
-                    "button": {
-                        "cancel": "Annuler",
-                        "send": "Envoyer"
-                    }
+        "contact_vendor": {
+            "label": "Contacter le marchand",
+            "modal": {
+                "button": {
+                    "cancel": "Annuler",
+                    "send": "Envoyer"
                 }
-            }
+            },
+            "login_constraint": "Vous devez être connecté pour contacter le vendeur"
         },
         "stock": {
             "in_stock": "en stock",
