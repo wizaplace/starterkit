@@ -338,7 +338,7 @@
             "form": {
                 "email": "E-mail",
                 "password": "Mot de passe",
-                "forgotten-password": "Mot de passe oublié",
+                "forgotten_password": "Mot de passe oublié",
                 "validate": "Valider"
             }
         },
@@ -352,7 +352,6 @@
         },
         "basket": {
             "label": "Mon panier",
-            "no_image": "Pas d'image",
             "delete": "Supprimer",
             "total": "Total",
             "empty": "Votre panier est vide",
