@@ -1,6 +1,9 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+wizaplace_front_bundle:
+    resource: '@WizaplaceFrontBundle/Resources/config/routing.yml'
+
 home:
     path: /
     defaults: { _controller: AppBundle:Home:home }
