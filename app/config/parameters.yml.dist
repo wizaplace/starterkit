@@ -6,3 +6,6 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     api.base_url: 'https://sandbox.wizaplace.com/api/v1/'
     wizaplace.system_user_password: 'FakeSecret'
+    api.connect_timeout: 30 # dev value, reduce it in production
+    api.read_timeout: 30 # dev value, reduce it in production
+    api.timeout: 30 # dev value, reduce it in production
