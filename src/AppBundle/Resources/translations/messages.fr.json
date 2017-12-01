@@ -352,6 +352,7 @@
         },
         "basket": {
             "label": "Mon panier",
+            "no_image": "Pas d'image",
             "delete": "Supprimer",
             "total": "Total",
             "empty": "Votre panier est vide",
