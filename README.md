@@ -33,7 +33,7 @@ Requirements:
 - [Vagrant 1.9.5](https://releases.hashicorp.com/vagrant/1.9.5/),
 - [Landrush](https://github.com/vagrant-landrush/landrush) and [Vagrant-cachier plugin](https://github.com/fgrehm/vagrant-cachier) plugins: `vagrant plugin install landrush vagrant-cachier`,
 - NFS on Linux: `sudo apt-get install nfs-common nfs-kernel-server`.
-- dnsmasq
+- dnsmasq on Linux: `sudo apt-get install dnsmasq`
 
 If you have not done this already, you need to create a SSH key and configure it into your GitHub account: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
