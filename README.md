@@ -49,7 +49,8 @@ $ cd starterkit/
 $ make dev-from-scratch
 ```
 
-The website is now reachable at [http://demo.loc/](http://demo.loc/).
+The website is now reachable at [http://demo.loc/](http://demo.loc/).  
+You can have access to the profiler bar at [http://demo.loc/app_dev.php](http://demo.loc/app_dev.php).
 
 At any time you can rebuild everything by running `make dev-from-scratch` again.
 
@@ -83,6 +84,7 @@ Requirements:
 - Composer
 - NPM
 - Gulp
+- dnsmasq
 
 ```
 make install
