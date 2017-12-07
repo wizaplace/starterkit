@@ -1,15 +1,13 @@
+// @remove me:
+@import 'wizaplace/demo.less';
+
 // legacy
-@import '_breadcrumb';
 @import '_checkout-steps';
 @import '_pagination';
-@import '_product-review';
-@import '_company-map';
 @import '_search-sidebar';
-@import (inline) '_jquery-ui.min.css';
 
 // global
 @import 'wizaplace/variables.less';
-@import 'wizaplace/global.less';
 
 // libs
 @import '../../../../../node_modules/bootstrap/less/bootstrap';
@@ -17,7 +15,8 @@
 @import '../../../../../node_modules/slick-carousel/slick/slick';
 @import '../../../../../node_modules/slick-carousel/slick/slick-theme';
 @import (inline) '../../../../../node_modules/cookieconsent/build/cookieconsent.min.css';
-@import (inline) 'jquery-ui-date-picker.min.css';
+@import (inline) 'libraries/_jquery-ui.min.css';
+@import 'libraries/star-rating';
 
 // components
 @import 'wizaplace/components/overlay';
@@ -28,10 +27,6 @@
 @import 'wizaplace/components/loading-spinner';
 
 // templates
-@import 'wizaplace/header';
-@import 'wizaplace/footer';
 @import 'basket';
 @import 'profile';
-@import 'product';
-@import 'star-rating';
 @import 'discussion';
