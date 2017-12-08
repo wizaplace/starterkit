@@ -20,61 +20,53 @@
                 {% endfor %}
             </ol>
 
+            {# product name #}
+            <h1>{{ product.name }}</h1>
 
-            {# product general info block #}
-            <div class="demo-block column">
+            {# product short description #}
+            <p>{{ product.shortDescription|striptags|raw }}</p>
 
-                {# product name #}
-                <h1>{{ product.name }}</h1>
+            {# product brand ('brand' and 'brandUrl' are Twig filter extensions provided by the WizaplaceFrontBundle) #}
+            {% set brand = product|brand %}
+            {% if brand|default() %}
+                <a href="{{ brand|brandUrl }}">{{ brand.name }}</a>
+            {% endif %}
 
-                {# product short description #}
-                <p>{{ product.shortDescription|striptags|raw }}</p>
+            {# product's vendor #}
+            <p>{{ product.companies[0].name }}</p>
 
-                {# product brand ('brand' and 'brandUrl' are Twig filter extensions provided by the WizaplaceFrontBundle) #}
-                {% set brand = product|brand %}
-                {% if brand|default() %}
-                    <a href="{{ brand|brandUrl }}">{{ brand.name }}</a>
-                {% endif %}
+            {# user must be logged in to contact vendor #}
+            {% if app.user %}
 
-                {# product's vendor #}
-                <p>{{ product.companies[0].name }}</p>
+                {# trigger 'contact vendor' modal #}
+                <a data-toggle="modal" href="#discussion-modal">{{ 'product.contact_vendor.label'|trans }}</a>
 
-                {# user must be logged in to contact vendor #}
-                {% if app.user %}
-
-                    {# trigger 'contact vendor' modal #}
-                    <a data-toggle="modal" href="#discussion-modal">{{ 'product.contact_vendor.label'|trans }}</a>
-
-                {% else %}
-                    <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.contact_vendor.login_constraint'|trans }}</a>
-                {% endif %}
-            </div>
+            {% else %}
+                <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.contact_vendor.login_constraint'|trans }}</a>
+            {% endif %}
 
 
             {# product images #}
-            <div class="demo-block column">
-                {% if declination.images %}
-                    <br>
-                    <div class="js-slick-declination-images">
+            {% if declination.images %}
+                <div class="js-slick-declination-images">
 
-                        {# featured image #}
-                        <div class="slider-for">
-                            {% for image in declination.images %}
-                                <div><img src="{{ image|imageUrl(350, 350)}}"></div> {# empty div element is needed to avoid a height of 1px #}
-                            {% endfor %}
-                        </div>
-
-                        {# thumbnails #}
-                        <div class="slider-nav">
-                            {% for image in declination.images %}
-                                <div><img src="{{ image|imageUrl(150, 150)}}"></div> {# empty div element is needed to avoid a height of 1px #}
-                            {% endfor %}
-                        </div>
+                    {# featured image #}
+                    <div class="slider-for">
+                        {% for image in declination.images %}
+                            <div><img src="{{ image|imageUrl(350, 350)}}"></div> {# empty div element is needed to avoid a height of 1px #}
+                        {% endfor %}
                     </div>
-                {% else %}
-                    <img src="{{ asset('images/no-image.jpg') }}">
-                {% endif %}
-            </div>
+
+                    {# thumbnails #}
+                    <div class="slider-nav">
+                        {% for image in declination.images %}
+                            <div><img src="{{ image|imageUrl(150, 150)}}"></div> {# empty div element is needed to avoid a height of 1px #}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <img src="{{ asset('images/no-image.jpg') }}">
+            {% endif %}
 
             {# favorites (only logged in users can add/remove product to/from their favorites) #}
             {% if app.user %}
@@ -83,128 +75,110 @@
             {% endif %}
 
 
-            {# product detail data #}
-            <div class="demo-block column">
+            {# supplier reference #}
+            <div>{{ product.supplierReference }}</div>
 
-                {# supplier reference #}
-                <div>{{ product.supplierReference }}</div>
+            {# product code (EAN) #}
+            <div>{{ product.code }}</div>
 
-                {# product code (EAN) #}
-                <div>{{ product.code }}</div>
-
-                {# product is/isn't in stock #}
-                {% if inStock %}
-                    <div>{{ 'product.stock.in_stock'|trans }}</div>
-                {% else %}
-                    <div>{{ 'product.stock.out_of_stock'|trans }}</div>
-                {% endif %}
+            {# product is/isn't in stock #}
+            {% if inStock %}
+                <div>{{ 'product.stock.in_stock'|trans }}</div>
+            {% else %}
+                <div>{{ 'product.stock.out_of_stock'|trans }}</div>
+            {% endif %}
 
 
-                {# price #}
+            {# price (with promo) #}
+            {% if declination.crossedoutprice %}
 
-                {# price (with promo) #}
-                {% if declination.crossedoutprice %}
-
-                    {# '|price' filter is provided by WizaplaceFrontBundle and return a price and euro symbol (€) #}
-                    <div>{{ declination.pricewithoutvat|price }}</div>
-                    <div><s>{{ declination.crossedoutprice|price }}</s></div>
+                {# '|price' filter is provided by WizaplaceFrontBundle and return a price and euro symbol (€) #}
+                <div>{{ declination.pricewithoutvat|price }}</div>
+                <div><s>{{ declination.crossedoutprice|price }}</s></div>
 
                 {# price (without promo) #}
-                {% else %}
-                    <div>{{ declination.priceWithoutVat|price }}</div>
-                {% endif %}
+            {% else %}
+                <div>{{ declination.priceWithoutVat|price }}</div>
+            {% endif %}
 
-                {# greentax #}
-                <div>{{ declination.greenTax|price }}</div>
-            </div>
-
+            {# greentax #}
+            <div>{{ declination.greenTax|price }}</div>
 
             {# options selector #}
             {% if options %}
-                <div class="demo-block column">
-                    <ul>
-                        {% for option in options  %}
-                            <li>{{ option.name }}
-                                <select data-id="{{ option.id }}" onchange="updateDeclination(this)">
-                                    {% for variant in option.variants %}
-                                        <option value="{{ variant.id }}" data-url="{{ variant.url }}" {% if variant.selected %}selected{% endif %}>{{ variant.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                <ul>
+                    {% for option in options  %}
+                        <li>{{ option.name }}
+                            <select data-id="{{ option.id }}" onchange="updateDeclination(this)">
+                                {% for variant in option.variants %}
+                                    <option value="{{ variant.id }}" data-url="{{ variant.url }}" {% if variant.selected %}selected{% endif %}>{{ variant.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endif %}
 
 
             {# change quantity / add to basket #}
-            <div class="demo-block">
-                <input type="number" :value="quantity" v-model="quantity" {% if not inStock %} disabled {% endif %}>
-                <button type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
-                <button type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
+            <input type="number" :value="quantity" v-model="quantity" {% if not inStock %} disabled {% endif %}>
+            <button type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
+            <button type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
 
-                {% if inStock %}
-                    <button type="button" @click="addToBasket">{{ 'product.action.add_to_basket'|trans }}</button>
-                {% else %}
-                    <button type="button" disabled>{{ 'product.stock.out_of_stock'|trans }}</button>
-                {% endif %}
-            </div>
+            {% if inStock %}
+                <button type="button" @click="addToBasket">{{ 'product.action.add_to_basket'|trans }}</button>
+            {% else %}
+                <button type="button" disabled>{{ 'product.stock.out_of_stock'|trans }}</button>
+            {% endif %}
 
 
             {# long description #}
-            <div class="demo-block column">
-                <div>{{ product.description|striptags('<br><p>')|raw }}</div>
-            </div>
+            <div>{{ product.description|striptags('<br><p>')|raw }}</div>
 
 
             {# attributes #}
-            <div class="demo-block column">
 
-                {# simple attributes #}
+            {# simple attributes #}
+            <ul>
+                {% for attribute in product.attributes if attribute.children|length == 0 %}
+                    <li>{{ attribute.name }} : {{ attribute.value|join(', ') }}</li>
+                {% endfor %}
+            </ul>
+
+            {# grouped attributes #}
+            {% for attribute in product.attributes if attribute.children|length > 0 %}
+                <h4>{{ attribute.name }}</h4>
                 <ul>
-                    {% for attribute in product.attributes if attribute.children|length == 0 %}
+                    {% for attribute in attribute.children %}
                         <li>{{ attribute.name }} : {{ attribute.value|join(', ') }}</li>
                     {% endfor %}
                 </ul>
-
-                {# grouped attributes #}
-                {% for attribute in product.attributes if attribute.children|length > 0 %}
-                    <h4>{{ attribute.name }}</h4>
-                    <ul>
-                        {% for attribute in attribute.children %}
-                            <li>{{ attribute.name }} : {{ attribute.value|join(', ') }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
-            </div>
+            {% endfor %}
 
 
             {# customer reviews #}
-            <div class="demo-block column">
+            {% for review in reviews if reviews|length > 0 %}
 
-                {% for review in reviews if reviews|length > 0 %}
+                {# reviewer name #}
+                <div>{{ review.author.name }}</div>
 
-                    {# reviewer name #}
-                    <div>{{ review.author.name }}</div>
+                {# date #}
+                <div>{{ review.postedAt|date('d/m/Y') }}</div>
 
-                    {# date #}
-                    <div>{{ review.postedAt|date('d/m/Y') }}</div>
+                {# rating #}
+                <div>
+                    {% for i in 1..5 %}
+                        {% if i <= review.rating %}
+                            <i class="glyphicon glyphicon-star"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
 
-                    {# rating #}
-                    <div>
-                        {% for i in 1..5 %}
-                            {% if i <= review.rating %}
-                                <i class="glyphicon glyphicon-star"></i>
-                            {% else %}
-                                <i class="glyphicon glyphicon-star-empty"></i>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    {# review message #}
-                    <div>{{ review.message }}</div>
-                {% endfor %}
-            </div>
+                {# review message #}
+                <div>{{ review.message }}</div>
+            {% endfor %}
 
 
             {# 'add your own review' #}
@@ -232,9 +206,7 @@
 
             {# user is not logged in #}
             {% else %}
-                <div class="demo-block column">
-                    <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.review.login_constraint'|trans }}</a>
-                </div>
+                <a href="{{ path('login', {'redirect_url': app.request.uri}) }}">{{ 'product.review.login_constraint'|trans }}</a>
             {% endif %}
 
             {# products carousel #}
