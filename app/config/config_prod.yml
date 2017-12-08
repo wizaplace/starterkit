@@ -9,9 +9,9 @@ parameters:
     api.read_timeout: '%env(API_READ_TIMEOUT)%'
     api.timeout: '%env(API_TIMEOUT)%'
     # default env values
-    env(API_CONNECT_TIMEOUT): 3
-    env(API_READ_TIMEOUT): 5
-    env(API_TIMEOUT): 5
+    env(API_CONNECT_TIMEOUT): 5
+    env(API_READ_TIMEOUT): 30
+    env(API_TIMEOUT): 30
     env(SENTRY_DSN): ~
     env(WIZAPLACE_SYSTEM_USER_PASSWORD): ~
     env(PLATFORM_TREE_ID): ~
