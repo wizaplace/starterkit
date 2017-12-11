@@ -212,7 +212,7 @@
             {# products carousel #}
             <div class="js-slick-product-group">
                 {% for product in latestProducts %}
-                    {% include '@App/common/product/card.html.twig' with { "product": product } %}
+                    {% include '@App/common/product/_card.html.twig' with { "product": product } %}
                 {% endfor %}
             </div>
 

@@ -1,0 +1,46 @@
+{# 'Category' sub-section title #}
+<h4>
+    <a data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="">
+        {{ 'search.sidebar.category'|trans }}
+    </a>
+</h4>
+
+{% include('@App/search/sidebar/_categories.html.twig') %}
+
+
+{# facets (excluding categories) #}
+<div v-for="facet in facets" :key="facet.name" class="sidebar-item" v-if="facet.name != 'categories'">
+
+    {# price slider #}
+    <div v-if="facet.name == 'price'">
+        <h4>
+            <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
+        </h4>
+
+        <div :id="'facet-'+facet.name" class="collapse">
+            <span>
+                <keep-alive>
+                    <slider :min="facet.values.min" :max="facet.values.max"
+                            @update="updateNumericFilter(facet.name, arguments[0], arguments[1])">
+                    </slider>
+                </keep-alive>
+            </span>
+        </div>
+    </div>
+
+    {# other facets #}
+    <div v-if="!facet.isNumeric && facet.values.length != 0">
+        <h4>
+            <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
+        </h4>
+
+        <div :id="'facet-'+facet.name" class="collapse" :class="{in: (filters[facet.name]) }">
+            <div v-for="(value, index) in facet.values">
+                <label>
+                    <input type="radio" @click="toggleFilter(facet.name, index)" :checked="isChecked(facet.name, index)">
+                    <span>${value.label}</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<ul class="pagination" v-if="pagination.nbPages > 1">
+
+    {# go to previous page #}
+    <li :class="{disabled: pagination.page == 1}">
+        <a href="#" @click.prevent="goToPage(pagination.page - 1)">
+            <span> < </span>
+        </a>
+    </li>
+
+    {# 3 pages previous to current page #}
+    <li v-for="i in range(pagination.page -3, pagination.page)" v-if="i > 0">
+        <a href="#" @click.prevent="goToPage(i)" v-text="i"></a>
+    </li>
+
+    {# current page #}
+    <li class="active">
+        <a href="#" @click.prevent="goToPage(pagination.page)" v-text="pagination.page"></a>
+    </li>
+
+    {# 3 pages next to current page #}
+    <li v-for="i in range(pagination.page + 1, pagination.page + 4)" v-if="i < pagination.nbPages + 1">
+        <a href="#" @click.prevent="goToPage(i)" v-text="i"></a>
+    </li>
+
+    {# go to next page #}
+    <li :class="{disabled: pagination.page == pagination.nbPages}">
+        <a href="#" @click.prevent="goToPage(pagination.page + 1)">
+            <span> > </span>
+        </a>
+    </li>
+</ul>

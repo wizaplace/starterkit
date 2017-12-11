@@ -429,6 +429,16 @@
             "search_input_placeholder": "Rechercher",
             "geoloc_input_placeholder": "Ville, département",
             "button": "Rechercher"
+        },
+        "sort": {
+            "relevance": "Pertinence",
+            "alpha_asc": "Nom A-Z",
+            "alpha_desc": "Nom Z-A",
+            "price_asc": "Prix - à + cher",
+            "price_desc": "Prix + à - cher"
+        },
+        "sidebar": {
+            "category": "Catégorie"
         }
     },
 

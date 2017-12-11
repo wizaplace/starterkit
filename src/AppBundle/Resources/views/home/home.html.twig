@@ -14,7 +14,7 @@
         {# products carousel #}
         <div class="js-slick-product-group">
             {% for product in latestProducts %}
-                {% include '@App/common/product/card.html.twig' with { "product": product } %}
+                {% include '@App/common/product/_card.html.twig' with { "product": product } %}
             {% endfor %}
         </div>
 
@@ -33,7 +33,7 @@
                     {# default quantity is 1 #}
                     var quantity = 1;
 
-                    {# collected product data (see 'common/product/card.html.twig') #}
+                    {# collected product data (see 'common/product/_card.html.twig') #}
                     var productData = {
                         name: $(this).data('name'),
                         price: $(this).data('price'),

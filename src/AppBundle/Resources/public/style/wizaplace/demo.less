@@ -1,3 +1,6 @@
+// this file's purpose is to provide (ultra) basic style rules for project setup
+// it can be removed safely
+
 // header
 #masthead {
     .header-top {
@@ -81,5 +84,56 @@ footer {
         margin-top: 2rem;
         padding: 0;
         border-bottom: 0;
+    }
+}
+
+// search page
+#search-page {
+    // set apart "number of results/page" from sort buttons
+    button:nth-of-type(5) {
+        margin-right: 10rem;
+    }
+
+    .search-block {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-between;
+
+        .sidebar {
+            width: 20%;
+
+            .selected-category, .selected-category a {
+                text-decoration: underline;
+                color: red;
+            }
+        }
+
+        .search-result {
+            width: 75%;
+
+            .products {
+                display: flex;
+                flex-wrap: wrap;
+
+                .product {
+                    margin: 2rem;
+
+                    span:first-child {
+                        display: block;
+                    }
+
+                    a img ~ div {
+                        max-width: 200px;
+                        max-height: 100px;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+    .pagination {
+        display: block;
+        margin-top: 6rem;
     }
 }

@@ -1,118 +1,48 @@
 {% extends '@App/layout.html.twig' %}
 
 {% block body %}
+    <div id="search-page" v-cloak>
 
-    <div class="container-fluid" id="search-content" v-cloak>
+        {# search results number #}
+        <div v-if="pagination.nbResults" v-text="pagination.nbResults"></div>
 
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="label" >&nbsp;<span v-if="pagination.nbResults">${pagination.nbResults+' Résultats'}</span></div>
-                <div class="big-title"></div>
-                {% if currentCategory|default %}
-                    <p>dans {{ currentCategory.name }}</p>
-                {% endif %}
-            </div>
-        </div>
+        {# current category name #}
+        {% if currentCategory|default %}
+            <h2>{{ currentCategory.name }}</h2>
+        {% endif %}
 
-        <div class="row">
-            <div class="col-xs-9">
-                <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default" @click="setSort(null, null)">Pertinence</button>
-                    <button type="button" class="btn btn-default" @click="setSort('name', 'asc')">Nom A-Z</button>
-                    <button type="button" class="btn btn-default" @click="setSort('name', 'desc')">Nom Z-A</button>
-                    <button type="button" class="btn btn-default" @click="setSort('price', 'asc')">Prix - à +</button>
-                    <button type="button" class="btn btn-default" @click="setSort('price', 'desc')">Prix + à -</button>
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default active" @click="changeResultsNumber(12)">12</button>
-                    <button type="button" class="btn btn-default" @click="changeResultsNumber(24)">24</button>
-                    <button type="button" class="btn btn-default" @click="changeResultsNumber(48)">48</button>
-                </div>
-            </div>
-        </div>
+        {# sorts #}
+        <button type="button" @click="setSort(null, null)">{{ 'search.sort.relevance'|trans }}</button>
+        <button type="button" @click="setSort('name', 'asc')">{{ 'search.sort.alpha_asc'|trans }}</button>
+        <button type="button" @click="setSort('name', 'desc')">{{ 'search.sort.alpha_desc'|trans }}</button>
+        <button type="button" @click="setSort('price', 'asc')">{{ 'search.sort.price_asc'|trans }}</button>
+        <button type="button" @click="setSort('price', 'desc')">{{ 'search.sort.price_desc'|trans }}</button>
 
-        <div class="row">
+
+        {# results by page #}
+        <button type="button" @click="changeResultsNumber(12)">12</button>
+        <button type="button" @click="changeResultsNumber(24)">24</button>
+        <button type="button" @click="changeResultsNumber(48)">48</button>
+
+
+        <div class="search-block">
 
             {# sidebar #}
-            <div class="col-md-2">
-                {% include '@App/search/sidebar/sidebar.html.twig' %}
+            <div class="sidebar">
+                {% include '@App/search/sidebar/_sidebar.html.twig' %}
             </div>
 
+
             {# search result #}
-            <div class="col-md-10">
+            <div class="search-result">
 
-                {% block searchHeader %}{% endblock %}
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product" v-for="product in products">
-                            {# promo badge #}
-                            <div class="top-badge badge-promo" v-if="product.crossedOutPrice !== null">PROMO</div>
-
-                            <a class="product-detail" :href="productUrl(product)">
-                                <div class="product-image" :style="imageStyle(product)"></div>
-                                <div class="product-caption">
-                                    <div class="title ellipsis">${product.name}</div>
-                                    <div class="ellipsis">${ product.subtitle }</div>
-                                </div>
-                            </a>
-
-                            <div class="product-price">
-                                <div class="pull-left">
-                                    <span v-if="product.crossedOutPrice !== null" class="title">${product.minimumPrice|price}&nbsp;TTC</span><br />
-                                    <span v-if="product.crossedOutPrice !== null" class="title text-blue text-line-through">${product.crossedOutPrice|price}&nbsp;TTC</span>
-                                    <span v-else class="title">${product.minimumPrice|price}&nbsp;TTC</span><br />
-                                </div>
-                                <button class="add-to-basket btn btn-link pull-right" @click="submitBasket(product)" title="Ajouter au panier">
-                                    <span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                {# fetched products #}
+                <div class="products">
+                    {% include('@App/common/product/_search-card.html.twig') %}
                 </div>
 
                 {# pagination #}
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <nav v-if="pagination.nbPages > 1">
-
-                            <ul class="pagination-block list-inline">
-                                {# go to previous page #}
-                                <li :class="{disabled: pagination.page == 1}">
-                                    <a href="#" @click.prevent="goToPage(pagination.page - 1)">
-                                        <span class="glyphicon glyphicon-arrow-left"></span>
-                                    </a>
-                                </li>
-
-                                {# 3 pages previous to current page #}
-                                <li v-for="i in range(pagination.page -3, pagination.page)" v-if="i > 0">
-                                    <a href="#" @click.prevent="goToPage(i)" class="page-number">${i}</a>
-                                </li>
-
-                                {# current page #}
-                                <li class="active">
-                                    <a href="#" @click.prevent="goToPage(pagination.page)">
-                                        ${pagination.page}
-                                    </a>
-                                </li>
-
-                                {# 3 pages next to current page #}
-                                <li v-for="i in range(pagination.page + 1, pagination.page + 4)" v-if="i < pagination.nbPages + 1">
-                                    <a href="#" @click.prevent="goToPage(i)" class="page-number">${i}</a>
-                                </li>
-
-                                {# go to next page #}
-                                <li :class="{disabled: pagination.page == pagination.nbPages}">
-                                    <a href="#" @click.prevent="goToPage(pagination.page + 1)">
-                                        <span class="glyphicon glyphicon-arrow-right"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                {% include('@App/common/_pagination.html.twig') %}
             </div>
         </div>
     </div>
@@ -147,7 +77,7 @@
         });
 
         var vm = new Vue({
-            el: '#search-content',
+            el: '#search-page',
             delimiters: ['${','}'],
             data: {
                 loading: true,
@@ -155,7 +85,7 @@
                 query: urlParameters.query || '',
                 pagination: {
                     page: urlParameters.page || 1,
-                    resultsPerPage: urlParameters.resultsPerPage || 12
+                    resultsPerPage: urlParameters.resultsPerPage || 6
                 },
                 filters: urlParameters.filters || {{ filters|default({})|json_encode|raw }},
                 sorting: urlParameters.sorting || {},
@@ -224,7 +154,7 @@
 
                     // got to page top
                     var $container = $('html, body');
-                    var $ref = $("#search-content");
+                    var $ref = $("#search-page");
                     $container.animate({ scrollTop: $ref.offset().top - $container.offset().top }, 'fast');
 
                     this.refresh();
@@ -275,9 +205,9 @@
                     }
                 },
 
-                imageUrl: function (product) {
+                imageUrl: function (product, dimension) {
                     if(product.mainImage != null) {
-                        return "{{ apiBaseUrl }}image/" + product.mainImage.id + "?w=500&h=500";
+                        return "{{ apiBaseUrl }}image/" + product.mainImage.id + "?w=" + dimension + "&h=" + dimension;
                     } else {
                         return "{{ asset('images/no-image.jpg') }}"
                     }
