@@ -1,7 +1,6 @@
-# Wizaplace front-office demo
+# Wizaplace front-office StarterKit
 
-
-The StarterKit is a template web application for creating a front-office for Wizaplace.
+The StarterKit is a template web application for creating an e-commerce front-office for Wizaplace.
 
 It is based on PHP 7.1, Symfony 3 and [our PHP SDK](https://github.com/wizaplace/wizaplace-php-sdk). The front-office connects to Wizaplace through the API ([API documentation](https://sandbox.wizaplace.com/api/v1/doc/)).
 
@@ -13,13 +12,7 @@ The StarterKit project is meant to be cloned (forked on GitHub for example) for 
 
 ## Features
 
-The StarterKit is a project in development. While all features are implemented in the PHP SDK, some pages and features may be missing in the StarterKit. If you need them, you will need to create or modify the Symfony routes/controlers/views to add them.
-
-This is the list of pages and features we will be adding soon in the StarterKit:
-
-- Product page:
-    - [ ] Report a product ([SDK](https://github.com/wizaplace/wizaplace-php-sdk/blob/ed32657f91f42821574d6b1cda5b471b4ff197be/src/Catalog/CatalogService.php#L129-L135) and [API](https://sandbox.wizaplace.com/api/v1/doc/#tag/Catalog%2Fpaths%2F~1catalog~1products~1%7BproductId%7D~1report%2Fpost))
-- [ ] List of brands (in development, available in a few days)
+The StarterKit is a starting point for your front-office. Some specific pages and features may be missing in the StarterKit and may require to create or modify the Symfony routes, controlers and views to add them.
 
 ## Setup
 
