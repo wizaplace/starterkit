@@ -9,10 +9,10 @@
 
 
 {# facets (excluding categories) #}
-<div v-for="facet in facets" :key="facet.name" class="sidebar-item" v-if="facet.name != 'categories'">
+<div v-for="facet in facets" :key="facet.name" class="sidebar-item" v-if="facet.name !== 'categories'">
 
     {# price slider #}
-    <div v-if="facet.name == 'price'">
+    <div v-if="facet.name === 'price'">
         <h4>
             <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
         </h4>
@@ -29,16 +29,16 @@
     </div>
 
     {# other facets #}
-    <div v-if="!facet.isNumeric && facet.values.length != 0">
+    <div v-if="!facet.isNumeric && facet.values.length !== 0">
         <h4>
             <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
         </h4>
 
         <div :id="'facet-'+facet.name" class="collapse" :class="{in: (filters[facet.name]) }">
-            <div v-for="(value, index) in facet.values">
+            <div v-for="(value, index) in orderedFacets(facet.values)">
                 <label>
                     <input type="radio" @click="toggleFilter(facet.name, index)" :checked="isChecked(facet.name, index)">
-                    <span>${value.label}</span>
+                    <span v-text="value.label"></span>
                 </label>
             </div>
         </div>

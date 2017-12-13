@@ -28,12 +28,7 @@
             {# store product id for later use #}
             :data-id="product.id"
 
-            {# store data to be displayed in confirmation modal #}
-            :data-name="product.name"
-            :data-price="product.minimumPrice"
-            :data-image="imageUrl(product, 120)"
-
-            @click="submitBasket(product)">
+            @click="addToBasket(product)">
 
         {# button label #}
         {{ 'product.action.add_to_basket'|trans }}
