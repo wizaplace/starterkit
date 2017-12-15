@@ -264,19 +264,26 @@
         activated: function () {
             var view = this;
 
-            $('#facet-slider').slider({
-                range: true,
-                min: Math.floor(view.min),
-                max: Math.ceil(view.max),
-                values: [view.currentMin, view.currentMax],
-                slide: function (event, ui) {
-                    view.currentMin = ui.values[0];
-                    view.currentMax = ui.values[1];
-                },
-                stop: function () {
-                    // let the main view know there has been an update
-                    view.$emit('update', view.currentMin, view.currentMax);
+            var facetSlider = document.getElementById('facet-slider');
+            noUiSlider.create(facetSlider, {
+                start: [Math.floor(view.min), Math.ceil(view.max)],
+                step: 1,
+                connect: true,
+                range: {
+                    'min': Math.floor(view.min),
+                    'max': Math.ceil(view.max)
                 }
+            });
+
+            // display correct values while sliding
+            facetSlider.noUiSlider.on('slide', function (values) {
+                view.currentMin = Math.floor(values[0]);
+                view.currentMax = Math.ceil(values[1]);
+            });
+
+            // trigger search refresh when sliding is done
+            facetSlider.noUiSlider.on('end', function () {
+                view.$emit('update', view.currentMin, view.currentMax);
             });
         }
     });

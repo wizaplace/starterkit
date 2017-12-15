@@ -1,15 +1,15 @@
-/* Component based on jquery-ui range-slider */
+/* Component based on noUi-slider range-slider */
 
 // default values
 @handle-color: #fff;
-@handle-color-active: #b542a4;
-@handle-border-width: 3px;
-@handle-border-color: #b542a4;
+@handle-color-active: #61b58d;
+@handle-border-width: 1px;
+@handle-border-color: #40b549;
 @handle-height: 20px;
 @handle-width: 20px;
 @handle-border-radius: 50%; // round
 
-@slider-height: 9px;
+@slider-height: 8px;
 @slider-background-color: #bbb;
 @slider-range-background-color: #b542a4;
 
@@ -18,20 +18,21 @@
         .range-values {
             display: flex;
             justify-content: space-between;
-            margin-top: calc(@handle-height * 1.1);
-            margin-bottom: 1em;
+            margin: calc(@handle-height * 1.1) .25rem 1rem .25rem;
         }
 
-        .ui-slider {
+        .noUi-target {
             position: relative;
             text-align: left;
             background-color: @slider-background-color;
             top: calc((@handle-height - @slider-height) / 2);
-            left: calc(@handle-width / 2 - @handle-border-width);
+            left: calc(@handle-width/2 - @handle-border-width);
             width: calc(~'100% - (@{handle-width} + (@{handle-border-width}))');
             height: @slider-height;
+            border: 0;
+            border-radius: unset;
 
-            .ui-slider-handle {
+            .noUi-handle {
                 position: absolute;
                 z-index: 2;
                 width: @handle-width;
@@ -41,41 +42,43 @@
                 touch-action: none;
                 outline: 0;
                 border-radius: @handle-border-radius;
-                top: calc(((@handle-height / 2) * -1) + (@slider-height / 2) - (@handle-border-width / 4));
-                margin-left: calc((@handle-width / 2 - @handle-border-width) * -1);
+                transform: translateY(-50%);
+                top: calc(@slider-height/2);
+                margin-left: calc(@handle-width/2 - @handle-border-width/2);
+                box-shadow: none;
+                border: @handle-border-width solid @handle-border-color;
+                background: @handle-color;
 
-                &.ui-state-active {
-                    cursor: grabbing;
-                    cursor: -moz-grabbing;
-                    cursor: -webkit-grabbing;
+                &.noUi-active {
+                    background: @handle-color-active;
+                }
+
+                &::before, &::after {
+                    height: 0;
+                    width: 0;
+                    position: inherit;
+                    background: inherit;
                 }
             }
 
-            .ui-slider-range {
+            // slider 'bar'
+            .noUi-base {
                 position: absolute;
                 z-index: 1;
                 display: block;
                 border: 0;
-                background-color: @slider-range-background-color;
+                border-radius: unset;
+                background-color: @slider-background-color;
                 top: 0;
                 height: 100%;
+
+                // between handles
+                .noUi-connect {
+                    background-color: @slider-range-background-color;
+                    border: 0;
+                    border-radius: unset;
+                }
             }
-        }
-
-        // handles
-        .ui-state-default,
-        .ui-widget-content .ui-state-default,
-        .ui-widget-header .ui-state-default {
-            border: @handle-border-width solid @handle-border-color;
-            background: @handle-color;
-            font-weight: normal;
-        }
-
-        // slider
-        .ui-widget-content .ui-state-active {
-            border: @handle-border-width solid @handle-border-color;
-            background: @handle-color-active;
-            font-weight: normal;
         }
     }
 }
