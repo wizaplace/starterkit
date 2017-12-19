@@ -23,14 +23,10 @@
 
         {# crossed out price #}
         <div><s>{{ product.crossedOutPrice|price }}</s></div>
-
-        {# regular price #}
-        <div>{{ product.minimumPrice|price }}</div>
-
-    {# ...or show only regular price #}
-    {% else %}
-        <div>{{ product.minimumPrice|price }}</div>
     {% endif %}
+
+    {# regular price #}
+    <div>{{ product.minimumPrice|price }}</div>
 
     {# product can be added to basket or favorites if it has only one declination #}
     {% if product.declinationCount < 2 %}

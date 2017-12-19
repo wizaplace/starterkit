@@ -1,0 +1,49 @@
+{% set categories = categoryTree() %}
+
+<ul id="categories" class="collapse {% if currentCategory|default %} in {% endif %}">
+    {% for category in categories %}
+
+        {# category - level 1 (root) #}
+        <li :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+
+            {% if category.children|length == 0 %}
+                <a href="{{ path('category', {'slug': category.category.slug})}}">
+                    {{ category.category.name }}
+                </a>
+            {% else %}
+                <a data-toggle="collapse" href="{{ '#cat'~category.category.id }}" aria-expanded="false" aria-controls="">
+                    {{ category.category.name }}
+                </a>
+            {% endif %}
+
+            <ul id="cat{{category.category.id }}" class="collapse">
+                {% for category in category.children %}
+
+                    {# category - level 2 #}
+                    <li :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+
+                        {% if category.children|length == 0 %}
+                            <a href="{{ path('category', {'slug': category.category.slug})}}">
+                                {{ category.category.name }}
+                            </a>
+                        {% else %}
+                            <a data-toggle="collapse" href="{{ '#cat'~category.category.id }}" aria-expanded="false" aria-controls="">
+                                {{ category.category.name }}
+                            </a>
+                        {% endif %}
+
+                        <ul id="cat{{category.category.id }}" class="collapse">
+                            {% for category in category.children %}
+
+                                {# category - level 3 #}
+                                <li :class="{'selected-category': isCurrentCategory({{ category.category.id }})}">
+                                    <a href="{{ path('category', {'slug': category.category.slug}) }}">{{ category.category.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

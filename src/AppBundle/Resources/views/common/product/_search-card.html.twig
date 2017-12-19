@@ -1,0 +1,36 @@
+<article class="product" v-for="product in products">
+
+    {# display a promo label if need be #}
+    <span v-if="product.crossedOutPrice !== null">{{ 'product.badge.promo'|trans }}</span>
+
+    {# clickable part of the product card #}
+    <a :href="productUrl(product)" title="{{ 'product.action.see_product'|trans }}">
+
+        {# product image #}
+        <img :src="imageUrl(product, 300)" :alt="product.name">
+
+        {# product name #}
+        <div v-text="product.name"></div>
+
+        {# product description #}
+        <div v-text="product.subtitle"></div>
+    </a>
+
+    {# crossed out price (if needed) #}
+    <div v-if="product.crossedOutPrice"><s>${product.crossedOutPrice|price}</s></div>
+
+    {# regular price #}
+    <div>${product.minimumPrice|price}</div>
+
+    {# product can be added to basket or favorites if it has only one declination #}
+    <button v-if="product.declinationCount < 2" class="js-add-to-basket" title="{{ 'product.action.add_to_basket'|trans }}"
+
+            {# store product id for later use #}
+            :data-id="product.id"
+
+            @click="addToBasket(product)">
+
+        {# button label #}
+        {{ 'product.action.add_to_basket'|trans }}
+    </button>
+</article>
