@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0996d5078a5229553b3de2ab6da3cd5e",
+    "content-hash": "3715009476644547016f82fdd34f400e",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -55,6 +55,48 @@
                 "timeline"
             ],
             "time": "2017-06-16T13:40:04+00:00"
+        },
+        {
+            "name": "clue/json-stream",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clue/php-json-stream.git",
+                "reference": "85aca00beef6b59f9e063ca10320e32dde062d29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clue/php-json-stream/zipball/85aca00beef6b59f9e063ca10320e32dde062d29",
+                "reference": "85aca00beef6b59f9e063ca10320e32dde062d29",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Clue\\JsonStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@lueck.tv"
+                }
+            ],
+            "description": "Lightweight incremental streaming JSON parser",
+            "homepage": "https://github.com/clue/php-json-stream",
+            "keywords": [
+                "incremental parser",
+                "json",
+                "streaming parser"
+            ],
+            "time": "2015-03-10T22:43:19+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1038,6 +1080,108 @@
                 "package versions"
             ],
             "time": "2017-11-30T22:02:29+00:00"
+        },
+        {
+            "name": "kphoen/sitemap-bundle",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sitemap-php/KPhoenSitemapBundle.git",
+                "reference": "1853d178fd3ab9dd7cf1b332da95b411b78e0e12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sitemap-php/KPhoenSitemapBundle/zipball/1853d178fd3ab9dd7cf1b332da95b411b78e0e12",
+                "reference": "1853d178fd3ab9dd7cf1b332da95b411b78e0e12",
+                "shasum": ""
+            },
+            "require": {
+                "kphoen/sitemap-generator": "^1.0",
+                "php": ">=7.0",
+                "symfony/console": "^2.8|^3.0|^4.0 ",
+                "symfony/framework-bundle": "^2.8|^3.0|^4.0 "
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4",
+                "symfony/browser-kit": "^2.8|^3.0|^4.0 ",
+                "symfony/translation": "^2.8|^3.0|^4.0 ",
+                "symfony/validator": "^2.8|^3.0|^4.0 ",
+                "symfony/yaml": "^2.8|^3.0|^4.0 "
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KPhoen\\SitemapBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr",
+                    "homepage": "http://www.kevingomez.fr/"
+                }
+            ],
+            "description": "Provides a way to create/generate a sitemap using Doctrine, etc.",
+            "keywords": [
+                "Sitemap",
+                "command",
+                "seo"
+            ],
+            "time": "2017-11-25T13:29:40+00:00"
+        },
+        {
+            "name": "kphoen/sitemap-generator",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sitemap-php/SitemapGenerator.git",
+                "reference": "42b9f0f6bfe737546583397d30a9be3f0712d5a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sitemap-php/SitemapGenerator/zipball/42b9f0f6bfe737546583397d30a9be3f0712d5a5",
+                "reference": "42b9f0f6bfe737546583397d30a9be3f0712d5a5",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.8.0",
+                "phpunit/phpunit": ">=3.7.0",
+                "propel/propel1": ">=1.6.0",
+                "symfony/routing": ">=2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SitemapGenerator": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr",
+                    "homepage": "http://www.kevingomez.fr/"
+                }
+            ],
+            "description": "Provides a way to create/generate a sitemap using Propel, Doctrine, etc.",
+            "keywords": [
+                "Sitemap",
+                "generator",
+                "seo"
+            ],
+            "time": "2015-01-12T20:03:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2676,28 +2820,29 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.2.5",
+            "version": "v0.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "e5d62daa25ccd313eecdb40d4231369c87377579"
+                "reference": "1c56dce7b862bb2667aae5954dc092bcdfd02123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/e5d62daa25ccd313eecdb40d4231369c87377579",
-                "reference": "e5d62daa25ccd313eecdb40d4231369c87377579",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/1c56dce7b862bb2667aae5954dc092bcdfd02123",
+                "reference": "1c56dce7b862bb2667aae5954dc092bcdfd02123",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
                 "roave/security-advisories": "@dev",
                 "symfony/monolog-bundle": "^3.1",
-                "symfony/symfony": "^3.3",
+                "symfony/symfony": "~3.3.14",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.2.0"
+                "wizaplace/sdk": "^1.7.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
+                "kphoen/sitemap-bundle": "^2.0",
                 "lookyman/phpstan-symfony": "@dev",
                 "php-vcr/php-vcr": "^1.4",
                 "phpstan/phpstan": "^0.8.5",
@@ -2706,6 +2851,9 @@
                 "squizlabs/php_codesniffer": "^3.1",
                 "symfony/phpunit-bridge": "^3.3",
                 "wizaplace/php-coding-standard": "^1.1"
+            },
+            "suggest": {
+                "kphoen/sitemap-bundle": "To generate sitemaps"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2717,23 +2865,24 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2017-12-01T08:29:34+00:00"
+            "time": "2018-01-05T14:36:44+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.2.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "2edea829244b829c0e0229b27da13e9b105d0c9c"
+                "reference": "b84c32ef37870c991ba3ce283e61f9c8501ed2b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/2edea829244b829c0e0229b27da13e9b105d0c9c",
-                "reference": "2edea829244b829c0e0229b27da13e9b105d0c9c",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/b84c32ef37870c991ba3ce283e61f9c8501ed2b7",
+                "reference": "b84c32ef37870c991ba3ce283e61f9c8501ed2b7",
                 "shasum": ""
             },
             "require": {
+                "clue/json-stream": "^0.1.0",
                 "guzzlehttp/guzzle": "^6.2",
                 "guzzlehttp/psr7": "^1.4",
                 "jean85/pretty-package-versions": "^1.0",
@@ -2742,6 +2891,7 @@
                 "theodorejb/polycast": "^1.0"
             },
             "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.4",
                 "php-vcr/php-vcr": "^1.4.1",
                 "phpstan/phpstan": "^0.8.0",
                 "phpunit/phpunit": "^6.1",
@@ -2750,6 +2900,12 @@
                 "wizaplace/php-coding-standard": "^1.1.3"
             },
             "type": "library",
+            "extra": {
+                "hooks": {
+                    "post-checkout": "composer install || true",
+                    "post-merge": "composer install || true"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Wizaplace\\SDK\\": "src/"
@@ -2760,7 +2916,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2017-11-30T08:46:25+00:00"
+            "time": "2018-01-03T10:25:00+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -3094,7 +3250,7 @@
             "support": {
                 "source": "https://github.com/hectorj/phpstan-symfony/tree/master"
             },
-            "time": "2017-07-18 10:15:23"
+            "time": "2017-07-18T10:15:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",

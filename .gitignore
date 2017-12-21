@@ -10,6 +10,9 @@
 !/var/translations
 /var/translations/*
 !var/translations/.gitkeep
+!/var/sitemap
+/var/sitemap/*
+!var/sitemap/.gitkeep
 !/var/sessions
 /var/sessions/*
 /node_modules/*
