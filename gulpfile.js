@@ -12,6 +12,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const buffer = require('vinyl-buffer');
+const source = require('vinyl-source-stream');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -28,8 +32,24 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+//ES6+ (prod and dev)
+gulp.task('babelify', function () {
+    let bundler = browserify('./src/AppBundle/Resources/public/scripts/scoped/header.js', {debug: true}).transform(babelify);
+
+    bundler.bundle()
+        .on('error', function (err) {
+            console.error(err);
+            this.emit('end');
+        })
+        .pipe(source('header.js')) // destination filename
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./web/scripts')); // destination folder
+});
+
 // scripts (prod)
-gulp.task('scripts_prod', function() {
+gulp.task('scripts_prod', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
@@ -38,13 +58,14 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './src/AppBundle/Resources/public/scripts/**/*.*',
+        '!./src/AppBundle/Resources/public/scripts/scoped/**/*.*',
     ])
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
 // scripts (dev)
-gulp.task('scripts_dev', function() {
+gulp.task('scripts_dev', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
@@ -53,6 +74,7 @@ gulp.task('scripts_dev', function() {
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         './src/AppBundle/Resources/public/scripts/**/*.*',
+        '!./src/AppBundle/Resources/public/scripts/scoped/**/*.*',
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
