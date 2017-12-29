@@ -37,6 +37,7 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
+        `${nodeModulePath}/nouislider/distribute/nouislider.min.js`,
         './src/AppBundle/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
@@ -52,6 +53,7 @@ gulp.task('scripts_dev', function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
+        `${nodeModulePath}/nouislider/distribute/nouislider.min.js`,
         './src/AppBundle/Resources/public/scripts/**/*.*',
     ])
         .pipe(sourcemaps.init())
