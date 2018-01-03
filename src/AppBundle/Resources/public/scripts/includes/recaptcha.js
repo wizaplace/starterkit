@@ -1,3 +1,5 @@
+import helper from './helper';
+
 const reCaptcha = {
     init: function() {
         let $reCaptchaButtons = $('.trigger-recaptcha');
@@ -52,3 +54,5 @@ const reCaptcha = {
         }
     }
 };
+
+export default reCaptcha;

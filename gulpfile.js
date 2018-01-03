@@ -32,16 +32,16 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-//ES6+ (prod and dev)
+//ES6+
 gulp.task('babelify', function () {
-    let bundler = browserify('./src/AppBundle/Resources/public/scripts/scoped/header.js', {debug: true}).transform(babelify);
+    let bundler = browserify('./src/AppBundle/Resources/public/scripts/main.js', {debug: true}).transform(babelify);
 
     bundler.bundle()
         .on('error', function (err) {
             console.error(err);
             this.emit('end');
         })
-        .pipe(source('header.js')) // destination filename
+        .pipe(source('app.js')) // destination filename
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write('./'))
@@ -49,7 +49,7 @@ gulp.task('babelify', function () {
 });
 
 // scripts (prod)
-gulp.task('scripts_prod', ['babelify'], function() {
+gulp.task('scripts_libs_prod', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
@@ -57,15 +57,14 @@ gulp.task('scripts_prod', ['babelify'], function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './src/AppBundle/Resources/public/scripts/**/*.*',
-        '!./src/AppBundle/Resources/public/scripts/scoped/**/*.*',
+        './src/AppBundle/Resources/public/scripts/lib/*.*',
     ])
-        .pipe(concat('app.js'))
+        .pipe(concat('libs.js'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
 // scripts (dev)
-gulp.task('scripts_dev', ['babelify'], function() {
+gulp.task('scripts_libs_dev', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
@@ -73,11 +72,10 @@ gulp.task('scripts_dev', ['babelify'], function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './src/AppBundle/Resources/public/scripts/**/*.*',
-        '!./src/AppBundle/Resources/public/scripts/scoped/**/*.*',
+        './src/AppBundle/Resources/public/scripts/lib/*.*',
     ])
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
+        .pipe(concat('libs.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });
@@ -128,7 +126,7 @@ gulp.task('server', function() {
         notify: false
     });
 
-    gulp.watch('./src/AppBundle/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/scripts/**/*.*', ['scripts_libs_dev', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/images/**/*.*', ['images', 'browser-reload']);
@@ -160,7 +158,7 @@ gulp.task('default', ['dev']);
 gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
 // dev tasks (with watcher, css linter and Vue.js dev version)
-gulp.task('dev', ['scripts_dev', 'common', 'lint-css', 'server']);
+gulp.task('dev', ['scripts_libs_dev', 'common', 'lint-css', 'server']);
 
 // prod tasks (without watch task)
-gulp.task('deploy', ['scripts_prod', 'common']);
+gulp.task('deploy', ['scripts_libs_prod', 'common']);

@@ -51,3 +51,5 @@ const helper = {
         $('.loading-spinner').removeClass('is-visible');
     }
 };
+
+export default helper;

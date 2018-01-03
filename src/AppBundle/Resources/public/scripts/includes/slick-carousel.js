@@ -48,3 +48,5 @@ const slick = {
         });
     }
 };
+
+export default slick;

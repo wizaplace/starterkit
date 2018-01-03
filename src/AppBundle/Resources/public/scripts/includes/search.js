@@ -2,7 +2,7 @@
  * Search API.
  */
 
-function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
+export default function SearchClient(productSearchEndpoint, productAutocompleteEndpoint) {
 
     /**
      * @param {string} query

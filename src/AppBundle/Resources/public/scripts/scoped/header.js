@@ -1,6 +1,6 @@
-// vars is declared in _search.html.twig
+import SearchClient from '../includes/search';
 
-console.log(vars);
+// `vars` variable is declared in _search.html.twig
 
 let search = new SearchClient(vars.header.apiBaseUrl + 'catalog/search/products', vars.header.apiBaseUrl + 'catalog/search/products/autocomplete');
 let urlParameters = search.restoreSearchFromUrl(); // used in Search page
