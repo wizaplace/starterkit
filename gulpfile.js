@@ -57,7 +57,7 @@ gulp.task('scripts_libs_prod', ['babelify'], function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './src/AppBundle/Resources/public/scripts/lib/*.*',
+        './src/AppBundle/Resources/public/scripts/libraries/**/*.*',
     ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest('./web/scripts'));
@@ -72,7 +72,7 @@ gulp.task('scripts_libs_dev', ['babelify'], function() {
         `${nodeModulePath}/lodash/lodash.min.js`,
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
-        './src/AppBundle/Resources/public/scripts/lib/*.*',
+        './src/AppBundle/Resources/public/scripts/libraries/**/*.*',
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('libs.js'))
