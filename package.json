@@ -1,7 +1,7 @@
 {
   "name": "wizaplace",
   "version": "0.0.0",
-  "description": "Demo project",
+  "description": "Starter Kit",
   "main": "gulpfile.js",
   "directories": {
     "doc": "docs",
