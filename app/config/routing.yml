@@ -266,6 +266,11 @@ company:
     requirements:
         slug: "%slug.regexp%"
 
+contact:
+    path: /contact
+    defaults: { _controller: AppBundle:Contact:contact }
+    methods: [GET, POST]
+
 cms_page:
     path: /{slug}
     defaults: { _controller: AppBundle:Cms:Page }

@@ -387,6 +387,9 @@
             "label": "M'abonner à la newsletter",
             "placeholder": "E-mail",
             "validate": "M'abonner"
+        },
+        "contact": {
+            "link": "contact"
         }
     },
 
@@ -448,6 +451,19 @@
             "latest_products": {
                 "title": "Nouveautés"
             }
+        }
+    },
+    "contact": {
+        "error": {
+            "missing_email": "L'email est manquant",
+            "missing_subject": "Le sujet est manquant",
+            "missing_message": "Le message est manquant"
+        },
+        "success_message": "Votre message a bien été envoyé",
+        "label": {
+            "email": "Adresse email",
+            "subject": "sujet",
+            "message": "Message"
         }
     }
 }
