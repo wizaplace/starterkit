@@ -49,6 +49,7 @@ class ContactController extends Controller
                 foreach ($errorMessages as $errorMessage) {
                     $this->addFlash('danger', $errorMessage);
                 }
+
                 return $this->redirectToRoute('contact');
             }
 
