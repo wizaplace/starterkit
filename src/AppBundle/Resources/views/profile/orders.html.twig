@@ -12,16 +12,18 @@
                 <th>{{ 'order_table.header.shipping_name' | trans }}</th>
                 <th>{{ 'order_table.header.total' | trans }}</th>
                 <th>{{ 'order_table.header.status' | trans }}</th>
+                <th>{{ 'order_table.header.invoice'|trans }}</th>
             </tr>
             </thead>
             <tbody>
             {% for order in orders|default %}
                 <tr>
-                    <td><a href="{{ path('profile_order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
+                    <td><a href="{{ path('profile_order', {'orderId': order.id}) }}">{{ order.id }}</a></td>
                     <td>{{ order.timestamp.format('d-m-y') }}</td>
                     <td>{{ order.shippingName }}</td>
                     <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
                     <td>{{ ('order_table.body.status.'~order.status) | trans }}</td>
+                    <td><a href="{{ path('profile_order_invoice', {'orderId': order.id}) }}">{{ 'order_table.body.download'|trans }}</a></td>
                 </tr>
             {% endfor %}
             </tbody>

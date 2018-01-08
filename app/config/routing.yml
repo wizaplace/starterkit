@@ -95,6 +95,11 @@ profile_orders:
     defaults: { _controller: AppBundle:Profile:orders }
     methods: [GET]
 
+profile_order_invoice:
+    path: /profil/commandes/download/{orderId}
+    defaults: { _controller: AppBundle:Profile:downloadPdfInvoice }
+    methods: [GET]
+
 profile_order:
     path: /profil/commande/{orderId}
     defaults: { _controller: AppBundle:Profile:order }
@@ -275,6 +280,11 @@ company:
     methods: [GET]
     requirements:
         slug: "%slug.regexp%"
+
+contact:
+    path: /contact
+    defaults: { _controller: AppBundle:Contact:contact }
+    methods: [GET, POST]
 
 cms_page:
     path: /{slug}

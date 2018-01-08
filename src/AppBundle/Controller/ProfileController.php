@@ -10,10 +10,24 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Controller\ProfileController as BaseController;
+use WizaplaceFrontBundle\Service\InvoiceService;
 
 class ProfileController extends BaseController
 {
+    /**
+     * @var InvoiceService
+     */
+    private $invoiceService;
+
+    public function __construct(TranslatorInterface $translator, UserService $userService, InvoiceService $invoiceService)
+    {
+        parent::__construct($translator, $userService);
+        $this->invoiceService = $invoiceService;
+    }
+
     public function viewAction(): Response
     {
         return parent::viewAction();
@@ -62,5 +76,10 @@ class ProfileController extends BaseController
     public function newsletterAction(): Response
     {
         return parent::newsletterAction();
+    }
+
+    public function downloadPdfInvoiceAction(int $orderId): Response
+    {
+        return $this->invoiceService->downloadPdf($orderId);
     }
 }
