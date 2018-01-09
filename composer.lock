@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "891aa4882d36fc98ba15c745fb38b18e",
+    "content-hash": "149b72c001625d7bf2f51a7558149e8f",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2904,16 +2904,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.2.12",
+            "version": "v0.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "029cd7f6b07df1784fcaa54a63dafeeb497ddb5b"
+                "reference": "262454bb5c196948ee16f254e84c2353725e4d1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/029cd7f6b07df1784fcaa54a63dafeeb497ddb5b",
-                "reference": "029cd7f6b07df1784fcaa54a63dafeeb497ddb5b",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/262454bb5c196948ee16f254e84c2353725e4d1d",
+                "reference": "262454bb5c196948ee16f254e84c2353725e4d1d",
                 "shasum": ""
             },
             "require": {
@@ -2950,7 +2950,7 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-01-09T13:32:32+00:00"
+            "time": "2018-01-09T15:53:18+00:00"
         },
         {
             "name": "wizaplace/sdk",
