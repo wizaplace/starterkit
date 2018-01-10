@@ -4,6 +4,11 @@
     <h1>{{ company.name }}</h1>
     <p>{{ company.description }}</p>
     <img src="{{ company.image|imageUrl }}">
+
+    {# You might want to have company info at the top of the search page and the reviews at the bottom.
+       For this, you need to add another twig block in AppBundle/Resources/views/search/search.html.twig
+       and use it here.
+    #}
     <h2>{{ 'company_average_rating'|trans }}</h2>
 
     {% for i in 1..5 %}
