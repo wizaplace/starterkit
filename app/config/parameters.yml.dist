@@ -9,3 +9,4 @@ parameters:
     api.connect_timeout: 30
     api.read_timeout: 30
     api.timeout: 30
+    http_host: localhost
