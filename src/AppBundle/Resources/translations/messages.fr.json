@@ -156,7 +156,8 @@
             "shipping_name": "Transporteur",
             "total": "Total",
             "status": "Statut",
-            "action": "Action"
+            "action": "Action",
+            "invoice": "Facture"
         },
         "body": {
             "total": "%price% TTC",
@@ -174,7 +175,8 @@
                 "CANCELED": "Annulée",
                 "IMCOMPLETED": "Imcomplète",
                 "PARENT_ORDER": "Parente"
-            }
+            },
+            "download": "Télécharger"
         }
     },
 
