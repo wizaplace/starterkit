@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: parameters.platform_sh.php }
     - { resource: security.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -32,7 +33,7 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path: ~ # use value from php.ini
-    fragments:       ~
+    fragments: ~
     http_method_override: true
     assets: ~
     php_errors:
@@ -58,3 +59,10 @@ services:
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
+    sitemap_gz_dumper:
+        class: SitemapGenerator\Dumper\GzFileDumper
+        arguments: [ "%kernel.root_dir%/../var/sitemap/sitemap.xml.gz" ]
+
+k_phoen_sitemap:
+    base_host:         'https://%http_host%'
+    base_host_sitemap: 'https://%http_host%'

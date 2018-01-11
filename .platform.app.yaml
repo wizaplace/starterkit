@@ -32,6 +32,14 @@ web:
                 # Provide a longer TTL (2 weeks) for aggregated assets files.
                 '^/(bundles|fonts|images|js|scripts|style)':
                     expires: 2w
+                '^/(?<filename>sitemap\.xml(-[0-9]+)?(\.gz)?)$':
+                    passthru: '/sitemap/$filename'
+        '/sitemap':
+            root: 'var/sitemap'
+            scripts: false
+            allow: true
+            expires: 300s
+            passthru: '/app.php'
         # Allow uploaded files to be served, but do not run scripts.
         # Missing files get mapped to the front controller above.
         '/files':
@@ -53,6 +61,7 @@ mounts:
     '/var/sessions': 'shared:files/sessions'
     '/var/translations': 'shared:files/translations'
     '/var/filebeat': 'shared:files/filebeat'
+    '/var/sitemap': 'shared:files/sitemap'
 
 runtime:
     sizing_hints:
@@ -117,3 +126,6 @@ crons:
     filebeat:
         spec: '*/5 * * * *'
         cmd: './bin/filebeat.sh'
+    sitemap:
+        spec: '*/30 * * * *'
+        cmd: 'php bin/console --env=prod sitemap:generate'

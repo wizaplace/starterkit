@@ -3,6 +3,12 @@
 {% block body %}
     <div id="search-page" v-cloak>
 
+        {# This block is used by :
+           - AppBundle/Resources/views/attribute/variant-attribute.html.twig
+           - AppBundle/Resources/views/company/company.html.twig
+        #}
+        {% block searchHeader %}{% endblock %}
+
         {# search results number #}
         <div v-if="pagination.nbResults" v-text="pagination.nbResults"></div>
 
@@ -31,8 +37,6 @@
             <div class="sidebar">
                 {% include '@App/search/sidebar/_sidebar.html.twig' %}
             </div>
-
-            {% block searchHeader %}{% endblock %}
 
             {# search result #}
             <div class="search-result">
