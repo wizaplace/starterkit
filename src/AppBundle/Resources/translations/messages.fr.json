@@ -463,7 +463,8 @@
         "label": {
             "email": "Adresse email",
             "subject": "sujet",
-            "message": "Message"
+            "message": "Message",
+            "submit": "Envoyer"
         }
     }
 }
