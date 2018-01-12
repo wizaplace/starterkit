@@ -45,7 +45,7 @@ stan-ci:
 	(sed -i 's/<error/<error source="phpstan"/g' phpstan-checkstyle.xml && false)
 
 npm-install:
-	npm install
+	npm install --no-save
 
 assets:
 	gulp deploy
