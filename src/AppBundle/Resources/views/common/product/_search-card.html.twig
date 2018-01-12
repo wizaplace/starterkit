@@ -3,6 +3,9 @@
     {# display a promo label if need be #}
     <span v-if="product.crossedOutPrice !== null">{{ 'product.badge.promo'|trans }}</span>
 
+    {# show that the product is in user's favorites #}
+    <span v-if="inFavorite(product)">{{ 'product.badge.favorite'|trans }}</span>
+
     {# clickable part of the product card #}
     <a :href="productUrl(product)" title="{{ 'product.action.see_product'|trans }}">
 

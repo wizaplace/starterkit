@@ -10,6 +10,7 @@
         data: {
             loading: true,
             products: [],
+            favoriteIds: '{{ userFavoriteIds|json_encode }}' || [],
             facets: [],
             query: urlParameters.query || '',
             pagination: {
@@ -235,6 +236,10 @@
 
             isCurrentCategory: function(categoryId) {
                 return this.filters['categories'] == categoryId;
+            },
+
+            inFavorite: function (product) {
+                return this.favoriteIds.indexOf(product.mainDeclination.id) > -1;
             },
         },
 
