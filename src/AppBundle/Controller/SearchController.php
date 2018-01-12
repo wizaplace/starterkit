@@ -29,12 +29,12 @@ class SearchController extends Controller
         // gather user's favorites
         $userFavoriteIds = [];
 
-        if($this->getUser()) {
+        if ($this->getUser()) {
             $favoriteService = $this->get(FavoriteService::class);
             $favoriteProducts = $favoriteService->getAll();
 
             $userFavoriteIds = array_map(function ($product) {
-                return (string)$product->getId();
+                return (string) $product->getId();
             }, $favoriteProducts);
         }
 
