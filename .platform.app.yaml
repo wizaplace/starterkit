@@ -85,7 +85,7 @@ hooks:
       # install and compile frontend assets
       bin/console --env=prod assets:install --no-debug
       bin/console --env=prod fos:js-routing:dump --no-debug
-      npm install --quiet --no-progress
+      npm install --quiet --no-progress --no-save
       /app/node_modules/.bin/gulp deploy
       rm -rf /app/node_modules
 
