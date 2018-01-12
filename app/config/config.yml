@@ -35,7 +35,8 @@ framework:
         save_path: ~ # use value from php.ini
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        json_manifest_path: '%kernel.root_dir%/../var/rev-manifest.json'
     php_errors:
         log: true
 

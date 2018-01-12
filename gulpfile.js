@@ -12,6 +12,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
+const rev = require('gulp-rev');
+const rename = require('gulp-rename');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -23,6 +25,7 @@ gulp.task('clean', function() {
             './web/images',
             './web/scripts',
             './web/style',
+            './var/rev-manifest.json',
         ],
         { read: false })
         .pipe(clean());
@@ -41,7 +44,11 @@ gulp.task('scripts_prod', function() {
         './src/AppBundle/Resources/public/scripts/**/*.*',
     ])
         .pipe(concat('app.js'))
-        .pipe(gulp.dest('./web/scripts'));
+        .pipe(rev())
+        .pipe(gulp.dest('./web/scripts'))
+        .pipe(rename({dirname: "scripts"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // scripts (dev)
@@ -59,7 +66,11 @@ gulp.task('scripts_dev', function() {
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./web/scripts'));
+        .pipe(rev())
+        .pipe(gulp.dest('./web/scripts'))
+        .pipe(rename({dirname: "scripts"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // style (less)
@@ -71,13 +82,21 @@ gulp.task('style', function () {
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./web/style'));
+        .pipe(rev())
+        .pipe(gulp.dest('./web/style'))
+        .pipe(rename({dirname: "style"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // JQuery (move)
 gulp.task('jquery', function() {
     return gulp.src(`${nodeModulePath}/jquery/dist/jquery.min.js`)
-        .pipe(gulp.dest('./web/scripts'));
+        .pipe(rev())
+        .pipe(gulp.dest('./web/scripts'))
+        .pipe(rename({dirname: "scripts"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // images (move)
@@ -87,7 +106,11 @@ gulp.task('images', function () {
         `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
     ])
         .pipe(imagemin())
-        .pipe(gulp.dest('./web/images'));
+        .pipe(rev())
+        .pipe(gulp.dest('./web/images'))
+        .pipe(rename({dirname: "images"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // fonts (move)
@@ -97,7 +120,10 @@ gulp.task('fonts', function () {
         `${nodeModulePath}/font-awesome/fonts/**/*`,
         `${nodeModulePath}/bootstrap/fonts/**/*`,
         `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
-    ]).pipe(gulp.dest('./web/fonts'));
+    ]).pipe(rev()).pipe(gulp.dest('./web/fonts'))
+        .pipe(rename({dirname: "fonts"}))
+        .pipe(rev.manifest('./var/rev-manifest.json', {merge: true}))
+        .pipe(gulp.dest('./'));
 });
 
 // serve (for live reload) and watch assets changes
