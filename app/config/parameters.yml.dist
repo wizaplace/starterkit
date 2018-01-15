@@ -4,7 +4,7 @@
 parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
-    api.base_url: 'https://sandbox.wizaplace.com/api/v1/'
+    env(API_BASE_URL): 'http://wizaplace.loc/api/v1/'
     wizaplace.system_user_password: 'FakeSecret'
     api.connect_timeout: 30
     api.read_timeout: 30
