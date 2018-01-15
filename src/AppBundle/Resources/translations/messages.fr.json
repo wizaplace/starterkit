@@ -217,7 +217,8 @@
         },
         "badge": {
             "promo": "Promo",
-            "new": "Nouveau"
+            "new": "Nouveau",
+            "favorite": "Favori"
         },
         "review": {
             "rating": "Votre note",

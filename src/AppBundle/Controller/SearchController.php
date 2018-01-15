@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\SDK\Catalog\CatalogService;
+use WizaplaceFrontBundle\Service\FavoriteService;
 
 class SearchController extends Controller
 {
@@ -25,10 +26,23 @@ class SearchController extends Controller
             $filters['categories'] = $selectedCategoryId;
         }
 
+        // gather user's favorites
+        $userFavoriteIds = [];
+
+        if ($this->getUser()) {
+            $favoriteService = $this->get(FavoriteService::class);
+            $favoriteProducts = $favoriteService->getAll();
+
+            $userFavoriteIds = array_map(function ($product) {
+                return (string) $product->getId();
+            }, $favoriteProducts);
+        }
+
         return $this->render('@App/search/search.html.twig', [
             'searchQuery' => $request->query->get('q'),
             'filters' => $filters,
             'selectedCategory' => $selectedCategory,
+            'userFavoriteIds' => $userFavoriteIds,
         ]);
     }
 }
