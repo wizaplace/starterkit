@@ -10,6 +10,8 @@ parameters:
     slug.regexp: !php/const:Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
     recaptcha.key: '%env(RECAPTCHA_KEY)%'
     recaptcha.secret: '%env(RECAPTCHA_SECRET)%'
+    api.base_url: '%env(API_BASE_URL)%'
+    # default values
     env(RECAPTCHA_KEY): '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
     env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
