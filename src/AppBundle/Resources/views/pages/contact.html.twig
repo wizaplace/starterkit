@@ -1,0 +1,15 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+
+    <form method="post" action="{{ path('contact') }}">
+        <label for="contact_email">{{ 'contact.label.email'|trans }}</label>
+        <input id ="contact_email" type="text" name="email">
+        <label for="contact_subject">{{ 'contact.label.subject'|trans }}</label>
+        <input id="contact_subject" type="text" name="subject">
+        <label for="contact_message">{{ 'contact.label.email'|trans }}</label>
+        <textarea id="contact_message" name="message"></textarea>
+        <button type="submit">{{ 'contact.label.submit'|trans }}</button>
+    </form>
+
+{% endblock %}
