@@ -12,6 +12,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const buffer = require('vinyl-buffer');
+const source = require('vinyl-source-stream');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -28,8 +32,24 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+//ES6+
+gulp.task('babelify', function () {
+    let bundler = browserify('./src/AppBundle/Resources/public/scripts/main.js', {debug: true}).transform(babelify);
+
+    bundler.bundle()
+        .on('error', function (err) {
+            console.error(err);
+            this.emit('end');
+        })
+        .pipe(source('app.js')) // destination filename
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./web/scripts')); // destination folder
+});
+
 // scripts (prod)
-gulp.task('scripts_prod', function() {
+gulp.task('scripts_libs_prod', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
@@ -38,14 +58,14 @@ gulp.task('scripts_prod', function() {
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         `${nodeModulePath}/nouislider/distribute/nouislider.min.js`,
-        './src/AppBundle/Resources/public/scripts/**/*.*',
+        './src/AppBundle/Resources/public/scripts/libraries/**/*.*',
     ])
-        .pipe(concat('app.js'))
+        .pipe(concat('libs.js'))
         .pipe(gulp.dest('./web/scripts'));
 });
 
 // scripts (dev)
-gulp.task('scripts_dev', function() {
+gulp.task('scripts_libs_dev', ['babelify'], function() {
     return gulp.src([
         `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
         `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
@@ -54,10 +74,10 @@ gulp.task('scripts_dev', function() {
         `${nodeModulePath}/cookieconsent/build/cookieconsent.min.js`,
         `${nodeModulePath}/slick-carousel/slick/slick.min.js`,
         `${nodeModulePath}/nouislider/distribute/nouislider.min.js`,
-        './src/AppBundle/Resources/public/scripts/**/*.*',
+        './src/AppBundle/Resources/public/scripts/libraries/**/*.*',
     ])
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
+        .pipe(concat('libs.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/scripts'));
 });
@@ -108,7 +128,7 @@ gulp.task('server', function() {
         notify: false
     });
 
-    gulp.watch('./src/AppBundle/Resources/public/scripts/**/*.*', ['scripts_dev', 'browser-reload']);
+    gulp.watch('./src/AppBundle/Resources/public/scripts/**/*.*', ['scripts_libs_dev', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/style/**/*.*', ['lint-css', 'style', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/fonts/**/*.*', ['fonts', 'browser-reload']);
     gulp.watch('./src/AppBundle/Resources/public/images/**/*.*', ['images', 'browser-reload']);
@@ -140,7 +160,7 @@ gulp.task('default', ['dev']);
 gulp.task('common', ['style', 'jquery', 'images', 'fonts']);
 
 // dev tasks (with watcher, css linter and Vue.js dev version)
-gulp.task('dev', ['scripts_dev', 'common', 'lint-css', 'server']);
+gulp.task('dev', ['scripts_libs_dev', 'common', 'lint-css', 'server']);
 
 // prod tasks (without watch task)
-gulp.task('deploy', ['scripts_prod', 'common']);
+gulp.task('deploy', ['scripts_libs_prod', 'common']);
