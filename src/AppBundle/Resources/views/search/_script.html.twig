@@ -90,24 +90,36 @@
              * */
             toggleFilter: function (facetName, variantName) {
 
-                // désélection d'une valeur
-                if (this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName) {
 
-                    // remove filter
-                    Vue.delete(this.filters, facetName);
+                // désélection d'une valeur déjà présente dans le tableau des filtres
+                if ( this.filters.hasOwnProperty(facetName) && _.includes(this.filters[facetName], variantName) ) {
 
-                    // sélection d'une nouvelle valeur
+                    // si la valeur est le seul élément du tableau, on supprime le filtre entièrement
+                    if (this.filters[facetName].length < 2) {
+                        Vue.delete(this.filters, facetName);
+
+                    // sinon on enlève simplement la valeur du tableau
+                    } else {
+                        this.filters[facetName].splice(this.filters[facetName].indexOf(variantName), 1);
+                    }
+
+                // sélection d'une nouvelle valeur
                 } else {
 
-                    // set filter
-                    Vue.set(this.filters, facetName, variantName);
+                    // récupère sous forme de tableau les valeurs éventuellement déjà sélectionnées
+                    // pour y ajouter la valeur qui vient juste d'être sélectionnée
+                    var variantNames = _.values(this.filters[facetName]);
+                    variantNames.push(variantName);
+
+                    // met à jour le tableau de filtres de l'attribut avec le tableau de ses valeurs
+                    Vue.set(this.filters, facetName, variantNames);
                 }
                 this.refresh();
             },
 
             // use `isChecked()` to know when a radio button or a checkbox has to be checked (needed after a refresh)
             isChecked: function(facetName, variantName) {
-                return this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName;
+                return this.filters.hasOwnProperty(facetName) && _.includes(this.filters[facetName], variantName);
             },
 
             // e.g. price slider
