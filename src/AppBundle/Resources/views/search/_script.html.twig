@@ -10,7 +10,7 @@
         data: {
             loading: true,
             products: [],
-            favoriteIds: '{{ userFavoriteIds|json_encode }}' || [],
+            favoriteIds: JSON.parse('{{ userFavoriteIds|json_encode|raw }}') || [],
             facets: [],
             query: urlParameters.query || '',
             pagination: {
@@ -89,7 +89,6 @@
              * variantName correspond à la valeur sélectionnée. Exemple: blanc
              * */
             toggleFilter: function (facetName, variantName) {
-
 
                 // désélection d'une valeur déjà présente dans le tableau des filtres
                 if ( this.filters.hasOwnProperty(facetName) && _.includes(this.filters[facetName], variantName) ) {
@@ -264,9 +263,53 @@
                 return this.filters['categories'] == categoryId;
             },
 
-            inFavorite: function (product) {
+            inFavorites: function (product) {
                 return this.favoriteIds.indexOf(product.mainDeclination.id) > -1;
             },
+
+            addToFavorites: function (product) {
+                helper.displayLoadingSpinner();
+
+                var self = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('add_to_favorites') }}",
+                    data: { declinationId: product.mainDeclination.id },
+                }).done(function() {
+
+                    // add product to local favorites array
+                    self.favoriteIds.push(product.mainDeclination.id);
+
+                    notification.createAlert("{{'product.favorite.successfully_added'|trans}}", "success");
+                }).fail(function (err) {
+
+                }).always(function () {
+                    helper.removeLoadingSpinner();
+                });
+            },
+
+            removeFromFavorites: function (product) {
+                helper.displayLoadingSpinner();
+
+                var self = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('remove_from_favorites') }}",
+                    data: { declinationId: product.mainDeclination.id },
+                }).done(function() {
+
+                    {# remove product from local favorites array #}
+                    self.favoriteIds.splice(self.favoriteIds.indexOf(product.mainDeclination.id), 1);
+
+                    notification.createAlert("{{'product.favorite.successfully_removed'|trans}}", "success");
+                }).fail(function (err) {
+
+                }).always(function () {
+                    helper.removeLoadingSpinner();
+                });
+            }
         },
 
         mounted: function () {
