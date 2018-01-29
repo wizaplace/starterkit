@@ -84,11 +84,19 @@
                 this.refresh();
             },
 
+            /**
+             * facetName représente le nom d'un attribut. Exemple: couleur
+             * variantName correspond à la valeur sélectionnée. Exemple: blanc
+             * */
             toggleFilter: function (facetName, variantName) {
+
+                // désélection d'une valeur
                 if (this.filters.hasOwnProperty(facetName) && this.filters[facetName] == variantName) {
 
                     // remove filter
                     Vue.delete(this.filters, facetName);
+
+                    // sélection d'une nouvelle valeur
                 } else {
 
                     // set filter
@@ -123,8 +131,14 @@
                 this.refresh();
             },
 
-            // order facets by 'position' attribute (position is set via back office)
-            orderedFacets: function (values) {
+            // order facets by position
+            orderFacets: function (values) {
+
+                // save facet key as it will be lost on ordering process
+                _.forEach(values, function (value, key) {
+                    value.key = key;
+                });
+
                 return _.orderBy(values, 'position');
             },
 
