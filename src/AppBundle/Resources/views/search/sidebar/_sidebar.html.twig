@@ -35,9 +35,9 @@
         </h4>
 
         <div :id="'facet-'+facet.name" class="collapse" :class="{in: (filters[facet.name]) }">
-            <div v-for="(value, index) in orderedFacets(facet.values)">
+            <div v-for="value in orderFacets(facet.values)">
                 <label>
-                    <input type="radio" @click="toggleFilter(facet.name, index)" :checked="isChecked(facet.name, index)">
+                    <input type="radio" @click="toggleFilter(facet.name, value.key)" :checked="isChecked(facet.name, index)">
                     <span v-text="value.label"></span>
                 </label>
             </div>
