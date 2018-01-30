@@ -18,7 +18,7 @@
         "roave/security-advisories": "@dev",
         "sensio/distribution-bundle": "^5.0.20",
         "sensio/framework-extra-bundle": "^3.0.26",
-        "sentry/sentry": "^1.7",
+        "sentry/sentry": "^1.8.2",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/psr-http-message-bridge": "^1.0",
         "symfony/symfony": "~3.3.15",
