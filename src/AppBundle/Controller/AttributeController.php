@@ -32,10 +32,7 @@ class AttributeController extends Controller
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
 
-        $userFavoriteIds = [];
-        if ($this->getUser()) {
-            $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
-        }
+        $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
 
         return $this->render('@App/attribute/variant-attribute.html.twig', [
             'filters' => $filters,
