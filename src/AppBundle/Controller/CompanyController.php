@@ -38,10 +38,7 @@ class CompanyController extends Controller
         $reviews = $reviewService->getCompanyReviews($companyId);
         $canUserReviewCompany = $reviewService->canUserReviewCompany($companyId);
 
-        $userFavoriteIds = [];
-        if ($this->getUser()) {
-            $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
-        }
+        $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
 
         return $this->render('@App/company/company.html.twig', [
             'filters' => $filters,
