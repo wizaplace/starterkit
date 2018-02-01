@@ -46,9 +46,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     # Provisioning
-    if File.exists?(ENV['HOME'] + "/.gitconfig")
-        config.vm.provision "file", source: "~/.gitconfig", destination: "/home/vagrant/.gitconfig"
-    end
     config.vm.provision "shell", path: "vagrant/provision.sh", keep_color: true, privileged: false
 end
 
