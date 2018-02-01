@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\SDK\Catalog\CatalogService;
 use Wizaplace\SDK\Seo\SeoService;
 use Wizaplace\SDK\Seo\SlugTargetType;
+use WizaplaceFrontBundle\Service\FavoriteService;
 
 class AttributeController extends Controller
 {
@@ -31,9 +32,12 @@ class AttributeController extends Controller
         $filters = [];
         $filters[$selectedVariant->getAttributeId()] = $selectedVariantId;
 
+        $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
+
         return $this->render('@App/attribute/variant-attribute.html.twig', [
             'filters' => $filters,
             'selectedVariant' => $selectedVariant,
+            'userFavoriteIds' => $userFavoriteIds,
         ]);
     }
 }
