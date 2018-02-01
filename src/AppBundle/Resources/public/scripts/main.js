@@ -7,6 +7,9 @@ $(function() {
     // Replace exceeding text with ellipsis (three dots)
     $('.ellipsis').dotdotdot();
 
+    // init star rating lib
+    ui.renderRatings();
+
     // init slick behaviour
     slick.init();
 
