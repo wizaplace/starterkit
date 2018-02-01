@@ -33,7 +33,7 @@
             {% endif %}
 
             {# product's vendor #}
-            <p>{{ product.companies[0].name }}</p>
+            <p><a href="{{ path('company', { slug: product.companies[0].slug }) }}">{{ product.companies[0].name }}</a></p>
 
             {# user must be logged in to contact vendor #}
             {% if app.user %}
