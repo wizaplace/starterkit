@@ -16,6 +16,7 @@ use Wizaplace\SDK\Catalog\CatalogService;
 use Wizaplace\SDK\Catalog\Review\ReviewService;
 use Wizaplace\SDK\Seo\SeoService;
 use Wizaplace\SDK\Seo\SlugTargetType;
+use WizaplaceFrontBundle\Service\FavoriteService;
 
 class CompanyController extends Controller
 {
@@ -37,10 +38,16 @@ class CompanyController extends Controller
         $reviews = $reviewService->getCompanyReviews($companyId);
         $canUserReviewCompany = $reviewService->canUserReviewCompany($companyId);
 
+        $userFavoriteIds = [];
+        if ($this->getUser()) {
+            $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
+        }
+
         return $this->render('@App/company/company.html.twig', [
             'filters' => $filters,
             'company' => $company,
             'reviews' => $reviews,
+            'userFavoriteIds' => $userFavoriteIds,
             'canUserReviewCompany' => $canUserReviewCompany,
         ]);
     }

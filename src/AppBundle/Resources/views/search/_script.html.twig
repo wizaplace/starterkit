@@ -10,7 +10,7 @@
         data: {
             loading: true,
             products: [],
-            favoriteIds: {{ userFavoriteIds|json_encode|raw }} || [],
+            favoriteIds: _.values({{ userFavoriteIds|json_encode|raw }}) || [],
             facets: [],
             query: urlParameters.query || '',
             pagination: {
