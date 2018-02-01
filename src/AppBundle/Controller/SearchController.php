@@ -26,10 +26,7 @@ class SearchController extends Controller
             $filters['categories'] = $selectedCategoryId;
         }
 
-        $userFavoriteIds = [];
-        if ($this->getUser()) {
-            $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
-        }
+        $userFavoriteIds = $this->get(FavoriteService::class)->getFavoriteIds();
 
         return $this->render('@App/search/search.html.twig', [
             'searchQuery' => $request->query->get('q'),
