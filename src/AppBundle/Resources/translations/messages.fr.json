@@ -201,6 +201,17 @@
                 "see_basket": "Voir mon panier"
             }
         },
+        "report_modal": {
+            "title": "Signaler un produit",
+            "trigger": "Signaler le produit",
+            "name": "Votre nom",
+            "email": "Votre email",
+            "message": "Raison du signalement",
+            "cancel": "Annuler",
+            "send": "Signaler le produit",
+            "success": "Le produit a bien été signalé",
+            "error": "Le produit n'a pas pu être signalé"
+        },
         "contact_vendor": {
             "label": "Contacter le marchand",
             "modal": {
