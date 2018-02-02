@@ -63,7 +63,7 @@ class ProductController extends BaseController
         //product Reviews
         $reviews = $this->reviewService->getProductReviews($product->getId());
 
-        if ($request->query->has('options')) {
+        if ($request->query->has('options')) { // We have a list of option variants, so we do not have an actual declination
             $template = '@App/product/product.html.twig';
             $isFavorite = false;
             $declination = null;
