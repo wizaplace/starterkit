@@ -1,9 +1,6 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-wizaplace_front_bundle:
-    resource: '@WizaplaceFrontBundle/Resources/config/routing.yml'
-
 home:
     path: /
     defaults: { _controller: AppBundle:Home:home }
@@ -225,6 +222,11 @@ product:
     options:
         expose: true
 
+report_product:
+    path: /product/report
+    defaults: { _controller: AppBundle:Product:report }
+    methods: [POST]
+
 # panier (Create, Update, Delete)
 clean_basket:
     path: /basket/clean
@@ -314,3 +316,7 @@ remove_from_favorites:
     path: /favorites/remove
     defaults: { _controller: WizaplaceFrontBundle:Favorite:removeFromFavorite }
     methods: [POST]
+
+# front bundle
+wizaplace_front_bundle:
+    resource: '@WizaplaceFrontBundle/Resources/config/routing.yml'

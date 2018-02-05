@@ -119,18 +119,17 @@
                 </ul>
             {% endif %}
 
-
             {# change quantity / add to basket #}
-            <input type="number" :value="quantity" v-model="quantity" {% if not inStock %} disabled {% endif %}>
-            <button type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
-            <button type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
-
-            {% if inStock %}
-                <button type="button" @click="addToBasket">{{ 'product.action.add_to_basket'|trans }}</button>
-            {% else %}
-                <button type="button" disabled>{{ 'product.stock.out_of_stock'|trans }}</button>
-            {% endif %}
-
+            <form method="POST" @submit.prevent="addToBasket">
+                <input type="number" v-model="quantity" {% if not inStock %} disabled {% endif %}>
+                <button type="button" @click="decreaseQuantity" {% if not inStock %} disabled {% endif %}> - </button>
+                <button type="button" @click="increaseQuantity" {% if not inStock %} disabled {% endif %}> + </button>
+                {% if inStock %}
+                    <button type="submit">{{ 'product.action.add_to_basket'|trans }}</button>
+                {% else %}
+                    <button type="button" disabled>{{ 'product.stock.out_of_stock'|trans }}</button>
+                {% endif %}
+            </form>
 
             {# long description #}
             <div>{{ product.description|striptags('<br><p>')|raw }}</div>
@@ -180,12 +179,14 @@
                 <div>{{ review.message }}</div>
             {% endfor %}
 
+            {# trigger 'report product' modal #}
+            <div><a data-toggle="modal" href="#report-modal">{{ 'product.report_modal.trigger'|trans }}</a></div>
 
             {# 'add your own review' #}
 
             {# user is logged in #}
             {% if app.user %}
-                <form method="post" action="{{ path('create_product_review') }}">
+                <form method="POST" action="{{ path('create_product_review') }}">
                     <div class="demo-block column">
                         <input type="hidden" name="redirect_url" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
                         <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -215,13 +216,15 @@
                     {% include '@App/common/product/_card.html.twig' with { "product": product } %}
                 {% endfor %}
             </div>
-
         </div>
+
+        {# modals without scripts #}
+        {% include '@App/product/_modal_discussion.html.twig' %}
+        {% include '@App/product/_modal_report.html.twig' %}
     </section>
 
-    {# include modals #}
-    {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
-    {% include '@App/product/_discussion-modal.html.twig' %}
+        {# modals with scripts (outside of vuejs scope) #}
+        {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
 
 {% endblock %}
 
@@ -234,6 +237,9 @@
                 quantity: 1,
                 declinationId: '{{ declination.id }}',
                 isFavorite: {{ isFavorite|json_encode }},
+                reportName: '',
+                reportEmail: '',
+                reportMessage: '',
             },
 
             methods: {
@@ -296,7 +302,29 @@
                             notification.createAlert("{{'product.favorite.successfully_removed'|trans}}", "success");
                         }
                     });
-                }
+                },
+
+                report: function () {
+                    helper.displayLoadingSpinner();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('report_product') }}",
+                        data: {
+                            productId: '{{ product.id  }}',
+                            name: this.reportName,
+                            email: this.reportEmail,
+                            message: this.reportMessage,
+                        },
+                    }).done(function () {
+                        notification.createAlert('{{ 'product.report_modal.success'|trans }}', "success");
+                    }).fail(function () {
+                        notification.createAlert('{{ 'product.report_modal.error'|trans }}', "danger");
+                    }).always(function () {
+                        $('.modal').modal('hide');
+                        helper.removeLoadingSpinner();
+                    });
+                },
             },
         });
 
