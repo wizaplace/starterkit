@@ -1,56 +1,56 @@
 /* Component based on noUi-slider range-slider */
 
 // default values
-@handle-color: #fff;
-@handle-color-active: #61b58d;
-@handle-border-width: 1px;
-@handle-border-color: #40b549;
-@handle-height: 20px;
-@handle-width: 20px;
-@handle-border-radius: 50%; // round
+$handle-color: white;
+$handle-color-active: #61b58d;
+$handle-border-width: 1px;
+$handle-border-color: #40b549;
+$handle-height: 20px;
+$handle-width: 20px;
+$handle-border-radius: 50%; // round
 
-@slider-height: 8px;
-@slider-background-color: #bbb;
-@slider-range-background-color: #b542a4;
+$slider-height: 8px;
+$slider-background-color: #bbb;
+$slider-range-background-color: #b542a4;
 
 .range-slider {
     .range-slider-wrapper {
         .range-values {
             display: flex;
             justify-content: space-between;
-            margin: calc(@handle-height * 1.1) .25rem 1rem .25rem;
+            margin: calc(#{$handle-height} * 1.1) .25rem 1rem .25rem;
         }
 
         .noUi-target {
             position: relative;
             text-align: left;
-            background-color: @slider-background-color;
-            top: calc((@handle-height - @slider-height) / 2);
-            left: calc(@handle-width/2 - @handle-border-width);
-            width: calc(~'100% - (@{handle-width} + (@{handle-border-width}))');
-            height: @slider-height;
+            background-color: $slider-background-color;
+            top: calc((#{$handle-height} - #{$slider-height}) / 2);
+            left: calc(#{$handle-width} / 2 - #{$handle-border-width});
+            width: calc(100% - (#{$handle-width} + #{$handle-border-width}));
+            height: $slider-height;
             border: 0;
             border-radius: unset;
 
             .noUi-handle {
                 position: absolute;
                 z-index: 2;
-                width: @handle-width;
-                height: @handle-height;
+                width: $handle-width;
+                height: $handle-height;
                 cursor: grab;
                 -ms-touch-action: none;
                 touch-action: none;
                 outline: 0;
-                border-radius: @handle-border-radius;
+                border-radius: $handle-border-radius;
                 transform: translateY(-50%);
-                top: calc(@slider-height/2);
-                margin-left: calc(@handle-width/2 - @handle-border-width/2);
+                top: calc(#{$slider-height} / 2);
+                margin-left: calc(#{$handle-width} / 2 - #{$handle-border-width} / 2);
                 box-shadow: none;
-                border: @handle-border-width solid @handle-border-color;
-                background: @handle-color;
+                border: $handle-border-width solid $handle-border-color;
+                background: $handle-color;
 
                 &.noUi-active {
-                    background: @handle-color-active;
+                    background: $handle-color-active;
                 }
 
                 &::before, &::after {
@@ -68,13 +68,13 @@
                 display: block;
                 border: 0;
                 border-radius: unset;
-                background-color: @slider-background-color;
+                background-color: $slider-background-color;
                 top: 0;
                 height: 100%;
 
                 // between handles
                 .noUi-connect {
-                    background-color: @slider-range-background-color;
+                    background-color: $slider-range-background-color;
                     border: 0;
                     border-radius: unset;
                 }

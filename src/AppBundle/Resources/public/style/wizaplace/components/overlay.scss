@@ -6,11 +6,11 @@
     width: 100vw;
     height: 100vh;
     opacity: 0;
-    background-color: #000;
+    background-color: black;
     transition: opacity .2s ease-in-out, z-index 0s ease .3s; // z-index is deferred after transition
 
     &.is-visible {
-        z-index: @zindex-overlay;
+        z-index: $zindex-overlay;
         opacity: .5;
         transition: opacity .2s ease-in-out, z-index 0s ease;
     }

@@ -14,12 +14,12 @@
     }
 
     .user-message {
-        background: fade(@gray-light, 10%);
+        background: transparentize(lightgray, 10%);
     }
 
     .company-message {
         align-self: flex-end;
-        background: fade(@gray-light, 10%);
+        background: transparentize(lightgray, 10%);
     }
 }
 

@@ -31,7 +31,7 @@ gulp.task('clean', function() {
 // scripts (prod)
 gulp.task('scripts_prod', function() {
     return gulp.src([
-        `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
+        `${nodeModulePath}/bootstrap/dist/js/bootstrap.bundle.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
@@ -47,7 +47,7 @@ gulp.task('scripts_prod', function() {
 // scripts (dev)
 gulp.task('scripts_dev', function() {
     return gulp.src([
-        `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
+        `${nodeModulePath}/bootstrap/dist/js/bootstrap.bundle.js`,
         `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
@@ -95,7 +95,6 @@ gulp.task('fonts', function () {
     return gulp.src([
         './src/AppBundle/Resources/public/fonts/**/*.*',
         `${nodeModulePath}/font-awesome/fonts/**/*`,
-        `${nodeModulePath}/bootstrap/fonts/**/*`,
         `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
     ]).pipe(gulp.dest('./web/fonts'));
 });
