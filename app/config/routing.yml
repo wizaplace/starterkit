@@ -295,12 +295,12 @@ cms_page:
 
 # reviews
 create_product_review:
-    path: /product/add_review
+    path: /product/add/review
     defaults: { _controller: AppBundle:Product:review }
     methods: [POST]
 
 create_company_review:
-    path: /company/add_review
+    path: /company/add/review
     defaults: { _controller: AppBundle:Company:review }
     methods: [POST]
 
