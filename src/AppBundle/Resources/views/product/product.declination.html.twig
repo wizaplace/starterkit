@@ -1,0 +1,127 @@
+{% extends '@App/product/product.html.twig' %}
+
+{% block product_extra %}
+    {# favorites (only logged in users can add/remove product to/from their favorites) #}
+    {% if app.user %}
+        <a href="#" @click.prevent="removeFromFavorite" v-if="isFavorite">{{ 'product.favorite.remove'|trans }}</a>
+        <a href="#" @click.prevent="addToFavorite" v-else>{{ 'product.favorite.add'|trans }}</a>
+    {% endif %}
+
+    {# price (with promo) #}
+    {% if declination.crossedoutprice %}
+
+        {# '|price' filter is provided by WizaplaceFrontBundle and return a price and euro symbol (€) #}
+        <div>{{ declination.pricewithoutvat|price }}</div>
+        <div><s>{{ declination.crossedoutprice|price }}</s></div>
+
+        {# price (without promo) #}
+    {% else %}
+        <div>{{ declination.priceWithoutVat|price }}</div>
+    {% endif %}
+
+    {# greentax #}
+    <div>{{ declination.greenTax|price }}</div>
+{% endblock product_extra %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        new Vue({
+            delimiters: ['${','}'],
+            el: '#product-page',
+            data: {
+                quantity: 1,
+                declinationId: '{{ declination.id }}',
+                isFavorite: {{ isFavorite|json_encode }},
+                reportName: '',
+                reportEmail: '',
+                reportMessage: '',
+            },
+
+            methods: {
+                increaseQuantity: function() {
+                    if(this.quantity < {{ declination.amount|e('js') }}) {
+                        this.quantity ++;
+                    }
+                },
+
+                decreaseQuantity: function() {
+                    if(this.quantity > 1) {
+                        this.quantity --;
+                    }
+                },
+
+                addToBasket: function() {
+
+                    var self = this;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('basket_add_product') }}",
+                        data: { declinationId: this.declinationId, quantity: this.quantity },
+                        success: function(response) {
+                            var declinationInfo = {
+                                name: {{ product.name|json_encode|raw }},
+                                price: {{ declination.priceWithoutVat|json_encode|raw }},
+                                image: {{ (declination.images|length > 0) ? declination.images|first|imageUrl(100, 100)|json_encode|raw : 'null' }},
+                            };
+                            hydrateModal(declinationInfo, self.quantity, response.message);
+                        }
+                    });
+                },
+
+                addToFavorite: function () {
+
+                    var self = this;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('add_to_favorites') }}",
+                        data: { declinationId: this.declinationId },
+                        success: function() {
+                            self.isFavorite = true;
+                            notification.createAlert("{{'product.favorite.successfully_added'|trans}}", "success");
+                        },
+                        error: function () {
+                            notification.createAlert("{{'product.favorite.already_favored'|trans}}", "danger");
+                        }
+                    });
+                },
+
+                removeFromFavorite: function () {
+
+                    var self = this;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('remove_from_favorites') }}",
+                        data: { declinationId: this.declinationId },
+                        success: function() {
+                            self.isFavorite = false;
+                            notification.createAlert("{{'product.favorite.successfully_removed'|trans}}", "success");
+                        }
+                    });
+                },
+
+                report: function () {
+                    helper.displayLoadingSpinner();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('report_product') }}",
+                        data: {
+                            productId: '{{ product.id  }}',
+                            name: this.reportName,
+                            email: this.reportEmail,
+                            message: this.reportMessage,
+                        },
+                    }).done(function () {
+                        notification.createAlert('{{ 'product.report_modal.success'|trans }}', "success");
+                    }).fail(function () {
+                        notification.createAlert('{{ 'product.report_modal.error'|trans }}', "danger");
+                    }).always(function () {
+                        $('.modal').modal('hide');
+                        helper.removeLoadingSpinner();
+                    });
+                },
+            },
+        });
+    </script>
+{% endblock scripts %}
