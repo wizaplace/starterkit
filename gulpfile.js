@@ -2,12 +2,12 @@
 
 // dependencies
 const gulp = require('gulp');
-const less = require('gulp-less');
+const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
-const clean = require('gulp-clean');
+const clean = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
-const cleanCSS = require('gulp-clean-css');
+const cleanCSS = require('gulp-clean');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
@@ -62,15 +62,15 @@ gulp.task('scripts_dev', function() {
         .pipe(gulp.dest('./web/scripts'));
 });
 
-// style (less)
+// style (sass)
 gulp.task('style', function () {
-    return gulp.src('./src/AppBundle/Resources/public/style/main.less')
-        .pipe(sourcemaps.init())
-        .pipe(less())
+    return gulp.src('./src/AppBundle/Resources/public/style/main.scss')
+        // .pipe(sourcemaps.init())
+        .pipe(sass())
         .pipe(concat('app.css'))
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
-        .pipe(sourcemaps.write('./'))
+        // .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/style'));
 });
 
@@ -120,7 +120,7 @@ gulp.task('browser-reload', function() {
 
 gulp.task('lint-css', function lintCssTask() {
     return gulp
-        .src('src/AppBundle/Resources/public/style/**/*.less')
+        .src('src/AppBundle/Resources/public/style/**/*.scss')
         .pipe(gulpStylelint({
             reporters: [
                 {formatter: 'string', console: true}

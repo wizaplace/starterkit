@@ -17,11 +17,11 @@
         <div class="dropdown">
 
             {# small screens: display a link to profile page #}
-            <a href="{{ path('profile') }}" class="hidden-md hidden-lg">{{ 'header.account.label'|trans }}</a>
+            <a href="{{ path('profile') }}" class="d-md-none">{{ 'header.account.label'|trans }}</a>
 
             {# large screens #}
-            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.account.label'|trans }}</a>
-            <div class="dropdown-menu">
+            <a href="#" role="button" data-toggle="dropdown" id="user-menu-trigger" class="d-none d-md-block" aria-haspopup="true" aria-expanded="false">{{ 'header.account.label'|trans }}</a>
+            <div class="dropdown-menu" aria-labelledby="user-menu-trigger">
                 {% include('@App/common/header/_pop_account.html.twig') %}
             </div>
         </div>
@@ -32,11 +32,11 @@
         <div class="dropdown">
 
             {# small screens: display a link to login page #}
-            <a href="{{ path('login') }}" class="hidden-md hidden-lg">{{ 'header.login.label'|trans }}</a>
+            <a href="{{ path('login') }}" class="d-md-none">{{ 'header.login.label'|trans }}</a>
 
             {# large screens #}
-            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.login.label'|trans }}</a>
-            <div class="dropdown-menu">
+            <a href="#" role="button" data-toggle="dropdown" id="login-menu-trigger" class="d-none d-md-block" aria-haspopup="true" aria-expanded="false">{{ 'header.login.label'|trans }}</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="login-menu-trigger">
                 {% include('@App/common/header/_pop_login.html.twig') %}
             </div>
         </div>
@@ -46,11 +46,11 @@
         <div class="dropdown">
 
             {# small screens: display a link to login page #}
-            <a href="{{ path('login') }}" class="hidden-md hidden-lg">{{ 'header.register.label'|trans }}</a>
+            <a href="{{ path('login') }}" class="d-md-none">{{ 'header.register.label'|trans }}</a>
 
             {# large screens #}
-            <a href="#" data-toggle="dropdown" class="hidden-xs hidden-sm">{{ 'header.register.label'|trans }}</a>
-            <div class="dropdown-menu">
+            <a href="#" role="button" data-toggle="dropdown" id="register-menu-trigger" class="d-none d-md-block" aria-haspopup="true" aria-expanded="false">{{ 'header.register.label'|trans }}</a>
+            <div class="dropdown-menu" aria-labelledby="register-menu-trigger">
                 {% include('@App/common/header/_pop_register.html.twig') %}
             </div>
         </div>

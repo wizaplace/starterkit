@@ -10,8 +10,8 @@
         <table class="table table-stripped">
             <thead>
                 <tr>
-                    <th class="hidden-xs">N° Cde</th>
-                    <th class="hidden-xs">Date</th>
+                    <th class="d-xs-none">N° Cde</th>
+                    <th class="d-xs-none">Date</th>
                     <th>Total HT</th>
                     <th>Statut</th>
                     <th>Commentaire Client</th>
@@ -19,8 +19,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="hidden-xs">{{ order.id }}</td>
-                    <td class="hidden-xs">{{ order.timestamp|date("d/m/Y") }}</td>
+                    <td class="d-xs-none">{{ order.id }}</td>
+                    <td class="d-xs-none">{{ order.timestamp|date("d/m/Y") }}</td>
                     <td class="price">{{ order.total|price }}</td>
                     <td>
                         {% if  order.status == "STANDBY_BILLING" %}Attente de paiement
