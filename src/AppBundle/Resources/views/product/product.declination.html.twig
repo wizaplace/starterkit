@@ -27,39 +27,42 @@
     {{ parent() }}
     <script>
         new Vue({
-            delimiters: ['${', '}'],
-            el: '#product',
+            delimiters: ['${','}'],
+            el: '#product-page',
             data: {
                 quantity: 1,
                 declinationId: '{{ declination.id }}',
                 isFavorite: {{ isFavorite|json_encode }},
+                reportName: '',
+                reportEmail: '',
+                reportMessage: '',
             },
 
             methods: {
-                increaseQuantity: function () {
-                    if (this.quantity < {{ declination.amount|e('js') }}) {
-                        this.quantity++;
+                increaseQuantity: function() {
+                    if(this.quantity < {{ declination.amount|e('js') }}) {
+                        this.quantity ++;
                     }
                 },
 
-                decreaseQuantity: function () {
-                    if (this.quantity > 1) {
-                        this.quantity--;
+                decreaseQuantity: function() {
+                    if(this.quantity > 1) {
+                        this.quantity --;
                     }
                 },
 
-                addToBasket: function () {
+                addToBasket: function() {
 
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: "{{ path('basket_add_product') }}",
-                        data: {declinationId: this.declinationId, quantity: this.quantity},
-                        success: function (response) {
+                        data: { declinationId: this.declinationId, quantity: this.quantity },
+                        success: function(response) {
                             var declinationInfo = {
                                 name: {{ product.name|json_encode|raw }},
                                 price: {{ declination.priceWithoutVat|json_encode|raw }},
-                                image: {{ (images|length > 0) ? images|first|imageUrl(100, 100)|json_encode|raw : 'null' }},
+                                image: {{ (declination.images|length > 0) ? declination.images|first|imageUrl(100, 100)|json_encode|raw : 'null' }},
                             };
                             hydrateModal(declinationInfo, self.quantity, response.message);
                         }
@@ -72,13 +75,13 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ path('add_to_favorites') }}",
-                        data: {declinationId: this.declinationId},
-                        success: function () {
+                        data: { declinationId: this.declinationId },
+                        success: function() {
                             self.isFavorite = true;
-                            notification.createAlert("{{ 'product.favorite.successfully_added'|trans }}", "success");
+                            notification.createAlert("{{'product.favorite.successfully_added'|trans}}", "success");
                         },
                         error: function () {
-                            notification.createAlert("{{ 'product.favorite.already_favored'|trans }}", "danger");
+                            notification.createAlert("{{'product.favorite.already_favored'|trans}}", "danger");
                         }
                     });
                 },
@@ -89,13 +92,35 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ path('remove_from_favorites') }}",
-                        data: {declinationId: this.declinationId},
-                        success: function () {
+                        data: { declinationId: this.declinationId },
+                        success: function() {
                             self.isFavorite = false;
-                            notification.createAlert("{{ 'product.favorite.successfully_removed'|trans }}", "success");
+                            notification.createAlert("{{'product.favorite.successfully_removed'|trans}}", "success");
                         }
                     });
-                }
+                },
+
+                report: function () {
+                    helper.displayLoadingSpinner();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('report_product') }}",
+                        data: {
+                            productId: '{{ product.id  }}',
+                            name: this.reportName,
+                            email: this.reportEmail,
+                            message: this.reportMessage,
+                        },
+                    }).done(function () {
+                        notification.createAlert('{{ 'product.report_modal.success'|trans }}', "success");
+                    }).fail(function () {
+                        notification.createAlert('{{ 'product.report_modal.error'|trans }}', "danger");
+                    }).always(function () {
+                        $('.modal').modal('hide');
+                        helper.removeLoadingSpinner();
+                    });
+                },
             },
         });
     </script>

@@ -7,12 +7,14 @@
 
 namespace AppBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\SDK\Catalog\CatalogService;
 use Wizaplace\SDK\Catalog\DeclinationId;
 use Wizaplace\SDK\Catalog\ProductCategory;
+use Wizaplace\SDK\Catalog\ProductReport;
 use Wizaplace\SDK\Catalog\Review\ReviewService;
 use Wizaplace\SDK\Seo\SeoService;
 use WizaplaceFrontBundle\Controller\ProductController as BaseController;
@@ -110,5 +112,23 @@ class ProductController extends BaseController
         );
 
         return $this->redirect($request->request->get('redirect_url'));
+    }
+
+    public function reportAction(CatalogService $catalogService, Request $request): JsonResponse
+    {
+        $productId = $request->request->get('productId');
+        $name = $request->request->get('name');
+        $email = $request->request->get('email');
+        $message = $request->request->get('message');
+
+        $report = new ProductReport();
+        $report->setProductId($productId);
+        $report->setReporterName($name);
+        $report->setReporterEmail($email);
+        $report->setMessage($message);
+
+        $catalogService->reportProduct($report);
+
+        return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }
