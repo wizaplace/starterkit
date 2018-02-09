@@ -94,13 +94,19 @@ class BasketController extends Controller
         if ($quantity === 0) {
             $this->basketService->removeProductFromBasket($declinationId);
 
-            $message = $this->translator->trans('product_deleted_from_basket');
+            $message = $this->translator->trans('basket.notification.success.item_deleted');
             $this->addFlash('success', $message);
 
             return new JsonResponse();
         }
 
         $realQuantity = $this->basketService->updateProductQuantity($declinationId, $quantity);
+
+        // add a notification if not enough stock
+        if ($quantity > $realQuantity) {
+            $message = $this->translator->trans('basket.notification.warning.not_enough_stock');
+            $this->addFlash('warning', $message);
+        }
 
         return new JsonResponse([
             'realQuantity' => $realQuantity,

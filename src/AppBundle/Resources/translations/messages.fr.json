@@ -346,7 +346,17 @@
         "notification": {
             "success": {
                 "item_deleted": "Le produit a bien été supprimé du panier"
+            },
+            "error": {
+                "change_quantity": "La quantité n'a pas pu être modifiée",
+                "invalid_quantity": "La quantité n'est pas valide"
+            },
+            "warning": {
+                "not_enough_stock": "Le stock n'est pas suffisant"
             }
+        },
+        "action": {
+            "remove_product": "Supprimer du panier"
         }
     },
 

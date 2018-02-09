@@ -59,11 +59,12 @@
                                     {# quantity widget #}
                                     <article class="quantity">
                                         <div class="widget-label">{{ 'quantity'|trans }}</div>
-
                                         <div class="widget">
-                                            <button class="decrease-quantity">-</button>
-                                            <input class="product-quantity" type="number" step="1" pattern="[-+]?[0-9]" value="{{ product.quantity }}">
-                                            <button class="increase-quantity">+</button>
+
+                                            <input type="number" min="0" pattern="[0-9]*" @change.prevent="changeProductQuantity" value="{{ product.quantity }}">
+                                            <button @click.prevent="decreaseQuantity">-</button>
+                                            <button @click.prevent="increaseQuantity">+</button>
+                                            <button @click.prevent="removeFromBasket">{{ 'basket.action.remove_product'|trans }}</button>
                                         </div>
                                     </article>
                                 </article>
@@ -145,25 +146,7 @@
 
                         {% set nextStepLink = user|default ? path("checkout_addresses") : path("checkout_login") %}
                         <a href="{{ nextStepLink }}" class="btn btn-lg btn-primary">Valider mon panier</a>
-                        <div class="spacer"></div>
 
-                        <div class="reinsurance">
-                            <div class="reinsurance-item">
-                                <i class="icon icon-box"></i>
-                                <div class="light-title">Livraison express 24/48h</div>
-                            </div>
-
-                            <div class="reinsurance-item">
-                                <i class="icon icon-shield"></i>
-                                <div class="light-title">Paiement 100% sécurisé</div>
-                            </div>
-
-                            <div class="reinsurance-item">
-                                <i class="icon icon-phone-o"></i>
-                                <div class="light-title">Assistance & Conseils<br>0800 97 55 55 (gratuit)</div>
-                            </div>
-                        </div>
-                        <div class="spacer"></div>
                     </div>
                 </div>
             {% else %}
@@ -193,50 +176,6 @@
 
 {% block scripts %}
     <script>
-
-        {# quantity updates / page reload #}
-        {# ============================== #}
-
-        {# update quantity with custom buttons #}
-        $('.decrease-quantity').on('click', function(){
-            var $inputField = $(this).closest('.quantity').find('input');
-
-            if($inputField.val() > 0) {
-                $inputField.val(parseInt($inputField.val()) - 1);
-                modifyBasketQuantity($inputField);
-            }
-        });
-
-        $('.increase-quantity').on('click', function(){
-            var $inputField = $(this).closest('.quantity').find('input');
-            $inputField.val(parseInt($inputField.val()) + 1);
-            modifyBasketQuantity($inputField);
-        });
-
-        {# update quantity with manual input #}
-        $('.product-quantity').on('change', function(){
-            modifyBasketQuantity($(this));
-        });
-
-        function modifyBasketQuantity($inputField){
-
-            // show overlay and spinner
-            helper.displayLoadingSpinner();
-
-            var declinationId = $inputField.closest('.basket-product').data('declination-id');
-
-            $.ajax({
-                method: "POST",
-                url: "{{ url('basket_update_product_quantity') }}",
-                data: {
-                    declinationId: declinationId,
-                    quantity: $inputField.val()
-                }
-            }).done(function () {
-                window.location.reload();
-            });
-        }
-
 
         {# shipping update / page reload #}
         {# ============================= #}
@@ -305,8 +244,118 @@
             }
         });
 
-        var vm = new Vue({
-            el: '#basket'
+        new Vue({
+            el: '#basket',
+
+            methods: {
+                increaseQuantity: function (e) {
+
+                    // gather data from event (clicked button or input value change)
+                    var $inputField = $(e.currentTarget).closest('.quantity').find('[type="number"]');
+                    var currentQuantity = parseInt($inputField.val());
+                    var declinationId = $inputField.closest('.basket-product').data('declination-id');
+
+                    // can't get lower than 0
+                    if (currentQuantity < 1) {
+
+                        // alert user
+                        notification.createAlert('{{ 'basket.notification.error.invalid_quantity'|trans }}', "danger")
+
+                        // restore previous valid quantity
+                        $inputField.val(currentQuantity);
+
+                        // do nothing else
+                        return false;
+                    }
+
+                    // update quantity input value (before updating basket)
+                    var newQuantity = currentQuantity + 1;
+                    $inputField.val(newQuantity);
+
+                    this.updateBasketQuantity(declinationId, newQuantity);
+                },
+
+
+                decreaseQuantity: function (e) {
+
+                    // gather data from event (clicked button or input value change)
+                    var $inputField = $(e.currentTarget).closest('.quantity').find('[type="number"]');
+                    var currentQuantity = parseInt($inputField.val());
+                    var declinationId = $inputField.closest('.basket-product').data('declination-id');
+
+                    // can't get lower than 0
+                    if (currentQuantity < 1) {
+
+                        // alert user
+                        notification.createAlert('{{ 'basket.notification.error.invalid_quantity'|trans }}', "danger")
+
+                        // restore previous valid quantity
+                        $inputField.val(currentQuantity);
+
+                        // do nothing else
+                        return false;
+                    }
+
+                    // update quantity input value (before updating basket)
+                    var newQuantity = currentQuantity - 1;
+                    $inputField.val(newQuantity);
+
+                    this.updateBasketQuantity(declinationId, newQuantity);
+                },
+
+                // input value changed
+                changeProductQuantity: function (e) {
+
+                    // gather data from event (clicked button or input value change)
+                    var $inputField = $(e.currentTarget).closest('.quantity').find('[type="number"]');
+                    var currentQuantity = parseInt($inputField.val());
+                    var declinationId = $inputField.closest('.basket-product').data('declination-id');
+
+                    // can't get lower than 0
+                    if (currentQuantity < 0) {
+
+                        // alert user
+                        notification.createAlert('{{ 'basket.notification.error.invalid_quantity'|trans }}', "danger")
+
+                        // restore previous valid quantity
+                        $inputField.val(currentQuantity);
+
+                        // do nothing else
+                        return false;
+                    }
+
+                    // newQuantity already corresponds to input's value
+                    this.updateBasketQuantity(declinationId, currentQuantity);
+                },
+
+                removeFromBasket: function (e) {
+
+                    // gather data from event (clicked button or input value change)
+                    var $inputField = $(e.currentTarget).closest('.quantity').find('[type="number"]');
+                    var declinationId = $inputField.closest('.basket-product').data('declination-id');
+
+                    // update basket with "quantity = 0" will remove the product from basket
+                    this.updateBasketQuantity(declinationId, 0);
+                },
+
+                updateBasketQuantity: function (declinationId, quantity) {
+                    helper.displayLoadingSpinner();
+
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ url('basket_update_product_quantity') }}",
+                        data: {
+                            declinationId: declinationId,
+                            quantity: quantity
+                        }
+                    }).done(function () {
+                        window.location.reload();
+                    }).fail(function () {
+                        helper.removeLoadingSpinner();
+                        notification.createAlert('{{ 'basket.notification.error.change_quantity'|trans }}', "danger")
+                    });
+                }
+            }
         });
     </script>
 {% endblock %}
