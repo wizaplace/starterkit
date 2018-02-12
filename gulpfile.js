@@ -4,14 +4,14 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
-const clean = require('gulp-clean-css');
+const clean = require('gulp-clean');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
-const cleanCSS = require('gulp-clean');
+const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
-const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
+var rename = require('gulp-rename');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -65,12 +65,12 @@ gulp.task('scripts_dev', function() {
 // style (sass)
 gulp.task('style', function () {
     return gulp.src('./src/AppBundle/Resources/public/style/main.scss')
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(sass())
-        .pipe(concat('app.css'))
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
-        // .pipe(sourcemaps.write('./'))
+        .pipe(rename('app.css'))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/style'));
 });
 
@@ -86,7 +86,6 @@ gulp.task('images', function () {
         './src/AppBundle/Resources/public/images/**/*.*',
         `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
     ])
-        .pipe(imagemin())
         .pipe(gulp.dest('./web/images'));
 });
 

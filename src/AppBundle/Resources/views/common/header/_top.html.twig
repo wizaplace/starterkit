@@ -1,7 +1,7 @@
 {% set accountLink = app.user ? path('profile') : path('login') %}
 {% set userBasket = basket ?? basket() %}
 
-<div class="header-top">
+<div class="header-top navbar">
 
     {# branding #}
     <div class="branding">
@@ -25,7 +25,6 @@
                 {% include('@App/common/header/_pop_account.html.twig') %}
             </div>
         </div>
-
     {% else %}
 
         {# login form #}
@@ -36,7 +35,7 @@
 
             {# large screens #}
             <a href="#" role="button" data-toggle="dropdown" id="login-menu-trigger" class="d-none d-md-block" aria-haspopup="true" aria-expanded="false">{{ 'header.login.label'|trans }}</a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="login-menu-trigger">
+            <div class="dropdown-menu" aria-labelledby="login-menu-trigger">
                 {% include('@App/common/header/_pop_login.html.twig') %}
             </div>
         </div>
@@ -54,7 +53,6 @@
                 {% include('@App/common/header/_pop_register.html.twig') %}
             </div>
         </div>
-
     {% endif %}
 
     {# basket #}

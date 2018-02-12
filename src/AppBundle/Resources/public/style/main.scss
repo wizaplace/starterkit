@@ -10,11 +10,9 @@
 // libs
 @import '../../../../../node_modules/bootstrap/scss/bootstrap';
 @import '../../../../../node_modules/font-awesome/scss/font-awesome';
-@import '../../../../../node_modules/slick-carousel/slick/slick.scss';
-@import '../../../../../node_modules/slick-carousel/slick/slick-theme.scss';
 @import '../../../../../node_modules/nouislider/distribute/nouislider.min';
 @import '../../../../../node_modules/cookieconsent/build/cookieconsent.min';
-@import 'libraries/bootstrap-star-rating.min';
+@import 'libraries/star-rating/star-rating.min.css';
 
 // components
 @import 'wizaplace/components/overlay';
@@ -23,6 +21,11 @@
 @import 'wizaplace/components/notifications';
 @import 'wizaplace/components/cookie-consent';
 @import 'wizaplace/components/loading-spinner';
+@import 'wizaplace/components/star-rating';
+
+// slick (needs to be placed after components)
+@import '../../../../../node_modules/slick-carousel/slick/slick.scss';
+@import '../../../../../node_modules/slick-carousel/slick/slick-theme.scss';
 
 // templates
 @import 'basket';
