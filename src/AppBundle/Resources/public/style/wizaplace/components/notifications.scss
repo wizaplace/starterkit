@@ -2,12 +2,12 @@
     position: fixed;
     top: 5rem;
     left: 2rem;
+    z-index: $zindex-overlay + 2; // over an eventual modal
 
     .alert {
         position: relative;
         height: auto;
         width: auto;
-        z-index: $zindex-overlay + 2; // over an eventual modal
 
         // animation
         transform: translate(-100%, 0);
