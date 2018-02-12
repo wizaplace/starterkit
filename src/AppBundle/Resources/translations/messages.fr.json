@@ -490,5 +490,17 @@
             "message": "Message",
             "submit": "Envoyer"
         }
+    },
+
+    "seo": {
+        "search_page_title": "%query%",
+        "search_page_title_default": "Page recherche",
+        "search_page_description": "Page recherche",
+        "product_page_title": "%productName%",
+        "product_page_description": "%productDescription%",
+        "company_page_title": "%companyName%",
+        "company_page_description": "%companyDescription%",
+        "attribute_page_title": "%variantName%",
+        "attribute_page_description": "%variantDescription%"
     }
 }
