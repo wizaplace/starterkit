@@ -27,7 +27,9 @@ class AuthController extends BaseController
 
         // redirect already logged in user
         if ($this->getUser()) {
-            return $this->redirect($redirectUrl);
+            $referer = $request->headers->get('referer') ?? $this->generateUrl('home');
+
+            return $this->redirect($referer);
         }
 
         // logging in requires an existing session
