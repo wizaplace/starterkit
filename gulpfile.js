@@ -11,7 +11,7 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
-var rename = require('gulp-rename');
+const rename = require('gulp-rename');
 
 // helpers
 const nodeModulePath = "./node_modules";
