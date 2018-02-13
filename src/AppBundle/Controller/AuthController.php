@@ -23,13 +23,12 @@ class AuthController extends BaseController
 {
     public function loginAction(Request $request): Response
     {
-        $redirectUrl = $request->get(static::REDIRECT_URL_FIELD_NAME, null) ?? $this->generateUrl('home');
+        $referer = $request->headers->get('referer') ?? $this->generateUrl('home');
+        $redirectUrl = $request->get(static::REDIRECT_URL_FIELD_NAME, null) ?? $referer;
 
         // redirect already logged in user
         if ($this->getUser()) {
-            $referer = $request->headers->get('referer') ?? $this->generateUrl('home');
-
-            return $this->redirect($referer);
+            return $this->redirect($redirectUrl);
         }
 
         // logging in requires an existing session
