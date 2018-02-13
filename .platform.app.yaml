@@ -115,6 +115,8 @@ hooks:
       rm -rf var/cache/*
       bin/console --env=prod cache:warmup
 
+      bin/logrotate.sh
+
       DEPLOY_END=$(date +%s%N)
       echo "[`date --iso-8601=seconds`] deploy_end ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
@@ -129,3 +131,6 @@ crons:
     sitemap:
         spec: '*/30 * * * *'
         cmd: 'php bin/console --env=prod sitemap:generate'
+    daily_logrotate:
+        spec: '0 4 * * *'
+        cmd: 'bin/logrotate.sh'
