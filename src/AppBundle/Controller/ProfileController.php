@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wizaplace\SDK\Order\OrderService;
 use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Controller\ProfileController as BaseController;
 use WizaplaceFrontBundle\Service\InvoiceService;
@@ -36,6 +37,15 @@ class ProfileController extends BaseController
     public function addressesAction(): Response
     {
         return parent::addressesAction();
+    }
+
+    public function orderAction(int $orderId): Response
+    {
+        $order = $this->get(OrderService::class)->getOrder($orderId);
+
+        return $this->render('@App/profile/order.html.twig', [
+            "order" => $order,
+        ]);
     }
 
     public function ordersAction(): Response
