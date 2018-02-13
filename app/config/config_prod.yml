@@ -25,7 +25,7 @@ monolog:
         logstash:
             type:         fingers_crossed
             handler:      logstash_file
-            action_level: 'warning'
+            action_level: 'error'
             excluded_404s:
                 - ^/
         logstash_file:
