@@ -1,5 +1,11 @@
 {% extends '@App/search/search.html.twig' %}
 
+{% block title -%}{{ 'seo.company_page_title'|trans({'%companyName%': company.name|default})|striptags }}{%- endblock %}
+
+{% block meta_description -%}
+    <meta name="description" content="{{ 'seo.company_page_description'|trans({ '%companyDescription%': company.description|default('seo.company_page_title'|trans({ '%companyName%': company.name|default })) })|striptags }}">
+{%- endblock %}
+
 {% block searchHeader %}
     <h1>{{ company.name }}</h1>
     <p>{{ company.description }}</p>
