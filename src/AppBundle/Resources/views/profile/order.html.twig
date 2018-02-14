@@ -2,7 +2,7 @@
 
 {% block profile_content %}
 
-    <label>Informations sur la commande #{{ order.id }}</label>
+    <label>{{ 'order_detail.order_info'|trans }} #{{ order.id }}</label>
     <div class="spacer"></div>
 
     {# order details #}
@@ -10,11 +10,11 @@
         <table class="table table-stripped">
             <thead>
                 <tr>
-                    <th class="hidden-xs">N° Cde</th>
-                    <th class="hidden-xs">Date</th>
-                    <th>Total HT</th>
-                    <th>Statut</th>
-                    <th>Commentaire Client</th>
+                    <th class="hidden-xs">{{ 'order_detail.header.order_number'|trans }}</th>
+                    <th class="hidden-xs">{{ 'order_detail.header.date'|trans }}</th>
+                    <th>{{ 'order_detail.header.total_without_tax'|trans }}</th>
+                    <th>{{ 'order_detail.header.status'|trans }}</th>
+                    <th>{{ 'order_detail.header.comment'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,19 +23,19 @@
                     <td class="hidden-xs">{{ order.timestamp|date("d/m/Y") }}</td>
                     <td class="price">{{ order.total|price }}</td>
                     <td>
-                        {% if  order.status == "STANDBY_BILLING" %}Attente de paiement
-                        {% elseif order.status =="STANDBY_VENDOR" %}Validation vendeur
-                        {% elseif order.status =="PROCESSING_SHIPPING" %}Envoi en cours
-                        {% elseif order.status =="PROCESSED" %}Traitée
-                        {% elseif order.status =="COMPLETED" %}Terminée
-                        {% elseif order.status =="BILLING_FAILED" %}Paiement échoué
-                        {% elseif order.status =="VENDOR_DECLINED" %}Refusée par le vendeur
-                        {% elseif order.status =="STANDBY_SUPPLYING" %}Attente d'approvisionnement
-                        {% elseif order.status =="UNPAID" %}Impayée
-                        {% elseif order.status =="REFUNDED" %}Remboursée
-                        {% elseif order.status =="CANCELED" %}Annulée
-                        {% elseif order.status =="INCOMPLETED" %}Incomplète
-                        {% elseif order.status =="PARENT_ORDER" %}Parente
+                        {% if  order.status == "STANDBY_BILLING" %}{{ 'order_table.body.status.STANDBY_BILLING'|trans }}
+                        {% elseif order.status =="STANDBY_VENDOR" %}{{ 'order_table.body.status.STANDBY_VENDOR'|trans }}
+                        {% elseif order.status =="PROCESSING_SHIPPING" %}{{ 'order_table.body.status.PROCESSING_SHIPPING'|trans }}
+                        {% elseif order.status =="PROCESSED" %}{{ 'order_table.body.status.PROCESSED'|trans }}
+                        {% elseif order.status =="COMPLETED" %}{{ 'order_table.body.status.COMPLETED'|trans }}
+                        {% elseif order.status =="BILLING_FAILED" %}{{ 'order_table.body.status.BILLING_FAILED'|trans }}
+                        {% elseif order.status =="VENDOR_DECLINED" %}{{ 'order_table.body.status.VENDOR_DECLINED'|trans }}
+                        {% elseif order.status =="STANDBY_SUPPLYING" %}{{ 'order_table.body.status.STANDBY_SUPPLYING'|trans }}
+                        {% elseif order.status =="UNPAID" %}{{ 'order_table.body.status.UNPAID'|trans }}
+                        {% elseif order.status =="REFUNDED" %}{{ 'order_table.body.status.REFUNDED'|trans }}
+                        {% elseif order.status =="CANCELED" %}{{ 'order_table.body.status.CANCELED'|trans }}
+                        {% elseif order.status =="INCOMPLETED" %}{{ 'order_table.body.status.INCOMPLETED'|trans }}
+                        {% elseif order.status =="PARENT_ORDER" %}{{ 'order_table.body.status.PARENT_ORDER'|trans }}
                         {% endif %}
                     </td>
                     <td>{{ order.customerComment }}</td>
@@ -51,15 +51,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nom du produit</th>
-                        <th>Quantité</th>
-                        <th>Prix unitaire HT</th>
-                        <th>Commentaire</th>
+                        <th>{{ 'order_detail.header.product_name'|trans }}</th>
+                        <th>{{ 'order_detail.header.quantity'|trans }}</th>
+                        <th>{{ 'order_detail.header.unit_price_without_tax'|trans }}</th>
+                        <th>{{ 'order_detail.header.comment'|trans }}</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for orderItem in order.orderItems %}
-
                         <tr>
                             <td>{{ orderItem.productName }}</td>
                             <td>{{ orderItem.amount }}</td>
@@ -78,7 +78,7 @@
         {# shipping address #}
         {% set address = order.shippingAddress %}
         <div>
-            <h3 class="title">Adresse de livraison</h3>
+            <h3 class="title">{{ 'shipping_address'|trans }}</h3>
             <ul class="list-unstyled">
                 <li>{{ address.firstname }} {{ address.lastname }}</li>
                 <li>{{ address.address }}</li>

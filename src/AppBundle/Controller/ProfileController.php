@@ -23,10 +23,16 @@ class ProfileController extends BaseController
      */
     private $invoiceService;
 
-    public function __construct(TranslatorInterface $translator, UserService $userService, InvoiceService $invoiceService)
+    /**
+     * @var OrderService
+     */
+    private $orderService;
+
+    public function __construct(TranslatorInterface $translator, UserService $userService, InvoiceService $invoiceService, OrderService $orderService)
     {
         parent::__construct($translator, $userService);
         $this->invoiceService = $invoiceService;
+        $this->orderService = $orderService;
     }
 
     public function viewAction(): Response
@@ -41,7 +47,7 @@ class ProfileController extends BaseController
 
     public function orderAction(int $orderId): Response
     {
-        $order = $this->get(OrderService::class)->getOrder($orderId);
+        $order = $this->orderService->getOrder($orderId);
 
         return $this->render('@App/profile/order.html.twig', [
             "order" => $order,
