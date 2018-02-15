@@ -25,13 +25,14 @@ monolog:
         logstash:
             type:         fingers_crossed
             handler:      logstash_file
-            action_level: 'warning'
+            action_level: 'error'
             excluded_404s:
                 - ^/
         logstash_file:
             type:         stream
             path:         "%kernel.logs_dir%/prod.json"
             formatter:    monolog.formatter.logstash
+            level:        'warning'
         sentry_fingers_crossed:
             type:         fingers_crossed
             handler:      sentry_buffer

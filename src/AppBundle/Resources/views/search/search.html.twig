@@ -1,5 +1,13 @@
 {% extends '@App/layout.html.twig' %}
 
+{% block title -%}
+    {{ 'seo.search_page_title'|trans({ '%query%': searchQuery|default('seo.search_page_title_default'|trans) }) }}
+{%- endblock %}
+
+{% block meta_description -%}
+    <meta name="description" content="{{ 'seo.search_page_description'|trans }}">
+{%- endblock %}
+
 {% block body %}
     <div id="search-page" v-cloak>
 

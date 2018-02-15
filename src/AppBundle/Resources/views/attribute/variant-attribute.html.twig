@@ -1,5 +1,11 @@
 {% extends '@App/search/search.html.twig' %}
 
+{% block title -%}{{ 'seo.attribute_page_title'|trans({'%variantName%': selectedVariant.name|default})|striptags }}{%- endblock %}
+
+{% block meta_description -%}
+    <meta name="description" content="{{ 'seo.attribute_page_description'|trans({ '%variantDescription%': selectedVariant.description|default('seo.attribute_page_title'|trans({ '%variantName%': selectedVariant.name|default })) })|striptags }}">
+{%- endblock %}
+
 {% block searchHeader %}
     <h1>{{ selectedVariant.name }}</h1>
     <img src="{{ selectedVariant.image|imageUrl }}">

@@ -1,11 +1,18 @@
 {% extends '@App/layout.html.twig' %}
 
+{% block title -%}{{ 'seo.product_page_title'|trans({'%productName%': product.name|default})|striptags }}{%- endblock %}
+
+{% block meta_description -%}
+    {# product description (default to product name) #}
+    <meta name="description" content="{{ 'seo.product_page_description'|trans({ '%productDescription%': product.description|default('seo.product_page_title'|trans({ '%productName%': product.name|default })) })|striptags }}">
+{%- endblock %}
+
 {% block meta %}
     <link rel="canonical" href="{{ product|productUrl }}">
 {% endblock %}
 
 {% block body %}
-    <section id="product">
+    <section id="product-page">
         <div class="container">
             {# breadcrumb #}
             <nav aria-label="breadcrumb">
