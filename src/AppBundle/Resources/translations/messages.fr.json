@@ -149,6 +149,19 @@
     "discussion_title": "À propos du produit : %product_name%",
     "add_to_basket": "ajouter au panier",
     "orders": "Commandes",
+    "order_detail": {
+        "order_info": "Informations sur la commande",
+        "header": {
+            "order_number": "N° Cde",
+            "date": "Date",
+            "total_without_tax": "Total HT",
+            "status": "Statut",
+            "comment": "Commentaire",
+            "product_name": "Nom du produit",
+            "quantity": "Quantité",
+            "unit_price_without_tax": "Prix unitaire HT"
+        }
+    },
     "order_table": {
         "header": {
             "command_id": "N° Cde",
