@@ -94,7 +94,31 @@ class AuthController extends BaseController
 
     public function initiateResetPasswordAction(Request $request): Response
     {
-        return parent::initiateResetPasswordAction($request);
+        // redirection url
+        $referer = $request->headers->get('referer') ?? $this->generateUrl('home');
+
+        try {
+            $form = $this->authService->getInitiateResetPasswordForm();
+
+            $form->handleRequest($request);
+
+            if (!$form->isSubmitted() || !$form->isValid()) {
+                foreach ($form->getErrors() as $error) {
+                    $this->addFlash('warning', $error->getMessage());
+                }
+
+                return $this->redirect($referer);
+            }
+
+            $this->authService->initiateResetPassword($form->getData());
+
+            $message = $this->translator->trans('password_reset_confirmation_message');
+            $this->addFlash('success', $message);
+        } catch (\Throwable $e) {
+            $this->addFlash('error', $this->translator->trans('password_reset_error_message'));
+        }
+
+        return $this->redirect($referer);
     }
 
     public function registerCompanyAction(Request $request): Response

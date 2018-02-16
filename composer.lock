@@ -1782,12 +1782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776"
+                "reference": "5ebdd35b291cf9be4a425022872cb3aaf03192df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776",
-                "reference": "a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/5ebdd35b291cf9be4a425022872cb3aaf03192df",
+                "reference": "5ebdd35b291cf9be4a425022872cb3aaf03192df",
                 "shasum": ""
             },
             "conflict": {
@@ -1837,6 +1837,7 @@
                 "onelogin/php-saml": "<2.10.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
+                "padraic/file_get_contents": "<1.1.2",
                 "phpmailer/phpmailer": ">=5,<5.2.24",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
                 "phpxmlrpc/extras": "<0.6.1",
@@ -1920,7 +1921,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-01-31T19:36:12+00:00"
+            "time": "2018-02-13T10:17:11+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2916,12 +2917,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "bc2fa19f659bf2031db483b40b73afae4a93719d"
+                "reference": "5386578fbc2656b03c8b87aefe940af38058bccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/bc2fa19f659bf2031db483b40b73afae4a93719d",
-                "reference": "bc2fa19f659bf2031db483b40b73afae4a93719d",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/5386578fbc2656b03c8b87aefe940af38058bccd",
+                "reference": "5386578fbc2656b03c8b87aefe940af38058bccd",
                 "shasum": ""
             },
             "require": {
@@ -2958,7 +2959,7 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-02-16T14:43:24+00:00"
+            "time": "2018-02-16T14:53:46+00:00"
         },
         {
             "name": "wizaplace/sdk",
