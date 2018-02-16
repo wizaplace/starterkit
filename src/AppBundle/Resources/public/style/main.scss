@@ -1,0 +1,35 @@
+// @remove me:
+@import 'wizaplace/demo';
+
+// legacy
+@import '_checkout-steps';
+
+// global
+@import 'wizaplace/variables';
+
+// libs
+@import '../../../../../node_modules/bootstrap/scss/bootstrap';
+@import '../../../../../node_modules/font-awesome/scss/font-awesome';
+@import '../../../../../node_modules/nouislider/distribute/nouislider.min';
+@import '../../../../../node_modules/cookieconsent/build/cookieconsent.min';
+@import 'libraries/star-rating/star-rating.min.css';
+@import 'libraries/jquery-ui/jquery-ui.theme.min.css';
+@import 'libraries/jquery-ui/jquery-ui.min.css';
+
+// components
+@import 'wizaplace/components/overlay';
+@import 'wizaplace/components/range-slider';
+@import 'wizaplace/components/slick-carousel';
+@import 'wizaplace/components/notifications';
+@import 'wizaplace/components/cookie-consent';
+@import 'wizaplace/components/loading-spinner';
+@import 'wizaplace/components/star-rating';
+
+// slick (needs to be placed after components)
+@import '../../../../../node_modules/slick-carousel/slick/slick.scss';
+@import '../../../../../node_modules/slick-carousel/slick/slick-theme.scss';
+
+// templates
+@import 'basket';
+@import 'profile';
+@import 'discussion';

@@ -6,7 +6,7 @@
         {# root level #}
         {# ========== #}
 
-        <li class="category dropdown">
+        <li class="category dropdown list-inline-item">
 
             {# link to category page #}
             <a href="{{ path('category', {'slug': category.category.slug}) }}">{{ category.category.name }}</a>
@@ -14,13 +14,13 @@
             {# eventual children #}
             {% if category.children %}
 
-                <a href="#" data-toggle="dropdown">({{ 'header.category.display_children'|trans }})</a>
+                <a href="#" data-toggle="dropdown" id="category-menu-trigger">({{ 'header.category.display_children'|trans }})</a>
 
                 {# second level #}
                 {# ============ #}
 
                 {# hidden by default #}
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" aria-labelledby="category-menu-trigger">
 
                     {% for category in category.children %}
                         <li>

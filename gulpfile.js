@@ -2,16 +2,16 @@
 
 // dependencies
 const gulp = require('gulp');
-const less = require('gulp-less');
+const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const clean = require('gulp-clean');
 const concat = require('gulp-concat');
 const autoprefixer = require('autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
-const imagemin = require('gulp-imagemin');
 const browserSync = require('browser-sync').create();
 const gulpStylelint = require('gulp-stylelint');
+const rename = require('gulp-rename');
 
 // helpers
 const nodeModulePath = "./node_modules";
@@ -31,7 +31,7 @@ gulp.task('clean', function() {
 // scripts (prod)
 gulp.task('scripts_prod', function() {
     return gulp.src([
-        `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
+        `${nodeModulePath}/bootstrap/dist/js/bootstrap.bundle.js`,
         `${nodeModulePath}/vue/dist/vue.min.js`,
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
@@ -47,7 +47,7 @@ gulp.task('scripts_prod', function() {
 // scripts (dev)
 gulp.task('scripts_dev', function() {
     return gulp.src([
-        `${nodeModulePath}/bootstrap/dist/js/bootstrap.min.js`,
+        `${nodeModulePath}/bootstrap/dist/js/bootstrap.bundle.js`,
         `${nodeModulePath}/vue/dist/vue.js`, // not minified to be used with chrome plugin (vuejs-devtools)
         `${nodeModulePath}/moment/min/moment.min.js`,
         `${nodeModulePath}/lodash/lodash.min.js`,
@@ -62,14 +62,14 @@ gulp.task('scripts_dev', function() {
         .pipe(gulp.dest('./web/scripts'));
 });
 
-// style (less)
+// style (sass)
 gulp.task('style', function () {
-    return gulp.src('./src/AppBundle/Resources/public/style/main.less')
+    return gulp.src('./src/AppBundle/Resources/public/style/main.scss')
         .pipe(sourcemaps.init())
-        .pipe(less())
-        .pipe(concat('app.css'))
+        .pipe(sass())
         .pipe(postcss([ autoprefixer() ]))
         .pipe(cleanCSS())
+        .pipe(rename('app.css'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./web/style'));
 });
@@ -86,7 +86,6 @@ gulp.task('images', function () {
         './src/AppBundle/Resources/public/images/**/*.*',
         `${nodeModulePath}/slick-carousel/slick/ajax-loader.gif`,
     ])
-        .pipe(imagemin())
         .pipe(gulp.dest('./web/images'));
 });
 
@@ -95,7 +94,6 @@ gulp.task('fonts', function () {
     return gulp.src([
         './src/AppBundle/Resources/public/fonts/**/*.*',
         `${nodeModulePath}/font-awesome/fonts/**/*`,
-        `${nodeModulePath}/bootstrap/fonts/**/*`,
         `${nodeModulePath}/slick-carousel/slick/fonts/**/*`,
     ]).pipe(gulp.dest('./web/fonts'));
 });
@@ -121,7 +119,7 @@ gulp.task('browser-reload', function() {
 
 gulp.task('lint-css', function lintCssTask() {
     return gulp
-        .src('src/AppBundle/Resources/public/style/**/*.less')
+        .src('src/AppBundle/Resources/public/style/**/*.scss')
         .pipe(gulpStylelint({
             reporters: [
                 {formatter: 'string', console: true}

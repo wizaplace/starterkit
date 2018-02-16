@@ -1,0 +1,23 @@
+$star-font-size: 2rem;
+$star-filled-color: gold;
+$star-empty-color: lightgray;
+
+.rating-container {
+    font-size: $star-font-size;
+
+    .filled-stars {
+        -webkit-text-stroke: unset;
+        text-shadow: initial;
+
+        .star {
+            color: $star-filled-color; // filled stars color
+        }
+    }
+
+    .empty-stars {
+        .star {
+            color: $star-empty-color; // empty stars stroke color
+        }
+    }
+}
+

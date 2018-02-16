@@ -2,7 +2,7 @@
     position: fixed;
     top: 5rem;
     left: 2rem;
-    z-index: @zindex-overlay + 2; // over an eventual modal
+    z-index: $zindex-overlay + 2; // over an eventual modal
 
     .alert {
         position: relative;

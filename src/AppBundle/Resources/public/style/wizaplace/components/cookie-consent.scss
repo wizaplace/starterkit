@@ -1,10 +1,10 @@
 #cookie-consent {
     .cc-window {
-        color: @gray-light;
-        background: @gray-dark;
+        color: lightgray;
+        background: darkgray;
 
         .cc-link {
-            color: @gray-light;
+            color: lightgray;
         }
 
         .cc-btn {
@@ -12,7 +12,7 @@
         }
 
         .cc-compliance {
-            background: @gray-light;
+            background: lightgray;
         }
     }
 }

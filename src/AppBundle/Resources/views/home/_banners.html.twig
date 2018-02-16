@@ -1,5 +1,5 @@
 {# large banners #}
-<div class="js-slick-banner hidden-xs">
+<div class="js-slick-banner d-xs-none d-sm-block">
     {% for banner in desktopBanners %}
         <a href="{{ banner.link|default("#") }}"
                 {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
@@ -9,7 +9,7 @@
 </div>
 
 {# responsive banners #}
-<div class="js-slick-banner visible-xs">
+<div class="js-slick-banner d-sm-none">
     {% for banner in mobileBanners %}
         <a href="{{ banner.link|default("#") }}"
                 {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>

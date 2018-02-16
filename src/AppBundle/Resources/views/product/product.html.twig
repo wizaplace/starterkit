@@ -15,14 +15,21 @@
     <section id="product-page">
         <div class="container">
             {# breadcrumb #}
-            <ol class="breadcrumb">
-                <li><a href="{{ path("home") }}">{{ 'home.label'|trans }}</a></li>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path("home") }}">{{ 'home.label'|trans }}</a></li>
 
-                {# create links from product categories #}
-                {% for category in product.categoryPath %}
-                    <li><a href="{{ path('category', { slug: category.slug }) }}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ol>
+                    {# create links from product categories #}
+                    {% for category in product.categoryPath %}
+                        <li class="breadcrumb-item
+                            {% if loop.last %} active" aria-current="page">
+                            {% else %} ">
+                            {% endif %}
+                            <a href="{{ path('category', { slug: category.slug }) }}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </nav>
 
             {# product name #}
             <h1>{{ product.name }}</h1>
@@ -152,9 +159,9 @@
                 <div>
                     {% for i in 1..5 %}
                         {% if i <= review.rating %}
-                            <i class="glyphicon glyphicon-star"></i>
+                            <i class="fa fa-star"></i>
                         {% else %}
-                            <i class="glyphicon glyphicon-star-empty"></i>
+                            <i class="fa fa-star-o"></i>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -178,7 +185,7 @@
 
                         {# star rating #}
                         <label for="review-rating">{{ 'product.review.rating'|trans }}</label>
-                        <input id="review-rating" name="rating" class="js-rating" value="3">
+                        <input id="review-rating" name="rating" type="number" value="3" class="js-rating">
 
                         {# message input #}
                         <label for="review-message">{{ 'product.review.message'|trans }}</label>

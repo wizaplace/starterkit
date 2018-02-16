@@ -10,8 +10,8 @@
         <table class="table table-stripped">
             <thead>
                 <tr>
-                    <th class="hidden-xs">{{ 'order_detail.header.order_number'|trans }}</th>
-                    <th class="hidden-xs">{{ 'order_detail.header.date'|trans }}</th>
+                    <th class="d-none d-sm-block">{{ 'order_detail.header.order_number'|trans }}</th>
+                    <th class="d-none d-sm-block">{{ 'order_detail.header.date'|trans }}</th>
                     <th>{{ 'order_detail.header.total_without_tax'|trans }}</th>
                     <th>{{ 'order_detail.header.status'|trans }}</th>
                     <th>{{ 'order_detail.header.comment'|trans }}</th>
@@ -19,8 +19,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="hidden-xs">{{ order.id }}</td>
-                    <td class="hidden-xs">{{ order.timestamp|date("d/m/Y") }}</td>
+                    <td class="d-none d-sm-block">{{ order.id }}</td>
+                    <td class="d-none d-sm-block">{{ order.timestamp|date("d/m/Y") }}</td>
                     <td class="price">{{ order.total|price }}</td>
                     <td>
                         {% if  order.status == "STANDBY_BILLING" %}{{ 'order_table.body.status.STANDBY_BILLING'|trans }}

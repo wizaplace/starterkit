@@ -1,0 +1,42 @@
+.checkout-steps-buttons {
+    .btn {
+        cursor: default;
+        border: 1px solid black;
+
+        &.previous, &.previous:hover {
+            background-color: lightgray;
+        }
+
+        &:focus, &:active, &:visited {
+            outline: 0;
+            box-shadow: none;
+            background-color: white;
+            color: gray;
+            border-color: black;
+
+            &.active {
+                color: white;
+                background-color: black;
+            }
+
+            &.previous {
+                background-color: lightgray;
+            }
+        }
+
+        &:hover {
+            color: gray;
+            background-color: white;
+            border-color: black;
+        }
+
+        &.active:hover {
+            color: white;
+            background-color: black;
+        }
+
+        .icon {
+            font-size: 2.5em;
+        }
+    }
+}
