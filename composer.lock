@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "41002fec176723c7ff2817419fcdd4a2",
+    "content-hash": "c2d680cec460edc5001143af96043e5c",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -1392,27 +1392,27 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "ad8a245decad4897cc6b432743913dad0d69753c"
+                "reference": "4489d5002c49d55576fa0ba786f42dbb009be46f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/ad8a245decad4897cc6b432743913dad0d69753c",
-                "reference": "ad8a245decad4897cc6b432743913dad0d69753c",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/4489d5002c49d55576fa0ba786f42dbb009be46f",
+                "reference": "4489d5002c49d55576fa0ba786f42dbb009be46f",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
-                "php": "~7.0"
+                "composer-plugin-api": "^1.0.0",
+                "php": "^7.1.0"
             },
             "require-dev": {
-                "composer/composer": "^1.3",
+                "composer/composer": "^1.6.3",
                 "ext-zip": "*",
-                "humbug/humbug": "dev-master",
-                "phpunit/phpunit": "^6.4"
+                "infection/infection": "^0.7.1",
+                "phpunit/phpunit": "^7.0.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -1437,7 +1437,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2017-11-24T11:07:03+00:00"
+            "time": "2018-02-05T13:05:30+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2912,16 +2912,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.2.17",
+            "version": "v0.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "2faa4dcbc7d5b22ffb65862c2cd6c48d96977755"
+                "reference": "bc2fa19f659bf2031db483b40b73afae4a93719d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/2faa4dcbc7d5b22ffb65862c2cd6c48d96977755",
-                "reference": "2faa4dcbc7d5b22ffb65862c2cd6c48d96977755",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/bc2fa19f659bf2031db483b40b73afae4a93719d",
+                "reference": "bc2fa19f659bf2031db483b40b73afae4a93719d",
                 "shasum": ""
             },
             "require": {
@@ -2931,7 +2931,7 @@
                 "symfony/monolog-bundle": "^3.1",
                 "symfony/symfony": "~3.3.15",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.12.0"
+                "wizaplace/sdk": "^1.14.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -2958,20 +2958,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-02-01T14:51:28+00:00"
+            "time": "2018-02-16T14:43:24+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.12.0",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "11338e7fd6d0ccd65c89a33a9f516ba9dad26a53"
+                "reference": "f003c9c567744b2818c761fc6642a618b81733ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/11338e7fd6d0ccd65c89a33a9f516ba9dad26a53",
-                "reference": "11338e7fd6d0ccd65c89a33a9f516ba9dad26a53",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/f003c9c567744b2818c761fc6642a618b81733ac",
+                "reference": "f003c9c567744b2818c761fc6642a618b81733ac",
                 "shasum": ""
             },
             "require": {
@@ -3009,7 +3009,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-02-01T14:48:11+00:00"
+            "time": "2018-02-13T10:19:42+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
