@@ -7,6 +7,7 @@
 
 namespace AppBundle\Controller;
 
+use GuzzleHttp\Psr7\Uri;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,13 +51,15 @@ class ProductController extends BaseController
             throw $this->createNotFoundException("Product '${slug}' Not Found");
         }
 
-        // Check if the category path is canonical
+        // Check if the URL path is canonical
         $realCategoryPath = implode('/', array_map(function (ProductCategory $category) : string {
             return $category->getSlug();
         }, $product->getCategoryPath()));
-        if ($categoryPath !== $realCategoryPath) {
+        if ($slug !== $product->getSlug() || $categoryPath !== $realCategoryPath) {
             // If not, redirect to the canonical URL
-            return $this->redirect($this->productUrlGenerator->generateUrlFromProduct($product));
+            $canonicalUrl = (new Uri($this->productUrlGenerator->generateUrlFromProduct($product)))->withQuery($request->getQueryString() ?? '');
+
+            return $this->redirect((string) $canonicalUrl);
         }
 
         // latestProducts
