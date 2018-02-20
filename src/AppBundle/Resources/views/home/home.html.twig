@@ -5,55 +5,44 @@
     {# banners #}
     {% include('@App/home/_banners.html.twig') %}
 
-
     {# latest products #}
+    <h2>{{ 'home.section.latest_products.title'|trans }}</h2>
+    <div class="js-slick-product-group"> {# products carousel #}
+        {% for product in latestProducts %}
+            {% include '@App/common/product/_card.html.twig' with { "product": product } %}
+        {% endfor %}
+    </div>
 
-        {# section title #}
-        <h2>{{ 'home.section.latest_products.title'|trans }}</h2>
+    {# 'add product to basket' #}
+    {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
+    <script>
+        $('.js-add-to-basket').on('click', function() {
+            var declinationId = $(this).data('id');
 
-        {# products carousel #}
-        <div class="js-slick-product-group">
-            {% for product in latestProducts %}
-                {% include '@App/common/product/_card.html.twig' with { "product": product } %}
-            {% endfor %}
-        </div>
+            {# default quantity is 1 #}
+            var quantity = 1;
 
+            {# collected product data (see 'common/product/_card.html.twig') #}
+            var productData = {
+                name: $(this).data('name'),
+                price: $(this).data('price'),
+                image: $(this).data('image'),
+            };
 
-        {# 'add product to basket' #}
+            {# request server to actually add product in basket #}
+            $.ajax({
+                type: "POST",
+                url: "{{ path('basket_add_product') }}",
+                data: {
+                    declinationId: declinationId,
+                    quantity: quantity
+                },
+                {# display success modal with product data #}
+                success: function(response) {
+                    hydrateModal(productData, quantity, response.message);
+                }
+            });
+        });
+    </script>
 
-            {# modal #}
-            {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
-
-            {# script #}
-            <script>
-                $(".js-add-to-basket").on("click", function() {
-
-                    var declinationId = $(this).data('id');
-
-                    {# default quantity is 1 #}
-                    var quantity = 1;
-
-                    {# collected product data (see 'common/product/_card.html.twig') #}
-                    var productData = {
-                        name: $(this).data('name'),
-                        price: $(this).data('price'),
-                        image: $(this).data('image'),
-                    };
-
-                    {# request server to actually add product in basket #}
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ path('basket_add_product') }}",
-                        data: {
-                            declinationId: declinationId,
-                            quantity: quantity
-                        },
-
-                        {# display success modal with product data #}
-                        success: function(response) {
-                            hydrateModal(productData, quantity, response.message);
-                        }
-                    });
-                });
-            </script>
 {% endblock %}
