@@ -105,6 +105,12 @@ hooks:
       set -eu
       IFS=$'\n\t'
 
+      # Empty logs before writing anything in it
+      echo -n > /var/log/access.log
+      echo -n > /var/log/error.log
+      echo -n > /var/log/deploy.log
+      echo -n > /var/log/php.access.log
+
       deployID="$(cat /app/app/buildID).$(cat /proc/sys/kernel/random/uuid)"
       echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
