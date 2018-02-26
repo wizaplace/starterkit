@@ -6,7 +6,8 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: fr
+    locales: ['fr', 'en']
+    default_locale: 'fr'
     slug.regexp: !php/const:Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
     recaptcha.key: '%env(RECAPTCHA_KEY)%'
     recaptcha.secret: '%env(RECAPTCHA_SECRET)%'
@@ -17,7 +18,7 @@ parameters:
 
 framework:
     translator:
-        fallbacks: ["%locale%"]
+        fallbacks: ["%default_locale%"]
         # load translations pulled from the backend in addition to normal translations files (backend overrides local)
         paths: ["%kernel.project_dir%/var/translations"]
     secret:          "%secret%"
@@ -29,7 +30,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  "%locale%"
+    default_locale:  '%default_locale%'
     trusted_hosts:   ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
@@ -68,3 +69,8 @@ services:
 k_phoen_sitemap:
     base_host:         'https://%http_host%'
     base_host_sitemap: 'https://%http_host%'
+
+jms_i18n_routing:
+    default_locale: '%default_locale%'
+    locales: '%locales%'
+    strategy: prefix_except_default

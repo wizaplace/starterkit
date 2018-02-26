@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "afd1c3e6ad27f37668ca8f083567add7",
+    "content-hash": "4a9dd7e81c37272153c4bc6bf7be2d95",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -1088,6 +1088,63 @@
                 "versions"
             ],
             "time": "2018-01-21T13:54:22+00:00"
+        },
+        {
+            "name": "jms/i18n-routing-bundle",
+            "version": "2.0.4",
+            "target-dir": "JMS/I18nRoutingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
+                "reference": "052917faa3f00801c288f6d475ef7e2485928d5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/052917faa3f00801c288f6d475ef7e2485928d5b",
+                "reference": "052917faa3f00801c288f6d475ef7e2485928d5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "jms/di-extra-bundle": "~1.1",
+                "phpunit/phpunit": "~4",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/symfony": "~2.3|~3.0"
+            },
+            "suggest": {
+                "jms/translation-bundle": "If you want to use the RouteTranslation extractor"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "JMS\\I18nRoutingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Albert Casademont",
+                    "email": "albertcasademont@gmail.com"
+                }
+            ],
+            "description": "This bundle allows you to create i18n routes. Fork of the jms/i18n-routing-bundle",
+            "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",
+            "keywords": [
+                "multilanguage",
+                "routing",
+                "translation"
+            ],
+            "time": "2017-12-06T11:56:15+00:00"
         },
         {
             "name": "kevinrob/guzzle-cache-middleware",
@@ -2913,16 +2970,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.2.18",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "5386578fbc2656b03c8b87aefe940af38058bccd"
+                "reference": "d69bdaed547237bd05903b86d253cb25263799dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/5386578fbc2656b03c8b87aefe940af38058bccd",
-                "reference": "5386578fbc2656b03c8b87aefe940af38058bccd",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/d69bdaed547237bd05903b86d253cb25263799dc",
+                "reference": "d69bdaed547237bd05903b86d253cb25263799dc",
                 "shasum": ""
             },
             "require": {
@@ -2937,9 +2994,9 @@
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
                 "kphoen/sitemap-bundle": "^2.0",
-                "lookyman/phpstan-symfony": "@dev",
+                "lookyman/phpstan-symfony": "~0.4.1",
                 "php-vcr/php-vcr": "^1.4",
-                "phpstan/phpstan": "^0.8.5",
+                "phpstan/phpstan": "^0.9.2",
                 "phpunit/phpunit": "^6.5.5",
                 "sensio/distribution-bundle": "^5.0",
                 "squizlabs/php_codesniffer": "^3.1",
@@ -2947,6 +3004,7 @@
                 "wizaplace/php-coding-standard": "^1.1"
             },
             "suggest": {
+                "jms/i18n-routing-bundle": "To vary routes per language",
                 "kphoen/sitemap-bundle": "To generate sitemaps"
             },
             "type": "symfony-bundle",
@@ -2959,20 +3017,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-02-16T14:53:46+00:00"
+            "time": "2018-02-26T13:31:49+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "f003c9c567744b2818c761fc6642a618b81733ac"
+                "reference": "5d0244bbbf90d48c559bdc0de18fae2fe03e750b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/f003c9c567744b2818c761fc6642a618b81733ac",
-                "reference": "f003c9c567744b2818c761fc6642a618b81733ac",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/5d0244bbbf90d48c559bdc0de18fae2fe03e750b",
+                "reference": "5d0244bbbf90d48c559bdc0de18fae2fe03e750b",
                 "shasum": ""
             },
             "require": {
@@ -3010,7 +3068,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-02-13T10:19:42+00:00"
+            "time": "2018-02-21T14:01:42+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
