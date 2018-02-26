@@ -1,4 +1,5 @@
 includes:
 	- vendor/lookyman/phpstan-symfony/extension.neon
-services:
-	- Lookyman\PHPStan\Symfony\ServiceMap(var/cache/dev/appDevDebugProjectContainer.xml)
+parameters:
+	symfony:
+		container_xml_path: %rootDir%/../../../var/cache/dev/appDevDebugProjectContainer.xml
