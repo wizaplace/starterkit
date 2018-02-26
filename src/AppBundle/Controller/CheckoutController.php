@@ -22,9 +22,13 @@ class CheckoutController extends Controller
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    /** @var BasketService */
+    private $basketService;
+
+    public function __construct(TranslatorInterface $translator, BasketService $basketService)
     {
         $this->translator = $translator;
+        $this->basketService = $basketService;
     }
 
     public function loginAction(): Response
@@ -34,7 +38,7 @@ class CheckoutController extends Controller
             return $this->redirect($this->generateUrl('checkout_addresses'));
         }
 
-        $basket = $this->get(BasketService::class)->getBasket();
+        $basket = $this->basketService->getBasket();
 
         return $this->render('@App/checkout/login.html.twig', [
             'basket' => $basket,
@@ -43,7 +47,7 @@ class CheckoutController extends Controller
 
     public function addressesAction(): Response
     {
-        $basket = $this->get(BasketService::class)->getBasket();
+        $basket = $this->basketService->getBasket();
 
         $user = $this->getUser()->getWizaplaceUser();
         // @codingStandardsIgnoreLine
@@ -59,7 +63,7 @@ class CheckoutController extends Controller
 
     public function paymentAction(): Response
     {
-        $basketService = $this->get(BasketService::class);
+        $basketService = $this->basketService;
         $basket = $basketService->getBasket();
         $payments = $basketService->getPayments();
 
@@ -71,7 +75,7 @@ class CheckoutController extends Controller
 
     public function submitPaymentAction(Request $request): Response
     {
-        $basketService = $this->get(BasketService::class);
+        $basketService = $this->basketService;
         $paymentId = $request->request->get('paymentId');
         $paymentInfo = $basketService->checkout(
             $paymentId,
@@ -98,7 +102,7 @@ class CheckoutController extends Controller
 
             return $this->redirect($this->generateUrl('checkout_payment'));
         }
-        $this->get(BasketService::class)->forgetBasket();
+        $this->basketService->forgetBasket();
 
         $orderIds = $request->query->get("orderIds", []);
 
