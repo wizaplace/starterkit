@@ -14,6 +14,7 @@
         "google/recaptcha": "^1.1",
         "guzzlehttp/guzzle": "^6.2",
         "incenteev/composer-parameter-handler": "^2.0",
+        "jms/i18n-routing-bundle": "^2.0.2",
         "kphoen/sitemap-bundle": "^2.0",
         "roave/security-advisories": "@dev",
         "sensio/distribution-bundle": "^5.0.20",
@@ -22,7 +23,7 @@
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/psr-http-message-bridge": "^1.0",
         "symfony/symfony": "~3.3.15",
-        "wizaplace/front-bundle": "~0.2.18",
+        "wizaplace/front-bundle": "~0.3.0",
         "zendframework/zend-diactoros": "^1.5"
     },
     "require-dev": {

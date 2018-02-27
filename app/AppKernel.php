@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new WizaplaceFrontBundle\WizaplaceFrontBundle(),
             new KPhoen\SitemapBundle\KPhoenSitemapBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new AppBundle\AppBundle(),
         ];
 
