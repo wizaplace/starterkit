@@ -36,7 +36,7 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path: ~ # use value from php.ini
-        cookie_lifetime: 12096000 # 12 096 000 seconds == 2 weeks
+        cookie_lifetime: 1209600 # 1 209 600 seconds == 2 weeks
     fragments: ~
     http_method_override: true
     assets: ~
