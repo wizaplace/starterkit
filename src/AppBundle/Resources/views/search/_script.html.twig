@@ -216,17 +216,6 @@
                 return Math.round(discount);
             },
 
-            /**
-             * use `isNew()` in template to know when to display a 'new' label, e.g.:
-             *
-             * <div v-for="product in products">
-             *     <span class="new-product" v-if="isNew(product)">{{ "new"|trans }}</span>
-             * </div>
-             */
-            isNew: function (product) {
-                var aWeekAgo = moment().subtract(7, 'days');
-                return moment.unix(product.createdAt).isAfter(aWeekAgo);
-            },
 
             // add product to basket and display confirmation modal
             addToBasket: function(product) {
