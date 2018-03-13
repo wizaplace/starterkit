@@ -8,18 +8,35 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wizaplace\SDK\Catalog\CatalogService;
+use Wizaplace\SDK\Catalog\CatalogServiceInterface;
 use WizaplaceFrontBundle\Service\FavoriteService;
+use WizaplaceFrontBundle\Service\JsonSearchService;
 
 class SearchController extends Controller
 {
+    /**
+     * @var CatalogServiceInterface
+     */
+    private $catalogService;
+
+    /**
+     * @var JsonSearchService
+     */
+    private $jsonSearchService;
+
+    public function __construct(CatalogServiceInterface $catalogService, JsonSearchService $jsonSearchService)
+    {
+        $this->catalogService = $catalogService;
+        $this->jsonSearchService = $jsonSearchService;
+    }
+
     public function searchAction(Request $request): Response
     {
-        $catalogService = $this->get(CatalogService::class);
         $selectedCategoryId = (int) $request->get("selected_category_id");
-        $selectedCategory = $selectedCategoryId ? $catalogService->getCategory($selectedCategoryId) : null;
+        $selectedCategory = $selectedCategoryId ? $this->catalogService->getCategory($selectedCategoryId) : null;
 
         $filters = [];
         if ($selectedCategoryId) {
@@ -34,5 +51,17 @@ class SearchController extends Controller
             'selectedCategory' => $selectedCategory,
             'userFavoriteIds' => $userFavoriteIds,
         ]);
+    }
+
+    public function jsonSearchAction(Request $request): JsonResponse
+    {
+        $query = $request->query->get('query', '');
+        $filters = $request->query->get('filters', []);
+        $sorting = $request->query->get('sorting', []);
+        $resultsPerPage = $request->query->getInt('resultsPerPage', 12);
+        $page = $request->query->getInt('page', 1);
+        // @TODO: geo-filtering
+
+        return new JsonResponse($this->jsonSearchService->search($query, $filters, $sorting, $resultsPerPage, $page), Response::HTTP_OK, [], true);
     }
 }

@@ -56,7 +56,7 @@
     <script>
         $(function () {
 
-            var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
+            var search = new SearchClient('{{ path('json_search') }}', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
             var urlParameters = search.restoreSearchFromUrl(); // used in Search page
 
             new Vue({

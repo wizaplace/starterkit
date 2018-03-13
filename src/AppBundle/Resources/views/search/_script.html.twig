@@ -1,7 +1,7 @@
 <script>
     var urlParameters;
 
-    var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}/catalog/search/products/autocomplete');
+    var search = new SearchClient('{{ path('json_search') }}', '{{ apiBaseUrl }}/catalog/search/products/autocomplete');
     urlParameters = search.restoreSearchFromUrl();
 
     new Vue({
@@ -29,26 +29,21 @@
                 var self = this;
 
                 search.searchProducts(this.query, this.pagination.page, this.pagination.resultsPerPage, this.filters, this.sorting, this.geoFilter, {}, function (response) {
+                    console.log(response);
                     self.loading = false;
-                    self.products = response.results;
+                    self.products = response.products;
                     self.pagination = response.pagination;
 
                     // filter returned facets
-                    Object.keys(response.facets).map(function (attributeId) {
-                        var variants = response.facets[attributeId];
-                        Object.keys(variants).map(function (variantId) {
-
-                            // remove reverse attribute search (∅)
-                            if (variantId === 'values') {
-                                for (var valueId in response.facets[attributeId][variantId]) {
-
-                                    // remove ∅ variant
-                                    if (valueId === '∅') {
-                                        delete response.facets[attributeId][variantId][valueId];
-                                    }
+                    Object.keys(response.facets).map(function (facetId) {
+                        if (typeof response.facets[facetId].values != 'undefined') {
+                            Object.keys(response.facets[facetId].values).map(function (variantId) {
+                                // remove ∅ variant
+                                if (response.facets[facetId].values[variantId].label === '∅') {
+                                    delete response.facets[facetId].values[variantId];
                                 }
-                            }
-                        });
+                            });
+                        }
                     });
 
                     // save facets
@@ -253,7 +248,7 @@
             },
 
             inFavorites: function (product) {
-                return this.favoriteIds.indexOf(product.mainDeclination.id) > -1;
+                return this.favoriteIds.indexOf(product.mainDeclinationId) > -1;
             },
 
             addToFavorites: function (product) {
