@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59c695caced84782c5c916d110789eb6",
+    "content-hash": "54ae66b5106bc69a74186d10dc6c0eb0",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2969,16 +2969,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.3.1",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "454d1eb0f37017b2bd6e00cdfe2707afa261a459"
+                "reference": "6e2198f38e718dfd6e8fc83eb22fa3a328f422f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/454d1eb0f37017b2bd6e00cdfe2707afa261a459",
-                "reference": "454d1eb0f37017b2bd6e00cdfe2707afa261a459",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/6e2198f38e718dfd6e8fc83eb22fa3a328f422f2",
+                "reference": "6e2198f38e718dfd6e8fc83eb22fa3a328f422f2",
                 "shasum": ""
             },
             "require": {
@@ -2989,7 +2989,7 @@
                 "symfony/serializer": "^3.3.16",
                 "symfony/symfony": "~3.3.15",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.15.1"
+                "wizaplace/sdk": "^1.16.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -3017,20 +3017,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-03-06T09:54:33+00:00"
+            "time": "2018-03-12T08:56:32+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.15.1",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "a4585dec0fd418d37f248e165f53fe7d470f96ef"
+                "reference": "2e7560ef97e89cb1dc55d747c20011aaad08464b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/a4585dec0fd418d37f248e165f53fe7d470f96ef",
-                "reference": "a4585dec0fd418d37f248e165f53fe7d470f96ef",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/2e7560ef97e89cb1dc55d747c20011aaad08464b",
+                "reference": "2e7560ef97e89cb1dc55d747c20011aaad08464b",
                 "shasum": ""
             },
             "require": {
@@ -3068,7 +3068,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-02-27T13:43:13+00:00"
+            "time": "2018-03-06T14:04:40+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
