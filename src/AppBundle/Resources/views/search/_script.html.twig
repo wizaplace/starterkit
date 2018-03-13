@@ -29,7 +29,6 @@
                 var self = this;
 
                 search.searchProducts(this.query, this.pagination.page, this.pagination.resultsPerPage, this.filters, this.sorting, this.geoFilter, {}, function (response) {
-                    console.log(response);
                     self.loading = false;
                     self.products = response.products;
                     self.pagination = response.pagination;
