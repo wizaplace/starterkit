@@ -18,7 +18,7 @@
             <tbody>
             {% for order in orders|default %}
                 <tr>
-                    <td><a href="{{ path('order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
+                    <td><a href="{{ path('profile_order', {'orderId': order.id}) }}" class="text-blue">{{ order.id }}</a></td>
                     <td>{{ order.timestamp.format('d-m-y') }}</td>
                     <td>{{ order.shippingName }}</td>
                     <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
@@ -53,7 +53,7 @@
             <tbody>
             {% for return in returns|default %}
                 <tr>
-                    <td><a href="{{ path('order', {'orderId': return.id}) }}" class="text-blue">{{ return.id }}</a></td>
+                    <td><a href="{{ path('profile_order', {'orderId': return.id}) }}" class="text-blue">{{ return.id }}</a></td>
                     <td>{{ return.createdAt.format('d-m-y') }}</td>
                     <td>
                         <ul>
