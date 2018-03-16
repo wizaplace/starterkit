@@ -24,6 +24,7 @@
         "symfony/psr-http-message-bridge": "^1.0",
         "symfony/symfony": "~3.3.16",
         "wizaplace/front-bundle": "~0.3.3",
+        "wizaplace/sdk": "dev-PIM as 1.18.0",
         "zendframework/zend-diactoros": "^1.5"
     },
     "require-dev": {
