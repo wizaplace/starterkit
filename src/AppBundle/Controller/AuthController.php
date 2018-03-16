@@ -188,6 +188,7 @@ class AuthController extends BaseController
                 $registration->setZipcode($zipcode);
                 $registration->setAddress($address);
                 $registration->setCity($city);
+                $registration->setCountry($country);
                 $registration->setLegalStatus($legalStatus);
                 $registration->setPhoneNumber($phoneNumber);
                 $registration->setSiretNumber($siret);
