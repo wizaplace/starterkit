@@ -11,6 +11,7 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
 use Wizaplace\SDK\Authentication\BadCredentials;
 use Wizaplace\SDK\Company\CompanyRegistration;
 use Wizaplace\SDK\Company\CompanyService;
@@ -187,6 +188,7 @@ class AuthController extends BaseController
                 $registration->setZipcode($zipcode);
                 $registration->setAddress($address);
                 $registration->setCity($city);
+                $registration->setCountry($country);
                 $registration->setLegalStatus($legalStatus);
                 $registration->setPhoneNumber($phoneNumber);
                 $registration->setSiretNumber($siret);
@@ -209,7 +211,11 @@ class AuthController extends BaseController
             return $this->redirect($requestedUrl);
         }
 
-        return $this->render('@App/auth/vendor-registration.html.twig');
+        $countries = Intl::getRegionBundle()->getCountryNames();
+
+        return $this->render('@App/auth/vendor-registration.html.twig', [
+            'countries' => $countries,
+        ]);
     }
 
     public function resetPasswordFormAction(string $token)

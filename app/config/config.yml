@@ -50,6 +50,7 @@ twig:
     globals:
         apiBaseUrl: "%api.base_url%"
         googleMapsApiKey: '%googlemaps.api_key%'
+        defaultCountry: "FR"
 
 services:
     _defaults:
