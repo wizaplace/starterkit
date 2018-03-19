@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wizaplace\SDK\Catalog\CatalogServiceInterface;
+use Wizaplace\SDK\Catalog\GeoFilter;
 use WizaplaceFrontBundle\Service\FavoriteService;
 use WizaplaceFrontBundle\Service\JsonSearchService;
 
@@ -60,8 +61,12 @@ class SearchController extends Controller
         $sorting = $request->query->get('sorting', []);
         $resultsPerPage = $request->query->getInt('resultsPerPage', 12);
         $page = $request->query->getInt('page', 1);
-        // @TODO: geo-filtering
+        $geoFilter = null;
+        if ($request->query->has('geo')) {
+            $geo = $request->query->get('geo');
+            $geoFilter = new GeoFilter($geo['lat'], $geo['lng'], $geo['radius'] ?? null);
+        }
 
-        return new JsonResponse($this->jsonSearchService->search($query, $filters, $sorting, $resultsPerPage, $page), Response::HTTP_OK, [], true);
+        return new JsonResponse($this->jsonSearchService->search($query, $filters, $sorting, $resultsPerPage, $page, $geoFilter), Response::HTTP_OK, [], true);
     }
 }
