@@ -35,24 +35,22 @@
 
                     // filter returned facets
                     Object.keys(response.facets).map(function (attributeId) {
-                        var variants = response.facets[attributeId];
-                        Object.keys(variants).map(function (variantId) {
-
-                            // remove reverse attribute search (∅)
-                            if (variantId === 'values') {
-                                for (var valueId in response.facets[attributeId][variantId]) {
-
-                                    // remove ∅ variant
-                                    if (valueId === '∅') {
-                                        delete response.facets[attributeId][variantId][valueId];
-                                    }
+                        if (typeof response.facets[attributeId].values !== 'undefined') {
+                            for (var variantId in Object.keys(response.facets[attributeId].values)) {
+                                // remove ∅ variant
+                                if (variantId === '∅') {
+                                    delete response.facets[attributeId].values[variantId];
                                 }
                             }
-                        });
+                            if (Object.keys(response.facets[attributeId].values).length < 1) {
+                                // Delete facet without values
+                                delete response.facets[attributeId];
+                            }
+                        }
                     });
 
                     // save facets
-                    self.facets = response.facets;
+                    self.facets = response.facets.filter(v => typeof v !== 'undefined');
 
                     // change url to reflect search parameters (query, pagination, etc.)
                     search.saveSearchInUrl(self.query, self.pagination.page, self.pagination.resultsPerPage, self.filters, self.sorting, self.geoFilter);

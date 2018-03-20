@@ -29,7 +29,7 @@
     </div>
 
     {# other facets #}
-    <div v-if="!facet.isNumeric && facet.values.length !== 0">
+    <div v-if="!facet.isNumeric">
         <h4>
             <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
         </h4>
