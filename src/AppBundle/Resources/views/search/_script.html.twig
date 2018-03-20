@@ -197,7 +197,7 @@
                 for (var i in product.categoryPath) {
                     categorySlugPath.push(product.categoryPath[i].slug);
                 }
-                return Routing.generate('product', {slug: product.slug, categoryPath: categorySlugPath.join('/')});
+                return Routing.generate('{{ app.request.locale }}{{ constant('JMS\\I18nRoutingBundle\\Router\\I18nLoader::ROUTING_PREFIX') }}product', {slug: product.slug, categoryPath: categorySlugPath.join('/')});
             },
 
             /**
