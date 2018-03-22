@@ -216,6 +216,8 @@
                 return Math.round(discount);
             },
 
+            price: helper.formatPrice,
+
 
             // add product to basket and display confirmation modal
             addToBasket: function(product) {
@@ -305,10 +307,6 @@
             // Trigger the first refresh
             this.refresh();
         },
-
-        filters: {
-            price: helper.formatPrice
-        }
     });
 
     // price slider
