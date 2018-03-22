@@ -18,7 +18,7 @@ class SearchController extends Controller
     public function searchAction(Request $request): Response
     {
         $catalogService = $this->get(CatalogService::class);
-        $selectedCategoryId = (int) $request->get("selected_category_id");
+        $selectedCategoryId = $request->query->getInt("selected_category_id");
         $selectedCategory = $selectedCategoryId ? $catalogService->getCategory($selectedCategoryId) : null;
 
         $filters = [];
