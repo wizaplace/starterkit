@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.yml }
+    - { resource: parameters.yml, ignore_errors: true }
     - { resource: parameters.platform_sh.php }
     - { resource: security.yml }
 
