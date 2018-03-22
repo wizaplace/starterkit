@@ -11,22 +11,22 @@
             <div class="checkout-steps-buttons btn-group btn-group-lg" role="group">
                 <button class="btn btn-default {% if step == 1 %} active {% else %} previous {% endif %}">
                     <span class="fa fa-shopping-cart visible-xs"></span>
-                    <span class="d-xs-none">Récapitulatif</span>
+                    <span class="d-none d-sm-block">Récapitulatif</span>
                 </button>
 
                 <button class="btn btn-default {% if step == 2 %} active {% elseif step > 2 %} previous {% endif %}">
                     <span class="icon icon-avatar visible-xs"></span>
-                    <span class="d-xs-none">Identification</span>
+                    <span class="d-none d-sm-block">Identification</span>
                 </button>
 
                 <button class="btn btn-default {% if step == 3 %} active {% elseif step > 3 %} previous {% endif %}">
                     <span class="icon icon-box visible-xs"></span>
-                    <span class="d-xs-none">Livraison & Facturation</span>
+                    <span class="d-none d-sm-block">Livraison & Facturation</span>
                 </button>
 
                 <button class="btn btn-default {% if step == 4 %} active {% endif %}">
                     <span class="icon icon-cb visible-xs"></span>
-                    <span class="d-xs-none">Paiement</span>
+                    <span class="d-none d-sm-block">Paiement</span>
                 </button>
             </div>
         </div>
