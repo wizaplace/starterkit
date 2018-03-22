@@ -1,0 +1,15 @@
+*
+!/app
+!/bin/console
+!/src
+!/web/app.php
+!/web/robots.txt
+!/.babelrc
+!/composer.*
+!/gulpfile.js
+!/package*.json
+!/var/cache/.gitkeep
+!/var/logs/.gitkeep
+!/var/translations/.gitkeep
+!/var/sitemap/.gitkeep
+!/var/sessions/.gitkeep
