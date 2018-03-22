@@ -91,4 +91,8 @@ The application should be available at http://localhost:8000/
 
 To compile assets, simply run `gulp`. Gulp will watch changes and recompile Javascript, CSS, etc. automatically.
 
+### Integration
+
 Here are our integration guidelines: [wizaplace/integration-guidelines](https://github.com/wizaplace/integration-guidelines).
+
+A minimal stylesheet (`src/AppBundle/Resources/public/style/wizaplace/demo.scss`) is provided for demo purpose but must be removed before starting the integration phase as it can cause style conflicts with your own styles.
