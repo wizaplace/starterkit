@@ -50,7 +50,9 @@
                     });
 
                     // save facets
-                    self.facets = response.facets.filter(v => typeof v !== 'undefined');
+                    self.facets = response.facets.filter(function (facet) {
+                        return typeof facet !== 'undefined';
+                    });
 
                     // change url to reflect search parameters (query, pagination, etc.)
                     search.saveSearchInUrl(self.query, self.pagination.page, self.pagination.resultsPerPage, self.filters, self.sorting, self.geoFilter);
