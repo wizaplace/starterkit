@@ -28,10 +28,14 @@
                 <label for="company-city" class="required">{{ 'company_city'|trans }}</label>
                 <input id="company-city" name="company_city" required>
 
-                {# TODO: add other countries #}
                 <label for="company-country" class="required">{{ 'company_country'|trans }}</label>
                 <select id="company-country" name="company_country">
-                    <option value="France">France</option>
+                    {% for code, country in countries %}
+                        <option value="{{ code }}"
+                                {% if code == defaultCountry %} selected="selected" {% endif %}>
+                            {{ country }}
+                        </option>
+                    {% endfor %}
                 </select>
 
                 <label for="company-status" class="required">{{ 'company_legal_status'|trans }}</label>

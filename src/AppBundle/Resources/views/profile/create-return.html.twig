@@ -2,7 +2,7 @@
 
 {% block profile_content %}
     Réaliser un retour : <br/>
-    <form method="post" action="{{ path('create_return', {'orderId' : order.id}) }}">
+    <form method="post" action="{{ path('profile_create_return') }}">
         <input type="hidden" name="orderId" value="{{ order.id }}">
         <input type="text" name="comments" placeholder="commentaires">
         {% for item in order.orderItem %}

@@ -253,27 +253,6 @@ basket_update_comments:
     defaults: { _controller: AppBundle:Basket:updateComments }
     methods: [POST]
 
-# orders
-order_all:
-    path: /commandes
-    defaults: { _controller: AppBundle:Order:viewOrders }
-    methods: [GET]
-
-order:
-    path: /commande/{orderId}
-    defaults: { _controller: AppBundle:Order:viewOrder }
-    methods: [GET]
-
-create_return:
-    path: /commande/{orderId}/retour
-    defaults: { _controller: AppBundle:Order:createReturn }
-    methods: [POST]
-
-create_return_form:
-    path: /commande/{orderId}/retour
-    defaults: { _controller: AppBundle:Order:displayCreateReturn }
-    methods: [GET]
-
 category:
     path: /c/{slug}
     defaults: { _controller: AppBundle:Category:view }
