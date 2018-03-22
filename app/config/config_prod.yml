@@ -13,7 +13,7 @@ parameters:
     env(API_READ_TIMEOUT): 30
     env(API_TIMEOUT): 30
     env(SENTRY_DSN): ~
-    env(WIZAPLACE_SYSTEM_USER_PASSWORD): ~
+    env(WIZAPLACE_SYSTEM_USER_PASSWORD): ""
     env(PLATFORM_TREE_ID): ~
 
 framework:
