@@ -44,6 +44,7 @@
                             }
                             if (Object.keys(response.facets[attributeId].values).length < 1) {
                                 // Delete facet without values
+                                // This leaves an undefined value that we filter out after
                                 delete response.facets[attributeId];
                             }
                         }
