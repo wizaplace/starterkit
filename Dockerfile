@@ -18,6 +18,13 @@ RUN composer dump-autoload --optimize --classmap-authoritative --no-dev --no-int
 # Production image
 FROM php:7.1-apache as app
 LABEL maintainer="dev@wizaplace.com"
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    libzip-dev \
+    && docker-php-ext-install -j$(nproc) \
+    intl \
+    zip \
+    opcache
 
 COPY . /var/www/html/
 # Copie des vendors installé dans l'image temporaire qui contient composer
