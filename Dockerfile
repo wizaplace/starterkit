@@ -28,5 +28,6 @@ RUN chown -R www-data:www-data /var/www/html/var
 
 ENV SYMFONY_ENV "prod"
 
-RUN bin/console --env=prod assets:install \
+RUN touch app/config/parameters.yml \
+    && bin/console --env=prod assets:install \
     && bin/console --env=prod fos:js-routing:dump
