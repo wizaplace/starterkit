@@ -15,56 +15,56 @@
 
 {# first name #}
 <div class="form-group">
-    <label for="firstname" class="required">{{ 'firstname'|trans }}</label>
-    <input id="firstname" class="form-control" name="user[addresses][shipping][firstName]" value="{{ user.shippingAddress.firstname }}">
+    <label for="shipping-firstname" class="required">{{ 'firstname'|trans }}</label>
+    <input id="shipping-firstname" class="form-control" name="user[addresses][shipping][firstName]" value="{{ user.shippingAddress.firstname }}">
 </div>
 
 {# last name #}
 <div class="form-group">
-    <label for="lastname" class="required">{{ 'lastname'|trans }}</label>
-    <input id="lastname" class="form-control" name="user[addresses][shipping][lastName]" value="{{ user.shippingAddress.lastname }}">
+    <label for="shipping-lastname" class="required">{{ 'lastname'|trans }}</label>
+    <input id="shipping-lastname" class="form-control" name="user[addresses][shipping][lastName]" value="{{ user.shippingAddress.lastname }}">
 </div>
 
 {# user's company #}
 <div class="form-group">
-    <label for="company">{{ 'company'|trans }}</label>
-    <input id="company" class="form-control" name="user[addresses][shipping][company]" value="{{ user.shippingAddress.company }}">
+    <label for="shipping-company">{{ 'company'|trans }}</label>
+    <input id="shipping-company" class="form-control" name="user[addresses][shipping][company]" value="{{ user.shippingAddress.company }}">
 </div>
 
 {# phone number #}
 <div class="form-group">
-    <label for="telephone" class="required">{{ 'phone_number'|trans }}</label>
-    <input id="telephone" class="form-control" name="user[addresses][shipping][phone]" value="{{ user.shippingAddress.phone }}">
+    <label for="shipping-telephone" class="required">{{ 'phone_number'|trans }}</label>
+    <input id="shipping-telephone" class="form-control" name="user[addresses][shipping][phone]" value="{{ user.shippingAddress.phone }}">
 </div>
 
 {# address #}
 <div class="form-group">
-    <label for="address" class="required">{{ 'address'|trans }}</label>
-    <input id="address" class="form-control" name="user[addresses][shipping][address]" value="{{ user.shippingAddress.address }}">
+    <label for="shipping-address" class="required">{{ 'address'|trans }}</label>
+    <input id="shipping-address" class="form-control" name="user[addresses][shipping][address]" value="{{ user.shippingAddress.address }}">
 </div>
 
 {# address 2 #}
 <div class="form-group">
-    <label for="address2">{{ 'address2'|trans }}</label>
-    <input id="address2" class="form-control" name="user[addresses][shipping][address_2]" value="{{ user.shippingAddress.addressSecondLine }}">
+    <label for="shipping-address2">{{ 'address2'|trans }}</label>
+    <input id="shipping-address2" class="form-control" name="user[addresses][shipping][address_2]" value="{{ user.shippingAddress.addressSecondLine }}">
 </div>
 
 {# zipcode #}
 <div class="form-group">
-    <label for="zipcode" class="required">{{ 'zipcode'|trans }}</label>
-    <input id="zipcode" class="form-control" name="user[addresses][shipping][zipcode]" value="{{ user.shippingAddress.zipcode }}">
+    <label for="shipping-zipcode" class="required">{{ 'zipcode'|trans }}</label>
+    <input id="shipping-zipcode" class="form-control" name="user[addresses][shipping][zipcode]" value="{{ user.shippingAddress.zipcode }}">
 </div>
 
 {# city #}
 <div class="form-group">
-    <label for="city" class="required">{{ 'city'|trans }}</label>
-    <input id="city" class="form-control" name="user[addresses][shipping][city]" value="{{ user.shippingAddress.city }}">
+    <label for="shipping-city" class="required">{{ 'city'|trans }}</label>
+    <input id="shipping-city" class="form-control" name="user[addresses][shipping][city]" value="{{ user.shippingAddress.city }}">
 </div>
 
 {# country #}
 <div class="form-group">
-    <label for="country" class="required">{{ 'country'|trans }}</label>
-    <select id="country" class="form-control" name="user[addresses][shipping][country]">
+    <label for="shipping-country" class="required">{{ 'country'|trans }}</label>
+    <select id="shipping-country" class="form-control" name="user[addresses][shipping][country]">
         {% for code, country in countries %}
             <option value="{{ code }}"
                     {% if code == user.shippingAddress.country %} selected="selected" {% endif %}>
