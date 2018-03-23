@@ -31,7 +31,9 @@ COPY . /var/www/html/
 COPY --from=vendors /app/vendor/ /var/www/html/vendor
 # Copie des assets générés dans l'image temporaire node
 COPY --from=assets /app/web/ /var/www/html/web
-RUN chown -R www-data:www-data /var/www/html/var
+
+RUN a2enmod rewrite headers \
+    && sed -i 's@/var/www/html@/var/www/html/web@' /etc/apache2/sites-available/000-default.conf
 
 ENV SYMFONY_ENV "prod"
 
