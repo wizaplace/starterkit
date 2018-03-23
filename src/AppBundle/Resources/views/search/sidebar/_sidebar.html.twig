@@ -39,6 +39,7 @@
                 <label>
                     <input type="checkbox" @click="toggleFilter(facet.name, value.key)" :checked="isChecked(facet.name, value.key)">
                     <span v-text="value.label"></span>
+                    <span v-if="value.count" v-text="'(' + value.count + ')'"></span>
                 </label>
             </div>
         </div>
