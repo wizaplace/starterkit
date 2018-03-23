@@ -64,5 +64,12 @@
 {# country #}
 <div class="form-group">
     <label for="country" class="required">{{ 'country'|trans }}</label>
-    <input id="country" class="form-control" name="user[addresses][shipping][country]" value="{{ user.shippingAddress.country }}">
+    <select id="country" class="form-control" name="user[addresses][shipping][country]">
+        {% for code, country in countries %}
+            <option value="{{ code }}"
+                    {% if code == user.shippingAddress.country %} selected="selected" {% endif %}>
+                {{ country }}
+            </option>
+        {% endfor %}
+    </select>
 </div>
