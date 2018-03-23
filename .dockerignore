@@ -4,6 +4,7 @@
 !/src
 !/web/app.php
 !/web/robots.txt
+!/web/.htaccess
 !/.babelrc
 !/composer.*
 !/gulpfile.js
