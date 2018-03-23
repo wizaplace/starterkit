@@ -1,6 +1,6 @@
 {% set categories = categoryTree() %}
 
-<div id="searchbar">
+<div id="searchbar" v-cloak>
     <form action="{{ path('search') }}" class="searchbar" method="get" autocomplete="off">
         <input type="hidden" name="selected_category_id" v-model="selectedCategory.id">
 
