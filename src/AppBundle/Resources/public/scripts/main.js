@@ -14,7 +14,8 @@ $(function() {
     slick.init();
 
     // init reCaptcha behaviour
-    reCaptcha.init();
+    recaptcha.init();
+    window.recaptchaCallback = recaptcha.callback; // used by google recaptcha script
 
     // init basket behaviour
     basket.init();

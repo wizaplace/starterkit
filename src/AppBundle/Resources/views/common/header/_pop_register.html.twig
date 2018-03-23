@@ -10,11 +10,9 @@
     <label for="header-terms">{{ 'header.register.form.terms'|trans({'%link%': '#'})|raw }}</label>
     <input id="header-terms" type="checkbox" name="terms" value="1" required>
 
-    {# invisible reCaptcha button #}
-    <button type="button" class="trigger-recaptcha validate" id="g-recaptcha-header" data-sitekey="{{ recaptchaKey() }}">
-        {{'validate'|trans}}
-    </button>
+    {# invisible recaptcha #}
+    <div class="g-recaptcha" data-sitekey="{{ recaptchaKey() }}" data-callback="recaptchaCallback" data-size="invisible"></div>
+    <input type="hidden" name="recaptcha_response" value="__waiting-for-response-token__">
 
-    {# reCaptcha mechanism #}
-    <button type="submit" class="d-none"></button>
+    <button>{{'validate'|trans}}</button>
 </form>

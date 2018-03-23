@@ -47,7 +47,7 @@ class AuthController extends BaseController
         $referer = $request->headers->get('referer') ?? $this->get('router')->generate('home');
 
         // recaptcha validation
-        $recaptchaResponse = $request->request->get('g-recaptcha-response');
+        $recaptchaResponse = $request->request->get('recaptcha_response');
         $recaptcha = new ReCaptcha($this->getParameter('recaptcha.secret'));
         $recaptchaValidation = $recaptcha->verify($recaptchaResponse);
 

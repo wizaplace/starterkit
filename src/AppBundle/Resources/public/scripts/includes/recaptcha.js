@@ -1,54 +1,45 @@
-const reCaptcha = {
+/*
+    To avoid conflicts, recaptcha inputs have no id attribute.
+    The form is given a 'recaptcha-form' class only when it is submitted
+    so its recaptcha input can be targeted by Google library to inject the response token as a value.
+*/
+
+const recaptcha = {
     init: function() {
-        let $reCaptchaButtons = $('.trigger-recaptcha');
-        let $reCaptchaForms = $('form:has(.trigger-recaptcha)');
+        // get page eventual recaptcha inputs
+        var recaptchaInputs = document.querySelectorAll('[name="recaptcha_response"]');
 
-        let self = this;
+        if (recaptchaInputs.length) {
 
-        // trigger form submission behaviour...
-        // ====================================
+            // for each recaptcha input, get its related form
+            [...recaptchaInputs].forEach(function (input) {
+                var $form = $(input).closest('form');
 
-        // ...on recaptcha button click
-        $reCaptchaButtons.on('click', function() {
-            self.submitForm($(this));
-        });
+                $form.on('submit', function (e) {
 
-        // ...on standard form submission
-        $reCaptchaForms.on('submit', function() {
+                    // prevent form to be submitted
+                    e.preventDefault();
 
-            // intercept submission if the form is not validated yet
-            if (! $(this).hasClass('validated')) {
-                self.submitForm($(this).find(".trigger-recaptcha"));
-                return false;
-            }
-        });
+                    // add a flag on the form to allow later targeting (see recaptcha.callback)
+                    $form.addClass('recaptcha-form');
+
+                    // execute Google script (available via main layout script tag)
+                    grecaptcha.execute();
+                });
+            });
+        }
     },
 
-    submitForm: function($reCaptcha) {
-        let $form = $reCaptcha.closest('form');
-        let $submitButton = $form.find('[type="submit"]');
+    callback: function (responseToken) {
 
-        if (! helper.isFormValid($form)) {
-            $submitButton.click(); // force browser form validation
+        // target the form waiting to be submitted
+        var form = document.querySelector('.recaptcha-form');
 
-        } else {
+        // add response token to form
+        var recaptchaInput = form.querySelector('[name="recaptcha_response"]');
+        recaptchaInput.value = responseToken;
 
-            // flag form as ready to be submitted
-            $form.addClass('validated');
-
-            // add required class to reCaptcha
-            $('.trigger-recaptcha').addClass('g-recaptcha');
-
-            // recaptcha and form submission
-            grecaptcha.render($reCaptcha.attr('id'), {
-                'sitekey': $reCaptcha.data('sitekey'), // supplied by Twig extension
-                'callback': function(token) {
-                    $form.find('.g-recaptcha-response').val(token); // register token
-                    $form.submit();
-                }
-            });
-
-            grecaptcha.execute();
-        }
+        // submit form
+        form.submit();
     }
 };
