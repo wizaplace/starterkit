@@ -427,6 +427,11 @@
         },
         "contact": {
             "link": "contact"
+        },
+        "register": {
+            "vendor": {
+                "link": "inscription vendeur"
+            }
         }
     },
 
