@@ -27,4 +27,4 @@ monolog:
 
 twig:
     globals:
-        google_tag_manager_key: "GTM-TQTN9Z9" # dev key, not usable on production environment
+        google_tag_manager_key: "GTM-TQTN9Z9" # dev key (change with your own), not usable on production environment
