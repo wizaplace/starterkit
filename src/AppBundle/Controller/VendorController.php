@@ -9,9 +9,9 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\SDK\User\User;
 
 class VendorController extends Controller
 {
@@ -40,6 +40,10 @@ class VendorController extends Controller
      */
     private function isAccessGranted(): bool
     {
+        if (!$this->getParameter('is_bof_available')) {
+            throw new NotFoundHttpException();
+        }
+
         $user = $this->getUser();
         if (!$user->isVendor()) {
             $message = $this->translator->trans('vendor.access_denied.not_a_vendor');

@@ -18,6 +18,9 @@ parameters:
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
 
+    #Flags
+    is_bof_available: true
+
 framework:
     translator:
         fallbacks: ["%default_locale%"]
@@ -55,6 +58,9 @@ twig:
         defaultCountry: "FR"
         currencySign: '%env(CURRENCY_SIGN)%'
         currencyCode: '%env(CURRENCY_CODE)%'
+
+        #Flags
+        is_bof_available: "%is_bof_available%"
 
 services:
     _defaults:
