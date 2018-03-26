@@ -24,3 +24,7 @@ monolog:
         console:
             type:   console
             channels: ['!event', '!doctrine']
+
+twig:
+    globals:
+        google_tag_manager_key: "GTM-TQTN9Z9" # dev key, not usable on production environment
