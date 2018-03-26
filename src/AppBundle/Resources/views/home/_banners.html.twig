@@ -1,5 +1,5 @@
 {# large banners #}
-<div class="js-slick-banner d-xs-none d-sm-block">
+<div class="js-slick-banner d-none d-sm-block">
     {% for banner in desktopBanners %}
         <a href="{{ banner.link|default("#") }}"
                 {% if banner.shouldOpenInNewWindow %} target="_blank" {% endif %}>
