@@ -159,11 +159,11 @@ class AuthController extends BaseController
 
             $idCard = $uploadedFiles['admin_document_id_card'];
             $kbis = $uploadedFiles['company_document_kbis'];
-            $bic = $uploadedFiles['company_document_bic']; // RIB
+            $rib = $uploadedFiles['company_document_rib']; // RIB
 
             if (! $email || ! $firstName || ! $lastName || ! $name || ! $password || ! $phoneNumber ||
                 ! $legalStatus || ! $zipcode || ! $capital || ! $siret || ! $rcs || ! $city || ! $country ||
-                ! $address || ! $idCard || ! $kbis || ! $bic || ! $capital || ! $terms) {
+                ! $address || ! $idCard || ! $kbis || ! $rib || ! $capital || ! $terms) {
                 $notification = $this->translator->trans('fields_required_error_message');
                 $this->addFlash('danger', $notification);
 
@@ -195,7 +195,11 @@ class AuthController extends BaseController
                 $registration->setDescription($description);
                 $registration->addUploadedFile('kbis', $kbis);
                 $registration->addUploadedFile('idCard', $idCard);
-                $registration->addUploadedFile('bic', $bic);
+                $registration->addUploadedFile('rib', $rib);
+                $registration->setUrl($url);
+                $registration->setVatNumber($vat);
+                $registration->setCapital($capital);
+                $registration->setRcs($rcs);
 
                 $companyService->register($registration);
 
