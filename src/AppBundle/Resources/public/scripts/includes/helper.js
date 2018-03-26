@@ -31,7 +31,7 @@ const helper = {
             return '';
         }
         price = price.toFixed(2) + '';
-        return price.replace('.', ',') + '€';
+        return price.replace('.', ',');
     },
 
     displayLoadingSpinner: function() {
