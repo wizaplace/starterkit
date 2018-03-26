@@ -7,6 +7,8 @@ parameters:
     api.connect_timeout: '%env(API_CONNECT_TIMEOUT)%'
     api.read_timeout: '%env(API_READ_TIMEOUT)%'
     api.timeout: '%env(API_TIMEOUT)%'
+    secret: '%env(APP_SECRET)%'
+    http_host: '%env(HTTP_HOST)%'
     # default env values
     env(API_BASE_URL): 'https://sandbox.wizaplace.com/api/v1/'
     env(API_CONNECT_TIMEOUT): 30
@@ -14,11 +16,13 @@ parameters:
     env(API_TIMEOUT): 30
     env(SENTRY_DSN): ~
     env(WIZAPLACE_SYSTEM_USER_PASSWORD): ""
-    env(PLATFORM_TREE_ID): ~
+    env(APP_VERSION): ~
+    env(APP_SECRET): ~
+    env(HTTP_HOST): localhost
 
 framework:
     assets:
-        version: "%env(PLATFORM_TREE_ID)%"
+        version: "%env(APP_VERSION)%"
 
 monolog:
     handlers:
@@ -61,7 +65,7 @@ services:
                 auto_log_stacks: true
                 install_default_breadcrumb_handlers: false
                 install_shutdown_handler: false
-                release: "%env(PLATFORM_TREE_ID)%"
+                release: "%env(APP_VERSION)%"
     \Raven_Breadcrumbs_MonologHandler:
         class: \Raven_Breadcrumbs_MonologHandler
         arguments:
