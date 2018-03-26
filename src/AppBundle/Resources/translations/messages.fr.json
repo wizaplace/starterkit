@@ -383,7 +383,8 @@
                 "profile": "Mon profil",
                 "orders": "Mes commandes",
                 "discussion": "Ma messagerie",
-                "logout": "Me déconnecter"
+                "logout": "Me déconnecter",
+                "vendor_dashboard": "Mon dashboard"
             }
         },
         "login": {
@@ -509,7 +510,6 @@
             "submit": "Envoyer"
         }
     },
-
     "seo": {
         "search_page_title": "%query%",
         "search_page_title_default": "Page recherche",
@@ -520,5 +520,25 @@
         "company_page_description": "%companyDescription%",
         "attribute_page_title": "%variantName%",
         "attribute_page_description": "%variantDescription%"
+    },
+    "vendor": {
+        "access_denied": {
+            "not_a_vendor": "Vous devez être connecté en tant que vendeur pour accéder à cette page"
+        },
+        "dashboard": {
+            "layout": {
+                "account": {
+                    "title": "Accéder à mon profil"
+                },
+                "products": {
+                    "title": "Mes produits",
+                    "creation": "Création"
+                },
+                "orders": {
+                    "title": "Mes Commandes",
+                    "waiting": "En attente"
+                }
+            }
+        }
     }
 }

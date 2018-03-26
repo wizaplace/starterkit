@@ -1,0 +1,37 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="spacer"></div>
+            {# profile menu #}
+            <div class="col-md-3 profile-menu">
+                {% block profile_menu %}
+
+                    {# user profile #}
+                    <div class="title">
+                        <a href="{{ path("profile") }}">{{ 'vendor.dashboard.layout.account.title' | trans }}</a>
+                    </div>
+
+                    {# vendor products #}
+                    <div class="title">{{ 'vendor.dashboard.layout.products.title' | trans }}</div>
+                    <ul>
+                        <li><a href="#">{{ 'vendor.dashboard.layout.products.creation' | trans }}</a></li>
+                    </ul>
+
+                    {# vendor orders #}
+                    <div class="title">{{ 'vendor.dashboard.layout.orders.title' | trans }}</div>
+                    <ul>
+                        <li><a href="#">{{ 'vendor.dashboard.layout.orders.waiting' | trans }}</a></li>
+                    </ul>
+                {% endblock %}
+            </div>
+
+            {# profile content #}
+            <div class="col-md-9">
+                {% block profile_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
