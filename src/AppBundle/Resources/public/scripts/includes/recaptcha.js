@@ -7,12 +7,12 @@
 const recaptcha = {
     init: function() {
         // get page eventual recaptcha inputs
-        var recaptchaInputs = document.querySelectorAll('[name="recaptcha_response"]');
+        var $recaptchaInputs = $('[name="recaptcha_response"]');
 
-        if (recaptchaInputs.length) {
+        if ($recaptchaInputs.length) {
 
             // for each recaptcha input, get its related form
-            [...recaptchaInputs].forEach(function (input) {
+            $recaptchaInputs.each(function (input) {
                 var $form = $(input).closest('form');
 
                 $form.on('submit', function (e) {
