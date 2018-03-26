@@ -18,8 +18,8 @@ parameters:
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
 
-    #Flags
-    is_bof_available: true
+    #FeatureFlags
+    is_bof_available: '%env(IS_BOF_AVAILABLE)%'
 
 framework:
     translator:
