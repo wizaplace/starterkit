@@ -118,7 +118,7 @@
     "company_documents_max_size" : "L'ensemble des fichiers ne doit pas dépasser : 20MB",
     "admin_document_id_card": "Pièce d'identité (carte d'identité ou passeport)",
     "company_document_kbis": "Extrait Kbis (récépissé INSEE pour les autoentrepreneurs)",
-    "company_document_bic": "RIB",
+    "company_document_rib": "RIB",
     "admin_no_vat_checkbox": "Je déclare bénéficier du régime d'auto-entrepreneur ou être déclaré auto-entrepreneur et ne pas posséder de n° de TVA intra communautaire.",
     "terms_of_service": "Conditions générales d'utilisation",
     "terms_of_service_url": "#",
