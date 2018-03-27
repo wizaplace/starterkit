@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "54ae66b5106bc69a74186d10dc6c0eb0",
+    "content-hash": "ce3e2e23eecb53caca6ee334a73aab40",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -2863,16 +2863,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.6",
+            "version": "v2.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f"
+                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d2117ec118c1ff3d28ccddca8212d82787a4809f",
-                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/69aacd44dbbaa3199d5afb68605c996d577896fc",
+                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc",
                 "shasum": ""
             },
             "require": {
@@ -2881,8 +2881,8 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "library",
             "extra": {
@@ -2925,7 +2925,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-03-03T16:23:01+00:00"
+            "time": "2018-03-20T04:31:17+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2969,16 +2969,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.3.3",
+            "version": "dev-update-symfony-3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "6e2198f38e718dfd6e8fc83eb22fa3a328f422f2"
+                "reference": "ca83cb7c97e36f2b1219bc23dededf367082b1c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/6e2198f38e718dfd6e8fc83eb22fa3a328f422f2",
-                "reference": "6e2198f38e718dfd6e8fc83eb22fa3a328f422f2",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/ca83cb7c97e36f2b1219bc23dededf367082b1c1",
+                "reference": "ca83cb7c97e36f2b1219bc23dededf367082b1c1",
                 "shasum": ""
             },
             "require": {
@@ -2986,10 +2986,9 @@
                 "php": ">=7.1",
                 "roave/security-advisories": "@dev",
                 "symfony/monolog-bundle": "^3.1",
-                "symfony/serializer": "^3.3.16",
-                "symfony/symfony": "~3.3.15",
+                "symfony/symfony": "^3.3",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.16.0"
+                "wizaplace/sdk": "^1.18.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -3017,20 +3016,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-03-12T08:56:32+00:00"
+            "time": "2018-03-27T09:46:53+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.16.0",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "2e7560ef97e89cb1dc55d747c20011aaad08464b"
+                "reference": "dacd41beb2ba96fcebbcdc5f0a04e99106fe4371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/2e7560ef97e89cb1dc55d747c20011aaad08464b",
-                "reference": "2e7560ef97e89cb1dc55d747c20011aaad08464b",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/dacd41beb2ba96fcebbcdc5f0a04e99106fe4371",
+                "reference": "dacd41beb2ba96fcebbcdc5f0a04e99106fe4371",
                 "shasum": ""
             },
             "require": {
@@ -3068,7 +3067,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-03-06T14:04:40+00:00"
+            "time": "2018-03-21T15:58:34+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -5663,7 +5662,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "wizaplace/front-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
