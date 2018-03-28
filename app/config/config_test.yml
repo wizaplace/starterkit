@@ -18,7 +18,7 @@ web_profiler:
 services:
     VCR\Configuration:
         calls:
-            - ['setMode', [!php/const:VCR\VCR::MODE_ONCE]]
+            - ['setMode', [!php/const VCR\VCR::MODE_ONCE]]
     WizaplaceFrontBundle\Tests\TestEnv\Service\VcrGuzzleMiddleware:
         autowire: true
     wizaplace.guzzle.decorating_handler2:
