@@ -54,8 +54,9 @@
 
 {% block scripts %}
     <script>
-        $(function () {
 
+        {# Search library is not loaded yet #}
+        $(function () {
             var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
             var urlParameters = search.restoreSearchFromUrl(); // used in Search page
 
