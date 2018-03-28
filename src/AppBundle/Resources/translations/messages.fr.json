@@ -525,19 +525,63 @@
         "access_denied": {
             "not_a_vendor": "Vous devez être connecté en tant que vendeur pour accéder à cette page"
         },
-        "dashboard": {
-            "layout": {
-                "account": {
-                    "title": "Accéder à mon profil"
+        "layout": {
+            "dashboard": {
+                "title": "Dashboard"
+            },
+            "products": {
+                "title": "Mes produits",
+                "creation": "Création"
+            },
+            "orders": {
+                "title": "Mes Commandes",
+                "waiting": "En attente"
+            }
+        },
+        "products": {
+            "creation": {
+                "code": "Code EAN",
+                "supplier_reference": "Référence fournisseur",
+                "name": "Nom",
+                "status": {
+                    "title": "Statut",
+                    "A": "Activé",
+                    "D": "Désactivé",
+                    "H": "Caché"
                 },
-                "products": {
-                    "title": "Mes produits",
-                    "creation": "Création"
+                "main_category": "Catégorie principale",
+                "green_tax": "Éco Taxe",
+                "is_brand_new": {
+                    "true": "Neuf",
+                    "false": "Occasion"
                 },
-                "orders": {
-                    "title": "Mes Commandes",
-                    "waiting": "En attente"
-                }
+                "geolocation": {
+                    "title": "Localisation",
+                    "latitude": "Latitude",
+                    "longitude": "Longitude",
+                    "label": "Label",
+                    "zipcode": "Code postal"
+                },
+                "free_attributes": {
+                    "title": "Attributs libres",
+                    "name": "Nom",
+                    "value": "Valeur"
+                },
+                "has_free_shipping": "Frais de port offerts",
+                "weight": "Poids",
+                "is_downloadable": "Téléchargeable",
+                "affiliate_link": "lien d'affiliation",
+                "main_image": "Image principale",
+                "additional_images": {
+                    "name": "Images additionnelles",
+                    "error": "Vous devez d'abord uploader une image"
+                },
+                "full_description": "Description complète",
+                "short_description": "Description courte",
+                "tax_ids": "Taxes",
+                "declinations": "Déclinaisons",
+                "attachments": "Pièces jointes",
+                "availability_date": "Disponible depuis"
             }
         }
     }

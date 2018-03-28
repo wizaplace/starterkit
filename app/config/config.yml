@@ -78,6 +78,9 @@ services:
         class: SitemapGenerator\Dumper\GzFileDumper
         arguments: [ "%kernel.root_dir%/../var/sitemap/sitemap.xml.gz" ]
 
+    Wizaplace\SDK\Pim\Product\ProductService:
+        public: true
+
 k_phoen_sitemap:
     base_host:         'https://%http_host%'
     base_host_sitemap: 'https://%http_host%'

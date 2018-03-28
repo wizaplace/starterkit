@@ -1,0 +1,250 @@
+{% extends '@App/layout-vendor.html.twig' %}
+
+{% block profile_content %}
+    <form id="create-product-form" method="POST" action="{{ path('vendor_products_create') }}">
+        <div v-for="item in formList">
+            {#
+                The following components are available in
+                src/AppBundle/Resources/public/scripts/includes/vue-components.js
+
+                You can create your own components or directly insert your inputs
+                if those ones do not fit your needs.
+            #}
+            <form-input-text :item="item" v-if="item.type === 'text'"></form-input-text>
+            <form-input-number :item="item" v-if="item.type === 'number'"></form-input-number>
+            <form-input-checkbox :item="item" v-if="item.type === 'checkbox'"></form-input-checkbox>
+            <form-input-file :item="item" v-if="item.type === 'file'"></form-input-file>
+            <form-select :item="item" v-if="item.type === 'select'"></form-select>
+            <form-object :item="item" v-if="item.type === 'object'"></form-object>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        new Vue({
+            el: '#create-product-form',
+            data: {
+                formList: [
+                    {
+                        id: 'name',
+                        inputName: 'product_name',
+                        name: '{{ 'vendor.products.creation.name'|trans }}',
+                        type: 'text',
+                        required: true,
+                    },
+                    {
+                        id: 'code',
+                        inputName: 'code',
+                        name: '{{ 'vendor.products.creation.code'|trans }}',
+                        type: 'text',
+                        required: true,
+                    },
+                    {
+                        id: 'supplier_reference',
+                        inputName: 'supplier_reference',
+                        name: '{{ 'vendor.products.creation.supplier_reference'|trans }}',
+                        type: 'text',
+                        required: false,
+                    },
+                    {
+                        id: 'status',
+                        inputName: 'status',
+                        name: '{{ 'vendor.products.creation.status.title'|trans }}',
+                        type: 'select',
+                        options: {{ productStatusList|json_encode|raw }},
+                        required: true,
+                    },
+                    {
+                        id: 'main_category',
+                        inputName: 'main_category',
+                        name: '{{ 'vendor.products.creation.main_category'|trans }}',
+                        type: 'select',
+                        options: {{ categoriesList|json_encode|raw }},
+                        required: true,
+                    },
+                    {
+                        id: 'green_tax',
+                        inputName: 'green_tax',
+                        name: '{{ 'vendor.products.creation.green_tax'|trans }}',
+                        type: 'number',
+                        step: '0.01',
+                        defaultValue: 0,
+                        required: true,
+                    },
+                    {
+                        id: 'is_brand_new',
+                        inputName: 'is_brand_new',
+                        name: '{{ 'vendor.products.creation.is_brand_new.true'|trans }}',
+                        alternativeName: '{{ 'vendor.products.creation.is_brand_new.false' }}',
+                        type: 'checkbox',
+                        checked: true,
+                        required: false,
+                    },
+                    {
+                        id: 'geolocation',
+                        title: '{{ 'vendor.products.creation.geolocation.title'|trans }}',
+                        type: 'object',
+                        multiple: false,
+                        required: false,
+                        object: [
+                            {
+                                id: 'latitude',
+                                inputName: 'latitude',
+                                name: '{{ 'vendor.products.creation.geolocation.latitude'|trans }}',
+                                type: 'number',
+                                step: null,
+                                required: false,
+                            },
+                            {
+                                id: 'longitude',
+                                inputName: 'longitude',
+                                name: '{{ 'vendor.products.creation.geolocation.longitude'|trans }}',
+                                type: 'number',
+                                step: null,
+                                required: false,
+                            },
+                            {
+                                id: 'label',
+                                inputName: 'label',
+                                name: '{{ 'vendor.products.creation.geolocation.label'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                            {
+                                id: 'zipcode',
+                                inputName: 'zipcode',
+                                name: '{{ 'vendor.products.creation.geolocation.zipcode'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 'free_attributes',
+                        title: '{{ 'vendor.products.creation.free_attributes.title'|trans }}',
+                        type: 'object',
+                        required: false,
+                        multiple: true,
+                        error: 'nope',
+                        object: [
+                            {
+                                id: 'name',
+                                inputName: 'name',
+                                name: '{{ 'vendor.products.creation.free_attributes.name'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                            {
+                                id: 'value',
+                                inputName: 'value',
+                                name: '{{ 'vendor.products.creation.free_attributes.value'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 'has_free_shipping',
+                        inputName: 'has_free_shipping',
+                        name: '{{ 'vendor.products.creation.has_free_shipping'|trans }}',
+                        type: 'checkbox',
+                        checked: false,
+                        required: false,
+                    },
+                    {
+                        id: 'weight',
+                        inputName: 'weight',
+                        name: '{{ 'vendor.products.creation.weight'|trans }}',
+                        type: 'number',
+                        step: '0.001',
+                        defaultValue: 0,
+                        required: false,
+                    },
+                    {
+                        id: 'is_downloadable',
+                        inputName: 'is_downloadable',
+                        name: '{{ 'vendor.products.creation.is_downloadable'|trans }}',
+                        type: 'checkbox',
+                        value: false,
+                        required: false,
+                    },
+                    {
+                        id: 'affiliate_link',
+                        inputName: 'affiliate_link',
+                        name: '{{ 'vendor.products.creation.affiliate_link'|trans }}',
+                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                             // les conditions d'affichage
+                        value: 'disabled',
+                        required: false,
+                    },
+                    {
+                        id: 'main_image',
+                        inputName: 'main_image',
+                        name: '{{ 'vendor.products.creation.main_image'|trans }}',
+                        type: 'file',
+                        required: false,
+                        multiple: false,
+                    },
+                    {
+                        id: 'additional_images',
+                        inputName: 'additional_images',
+                        name: '{{ 'vendor.products.creation.additional_images.name'|trans }}',
+                        type: 'file',
+                        required: false,
+                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
+                        multiple: true,
+                    },
+                    {
+                        id: 'full_description',
+                        inputName: 'full_description',
+                        name: '{{ 'vendor.products.creation.full_description'|trans }}',
+                        type: 'text',
+                        required: false,
+                    },
+                    {
+                        id: 'short_description',
+                        inputName: 'short_description',
+                        name: '{{ 'vendor.products.creation.short_description'|trans }}',
+                        type: 'text',
+                        required: false,
+                    },
+                    {
+                        id: 'tax_ids',
+                        inputName: 'tax_ids',
+                        name: '{{ 'vendor.products.creation.tax_ids'|trans }}',
+                        type: 'select',
+                        options: {{ taxList|json_encode|raw }},
+                        required: true,
+                    },
+                    {
+                        id: 'declinations',
+                        inputName: 'declinations',
+                        name: '{{ 'vendor.products.creation.declinations'|trans }}',
+                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                             // les conditions d'affichage
+                        value: 'disabled',
+                        required: false,
+                    },
+                    {
+                        id: 'attachments',
+                        inputName: 'attachments',
+                        name: '{{ 'vendor.products.creation.attachments'|trans }}',
+                        type: 'file',
+                        required: false,
+                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
+                        multiple: true,
+                    },
+                    {
+                        id: 'availability_date',
+                        inputName: 'availability_date',
+                        name: '{{ 'vendor.products.creation.availability_date'|trans }}',
+                        type: 'date',
+                        required: false,
+                    },
+                ],
+            },
+        });
+    </script>
+{% endblock %}
