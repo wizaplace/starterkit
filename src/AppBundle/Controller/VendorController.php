@@ -56,10 +56,16 @@ class VendorController extends Controller
         return $this->render('@App/vendor/dashboard-summary.html.twig');
     }
 
-    public function createProductAction(): Response
+    public function createProductAction(Request $request): Response
     {
         if (!$this->isAccessGranted()) {
             return $this->redirectToRoute('home');
+        }
+
+        if ($request->getMethod() === 'POST') {
+            $command = $this->newCreateProductCommandFromRequest($request);
+
+            $this->productService->createProduct($command);
         }
 
         $statusList = ProductStatus::toArray();
@@ -112,5 +118,90 @@ class VendorController extends Controller
         }
 
         return true;
+    }
+
+    private function newCreateProductCommandFromRequest(Request $request): CreateProductCommand
+    {
+        $productName = $request->get('product_name');
+        $code = $request->get('code');
+        $supplierReference = $request->get('supplier_reference');
+        $status = $request->get('status');
+        $mainCategory = (int) $request->get('main_category');
+        $greenTax = (float) $request->get('green_tax');
+        $isBrandNew = (bool) $request->get('is_brand_new');
+        $geolocation = $request->get('geolocation');
+        $freeAttributes = $request->get('free_attributes') ?? [];
+        $hasFreeShipping = $request->get('has_free_shipping') ?? false;
+        $weight = (float) $request->get('weight');
+        $isDownloadable = $request->get('is_downloadable') ?? false;
+        $affiliateLink = $request->get('affiliate_link');
+        $mainImage = $request->files->get('main_image');
+        $additionalImages = $request->files->get('additional_images') ?? [];
+        $fullDescription = $request->get('full_description');
+        $shortDescription = $request->get('short_description');
+        $taxIds = (array) $request->get('tax_ids');
+        $declinations = $request->get('declinations') ?? [];
+        $attachments = $request->files->get('attachments');
+        $availabilityDate = $request->get('availability_date');
+
+        $createProductCommand = new CreateProductCommand();
+        $createProductCommand->setName($productName);
+        $createProductCommand->setCode($code);
+        if ($supplierReference !== null) {
+            $createProductCommand->setSupplierReference($supplierReference);
+        }
+        $createProductCommand->setStatus(new ProductStatus($status));
+        $createProductCommand->setMainCategoryId($mainCategory);
+        $createProductCommand->setGreenTax($greenTax);
+        if ($isBrandNew !== null) {
+            $createProductCommand->setIsBrandNew($isBrandNew);
+        }
+        if ($geolocation !== null) {
+            $geoloc = new ProductGeolocationUpsertData(
+                $request->get('latitude'),
+                $request->get('longitude'));
+            $geoloc->setLabel($request->get('label'));
+            $geoloc->setZipcode($request->get('zipcode'));
+            $createProductCommand->setGeolocation($geoloc);
+        }
+        if ($freeAttributes !== null) {
+            $createProductCommand->setFreeAttributes($freeAttributes);
+        }
+        if ($hasFreeShipping !== null) {
+            $createProductCommand->setHasFreeShipping($hasFreeShipping);
+        }
+        if ($weight !== null) {
+            $createProductCommand->setWeight($weight);
+        }
+        if ($isDownloadable !== null) {
+            $createProductCommand->setIsDownloadable($isDownloadable);
+        }
+        if ($affiliateLink !== null) {
+            $createProductCommand->setAffiliateLink($affiliateLink);
+        }
+        if ($mainImage !== null) {
+            $createProductCommand->setMainImage($mainImage);
+        }
+        if ($additionalImages !== null) {
+            $createProductCommand->setAdditionalImages($additionalImages);
+        }
+        if ($fullDescription !== null) {
+            $createProductCommand->setFullDescription($fullDescription);
+        }
+        if ($shortDescription !== null) {
+            $createProductCommand->setShortDescription($shortDescription);
+        }
+        $createProductCommand->setTaxIds($taxIds);
+        if ($declinations !== null) {
+            $createProductCommand->setDeclinations($declinations);
+        }
+        if ($attachments !== null) {
+            $createProductCommand->setAttachments($attachments);
+        }
+        if ($availabilityDate !== null) {
+            $createProductCommand->setAvailabilityDate($availabilityDate);
+        }
+
+        return $createProductCommand;
     }
 }
