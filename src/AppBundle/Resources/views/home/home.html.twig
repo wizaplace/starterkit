@@ -15,6 +15,7 @@
 
     {# 'add product to basket' #}
     {% include '@App/common/product/_modal_add-to-basket.html.twig' %}
+
     <script>
         $('.js-add-to-basket').on('click', function() {
             var declinationId = $(this).data('id');
@@ -37,6 +38,7 @@
                     declinationId: declinationId,
                     quantity: quantity
                 },
+
                 {# display success modal with product data #}
                 success: function(response) {
                     hydrateModal(productData, quantity, response.message);
@@ -44,5 +46,4 @@
             });
         });
     </script>
-
 {% endblock %}

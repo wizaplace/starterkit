@@ -22,8 +22,8 @@
         "sentry/sentry": "^1.8.2",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/psr-http-message-bridge": "^1.0",
-        "symfony/symfony": "~3.3.16",
-        "wizaplace/front-bundle": "~0.3.3",
+        "symfony/symfony": "^3.4.6",
+        "wizaplace/front-bundle": "~0.4.0",
         "wizaplace/sdk": "dev-PIM as 1.19.0",
         "zendframework/zend-diactoros": "^1.5"
     },

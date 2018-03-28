@@ -30,39 +30,42 @@
 </footer>
 
 <script>
-    // submit user's email for newsletter subscription via ajax
-    $('#js-subscription-form').on('submit', function(e) {
 
-        {# stop form to be submited as it will be done via ajax #}
-        e.preventDefault();
+    {# submit user's email for newsletter subscription via ajax, wait for page to be fully loaded to use notification helper #}
+    $(function () {
+        $('#js-subscription-form').on('submit', function(e) {
 
-        {# gather needed data #}
-        var method = $(this).attr('method');
-        var url = $(this).attr('action');
-        var $email = $(this).find('[name="email"]');
-        var email = $email.val();
+            {# stop form to be submited as it will be done via ajax #}
+            e.preventDefault();
 
-        {# send data to server #}
-        $.ajax({
-            method: method,
-            url: url,
-            data: {
-                email: email,
-            }
-        }).done(function() {
+            {# gather needed data #}
+            var method = $(this).attr('method');
+            var url = $(this).attr('action');
+            var $email = $(this).find('[name="email"]');
+            var email = $email.val();
 
-            {# create a success notification (see notification.js) #}
-            notification.createAlert('{{ "newsletter_subscription_success_message"|trans }}', 'success');
+            {# send data to server #}
+            $.ajax({
+                method: method,
+                url: url,
+                data: {
+                    email: email,
+                }
+            }).done(function() {
 
-        }).fail(function(response) {
+                {# create a success notification (see notification.js) #}
+                notification.createAlert('{{ "newsletter_subscription_success_message"|trans }}', 'success');
 
-            {# create an error notification (see notification.js) #}
-            notification.createAlert(response.responseText, 'danger');
+            }).fail(function(response) {
 
-        }).always(function() {
+                {# create an error notification (see notification.js) #}
+                notification.createAlert(response.responseText, 'danger');
 
-            {# input cleanup #}
-            $email.val('');
+            }).always(function() {
+
+                {# input cleanup #}
+                $email.val('');
+            });
         });
     });
 </script>
