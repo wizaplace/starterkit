@@ -427,11 +427,11 @@
             "validate": "M'abonner"
         },
         "contact": {
-            "link": "contact"
+            "link_text": "contact"
         },
         "register": {
             "vendor": {
-                "link": "inscription vendeur"
+                "link_text": "inscription vendeur"
             }
         }
     },
