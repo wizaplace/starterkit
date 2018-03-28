@@ -1,6 +1,7 @@
 *
 !/app
 !/bin/console
+!/bin/init.sh
 !/src
 !/web/app.php
 !/web/robots.txt
