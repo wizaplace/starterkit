@@ -13,19 +13,15 @@
 
     {% block meta %}{% endblock %}
 
-    {# jquery is loaded in the header to allow usage in scripts inlined into templates #}
-    {#<script src="{{ asset('scripts/jquery.min.js') }}"></script>#}
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script>{# Use the same locale in Symfony and in our AJAX calls #}
+    {# Inlined template scripts need jquery to be loaded first #}
+    <script src="{{ asset('scripts/jquery.min.js') }}"></script>
+
+    {# Use the same locale in Symfony and in our AJAX calls, wait for page to be fully loaded to use jquery #}
+    <script>
         $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
             jqXHR.setRequestHeader('Accept-Language', '{{ app.request.locale }}');
         });
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     {% if app.debug %}
