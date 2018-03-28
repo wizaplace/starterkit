@@ -11,19 +11,19 @@
 
                     {# user profile #}
                     <div class="title">
-                        <a href="{{ path("profile") }}">{{ 'vendor.dashboard.layout.account.title' | trans }}</a>
+                        <a href="{{ path("profile_vendor_dashboard") }}">{{ 'vendor.layout.dashboard.title' | trans }}</a>
                     </div>
 
                     {# vendor products #}
-                    <div class="title">{{ 'vendor.dashboard.layout.products.title' | trans }}</div>
+                    <div class="title">{{ 'vendor.layout.products.title' | trans }}</div>
                     <ul>
-                        <li><a href="#">{{ 'vendor.dashboard.layout.products.creation' | trans }}</a></li>
+                        <li><a href="{{ path('vendor_products_create') }}">{{ 'vendor.layout.products.creation' | trans }}</a></li>
                     </ul>
 
                     {# vendor orders #}
-                    <div class="title">{{ 'vendor.dashboard.layout.orders.title' | trans }}</div>
+                    <div class="title">{{ 'vendor.layout.orders.title' | trans }}</div>
                     <ul>
-                        <li><a href="#">{{ 'vendor.dashboard.layout.orders.waiting' | trans }}</a></li>
+                        <li><a href="#">{{ 'vendor.layout.orders.waiting' | trans }}</a></li>
                     </ul>
                 {% endblock %}
             </div>
