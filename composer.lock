@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6afa371c9de37a5292b971c470478fe7",
+    "content-hash": "462cce5cda5da05669d9d58509764ded",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -3025,12 +3025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "f6a2c7a7b401153d6e3ffc577c60b6502fd67ce1"
+                "reference": "270839174d32aec23ab3b83f611fa7a8a0fac320"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/f6a2c7a7b401153d6e3ffc577c60b6502fd67ce1",
-                "reference": "f6a2c7a7b401153d6e3ffc577c60b6502fd67ce1",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/270839174d32aec23ab3b83f611fa7a8a0fac320",
+                "reference": "270839174d32aec23ab3b83f611fa7a8a0fac320",
                 "shasum": ""
             },
             "require": {
@@ -3070,7 +3070,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-03-15T10:36:08+00:00"
+            "time": "2018-03-26T14:21:33+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -5664,8 +5664,8 @@
     ],
     "aliases": [
         {
-            "alias": "1.18.0",
-            "alias_normalized": "1.18.0.0",
+            "alias": "1.19.0",
+            "alias_normalized": "1.19.0.0",
             "version": "dev-PIM",
             "package": "wizaplace/sdk"
         }
