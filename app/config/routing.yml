@@ -149,6 +149,11 @@ profile_message_create:
     defaults: { _controller: AppBundle:Discussion:createMessage}
     methods: [POST]
 
+profile_vendor_dashboard:
+    path: /profile/vendeur/
+    defaults: { _controller: AppBundle:Vendor:dashboardSummary }
+    methods: [GET]
+
 # newsletter
 newsletter_subscribe:
     path: /newsletter/subscribe
