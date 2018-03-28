@@ -45,7 +45,7 @@ class VendorController extends Controller
         }
 
         $user = $this->getUser();
-        if (!$user->isVendor()) {
+        if (!$user || !$user->isVendor()) {
             $message = $this->translator->trans('vendor.access_denied.not_a_vendor');
             $this->addFlash('danger', $message);
 
