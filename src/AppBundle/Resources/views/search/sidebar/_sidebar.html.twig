@@ -20,7 +20,7 @@
         <div :id="'facet-'+facet.name" class="collapse">
             <span>
                 <keep-alive>
-                    <slider :min="facet.values.min" :max="facet.values.max"
+                    <slider :min="facet.min" :max="facet.max"
                             @update="updateNumericFilter(facet.name, arguments[0], arguments[1])">
                     </slider>
                 </keep-alive>
@@ -29,7 +29,7 @@
     </div>
 
     {# other facets #}
-    <div v-if="!facet.isNumeric && facet.values.length !== 0">
+    <div v-if="typeof facet.values !== 'undefined' && Object.keys(facet.values).length > 0">
         <h4>
             <a data-toggle="collapse" :href="'#facet-'+facet.name" aria-expanded="false" aria-controls="" v-text="facet.label"></a>
         </h4>
