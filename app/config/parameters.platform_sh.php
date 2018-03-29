@@ -15,7 +15,7 @@ if (isset($_ENV['PLATFORM_PROJECT_ENTROPY'])) {
 }
 
 if (isset($_ENV['PLATFORM_TREE_ID'])) {
-    $container->setParameter('version', $_ENV['PLATFORM_TREE_ID']);
+    $container->setParameter('env(APP_VERSION)', $_ENV['PLATFORM_TREE_ID']);
 }
 
 // Configure host

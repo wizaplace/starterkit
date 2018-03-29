@@ -9,6 +9,7 @@ parameters:
     api.timeout: '%env(API_TIMEOUT)%'
     secret: '%env(APP_SECRET)%'
     http_host: '%env(HTTP_HOST)%'
+    version: '%env(APP_VERSION)%'
     # default env values
     env(API_BASE_URL): 'https://sandbox.wizaplace.com/api/v1/'
     env(API_CONNECT_TIMEOUT): 30
@@ -22,7 +23,7 @@ parameters:
 
 framework:
     assets:
-        version: "%env(APP_VERSION)%"
+        version: "%version%"
 
 monolog:
     handlers:
@@ -65,7 +66,7 @@ services:
                 auto_log_stacks: true
                 install_default_breadcrumb_handlers: false
                 install_shutdown_handler: false
-                release: "%env(APP_VERSION)%"
+                release: "%version%"
     \Raven_Breadcrumbs_MonologHandler:
         class: \Raven_Breadcrumbs_MonologHandler
         arguments:
