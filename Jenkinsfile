@@ -79,6 +79,12 @@ pipeline {
             }
         }
         stage('docker build') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
             // when { branch 'master' }
             steps {
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
