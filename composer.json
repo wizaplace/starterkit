@@ -3,9 +3,6 @@
         "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
-    "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
-    },
     "require": {
         "php": ">=7.1",
         "bmancone/guzzle-stopwatch-middleware": "0.0.2",
