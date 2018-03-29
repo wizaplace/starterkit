@@ -96,7 +96,7 @@ pipeline {
             agent any
             when { branch 'master' }
             steps {
-                sh "curl -qO /dev/null -i \"https://jenkins.wizaplace.com/buildByToken/buildWithParameters?job=DEPLOY_k8s_starterkit&token=${DEPLOY_STARTERKIT_TOKEN}&VERSION=${GIT_COMMIT}\""
+                sh "curl -s -o /dev/null -i \"https://jenkins.wizaplace.com/buildByToken/buildWithParameters?job=DEPLOY_k8s_starterkit&token=${DEPLOY_STARTERKIT_TOKEN}&VERSION=${GIT_COMMIT}\""
             }
         }
     }
