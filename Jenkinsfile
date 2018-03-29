@@ -82,7 +82,7 @@ pipeline {
             agent any
             // when { branch 'master' }
             steps {
-                sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY}"
+                sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                 sh "docker build -t ${DOCKER_REGISTRY}/starterkit"
                 sh "docker push ${DOCKER_REGISTRY}/starterkit"
             }
