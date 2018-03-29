@@ -82,7 +82,7 @@ pipeline {
             agent {
                 docker {
                     image 'docker'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -u 0:0'
                 }
             }
             // when { branch 'master' }
