@@ -78,5 +78,19 @@ pipeline {
                 }
             }
         }
+        stage('docker build') {
+            agent { none }
+            // when { branch 'master' }
+            steps {
+                sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY}"
+                sh "docker build -t ${DOCKER_REGISTRY}/starterkit"
+                sh "docker push ${DOCKER_REGISTRY}/starterkit"
+            }
+        }
+    }
+    environment {
+        DOCKER_REGISTRY = credentials('546dd443-92b3-4712-9fa4-58d1546ff464')
+        DOCKER_USERNAME = credentials('fe8f6ec1-fbd7-455a-bf0e-992f0562da61')
+        DOCKER_PASSWORD = credentials('0455ac3f-611f-4073-b626-5383520c29d2')
     }
 }
