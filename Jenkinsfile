@@ -79,7 +79,6 @@ pipeline {
             }
         }
         stage('docker build') {
-            agent any
             // when { branch 'master' }
             steps {
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
