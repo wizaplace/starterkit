@@ -92,10 +92,18 @@ pipeline {
                 sh "docker push ${DOCKER_REGISTRY}/starterkit"
             }
         }
+        stage('deploy') {
+            agent any
+            when { branch 'master' }
+            steps {
+                sh "curl -qO /dev/null -i https://jenkins.wizaplace.com/buildByToken/buildWithParameters?job=DEPLOY_k8s_starterkit&token=${DEPLOY_STARTERKIT_TOKEN}&VERSION=${GIT_COMMIT}"
+            }
+        }
     }
     environment {
         DOCKER_REGISTRY = credentials('546dd443-92b3-4712-9fa4-58d1546ff464')
         DOCKER_USERNAME = credentials('fe8f6ec1-fbd7-455a-bf0e-992f0562da61')
         DOCKER_PASSWORD = credentials('0455ac3f-611f-4073-b626-5383520c29d2')
+        DEPLOY_STARTERKIT_TOKEN = credentials('c7951c3b-2c26-4fcf-8a92-ea4d1e8b6f96')
     }
 }
