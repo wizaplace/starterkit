@@ -34,7 +34,7 @@ pipeline {
         stage('check') {
             agent {
                 docker {
-                    image 'php:7.1'
+                    image 'php:7.2'
                     args '-u 0:0'
                 }
             }

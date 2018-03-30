@@ -16,7 +16,7 @@ COPY . /app
 RUN composer dump-autoload --optimize --classmap-authoritative --no-dev --no-interaction
 
 # Production image
-FROM php:7.1-apache as app
+FROM php:7.2-apache as app
 LABEL maintainer="dev@wizaplace.com"
 RUN apt-get update && apt-get install -y \
     libicu-dev \
