@@ -2,7 +2,7 @@ FROM node:6 as assets
 
 # assets
 WORKDIR /app
-COPY package.json package-lock.json /app/
+COPY package*.json /app/
 RUN npm install --no-save
 COPY . /app
 RUN node_modules/.bin/gulp deploy
