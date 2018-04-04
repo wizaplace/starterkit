@@ -38,8 +38,7 @@ RUN a2enmod rewrite headers \
 ENV SYMFONY_ENV "prod"
 
 RUN touch app/config/parameters.yml \
-    && bin/console --env=prod assets:install \
-    && bin/console --env=prod fos:js-routing:dump \
-    && bin/console --env=prod cache:warmup
+    && bin/console assets:install \
+    && bin/console fos:js-routing:dump
 
 RUN chown -R www-data:www-data /var/www/html/var /var/www/html/web
