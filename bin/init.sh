@@ -1,4 +1,6 @@
 #!/bin/bash
 
 set -e
-bin/console --env=prod wizaplace:translations:push
+rm -rf var/cache/prod
+bin/console cache:warmup
+bin/console wizaplace:translations:push
