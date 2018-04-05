@@ -1,8 +1,8 @@
-imports:
-    - { resource: config.yml }
-
 parameters:
     googlemaps.api_key: 'AIzaSyBZTTRwiE94s-iJ7OVJAdl-linxm4LMAJE' # usable only from '*.demo.loc/*'
+
+imports:
+    - { resource: config.yml }
 
 framework:
     router:
