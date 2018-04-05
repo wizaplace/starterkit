@@ -3037,12 +3037,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "270839174d32aec23ab3b83f611fa7a8a0fac320"
+                "reference": "1673aff5f614d7d65c1f8b45b12aa56c2dc3264a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/270839174d32aec23ab3b83f611fa7a8a0fac320",
-                "reference": "270839174d32aec23ab3b83f611fa7a8a0fac320",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/1673aff5f614d7d65c1f8b45b12aa56c2dc3264a",
+                "reference": "1673aff5f614d7d65c1f8b45b12aa56c2dc3264a",
                 "shasum": ""
             },
             "require": {
@@ -3082,7 +3082,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-03-26T14:21:33+00:00"
+            "time": "2018-04-04T10:18:53+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
