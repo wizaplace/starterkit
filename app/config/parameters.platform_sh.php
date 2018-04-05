@@ -11,11 +11,11 @@ if (!isset($container)) {
 
 // Set a default unique secret, based on a project-specific entropy value.
 if (isset($_ENV['PLATFORM_PROJECT_ENTROPY'])) {
-    $container->setParameter('kernel.secret', $_ENV['PLATFORM_PROJECT_ENTROPY']);
+    $_ENV['APP_SECRET'] = $_ENV['PLATFORM_PROJECT_ENTROPY'];
 }
 
 if (isset($_ENV['PLATFORM_TREE_ID'])) {
-    $container->setParameter('version', $_ENV['PLATFORM_TREE_ID']);
+    $_ENV['APP_VERSION'] = $_ENV['PLATFORM_TREE_ID'];
 }
 
 // Configure host
