@@ -1,19 +1,5 @@
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locales: ['fr']
-    default_locale: 'fr'
-    slug.regexp: !php/const Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
-    recaptcha.key: '%env(RECAPTCHA_KEY)%'
-    recaptcha.secret: '%env(RECAPTCHA_SECRET)%'
-    api.base_url: '%env(API_BASE_URL)%'
-    # default values
-    env(RECAPTCHA_KEY): '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-    env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
-    env(CURRENCY_SIGN): '€'
-    env(CURRENCY_CODE): 'EUR'
-
 imports:
+    - { resource: pararemeters.default.yml }
     - { resource: parameters.yml }
     - { resource: parameters.platform_sh.php }
     - { resource: security.yml }
