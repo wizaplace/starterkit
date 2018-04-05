@@ -1,25 +1,6 @@
 imports:
+    - { resource: parameters_prod.default.yml }
     - { resource: config.yml }
-
-parameters:
-    googlemaps.api_key: 'AIzaSyC6pzFn22J8wZ9OMuYBButVwUKvmo5Jx1w' #@TODO: change me
-    wizaplace.system_user_password: '%env(WIZAPLACE_SYSTEM_USER_PASSWORD)%'
-    api.connect_timeout: '%env(API_CONNECT_TIMEOUT)%'
-    api.read_timeout: '%env(API_READ_TIMEOUT)%'
-    api.timeout: '%env(API_TIMEOUT)%'
-    secret: '%env(APP_SECRET)%'
-    http_host: '%env(HTTP_HOST)%'
-    version: '%env(APP_VERSION)%'
-    # default env values
-    env(API_BASE_URL): 'https://sandbox.wizaplace.com/api/v1/'
-    env(API_CONNECT_TIMEOUT): 30
-    env(API_READ_TIMEOUT): 30
-    env(API_TIMEOUT): 30
-    env(SENTRY_DSN): ~
-    env(WIZAPLACE_SYSTEM_USER_PASSWORD): ""
-    env(APP_VERSION): ~
-    env(APP_SECRET): ~
-    env(HTTP_HOST): localhost
 
 framework:
     assets:
