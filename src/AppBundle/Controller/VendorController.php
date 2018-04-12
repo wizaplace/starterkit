@@ -161,8 +161,8 @@ class VendorController extends Controller
         $availabilityDate = $request->get('availability_date');
 
         $productDeclinationUpsertData = new ProductDeclinationUpsertData([]);
-        $productDeclinationUpsertData->setPrice( (float) $price);
-        $productDeclinationUpsertData->setQuantity( (int) $quantity);
+        $productDeclinationUpsertData->setPrice((float) $price);
+        $productDeclinationUpsertData->setQuantity((int) $quantity);
 
         $createProductCommand = new CreateProductCommand();
         $createProductCommand->setName($productName);
