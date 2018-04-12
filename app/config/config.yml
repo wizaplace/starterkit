@@ -80,6 +80,10 @@ services:
 
     Wizaplace\SDK\Pim\Product\ProductService:
         public: true
+    Wizaplace\SDK\Pim\Tax\TaxService:
+        public: true
+    Wizaplace\SDK\Pim\Category\CategoryService:
+        public: true
 
 k_phoen_sitemap:
     base_host:         'https://%http_host%'
