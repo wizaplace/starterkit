@@ -541,6 +541,8 @@
         "products": {
             "creation": {
                 "code": "Code EAN",
+                "price": "Prix",
+                "quantity": "Quantité",
                 "supplier_reference": "Référence fournisseur",
                 "name": "Nom",
                 "status": {
@@ -582,6 +584,11 @@
                 "declinations": "Déclinaisons",
                 "attachments": "Pièces jointes",
                 "availability_date": "Disponible depuis"
+            },
+            "notifications": {
+                "success": {
+                    "product_created": "Votre produit a bien été créé et est en attente de modération."
+                }
             }
         }
     }
