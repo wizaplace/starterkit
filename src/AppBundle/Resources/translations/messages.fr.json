@@ -547,16 +547,17 @@
                 "name": "Nom",
                 "status": {
                     "title": "Statut",
+                    "select": "Selectionner",
                     "A": "Activé",
                     "D": "Désactivé",
                     "H": "Caché"
                 },
-                "main_category": "Catégorie principale",
-                "green_tax": "Éco Taxe",
-                "is_brand_new": {
-                    "true": "Neuf",
-                    "false": "Occasion"
+                "main_category": {
+                  "title": "Catégorie principale",
+                  "select": "Selectionner"
                 },
+                "green_tax": "Éco Taxe",
+                "is_brand_new": "Neuf",
                 "geolocation": {
                     "title": "Localisation",
                     "latitude": "Latitude",
@@ -580,10 +581,14 @@
                 },
                 "full_description": "Description complète",
                 "short_description": "Description courte",
-                "tax_ids": "Taxes",
+                "tax_ids": {
+                  "title": "Taxes",
+                  "select": "Selectionner"
+                },
                 "declinations": "Déclinaisons",
                 "attachments": "Pièces jointes",
-                "availability_date": "Disponible depuis"
+                "availability_date": "Disponible depuis",
+                "submit": "Soumettre"
             },
             "notifications": {
                 "success": {

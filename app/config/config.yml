@@ -17,6 +17,7 @@ parameters:
     env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
+    env(IS_BOF_AVAILABLE): true
 
     #FeatureFlags
     is_bof_available: '%env(IS_BOF_AVAILABLE)%'

@@ -149,6 +149,8 @@ form.searchbar {
     flex-wrap: wrap;
 }
 
-input {
-    display: block;
+label.required {
+    &::after {
+        content: "*";
+    }
 }

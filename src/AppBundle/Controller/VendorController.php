@@ -144,7 +144,7 @@ class VendorController extends Controller
         $status = $request->get('status');
         $mainCategory = (int) $request->get('main_category');
         $greenTax = (float) $request->get('green_tax');
-        $isBrandNew = $request->get('is_brand_new');
+        $isBrandNew = $request->get('is_brand_new') ?? false;
         $geolocation = $request->get('geolocation');
         $freeAttributes = $request->get('free_attributes') ?? [];
         $hasFreeShipping = $request->get('has_free_shipping') ?? false;
@@ -189,13 +189,13 @@ class VendorController extends Controller
             $createProductCommand->setFreeAttributes($freeAttributes);
         }
         if ($hasFreeShipping !== null) {
-            $createProductCommand->setHasFreeShipping($hasFreeShipping);
+            $createProductCommand->setHasFreeShipping( (bool) $hasFreeShipping);
         }
         if ($weight !== null) {
             $createProductCommand->setWeight((float) $weight);
         }
         if ($isDownloadable !== null) {
-            $createProductCommand->setIsDownloadable($isDownloadable);
+            $createProductCommand->setIsDownloadable((bool) $isDownloadable);
         }
         if ($affiliateLink !== null) {
             $createProductCommand->setAffiliateLink($affiliateLink);
