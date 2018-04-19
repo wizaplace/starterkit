@@ -189,7 +189,7 @@ class VendorController extends Controller
             $createProductCommand->setFreeAttributes($freeAttributes);
         }
         if ($hasFreeShipping !== null) {
-            $createProductCommand->setHasFreeShipping( (bool) $hasFreeShipping);
+            $createProductCommand->setHasFreeShipping((bool) $hasFreeShipping);
         }
         if ($weight !== null) {
             $createProductCommand->setWeight((float) $weight);
