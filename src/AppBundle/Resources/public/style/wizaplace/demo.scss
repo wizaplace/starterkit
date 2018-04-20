@@ -148,3 +148,9 @@ footer {
 form.searchbar {
     flex-wrap: wrap;
 }
+
+label.required {
+    &::after {
+        content: "*";
+    }
+}

@@ -154,6 +154,11 @@ profile_vendor_dashboard:
     defaults: { _controller: AppBundle:Vendor:dashboardSummary }
     methods: [GET]
 
+vendor_products_create:
+    path: /vendeur/produits/creation
+    defaults: { _controller: AppBundle:Vendor:createProduct }
+    methods: [GET, POST]
+
 # newsletter
 newsletter_subscribe:
     path: /newsletter/subscribe

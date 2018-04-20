@@ -17,9 +17,10 @@ parameters:
     env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
+    env(BOF_ENABLED): true
 
     #FeatureFlags
-    is_bof_available: '%env(IS_BOF_AVAILABLE)%'
+    bof_enabled: '%env(BOF_ENABLED)%'
 
 framework:
     translator:
@@ -60,7 +61,7 @@ twig:
         currencyCode: '%env(CURRENCY_CODE)%'
 
         #Flags
-        is_bof_available: "%is_bof_available%"
+        bof_enabled: "%bof_enabled%"
 
 services:
     _defaults:
@@ -77,6 +78,10 @@ services:
     sitemap_gz_dumper:
         class: SitemapGenerator\Dumper\GzFileDumper
         arguments: [ "%kernel.root_dir%/../var/sitemap/sitemap.xml.gz" ]
+
+    Wizaplace\SDK\Pim\Product\ProductService:
+    Wizaplace\SDK\Pim\Tax\TaxService:
+    Wizaplace\SDK\Pim\Category\CategoryService:
 
 k_phoen_sitemap:
     base_host:         'https://%http_host%'

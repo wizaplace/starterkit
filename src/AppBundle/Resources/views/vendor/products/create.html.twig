@@ -1,0 +1,227 @@
+{% extends '@App/layout-vendor.html.twig' %}
+
+{% block profile_content %}
+    <form id="create-product-form" method="POST" action="{{ path('vendor_products_create') }}">
+        <div class="form-group row">
+            <div class="col-4">
+                <label for="name" class="required">{{ 'vendor.products.creation.name'|trans }}</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" id="name" name="product_name" required>
+            </div>
+            <div class="col-4">
+                <label for="code" class="required">{{ 'vendor.products.creation.code'|trans }}</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" id="code" name="code" required>
+            </div>
+            <div class="col-4">
+                <label for="supplier_reference">{{ 'vendor.products.creation.supplier_reference'|trans }}</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" id="supplier_reference" name="supplier_reference">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="price" class="required">{{ 'vendor.products.creation.price'|trans }}</label>
+                <input type="number" step="0.01" class="form-control mb-2 mr-sm-2" id="price" name="price" value="0" required>
+            </div>
+            <div class="col-6">
+                <label for="quantity" class="required">{{ 'vendor.products.creation.quantity'|trans }}</label>
+                <input type="number" step="1" class="form-control mb-2 mr-sm-2" id="quantity" name="quantity" value="1" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="status" class="required">{{ 'vendor.products.creation.status.title'|trans }}</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option selected>{{ 'vendor.products.creation.status.select'|trans }}</option>
+                    <option v-for="status in statusList" :value="status.value" v-text="status.name"></option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="main_category" class="required">{{ 'vendor.products.creation.main_category.title'|trans }}</label>
+                <select class="form-control" id="main_category" name="main_category" required>
+                    <option selected>{{ 'vendor.products.creation.main_category.select'|trans }}</option>
+                    <option v-for="category in categoriesList" :value="category.value" v-text="category.name"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="green_tax" class="required">{{ 'vendor.products.creation.green_tax'|trans }}</label>
+                <input type="number" step="0.01" class="form-control mb-2 mr-sm-2" id="green_tax" name="green_tax" value="0" required>
+            </div>
+            <div class="col-6">
+                <label for="tax_ids" class="required">{{ 'vendor.products.creation.tax_ids.title'|trans }}</label>
+                <select class="form-control" id="tax_ids" name="tax_ids" required>
+                    <option selected>{{ 'vendor.products.creation.tax_ids.select'|trans }}</option>
+                    <option v-for="tax in taxesList" :value="tax.value" v-text="tax.name"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="form-check text-center">
+                    <input class="form-check-input" type="checkbox" id="is_brand_new" name="is_brand_new" checked>
+                    <label class="form-check-label" for="is_brand_new">{{ 'vendor.products.creation.is_brand_new'|trans }}</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-check text-center">
+                    <input class="form-check-input" type="checkbox" id="has_free_shipping" name="has_free_shipping">
+                    <label class="form-check-label" for="has_free_shipping">{{ 'vendor.products.creation.has_free_shipping'|trans }}</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-check text-center">
+                    <input class="form-check-input" type="checkbox" id="is_downloadable" name="is_downloadable">
+                    <label class="form-check-label" for="is_downloadable">{{ 'vendor.products.creation.is_downloadable'|trans }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="weight">{{ 'vendor.products.creation.weight'|trans }}</label>
+                <input type="number" step="0.001" class="form-control mb-2 mr-sm-2" id="weight" name="weight" value="0">
+            </div>
+            <div class="col-6">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="full_description">{{ 'vendor.products.creation.full_description'|trans }}</label>
+                <textarea class="form-control mb-2 mr-sm-2" id="full_description" name="full_description"></textarea>
+            </div>
+            <div class="col-6">
+                <label for="short_description">{{ 'vendor.products.creation.short_description'|trans }}</label>
+                <textarea class="form-control mb-2 mr-sm-2" id="short_description" name="short_description"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ 'vendor.products.creation.submit'|trans }}</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        new Vue({
+            el: '#create-product-form',
+            data: {
+                statusList: {{ productStatusList|json_encode|raw }},
+                categoriesList: {{ categoriesList|json_encode|raw }},
+                taxesList: {{ taxList|json_encode|raw }},
+                formList: [
+                    {
+                        id: 'geolocation',
+                        title: '{{ 'vendor.products.creation.geolocation.title'|trans }}',
+                        type: 'object',
+                        multiple: false,
+                        required: false,
+                        object: [
+                            {
+                                id: 'latitude',
+                                inputName: 'latitude',
+                                name: '{{ 'vendor.products.creation.geolocation.latitude'|trans }}',
+                                type: 'number',
+                                step: null,
+                                required: false,
+                            },
+                            {
+                                id: 'longitude',
+                                inputName: 'longitude',
+                                name: '{{ 'vendor.products.creation.geolocation.longitude'|trans }}',
+                                type: 'number',
+                                step: null,
+                                required: false,
+                            },
+                            {
+                                id: 'label',
+                                inputName: 'label',
+                                name: '{{ 'vendor.products.creation.geolocation.label'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                            {
+                                id: 'zipcode',
+                                inputName: 'zipcode',
+                                name: '{{ 'vendor.products.creation.geolocation.zipcode'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 'free_attributes',
+                        title: '{{ 'vendor.products.creation.free_attributes.title'|trans }}',
+                        type: 'object',
+                        required: false,
+                        multiple: true,
+                        error: 'nope',
+                        object: [
+                            {
+                                id: 'name',
+                                inputName: 'name',
+                                name: '{{ 'vendor.products.creation.free_attributes.name'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                            {
+                                id: 'value',
+                                inputName: 'value',
+                                name: '{{ 'vendor.products.creation.free_attributes.value'|trans }}',
+                                type: 'text',
+                                required: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 'affiliate_link',
+                        inputName: 'affiliate_link',
+                        name: '{{ 'vendor.products.creation.affiliate_link'|trans }}',
+                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                             // les conditions d'affichage
+                        value: 'disabled',
+                        required: false,
+                    },
+                    {
+                        id: 'main_image',
+                        inputName: 'main_image',
+                        name: '{{ 'vendor.products.creation.main_image'|trans }}',
+                        type: 'file',
+                        required: false,
+                        multiple: false,
+                    },
+                    {
+                        id: 'additional_images',
+                        inputName: 'additional_images',
+                        name: '{{ 'vendor.products.creation.additional_images.name'|trans }}',
+                        type: 'file',
+                        required: false,
+                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
+                        multiple: true,
+                    },
+                    {
+                        id: 'declinations',
+                        inputName: 'declinations',
+                        name: '{{ 'vendor.products.creation.declinations'|trans }}',
+                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                             // les conditions d'affichage
+                        value: 'disabled',
+                        required: false,
+                    },
+                    {
+                        id: 'attachments',
+                        inputName: 'attachments',
+                        name: '{{ 'vendor.products.creation.attachments'|trans }}',
+                        type: 'file',
+                        required: false,
+                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
+                        multiple: true,
+                    },
+                    {
+                        id: 'availability_date',
+                        inputName: 'availability_date',
+                        name: '{{ 'vendor.products.creation.availability_date'|trans }}',
+                        type: 'date',
+                        required: false,
+                    },
+                ],
+            },
+        });
+    </script>
+{% endblock %}
