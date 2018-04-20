@@ -1,5 +1,5 @@
 {# user account links #}
-{% if is_bof_enabled and app.user.isVendor %}
+{% if bof_enabled and app.user.isVendor %}
     <li><a href="{{ path('profile_vendor_dashboard') }}">{{ 'header.account.menu.vendor_dashboard'|trans }}</a></li>
 {% endif %}
 <li><a href="{{ path('profile') }}">{{ 'header.account.menu.profile'|trans }}</a></li>

@@ -20,7 +20,7 @@ parameters:
     env(BOF_ENABLED): true
 
     #FeatureFlags
-    is_bof_enabled: '%env(BOF_ENABLED)%'
+    bof_enabled: '%env(BOF_ENABLED)%'
 
 framework:
     translator:
@@ -61,7 +61,7 @@ twig:
         currencyCode: '%env(CURRENCY_CODE)%'
 
         #Flags
-        is_bof_enabled: "%is_bof_enabled%"
+        bof_enabled: "%bof_enabled%"
 
 services:
     _defaults:

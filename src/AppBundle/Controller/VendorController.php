@@ -119,7 +119,7 @@ class VendorController extends Controller
      */
     private function isAccessGranted(): bool
     {
-        if (!$this->getParameter('is_bof_enabled')) {
+        if (!$this->getParameter('bof_enabled')) {
             throw new NotFoundHttpException();
         }
 
