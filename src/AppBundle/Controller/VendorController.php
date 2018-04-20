@@ -83,7 +83,7 @@ class VendorController extends Controller
         }
 
         $statusList = ProductStatus::toArray();
-        $statusList = array_map(function (string $status) {
+        $statusList = array_map(function (string $status): array {
             return [
                 'value' => $status,
                 'name'  => $this->translator->trans('vendor.products.creation.status.'.$status),
@@ -91,7 +91,7 @@ class VendorController extends Controller
         }, $statusList);
 
         $categoriesList = $this->categoryService->listCategories();
-        $categoriesList = array_map(static function (Category $category) {
+        $categoriesList = array_map(static function (Category $category): array {
             return [
                 'value' => $category->getId(),
                 'name'  => $category->getName(),
@@ -99,7 +99,7 @@ class VendorController extends Controller
         }, $categoriesList);
 
         $taxList = $this->taxService->listTaxes();
-        $taxList = array_map(static function (Tax $tax) {
+        $taxList = array_map(static function (Tax $tax): array {
             return [
                 'value' => $tax->getId(),
                 'name'  => $tax->getName(),
