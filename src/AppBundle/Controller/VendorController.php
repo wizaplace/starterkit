@@ -222,7 +222,7 @@ class VendorController extends Controller
             $createProductCommand->setAttachments($attachments);
         }
         if ($availabilityDate !== null) {
-            $createProductCommand->setAvailabilityDate($availabilityDate);
+            $createProductCommand->setAvailabilityDate(new \DateTimeImmutable($availabilityDate));
         }
 
         return $createProductCommand;
