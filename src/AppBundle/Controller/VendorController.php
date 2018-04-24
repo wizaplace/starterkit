@@ -146,7 +146,7 @@ class VendorController extends Controller
         $greenTax = (float) $request->get('green_tax');
         $isBrandNew = $request->get('is_brand_new') ?? false;
         $geolocation = $request->get('geolocation');
-        $freeAttributes = $request->get('free_attributes') ?? [];
+        $freeAttributesData = $request->get('free_attributes') ?? [];
         $hasFreeShipping = $request->get('has_free_shipping') ?? false;
         $weight = $request->get('weight');
         $isDownloadable = $request->get('is_downloadable') ?? false;
@@ -185,7 +185,11 @@ class VendorController extends Controller
             $geoloc->setZipcode($request->get('zipcode'));
             $createProductCommand->setGeolocation($geoloc);
         }
-        if ($freeAttributes !== null) {
+        if ($freeAttributesData !== []) {
+            $freeAttributes = [];
+            foreach ($freeAttributesData as $attribute) {
+                $freeAttributes[$attribute['key']][] = $attribute['value'];
+            }
             $createProductCommand->setFreeAttributes($freeAttributes);
         }
         if ($hasFreeShipping !== null) {

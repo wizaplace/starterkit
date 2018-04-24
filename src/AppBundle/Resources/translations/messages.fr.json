@@ -566,6 +566,7 @@
                     "zipcode": "Code postal"
                 },
                 "free_attributes": {
+                    "add": "Ajouter",
                     "title": "Attributs libres",
                     "name": "Nom",
                     "value": "Valeur"

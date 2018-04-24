@@ -98,7 +98,26 @@
                 <label for="availability_date">{{ 'vendor.products.creation.availability_date'|trans }}</label>
                 <input type="text" class="form-control mb-2 mr-sm-2" id="availability_date" name="availability_date">
             </div>
-            <div class="col-6">
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <h3>{{ 'vendor.products.creation.free_attributes.title'|trans }}</h3>
+                <button type="button" class="btn btn-primary mb-2" @click="addFreeAttributeFields(0)">{{ 'vendor.products.creation.free_attributes.add'|trans }}</button>
+                <div id="free-attributes">
+                    <div class="form-group row" v-for="i in freeAttributesCount">
+                        <div class="col-5">
+                            <label :for="'free_attributes['+i+'][key]'">{{ 'vendor.products.creation.free_attributes.name'|trans }}</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" :id="'free_attributes['+i+'][key]'" :name="'free_attributes['+i+'][key]'">
+                        </div>
+                        <div class="col-5">
+                            <label :for="'free_attributes['+i+'][value]'">{{ 'vendor.products.creation.free_attributes.value'|trans }}</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" :id="'free_attributes['+i+'][value]'" :name="'free_attributes['+i+'][value]'">
+                            </div>
+                        <div class="col-2">
+                            <button type="button" @click="removeFreeAttributeFields(i)" class="btn btn-danger">x</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">{{ 'vendor.products.creation.submit'|trans }}</button>
@@ -116,6 +135,7 @@
                 statusList: {{ productStatusList|json_encode|raw }},
                 categoriesList: {{ categoriesList|json_encode|raw }},
                 taxesList: {{ taxList|json_encode|raw }},
+                freeAttributesCount: 0,
                 formList: [
                     {
                         id: 'geolocation',
@@ -151,30 +171,6 @@
                                 id: 'zipcode',
                                 inputName: 'zipcode',
                                 name: '{{ 'vendor.products.creation.geolocation.zipcode'|trans }}',
-                                type: 'text',
-                                required: false,
-                            },
-                        ],
-                    },
-                    {
-                        id: 'free_attributes',
-                        title: '{{ 'vendor.products.creation.free_attributes.title'|trans }}',
-                        type: 'object',
-                        required: false,
-                        multiple: true,
-                        error: 'nope',
-                        object: [
-                            {
-                                id: 'name',
-                                inputName: 'name',
-                                name: '{{ 'vendor.products.creation.free_attributes.name'|trans }}',
-                                type: 'text',
-                                required: false,
-                            },
-                            {
-                                id: 'value',
-                                inputName: 'value',
-                                name: '{{ 'vendor.products.creation.free_attributes.value'|trans }}',
                                 type: 'text',
                                 required: false,
                             },
@@ -224,15 +220,16 @@
                         error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
                         multiple: true,
                     },
-                    {
-                        id: 'availability_date',
-                        inputName: 'availability_date',
-                        name: '{{ 'vendor.products.creation.availability_date'|trans }}',
-                        type: 'date',
-                        required: false,
-                    },
                 ],
             },
+            methods: {
+                addFreeAttributeFields() {
+                    this.freeAttributesCount++;
+                },
+                removeFreeAttributeFields(number) {
+                    document.getElementById('free_attributes['+number+'][key]').closest('.form-group').remove();
+                }
+            }
         });
     </script>
 {% endblock %}
