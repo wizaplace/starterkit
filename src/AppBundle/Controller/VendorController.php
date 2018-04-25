@@ -185,7 +185,7 @@ class VendorController extends Controller
             $geoloc->setZipcode($request->get('zipcode'));
             $createProductCommand->setGeolocation($geoloc);
         }
-        if ($freeAttributesData !== []) {
+        if (!empty($freeAttributesData)) {
             $freeAttributes = [];
             foreach ($freeAttributesData as $attribute) {
                 $freeAttributes[$attribute['key']][] = $attribute['value'];
