@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -18,6 +19,7 @@ use Wizaplace\SDK\Pim\Category\CategoryService;
 use Wizaplace\SDK\Pim\Product\CreateProductCommand;
 use Wizaplace\SDK\Pim\Product\ProductDeclinationUpsertData;
 use Wizaplace\SDK\Pim\Product\ProductGeolocationUpsertData;
+use Wizaplace\SDK\Pim\Product\ProductImageUpload;
 use Wizaplace\SDK\Pim\Product\ProductService;
 use Wizaplace\SDK\Pim\Product\ProductStatus;
 use Wizaplace\SDK\Pim\Tax\Tax;
@@ -152,7 +154,7 @@ class VendorController extends Controller
         $isDownloadable = $request->get('is_downloadable') ?? false;
         $affiliateLink = $request->get('affiliate_link');
         $mainImage = $request->files->get('main_image');
-        $additionalImages = $request->files->get('additional_images') ?? [];
+        $additionalImagesData = $request->files->get('additional_images') ?? [];
         $fullDescription = $request->get('full_description');
         $shortDescription = $request->get('short_description');
         $taxIds = (array) $request->get('tax_ids');
@@ -205,9 +207,12 @@ class VendorController extends Controller
             $createProductCommand->setAffiliateLink($affiliateLink);
         }
         if ($mainImage !== null) {
-            $createProductCommand->setMainImage($mainImage);
+            $createProductCommand->setMainImage(ProductImageUpload::createFromSymfonyUploadedFile($mainImage));
         }
-        if ($additionalImages !== null) {
+        if ($additionalImagesData !== null) {
+            $additionalImages = array_map(static function (UploadedFile $image) {
+                return ProductImageUpload::createFromSymfonyUploadedFile($image);
+            }, $additionalImagesData);
             $createProductCommand->setAdditionalImages($additionalImages);
         }
         if ($fullDescription !== null) {
