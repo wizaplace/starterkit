@@ -1,7 +1,7 @@
 {% extends '@App/layout-vendor.html.twig' %}
 
 {% block profile_content %}
-    <form id="create-product-form" method="POST" action="{{ path('vendor_products_create') }}">
+    <form id="create-product-form" method="POST" action="{{ path('vendor_products_create') }}" enctype="multipart/form-data">
         <div class="form-group row">
             <div class="col-4">
                 <label for="name" class="required">{{ 'vendor.products.creation.name'|trans }}</label>
@@ -112,9 +112,32 @@
                         <div class="col-5">
                             <label :for="'free_attributes['+i+'][value]'">{{ 'vendor.products.creation.free_attributes.value'|trans }}</label>
                             <input type="text" class="form-control mb-2 mr-sm-2" :id="'free_attributes['+i+'][value]'" :name="'free_attributes['+i+'][value]'">
-                            </div>
+                        </div>
                         <div class="col-2">
                             <button type="button" @click="removeFreeAttributeFields(i)" class="btn btn-danger">x</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <label for="main_image">{{ 'vendor.products.creation.main_image'|trans }}</label>
+                <input type="file" class="form-control mb-2 mr-sm-2" id="main_image" name="main_image">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <h3>{{ 'vendor.products.creation.additional_images.title'|trans }}</h3>
+                <button type="button" class="btn btn-primary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
+                <div id="additional_images">
+                    <div class="form-group row" v-for="i in additionalImagesCount">
+                        <div class="col-10">
+                            <label :for="'additional_images['+i+']'">{{ 'vendor.products.creation.additional_images.title'|trans }}</label>
+                            <input type="file" class="form-control mb-2 mr-sm-2" :id="'additional_images['+i+']'" :name="'additional_images['+i+']'" @change="updateMainImageHasContent()">
+                        </div>
+                        <div class="col-2">
+                            <button type="button" @click="removeAdditionalImageField(i)" class="btn btn-danger">x</button>
                         </div>
                     </div>
                 </div>
@@ -136,6 +159,9 @@
                 categoriesList: {{ categoriesList|json_encode|raw }},
                 taxesList: {{ taxList|json_encode|raw }},
                 freeAttributesCount: 0,
+                additionalImagesCount: 0,
+                mainImageHasContent: false,
+                displayAdditionalImagesFields: 'hidden',
                 formList: [
                     {
                         id: 'geolocation',
@@ -186,23 +212,6 @@
                         required: false,
                     },
                     {
-                        id: 'main_image',
-                        inputName: 'main_image',
-                        name: '{{ 'vendor.products.creation.main_image'|trans }}',
-                        type: 'file',
-                        required: false,
-                        multiple: false,
-                    },
-                    {
-                        id: 'additional_images',
-                        inputName: 'additional_images',
-                        name: '{{ 'vendor.products.creation.additional_images.name'|trans }}',
-                        type: 'file',
-                        required: false,
-                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
-                        multiple: true,
-                    },
-                    {
                         id: 'declinations',
                         inputName: 'declinations',
                         name: '{{ 'vendor.products.creation.declinations'|trans }}',
@@ -228,8 +237,14 @@
                 },
                 removeFreeAttributeFields(number) {
                     document.getElementById('free_attributes['+number+'][key]').closest('.form-group').remove();
-                }
-            }
+                },
+                addAdditionalImageField() {
+                    this.additionalImagesCount++;
+                },
+                removeAdditionalImageField(number) {
+                    document.getElementById('additional_images['+number+']').closest('.form-group').remove();
+                },
+            },
         });
     </script>
 {% endblock %}

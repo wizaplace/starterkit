@@ -577,7 +577,8 @@
                 "affiliate_link": "lien d'affiliation",
                 "main_image": "Image principale",
                 "additional_images": {
-                    "name": "Images additionnelles",
+                    "add": "Ajouter",
+                    "title": "Images additionnelles",
                     "error": "Vous devez d'abord uploader une image"
                 },
                 "full_description": "Description complète",
