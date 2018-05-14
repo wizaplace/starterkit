@@ -18,9 +18,11 @@ parameters:
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
     env(BOF_ENABLED): true
+    env(BOF_ATTACHMENTS_ENABLED): true
 
     #FeatureFlags
     bof_enabled: '%env(BOF_ENABLED)%'
+    bof_attachments_enabled: '%env(BOF_ATTACHMENTS_ENABLED)%'
 
 framework:
     translator:
@@ -61,7 +63,8 @@ twig:
         currencyCode: '%env(CURRENCY_CODE)%'
 
         #Flags
-        bof_enabled: "%bof_enabled%"
+        bof_enabled: "%env(BOF_ENABLED)%"
+        bof_attachments_enabled: "%env(BOF_ATTACHMENTS_ENABLED)%"
 
 services:
     _defaults:

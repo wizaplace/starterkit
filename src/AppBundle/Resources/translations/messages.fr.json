@@ -588,7 +588,12 @@
                   "select": "Selectionner"
                 },
                 "declinations": "Déclinaisons",
-                "attachments": "Pièces jointes",
+                "attachments": {
+                    "add": "Ajouter",
+                    "title": "Pièces jointes",
+                    "label": "Label",
+                    "value": "Url"
+                },
                 "availability_date": "Disponible depuis",
                 "submit": "Soumettre"
             },

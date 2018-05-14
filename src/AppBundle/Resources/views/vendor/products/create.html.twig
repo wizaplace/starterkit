@@ -130,7 +130,7 @@
             <div class="col-12">
                 <h3>{{ 'vendor.products.creation.additional_images.title'|trans }}</h3>
                 <button type="button" class="btn btn-primary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
-                <div id="additional_images">
+                <div id="additional-images">
                     <div class="form-group row" v-for="i in additionalImagesCount">
                         <div class="col-10">
                             <label :for="'additional_images['+i+']'">{{ 'vendor.products.creation.additional_images.title'|trans }}</label>
@@ -143,6 +143,29 @@
                 </div>
             </div>
         </div>
+        {% if bof_attachments_enabled %}
+            <div class="form-group row">
+                <div class="col-12">
+                    <h3>{{ 'vendor.products.creation.attachments.title'|trans }}</h3>
+                    <button type="button" class="btn btn-primary mb-2" @click="addAttachmentFields()">{{ 'vendor.products.creation.attachments.add'|trans }}</button>
+                    <div id="attachments">
+                        <div class="form-group row" v-for="i in attachmentsCount">
+                            <div class="col-5">
+                                <label :for="'attachments['+i+'][key]'">{{ 'vendor.products.creation.attachments.label'|trans }}</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" :id="'attachments['+i+'][key]'" :name="'attachments['+i+'][key]'">
+                            </div>
+                            <div class="col-5">
+                                <label :for="'attachments['+i+'][value]'">{{ 'vendor.products.creation.attachments.value'|trans }}</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" :id="'attachments['+i+'][value]'" :name="'attachments['+i+'][value]'">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" @click="removeAttachmentFields(i)" class="btn btn-danger">x</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <button type="submit" class="btn btn-primary">{{ 'vendor.products.creation.submit'|trans }}</button>
     </form>
 {% endblock %}
@@ -160,6 +183,7 @@
                 taxesList: {{ taxList|json_encode|raw }},
                 freeAttributesCount: 0,
                 additionalImagesCount: 0,
+                attachmentsCount: 0,
                 mainImageHasContent: false,
                 displayAdditionalImagesFields: 'hidden',
                 formList: [
@@ -220,15 +244,6 @@
                         value: 'disabled',
                         required: false,
                     },
-                    {
-                        id: 'attachments',
-                        inputName: 'attachments',
-                        name: '{{ 'vendor.products.creation.attachments'|trans }}',
-                        type: 'file',
-                        required: false,
-                        error: '{{ 'vendor.products.creation.additional_images.error'|trans }}',
-                        multiple: true,
-                    },
                 ],
             },
             methods: {
@@ -243,6 +258,12 @@
                 },
                 removeAdditionalImageField(number) {
                     document.getElementById('additional_images['+number+']').closest('.form-group').remove();
+                },
+                addAttachmentFields() {
+                    this.attachmentsCount++;
+                },
+                removeAttachmentFields(number) {
+                    document.getElementById('attachments['+number+'][key]').closest('.form-group').remove();
                 },
             },
         });

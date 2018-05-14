@@ -17,6 +17,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Wizaplace\SDK\Pim\Category\Category;
 use Wizaplace\SDK\Pim\Category\CategoryService;
 use Wizaplace\SDK\Pim\Product\CreateProductCommand;
+use Wizaplace\SDK\Pim\Product\ProductAttachmentUpload;
 use Wizaplace\SDK\Pim\Product\ProductDeclinationUpsertData;
 use Wizaplace\SDK\Pim\Product\ProductGeolocationUpsertData;
 use Wizaplace\SDK\Pim\Product\ProductImageUpload;
@@ -148,7 +149,7 @@ class VendorController extends Controller
         $greenTax = (float) $request->get('green_tax');
         $isBrandNew = $request->get('is_brand_new') ?? false;
         $geolocation = $request->get('geolocation');
-        $freeAttributesData = $request->get('free_attributes') ?? [];
+        $freeAttributesData = $request->get('free_attributes');
         $hasFreeShipping = $request->get('has_free_shipping') ?? false;
         $weight = $request->get('weight');
         $isDownloadable = $request->get('is_downloadable') ?? false;
@@ -159,9 +160,8 @@ class VendorController extends Controller
         $shortDescription = $request->get('short_description');
         $taxIds = (array) $request->get('tax_ids');
         $declinations = $request->get('declinations') ?? [];
-        $attachments = $request->files->get('attachments');
+        $attachmentsData = $request->get('attachments');
         $availabilityDate = $request->get('availability_date');
-
         $productDeclinationUpsertData = new ProductDeclinationUpsertData([]);
         $productDeclinationUpsertData->setPrice((float) $price);
         $productDeclinationUpsertData->setQuantity((int) $quantity);
@@ -187,13 +187,15 @@ class VendorController extends Controller
             $geoloc->setZipcode($request->get('zipcode'));
             $createProductCommand->setGeolocation($geoloc);
         }
-        if (!empty($freeAttributesData)) {
-            $freeAttributes = [];
+
+        $freeAttributes = [];
+        if ($freeAttributesData !== null) {
             foreach ($freeAttributesData as $attribute) {
                 $freeAttributes[$attribute['key']][] = $attribute['value'];
             }
-            $createProductCommand->setFreeAttributes($freeAttributes);
         }
+        $createProductCommand->setFreeAttributes($freeAttributes);
+
         if ($hasFreeShipping !== null) {
             $createProductCommand->setHasFreeShipping((bool) $hasFreeShipping);
         }
@@ -227,7 +229,10 @@ class VendorController extends Controller
         } else {
             $createProductCommand->setDeclinations([$productDeclinationUpsertData]);
         }
-        if ($attachments !== null) {
+        if ($attachmentsData !== null) {
+                $attachments = array_map(static function($attachment) {
+                    return new ProductAttachmentUpload($attachment['key'], $attachment['value']);
+                }, $attachmentsData);
             $createProductCommand->setAttachments($attachments);
         }
         if ($availabilityDate !== null) {
