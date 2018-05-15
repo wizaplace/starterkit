@@ -559,10 +559,8 @@
                 "green_tax": "Éco Taxe",
                 "is_brand_new": "Neuf",
                 "geolocation": {
-                    "title": "Localisation",
-                    "latitude": "Latitude",
-                    "longitude": "Longitude",
-                    "label": "Label",
+                    "title": "Géolocalisation",
+                    "city": "Ville",
                     "zipcode": "Code postal"
                 },
                 "free_attributes": {

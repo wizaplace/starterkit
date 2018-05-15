@@ -99,10 +99,29 @@
                 <input type="text" class="form-control mb-2 mr-sm-2" id="availability_date" name="availability_date">
             </div>
         </div>
+
+        {# geolocation #}
+        <div class="form-group row">
+            <div class="col-12">
+                <h3>{{ 'vendor.products.creation.geolocation.title'|trans }}</h3>
+
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="zipcode">{{ 'vendor.products.creation.geolocation.zipcode'|trans }}</label>
+                        <input id="zipcode" type="text" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="city">{{ 'vendor.products.creation.geolocation.city'|trans }}</label>
+                        <input id="city" type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group row">
             <div class="col-12">
                 <h3>{{ 'vendor.products.creation.free_attributes.title'|trans }}</h3>
-                <button type="button" class="btn btn-primary mb-2" @click="addFreeAttributeFields()">{{ 'vendor.products.creation.free_attributes.add'|trans }}</button>
+                <button type="button" class="btn btn-secondary mb-2" @click="addFreeAttributeFields()">{{ 'vendor.products.creation.free_attributes.add'|trans }}</button>
                 <div id="free-attributes">
                     <div class="form-group row" v-for="i in freeAttributesCount">
                         <div class="col-5">
@@ -129,7 +148,7 @@
         <div class="form-group row">
             <div class="col-12">
                 <h3>{{ 'vendor.products.creation.additional_images.title'|trans }}</h3>
-                <button type="button" class="btn btn-primary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
+                <button type="button" class="btn btn-secondary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
                 <div id="additional-images">
                     <div class="form-group row" v-for="i in additionalImagesCount">
                         <div class="col-10">
@@ -144,10 +163,10 @@
             </div>
         </div>
         {% if bof_attachments_enabled %}
-            <div class="form-group row">
+            <div class="form-group row mb-5">
                 <div class="col-12">
                     <h3>{{ 'vendor.products.creation.attachments.title'|trans }}</h3>
-                    <button type="button" class="btn btn-primary mb-2" @click="addAttachmentFields()">{{ 'vendor.products.creation.attachments.add'|trans }}</button>
+                    <button type="button" class="btn btn-secondary mb-2" @click="addAttachmentFields()">{{ 'vendor.products.creation.attachments.add'|trans }}</button>
                     <div id="attachments">
                         <div class="form-group row" v-for="i in attachmentsCount">
                             <div class="col-5">
