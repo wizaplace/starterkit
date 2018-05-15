@@ -1,28 +1,8 @@
 imports:
+    - { resource: parameters.default.yml }
     - { resource: parameters.yml }
     - { resource: parameters.platform_sh.php }
     - { resource: security.yml }
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locales: ['fr']
-    default_locale: 'fr'
-    slug.regexp: !php/const Wizaplace\SDK\Seo\SeoService::SLUG_REGEXP
-    recaptcha.key: '%env(RECAPTCHA_KEY)%'
-    recaptcha.secret: '%env(RECAPTCHA_SECRET)%'
-    api.base_url: '%env(API_BASE_URL)%'
-    # default values
-    env(RECAPTCHA_KEY): '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-    env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
-    env(CURRENCY_SIGN): '€'
-    env(CURRENCY_CODE): 'EUR'
-    env(BOF_ENABLED): true
-    env(BOF_ATTACHMENTS_ENABLED): true
-
-    #FeatureFlags
-    bof_enabled: '%env(BOF_ENABLED)%'
-    bof_attachments_enabled: '%env(BOF_ATTACHMENTS_ENABLED)%'
 
 framework:
     translator:
@@ -41,9 +21,8 @@ framework:
     default_locale:  '%default_locale%'
     trusted_hosts:   ~
     session:
-        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id:  session.handler.native_file
-        save_path: ~ # use value from php.ini
+        # handler_id set to null will use default session handler from php.ini
+        handler_id: ~
         cookie_lifetime: 1209600 # 1 209 600 seconds == 2 weeks
     fragments: ~
     http_method_override: true

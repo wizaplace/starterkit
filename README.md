@@ -2,7 +2,7 @@
 
 The StarterKit is a template web application for creating an e-commerce front-office for Wizaplace.
 
-It is based on PHP 7.1, Symfony 3 and [our PHP SDK](https://github.com/wizaplace/wizaplace-php-sdk). The front-office connects to Wizaplace through the API ([API documentation](https://sandbox.wizaplace.com/api/v1/doc/)).
+It is based on PHP 7.2, Symfony 3 and [our PHP SDK](https://github.com/wizaplace/wizaplace-php-sdk). The front-office connects to Wizaplace through the API ([API documentation](https://sandbox.wizaplace.com/api/v1/doc/)).
 
 ## Architecture
 
@@ -43,7 +43,7 @@ $ cd starterkit/
 $ make dev-from-scratch
 ```
 
-The website is now reachable at [http://demo.loc/](http://demo.loc/).  
+The website is now reachable at [http://demo.loc/](http://demo.loc/).
 You can have access to the profiler bar at [http://demo.loc/app_dev.php](http://demo.loc/app_dev.php).
 
 At any time you can rebuild everything by running `make dev-from-scratch` again.
@@ -74,7 +74,7 @@ This method can be used when Vagrant cannot be made to work.
 
 Requirements:
 
-- PHP 7.1
+- PHP 7.2
 - Composer
 - NPM
 - Gulp

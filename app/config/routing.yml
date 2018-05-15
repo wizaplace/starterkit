@@ -16,6 +16,11 @@ search:
     options:
         sitemap: true
 
+json_search:
+    path: /recherche/json
+    defaults: { _controller: AppBundle:Search:jsonSearch }
+    methods: [GET]
+
 attribute_variant:
     path: /a/{slug}
     defaults: { _controller: AppBundle:Attribute:viewVariant }

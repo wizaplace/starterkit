@@ -4,7 +4,7 @@
 name: 'starterkit'
 
 # The type key specifies the language and version for your application.
-type: 'php:7.1'
+type: 'php:7.2'
 
 # On PHP, there are multiple build flavors available. Pretty much everyone
 # except Drupal 7 users will want the composer flavor.
