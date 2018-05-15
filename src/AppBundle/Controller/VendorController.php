@@ -230,7 +230,7 @@ class VendorController extends Controller
             $createProductCommand->setDeclinations([$productDeclinationUpsertData]);
         }
         if ($attachmentsData !== null) {
-                $attachments = array_map(static function ($attachment) {
+                $attachments = array_map(static function (array $attachment): ProductAttachmentUpload {
                     return new ProductAttachmentUpload($attachment['key'], $attachment['value']);
                 }, $attachmentsData);
             $createProductCommand->setAttachments($attachments);
