@@ -104,12 +104,7 @@
         <div id="js-geolocation" class="form-group row">
             <div class="col-12">
                 <label for="geolocationAddress">{{ 'vendor.products.creation.geolocation.address'|trans }}</label>
-                <input id="geolocationAddress" type="text" class="form-control" name="geolocationAddress" v-model="selectedFormattedAddress" @keyup="codeAddress" autocomplete="nope" required> {# https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion #}
-                <ul class="suggestions">
-                    <li v-for="suggestedAddress in suggestedAddresses">
-                        <a href="#" @click.prevent="selectAddress(suggestedAddress)" v-text="suggestedAddress.formatted_address"></a>
-                    </li>
-                </ul>
+                <input id="geolocationAddress" type="text" class="form-control" name="geolocationAddress" autocomplete="nope" required> {# https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion #}
             </div>
 
             <input id="geolocationLatitude" type="hidden" name="latitude" value="">
@@ -264,9 +259,7 @@
                             required: false,
                         },
                     ],
-                    selectedFormattedAddress: "",
-                    geocoder: null,
-                    suggestedAddresses: []
+                    googleMapsAutocomplete: null
                 },
                 methods: {
                     addFreeAttributeFields() {
@@ -288,41 +281,40 @@
                         document.getElementById('attachments['+number+'][key]').closest('.form-group').remove();
                     },
 
-                    initGeocoding: function () {
-                        this.geocoder = new google.maps.Geocoder();
+                    initGooglePlace: function () {
+                        var labelInput = document.getElementById('geolocationAddress');
+                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
                     },
 
-                    codeAddress: function () {
-                        var self = this;
-                        this.geocoder.geocode( { 'address': this.selectedFormattedAddress}, function (results, status) {
-                            if (status === 'OK') {
+                    geolocAutocompleted: function () {
+                        var place = this.googleMapsAutocomplete.getPlace();
 
-                                {# Affiche les propositions d'adresses retournées par l'API de Google #}
-                                self.suggestedAddresses = results;
+                        {# l'utilisateur a entré un lieu non existant ou la requête a échouée #}
+                        if (! place.geometry) return;
+
+                        {# récupère les informations de geolocalisation #}
+                        var latitude = place.geometry.location.lat();
+                        var longitude = place.geometry.location.lng();
+                        var label = place.formatted_address;
+                        var zipcode = "";
+
+                        {# récupère le code postal s'il existe #}
+                        place.address_components.forEach(function (component) {
+                            if (_.includes(component.types, "postal_code")) {
+                                zipcode = component.long_name;
                             }
                         });
-                    },
-
-                    selectAddress: function (suggestedAddress) {
 
                         {# complète les valeurs des champs cachés du formulaire #}
-
-                        var latitude = suggestedAddress.geometry.location.lat();
-                        var longitude = suggestedAddress.geometry.location.lng();
-
                         $("#geolocationLatitude").val(latitude);
                         $("#geolocationLongitude").val(longitude);
-                        $("#geolocationLabel").val(suggestedAddress.formatted_address);
-
-                        {# affiche l'adresse sélectionnée dans le champ du formulaire #}
-                        this.selectedFormattedAddress = suggestedAddress.formatted_address;
-
-                        {# remet à zéro / cache les suggestions #}
-                        this.suggestedAddresses = null;
+                        $("#geolocationLabel").val(label);
+                        $("#geolocationZipcode").val(zipcode);
                     }
                 },
                 mounted: function () {
-                    this.initGeocoding();
+                    this.initGooglePlace();
                 }
             });
         });
