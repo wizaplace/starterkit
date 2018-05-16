@@ -560,8 +560,7 @@
                 "is_brand_new": "Neuf",
                 "geolocation": {
                     "title": "Géolocalisation",
-                    "city": "Ville",
-                    "zipcode": "Code postal"
+                    "address": "Adresse"
                 },
                 "free_attributes": {
                     "add": "Ajouter",
