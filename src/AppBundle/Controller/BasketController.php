@@ -50,7 +50,7 @@ class BasketController extends Controller
         $addedQuantity = $this->basketService->addProductToBasket($declinationId, $requestedQuantity);
 
         // warning message regarding stock
-        $notEnoughStockMessage = $this->translator->trans('not_enough_stock');
+        $notEnoughStockMessage = $this->translator->trans('basket.notification.warning.not_enough_stock');
         $message = ($addedQuantity < $requestedQuantity) ? $notEnoughStockMessage : null;
 
         return new JsonResponse([

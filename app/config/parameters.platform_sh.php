@@ -14,6 +14,10 @@ if (isset($_ENV['PLATFORM_PROJECT_ENTROPY'])) {
     $container->setParameter('kernel.secret', $_ENV['PLATFORM_PROJECT_ENTROPY']);
 }
 
+if (isset($_ENV['PLATFORM_TREE_ID'])) {
+    $container->setParameter('version', $_ENV['PLATFORM_TREE_ID']);
+}
+
 // Configure host
 // si http_host est configuré, alors on ne prend pas le host de platform
 // mais celui configuré en dur. cette règle permet de générer des URL en dur

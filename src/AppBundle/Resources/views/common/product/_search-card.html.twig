@@ -20,10 +20,10 @@
     </a>
 
     {# crossed out price (if needed) #}
-    <div v-if="product.crossedOutPrice"><s v-text="price(product.crossedOutPrice)"></s></div>
+    <div v-if="product.crossedOutPrice"><s>${product.crossedOutPrice|price} {{ 'currencySign'|trans }}</s></div>
 
     {# regular price #}
-    <div v-text="price(product.minimumPrice)"></div>
+    <div>${product.minimumPrice|price} {{ 'currencySign'|trans }}</div>
 
     {# product can be added to basket or favorites if it has only one declination #}
     <button v-if="product.declinationCount < 2" class="js-add-to-basket" title="{{ 'product.action.add_to_basket'|trans }}"

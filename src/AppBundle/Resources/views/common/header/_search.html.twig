@@ -1,6 +1,6 @@
 {% set categories = categoryTree() %}
 
-<div id="searchbar">
+<div id="searchbar" v-cloak>
     <form action="{{ path('search') }}" class="searchbar" method="get" autocomplete="off">
         <input type="hidden" name="selected_category_id" v-model="selectedCategory.id">
 
@@ -54,9 +54,10 @@
 
 {% block scripts %}
     <script>
-        $(function () {
 
-            var search = new SearchClient('{{ apiBaseUrl }}catalog/search/products', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
+        {# Search library is not loaded yet #}
+        $(function () {
+            var search = new SearchClient('{{ path('json_search') }}', '{{ apiBaseUrl }}catalog/search/products/autocomplete');
             var urlParameters = search.restoreSearchFromUrl(); // used in Search page
 
             new Vue({
