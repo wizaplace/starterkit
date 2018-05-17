@@ -1,6 +1,7 @@
 {
     "page_title_default": "Starter Kit",
     "marketplace_name": "Starter Kit",
+    "currencySign": "€",
     "category": "Catégorie",
     "categories": "Catégories",
     "see_categories": "Voir les catégories",
@@ -82,7 +83,6 @@
     "place_order": "Passer la commande",
     "your_basket_is_empty": "Votre panier est vide",
     "product_deleted_from_basket": "Le produit a bien été supprimé de votre panier",
-    "not_enough_stock": "Le nombre de produits en stock est insuffisant pour votre commande",
     "csrf_error_message": "L'action n'a pas pu être effectuée car elle a expirée, merci de réessayer",
     "fields_required_error_message": "Tous les champs marqués avec un astérisque doivent être renseignés, merci de réessayer",
     "email_field_required_error_message": "L'adresse email doit être renseignée, merci de réessayer",
@@ -365,7 +365,7 @@
                 "invalid_quantity": "La quantité n'est pas valide"
             },
             "warning": {
-                "not_enough_stock": "Le stock n'est pas suffisant"
+                "not_enough_stock": "Le nombre de produits en stock est insuffisant pour votre commande"
             }
         },
         "action": {

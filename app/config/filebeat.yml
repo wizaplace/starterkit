@@ -7,19 +7,19 @@ filebeat.prospectors:
     - /var/log/access.log
   fields:
     document_type: apache_access
-  tags: ["front"]
+  tags: ["front", "${PROJECT_NAME}"]
 
 - input_type: log
   paths:
     - /var/log/error.log
   fields:
     document_type: apache_error
-  tags: ["front"]
+  tags: ["front", "${PROJECT_NAME}"]
 
 - input_type: log
   paths:
     - /app/var/logs/prod.json
-  tags: ["front"]
+  tags: ["front", "${PROJECT_NAME}"]
   json.keys_under_root: true
   fields:
     document_type: app
@@ -29,14 +29,14 @@ filebeat.prospectors:
     - /var/log/deploy.log
   fields:
     document_type: deploy
-  tags: ["front"]
+  tags: ["front", "${PROJECT_NAME}"]
 
 - input_type: log
   paths:
     - /var/log/php.access.log
   fields:
     document_type: php_access
-  tags: ["front"]
+  tags: ["front", "${PROJECT_NAME}"]
 
 output.logstash:
   hosts: ["logs.wizacha.com:5044"]
