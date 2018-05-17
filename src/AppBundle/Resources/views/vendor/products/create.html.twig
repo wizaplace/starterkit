@@ -187,7 +187,6 @@
 {% block scripts %}
     <script>
         $(function(){
-            $('#availability_date').datepicker();
 
             new Vue({
                 el: '#create-product-form',
@@ -317,6 +316,22 @@
                     this.initGooglePlace();
                 }
             });
+
+            {# datepicker pour la date de disponibilité #}
+            var datePickerOptions = {
+                dateFormat: 'dd/mm/yy',
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                monthNamesShort: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Dec" ],
+                yearRange: '-100:+0',
+                firstDay: 1,
+                changeMonth: true,
+                changeYear: true,
+            };
+
+            $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+
+            $('#availability_date').datepicker(datePickerOptions);
         });
     </script>
 {% endblock %}
