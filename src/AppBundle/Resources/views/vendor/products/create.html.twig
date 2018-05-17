@@ -99,10 +99,24 @@
                 <input type="text" class="form-control mb-2 mr-sm-2" id="availability_date" name="availability_date">
             </div>
         </div>
+
+        {# geolocation #}
+        <div id="js-geolocation" class="form-group row">
+            <div class="col-12">
+                <label for="geolocationAddress">{{ 'vendor.products.creation.geolocation.address'|trans }}</label>
+                <input id="geolocationAddress" type="text" class="form-control" name="geolocationAddress" autocomplete="nope" required> {# https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion #}
+            </div>
+
+            <input id="geolocationLatitude" type="hidden" name="latitude" value="">
+            <input id="geolocationLongitude" type="hidden" name="longitude" value="">
+            <input id="geolocationLabel" type="hidden" name="label" value="">
+            <input id="geolocationZipcode" type="hidden" name="zipcode" value="">
+        </div>
+
         <div class="form-group row">
             <div class="col-12">
                 <h3>{{ 'vendor.products.creation.free_attributes.title'|trans }}</h3>
-                <button type="button" class="btn btn-primary mb-2" @click="addFreeAttributeFields()">{{ 'vendor.products.creation.free_attributes.add'|trans }}</button>
+                <button type="button" class="btn btn-secondary mb-2" @click="addFreeAttributeFields()">{{ 'vendor.products.creation.free_attributes.add'|trans }}</button>
                 <div id="free-attributes">
                     <div class="form-group row" v-for="i in freeAttributesCount">
                         <div class="col-5">
@@ -129,7 +143,7 @@
         <div class="form-group row">
             <div class="col-12">
                 <h3>{{ 'vendor.products.creation.additional_images.title'|trans }}</h3>
-                <button type="button" class="btn btn-primary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
+                <button type="button" class="btn btn-secondary mb-2" @click="addAdditionalImageField()">{{ 'vendor.products.creation.additional_images.add'|trans }}</button>
                 <div id="additional-images">
                     <div class="form-group row" v-for="i in additionalImagesCount">
                         <div class="col-10">
@@ -144,10 +158,10 @@
             </div>
         </div>
         {% if bof_attachments_enabled %}
-            <div class="form-group row">
+            <div class="form-group row mb-5">
                 <div class="col-12">
                     <h3>{{ 'vendor.products.creation.attachments.title'|trans }}</h3>
-                    <button type="button" class="btn btn-primary mb-2" @click="addAttachmentFields()">{{ 'vendor.products.creation.attachments.add'|trans }}</button>
+                    <button type="button" class="btn btn-secondary mb-2" @click="addAttachmentFields()">{{ 'vendor.products.creation.attachments.add'|trans }}</button>
                     <div id="attachments">
                         <div class="form-group row" v-for="i in attachmentsCount">
                             <div class="col-5">
@@ -174,98 +188,135 @@
     <script>
         $(function(){
             $('#availability_date').datepicker();
-        });
-        new Vue({
-            el: '#create-product-form',
-            data: {
-                statusList: {{ productStatusList|json_encode|raw }},
-                categoriesList: {{ categoriesList|json_encode|raw }},
-                taxesList: {{ taxList|json_encode|raw }},
-                freeAttributesCount: 0,
-                additionalImagesCount: 0,
-                attachmentsCount: 0,
-                mainImageHasContent: false,
-                displayAdditionalImagesFields: 'hidden',
-                formList: [
-                    {
-                        id: 'geolocation',
-                        title: '{{ 'vendor.products.creation.geolocation.title'|trans }}',
-                        type: 'object',
-                        multiple: false,
-                        required: false,
-                        object: [
-                            {
-                                id: 'latitude',
-                                inputName: 'latitude',
-                                name: '{{ 'vendor.products.creation.geolocation.latitude'|trans }}',
-                                type: 'number',
-                                step: null,
-                                required: false,
-                            },
-                            {
-                                id: 'longitude',
-                                inputName: 'longitude',
-                                name: '{{ 'vendor.products.creation.geolocation.longitude'|trans }}',
-                                type: 'number',
-                                step: null,
-                                required: false,
-                            },
-                            {
-                                id: 'label',
-                                inputName: 'label',
-                                name: '{{ 'vendor.products.creation.geolocation.label'|trans }}',
-                                type: 'text',
-                                required: false,
-                            },
-                            {
-                                id: 'zipcode',
-                                inputName: 'zipcode',
-                                name: '{{ 'vendor.products.creation.geolocation.zipcode'|trans }}',
-                                type: 'text',
-                                required: false,
-                            },
-                        ],
+
+            new Vue({
+                el: '#create-product-form',
+                data: {
+                    statusList: {{ productStatusList|json_encode|raw }},
+                    categoriesList: {{ categoriesList|json_encode|raw }},
+                    taxesList: {{ taxList|json_encode|raw }},
+                    freeAttributesCount: 0,
+                    additionalImagesCount: 0,
+                    attachmentsCount: 0,
+                    mainImageHasContent: false,
+                    displayAdditionalImagesFields: 'hidden',
+                    formList: [
+                        {
+                            id: 'geolocation',
+                            title: '{{ 'vendor.products.creation.geolocation.title'|trans }}',
+                            type: 'object',
+                            multiple: false,
+                            required: false,
+                            object: [
+                                {
+                                    id: 'latitude',
+                                    inputName: 'latitude',
+                                    name: '{{ 'vendor.products.creation.geolocation.latitude'|trans }}',
+                                    type: 'number',
+                                    step: null,
+                                    required: false,
+                                },
+                                {
+                                    id: 'longitude',
+                                    inputName: 'longitude',
+                                    name: '{{ 'vendor.products.creation.geolocation.longitude'|trans }}',
+                                    type: 'number',
+                                    step: null,
+                                    required: false,
+                                },
+                                {
+                                    id: 'label',
+                                    inputName: 'label',
+                                    name: '{{ 'vendor.products.creation.geolocation.label'|trans }}',
+                                    type: 'text',
+                                    required: false,
+                                },
+                                {
+                                    id: 'zipcode',
+                                    inputName: 'zipcode',
+                                    name: '{{ 'vendor.products.creation.geolocation.zipcode'|trans }}',
+                                    type: 'text',
+                                    required: false,
+                                },
+                            ],
+                        },
+                        {
+                            id: 'affiliate_link',
+                            inputName: 'affiliate_link',
+                            name: '{{ 'vendor.products.creation.affiliate_link'|trans }}',
+                            type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                                 // les conditions d'affichage
+                            value: 'disabled',
+                            required: false,
+                        },
+                        {
+                            id: 'declinations',
+                            inputName: 'declinations',
+                            name: '{{ 'vendor.products.creation.declinations'|trans }}',
+                            type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
+                                                 // les conditions d'affichage
+                            value: 'disabled',
+                            required: false,
+                        },
+                    ],
+                    googleMapsAutocomplete: null
+                },
+                methods: {
+                    addFreeAttributeFields() {
+                        this.freeAttributesCount++;
                     },
-                    {
-                        id: 'affiliate_link',
-                        inputName: 'affiliate_link',
-                        name: '{{ 'vendor.products.creation.affiliate_link'|trans }}',
-                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
-                                             // les conditions d'affichage
-                        value: 'disabled',
-                        required: false,
+                    removeFreeAttributeFields(number) {
+                        document.getElementById('free_attributes['+number+'][key]').closest('.form-group').remove();
                     },
-                    {
-                        id: 'declinations',
-                        inputName: 'declinations',
-                        name: '{{ 'vendor.products.creation.declinations'|trans }}',
-                        type: 'conditional', // @TODO: Modifier cette partie quand on en saura plus sur
-                                             // les conditions d'affichage
-                        value: 'disabled',
-                        required: false,
+                    addAdditionalImageField() {
+                        this.additionalImagesCount++;
                     },
-                ],
-            },
-            methods: {
-                addFreeAttributeFields() {
-                    this.freeAttributesCount++;
+                    removeAdditionalImageField(number) {
+                        document.getElementById('additional_images['+number+']').closest('.form-group').remove();
+                    },
+                    addAttachmentFields() {
+                        this.attachmentsCount++;
+                    },
+                    removeAttachmentFields(number) {
+                        document.getElementById('attachments['+number+'][key]').closest('.form-group').remove();
+                    },
+
+                    initGooglePlace: function () {
+                        var labelInput = document.getElementById('geolocationAddress');
+                        this.googleMapsAutocomplete = new google.maps.places.Autocomplete(labelInput);
+                        this.googleMapsAutocomplete.addListener('place_changed', this.geolocAutocompleted);
+                    },
+
+                    geolocAutocompleted: function () {
+                        var place = this.googleMapsAutocomplete.getPlace();
+
+                        {# l'utilisateur a entré un lieu non existant ou la requête a échouée #}
+                        if (! place.geometry) return;
+
+                        {# récupère les informations de geolocalisation #}
+                        var latitude = place.geometry.location.lat();
+                        var longitude = place.geometry.location.lng();
+                        var label = place.formatted_address;
+                        var zipcode = "";
+
+                        {# récupère le code postal s'il existe #}
+                        place.address_components.forEach(function (component) {
+                            if (_.includes(component.types, "postal_code")) {
+                                zipcode = component.long_name;
+                            }
+                        });
+
+                        {# complète les valeurs des champs cachés du formulaire #}
+                        $("#geolocationLatitude").val(latitude);
+                        $("#geolocationLongitude").val(longitude);
+                        $("#geolocationLabel").val(label);
+                        $("#geolocationZipcode").val(zipcode);
+                    }
                 },
-                removeFreeAttributeFields(number) {
-                    document.getElementById('free_attributes['+number+'][key]').closest('.form-group').remove();
-                },
-                addAdditionalImageField() {
-                    this.additionalImagesCount++;
-                },
-                removeAdditionalImageField(number) {
-                    document.getElementById('additional_images['+number+']').closest('.form-group').remove();
-                },
-                addAttachmentFields() {
-                    this.attachmentsCount++;
-                },
-                removeAttachmentFields(number) {
-                    document.getElementById('attachments['+number+'][key]').closest('.form-group').remove();
-                },
-            },
+                mounted: function () {
+                    this.initGooglePlace();
+                }
+            });
         });
     </script>
 {% endblock %}

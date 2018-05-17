@@ -148,7 +148,6 @@ class VendorController extends Controller
         $mainCategory = (int) $request->get('main_category');
         $greenTax = (float) $request->get('green_tax');
         $isBrandNew = $request->get('is_brand_new') ?? false;
-        $geolocation = $request->get('geolocation');
         $freeAttributesData = $request->get('free_attributes');
         $hasFreeShipping = $request->get('has_free_shipping') ?? false;
         $weight = $request->get('weight');
@@ -178,10 +177,10 @@ class VendorController extends Controller
         if ($isBrandNew !== null) {
             $createProductCommand->setIsBrandNew((bool) $isBrandNew);
         }
-        if ($geolocation !== null) {
+        if ($request->get('latitude') !== null) {
             $geoloc = new ProductGeolocationUpsertData(
-                $request->get('latitude'),
-                $request->get('longitude')
+                floatval($request->get('latitude')),
+                floatval($request->get('longitude'))
             );
             $geoloc->setLabel($request->get('label'));
             $geoloc->setZipcode($request->get('zipcode'));
