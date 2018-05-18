@@ -266,19 +266,22 @@
                         this.freeAttributesCount++;
                     },
                     removeFreeAttributeFields(number) {
-                        document.getElementById('free_attributes['+number+'][key]').closest('.form-group').remove();
+                        var freeAttributes = document.getElementById('free_attributes['+number+'][key]');
+                        $(freeAttributes).closest('.form-group').remove();
                     },
                     addAdditionalImageField() {
                         this.additionalImagesCount++;
                     },
                     removeAdditionalImageField(number) {
-                        document.getElementById('additional_images['+number+']').closest('.form-group').remove();
+                        var additionalImages = document.getElementById('additional_images['+number+']');
+                        $(additionalImages).closest('.form-group').remove();
                     },
                     addAttachmentFields() {
                         this.attachmentsCount++;
                     },
                     removeAttachmentFields(number) {
-                        document.getElementById('attachments['+number+'][key]').closest('.form-group').remove();
+                        var attachments = document.getElementById('attachments['+number+'][key]');
+                        $(attachments).closest('.form-group').remove();
                     },
 
                     initGooglePlace: function () {
