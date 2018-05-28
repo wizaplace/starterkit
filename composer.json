@@ -20,7 +20,7 @@
         "symfony/monolog-bundle": "^3.2",
         "symfony/psr-http-message-bridge": "^1.0",
         "symfony/symfony": "^3.4.6",
-        "wizaplace/front-bundle": "~0.4.0",
+        "wizaplace/front-bundle": "~0.4.2",
         "zendframework/zend-diactoros": "^1.5"
     },
     "require-dev": {
