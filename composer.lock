@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "862050f070e8ca60234905188791d51b",
+    "content-hash": "ec37cbde57838917104ebd8f9bfb24ae",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -1405,20 +1405,20 @@
         },
         {
             "name": "myclabs/php-enum",
-            "version": "1.5.2",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "3ed7088cfd0a0e06534b7f8b0eee82acea574fac"
+                "reference": "8c5649e4ed99acd53a40eada270154dcac089f7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/3ed7088cfd0a0e06534b7f8b0eee82acea574fac",
-                "reference": "3ed7088cfd0a0e06534b7f8b0eee82acea574fac",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/8c5649e4ed99acd53a40eada270154dcac089f7e",
+                "reference": "8c5649e4ed99acd53a40eada270154dcac089f7e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
@@ -1445,7 +1445,7 @@
             "keywords": [
                 "enum"
             ],
-            "time": "2017-06-28T16:24:08+00:00"
+            "time": "2018-05-09T08:09:15+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -2401,16 +2401,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
+                "reference": "3296adf6a6454a050679cde90f95350ad604b171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
-                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
+                "reference": "3296adf6a6454a050679cde90f95350ad604b171",
                 "shasum": ""
             },
             "require": {
@@ -2422,7 +2422,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -2456,7 +2456,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-01-30T19:27:44+00:00"
+            "time": "2018-04-26T10:06:28+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -2878,16 +2878,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.7",
+            "version": "v2.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc"
+                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/69aacd44dbbaa3199d5afb68605c996d577896fc",
-                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7b604c89da162034bdf4bb66310f358d313dd16d",
+                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d",
                 "shasum": ""
             },
             "require": {
@@ -2940,7 +2940,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-03-20T04:31:17+00:00"
+            "time": "2018-04-02T09:24:19+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2984,16 +2984,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.4.0",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "2007cac76123d4d2019b5b0cf0f714d8cd247225"
+                "reference": "a46eda1af07eaa4d5fbf0346466b8a1d4744a46f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/2007cac76123d4d2019b5b0cf0f714d8cd247225",
-                "reference": "2007cac76123d4d2019b5b0cf0f714d8cd247225",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/a46eda1af07eaa4d5fbf0346466b8a1d4744a46f",
+                "reference": "a46eda1af07eaa4d5fbf0346466b8a1d4744a46f",
                 "shasum": ""
             },
             "require": {
@@ -3003,7 +3003,7 @@
                 "symfony/monolog-bundle": "^3.1",
                 "symfony/symfony": "^3.4.6",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.18.0"
+                "wizaplace/sdk": "^1.24.0"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -3031,20 +3031,20 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-03-27T13:18:32+00:00"
+            "time": "2018-05-18T13:05:57+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.19.0",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "dacd41beb2ba96fcebbcdc5f0a04e99106fe4371"
+                "reference": "ff81aa57ef4ccb87c485f313346eb01c843a1cd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/dacd41beb2ba96fcebbcdc5f0a04e99106fe4371",
-                "reference": "dacd41beb2ba96fcebbcdc5f0a04e99106fe4371",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/ff81aa57ef4ccb87c485f313346eb01c843a1cd9",
+                "reference": "ff81aa57ef4ccb87c485f313346eb01c843a1cd9",
                 "shasum": ""
             },
             "require": {
@@ -3082,7 +3082,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-03-21T15:58:34+00:00"
+            "time": "2018-05-21T07:25:48+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
