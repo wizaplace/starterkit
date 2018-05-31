@@ -93,7 +93,7 @@ hooks:
       cp .platform.php.ini php.ini
 
       # download filebeat
-      FILEBEAT_VERSION=5.6.9
+      FILEBEAT_VERSION=6.2.4
       wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
       tar xfz filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
       cp filebeat-${FILEBEAT_VERSION}-linux-x86_64/filebeat bin/filebeat

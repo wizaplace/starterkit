@@ -1,22 +1,31 @@
-path.data: /app/var/filebeat/data
-path.logs: /app/var/filebeat/logs
+path.home: /app/var/filebeat
+
+logging.level: warning
+logging.to_files: true
+logging.to_syslog: false
+logging.files:
+  name: filebeat.log
+
+filebeat.config:
+  modules:
+    enabled: false
 
 filebeat.prospectors:
-- input_type: log
+- type: log
   paths:
     - /var/log/access.log
   fields:
     document_type: apache_access
   tags: ["front", "${PROJECT_NAME}"]
 
-- input_type: log
+- type: log
   paths:
     - /var/log/error.log
   fields:
     document_type: apache_error
   tags: ["front", "${PROJECT_NAME}"]
 
-- input_type: log
+- type: log
   paths:
     - /app/var/logs/prod.json
   tags: ["front", "${PROJECT_NAME}"]
@@ -24,14 +33,14 @@ filebeat.prospectors:
   fields:
     document_type: app
 
-- input_type: log
+- type: log
   paths:
     - /var/log/deploy.log
   fields:
     document_type: deploy
   tags: ["front", "${PROJECT_NAME}"]
 
-- input_type: log
+- type: log
   paths:
     - /var/log/php.access.log
   fields:
