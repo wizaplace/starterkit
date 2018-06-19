@@ -130,7 +130,7 @@ crons:
     translations:
         # regularly pull translations' values from the backend
         spec: '*/5 * * * *'
-        cmd: 'php bin/console --env=prod wizaplace:translations:pull && rm -f var/cache/prod/translations/* && bin/console --env=prod cache:warmup'
+        cmd: 'php bin/console --env=prod wizaplace:translations:pull && bin/console --env=prod cache:warmup'
     filebeat:
         spec: '*/5 * * * *'
         cmd: './bin/filebeat.sh'
