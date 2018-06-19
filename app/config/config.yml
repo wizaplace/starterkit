@@ -29,6 +29,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    cache:
+        default_redis_provider: "%redis_dsn%"
 
 # Twig Configuration
 twig:
