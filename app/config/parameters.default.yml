@@ -7,12 +7,11 @@ parameters:
     recaptcha.key: '%env(RECAPTCHA_KEY)%'
     recaptcha.secret: '%env(RECAPTCHA_SECRET)%'
     api.base_url: '%env(API_BASE_URL)%'
-    cache_backend: '%env(CACHE_BACKEND)%'
+    cache_backend: 'cache.app'
     redis_dsn: '%env(REDIS_DSN)%'
     # default values
     env(RECAPTCHA_KEY): '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
     env(RECAPTCHA_SECRET): '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
-    env(CACHE_BACKEND): cache.app
     env(REDIS_DSN): redis://localhost

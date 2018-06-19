@@ -18,6 +18,15 @@ if (isset($_ENV['PLATFORM_TREE_ID'])) {
     $container->setParameter('version', $_ENV['PLATFORM_TREE_ID']);
 }
 
+if (isset($_ENV['PLATFORM_RELATIONSHIPS'])) {
+    $relationships = json_decode(base64_decode($_ENV['PLATFORM_RELATIONSHIPS']), true);
+
+    // Configure redis
+    if ($endpoint = ($relationships['redis'][0] ?? null)) {
+        $container->setParameter('redis_dsn', "redis://{$endpoint['host']}:{$endpoint['port']}");
+    }
+}
+
 // Configure host
 // si http_host est configuré, alors on ne prend pas le host de platform
 // mais celui configuré en dur. cette règle permet de générer des URL en dur
