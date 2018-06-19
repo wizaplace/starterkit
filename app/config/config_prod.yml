@@ -5,6 +5,8 @@ imports:
 framework:
     assets:
         version: "%version%"
+    cache:
+        app: cache.adapter.redis
 
 monolog:
     handlers:
