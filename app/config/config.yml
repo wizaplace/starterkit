@@ -29,6 +29,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+    cache:
+        app: '%cache_backend%'
+        default_redis_provider: "redis://localhost"
 
 # Twig Configuration
 twig:
