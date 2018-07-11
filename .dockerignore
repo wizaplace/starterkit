@@ -1,5 +1,6 @@
 *
 !app
+app/config/parameters.yml
 !bin/console
 !bin/init.sh
 !src
