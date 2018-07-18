@@ -10,7 +10,7 @@ filebeat.config:
   modules:
     enabled: false
 
-filebeat.prospectors:
+filebeat.inputs:
 - type: log
   paths:
     - /var/log/access.log
@@ -39,6 +39,8 @@ filebeat.prospectors:
   fields:
     document_type: deploy
   tags: ["front", "${PROJECT_NAME}"]
+  close_eof: true
+  clean_inactive: 1m
 
 - type: log
   paths:
