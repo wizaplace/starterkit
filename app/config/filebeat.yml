@@ -39,8 +39,6 @@ filebeat.inputs:
   fields:
     document_type: deploy
   tags: ["front", "${PROJECT_NAME}"]
-  close_eof: true
-  clean_inactive: 1m
 
 - type: log
   paths:
