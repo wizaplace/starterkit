@@ -48,3 +48,5 @@ security:
         - { path: ^/profil, roles: [ ROLE_USER ] }
         - { path: ^/commande/connexion, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
         - { path: ^/commande, roles: [ ROLE_USER ] }
+        - { path: ^/oauth, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/oauth-authorize, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
