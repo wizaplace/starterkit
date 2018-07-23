@@ -42,6 +42,16 @@ logout: # see security.yml
     path: /logout
     methods: [GET]
 
+oauth:
+    path: /oauth
+    defaults: { _controller: WizaplaceFrontBundle:Oauth:login }
+    methods: [GET]
+
+oauth_authorize:
+    path: /oauth-authorize
+    defaults: { _controller: WizaplaceFrontBundle:Oauth:authorize }
+    methods: [GET]
+
 reset_password_initiate:
     path: /password
     defaults: { _controller: AppBundle:Auth:initiateResetPassword }
