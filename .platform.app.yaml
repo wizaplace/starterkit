@@ -20,6 +20,9 @@ relationships:
 
 # The configuration of the application when it is exposed to the web.
 web:
+    commands:
+        start: |
+            supervisord -n -c app/config/supervisord.conf
     locations:
         '/':
             # The public directory of the application relative to its root.
@@ -68,6 +71,10 @@ runtime:
     extensions:
         - newrelic
 
+dependencies:
+    python:
+        supervisor: "*"
+
 # The hooks that will be triggered when the package is deployed.
 hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
@@ -91,27 +98,31 @@ hooks:
       # use our custom php.ini
       cp .platform.php.ini php.ini
 
-      #   # download filebeat
-      #   FILEBEAT_VERSION=6.3.1
-      #   wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
-      #   tar xfz filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
-      #   cp filebeat-${FILEBEAT_VERSION}-linux-x86_64/filebeat bin/filebeat
-      #   rm -rf filebeat-${FILEBEAT_VERSION}-linux-x86_64 filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+      # download filebeat
+      wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+      tar xfz filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
+      cp filebeat-${FILEBEAT_VERSION}-linux-x86_64/filebeat bin/filebeat
+      rm -rf filebeat-${FILEBEAT_VERSION}-linux-x86_64 filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz
 
       echo "[`date --iso-8601=seconds`] build_end ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${buildID}"
     # Deploy hooks can access services but the file system is now read-only.
     deploy: |
       set -eu
       IFS=$'\n\t'
+      deployID="$(cat /app/app/buildID).$(cat /proc/sys/kernel/random/uuid)"
+      echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
 
       # Empty logs before writing anything in it
       echo -n > /var/log/access.log
       echo -n > /var/log/error.log
       echo -n > /var/log/deploy.log
       echo -n > /var/log/php.access.log
+      bin/logrotate.sh
+      # clean filebeat registry
+      rm var/filebeat/data/registry
 
-      deployID="$(cat /app/app/buildID).$(cat /proc/sys/kernel/random/uuid)"
-      echo "[`date --iso-8601=seconds`] deploy_start ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
+      # supervisor logs
+      mkdir -p var/supervisor
 
       # cache
       rm -rf var/cache/*
@@ -120,19 +131,18 @@ hooks:
       # push our local translations to the backend
       bin/console --env=prod wizaplace:translations:push
 
-      bin/logrotate.sh
-
       DEPLOY_END=$(date +%s%N)
       echo "[`date --iso-8601=seconds`] deploy_end ${PLATFORM_PROJECT}.${PLATFORM_TREE_ID}.${deployID}"
+
+variables:
+    env:
+        FILEBEAT_VERSION: '6.3.1'
 
 crons:
     translations:
         # regularly pull translations' values from the backend
         spec: '*/5 * * * *'
         cmd: 'php bin/console --env=prod wizaplace:translations:pull && bin/console --env=prod cache:warmup'
-    # filebeat:
-    #     spec: '*/5 * * * *'
-    #     cmd: './bin/filebeat.sh'
     sitemap:
         spec: '*/30 * * * *'
         cmd: 'php bin/console --env=prod sitemap:generate'
