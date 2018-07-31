@@ -121,6 +121,9 @@ hooks:
       bin/logrotate.sh
       # clean filebeat registry
       rm var/filebeat/data/registry
+      
+      # supervisor logs
+      mkdir -p var/supervisor
 
       # cache
       rm -rf var/cache/*
