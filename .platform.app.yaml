@@ -64,6 +64,7 @@ mounts:
     '/var/translations': 'shared:files/translations'
     '/var/filebeat': 'shared:files/filebeat'
     '/var/sitemap': 'shared:files/sitemap'
+    '/var/supervisor': 'shared:files/supervisor'
 
 runtime:
     sizing_hints:
@@ -120,9 +121,6 @@ hooks:
       bin/logrotate.sh
       # clean filebeat registry
       rm var/filebeat/data/registry
-
-      # supervisor logs
-      mkdir -p var/supervisor
 
       # cache
       rm -rf var/cache/*
