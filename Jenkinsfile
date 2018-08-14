@@ -35,7 +35,7 @@ pipeline {
                 sh 'make npm-install lint-css assets'
             }
         }
-        stage('check') {
+        stage('lint') {
             agent {
                 docker {
                     image 'php:7.2'
@@ -44,42 +44,25 @@ pipeline {
             }
             steps {
                 parallel(
-                    'lint': {
-                        sh 'make -j lint-ci'
+                    'phpcs': {
+                        sh 'make lint-php'
                     },
                     'stan': {
-                        sh 'make stan-ci'
+                        sh 'make stan'
                     },
-                )
-            }
-            post {
-                always {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'phpcs-checkstyle.xml'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'phpstan-checkstyle.xml'
-                    withCredentials([string(credentialsId: 'e18082c0-a95c-4c22-9bf5-803fd091c764', variable: 'GITHUB_TOKEN')]) {
-                        step([
-                            $class: 'ViolationsToGitHubRecorder',
-                            config: [
-                                gitHubUrl: 'https://api.github.com/',
-                                repositoryOwner: 'wizaplace',
-                                repositoryName: 'starterkit',
-                                pullRequestId: "${env.CHANGE_ID}",
-                                useOAuth2Token: true,
-                                oAuth2Token: "$GITHUB_TOKEN",
-                                useUsernamePassword: false,
-                                useUsernamePasswordCredentials: false,
-                                usernamePasswordCredentialsId: '',
-                                createCommentWithAllSingleFileComments: false,
-                                createSingleFileComments: true,
-                                commentOnlyChangedContent: true,
-                                minSeverity: 'INFO',
-                                violationConfigs: [
-                                    [ pattern: '.*/.*-checkstyle\\.xml$', parser: 'CHECKSTYLE', reporter: 'Checkstyle' ],
-                                ]
-                            ]
-                        ])
+                    'twig': {
+                        sh 'make lint-twig'
+                    },
+                    'yaml': {
+                        sh 'make lint-yaml'
+                    },
+                    'xliff': {
+                        sh 'make lint-xliff'
+                    },
+                    'json': {
+                        sh 'make lint-json'
                     }
-                }
+                )
             }
         }
         stage('docker build') {

@@ -1,5 +1,6 @@
 ENV ?= "dev"
-
+JSON_FILE_SRC = $(shell find src/ -name '*.json')
+JSON_FILE_APP = $(shell find app/ -name '*.json')
 
 all: install
 
@@ -15,7 +16,7 @@ composer-install-ci:
 
 lint: lint-php lint-twig lint-yaml lint-xliff lint-css
 
-lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff
+lint-ci: lint-php-ci lint-twig lint-yaml lint-xliff lint-json
 
 lint-php:
 	./vendor/bin/phpcs
@@ -36,6 +37,9 @@ lint-xliff:
 
 lint-css:
 	gulp lint-css
+
+lint-json:
+	./vendor/bin/jsonlint $(JSON_FILE_SRC) $(JSON_FILE_APP)
 
 stan:
 	./vendor/bin/phpstan analyse -c phpstan.neon -l 5 app src
