@@ -87,6 +87,11 @@ pipeline {
             }
         }
     }
+    post {
+        failure {
+            slackSend channel: "#ci-errors", color: "danger", message: "${env.JOB_NAME} - ${env.BUILD_DISPLAY_NAME} failure (<${env.BUILD_URL}|Open>)"
+        }
+    }
     environment {
         DOCKER_REGISTRY = credentials('546dd443-92b3-4712-9fa4-58d1546ff464')
         DOCKER_USERNAME = credentials('fe8f6ec1-fbd7-455a-bf0e-992f0562da61')
