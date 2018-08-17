@@ -90,7 +90,7 @@ pipeline {
     post {
         failure {
             slackSend channel: "#ci-errors", color: "danger", message: "${env.JOB_NAME} - ${env.BUILD_DISPLAY_NAME} failure (<${env.BUILD_URL}|Open>)"
-            emailext subject: "Failed: ${env.JOB_NAME} - ${env.BUILD_DISPLAY_NAME}", attachLog: true, recipientProviders: [[$class: 'CulpritsRecipientProvider']], body: '''${SCRIPT, template="groovy-html.template"}'''
+            emailext subject: "Failed: ${env.JOB_NAME} - ${env.BUILD_DISPLAY_NAME}", attachLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], body: '''${SCRIPT, template="groovy-html.template"}'''
         }
     }
     environment {
