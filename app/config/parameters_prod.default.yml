@@ -1,5 +1,5 @@
 parameters:
-    googlemaps.api_key: 'AIzaSyC6pzFn22J8wZ9OMuYBButVwUKvmo5Jx1w' #@TODO: change me
+    googlemaps.api_key: '%env(GOOGLE_MAP_API_KEYs)%'
     wizaplace.system_user_password: '%env(WIZAPLACE_SYSTEM_USER_PASSWORD)%'
     api.connect_timeout: '%env(API_CONNECT_TIMEOUT)%'
     api.read_timeout: '%env(API_READ_TIMEOUT)%'
@@ -17,3 +17,4 @@ parameters:
     env(APP_VERSION): ~
     env(APP_SECRET): ~
     env(HTTP_HOST): localhost
+    env(GOOGLE_MAP_API_KEY): 'AIzaSyAw9jadoH_dgVqvbLU5tjAlsEZ75qt1TTw' #@TODO: override me
