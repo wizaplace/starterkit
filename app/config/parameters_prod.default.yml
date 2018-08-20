@@ -1,5 +1,5 @@
 parameters:
-    googlemaps.api_key: '%env(GOOGLE_MAP_API_KEYs)%'
+    googlemaps.api_key: '%env(GOOGLE_MAP_API_KEY)%'
     wizaplace.system_user_password: '%env(WIZAPLACE_SYSTEM_USER_PASSWORD)%'
     api.connect_timeout: '%env(API_CONNECT_TIMEOUT)%'
     api.read_timeout: '%env(API_READ_TIMEOUT)%'
