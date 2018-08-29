@@ -59,10 +59,6 @@ services:
         class: SitemapGenerator\Dumper\GzFileDumper
         arguments: [ "%kernel.root_dir%/../var/sitemap/sitemap.xml.gz" ]
 
-k_phoen_sitemap:
-    base_host:         'https://%http_host%'
-    base_host_sitemap: 'https://%http_host%'
-
 jms_i18n_routing:
     default_locale: '%default_locale%'
     locales: '%locales%'

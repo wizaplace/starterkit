@@ -14,3 +14,5 @@ parameters:
     env(CURRENCY_SIGN): '€'
     env(CURRENCY_CODE): 'EUR'
     env(REDIS_DSN): redis://localhost
+    router.request_context.host: '%http_host%'
+    router.request_context.scheme: 'https'
