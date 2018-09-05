@@ -2153,16 +2153,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "1.8.2",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "3241b135120c25d6522e46246386df0ab48e13c5"
+                "reference": "6b4c80ee1f5d9d5ab5bae949f4eb5d758a0bf64b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/3241b135120c25d6522e46246386df0ab48e13c5",
-                "reference": "3241b135120c25d6522e46246386df0ab48e13c5",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/6b4c80ee1f5d9d5ab5bae949f4eb5d758a0bf64b",
+                "reference": "6b4c80ee1f5d9d5ab5bae949f4eb5d758a0bf64b",
                 "shasum": ""
             },
             "require": {
@@ -2189,7 +2189,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -2213,7 +2213,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-12-21T16:05:46+00:00"
+            "time": "2018-08-18T19:41:03+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
