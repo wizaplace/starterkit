@@ -54,6 +54,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - composer-
       - run: make lint-php
+      - run: bin/console cache:warmup
       - run: make stan
       - run: make lint-twig
       - run: make lint-yaml
