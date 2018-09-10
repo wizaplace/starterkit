@@ -9,9 +9,9 @@ jobs:
       - run: sudo composer self-update
       - restore_cache:
           keys:
-          - composer-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - composer-
+            - composer-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - composer-
       - run: make composer-install-ci
       - save_cache:
           paths:
@@ -19,9 +19,9 @@ jobs:
           key: composer-{{ checksum "composer.lock" }}
       - restore_cache:
           keys:
-          - node-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - node-
+            - node-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - node-
       - run: make npm-install
       - save_cache:
           paths:
@@ -36,9 +36,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - node-
+            - node-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - node-
       - run: make lint-css assets
 
   lint:
@@ -49,9 +49,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - composer-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - composer-
+            - composer-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - composer-
       - run: make lint-php
       - run: make stan
       - run: make lint-twig
