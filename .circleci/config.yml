@@ -62,12 +62,12 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build_and_lint:
     jobs:
       - build
-  assets:
-    jobs:
-      - css
-  lint:
-    jobs:
-      - lint
+      - css:
+          requires:
+            - build
+      - lint:
+          requires:
+            - build
