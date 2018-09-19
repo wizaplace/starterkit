@@ -1,7 +1,7 @@
 "https://{default}/":
     type: upstream
     # the first part should be your project name
-    upstream: 'starterkit:php'
+    upstream: 'starterkit:http'
 
 "http://{default}/":
     type: redirect
