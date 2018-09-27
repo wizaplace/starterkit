@@ -91,6 +91,6 @@ workflows:
             - css
             - lint
           context: org-global
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
