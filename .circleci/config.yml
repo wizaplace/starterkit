@@ -75,6 +75,19 @@ jobs:
       - run: docker build -t ${DOCKER_REGISTRY}/starterkit .
       - run: docker push ${DOCKER_REGISTRY}/starterkit
 
+  deploy_k8s:
+    machine: true
+    working_directory: ~/repo
+    steps:
+    # see wizaplace/wizaplace-config circleci job deploy_k8s_wizaplace to check deploy
+    - run:
+        command: |
+          curl https://circleci.com/api/v1.1/project/github/wizaplace/wizaplace-config/tree/master \
+            --user ${CIRCLE_API_TOKEN}: \
+            --data build_parameters[CIRCLE_JOB]=deploy_k8s \
+            --data build_parameters[VERSION]=${CIRCLE_SHA1} \
+            --data build_parameters[PROJECT]=frontend
+
 workflows:
   version: 2
   build_and_lint:
@@ -90,6 +103,13 @@ workflows:
           requires:
             - css
             - lint
+          context: org-global
+          filters:
+            branches:
+              only: master
+      - deploy_k8s:
+          requires:
+            - docker
           context: org-global
           filters:
             branches:
