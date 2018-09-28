@@ -79,7 +79,7 @@ jobs:
     machine: true
     working_directory: ~/repo
     steps:
-    # see wizaplace/wizaplace-config circleci job deploy_k8s_wizaplace to check deploy
+    # see wizaplace/wizaplace-config circleci job deploy_k8s to check deploy
     - run:
         command: |
           curl https://circleci.com/api/v1.1/project/github/wizaplace/wizaplace-config/tree/master \
