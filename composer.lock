@@ -3033,16 +3033,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.5.1",
+            "version": "v0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "abbbd88affca248b36dc5863a000d6ba15580753"
+                "reference": "bce7d5d9ff859881574e551748306015ae12890f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/abbbd88affca248b36dc5863a000d6ba15580753",
-                "reference": "abbbd88affca248b36dc5863a000d6ba15580753",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/bce7d5d9ff859881574e551748306015ae12890f",
+                "reference": "bce7d5d9ff859881574e551748306015ae12890f",
                 "shasum": ""
             },
             "require": {
@@ -3080,7 +3080,7 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-09-03T14:35:02+00:00"
+            "time": "2018-10-16T13:49:16+00:00"
         },
         {
             "name": "wizaplace/sdk",
