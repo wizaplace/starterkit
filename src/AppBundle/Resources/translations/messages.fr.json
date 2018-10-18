@@ -44,6 +44,8 @@
     "phone_number": "Numéro de téléphone",
     "billing_address": "Adresse de facturation",
     "shipping_address": "Adresse de livraison",
+    "shipping_point_address": "Livraison en point relai",
+    "shipping_point_address_map": "Voir sur la carte",
     "validate": "Valider",
     "modify": "Modifier",
     "newsletter_subscription_success_message": "Vous êtes désormais inscrit à la newsletter",

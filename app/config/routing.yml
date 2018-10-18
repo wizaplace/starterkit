@@ -212,6 +212,11 @@ checkout_addresses:
     defaults: { _controller: AppBundle:Checkout:addresses }
     methods: [GET]
 
+checkout_pickup_points:
+    path: /commande/point-relai
+    defaults: { _controller: AppBundle:Checkout:pickupPoints }
+    methods: [GET, POST]
+
 checkout_payment:
     path: /commande/paiement
     defaults: { _controller: AppBundle:Checkout:payment }

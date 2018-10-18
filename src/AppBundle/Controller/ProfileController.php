@@ -11,10 +11,11 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Wizaplace\SDK\Order\OrderService;
-use Wizaplace\SDK\User\UserService;
 use WizaplaceFrontBundle\Controller\ProfileController as BaseController;
 use WizaplaceFrontBundle\Service\InvoiceService;
+use Wizaplace\SDK\Order\OrderService;
+use Wizaplace\SDK\Shipping\MondialRelayService;
+use Wizaplace\SDK\User\UserService;
 
 class ProfileController extends BaseController
 {
@@ -28,11 +29,17 @@ class ProfileController extends BaseController
      */
     private $orderService;
 
-    public function __construct(TranslatorInterface $translator, UserService $userService, InvoiceService $invoiceService, OrderService $orderService)
+    /**
+     * @var MondialRelayService
+     */
+    private $mondialRelayService;
+
+    public function __construct(TranslatorInterface $translator, UserService $userService, InvoiceService $invoiceService, OrderService $orderService, MondialRelayService $mondialRelayService)
     {
         parent::__construct($translator, $userService);
         $this->invoiceService = $invoiceService;
         $this->orderService = $orderService;
+        $this->mondialRelayService = $mondialRelayService;
     }
 
     public function viewAction(): Response
@@ -48,9 +55,13 @@ class ProfileController extends BaseController
     public function orderAction(int $orderId): Response
     {
         $order = $this->orderService->getOrder($orderId);
+        $pickupPoint = $order->getShippingAddress()->getPickupPointId()
+            ? $this->mondialRelayService->getPickupPoint($order->getShippingAddress()->getPickupPointId())
+            : null;
 
         return $this->render('@App/profile/order.html.twig', [
-            "order" => $order,
+            'order' => $order,
+            'pickupPoint' => $pickupPoint,
         ]);
     }
 

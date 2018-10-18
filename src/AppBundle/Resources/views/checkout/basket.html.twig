@@ -177,27 +177,31 @@
 {% block scripts %}
     <script>
 
-        {# shipping update / page reload #}
-        {# ============================= #}
+        $(function() {
 
-        $('.select-shipping').on('change', function() {
+            {# shipping update / page reload #}
+            {# ============================= #}
 
-            // show overlay and spinner
-            helper.displayLoadingSpinner();
+            $('.select-shipping').on('change', function() {
 
-            var shippingGroupId = $(this).closest('.shipping-group').data('shipping-group-id');
-            var shippingId = $(this).find('option:selected').val();
+                // show overlay and spinner
+                helper.displayLoadingSpinner();
 
-            $.ajax({
-                method: "POST",
-                url: "{{ url('basket_update_shipping') }}",
-                data: {
-                    shippingGroupId: shippingGroupId,
-                    shippingId: shippingId
-                }
-            }).done(function () {
-                window.location.reload();
+                var shippingGroupId = $(this).closest('.shipping-group').data('shipping-group-id');
+                var shippingId = $(this).find('option:selected').val();
+
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('basket_update_shipping') }}",
+                    data: {
+                        shippingGroupId: shippingGroupId,
+                        shippingId: shippingId
+                    }
+                }).done(function () {
+                    window.location.reload();
+                });
             });
+
         });
 
         Vue.component('basket-comment', {

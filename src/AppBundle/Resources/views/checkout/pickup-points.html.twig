@@ -1,0 +1,56 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    {% set user = app.user.wizaplaceUser %}
+
+    <div class="container">
+
+        {# steps breadcrumb #}
+        {% include '@App/checkout/steps.html.twig' with {step: 3} %}
+
+        <form>
+            <div class="form-group">
+                <label for="pickup-zip">Code postal :</label>
+                <input type="text" name="zipCode" id="pickup-zip" value="{{ zipCode }}">
+            </div>
+            <div class="form-group">
+                <input type="submit" name="search" value="Rechercher un point relai">
+            </div>
+        </form>
+
+        {% if results is not null %}
+            <h3>Point relai :</h3>
+
+            <form method="post">
+                <div class="form-group">
+                    <ul>
+                        {% for result in results %}
+                            <li><label><input type="radio" name="pickupPointId" value="{{ result.id }}"> {{ result.address[0] }}</label></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <ul>
+                        <li><label><input type="radio" name="title" value="mr"> Monsieur</label></li>
+                        <li><label><input type="radio" name="title" value="mrs"> Madame</label></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="pickup-zip">Prénom :</label>
+                    <input type="text" name="firstName" id="pickup-firstname">
+                </div>
+                <div class="form-group">
+                    <label for="pickup-zip">Nom :</label>
+                    <input type="text" name="lastName" id="pickup-lastname">
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="valid" value="Valider et poursuivre ma commande">
+                </div>
+
+            </form>
+        {% endif %}
+
+        {# basket summary #}
+        {% include '@App/checkout/_basket-summary.html.twig' %}
+    </div>
+{% endblock %}

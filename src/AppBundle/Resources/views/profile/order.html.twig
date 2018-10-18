@@ -74,17 +74,29 @@
 
     {# addresses #}
     <div class="addresses">
-
         {# shipping address #}
         {% set address = order.shippingAddress %}
         <div>
-            <h3 class="title">{{ 'shipping_address'|trans }}</h3>
-            <ul class="list-unstyled">
-                <li>{{ address.firstname }} {{ address.lastname }}</li>
-                <li>{{ address.address }}</li>
-                <li>{{ address.address2 }}</li>
-                <li>{{ address.zipcode }} {{ address.city }}</li>
-            </ul>
+            {% if pickupPoint is not null %}
+                    <h3 class="title">{{ 'shipping_point_address'|trans }}</h3>
+                    <ul class="list-unstyled">
+                        <li>{{ address.firstname }} {{ address.lastname }}</li>
+                        {% for line in pickupPoint.address %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                        <li>{{ address.zipcode }} {{ address.city }}</li>
+                        <li></li>
+                        <li><a href="{{ pickupPoint.urlMap }}">{{ 'shipping_point_address_map'|trans }}</a></li>
+                    </ul>
+            {% else %}
+                <h3 class="title">{{ 'shipping_address'|trans }}</h3>
+                <ul class="list-unstyled">
+                    <li>{{ address.firstname }} {{ address.lastname }}</li>
+                    <li>{{ address.address }}</li>
+                    <li>{{ address.address2 }}</li>
+                    <li>{{ address.zipcode }} {{ address.city }}</li>
+                </ul>
+            {% endif %}
         </div>
     </div>
 

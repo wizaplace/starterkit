@@ -21,7 +21,7 @@
                     <td><a href="{{ path('profile_order', {'orderId': order.id}) }}">{{ order.id }}</a></td>
                     <td>{{ order.timestamp.format('d-m-y') }}</td>
                     <td>{{ order.shippingName }}</td>
-                    <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) }}</td>
+                    <td>{{ 'order_table.body.total' | trans({'%price%': order.total|price }) | raw }}</td>
                     <td>{{ ('order_table.body.status.'~order.status) | trans }}</td>
                     <td><a href="{{ path('profile_order_invoice', {'orderId': order.id}) }}">{{ 'order_table.body.download'|trans }}</a></td>
                 </tr>

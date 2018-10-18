@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a62b454cc74159c08dc8f27ec1769269",
+    "content-hash": "71280bdc8eabccc3230960d5b4167a9d",
     "packages": [
         {
             "name": "bmancone/guzzle-stopwatch-middleware",
@@ -227,16 +227,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.7.1",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a"
+                "reference": "d768d58baee9a4862ca783840eca1b9add7a7f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/b3217d58609e9c8e661cd41357a54d926c4a2a1a",
-                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/d768d58baee9a4862ca783840eca1b9add7a7f57",
+                "reference": "d768d58baee9a4862ca783840eca1b9add7a7f57",
                 "shasum": ""
             },
             "require": {
@@ -247,8 +247,9 @@
             },
             "require-dev": {
                 "alcaeus/mongo-php-adapter": "^1.1",
+                "doctrine/coding-standard": "^4.0",
                 "mongodb/mongodb": "^1.1",
-                "phpunit/phpunit": "^5.7",
+                "phpunit/phpunit": "^7.0",
                 "predis/predis": "~1.0"
             },
             "suggest": {
@@ -257,7 +258,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
@@ -292,12 +293,12 @@
                 }
             ],
             "description": "Caching library offering an object-oriented API for many cache backends",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "https://www.doctrine-project.org",
             "keywords": [
                 "cache",
                 "caching"
             ],
-            "time": "2017-08-25T07:02:50+00:00"
+            "time": "2018-08-21T18:01:43+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -1348,16 +1349,16 @@
         },
         {
             "name": "myclabs/php-enum",
-            "version": "1.6.1",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "8c5649e4ed99acd53a40eada270154dcac089f7e"
+                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/8c5649e4ed99acd53a40eada270154dcac089f7e",
-                "reference": "8c5649e4ed99acd53a40eada270154dcac089f7e",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/a8284c7c540caf9988e339a404cadcdf1e8b165d",
+                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d",
                 "shasum": ""
             },
             "require": {
@@ -1388,7 +1389,7 @@
             "keywords": [
                 "enum"
             ],
-            "time": "2018-05-09T08:09:15+00:00"
+            "time": "2018-10-27T21:15:22+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -1829,17 +1830,6 @@
         {
             "name": "roave/security-advisories",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "4a272b63452f4d8ff0d48a759e59db9359a9b5b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4a272b63452f4d8ff0d48a759e59db9359a9b5b7",
-                "reference": "4a272b63452f4d8ff0d48a759e59db9359a9b5b7",
-                "shasum": ""
-            },
             "conflict": {
                 "3f/pygmentize": "<1.2",
                 "adodb/adodb-php": "<5.20.6",
@@ -3033,16 +3023,16 @@
         },
         {
             "name": "wizaplace/front-bundle",
-            "version": "v0.5.5",
+            "version": "dev-feat-mondial-relay",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-front-bundle.git",
-                "reference": "bce7d5d9ff859881574e551748306015ae12890f"
+                "reference": "a5d7317b79fd9cabe12cf59ab7306749436dd472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/bce7d5d9ff859881574e551748306015ae12890f",
-                "reference": "bce7d5d9ff859881574e551748306015ae12890f",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-front-bundle/zipball/a5d7317b79fd9cabe12cf59ab7306749436dd472",
+                "reference": "a5d7317b79fd9cabe12cf59ab7306749436dd472",
                 "shasum": ""
             },
             "require": {
@@ -3052,7 +3042,7 @@
                 "symfony/monolog-bundle": "^3.1",
                 "symfony/symfony": "^3.4.6",
                 "twig/twig": "^2.4",
-                "wizaplace/sdk": "^1.24.0"
+                "wizaplace/sdk": "dev-feat-mondialrelay@dev"
             },
             "require-dev": {
                 "bmancone/guzzle-stopwatch-middleware": "^1.0",
@@ -3080,24 +3070,26 @@
             "license": [
                 "proprietary"
             ],
-            "time": "2018-10-16T13:49:16+00:00"
+            "time": "2018-10-31T09:39:44+00:00"
         },
         {
             "name": "wizaplace/sdk",
-            "version": "v1.27.0",
+            "version": "dev-feat-mondialrelay",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wizaplace/wizaplace-php-sdk.git",
-                "reference": "53d6c1fdfddd4047f635cdff07a28089cb9ea1ec"
+                "reference": "6f7380cd7a151d1563ff0e42a2edfe94c5817cad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/53d6c1fdfddd4047f635cdff07a28089cb9ea1ec",
-                "reference": "53d6c1fdfddd4047f635cdff07a28089cb9ea1ec",
+                "url": "https://api.github.com/repos/wizaplace/wizaplace-php-sdk/zipball/6f7380cd7a151d1563ff0e42a2edfe94c5817cad",
+                "reference": "6f7380cd7a151d1563ff0e42a2edfe94c5817cad",
                 "shasum": ""
             },
             "require": {
                 "clue/json-stream": "^0.1.0",
+                "doctrine/annotations": "^1.6",
+                "doctrine/cache": "^1.8",
                 "guzzlehttp/guzzle": "^6.3.0",
                 "guzzlehttp/psr7": "^1.4",
                 "jean85/pretty-package-versions": "^1.0",
@@ -3134,7 +3126,7 @@
                 "proprietary"
             ],
             "description": "Wizaplace's PHP SDK",
-            "time": "2018-07-05T07:34:30+00:00"
+            "time": "2018-11-07T15:47:23+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -4400,7 +4392,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "wizaplace/front-bundle": 20,
+        "wizaplace/sdk": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
