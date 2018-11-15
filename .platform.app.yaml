@@ -153,7 +153,7 @@ crons:
         spec: '*/5 * * * *'
         cmd: 'php bin/console --env=prod wizaplace:translations:pull && bin/console --env=prod cache:warmup'
     sitemap:
-        spec: '*/30 * * * *'
+        spec: '0 1 * * *'
         cmd: 'php bin/console --env=prod sitemap:generate'
     daily_logrotate:
         spec: '0 4 * * *'
