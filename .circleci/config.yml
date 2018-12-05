@@ -17,12 +17,12 @@ jobs:
               key: composer-{{ checksum "composer.lock" }}
         - restore_cache:
               keys:
-              - npm-{{ checksum "package.json" }}
+              - npm-v2-{{ checksum "package.json" }}
         - run: npm install --no-save
         - save_cache:
               paths:
               - ./node_modules
-              key: npm-{{ checksum "package.json" }}
+              key: npm-v2-{{ checksum "package.json" }}
 
     css:
         docker:
@@ -32,7 +32,7 @@ jobs:
         - checkout
         - restore_cache:
               keys:
-              - npm-{{ checksum "package.json" }}
+              - npm-v2-{{ checksum "package.json" }}
         - run: sudo npm install -g gulp-cli
         - run: make lint-css assets
 
