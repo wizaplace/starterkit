@@ -19,14 +19,14 @@ jobs:
               key: composer-{{ checksum "composer.lock" }}
         - restore_cache:
               keys:
-              - node-{{ checksum "package.json" }}
+              - npm-{{ checksum "package.json" }}
               # fallback to using the latest cache if no exact match is found
               - node-
         - run: npm install --no-save
         - save_cache:
               paths:
               - ./node_modules
-              key: node-{{ checksum "package.json" }}
+              key: npm-{{ checksum "package.json" }}
 
     css:
         docker:
@@ -36,7 +36,7 @@ jobs:
         - checkout
         - restore_cache:
               keys:
-              - node-{{ checksum "package.json" }}
+              - npm-{{ checksum "package.json" }}
               # fallback to using the latest cache if no exact match is found
               - node-
         - run: sudo npm install -g gulp-cli
