@@ -1,96 +1,96 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/php:7.1-cli-node-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: sudo composer self-update
-      - restore_cache:
-          keys:
-            - composer-{{ checksum "composer.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - composer-
-      - run: composer install --no-scripts --no-progress
-      - save_cache:
-          paths:
-            - ./vendor
-          key: composer-{{ checksum "composer.lock" }}
-      - restore_cache:
-          keys:
-            - node-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - node-
-      - run: npm install --no-save
-      - save_cache:
-          paths:
-            - ./node_modules
-          key: node-{{ checksum "package-lock.json" }}
+    build:
+        docker:
+        - image: circleci/php:7.1-cli-node-browsers
+        working_directory: ~/repo
+        steps:
+        - checkout
+        - run: sudo composer self-update
+        - restore_cache:
+              keys:
+              - composer-{{ checksum "composer.lock" }}
+              # fallback to using the latest cache if no exact match is found
+              - composer-
+        - run: composer install --no-scripts --no-progress
+        - save_cache:
+              paths:
+              - ./vendor
+              key: composer-{{ checksum "composer.lock" }}
+        - restore_cache:
+              keys:
+              - node-{{ checksum "package-lock.json" }}
+              # fallback to using the latest cache if no exact match is found
+              - node-
+        - run: npm install --no-save
+        - save_cache:
+              paths:
+              - ./node_modules
+              key: node-{{ checksum "package.json" }}
 
-  css:
-    docker:
-      - image: circleci/php:7.1-cli-node-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - node-
-      - run: sudo npm install -g gulp-cli
-      - run: make lint-css assets
+    css:
+        docker:
+        - image: circleci/php:7.1-cli-node-browsers
+        working_directory: ~/repo
+        steps:
+        - checkout
+        - restore_cache:
+              keys:
+              - node-{{ checksum "package.json" }}
+              # fallback to using the latest cache if no exact match is found
+              - node-
+        - run: sudo npm install -g gulp-cli
+        - run: make lint-css assets
 
-  lint:
-    docker:
-      - image: circleci/php:7.1-cli-node-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - composer-{{ checksum "composer.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - composer-
-      - run: make lint-php
-      - run: |
-          cp app/config/parameters.yml.dist app/config/parameters.yml
-          bin/console cache:warmup
-      - run: make stan
-      - run: make lint-twig
-      - run: make lint-yaml
-      - run: make lint-xliff
-      - run: make lint-json
+    lint:
+        docker:
+        - image: circleci/php:7.1-cli-node-browsers
+        working_directory: ~/repo
+        steps:
+        - checkout
+        - restore_cache:
+              keys:
+              - composer-{{ checksum "composer.lock" }}
+              # fallback to using the latest cache if no exact match is found
+              - composer-
+        - run: make lint-php
+        - run: |
+              cp app/config/parameters.yml.dist app/config/parameters.yml
+              bin/console cache:warmup
+        - run: make stan
+        - run: make lint-twig
+        - run: make lint-yaml
+        - run: make lint-xliff
+        - run: make lint-json
 
-  docker:
     docker:
-      - image: docker
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY}
-      - run: docker build -t ${DOCKER_REGISTRY}/starterkit .
-      - run: docker push ${DOCKER_REGISTRY}/starterkit
+        docker:
+        - image: docker
+        working_directory: ~/repo
+        steps:
+        - checkout
+        - setup_remote_docker:
+              docker_layer_caching: true
+        - run: echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY}
+        - run: docker build -t ${DOCKER_REGISTRY}/starterkit .
+        - run: docker push ${DOCKER_REGISTRY}/starterkit
 
 workflows:
-  version: 2
-  build_and_lint:
-    jobs:
-      - build
-      - css:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - docker:
-          requires:
-            - css
-            - lint
-          context: org-global
-          filters:
-            branches:
-              only: master
+    version: 2
+    build_and_lint:
+        jobs:
+        - build
+        - css:
+              requires:
+              - build
+        - lint:
+              requires:
+              - build
+        - docker:
+              requires:
+              - css
+              - lint
+              context: org-global
+              filters:
+                  branches:
+                      only: master
