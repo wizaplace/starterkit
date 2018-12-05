@@ -10,8 +10,6 @@ jobs:
       - restore_cache:
           keys:
             - composer-{{ checksum "composer.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - composer-
       - run: composer install --no-scripts --no-progress
       - save_cache:
           paths:
@@ -19,14 +17,12 @@ jobs:
           key: composer-{{ checksum "composer.lock" }}
       - restore_cache:
           keys:
-            - node-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - node-
+            - node_module-{{ checksum "package.json" }}
       - run: npm install --no-save
       - save_cache:
           paths:
             - ./node_modules
-          key: node-{{ checksum "package-lock.json" }}
+          key: node_module-{{ checksum "package.json" }}
 
   css:
     docker:
@@ -36,9 +32,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - node-
+            - node_module-{{ checksum "package.json" }}
       - run: sudo npm install -g gulp-cli
       - run: make lint-css assets
 
@@ -51,8 +45,6 @@ jobs:
       - restore_cache:
           keys:
             - composer-{{ checksum "composer.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - composer-
       - run: make lint-php
       - run: |
           cp app/config/parameters.yml.dist app/config/parameters.yml
