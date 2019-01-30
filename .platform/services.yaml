@@ -1,3 +1,4 @@
 redis:
-  type: redis:3.2
+  type: redis-persistent:3.0
+  disk: 1024
   size: S
