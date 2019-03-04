@@ -30,7 +30,7 @@ if (isset($_ENV['PLATFORM_RELATIONSHIPS'])) {
 // mais celui configuré en dur. cette règle permet de générer des URL en dur
 // avec un http_host principal même si plusieurs domaines sont configurés
 // pour le projet
-if (isset($_ENV['PLATFORM_ROUTES']) && $container->getParameter('http_host') === 'localhost') {
+if (isset($_ENV['PLATFORM_ROUTES'])) {
     $routes = json_decode(base64_decode($_ENV['PLATFORM_ROUTES']), true);
     foreach ($routes as $route => $routeInfo) {
         if ($routeInfo['type'] === 'upstream') {
