@@ -127,7 +127,7 @@ hooks:
     echo -n > /var/log/php.access.log
     bin/logrotate.sh
     # clean filebeat registry
-    rm var/filebeat/data/registry
+    rm -f var/filebeat/data/registry
 
     # supervisor logs
     mkdir -p var/supervisor
