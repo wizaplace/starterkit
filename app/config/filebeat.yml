@@ -16,6 +16,7 @@ filebeat.inputs:
     - /var/log/access.log
   fields:
     document_type: apache_access
+    wizaenv: ${WIZAENV:sandbox}
   tags: ["front", "${PROJECT_NAME}"]
 
 - type: log
@@ -23,6 +24,7 @@ filebeat.inputs:
     - /var/log/error.log
   fields:
     document_type: apache_error
+    wizaenv: ${WIZAENV:sandbox}
   tags: ["front", "${PROJECT_NAME}"]
 
 - type: log
@@ -32,12 +34,14 @@ filebeat.inputs:
   json.keys_under_root: true
   fields:
     document_type: app
+    wizaenv: ${WIZAENV:sandbox}
 
 - type: log
   paths:
     - /var/log/deploy.log
   fields:
     document_type: deploy
+    wizaenv: ${WIZAENV:sandbox}
   tags: ["front", "${PROJECT_NAME}"]
 
 - type: log
@@ -45,6 +49,7 @@ filebeat.inputs:
     - /var/log/php.access.log
   fields:
     document_type: php_access
+    wizaenv: ${WIZAENV:sandbox}
   tags: ["front", "${PROJECT_NAME}"]
 
 output.logstash:
