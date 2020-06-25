@@ -17,7 +17,6 @@ filebeat.inputs:
   fields:
     type: apache_access
     provider: platform.sh
-    app.version: ${MARKETPLACE_VERSION}
     app.name: wizaplace
     client: ${PROJECT_NAME}
     wizaenv: ${WIZAENV:sandbox}
@@ -29,7 +28,6 @@ filebeat.inputs:
   fields:
     type: apache_error
     provider: platform.sh
-    app.version: ${MARKETPLACE_VERSION}
     app.name: wizaplace
     client: ${PROJECT_NAME}
     wizaenv: ${WIZAENV:sandbox}
@@ -43,7 +41,6 @@ filebeat.inputs:
   fields:
     type: app
     provider: platform.sh
-    app.version: ${MARKETPLACE_VERSION}
     app.name: wizaplace
     client: ${PROJECT_NAME}
     wizaenv: ${WIZAENV:sandbox}
@@ -54,7 +51,6 @@ filebeat.inputs:
   fields:
     type: deploy
     provider: platform.sh
-    app.version: ${MARKETPLACE_VERSION}
     app.name: wizaplace
     client: ${PROJECT_NAME}
     wizaenv: ${WIZAENV:sandbox}
@@ -66,7 +62,6 @@ filebeat.inputs:
   fields:
     type: php_access
     provider: platform.sh
-    app.version: ${MARKETPLACE_VERSION}
     app.name: wizaplace
     client: ${PROJECT_NAME}
     wizaenv: ${WIZAENV:sandbox}
