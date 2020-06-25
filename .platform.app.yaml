@@ -144,7 +144,7 @@ hooks:
 
 variables:
   env:
-    FILEBEAT_VERSION: '6.3.1'
+    FILEBEAT_VERSION: '7.2.0'
     TELEGRAF_VERSION: '1.8.3'
 
 crons:
