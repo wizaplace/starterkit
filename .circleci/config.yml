@@ -54,19 +54,7 @@ jobs:
       - run: make lint-yaml
       - run: make lint-xliff
       - run: make lint-json
-
-  docker:
-    docker:
-      - image: docker
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY}
-      - run: docker build -t ${DOCKER_REGISTRY}/starterkit .
-      - run: docker push ${DOCKER_REGISTRY}/starterkit
-
+      
 workflows:
   version: 2
   build_and_lint:
@@ -78,11 +66,3 @@ workflows:
       - lint:
           requires:
             - build
-      - docker:
-          requires:
-            - css
-            - lint
-          context: org-global
-          filters:
-            branches:
-              only: master
